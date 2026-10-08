@@ -1,0 +1,72 @@
+# Optional Higgsfield plugin integration
+
+The Higgsfield plugin is an optional route for an independently installed OLYMPOX studio. It can be used without `tools/higgsfield` or a local CLI. The framework supplies conversational instructions and traceable local records; it does not install or authenticate the plugin, call it through an automatic core adapter, upload references, or require a paid generation test during installation.
+
+The host plugin catalog and exposed tool metadata were checked on **October 8, 2026**, without connecting an account or submitting generation. The catalog description covers image/video generation, reference inputs, creative presets, and UGC workflows. This evidence does not prove the models, account access, prices, or successful execution available in a particular session. Check the actual tools and schemas before promising or executing a capability. The [local CLI guide](higgsfield-setup.md) describes the separate optional route.
+
+## Select and discover the route
+
+Use `higgsfield-studio` when Higgsfield is requested. Choose the plugin when its actual tools support the requested outcome; a missing local CLI does not block this route. Use the CLI when its checked capabilities fit the work and the studio has prepared that route. Record which route will execute the attempt. Changing tools or inputs does not silently reuse a previous execution or approval.
+
+Discover the plugin through the host's available plugin-management tools, or ask the user to open the host's plugin interface and search for **Higgsfield** when no such tool is exposed. Inspect the returned availability, installation, connection, and permission information. Use the host's real install/connect flow when applicable authorization covers it; the user completes any account interaction. Do not invent an installation command, connection endpoint, slash command, preset identifier, or internal plugin ID.
+
+An installed plugin, a loaded skill, and a connected account are separate observations. Confirm the correct account/workspace through the host connection state or an exposed read operation, without copying private identifiers into public documentation. Keep credentials outside the studio, character records, runs, and backups. If the tools or required connection remain unavailable, prepare the production package and retain `awaiting-tool`; do not report completed provider integration or generation.
+
+## Check real capabilities
+
+Discover the callable tools in the current session and read the schema of each operation needed for the request. Plugin descriptions and skills guide selection but do not establish execution access. Check only the capabilities needed for the current work:
+
+| Need | Evidence to check |
+| --- | --- |
+| Media generation | A callable operation, supported media type, required fields, and accepted parameters |
+| References and identity | Actual file/attachment or URL input mechanism, limits and order, and support for the exact approved references |
+| Preset or UGC workflow | A currently exposed catalog/schema and the inputs required by the chosen workflow |
+| Model, voice, duration, and format | Values exposed by the tool/schema or returned result; no inferred CLI parity |
+| Account and cost | Exposed account/balance or estimate operations and actual billing terms for this route |
+| Job recovery | An exposed status/query operation that can inspect the submitted job using its real identifier |
+| Export and inspection | An available method to obtain local bytes and inspect the complete requested media |
+
+The plugin may expose different operations and less metadata than the CLI. Do not transfer CLI flags, model IDs, voice IDs, training features, or prices to it without confirming the plugin schema. A preset name does not prove its current availability. When a required operation or parameter is absent, identify the missing stage and preserve the prepared work.
+
+An estimate or preparation call that sends media is an external upload, even if it creates no generation job. The inspected `estimate_image_cost` and `estimate_video_cost` metadata says HTTPS reference inputs are imported into the media library. Repeated estimates can repeat those imports; preserve confirmed media IDs and reuse them according to the actual schema instead of uploading the same references again. Check the current behavior before treating any call as read-only. Applicable authorization must cover reference transmission, paid generation, and any identity training separately. Subscription or plugin installation does not authorize these actions. If cost is unavailable, record it as unknown and ensure the applicable generation authorization covers that uncertainty; never interpret missing cost as free. Selecting a quoted allowance does not itself record user approval.
+
+Keep quoted or charged **credits** with their unit, scope, and source in run notes or additional asset provenance, such as `providerMetadata`; these are illustrative extra fields, not a new enforced contract. The asset's `cost` field accepts monetary amount and currency, so leave it `null` unless the provider exposes an actual amount in a supported currency. Do not put credits in a currency field or invent a conversion.
+
+## Transfer exact studio references
+
+The inspected tool metadata distinguishes `media_upload_and_confirm`, which accepts ChatGPT user attachments, from the OpenAI route of `media_upload`, which accepts files created by the plugin's `sandbox_exec`. That sandbox is remote and temporary; it cannot read local Windows canon paths. Neither a Windows pathname nor a file generated elsewhere becomes a permitted input simply because it is passed to one of these tools.
+
+Use a verified host-supported transfer mechanism for the exact selected files. When such a mechanism is absent, retain reference transfer as pending; do not manufacture an attachment or claim uploaded canon. Preserve a mapping from each local input path and SHA-256 to the confirmed provider media ID/URL, with the actual transfer evidence and any transformation limitations. Confirm that the generation call uses those mapped inputs in the intended order. Do not treat a prompt containing their filenames as reference submission. Read the current transfer schemas again if the host or tools change.
+
+## Preserve production context before submission
+
+1. Work in the installed studio, with the selected character and exact canon/narrative/content versions. For production, use approved canon and required references; candidate exploration keeps its draft/reference purpose. Verify input rights and the applicable authorization, budget, and attempt limit.
+2. Preserve the reviewed prompt and exact input files. Calculate their hashes through [local operations](operations.md), record reference IDs and attachment order, and use the tool's actual input mechanism. A path or filename in prompt text does not attach its bytes. If the plugin cannot accept the required references, retain the missing capability instead of claiming identity conditioning.
+3. Persist external intent in the run **before** invoking the provider: chosen route/tool, exposed model or preset, parameters, exact inputs and hashes, confirmed input media IDs/URLs, objective, and budget context. Use the core's `start` transition with `job` as described in [core operation](framework-02.md) and [framework contracts](../framework/README.md). Record only identifiers already available; do not invent a job ID before the provider returns one. When the host requires a provider-only tool turn, finish local persistence before entering that turn and record returned evidence afterward. The core records intent but does not intercept the plugin or enforce a service spending cap.
+4. Invoke only the callable operation and parameters actually checked. Record submission, all returned job/request IDs, status, exposed model/preset, known cost, result locations, and limitations as they are reported. Prefer a single output for the first pilot; for a batch, preserve each accepted ID and track each result separately. Preserve any tool-generated prompt changes that are exposed; if final prompt or model details are unavailable, say so rather than inventing them.
+
+A successful call or result URL proves neither audiovisual fidelity nor publication. Do not report a provider job when only a prompt or production package was prepared.
+
+## Record the provider outcome
+
+Every external intent recorded by `start` with `job` remains unresolved until `resolve`, even when the provider returns normally. Preserve an accepted but pending response using `uncertain` with the real returned identifiers and a reason describing the known status. That transition holds local continuation; query the original job through the provider's actual tool until its outcome is conclusive.
+
+For a terminal provider response, use `resolve` with the same provider/known identifiers, status `succeeded` or `failed`, and real evidence `type: reconciled`. A definitive choice response or rejection stating that no job was submitted instead requires `resolve` with `not-submitted`; do not invent a job ID. Inspect all accepted jobs in a batch before declaring the attempt reconciled, retaining each ID and individual result in the evidence/provenance. These are existing core transitions, not an automatic plugin adapter.
+
+Reconciliation does not complete generation. Only use the stage's `complete` after a successful resolved job has real local output files and the required generation evidence. If the provider succeeded but export remains unavailable, resolve the provider outcome first, then retain the local stage with `wait` and `awaiting-tool`; no duplicate generation is needed to explain the missing export. Failed or not-submitted outcomes require an appropriate recorded next step and applicable authorization for any new attempt.
+
+## Reconcile uncertain results
+
+If a submission times out, is interrupted, or returns no conclusive outcome, preserve the original attempt and known IDs. Mark the outstanding work as `uncertain-result` through the existing run procedure. Query the original job with an actual exposed status tool, such as the inspected `jobs_wait`, using only returned job IDs and its current limits. Reconcile each accepted batch job, including partial success or failure. Record reconciliation using `resolve`, with the real response/evidence, before continuing or requesting another attempt. A choice prompt or explicit error stating that no job was submitted is a different outcome: record that evidence without inventing a pending provider job. An ambiguous timeout does not establish non-submission.
+
+Do not resubmit automatically, switch to the CLI as a retry, or assume a missing response means failure. If no available tool can inspect the original job, keep it pending and identify the required provider/host check. Any new attempt requires reconciliation, applicable authorization for its scope, and preserved original history. The local core neither queries the service nor discovers a call made without previously recorded intent.
+
+## Save, seal, and inspect the result
+
+Obtain the real output bytes through an export/download method actually supplied by the host or provider. Save them as a new version in the character's media folder; preserve originals. A remote URL or host preview alone does not fulfill local file registration or delivery. When export is unavailable, retain the outstanding stage and report what can actually be accessed.
+
+Use `register` for the local file, complete the actual `provider`, `model`, `referenceIds`, prompt and hash, speech information when applicable, and known cost in `assets.json`, then create `execution-seal` as described in [operations](operations.md). `cost: null` means unknown. When the provider does not expose a model, use an honest nonempty description such as `unknown (not exposed by plugin)` instead of inventing one. Preserve quoted/charged credits in the additional provenance described above. The seal preserves the declared context; it does not prove generation or inspection.
+
+Têmis reviews the exact final bytes against the approved references and intended use. Images need visual inspection, audio needs listening, and video needs complete motion and audio review when present. Record the actual reviewer, method, hashes, decision, and limitations under [quality](quality.md). Missing export, listening, motion access, or other required inspection leaves review `pending` and the asset in draft. A critical failure requires correction or rejection; tests and provider completion cannot approve it.
+
+Edited, cropped, captioned, or recompressed outputs are new versions and need their own registration and review. Delivery requires the reviewed bytes. Publication remains a separate authorized action.

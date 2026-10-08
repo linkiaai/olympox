@@ -1,6 +1,8 @@
-# Preparação local opcional do Higgsfield
+# Preparação local opcional da CLI Higgsfield
 
-O Higgsfield é um fornecedor opcional para um estúdio. A instalação do framework fornece uma skill, um wrapper e proveniência de fontes do fornecedor; cada estúdio instala a CLI e conecta sua própria conta separadamente. A base documentada do wrapper é a CLI **1.1.26** em Windows x64. Fontes e instalador de referência foram revisados em **7 de outubro de 2026**; confira novamente termos e capacidades do fornecedor antes de usar.
+Este guia cobre o caminho opcional da CLI local. O Higgsfield também é suportado pelo plugin do aplicativo, seguindo o [guia do plugin](higgsfield-plugin.md), sem exigir CLI local. Os caminhos compartilham requisitos de cânone, rastreabilidade, autorização, preservação e revisão; sessões de conta, comandos, recursos e cobrança devem ser conferidos para o caminho selecionado.
+
+A instalação do framework fornece uma skill, um wrapper, guias e proveniência de fontes do fornecedor; cada estúdio que escolher a CLI a instala e conecta sua própria conta separadamente. A instalação não instala nem autentica o plugin ou a CLI, envia mídia ou exige geração paga. A base documentada do wrapper é a CLI **1.1.26** em Windows x64. Fontes e instalador de referência foram revisados em **7 de outubro de 2026**; confira novamente termos e capacidades do fornecedor antes de usar. Este suporte conversacional é operado pelo Codex, sem adaptador automático no núcleo.
 
 ## Base suportada e requisitos do estúdio
 
@@ -93,6 +95,8 @@ O orçamento do piloto deve registrar saldo inicial, custo consultado por tentat
    node scripts/higgsfield-local.mjs inspect generate list --json
    node scripts/higgsfield-local.mjs inspect generate get <actual-job-id> --json
    ```
+
+   Mudar para o plugin não reconcilia uma submissão incerta da CLI nem autoriza outra cobrança. Use uma ferramenta real de status que consiga inspecionar o job original e registre a reconciliação antes de qualquer nova tentativa.
 
 6. Salvar a mídia em nova versão na persona, registrar e selar execução. Fazer revisão completa do vídeo e áudio com método realmente disponível, registrar falhas e aprovações reais. Uma URL concluída, hash ou teste local não prova qualidade nem publicação.
 

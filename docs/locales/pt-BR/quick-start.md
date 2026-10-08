@@ -20,6 +20,18 @@ aprovados. Quero um roteiro de [formato] sobre [tema], com cenas e legenda.
 
 Saraswati escreve; Selene prepara e executa a produção disponível e autorizada; Têmis inspeciona a mídia completa. Aurora pesquisa tendências quando necessário. Fortuna prepara experimentos de distribuição e analisa dados próprios quando existirem.
 
+## Escolher uma ferramenta de produção
+
+A geração de imagens integrada do Codex é o padrão quando disponível, salvo se você escolher outro fornecedor. O acesso opcional ao Higgsfield pode usar o [plugin do Codex](higgsfield-plugin.md) ou a [CLI e wrapper locais](higgsfield-setup.md). O plugin precisa de instalação e conexão próprias no Codex, sem exigir a CLI local do Higgsfield. A instalação do OLYMPOX não fornece acesso à conta de nenhuma das rotas externas.
+
+```text
+Atena, use o Higgsfield pelo plugin para [personagem].
+Confira as ferramentas disponíveis e prepare esta peça usando as referências aprovadas.
+Mantenha os registros de execução e revisão no OLYMPOX.
+```
+
+Selene confere as capacidades e custos reais da rota escolhida antes da submissão autorizada. Ambas usam os mesmos registros de cânone e runs; a mídia final continua exigindo inspeção. Uma listagem do plugin não demonstra voz, Soul ID, download de mídia, exportação ou cobrança equivalente à CLI.
+
 ## Revisar e corrigir
 
 ```text

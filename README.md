@@ -1,5 +1,7 @@
 # OLYMPOX - AI Influencer framework
 
+Framework release **0.2.1** — **October 8, 2026**. Read the [release notes](docs/release-notes.md) and [upgrade guidance](docs/installation.md#upgrade-an-existing-studio) before updating an existing studio. The local core and contracts remain at component revision 0.2.0.
+
 OLYMPOX is a local AI influencer framework coordinated by Atena and a team of goddess-named specialists. Codex uses it to create and direct original virtual influencers through strategy, persona, references, photography, scripts, voice, video, and quality review. Each influencer has an individual identity and history.
 
 The reusable package contains governance, skills, specialist profiles, task contracts, workflows, local commands, templates, and a manual. The `olympox` skill organizes creative work in an installed studio. Each user installs an independent studio and creates their own original influencers there. Character records, media, runs, backups, credentials, and optional provider binaries are excluded from the framework package.
@@ -11,13 +13,13 @@ This repository and its Codex project are dedicated to framework development and
 Requires **Node 22 or later** and **Codex**. Install from GitHub:
 
 ```sh
-npx --yes github:linkiaai/olympox install ./my-studio
+npx --yes github:linkiaai/olympox#v0.2.1 install ./my-studio
 cd my-studio
 npm run verify
 npm run studio -- help
 ```
 
-On Windows, use `npx.cmd` and `npm.cmd` if PowerShell blocks the launchers. Open `my-studio` in Codex and use `$olympox`. Reload Codex if the new skill is not discovered; installation alone does not demonstrate that the current session has loaded it.
+The GitHub command requires access to the repository and release tag. A private repository may require authenticated Git access on your machine. On Windows, use `npx.cmd` and `npm.cmd` if PowerShell blocks the launchers. Open `my-studio` in Codex and use `$olympox`. Reload Codex if the new skill is not discovered; installation alone does not demonstrate that the current session has loaded it.
 
 For an existing project, add `--merge` to the installation command. The installer checks all destinations before writing, retains identical framework files, and refuses differing files or collisions. Review conflicts before retrying; it preserves unrelated local files.
 
@@ -56,6 +58,8 @@ For research:
 
 If there are no preferences yet, Codex proposes directions. The [brief](templates/brief.md) helps organize choices and accepts "please propose." You do not need to fill out every field before starting a conversation.
 
+For images, use the integrated Codex tool when available unless you choose another provider. You can choose Higgsfield through its optional [Codex plugin](docs/higgsfield-plugin.md) or the [local CLI and wrapper](docs/higgsfield-setup.md). The plugin route needs no local Higgsfield CLI. Both routes follow the same OLYMPOX canon, execution records, authorization, and media review requirements. The framework installer supplies guidance; each user installs and connects the external plugin separately.
+
 ## Method
 
 1. Value proposition, audience, personality, and voice.
@@ -93,9 +97,9 @@ Read [operations](docs/operations.md) for references, hashes, and the manifest. 
 | Coordination and history 0.2 | Registry, contracts, resumable tasks, snapshots, and local editorial records |
 | Character backups | File and linked-task inventory, verification, and restore testing |
 | Integrated images | Available only when the Codex session provides generation and inspection tools |
-| Higgsfield for video/voice | Optional skill, wrapper, and setup guide; install and connect the provider separately |
+| Higgsfield plugin or CLI | Optional plugin workflow and local CLI wrapper; check the selected route's available tools, account access, and costs separately |
 | Identity and pilot | Your own candidate exploration, explicit canon approval, and inspected pilot before batches |
 
-Profiles are instructions, and local packages do not dispatch agents. Commands maintain records and integrity; generation, inspection, paid services, and publication need the tools and authorizations applicable to your studio. Tests do not demonstrate visual identity, voice quality, or provider execution. Read [framework status](docs/studio-status.md) and [optional Higgsfield setup](docs/higgsfield-setup.md).
+Profiles are instructions, and local packages do not dispatch agents. Commands maintain records and integrity; generation, inspection, paid services, and publication need the tools and authorizations applicable to your studio. Tests do not demonstrate visual identity, voice quality, or provider execution. Plugin availability alone does not demonstrate voice, Soul ID, downloadable media, export, or equivalent CLI billing. Read [framework status](docs/studio-status.md), [Higgsfield plugin](docs/higgsfield-plugin.md), and [optional CLI setup](docs/higgsfield-setup.md).
 
 Released under the [MIT license](LICENSE).

@@ -1,5 +1,7 @@
 # OLYMPOX - AI Influencer framework
 
+Release **0.2.1** do framework — **8 de outubro de 2026**. Leia as [notas da versão](release-notes.md) e as [orientações de atualização](installation.md#atualizar-um-estudio-existente) antes de atualizar um estúdio existente. O núcleo local e os contratos continuam na revisão de componente 0.2.0.
+
 OLYMPOX é um framework local de influenciadores de IA coordenado por Atena e uma equipe de especialistas com nomes de deusas. O Codex o utiliza para criar e dirigir influenciadores virtuais originais por meio de estratégia, persona, referências, fotografia, roteiros, voz, vídeo e revisão de qualidade. Cada influenciador tem identidade e histórico próprios.
 
 O pacote reutilizável contém governança, skills, perfis de especialistas, contratos de tarefas, fluxos, comandos locais, templates e um manual. A skill `olympox` organiza o trabalho criativo em um estúdio instalado. Cada usuário instala um estúdio independente e cria ali seus próprios influenciadores originais. Fichas de personagens, mídia, runs, backups, credenciais e binários opcionais de fornecedores ficam fora do pacote do framework.
@@ -11,13 +13,13 @@ Este repositório e seu projeto do Codex são dedicados ao desenvolvimento e à 
 Requer **Node 22 ou posterior** e **Codex**. Instale pelo GitHub:
 
 ```sh
-npx --yes github:linkiaai/olympox install ./my-studio
+npx --yes github:linkiaai/olympox#v0.2.1 install ./my-studio
 cd my-studio
 npm run verify
 npm run studio -- help
 ```
 
-No Windows, use `npx.cmd` e `npm.cmd` se o PowerShell bloquear os inicializadores. Abra `my-studio` no Codex e use `$olympox`. Recarregue o Codex se a nova skill não for descoberta; a instalação por si só não demonstra que a sessão atual a carregou.
+O comando do GitHub exige acesso ao repositório e à tag da versão. Um repositório privado pode exigir acesso Git autenticado na sua máquina. No Windows, use `npx.cmd` e `npm.cmd` se o PowerShell bloquear os inicializadores. Abra `my-studio` no Codex e use `$olympox`. Recarregue o Codex se a nova skill não for descoberta; a instalação por si só não demonstra que a sessão atual a carregou.
 
 Para um projeto existente, acrescente `--merge` ao comando de instalação. O instalador confere todos os destinos antes de escrever, mantém arquivos idênticos do framework e recusa arquivos diferentes ou colisões. Revise os conflitos antes de tentar novamente; arquivos locais não relacionados são preservados.
 
@@ -56,6 +58,8 @@ Para pesquisa:
 
 Se ainda não houver preferências, o Codex propõe caminhos. O [brief](../../../templates/locales/pt-BR/brief.md) ajuda a organizar escolhas e aceita “pode propor”. Não é necessário preencher todos os campos antes de conversar.
 
+Para imagens, use a ferramenta integrada do Codex quando disponível, salvo se escolher outro fornecedor. Você pode escolher o Higgsfield por seu [plugin opcional do Codex](higgsfield-plugin.md) ou pela [CLI e wrapper locais](higgsfield-setup.md). A rota do plugin dispensa a CLI local do Higgsfield. Ambas seguem os mesmos requisitos do OLYMPOX para cânone, registros de execução, autorização e revisão de mídia. O instalador do framework fornece orientações; cada usuário instala e conecta o plugin externo separadamente.
+
 ## Método
 
 1. Proposta de valor, público, personalidade e voz.
@@ -93,9 +97,9 @@ Leia [operação](operations.md) para referências, hashes e manifesto. Mídia, 
 | Coordenação e histórico 0.2 | Registry, contratos, tarefas retomáveis, snapshots e registros editoriais locais |
 | Backup de personagens | Inventário de arquivos e tarefas vinculadas, verificação e teste de restauração |
 | Imagem integrada | Disponível somente quando a sessão do Codex oferece ferramentas de geração e inspeção |
-| Higgsfield para vídeo/voz | Skill opcional, wrapper e guia; instale e conecte o fornecedor separadamente |
+| Higgsfield por plugin ou CLI | Fluxo opcional por plugin e wrapper para CLI local; confira separadamente as ferramentas disponíveis, acesso à conta e custos da rota escolhida |
 | Identidade e piloto | Sua própria exploração de candidatos, aprovação explícita do cânone e piloto inspecionado antes de lotes |
 
-Os perfis são instruções, e os pacotes locais não despacham agentes. Os comandos mantêm registros e integridade; geração, inspeção, serviços pagos e publicação precisam das ferramentas e autorizações aplicáveis ao seu estúdio. Testes não demonstram identidade visual, qualidade de voz nem execução por um fornecedor. Consulte [estado do framework](studio-status.md) e [preparação opcional do Higgsfield](higgsfield-setup.md).
+Os perfis são instruções, e os pacotes locais não despacham agentes. Os comandos mantêm registros e integridade; geração, inspeção, serviços pagos e publicação precisam das ferramentas e autorizações aplicáveis ao seu estúdio. Testes não demonstram identidade visual, qualidade de voz nem execução por um fornecedor. A disponibilidade do plugin por si só não demonstra voz, Soul ID, mídia para download, exportação nem cobrança equivalente à CLI. Consulte [estado do framework](studio-status.md), [plugin Higgsfield](higgsfield-plugin.md) e [preparação opcional da CLI](higgsfield-setup.md).
 
 Distribuído sob a [licença MIT](../../../LICENSE).

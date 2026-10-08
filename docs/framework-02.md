@@ -49,7 +49,7 @@ node scripts/studio.mjs run-resume RUN_ID
 
 Inputs, completed outputs, and governance files have observed hashes. A change requires context review. A new attempt needs JSON with `newAttempt: true` and a reason; it restarts the workflow while preserving the previous attempt and does not silently reuse approvals.
 
-Before submitting external work, the `start` transition can record `job` with the provider and available identifier, preserving intent before submission. If the process is interrupted without a conclusive response, resumption treats the work as an uncertain result and blocks repetition. Query the provider and record `resolve` with reconciliation evidence. The runtime does not discover calls made without that prior record.
+Before submitting external work, the `start` transition can record `job` with the provider and available identifier, preserving intent before submission. Every recorded job starts unresolved and needs `resolve` with actual reconciliation evidence before local completion, including ordinary success and definitive no-submission responses. Use `succeeded`, `failed`, or `not-submitted` as the reconciled status. If the process is interrupted without a conclusive response, resumption treats the work as an uncertain result and blocks repetition. Query the provider and record `resolve` with reconciliation evidence. Resolving the job does not complete the stage; its local files and evidence are still required. The runtime does not discover calls made without that prior record.
 
 Locks reject concurrent writes. An interruption can leave a lock or temporary folder: check processes and preserve data before cleanup. There is no automatic expiration that could trigger paid work again.
 

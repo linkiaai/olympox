@@ -33,6 +33,13 @@
       }
     },
     {
+      "path": "docs/release-notes.md",
+      "label": "Release notes",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/release-notes.md"
+      }
+    },
+    {
       "path": "docs/framework-02.md",
       "label": "Operate the core",
       "translations": {
@@ -93,6 +100,13 @@
       "label": "Tools",
       "translations": {
         "pt-BR": "docs/locales/pt-BR/tools.md"
+      }
+    },
+    {
+      "path": "docs/higgsfield-plugin.md",
+      "label": "Higgsfield plugin",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/higgsfield-plugin.md"
       }
     },
     {

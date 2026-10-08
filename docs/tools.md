@@ -1,6 +1,6 @@
 # Tools and integration
 
-Sources consulted: **October 7, 2026**. Check capabilities, plans, and commands again before use: this information can change.
+CLI sources consulted: **October 7, 2026**; Higgsfield plugin catalog checked: **October 8, 2026**. Check capabilities, plans, and commands again before use: this information can change.
 
 ## Images
 
@@ -10,21 +10,24 @@ For consistency, open and compare the approved set, describe anchors, and attach
 
 Do not choose a provider solely from a demonstration. Run the same pilot with the same identity, setting, camera, and budget; compare visual acceptance rate, review time, and cost per approved asset. Changing the model or version requires retesting. LoRA or Soul ID can be future options when fidelity and volume justify training; they are not required to begin.
 
-## Higgsfield — video and voice
+## Higgsfield — plugin or local CLI
 
-The [official guide](https://higgsfield.ai/creator-hub/help-center/integrations/how-do-i-access-higgsfield-via-cli) recommends CLI + skills for Codex. This route uses login and credits from the Higgsfield account; it does not require an API key. Unlimited models and free generations do not apply to CLI/MCP; the API is a separate product. The [official skills](https://higgsfield.ai/skills) and [provider repository](https://github.com/higgsfield-ai/skills) provide current instructions.
+OLYMPOX supports two optional conversational routes. Codex selects and calls the capabilities actually available in the studio, while the local core preserves context, attempts, and reviews. There is no automatic Higgsfield provider adapter or submission through the core.
 
-**Optional integration:** the framework includes the `higgsfield-studio` skill, a local wrapper, and inspected provider-source provenance in `vendor/higgsfield-skills`. The wrapper's baseline expects official CLI **1.1.26** in `tools/higgsfield`, installed and checked separately. Provider binaries, account sessions, balances, and generation results are supplied by each studio. See [Higgsfield setup](higgsfield-setup.md) for preparation, commands, and provenance.
+| Route | Preparation | Actual execution |
+| --- | --- | --- |
+| Higgsfield plugin | Discover and install the plugin in the host, connect the user's account, and check its exposed tools and schemas; no local CLI required | Available plugin tools for the requested media, references, and supported creative workflows |
+| Local CLI | Install the inspected, pinned CLI separately, then connect the user's account | The local native executable with confirmed model parameters; the preparation wrapper permits only its documented operations |
 
-When the user chooses this provider:
+The plugin catalog describes image/video generation, reference inputs, creative presets, and UGC workflows. A catalog entry or installed skill does not establish callable tools, account access, model availability, or CLI feature parity. Follow the [plugin guide](higgsfield-plugin.md) for discovery, connection, capability checks, and traceable production. Use `higgsfield-studio` to select the route; do not require the CLI when the plugin provides the needed capability.
 
-1. Use the `higgsfield-studio` skill and `node scripts/higgsfield-local.mjs` wrapper. `doctor`, `version`, and `help` check preparation without login; do not reinstall everything or alter global PATH/configuration.
-2. When connection is requested, run interactive `login`. The user completes OAuth; confirm session storage outside the project before considering the connection complete.
-3. Check the account, workspace, credits, and model schemas using the guide's read operations. Define budget and attempts before jobs. **A `generate cost` estimate with local media can send files**; the preparation wrapper rejects those inputs and allows only simple parameters.
-4. With the applicable identity, references, and authorization, persist job intent and use the pinned local executable for production. The wrapper does not submit requests or impose a server-side spending cap.
-5. Generate a short video; review speech, movements, and the exported file. Record the job, inputs, model, prompt, parameters, known cost, and review in `assets.json`, preserving new versions.
+For the CLI route, the framework supplies a local wrapper and inspected provider-source provenance in `vendor/higgsfield-skills`. Its baseline expects official CLI **1.1.26** in `tools/higgsfield`, installed and checked separately. `doctor`, `version`, and `help` check local preparation without login. Follow [local CLI setup](higgsfield-setup.md) before using interactive `login` or querying account, workspace, credits, and model schemas. **A native `generate cost` estimate with local media can upload those files**; the preparation wrapper rejects these inputs and permits simple parameters only. The wrapper does not submit production jobs or impose a server-side spending cap.
 
-Do not automatically repeat a job with an unknown submission outcome: query status before resubmitting to avoid duplicate credit use. Never store passwords, tokens, or keys in `persona.json`, manifests, or commits.
+The [official CLI guide](https://higgsfield.ai/creator-hub/help-center/integrations/how-do-i-access-higgsfield-via-cli) describes account login and credits without an API key, and distinguishes CLI/MCP from free or unlimited website generations and the separate API product. Verify the actual billing terms for the chosen plugin or CLI route before production; do not assume their terms or account sessions are shared. The [official skills](https://higgsfield.ai/skills) and [provider repository](https://github.com/higgsfield-ai/skills) are source material whose current capabilities still need checking.
+
+Both routes use the same production rules: approved canon where required, exact attached inputs and hashes, recorded external intent before submission, exposed identifiers/model/cost, preserved local media versions, execution seals, and complete inspection. A path written in a prompt does not attach a file. Unknown cost remains unknown. An uncertain submission requires real querying and reconciliation before another attempt; switching to the CLI or plugin does not justify a duplicate submission. Keep unavailable generation, export, or inspection pending. Never store passwords, tokens, or keys in character files, runs, manifests, or commits.
+
+Framework installation supplies reusable instructions and local records; it does not install or authenticate either provider route, send media, or require a paid generation test. Each studio supplies its own provider access and applicable authorization.
 
 ## Video delivery
 

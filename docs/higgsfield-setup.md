@@ -1,6 +1,8 @@
-# Optional local Higgsfield setup
+# Optional local Higgsfield CLI setup
 
-Higgsfield is an optional provider for a studio. Framework installation supplies a skill, wrapper, and provider-source provenance; each studio installs the CLI and connects its own account separately. The documented wrapper baseline is CLI **1.1.26** on Windows x64. Sources and baseline installer were reviewed on **October 7, 2026**; recheck provider terms and capabilities before use.
+This guide covers the optional local CLI route. Higgsfield is also supported through its host plugin, following the [plugin guide](higgsfield-plugin.md), without requiring a local CLI. The routes share canon, traceability, authorization, preservation, and review requirements; account sessions, commands, features, and billing must be checked for the selected route.
+
+Framework installation supplies a skill, wrapper, guides, and provider-source provenance; each studio choosing the CLI installs it and connects its own account separately. Installation does not install or authenticate the plugin or CLI, send media, or require paid generation. The documented wrapper baseline is CLI **1.1.26** on Windows x64. Sources and baseline installer were reviewed on **October 7, 2026**; recheck provider terms and capabilities before use. This is conversational support operated by Codex, not an automatic core adapter.
 
 ## Supported baseline and studio requirements
 
@@ -93,6 +95,8 @@ The pilot budget must record initial balance, queried cost per attempt, total cr
    node scripts/higgsfield-local.mjs inspect generate list --json
    node scripts/higgsfield-local.mjs inspect generate get <actual-job-id> --json
    ```
+
+   Switching to the plugin does not reconcile an uncertain CLI submission or authorize another charge. Use a real status tool that can inspect the original job and record reconciliation before any new attempt.
 
 6. Save media as a new persona version, register it, and seal execution. Perform a complete video/audio review using a method actually available; record failures and real approvals. A completed URL, hash, or local test proves neither quality nor publication.
 

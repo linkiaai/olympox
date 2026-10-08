@@ -51,7 +51,13 @@ Naturalismo deve ser dirigido: pele com textura, cabelo plausível, luz coerente
 
 ## 5. Produzir e registrar
 
+A geração de imagens integrada do Codex continua sendo o padrão quando disponível, salvo se o usuário escolher Higgsfield ou outro fornecedor. O Higgsfield pode usar seu [plugin opcional do Codex](higgsfield-plugin.md) ou a [CLI e wrapper locais](higgsfield-setup.md). A rota do plugin dispensa a CLI local do Higgsfield; confira separadamente ferramentas reais, acesso à conta, entradas de referências, custos e obtenção de saídas. A disponibilidade do plugin não comprova voz, Soul ID, exportação ou cobrança equivalente à CLI. Ambas as rotas mantêm os mesmos requisitos de cânone, autorização e revisão.
+
 Use as referências aprovadas e registre ferramenta/modelo quando disponível, versão do cânone, prompt, parâmetros relevantes e arquivos de entrada e saída. Registre seed apenas se a ferramenta a expuser; ela ajuda na rastreabilidade, mas não garante a mesma identidade entre ferramentas, versões ou configurações.
+
+Persista a intenção de submissão na run antes de chamar uma ferramenta externa e depois registre IDs de jobs retornados, estado, custo conhecido e arquivos de saída que possam ser obtidos. Use evidência real da ferramenta para a rota escolhida; uma chamada ao plugin não cria automaticamente um registro local do OLYMPOX. Consulte e reconcilie resultados incertos antes de outra submissão. Preserve o contexto exato da geração pelo selo de execução e vincule a revisão aos arquivos finais e hashes. A falta de obtenção da saída ou de inspeção mantém a etapa correspondente pendente.
+
+Um caminho local de cânone no Windows não comprova que uma ferramenta do plugin possa lê-lo ou anexá-lo. Confira a rota de anexo/upload suportada e registre as referências realmente submetidas. Uma URL ou galeria remota continua sendo um resultado do fornecedor até que os bytes finais sejam salvos localmente e inspecionados; siga o [guia do plugin](higgsfield-plugin.md) para essa passagem.
 
 Gere um candidato, revise e ajuste. Ao testar uma hipótese, altere uma variável principal por vez. Só produza lotes depois de descobrir uma configuração que funcione no piloto. Defina um limite de tentativas e custo para cada peça antes de usar serviços pagos; se o limite for atingido, pare e revise o brief ou o método.
 

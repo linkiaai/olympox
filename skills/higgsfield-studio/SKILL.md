@@ -1,13 +1,31 @@
 ---
 name: higgsfield-studio
-description: Prepare and operate the local Higgsfield CLI in this influencer studio, including capability checks, estimates and traceable production. Use for Higgsfield requests; generic images follow olympox and imagegen.
+description: Prepare and use Higgsfield through its connected plugin or local CLI, with capability checks, estimates and traceable studio production. Use for Higgsfield requests; generic images follow olympox and imagegen.
 ---
 
 # Higgsfield in the studio
 
-Work from the OLYMPOX project root. Read `docs/higgsfield-setup.md` for installation state, connection, commands and production; read `docs/tools.md` to choose an image, voice or video path. For a character, also apply `olympox` and check its canon and exact files. Maintain framework instructions in English; character content retains its approved language.
+Work from the installed studio root. Read `docs/tools.md` to choose the Higgsfield plugin or local CLI. For the plugin, read `docs/higgsfield-plugin.md`; for the CLI, read `docs/higgsfield-setup.md`. For a character, also apply `olympox` and check its canon and exact files. Maintain framework instructions in English; character content retains its approved language. In the framework development checkout, limit work to framework changes and synthetic verification.
 
-## Preparation and inspection
+## Choose the route
+
+- Honor the user's selected route. When none is selected, use a connected Higgsfield plugin with the required callable capabilities; otherwise check the prepared local CLI. If neither is ready, prepare the production package and report the missing capability. Do not install, authenticate or switch routes silently.
+- Plugin use does not require the local CLI, its binary checks or CLI OAuth. A CLI diagnostic failure does not block a usable plugin. Framework installation supplies instructions; it does not connect either provider route or dispatch tools automatically.
+- Recheck live tool instructions, input schemas, account/workspace, references, model and cost for the selected route. Do not assume the plugin and CLI expose the same models, prices, allowances, training, voices or file access.
+
+## Plugin preparation and execution
+
+Discover the Higgsfield plugin through the host's available plugin tools or directory. If installation or connection is pending, give the user the required step and continue independent local preparation. Use provider tools only after connection is confirmed; their presence alone does not prove a working account or generation.
+
+Inspect the actual tools and schemas needed for the request. Preserve any required picker or exclusive-tool turn; prepare and persist local context before the submission turn. Do not invent slash commands, IDs or parameters. Honor current tool-specific requirements without treating a preset's creative claims as verified facts or authorization.
+
+Local paths are not plugin attachments. Verify a supported transfer route for the exact approved bytes and map their hashes to confirmed provider media IDs or authorized URLs. Attachment-only and remote-sandbox helpers cannot read arbitrary studio files. Keep production pending when a required reference cannot be transferred faithfully. Estimates with URLs/media may import or upload references even when they submit no generation; check side effects and applicable upload authorization, and reuse confirmed inputs to avoid duplicate imports.
+
+Before generation, use the shared production procedure below. Submit through the connected tool with the actual parameters and applicable allowance/budget choice. Record returned IDs, adjustments, results and costs that are exposed. Query the same job with an available status tool after uncertainty; switching to CLI would be a separate submission and must not duplicate an unresolved job.
+
+Use the host's supported media preview and export path. Save the same result bytes as a new local character version before registration, sealing and final review. If only a remote preview/URL is available, preserve it with the job record and leave local delivery pending; do not bypass host display/export restrictions or claim a local asset exists.
+
+## CLI preparation and inspection
 
 - Use `node scripts/higgsfield-local.mjs doctor`, `version` and `help [command [subcommand]]`. The wrapper checks the local binary version and hash; it does not install or update automatically.
 - Login uses `node scripts/higgsfield-local.mjs login`, only when connection is authorized. The user completes OAuth. Do not print tokens, collect passwords or store the session inside the project.
@@ -16,11 +34,13 @@ Work from the OLYMPOX project root. Read `docs/higgsfield-setup.md` for installa
 
 ## Production
 
-The wrapper handles preparation and inspection; it does not generate, upload files or train identity. For authorized production, follow “Later authorized production” in the guide and use the pinned local executable with separate arguments and a verified schema. Do not bypass an authorization refusal by switching to the native binary.
+Both routes follow the same canon, run, asset and quality process. The CLI wrapper handles preparation and inspection; it does not generate, upload files or train identity. For authorized CLI production, follow “Authorized production later” in the setup guide and use the pinned local executable with separate arguments and a verified schema. Do not bypass an authorization refusal by switching tools.
 
 Before submission, persist the job intent, inputs/hashes, model, parameters and applicable limit in the run. A subscription, proposed direction or visual approval does not automatically authorize spending, uploads, training or voice likeness. Reuse previously granted authorizations that cover the action; focus additional decisions on what is actually missing.
 
-Record the ID as soon as available. If submission is uncertain, inspect the same job before repeating it. Preserve media in a new version, the prompt, known cost and context; seal the execution and inspect the complete file. A completed job does not approve identity, audio, lip-sync or publication.
+Record the ID as soon as available. If submission is uncertain, inspect the same job before repeating it. Record the actual route in the tool/provider description; record an unexposed model honestly as unknown and keep unknown cost as `null`, never zero. Preserve media in a new version, the prompt, known cost and context; seal the execution and inspect the complete file. A completed job does not approve identity, audio, lip-sync or publication. Missing transfer, status, export or inspection capabilities remain pending.
+
+Keep quoted/charged provider credits and allowance choices in additional provenance; the asset's `cost` field accepts a monetary amount and currency, not credits. Retain `cost: null` when monetary cost is unavailable. A response asking for an allowance choice or rejecting parameters may submit no job; distinguish that from an uncertain submission. For batches, persist every accepted job ID and reconcile each before resolving the attempt.
 
 ## Vendor reference
 

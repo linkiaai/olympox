@@ -13,6 +13,7 @@ O OLYMPOX é um framework local reutilizável de influenciadores de IA. Seu núc
 | Continuidade | Snapshots do cânone aprovado, selos de execução, vínculos de revisão com arquivos exatos e tentativas preservadas |
 | Recuperação | Detecção de mudanças no contexto, tratamento de resultados incertos, backups com inventário e testes de restauração |
 | Documentação | Manual local navegável |
+| Acesso opcional ao Higgsfield | Orientações para o fluxo por plugin e wrapper da CLI local, usando os mesmos registros de cânone, runs e revisão |
 | Instalação | Criação de estúdio novo e merge com verificação prévia que mantém arquivos idênticos e recusa arquivos conflitantes do framework |
 
 Os fluxos são `create-character`, `produce-piece` e `review-correct`. Atena coordena pedidos no Codex. Perfis registrados orientam o trabalho; a delegação real para uma especialista ocorre somente quando uma subagente é efetivamente despachada.
@@ -34,7 +35,9 @@ Verificações estruturais não inspecionam pixels, escutam vozes, visualizam mo
 
 O Codex usa as ferramentas de geração, inspeção, pesquisa web e subagentes realmente disponíveis na sessão atual. Skills instaladas não criam acesso a ferramentas nem demonstram nova descoberta pelo Codex. Reabra ou recarregue o projeto quando necessário.
 
-O suporte ao Higgsfield é opcional: o pacote inclui instruções, um wrapper local e proveniência de fontes do fornecedor. Binários de fornecedores, sessões de conta, credenciais, disponibilidade de modelos e saldos não são fornecidos por uma instalação do framework. Confira e prepare esses recursos no seu ambiente antes de usar, seguindo [ferramentas](tools.md) e [preparação Higgsfield](higgsfield-setup.md).
+A geração de imagens integrada do Codex é o padrão quando disponível, salvo se o usuário escolher outro fornecedor. O suporte ao Higgsfield oferece duas rotas opcionais: o [plugin do Codex](higgsfield-plugin.md), sem exigir a CLI local do Higgsfield, ou a [CLI e wrapper locais](higgsfield-setup.md). O pacote inclui instruções para o fluxo, o wrapper e a proveniência permitida de fontes do fornecedor. O instalador do framework não instala nem conecta o plugin externo ou binários de fornecedores.
+
+Sessões de conta, credenciais, disponibilidade de ferramentas/modelos e saldos devem ser conferidos no ambiente do usuário para a rota escolhida. A descoberta do plugin por si só não demonstra acesso à conta, voz, Soul ID, uso de referências, download/exportação de mídia ou cobrança equivalente à CLI. A verificação local cobre registros e orientações do framework; ela não exercita o serviço do plugin. Siga [ferramentas](tools.md) e o guia da rota escolhida. Ambas exigem evidência real de execução, registros locais e inspeção completa da mídia.
 
 O núcleo não submete ou consulta jobs externos automaticamente, repete submissões incertas, agenda um radar de tendências, publica conteúdo ou coleta métricas dos canais. Geração paga, treinamento de identidade e publicação precisam de autorização aplicável. Um roteiro ou pacote de produção preparado continua sendo preparação até que execução e revisão ocorram.
 

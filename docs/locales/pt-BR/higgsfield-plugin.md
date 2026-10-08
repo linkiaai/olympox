@@ -1,0 +1,72 @@
+# Integração opcional com o plugin Higgsfield
+
+O plugin Higgsfield é um caminho opcional para um estúdio OLYMPOX instalado separadamente. Pode ser usado sem `tools/higgsfield` nem CLI local. O framework fornece instruções conversacionais e registros locais rastreáveis; não instala nem autentica o plugin, chama suas ferramentas por um adaptador automático no núcleo, envia referências ou exige um teste de geração pago durante a instalação.
+
+O catálogo de plugins do aplicativo e os metadados das ferramentas expostas foram conferidos em **8 de outubro de 2026**, sem conectar uma conta nem submeter geração. A descrição do catálogo cobre geração de imagens/vídeos, entradas de referência, presets criativos e fluxos UGC. Essa evidência não comprova modelos, acesso à conta, preços nem execução bem-sucedida em uma sessão específica. Confira as ferramentas e schemas reais antes de prometer ou executar um recurso. O [guia da CLI local](higgsfield-setup.md) descreve o outro caminho opcional.
+
+## Selecionar e descobrir o caminho
+
+Use `higgsfield-studio` quando Higgsfield for solicitado. Escolha o plugin quando suas ferramentas reais atenderem ao resultado pedido; a ausência da CLI local não bloqueia esse caminho. Use a CLI quando seus recursos conferidos forem adequados e o estúdio tiver preparado esse caminho. Registre qual caminho executará a tentativa. Alterar ferramentas ou entradas não reutiliza silenciosamente uma execução ou aprovação anterior.
+
+Descubra o plugin pelas ferramentas de gerenciamento de plugins disponíveis no aplicativo, ou peça ao usuário para abrir a interface de plugins do aplicativo e procurar **Higgsfield** quando não houver uma ferramenta exposta para isso. Inspecione as informações retornadas de disponibilidade, instalação, conexão e permissões. Use o fluxo real de instalação/conexão do aplicativo quando a autorização aplicável cobrir a ação; o usuário conclui qualquer interação com a conta. Não invente comando de instalação, endpoint de conexão, slash command, identificador de preset ou ID interno do plugin.
+
+Plugin instalado, skill carregada e conta conectada são observações separadas. Confirme conta/workspace corretos pelo estado de conexão do aplicativo ou por uma operação de leitura exposta, sem copiar identificadores privados para documentação pública. Mantenha credenciais fora do estúdio, fichas de personagens, runs e backups. Se as ferramentas ou a conexão necessária continuarem indisponíveis, prepare o pacote de produção e mantenha `awaiting-tool`; não informe integração ou geração concluída no fornecedor.
+
+## Conferir os recursos reais
+
+Descubra as ferramentas chamáveis na sessão atual e leia o schema de cada operação necessária ao pedido. Descrições e skills do plugin orientam a seleção, mas não comprovam acesso à execução. Confira somente os recursos necessários para o trabalho atual:
+
+| Necessidade | Evidência a conferir |
+| --- | --- |
+| Geração de mídia | Operação chamável, tipo de mídia suportado, campos exigidos e parâmetros aceitos |
+| Referências e identidade | Mecanismo real de entrada por arquivo/anexo ou URL, limites e ordem, e suporte às referências exatas aprovadas |
+| Preset ou fluxo UGC | Catálogo/schema atualmente exposto e entradas exigidas pelo fluxo escolhido |
+| Modelo, voz, duração e formato | Valores expostos pela ferramenta/schema ou pelo resultado retornado; sem presumir equivalência com a CLI |
+| Conta e custo | Operações expostas de conta/saldo ou estimativa e condições reais de cobrança deste caminho |
+| Recuperação de job | Operação exposta de status/consulta capaz de inspecionar o job submetido pelo identificador real |
+| Exportação e inspeção | Método disponível para obter bytes locais e inspecionar toda a mídia solicitada |
+
+O plugin pode expor operações diferentes e menos metadados que a CLI. Não transfira flags da CLI, IDs de modelos, IDs de vozes, recursos de treinamento ou preços sem confirmar o schema do plugin. Um nome de preset não comprova sua disponibilidade atual. Quando faltar uma operação ou parâmetro necessário, identifique a etapa ausente e preserve o trabalho preparado.
+
+Uma estimativa ou chamada preparatória que envia mídia é um upload externo, mesmo sem criar job de geração. Os metadados inspecionados de `estimate_image_cost` e `estimate_video_cost` informam que entradas de referência HTTPS são importadas para a biblioteca de mídia. Estimativas repetidas podem repetir essas importações; preserve IDs de mídia confirmados e reutilize-os conforme o schema real, em vez de enviar novamente as mesmas referências. Confira o comportamento atual antes de tratar qualquer chamada como somente leitura. A autorização aplicável deve cobrir transmissão de referências, geração paga e qualquer treinamento de identidade separadamente. Assinatura ou instalação do plugin não autorizam essas ações. Se o custo não estiver disponível, registre-o como desconhecido e assegure que a autorização de geração aplicável cubra essa incerteza; nunca interprete ausência de custo como gratuidade. Selecionar um limite cotado não registra, por si só, aprovação do usuário.
+
+Mantenha **créditos** cotados ou cobrados com unidade, escopo e fonte nas notas do run ou em proveniência adicional do ativo, como `providerMetadata`; esses campos extras são ilustrativos, sem novo contrato imposto. O campo `cost` do ativo aceita valor monetário e moeda, portanto deixe-o `null` até que o fornecedor exponha um valor real em uma moeda suportada. Não coloque créditos em um campo de moeda nem invente conversão.
+
+## Transferir as referências exatas do estúdio
+
+Os metadados inspecionados distinguem `media_upload_and_confirm`, que aceita anexos do usuário no ChatGPT, do caminho OpenAI de `media_upload`, que aceita arquivos criados pelo `sandbox_exec` do plugin. Esse sandbox é remoto e temporário; não consegue ler caminhos locais do cânone no Windows. Um caminho Windows ou arquivo gerado em outro lugar não se torna uma entrada permitida apenas por ser passado a uma dessas ferramentas.
+
+Use um mecanismo de transferência suportado pelo aplicativo e verificado para os arquivos exatos selecionados. Sem esse mecanismo, mantenha a transferência das referências pendente; não fabrique um anexo nem alegue envio do cânone. Preserve um mapeamento de cada caminho local de entrada e SHA-256 para o ID/URL de mídia confirmado pelo fornecedor, com evidência real da transferência e eventuais limitações de transformação. Confirme que a chamada de geração usa essas entradas mapeadas na ordem pretendida. Não trate um prompt contendo seus nomes como submissão de referências. Leia novamente os schemas atuais de transferência se o aplicativo ou as ferramentas mudarem.
+
+## Preservar o contexto de produção antes de submeter
+
+1. Trabalhe no estúdio instalado, com a personagem selecionada e versões exatas de cânone/narrativa/conteúdo. Para produção, use cânone aprovado e referências exigidas; a exploração de candidatos mantém seu propósito de rascunho/referência. Verifique direitos das entradas e autorização, orçamento e limite de tentativas aplicáveis.
+2. Preserve o prompt revisado e os arquivos exatos de entrada. Calcule seus hashes pelas [operações locais](operations.md), registre IDs de referência e ordem dos anexos, e use o mecanismo real de entrada da ferramenta. Um caminho ou nome no texto do prompt não anexa seus bytes. Se o plugin não aceitar as referências exigidas, mantenha o recurso ausente pendente, sem alegar condicionamento da identidade.
+3. Persista a intenção externa no run **antes** de invocar o fornecedor: caminho/ferramenta escolhidos, modelo ou preset exposto, parâmetros, entradas exatas e hashes, IDs/URLs de mídia de entrada confirmados, objetivo e contexto de orçamento. Use a transição `start` do núcleo com `job`, conforme [operação do núcleo](framework-02.md) e [contratos do framework](framework/README.md). Registre somente identificadores já disponíveis; não invente um ID de job antes de o fornecedor retorná-lo. Quando o aplicativo exigir um turno exclusivo para ferramentas do fornecedor, termine a persistência local antes de entrar nesse turno e registre a evidência retornada depois. O núcleo registra intenção, mas não intercepta o plugin nem impõe teto de gastos no serviço.
+4. Invoque somente a operação chamável e os parâmetros realmente conferidos. Registre submissão, todos os IDs de job/request retornados, status, modelo/preset exposto, custo conhecido, locais dos resultados e limitações conforme forem informados. Prefira uma saída única para o primeiro piloto; em lotes, preserve cada ID aceito e acompanhe cada resultado separadamente. Preserve alterações do prompt feitas pela ferramenta que forem expostas; se o prompt final ou detalhes do modelo estiverem indisponíveis, declare isso em vez de inventá-los.
+
+Uma chamada bem-sucedida ou URL de resultado não comprova fidelidade audiovisual nem publicação. Não informe um job do fornecedor quando somente um prompt ou pacote de produção tiver sido preparado.
+
+## Registrar o resultado do fornecedor
+
+Toda intenção externa registrada por `start` com `job` permanece sem resolução até `resolve`, mesmo quando o fornecedor retorna normalmente. Preserve uma resposta aceita, mas ainda pendente, usando `uncertain` com os identificadores realmente retornados e um motivo que descreva o status conhecido. Essa transição retém a continuação local; consulte o job original pela ferramenta real do fornecedor até obter resultado conclusivo.
+
+Para uma resposta terminal do fornecedor, use `resolve` com o mesmo fornecedor/identificadores conhecidos, status `succeeded` ou `failed` e evidência real `type: reconciled`. Uma resposta definitiva de escolha ou rejeição informando que nenhum job foi submetido exige `resolve` com `not-submitted`; não invente um ID de job. Inspecione todos os jobs aceitos de um lote antes de declarar a tentativa reconciliada, preservando cada ID e resultado individual na evidência/proveniência. Essas são transições existentes do núcleo, sem adaptador automático do plugin.
+
+A reconciliação não conclui a geração. Use `complete` na etapa somente após um job bem-sucedido e resolvido ter arquivos reais de saída local e a evidência de geração exigida. Se o fornecedor tiver sucesso, mas a exportação continuar indisponível, resolva primeiro o resultado do fornecedor e depois mantenha a etapa local com `wait` e `awaiting-tool`; nenhuma geração duplicada é necessária para explicar a exportação ausente. Resultados `failed` ou `not-submitted` exigem um próximo passo apropriado registrado e autorização aplicável para qualquer nova tentativa.
+
+## Reconciliar resultados incertos
+
+Se uma submissão atingir timeout, for interrompida ou não retornar resultado conclusivo, preserve a tentativa original e IDs conhecidos. Marque o trabalho pendente como `uncertain-result` pelo procedimento existente de runs. Consulte o job original com uma ferramenta de status realmente exposta, como a `jobs_wait` inspecionada, usando somente IDs de jobs retornados e seus limites atuais. Reconcilie cada job aceito do lote, inclusive sucesso ou falha parciais. Registre a reconciliação com `resolve`, usando resposta/evidência real, antes de continuar ou solicitar outra tentativa. Um pedido de escolha ou erro explícito informando que nenhum job foi submetido é outro resultado: registre essa evidência sem inventar um job pendente no fornecedor. Um timeout ambíguo não comprova ausência de submissão.
+
+Não reenvie automaticamente, mude para a CLI como tentativa de repetição ou presuma que ausência de resposta significa falha. Se nenhuma ferramenta disponível conseguir inspecionar o job original, mantenha-o pendente e identifique a verificação necessária no fornecedor/aplicativo. Qualquer nova tentativa exige reconciliação, autorização aplicável ao seu escopo e preservação do histórico original. O núcleo local não consulta o serviço nem descobre uma chamada feita sem intenção previamente registrada.
+
+## Salvar, selar e inspecionar o resultado
+
+Obtenha os bytes reais da saída por um método de exportação/download realmente fornecido pelo aplicativo ou fornecedor. Salve-os como uma nova versão na pasta de mídia da personagem; preserve os originais. Uma URL remota ou prévia no aplicativo, sozinha, não cumpre registro nem entrega de arquivo local. Se a exportação estiver indisponível, mantenha a etapa pendente e informe o que realmente pode ser acessado.
+
+Use `register` para o arquivo local, complete `provider`, `model` e `referenceIds` reais, prompt e hash, informação de fala quando aplicável e custo conhecido em `assets.json`, depois crie `execution-seal` conforme [operações](operations.md). `cost: null` significa desconhecido. Se o fornecedor não expuser um modelo, use uma descrição honesta não vazia, como `unknown (not exposed by plugin)`, em vez de inventar um nome. Preserve créditos cotados/cobrados na proveniência adicional descrita acima. O selo preserva o contexto declarado; não comprova geração nem inspeção.
+
+Têmis revisa os bytes finais exatos contra referências aprovadas e uso pretendido. Imagens precisam de inspeção visual, áudio precisa de escuta e vídeo precisa de revisão completa de movimento e áudio quando presente. Registre revisor real, método, hashes, decisão e limitações conforme [qualidade](quality.md). Falta de exportação, escuta, acesso ao movimento ou outra inspeção exigida mantém a revisão `pending` e o ativo em rascunho. Uma falha crítica exige correção ou rejeição; testes e conclusão no fornecedor não aprovam o ativo.
+
+Saídas editadas, recortadas, legendadas ou recomprimidas são novas versões e precisam de registro e revisão próprios. A entrega exige os bytes revisados. Publicação continua sendo uma ação autorizada separadamente.

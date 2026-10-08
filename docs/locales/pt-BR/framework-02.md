@@ -49,7 +49,7 @@ node scripts/studio.mjs run-resume RUN_ID
 
 Entradas, saídas concluídas e arquivos de governança têm hashes observados. Uma alteração exige revisão do contexto. Uma nova tentativa precisa de JSON com `newAttempt: true` e motivo; ela recomeça o fluxo preservando a anterior e não reutiliza aprovações silenciosamente.
 
-Antes de enviar um trabalho externo, a transição `start` pode registrar `job` com fornecedor e identificador disponível, preservando a intenção antes do envio. Se o processo interromper sem resposta conclusiva, a retomada trata esse trabalho como resultado incerto e bloqueia repetição. Consulte o fornecedor e registre `resolve` com evidência de reconciliação. O runtime não descobre chamadas feitas sem esse registro prévio.
+Antes de enviar um trabalho externo, a transição `start` pode registrar `job` com fornecedor e identificador disponível, preservando a intenção antes do envio. Todo job registrado começa não resolvido e exige `resolve` com evidência real de reconciliação antes da conclusão local, inclusive em sucesso normal e respostas conclusivas sem submissão. Use `succeeded`, `failed` ou `not-submitted` como estado reconciliado. Se o processo interromper sem resposta conclusiva, a retomada trata esse trabalho como resultado incerto e bloqueia repetição. Consulte o fornecedor e registre `resolve` com evidência de reconciliação. Resolver o job não conclui a etapa; seus arquivos locais e evidências ainda são necessários. O runtime não descobre chamadas feitas sem esse registro prévio.
 
 Locks recusam gravações concorrentes. Uma interrupção pode deixar lock ou pasta temporária: confira os processos e preserve os dados antes de qualquer limpeza. Não há expiração automática que possa disparar trabalho cobrado novamente.
 

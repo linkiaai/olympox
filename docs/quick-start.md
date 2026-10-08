@@ -20,6 +20,18 @@ and narrative. I want a [format] script about [topic], with scenes and a caption
 
 Saraswati writes; Selene prepares and executes available, authorized production; Têmis inspects the complete media. Aurora researches trends when needed. Fortuna prepares distribution experiments and analyzes first-party data when it exists.
 
+## Choose a production tool
+
+Integrated Codex image generation is the default when available unless you choose another provider. Optional Higgsfield access can use the [Codex plugin](higgsfield-plugin.md) or the [local CLI and wrapper](higgsfield-setup.md). The plugin needs its own installation and connection in Codex, with no local Higgsfield CLI required. OLYMPOX installation supplies neither external route's account access.
+
+```text
+Atena, use Higgsfield through the plugin for [character].
+Check the available tools and prepare this piece using the approved references.
+Keep the execution and review records in OLYMPOX.
+```
+
+Selene checks the selected route's actual capabilities and costs before authorized submission. Both routes use the same canon and run records; final media still needs inspection. A plugin listing does not demonstrate voice, Soul ID, media download, export, or equivalent CLI billing.
+
 ## Review and correct
 
 ```text

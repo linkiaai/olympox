@@ -13,6 +13,7 @@ OLYMPOX is a reusable local AI influencer framework. Its core maintains guidance
 | Continuity | Approved canon snapshots, execution seals, exact-file review links, and preserved attempts |
 | Recovery | Context change detection, uncertain-result handling, inventoried backups, and restore testing |
 | Documentation | Local navigable manual |
+| Optional Higgsfield access | Plugin workflow guidance and local CLI wrapper, using the same canon, run, and review records |
 | Installation | Fresh studio creation and preflight merge that retains identical files and refuses conflicting framework files |
 
 The workflows are `create-character`, `produce-piece`, and `review-correct`. Atena coordinates requests in Codex. Registered profiles guide work; real specialist delegation occurs only when a subagent is actually dispatched.
@@ -34,7 +35,9 @@ Structural checks do not inspect pixels, listen to voices, view motion, confirm 
 
 Codex uses generation, inspection, browsing, and subagent tools actually available in the current session. Installed skills do not create tool access or demonstrate fresh discovery by Codex. Reopen or reload the project when necessary.
 
-Higgsfield support is optional: the package includes instructions, a local wrapper, and provider-source provenance. Provider binaries, account sessions, credentials, model availability, and balances are not supplied by a framework installation. Check and prepare them for your own environment before use, following [tools](tools.md) and [Higgsfield setup](higgsfield-setup.md).
+Integrated Codex image generation is the default when available unless the user chooses another provider. Higgsfield support offers two optional routes: the [Codex plugin](higgsfield-plugin.md), with no local Higgsfield CLI required, or the [local CLI and wrapper](higgsfield-setup.md). The package includes workflow instructions, the wrapper, and permitted provider-source provenance. The framework installer does not install or connect the external plugin or provider binaries.
+
+Account sessions, credentials, tool/model availability, and balances must be checked for the selected route in the user's environment. Plugin discovery alone does not demonstrate account access, voice, Soul ID, reference handling, media download/export, or equivalent CLI billing. Local verification covers the framework's records and guidance; it does not exercise the plugin service. Follow [tools](tools.md) and the selected route's guide. Both routes require actual execution evidence, local records, and complete media inspection.
 
 The core does not automatically submit or query external jobs, retry uncertain submissions, schedule a trend radar, publish content, or collect channel analytics. Paid generation, identity training, and publication require applicable authorization. A prepared script or production package remains preparation until execution and review actually occur.
 

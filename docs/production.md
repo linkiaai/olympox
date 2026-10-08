@@ -51,7 +51,13 @@ Naturalism needs direction: textured skin, plausible hair, coherent light, and h
 
 ## 5. Produce and record
 
+Integrated Codex image generation remains the default when available unless the user chooses Higgsfield or another provider. Higgsfield can use its optional [Codex plugin](higgsfield-plugin.md) or the [local CLI and wrapper](higgsfield-setup.md). The plugin route requires no local Higgsfield CLI; check its actual tools, account access, reference inputs, costs, and output retrieval separately. Plugin availability does not establish voice, Soul ID, export, or equivalent CLI billing. Both routes retain the same canon, authorization, and review requirements.
+
 Use approved references and record the tool/model when available, canon version, prompt, relevant parameters, and input/output files. Record a seed only if the tool exposes one; it helps traceability but does not guarantee the same identity across tools, versions, or settings.
+
+Persist submission intent in the run before calling an external tool, then record returned job IDs, status, known cost, and retrievable output files. Use actual tool evidence for the selected route; a plugin call does not create a local OLYMPOX record automatically. Query and reconcile uncertain results before another submission. Preserve the exact generation context through the execution seal and bind review to the final files and hashes. Missing output retrieval or inspection keeps the corresponding stage pending.
+
+A local Windows canon path does not establish that a plugin tool can read or attach it. Verify the supported attachment/upload route and record the references actually submitted. A remote URL or gallery remains a provider result until the final bytes are saved locally and inspected; follow the [plugin guide](higgsfield-plugin.md) for this handoff.
 
 Generate a candidate, review, and adjust. When testing a hypothesis, change one main variable at a time. Produce batches only after finding a configuration that works in the pilot. Define an attempt and cost limit for each piece before using paid services; if the limit is reached, stop and review the brief or method.
 

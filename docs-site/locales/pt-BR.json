@@ -6,6 +6,7 @@
     "docs/quick-start.md": "Começar",
     "docs/living-documentation.md": "Documentação viva",
     "docs/installation.md": "Instalação",
+    "docs/release-notes.md": "Notas de lançamento",
     "docs/framework-02.md": "Operar o núcleo",
     "docs/framework-architecture.md": "Arquitetura",
     "docs/studio-team.md": "Equipe e responsabilidades",
@@ -15,6 +16,7 @@
     "docs/quality.md": "Qualidade e continuidade",
     "docs/operations.md": "Identidade, registros e backup",
     "docs/tools.md": "Ferramentas",
+    "docs/higgsfield-plugin.md": "Plugin Higgsfield",
     "framework/README.md": "API e contratos do núcleo",
     "CONSTITUTION.md": "Constituição"
   },
