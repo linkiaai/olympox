@@ -42,8 +42,10 @@ A new command needs syntax in CLI help and a description in `commandDescriptions
 
 ## Evolution and sharing
 
-The manifest includes source hashes and the framework version, allowing each build's sources to be checked. The public manual is at `https://olympox.linkia.ai/docs/`. The local server does not send content to the internet.
+The manifest includes source hashes and the framework version, allowing each build's sources to be checked. The public manual is at `https://olympox.linkia.ai/doc/`. The local server does not send content to the internet.
 
-`npm.cmd run docs:export` regenerates the manual and prepares only the permitted assets under `out/docs/`. The hosting project is recorded in `.openai/hosting.json`. Publish this complete build through Sites whenever a framework change updates the documentation. Exporting alone does not publish. Unexpected files in `out/` stop the export to prevent accidental disclosure.
+`npm.cmd run docs:export` regenerates the manual and prepares only the permitted assets under `out/doc/`. The hosting project is recorded in `.openai/hosting.json`. Publish this complete build through Sites whenever a framework change updates the documentation. Exporting alone does not publish. Unexpected files in `out/` stop the export to prevent accidental disclosure.
+
+The root at `https://olympox.linkia.ai/` presents the framework through a bilingual landing page. Its profile counts, team and workflow steps come from the same canonical sources as the manual. Landing sources participate in the documentation fingerprint. The old `/docs/` entry forwards to `/doc/`, retaining language and section; its compatibility manifest lets already-open pages discover the migration.
 
 The public page checks its published manifest once a minute. When a new publication arrives, it refreshes while retaining the language and section. This detects published changes; it does not read a developer's local files or call the local development server.

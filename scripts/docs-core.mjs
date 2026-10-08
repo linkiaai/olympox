@@ -4,6 +4,7 @@ import crypto from 'node:crypto';
 import { validateFramework } from './framework-core.mjs';
 
 export const DOCS_ASSETS = ['index.html', 'styles.css', 'markdown.js', 'localization.js', 'app.js', 'favicon.svg', 'olympox-logo.png', 'olympox-icon.png', 'content.js', 'manifest.json'];
+export const LANDING_SOURCES = ['landing.html', 'landing.css', 'landing.js', 'doc-redirect.js'];
 const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 
 export function sourceFile(root, relative) {
@@ -128,6 +129,7 @@ export function collectDocumentation(root) {
   for (const name of ['AGENTS.md', 'CONSTITUTION.md', 'package.json']) read(name);
   for (const item of registry.constitutionPaths ?? []) read(item);
   for (const asset of DOCS_ASSETS.filter(name => !['content.js', 'manifest.json'].includes(name))) read(`docs-site/src/${asset}`);
+  for (const asset of LANDING_SOURCES) read(`docs-site/src/${asset}`);
   const sources = [...files].sort(([a], [b]) => a.localeCompare(b)).map(([file, bytes]) => ({ path: file, sha256: hash(bytes) }));
   const fingerprint = hash(JSON.stringify(sources));
   const localeNames = Object.fromEntries(Object.entries(config.locales).map(([id, settings]) => [id, settings.name]));

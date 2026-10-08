@@ -294,28 +294,35 @@ function manualBrowser(data, { url = 'file:///manual/index.html', stored = null,
   return { element, document, location, storedValues, requests, get intervalMs() { return intervalMs; }, get reloads() { return reloads; }, navigate(route) { location.hash = `#${route}`; listeners.get('hashchange')(); }, switchLocale(value) { element('#locale-select').handlers.get('change')({ target: { value } }); }, async crossEdition(value, route) { const link = { dataset: { locale: value }, getAttribute: () => `?lang=${value}#${route}` }; await element('main').handlers.get('click')({ target: { closest: selector => selector === 'a[data-locale]' ? link : null }, preventDefault() {} }); }, search(value) { element('#search').value = value; element('#search').handlers.get('input')(); }, async status(value) { responseStatus = value; await interval(); } };
 }
 
-test('public export publishes only selected assets under docs and refuses unrelated output', () => {
+test('public export keeps the landing and doc isolated and migrates old docs safely', () => {
   const instance = fixture();
   try {
     const { root } = instance;
     buildDocumentation(root);
+    fs.mkdirSync(path.join(root, 'out/docs'), { recursive: true });
+    for (const name of DOCS_ASSETS) fs.copyFileSync(path.join(root, 'docs-site/dist', name), path.join(root, 'out/docs', name));
     fs.writeFileSync(path.join(root, 'docs-site/dist/private.txt'), 'PRIVATE-EXPORT-MARKER');
     const result = exportDocumentation(root);
-    assert.deepEqual(result.files.filter(name => name.startsWith('docs/')).sort(), DOCS_ASSETS.map(name => `docs/${name}`).sort());
+    assert.deepEqual(result.files.filter(name => name.startsWith('doc/')).sort(), DOCS_ASSETS.map(name => `doc/${name}`).sort());
+    assert.match(fs.readFileSync(path.join(result.directory, 'index.html'), 'utf8'), /Uma direção/);
+    assert.match(fs.readFileSync(path.join(result.directory, 'index.html'), 'utf8'), /data-doc="agent\/master"/);
+    assert.match(fs.readFileSync(path.join(result.directory, 'docs/index.html'), 'utf8'), /\/site\/doc-redirect.js/);
+    assert.equal(fs.existsSync(path.join(result.directory, 'docs/app.js')), false);
+    assert.deepEqual(fs.readFileSync(path.join(result.directory, 'docs/manifest.json')), fs.readFileSync(path.join(result.directory, 'doc/manifest.json')));
     for (const name of result.files) assert.equal(fs.readFileSync(path.join(result.directory, name)).includes('PRIVATE-EXPORT-MARKER'), false);
-    assert.match(fs.readFileSync(path.join(result.directory, '_redirects'), 'utf8'), /\/docs \/docs\/ 308/);
+    assert.match(fs.readFileSync(path.join(result.directory, '_redirects'), 'utf8'), /\/docs \/doc\/ 308/);
     assert.match(fs.readFileSync(path.join(result.directory, '_headers'), 'utf8'), /Cache-Control: no-cache/);
-    const previous = fs.readFileSync(path.join(result.directory, 'docs/content.js'));
+    const previous = fs.readFileSync(path.join(result.directory, 'doc/content.js'));
     fs.appendFileSync(path.join(root, 'docs/quick-start.md'), '\nPublic export revision example.\n');
     fs.writeFileSync(path.join(result.directory, 'unrelated.txt'), 'PRIVATE-EXPORT-MARKER');
     assert.throws(() => exportDocumentation(root), /Unexpected public output: unrelated.txt/);
-    assert.deepEqual(fs.readFileSync(path.join(result.directory, 'docs/content.js')), previous);
+    assert.deepEqual(fs.readFileSync(path.join(result.directory, 'doc/content.js')), previous);
   } finally { instance.close(); }
 });
 
-test('public manual checks published manifest and retains docs path, language and section', async () => {
+test('public manual checks published manifest and retains doc path, language and section', async () => {
   const { data } = collectDocumentation(source);
-  const browser = manualBrowser(data, { url: 'https://olympox.linkia.ai/docs/?lang=pt-BR#commands' });
+  const browser = manualBrowser(data, { url: 'https://olympox.linkia.ai/doc/?lang=pt-BR#commands' });
   assert.equal(browser.element('#sync-status').textContent, 'Versão publicada');
   assert.equal(browser.intervalMs, 60000);
   await browser.status({ fingerprint: data.fingerprint });
@@ -326,9 +333,22 @@ test('public manual checks published manifest and retains docs path, language an
   assert.equal(browser.element('#sync-status').textContent, 'Published version');
   await browser.status({ fingerprint: 'a-new-published-revision' });
   assert.equal(browser.reloads, 1);
-  assert.equal(browser.location.pathname, '/docs/');
+  assert.equal(browser.location.pathname, '/doc/');
   assert.equal(browser.location.search, '?lang=en');
   assert.equal(browser.location.hash, '#commands');
+});
+
+test('legacy docs redirect preserves language, section and nested paths', () => {
+  const script = fs.readFileSync(path.join(source, 'docs-site/src/doc-redirect.js'), 'utf8');
+  for (const [from, to] of [
+    ['/docs?lang=en#overview', '/doc?lang=en#overview'],
+    ['/docs/?lang=pt-BR#agent/master', '/doc/?lang=pt-BR#agent/master'],
+    ['/docs/manifest.json', '/doc/manifest.json']
+  ]) {
+    let target;
+    vm.runInNewContext(script, { URL, location: { href: `https://olympox.linkia.ai${from}`, replace(value) { target=value; } } });
+    assert.equal(target, `https://olympox.linkia.ai${to}`);
+  }
 });
 
 test('portable manual switches every UI surface, localized search and canonical contracts', () => {
