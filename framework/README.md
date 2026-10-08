@@ -37,4 +37,4 @@ The `uncertain` transition accepts `job: {provider, jobId?, requestId?}` and a r
 
 Gaia/Aurora research and distribution planning are optional according to each workflow. `skip` requires a reason and cannot skip generation, review, delivery, or canon decisions. State `completed` means that local contracts have been fulfilled; it does not mean publication or quality proven by the runtime.
 
-Canonical workflow and state tokens are English. Compatibility with legacy Brazilian Portuguese values preserves historical records instead of rewriting their bytes or approvals. See the [language policy](../docs/localization.md) and [Brazilian Portuguese translation](../docs/locales/pt-BR/framework/README.md).
+Historical workflow and state values remain accepted without rewriting records or approvals.

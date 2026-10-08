@@ -5,7 +5,7 @@ description: Create, direct, produce or review AI influencers in this project, i
 
 # OLYMPOX - AI Influencer framework
 
-Produce original characters with consistent identity and verifiable quality. Work through proposals, generation, visual review and approval; generation may require several attempts. Framework instructions and new technical records use English; character voice and content follow the approved audience language. See `docs/localization.md` for secondary Brazilian Portuguese translations and legacy compatibility.
+Produce original characters with consistent identity and verifiable quality. Work through proposals, generation, visual review and approval; generation may require several attempts. Framework instructions and new technical records use English; character voice and content follow the approved audience language.
 
 ## Context and references
 

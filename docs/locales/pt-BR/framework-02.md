@@ -14,7 +14,7 @@ O piloto precede lotes. Fontes e desempenho real orientam melhorias; volume de p
 
 ## Responsáveis e estado persistente
 
-O registry em `framework/registry.json` liga perfis, tarefas e fluxos. IDs dos fluxos: `create-character`, `produce-piece`, `review-correct`. O primeiro pode começar sem personagem; os dois últimos exigem cânone aprovado. Os IDs históricos em português continuam compatíveis sem reescrever runs anteriores.
+O registry em `framework/registry.json` liga perfis, tarefas e fluxos. IDs dos fluxos: `create-character`, `produce-piece`, `review-correct`. O primeiro pode começar sem personagem; os dois últimos exigem cânone aprovado. Os IDs históricos dos fluxos continuam compatíveis sem reescrever runs anteriores.
 
 Crie um arquivo JSON de especificação dentro do projeto, por exemplo `tmp/first-cycle.json`:
 
@@ -84,6 +84,3 @@ npm.cmd run verify
 ```
 
 Os testes verificam caminhos, histórico, estados, integridade e comandos locais. Não inspecionam pixels, escutam áudio, assistem vídeos nem autenticam uma declaração humana. Cada estúdio precisa de um piloto inspecionado para demonstrar consistência visual, movimento, voz e utilidade do conteúdo com ferramentas reais.
-
-
-> Tradução secundária em português do Brasil. A base canônica, os comandos e os tokens do framework são em inglês. Valores históricos em português continuam compatíveis; essa compatibilidade não reescreve fichas, runs, snapshots, hashes ou aprovações anteriores. O idioma editorial das personagens permanece independente. Consulte a [política de idiomas](localization.md).

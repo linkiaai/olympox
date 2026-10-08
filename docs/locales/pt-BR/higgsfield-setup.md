@@ -132,6 +132,3 @@ Ao atualizar, repetir inspeção, verificar novo archive/binário e ajustar o pi
 - [Skill generate e referências inspecionadas](https://github.com/higgsfield-ai/skills/tree/f83af0bc1d937c8119099a11f8ebbf5e6fb99819/higgsfield-generate).
 - [Integração CLI + Skills e regras de créditos](https://higgsfield.ai/creator-hub/help-center/integrations/how-do-i-access-higgsfield-via-cli).
 - Ajuda do executável local 1.1.26 para `auth`, `auth login`, `account`, `workspace`, `model` e `generate cost`.
-
-
-> Tradução secundária em português do Brasil. A base canônica, os comandos e os tokens do framework são em inglês. Valores históricos em português continuam compatíveis; essa compatibilidade não reescreve fichas, runs, snapshots, hashes ou aprovações anteriores. O idioma editorial das personagens permanece independente. Consulte a [política de idiomas](localization.md).

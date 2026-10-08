@@ -16,8 +16,7 @@
     "docs/operations.md": "Identidade, registros e backup",
     "docs/tools.md": "Ferramentas",
     "framework/README.md": "API e contratos do núcleo",
-    "CONSTITUTION.md": "Constituição",
-    "docs/localization.md": "Idioma e compatibilidade"
+    "CONSTITUTION.md": "Constituição"
   },
   "commandDescriptions": {
     "help": "Mostrar as operações disponíveis.",
@@ -289,7 +288,7 @@
     "capabilityNoteAfter": "A declaração não instala nem testa a ferramenta.",
     "completionCriteria": "Critérios de conclusão",
     "appearsIn": "Onde aparece",
-    "fullContract": "Contrato completo (inglês canônico)",
+    "fullContract": "Contrato completo",
     "contractsTitle": "O que cada tarefa precisa entregar.",
     "contractsDescription": "Os contratos tornam explícitos o responsável, os pré-requisitos e a evidência necessária para concluir uma etapa.",
     "contractsEyebrow": "CONTRATOS DO FRAMEWORK",

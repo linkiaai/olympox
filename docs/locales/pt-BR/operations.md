@@ -148,5 +148,4 @@ O ID retornado tem formato `character/name`. `restore BACKUP_ID` restaura apenas
 
 Consulte [núcleo 0.2](framework-02.md) para narrativa, peças e coordenação. Credenciais não pertencem ao projeto.
 
-
-> Tradução secundária em português do Brasil. A base canônica, os comandos e os tokens do framework são em inglês. Valores históricos em português continuam compatíveis; essa compatibilidade não reescreve fichas, runs, snapshots, hashes ou aprovações anteriores. O idioma editorial das personagens permanece independente. Consulte a [política de idiomas](localization.md).
+Registros históricos continuam legíveis sem reescrever seus bytes ou aprovações. O texto e a voz das personagens conservam seu próprio idioma editorial.

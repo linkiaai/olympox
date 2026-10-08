@@ -273,7 +273,7 @@ test('portable manual switches every UI surface, localized search and canonical 
   assert.equal(browser.element('#sync-status').textContent, 'Portable version');
   browser.navigate('task/generate-piece');
   const englishName = data.tasks.find(item => item.id === 'generate-piece').name;
-  assert.match(browser.element('main').innerHTML, /Full contract \(canonical English\)/);
+  assert.match(browser.element('main').innerHTML, /<h2>Full contract<\/h2>/);
   browser.switchLocale('pt-BR');
   assert.equal(browser.document.documentElement.lang, 'pt-BR');
   assert.equal(browser.location.search, '?lang=pt-BR');
@@ -282,7 +282,7 @@ test('portable manual switches every UI surface, localized search and canonical 
   assert.equal(browser.element('text:skip').textContent, 'Ir para o conteúdo');
   assert.equal(browser.element('aria:manualNavigation').attrs['aria-label'], 'Navegação do manual');
   assert.match(browser.element('main').innerHTML, /Gerar a peça real/);
-  assert.match(browser.element('main').innerHTML, /Contrato completo \(inglês canônico\)/);
+  assert.match(browser.element('main').innerHTML, /<h2>Contrato completo<\/h2>/);
   assert.equal(browser.element('main').innerHTML.includes(englishName), true);
   assert.equal(browser.element('#sync-status').textContent, 'Versão portátil');
   browser.search('Gerar a peça real');

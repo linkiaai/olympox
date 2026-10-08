@@ -35,5 +35,3 @@ Without connected execution, Codex can still prepare the complete package: exact
 ## Codex
 
 `AGENTS.md` provides project guidance; `.agents/skills/olympox` contains the reusable process. The [official skill documentation](https://developers.openai.com/codex/skills) describes local discovery. If the skill is absent from the selector, reload Codex; it can also be read directly in this conversation. Installed files do not prove automatic loading in the app.
-
-English is primary; [Brazilian Portuguese](locales/pt-BR/tools.md) is a secondary translation. See the [language policy](localization.md).

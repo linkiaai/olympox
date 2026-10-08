@@ -22,7 +22,7 @@ The naming includes the coordinator and eight specialists. Gaia and Íris retain
 | Têmis | Greek; divine order and regulation. [The Encyclopedia of Ancient History](https://onlinelibrary.wiley.com/doi/10.1002/9781444338386.wbeah30482) | Criteria and quality assessment |
 | Fortuna | Roman; fortune goddess. [British Museum](https://www.britishmuseum.org/learn/schools/ages-7-11/ancient-rome/gods-and-goddesses-roman-britain) | Opportunities and growth experiments |
 
-This revision retains core 0.2.0 and technical role and contract IDs. Canonical workflow IDs use English, with compatibility for historical Portuguese IDs. Historical records, snapshots, evidence, and backups retain the names used in their original execution. An earlier run can report changed governance after renaming; resumption requires an explicit new attempt with a reason, as described in [core operation](framework-02.md), preserving history.
+This revision retains core 0.2.0 and technical role and contract IDs. Workflow IDs retain compatibility with historical IDs. Historical records, snapshots, evidence, and backups retain the names used in their original execution. An earlier run can report changed governance after renaming; resumption requires an explicit new attempt with a reason, as described in [core operation](framework-02.md), preserving history.
 
 ## Atena — master and studio director
 
@@ -110,5 +110,3 @@ Local core 0.2 already persists runs in `work/runs`, with contracts, observed co
 A change in inputs, canon, or governance requires a new attempt and a reason to resume; the previous attempt is preserved and the workflow restarts. An unresolved external job stays `uncertain-result` until real reconciliation. Missing capability keeps the outstanding work in `awaiting-tool`; a prepared package does not replace generation or inspection.
 
 Core limitations and evolution are in [architecture 0.2](framework-architecture.md). Each studio creates its own personas and records actual canon approval and pilot inspection. Profiles, contracts, and local tests do not demonstrate completed creative production.
-
-English is primary; [Brazilian Portuguese](locales/pt-BR/studio-team.md) is a secondary translation. See the [language policy](localization.md).

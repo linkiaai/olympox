@@ -62,7 +62,7 @@ Open this checkout in Codex to develop and maintain the framework under its root
 | Constitution and project instructions | Character records and approved identity |
 | Framework profiles, contracts, and workflows | References, generated media, prompts, and exports |
 | Local scripts and templates | Runs, maintenance state, and backups |
-| English guides and secondary pt-BR translations | Provider installations, accounts, and credentials |
+| Guides and local manual | Provider installations, accounts, and credentials |
 | Manual source and build tools | Generated manual and temporary local files |
 | Versioned skills and permitted provider-source provenance | Files produced by your own creative work |
 
@@ -79,8 +79,6 @@ npm run studio -- list
 npm run docs:dev
 ```
 
-An empty character list is expected in a new studio. Open the address printed by `docs:dev` to read the English manual or select Brazilian Portuguese. The manual is local; its development server does not publish it remotely. See [quick start](quick-start.md), [operations](operations.md), and [framework capabilities](studio-status.md).
+An empty character list is expected in a new studio. Open the address printed by `docs:dev` to read the manual. The manual is local; its development server does not publish it remotely. See [quick start](quick-start.md), [operations](operations.md), and [framework capabilities](studio-status.md).
 
 OLYMPOX is distributed under the [MIT license](../LICENSE). Character content, external references, and provider services retain their own applicable terms and rights.
-
-English is primary; [Brazilian Portuguese](locales/pt-BR/installation.md) is a secondary translation. See the [language policy](localization.md).

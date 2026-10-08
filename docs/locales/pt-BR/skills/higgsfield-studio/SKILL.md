@@ -5,9 +5,7 @@ description: Preparar e operar o CLI local do Higgsfield neste estúdio de influ
 
 # Higgsfield no estúdio
 
-Esta é uma tradução secundária para leitura. A skill ativa e a fonte principal estão em inglês em skills/higgsfield-studio/; o idioma editorial da personagem é independente. Consulte docs/localization.md.
-
-Trabalhe da raiz do projeto OLYMPOX. Leia `docs/higgsfield-setup.md` para o estado da instalação, conexão, comandos e produção; leia `docs/tools.md` para escolher o caminho de imagem, voz e vídeo. Para uma personagem, aplique também `olympox` e confira seu cânone e arquivos exatos.
+Trabalhe da raiz do projeto OLYMPOX. Leia `docs/higgsfield-setup.md` para o estado da instalação, conexão, comandos e produção; leia `docs/tools.md` para escolher o caminho de imagem, voz e vídeo. Para uma personagem, aplique também `olympox` e confira seu cânone e arquivos exatos. Mantenha as instruções do framework em inglês; o conteúdo da personagem conserva seu idioma aprovado.
 
 ## Preparação e consulta
 

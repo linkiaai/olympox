@@ -12,7 +12,7 @@ OLYMPOX is a reusable local AI influencer framework. Its core maintains guidance
 | Character records | Brief, identity anchors, references, narrative, content pieces, and generation specifications |
 | Continuity | Approved canon snapshots, execution seals, exact-file review links, and preserved attempts |
 | Recovery | Context change detection, uncertain-result handling, inventoried backups, and restore testing |
-| Documentation | English manual with an explicit Brazilian Portuguese translation selector |
+| Documentation | Local navigable manual |
 | Installation | Fresh studio creation and preflight merge that retains identical files and refuses conflicting framework files |
 
 The workflows are `create-character`, `produce-piece`, and `review-correct`. Atena coordinates requests in Codex. Registered profiles guide work; real specialist delegation occurs only when a subagent is actually dispatched.
@@ -47,5 +47,3 @@ The core does not automatically submit or query external jobs, retry uncertain s
 5. Inspect the complete media and correct critical failures in new versions before batches.
 
 Keep character records, media, runs, and backups local. The distributed framework contains no real character files. Use verifiable backup and keep an independent copy outside the working disk; shared framework context needs its own preservation.
-
-English is primary; [Brazilian Portuguese](locales/pt-BR/studio-status.md) is a secondary translation. See the [language policy](localization.md).

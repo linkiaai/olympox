@@ -2,11 +2,9 @@
 
 OLYMPOX é um framework local de influenciadores de IA coordenado por Atena e uma equipe de especialistas com nomes de deusas. O Codex o utiliza para criar e dirigir influenciadores virtuais originais por meio de estratégia, persona, referências, fotografia, roteiros, voz, vídeo e revisão de qualidade. Cada influenciador tem identidade e histórico próprios.
 
-O pacote reutilizável contém governança, skills, perfis de especialistas, contratos de tarefas, fluxos, comandos locais, templates e um manual bilíngue. A skill `olympox` organiza o trabalho criativo em um estúdio instalado. Cada usuário instala um estúdio independente e cria ali seus próprios influenciadores originais. Fichas de personagens, mídia, runs, backups, credenciais e binários opcionais de fornecedores ficam fora do pacote do framework.
+O pacote reutilizável contém governança, skills, perfis de especialistas, contratos de tarefas, fluxos, comandos locais, templates e um manual. A skill `olympox` organiza o trabalho criativo em um estúdio instalado. Cada usuário instala um estúdio independente e cria ali seus próprios influenciadores originais. Fichas de personagens, mídia, runs, backups, credenciais e binários opcionais de fornecedores ficam fora do pacote do framework.
 
 Este repositório e seu projeto do Codex são dedicados ao desenvolvimento e à manutenção do framework. O `AGENTS.md` da raiz define as instruções de desenvolvimento. A instalação usa `templates/studio-AGENTS.md` para as instruções criativas do estúdio separado.
-
-O inglês é o idioma principal da documentação, dos comandos, do desenvolvimento e dos registros compartilhados do framework. Esta versão em português do Brasil é uma tradução secundária. Consulte a [política de idiomas](localization.md) e a [versão principal em inglês](../../../README.md).
 
 ## Instalar seu estúdio
 
@@ -101,6 +99,3 @@ Leia [operação](operations.md) para referências, hashes e manifesto. Mídia, 
 Os perfis são instruções, e os pacotes locais não despacham agentes. Os comandos mantêm registros e integridade; geração, inspeção, serviços pagos e publicação precisam das ferramentas e autorizações aplicáveis ao seu estúdio. Testes não demonstram identidade visual, qualidade de voz nem execução por um fornecedor. Consulte [estado do framework](studio-status.md) e [preparação opcional do Higgsfield](higgsfield-setup.md).
 
 Distribuído sob a [licença MIT](../../../LICENSE).
-
-
-> Tradução secundária em português do Brasil. A base canônica, os comandos e os tokens do framework são em inglês. Valores históricos em português continuam compatíveis; essa compatibilidade não reescreve fichas, runs, snapshots, hashes ou aprovações anteriores. O idioma editorial das personagens permanece independente. Consulte a [política de idiomas](localization.md).

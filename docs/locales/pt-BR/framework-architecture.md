@@ -67,7 +67,7 @@ Cada pacote identifica personagem quando aplicável, responsável, contrato, ent
 
 ## Retomada e evidências
 
-Runs usam os estados canônicos em inglês `planned`, `in-progress`, `awaiting-input`, `awaiting-tool`, `uncertain-result`, `in-review`, `completed`, `failed` e `cancelled`. Valores históricos em português continuam legíveis por compatibilidade. Mudanças de entradas, saídas concluídas, cânone ou governança exigem nova tentativa e motivo para retomar. O fluxo recomeça, preservando a tentativa anterior e sem reaproveitar silenciosamente suas aprovações.
+Runs usam os estados `planned`, `in-progress`, `awaiting-input`, `awaiting-tool`, `uncertain-result`, `in-review`, `completed`, `failed` e `cancelled`. Valores históricos dos estados continuam legíveis por compatibilidade. Mudanças de entradas, saídas concluídas, cânone ou governança exigem nova tentativa e motivo para retomar. O fluxo recomeça, preservando a tentativa anterior e sem reaproveitar silenciosamente suas aprovações.
 
 Antes de um envio externo, persistir intenção e identificadores conhecidos. Uma retomada com job não esclarecido fica `uncertain-result`, inclusive após interrupção antes de registrar a resposta. O Codex consulta o fornecedor com uma ferramenta real e registra a reconciliação antes de completar ou tentar novamente. O runtime não consulta nem reenvia jobs; sem intenção registrada, não descobre chamadas feitas fora dele. Interrupção não demonstra falha nem autoriza nova cobrança.
 
@@ -102,6 +102,3 @@ O próximo marco é **uma persona**, com público/direção escolhidos, referên
 Depois do piloto, estruturar publicações efetivamente realizadas e experimentos com hipótese, variável, coorte, janela, contagens, denominadores, fonte e decisão. Custos de tentativas rejeitadas contam; moedas diferentes e dados ausentes não são tratados como equivalentes. Campanhas completas, comparação de portfólio, analytics, adaptadores, dashboard e banco de dados entram conforme necessidade observada.
 
 Um adaptador para squads AIOX permanece uma possibilidade futura se houver demanda por esse ecossistema. Deve mapear contratos e validar um projeto real. Escala e automação dependem das evidências do piloto; quantidade de perfis não demonstra qualidade.
-
-
-> Tradução secundária em português do Brasil. A base canônica, os comandos e os tokens do framework são em inglês. Valores históricos em português continuam compatíveis; essa compatibilidade não reescreve fichas, runs, snapshots, hashes ou aprovações anteriores. O idioma editorial das personagens permanece independente. Consulte a [política de idiomas](localization.md).

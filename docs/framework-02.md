@@ -14,7 +14,7 @@ The pilot precedes batches. Sources and actual performance guide improvement; th
 
 ## Owners and persistent state
 
-The registry in `framework/registry.json` connects profiles, tasks, and workflows. Workflow IDs: `create-character`, `produce-piece`, `review-correct`. The first can start without a character; the other two require approved canon. Historical Portuguese IDs remain compatible without rewriting earlier runs.
+The registry in `framework/registry.json` connects profiles, tasks, and workflows. Workflow IDs: `create-character`, `produce-piece`, `review-correct`. The first can start without a character; the other two require approved canon. Historical workflow IDs remain compatible without rewriting earlier runs.
 
 Create a JSON specification file inside the project, such as `tmp/first-cycle.json`:
 
@@ -84,5 +84,3 @@ npm.cmd run verify
 ```
 
 Tests check paths, history, states, integrity, and local commands. They do not inspect pixels, listen to audio, watch videos, or authenticate a human declaration. Each studio needs an inspected pilot to demonstrate visual consistency, motion, voice, and useful content with real tools.
-
-English is primary; [Brazilian Portuguese](locales/pt-BR/framework-02.md) is a secondary translation. Canonical tokens remain English in translated examples; compatibility preserves historical records and their approvals. See the [language policy](localization.md).

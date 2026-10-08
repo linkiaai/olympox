@@ -78,6 +78,3 @@ Uma campanha pode ter estilo compartilhado sem aproximar involuntariamente as id
 5. Documentar o método que funcionou e começar a próxima peça ou o próximo personagem.
 
 Esse ciclo deixa claro o que foi aprovado, o que ainda precisa de inspeção e quais condições de produção já foram exercitadas. Amplie o processo conforme necessidades verificadas, sem transformar hipóteses em garantias de qualidade.
-
-
-> Tradução secundária em português do Brasil. A base canônica, os comandos e os tokens do framework são em inglês. Valores históricos em português continuam compatíveis; essa compatibilidade não reescreve fichas, runs, snapshots, hashes ou aprovações anteriores. O idioma editorial das personagens permanece independente. Consulte a [política de idiomas](localization.md).

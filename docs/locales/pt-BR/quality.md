@@ -69,5 +69,4 @@ Exemplo: “`take-03-v2.mp4`, cânone 1, Reel vertical; revisão completa com á
 
 Faça a menor mudança necessária. Prefira corrigir cenário, enquadramento ou um detalhe local preservando as referências aprovadas. Mude uma variável por tentativa e compare as versões. Após um reparo, inspecione também as regiões vizinhas e a mídia inteira: corrigir a mão pode alterar o rosto; melhorar o lip-sync pode introduzir dentes defeituosos. Preserve o original e nunca substitua uma referência do cânone por um resultado ainda não aprovado.
 
-
-> Tradução secundária em português do Brasil. A base canônica, os comandos e os tokens do framework são em inglês. Valores históricos em português continuam compatíveis; essa compatibilidade não reescreve fichas, runs, snapshots, hashes ou aprovações anteriores. O idioma editorial das personagens permanece independente. Consulte a [política de idiomas](localization.md).
+Os métodos de revisão são `visual`, `listening` e `visual-and-audio`. Valores históricos continuam aceitos sem reescrever arquivos ou aprovações anteriores.

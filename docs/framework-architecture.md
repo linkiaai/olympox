@@ -67,7 +67,7 @@ Each package identifies the character when applicable, owner, contract, inputs/h
 
 ## Resumption and evidence
 
-Runs use canonical English states: `planned`, `in-progress`, `awaiting-input`, `awaiting-tool`, `uncertain-result`, `in-review`, `completed`, `failed`, and `cancelled`. Legacy Portuguese state values remain readable for compatibility. Changes to inputs, completed outputs, canon, or governance require a new attempt and a reason to resume. The workflow restarts, preserving the previous attempt without silently reusing its approvals.
+Runs use these states: `planned`, `in-progress`, `awaiting-input`, `awaiting-tool`, `uncertain-result`, `in-review`, `completed`, `failed`, and `cancelled`. Historical state values remain readable for compatibility. Changes to inputs, completed outputs, canon, or governance require a new attempt and a reason to resume. The workflow restarts, preserving the previous attempt without silently reusing its approvals.
 
 Before external submission, persist intent and known identifiers. Resuming an unresolved job enters `uncertain-result`, including after interruption before recording the response. Codex queries the provider with a real tool and records reconciliation before completing or trying again. The runtime neither queries nor resubmits jobs; without recorded intent, it cannot discover calls made outside it. Interruption neither demonstrates failure nor authorizes another charge.
 
@@ -102,5 +102,3 @@ The next milestone is **one persona**, with a chosen audience/direction, inspect
 After the pilot, structure actual publications and experiments with a hypothesis, variable, cohort, window, counts, denominators, source, and decision. Costs of rejected attempts count; different currencies and missing data are not treated as equivalent. Complete campaigns, portfolio comparison, analytics, adapters, a dashboard, and a database are introduced according to observed need.
 
 An AIOX squad adapter remains a future possibility if demand for that ecosystem emerges. It must map contracts and validate a real project. Scale and automation depend on pilot evidence; the number of profiles does not demonstrate quality.
-
-English is primary; [Brazilian Portuguese](locales/pt-BR/framework-architecture.md) is a secondary translation. See the [language policy](localization.md).

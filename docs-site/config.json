@@ -109,13 +109,6 @@
       "translations": {
         "pt-BR": "docs/locales/pt-BR/CONSTITUTION.md"
       }
-    },
-    {
-      "path": "docs/localization.md",
-      "label": "Language and compatibility",
-      "translations": {
-        "pt-BR": "docs/locales/pt-BR/localization.md"
-      }
     }
   ],
   "commandDescriptions": {

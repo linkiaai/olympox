@@ -4,9 +4,9 @@ OLYMPOX is a local AI influencer framework for creating original virtual influen
 
 ## Language policy
 
-- English is the canonical language for framework documentation, commands, identifiers, contracts, development, comments, tests, templates, skills and default runtime messages. Maintain the English source first. Brazilian Portuguese (`pt-BR`) is a secondary translation, stored separately; it must not become a competing source of truth. Follow `docs/localization.md`.
+- English is the canonical language for framework documentation, commands, identifiers, contracts, development, comments, tests, templates, skills and default runtime messages. Maintain the English source first. Follow `docs/localization.md`.
 - Use English machine tokens in both language editions. Legacy Portuguese identifiers and states remain compatibility inputs; preserve historical bytes, hashes, approvals and snapshots. New records use canonical English values.
-- The manual opens in English and offers an explicit Brazilian Portuguese language selector. Character voice, editorial content and user conversation language are independent of framework language. Respect an existing character's approved language and the user's language preferences.
+- Character voice, editorial content and user conversation language are independent of framework language. Respect an existing character's approved language and the user's language preferences.
 - Preserve established goddess proper names and technical role IDs. Names such as Atena, Psiquê, Íris and Têmis are project names, not runtime commands.
 
 ## Start each task
@@ -41,7 +41,7 @@ OLYMPOX is a local AI influencer framework for creating original virtual influen
 ## Commands and maintenance
 
 - Generate the navigable manual in `docs-site/dist/` with `npm.cmd run docs:build`. `npm.cmd run docs:dev` watches changes and updates the browser while running. `npm.cmd run docs:check` detects a missing or stale build without writing files.
-- When changing framework behavior, commands, responsibilities, contracts or workflows, update the affected English guides and secondary translations in the same task. Catalogs derive from sources; explanations must accompany implementation. Add command syntax to CLI help and its English description to `docs-site/config.json`, with the secondary description in the locale resource. Include new guides in the explicit selection. Never include character records, media, prompts, runs, backups, credentials or private state in the manual.
+- When changing framework behavior, commands, responsibilities, contracts or workflows, update the affected English guides and locale resources in the same task. Catalogs derive from sources; explanations must accompany implementation. Add command syntax to CLI help and its description to `docs-site/config.json` and the locale resources. Include new guides in the explicit selection. Never include character records, media, prompts, runs, backups, credentials or private state in the manual.
 - Complete framework changes with `npm.cmd run verify`: it builds documentation, runs local checks and verifies the result. Do not claim semantic updates or remote publication that did not occur. Read `docs/living-documentation.md`.
 
 `npm.cmd run verify` checks scripts, records and local installation. `node scripts/studio.mjs help` lists operations. Do not install frameworks, create APIs, add a database or publish a website without a concrete need. The current base works with Node and no external dependencies.

@@ -105,5 +105,3 @@ Choose one hypothesis and main variable per experiment according to [strategy](s
 Before costly generation or publication, recheck short-lived signals and chosen music. The recheck interval is a research decision adjusted to signal speed, not certified validity. Missing data leaves the hypothesis open.
 
 The objective is relevant content with potential for reach and sharing while sustaining identity. Virality is an outcome observed after distribution, not a guaranteed property of a script.
-
-English is primary; [Brazilian Portuguese](locales/pt-BR/trend-research.md) is a secondary translation. See the [language policy](localization.md).

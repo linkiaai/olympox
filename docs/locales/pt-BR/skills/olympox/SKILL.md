@@ -5,9 +5,7 @@ description: Criar, dirigir, produzir ou revisar influenciadores de IA neste pro
 
 # OLYMPOX - AI Influencer framework
 
-Esta é uma tradução secundária para leitura. A skill ativa e a fonte principal estão em inglês em skills/olympox/; o idioma editorial da personagem é independente. Consulte docs/localization.md.
-
-Conduza a produção de personagens originais com identidade consistente e qualidade verificável. Trabalhe em ciclos de proposta, geração, revisão visual e aprovação; a geração pode exigir várias tentativas.
+Conduza a produção de personagens originais com identidade consistente e qualidade verificável. Trabalhe em ciclos de proposta, geração, revisão visual e aprovação; a geração pode exigir várias tentativas. As instruções do framework e os novos registros técnicos usam inglês; a voz e o conteúdo da personagem seguem o idioma aprovado para o público.
 
 ## Contexto e referências
 
@@ -32,7 +30,7 @@ Pergunte somente o essencial que estiver faltando. Para escolhas reversíveis, p
 
 **Conteúdo.** Escreva para a persona e o público aprovados: roteiro, legenda, sequência de cenas e direção de atuação. Vincule cada produção ao objetivo editorial e às referências do personagem. Preserve a distinção entre fatos verificáveis e ficção do personagem.
 
-**Qualidade.** Use `docs/quality.md` e inspecione visualmente os resultados. Verifique identidade, anatomia, continuidade, acabamento e adequação ao briefing. Referências usam `candidate`, `approved`, `rejected`; ativos usam `draft`, `production`, `rejected`, conforme inspeção e decisão real. Validação estrutural e geração bem-sucedida não aprovam identidade ou qualidade automaticamente.
+**Qualidade.** Use `docs/quality.md` e inspecione visualmente os resultados. Verifique identidade, anatomia, continuidade, acabamento e adequação ao briefing. Referências usam `candidate`, `approved`, `rejected`; ativos usam `draft`, `production`, `rejected`, conforme inspeção e decisão real. Valores históricos em português continuam legíveis. Validação estrutural e geração bem-sucedida não aprovam identidade ou qualidade automaticamente.
 
 ## Operação local
 

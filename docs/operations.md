@@ -148,4 +148,4 @@ The returned ID has the form `character/name`. `restore BACKUP_ID` restores only
 
 See [core 0.2](framework-02.md) for narrative, pieces, and coordination. Credentials do not belong in the project.
 
-Canonical machine tokens are English. Legacy Portuguese records remain readable without rewriting their historical bytes or approvals. Character prose and voice keep their own editorial language. See the [language policy](localization.md) and [Brazilian Portuguese translation](locales/pt-BR/operations.md).
+Historical records remain readable without rewriting their bytes or approvals. Character prose and voice keep their own editorial language.

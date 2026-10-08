@@ -2,11 +2,9 @@
 
 OLYMPOX is a local AI influencer framework coordinated by Atena and a team of goddess-named specialists. Codex uses it to create and direct original virtual influencers through strategy, persona, references, photography, scripts, voice, video, and quality review. Each influencer has an individual identity and history.
 
-The reusable package contains governance, skills, specialist profiles, task contracts, workflows, local commands, templates, and a bilingual manual. The `olympox` skill organizes creative work in an installed studio. Each user installs an independent studio and creates their own original influencers there. Character records, media, runs, backups, credentials, and optional provider binaries are excluded from the framework package.
+The reusable package contains governance, skills, specialist profiles, task contracts, workflows, local commands, templates, and a manual. The `olympox` skill organizes creative work in an installed studio. Each user installs an independent studio and creates their own original influencers there. Character records, media, runs, backups, credentials, and optional provider binaries are excluded from the framework package.
 
 This repository and its Codex project are dedicated to framework development and maintenance. The root `AGENTS.md` defines development instructions. Installation uses `templates/studio-AGENTS.md` for the separate studio's creative instructions.
-
-English is the framework's primary language for documentation, commands, development, and shared records. [Brazilian Portuguese](docs/locales/pt-BR/README.md) is a secondary translation. See the [language policy](docs/localization.md).
 
 ## Install your studio
 

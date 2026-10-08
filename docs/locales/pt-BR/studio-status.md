@@ -12,7 +12,7 @@ O OLYMPOX é um framework local reutilizável de influenciadores de IA. Seu núc
 | Fichas de personagens | Brief, âncoras de identidade, referências, narrativa, peças de conteúdo e especificações de geração |
 | Continuidade | Snapshots do cânone aprovado, selos de execução, vínculos de revisão com arquivos exatos e tentativas preservadas |
 | Recuperação | Detecção de mudanças no contexto, tratamento de resultados incertos, backups com inventário e testes de restauração |
-| Documentação | Manual em inglês com seletor explícito de tradução para português brasileiro |
+| Documentação | Manual local navegável |
 | Instalação | Criação de estúdio novo e merge com verificação prévia que mantém arquivos idênticos e recusa arquivos conflitantes do framework |
 
 Os fluxos são `create-character`, `produce-piece` e `review-correct`. Atena coordena pedidos no Codex. Perfis registrados orientam o trabalho; a delegação real para uma especialista ocorre somente quando uma subagente é efetivamente despachada.
@@ -47,5 +47,3 @@ O núcleo não submete ou consulta jobs externos automaticamente, repete submiss
 5. Inspecione a mídia completa e corrija falhas críticas em novas versões antes de lotes.
 
 Mantenha fichas de personagens, mídia, runs e backups locais. O framework distribuído não contém arquivos reais de personagens. Use backup verificável e mantenha uma cópia independente fora do disco de trabalho; o contexto compartilhado do framework precisa de preservação própria.
-
-O inglês é o idioma principal; esta é uma tradução secundária em português brasileiro. Consulte a [fonte em inglês](../../studio-status.md) e a [política de idiomas](localization.md).

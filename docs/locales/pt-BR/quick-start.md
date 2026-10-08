@@ -45,6 +45,3 @@ node scripts/studio.mjs list
 ## O que informar na passagem
 
 Informe personagem, versão do cânone, arquivos de entrada, objetivo, canal e entrega esperada. Uma pendência de ferramenta, decisão ou revisão deve permanecer visível. Autorizações já dadas continuam válidas; a equipe registra apenas o trabalho realmente executado.
-
-
-> Tradução secundária em português do Brasil. A base canônica, os comandos e os tokens do framework são em inglês. Valores históricos em português continuam compatíveis; essa compatibilidade não reescreve fichas, runs, snapshots, hashes ou aprovações anteriores. O idioma editorial das personagens permanece independente. Consulte a [política de idiomas](localization.md).

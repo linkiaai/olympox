@@ -37,5 +37,4 @@ A transição `uncertain` recebe `job: {provider, jobId?, requestId?}` e motivo;
 
 Pesquisas de Gaia/Aurora e planejamento de distribuição são opcionais conforme cada fluxo. `skip` exige justificativa e não pode pular geração, revisão, entrega ou decisão do cânone. Estado `completed` significa que contratos locais foram preenchidos; não significa publicação nem qualidade comprovada pelo runtime.
 
-
-> Tradução secundária em português do Brasil. A base canônica, os comandos e os tokens do framework são em inglês. Valores históricos em português continuam compatíveis; essa compatibilidade não reescreve fichas, runs, snapshots, hashes ou aprovações anteriores. O idioma editorial das personagens permanece independente. Consulte a [política de idiomas](../localization.md).
+Valores históricos dos fluxos e estados continuam aceitos sem reescrever registros ou aprovações.

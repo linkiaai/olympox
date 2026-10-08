@@ -25,5 +25,3 @@ These are our own proposals, not conclusions demonstrated by the video:
 ## Codex
 
 The local structure uses `AGENTS.md` and a skill in `.agents/skills`, following the official [project instructions](https://developers.openai.com/codex/guides/agents-md) and [local skills](https://developers.openai.com/codex/skills) documentation. Higgsfield recommends its CLI and skills for coding agents, including Codex; see the [official guide](https://higgsfield.ai/creator-hub/help-center/integrations/how-do-i-access-higgsfield-via-cli). Execution of that integration remains pending; details are in [tools](tools.md).
-
-English is primary; [Brazilian Portuguese](locales/pt-BR/video-reference.md) is a secondary translation. See the [language policy](localization.md).

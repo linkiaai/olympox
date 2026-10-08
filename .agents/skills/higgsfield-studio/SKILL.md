@@ -5,7 +5,7 @@ description: Prepare and operate the local Higgsfield CLI in this influencer stu
 
 # Higgsfield in the studio
 
-Work from the OLYMPOX project root. Read `docs/higgsfield-setup.md` for installation state, connection, commands and production; read `docs/tools.md` to choose an image, voice or video path. For a character, also apply `olympox` and check its canon and exact files. Maintain framework instructions in English; Brazilian Portuguese reading translations are secondary, and character content retains its approved language.
+Work from the OLYMPOX project root. Read `docs/higgsfield-setup.md` for installation state, connection, commands and production; read `docs/tools.md` to choose an image, voice or video path. For a character, also apply `olympox` and check its canon and exact files. Maintain framework instructions in English; character content retains its approved language.
 
 ## Preparation and inspection
 

@@ -78,5 +78,3 @@ A campaign can have shared style without unintentionally bringing identities clo
 5. Document the method that worked and start the next piece or character.
 
 This cycle makes clear what was approved, what still needs inspection, and which production conditions were actually exercised. Expand the process according to verified needs without turning hypotheses into quality guarantees.
-
-English is primary; [Brazilian Portuguese](locales/pt-BR/production.md) is a secondary translation. See the [language policy](localization.md).

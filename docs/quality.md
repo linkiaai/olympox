@@ -69,4 +69,4 @@ Example: "`take-03-v2.mp4`, canon 1, vertical Reel; complete review with audio b
 
 Make the smallest necessary change. Prefer correcting the setting, framing, or a local detail while preserving approved references. Change one variable per attempt and compare versions. After a repair, also inspect neighboring regions and the entire media: correcting a hand can alter the face; improving lip-sync can introduce defective teeth. Preserve the original and never replace a canon reference with an unapproved result.
 
-Canonical review methods are `visual`, `listening`, and `visual-and-audio`. Legacy Portuguese tokens remain supported for historical records without rewriting prior files or approvals. See the [language policy](localization.md) and [Brazilian Portuguese translation](locales/pt-BR/quality.md).
+Review methods are `visual`, `listening`, and `visual-and-audio`. Historical tokens remain supported without rewriting prior files or approvals.

@@ -37,5 +37,3 @@ The core organizes the process and validates its structure. Subagent execution d
 Structural validation does not prove visual fidelity, voice quality, or a declaration's authenticity. Generated media needs inspection. The user chooses the identity; publication and paid external generation require applicable authorization. `production` and `completed` do not mean published.
 
 To begin, read [Quick start](quick-start.md). For the mechanisms, see [architecture](framework-architecture.md) and [core operation](framework-02.md).
-
-English is primary; [Brazilian Portuguese](locales/pt-BR/framework-manual.md) is a secondary translation. See the [language policy](localization.md).

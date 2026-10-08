@@ -62,7 +62,7 @@ Abra essa cópia no Codex para desenvolver e manter o framework conforme seu `AG
 | Constituição e instruções do projeto | Fichas de personagens e identidade aprovada |
 | Perfis, contratos e fluxos do framework | Referências, mídia gerada, prompts e exportações |
 | Scripts e templates locais | Runs, estado de manutenção e backups |
-| Guias em inglês e traduções secundárias pt-BR | Instalações de fornecedores, contas e credenciais |
+| Guias e manual local | Instalações de fornecedores, contas e credenciais |
 | Fontes do manual e ferramentas de geração | Manual gerado e arquivos temporários locais |
 | Skills versionadas e proveniência permitida de fontes dos fornecedores | Arquivos produzidos pelo seu próprio trabalho criativo |
 
@@ -79,8 +79,6 @@ npm run studio -- list
 npm run docs:dev
 ```
 
-Uma lista de personagens vazia é esperada em um estúdio novo. Abra o endereço mostrado por `docs:dev` para ler o manual em inglês ou selecionar português brasileiro. O manual é local; seu servidor de desenvolvimento não o publica remotamente. Consulte [início rápido](quick-start.md), [operação](operations.md) e [capacidades do framework](studio-status.md).
+Uma lista de personagens vazia é esperada em um estúdio novo. Abra o endereço mostrado por `docs:dev` para ler o manual. O manual é local; seu servidor de desenvolvimento não o publica remotamente. Consulte [início rápido](quick-start.md), [operação](operations.md) e [capacidades do framework](studio-status.md).
 
 O OLYMPOX é distribuído sob a [licença MIT](../../../LICENSE). Conteúdo de personagens, referências externas e serviços de fornecedores mantêm seus próprios termos e direitos aplicáveis.
-
-O inglês é o idioma principal; esta é uma tradução secundária em [português brasileiro](installation.md). Consulte a [fonte em inglês](../../installation.md) e a [política de idiomas](localization.md).

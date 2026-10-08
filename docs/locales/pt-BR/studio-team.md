@@ -22,7 +22,7 @@ A nomenclatura inclui a coordenação e as oito especialistas. Gaia e Íris mant
 | Têmis | Grega; ordem e regulação divina. [The Encyclopedia of Ancient History](https://onlinelibrary.wiley.com/doi/10.1002/9781444338386.wbeah30482) | Critérios e avaliação de qualidade |
 | Fortuna | Romana; deusa da fortuna. [British Museum](https://www.britishmuseum.org/learn/schools/ages-7-11/ancient-rome/gods-and-goddesses-roman-britain) | Oportunidades e experimentos de crescimento |
 
-Esta revisão mantém o núcleo 0.2.0 e os IDs técnicos dos papéis e contratos. Os IDs canônicos dos fluxos usam inglês, com compatibilidade para os IDs históricos em português. Registros históricos, snapshots, evidências e backups conservam os nomes usados na execução original. Um run anterior pode indicar mudança de governança após a renomeação; a retomada exige nova tentativa explícita com motivo, conforme [operação do núcleo](framework-02.md), preservando o histórico.
+Esta revisão mantém o núcleo 0.2.0 e os IDs técnicos dos papéis e contratos. Os IDs dos fluxos mantêm compatibilidade com os IDs históricos. Registros históricos, snapshots, evidências e backups conservam os nomes usados na execução original. Um run anterior pode indicar mudança de governança após a renomeação; a retomada exige nova tentativa explícita com motivo, conforme [operação do núcleo](framework-02.md), preservando o histórico.
 
 ## Atena — mestra e diretora do estúdio
 
@@ -110,6 +110,3 @@ O núcleo local 0.2 já persiste runs em `work/runs`, com contratos, contexto ob
 Mudança de entrada, cânone ou governança exige nova tentativa e motivo para retomar; a tentativa anterior é preservada e o fluxo recomeça. Um job externo sem resultado esclarecido continua `uncertain-result` até reconciliação real. Capacidade ausente mantém a pendência em `awaiting-tool`; pacote preparado não substitui geração ou inspeção.
 
 Os limites e a evolução do núcleo estão na [arquitetura 0.2](framework-architecture.md). Cada estúdio cria suas próprias personas e registra a aprovação real do cânone e a inspeção do piloto. Perfis, contratos e testes locais não demonstram uma produção criativa concluída.
-
-
-> Tradução secundária em português do Brasil. A base canônica, os comandos e os tokens do framework são em inglês. Valores históricos em português continuam compatíveis; essa compatibilidade não reescreve fichas, runs, snapshots, hashes ou aprovações anteriores. O idioma editorial das personagens permanece independente. Consulte a [política de idiomas](localization.md).

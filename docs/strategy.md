@@ -130,5 +130,3 @@ Codex researches, presents directions when choices are missing, writes, organize
 User decisions focus on persona direction and anchors, identity references, publication, and spending not yet authorized. Drafts and proposals do not become approved canon through silence. Publishing, starting ads, or purchasing a tool requires corresponding authorization; document review and local content preparation can proceed.
 
 **Next step:** complete the essential brief or ask for three directions. After selecting a direction, prepare the persona record, voice, and reference proposals in your installed studio.
-
-English is primary; [Brazilian Portuguese](locales/pt-BR/strategy.md) is a secondary translation. Character-facing writing can use the persona's chosen language; see the [language policy](localization.md).

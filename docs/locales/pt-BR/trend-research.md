@@ -105,6 +105,3 @@ Escolher uma hipótese e variável principal por experimento, conforme [estraté
 Antes de geração custosa ou publicação, reconferir sinais efêmeros e a música escolhida. O prazo de reconferência é uma decisão de pesquisa ajustada à velocidade do sinal, não uma validade certificada. Falta de dados mantém a hipótese aberta.
 
 O objetivo é produzir conteúdo relevante com potencial de alcance e compartilhamento, sustentando a identidade. Viralização é um resultado observado depois da distribuição, não uma propriedade garantida do roteiro.
-
-
-> Tradução secundária em português do Brasil. A base canônica, os comandos e os tokens do framework são em inglês. Valores históricos em português continuam compatíveis; essa compatibilidade não reescreve fichas, runs, snapshots, hashes ou aprovações anteriores. O idioma editorial das personagens permanece independente. Consulte a [política de idiomas](localization.md).

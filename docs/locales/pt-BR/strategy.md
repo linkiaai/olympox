@@ -130,6 +130,3 @@ O Codex pesquisa, apresenta caminhos quando faltam escolhas, redige, organiza, r
 As decisões do usuário se concentram na direção e nas âncoras da persona, nas referências de identidade, na publicação e em gastos ainda não autorizados. Rascunhos e propostas não viram canon aprovado por silêncio. Publicar, iniciar anúncios ou contratar uma ferramenta requer autorização correspondente; revisar documentos e preparar conteúdo local pode avançar.
 
 **Próximo passo:** preencher a parte essencial do brief ou pedir três direções. Após escolher uma direção, preparar a ficha da persona, a voz e as propostas de referência no estúdio instalado.
-
-
-> Tradução secundária em português do Brasil. A base canônica, os comandos e os tokens do framework são em inglês. Valores históricos em português continuam compatíveis; essa compatibilidade não reescreve fichas, runs, snapshots, hashes ou aprovações anteriores. O idioma editorial das personagens permanece independente. Consulte a [política de idiomas](localization.md).

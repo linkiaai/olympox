@@ -84,7 +84,7 @@
     "capabilityNoteAfter": "The declaration does not install or test the tool.",
     "completionCriteria": "Completion criteria",
     "appearsIn": "Appears in",
-    "fullContract": "Full contract (canonical English)",
+    "fullContract": "Full contract",
     "contractsTitle": "What each task needs to deliver.",
     "contractsDescription": "Contracts make the owner, prerequisites and evidence needed to complete a step explicit.",
     "contractsEyebrow": "FRAMEWORK CONTRACTS",

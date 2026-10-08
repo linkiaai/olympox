@@ -132,5 +132,3 @@ When updating, repeat inspection, check the new archive/binary, and change the p
 - [Generate skill and inspected references](https://github.com/higgsfield-ai/skills/tree/f83af0bc1d937c8119099a11f8ebbf5e6fb99819/higgsfield-generate).
 - [CLI + Skills integration and credit rules](https://higgsfield.ai/creator-hub/help-center/integrations/how-do-i-access-higgsfield-via-cli).
 - Local executable 1.1.26 help for `auth`, `auth login`, `account`, `workspace`, `model`, and `generate cost`.
-
-English is primary; [Brazilian Portuguese](locales/pt-BR/higgsfield-setup.md) is a secondary translation. See the [language policy](localization.md).

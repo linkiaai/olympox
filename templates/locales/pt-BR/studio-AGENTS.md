@@ -4,9 +4,9 @@ OLYMPOX é um framework local de influenciadores de IA para criar influenciadore
 
 ## Política de idioma
 
-- A fonte principal de documentação, comandos, identificadores, contratos, desenvolvimento, comentários, testes, templates, skills e mensagens padrão é o inglês. Mantenha primeiro a fonte inglesa. O português brasileiro (`pt-BR`) é uma tradução secundária, mantida separadamente; não deve se tornar uma fonte principal concorrente. Consulte `docs/localization.md`.
+- A fonte principal de documentação, comandos, identificadores, contratos, desenvolvimento, comentários, testes, templates, skills e mensagens padrão é o inglês. Mantenha primeiro a fonte inglesa. Consulte `docs/localization.md`.
 - Use valores técnicos em inglês em ambas as versões. Valores portugueses antigos continuam aceitos para compatibilidade, sem reescrever registros, hashes, aprovações ou snapshots. Novos registros usam inglês.
-- O manual começa em inglês e permite selecionar português brasileiro. Idioma editorial da personagem e idioma da conversa são independentes da base do framework; preserve as decisões existentes e as preferências do usuário.
+- A voz, o conteúdo editorial da personagem e o idioma da conversa são independentes da base do framework. Respeite o idioma aprovado de uma personagem existente e as preferências do usuário.
 - Preserve os nomes próprios estabelecidos das deusas e os IDs técnicos dos papéis. Nomes como Atena, Psiquê, Íris e Têmis são nomes do projeto, não comandos de execução.
 
 ## Começar cada trabalho
@@ -42,7 +42,7 @@ OLYMPOX é um framework local de influenciadores de IA para criar influenciadore
 ## Comandos e manutenção
 
 - O manual navegável é gerado em `docs-site/dist/` por `npm.cmd run docs:build`. `npm.cmd run docs:dev` acompanha alterações e atualiza o navegador enquanto estiver aberto. `npm.cmd run docs:check` detecta uma geração ausente ou desatualizada sem escrever arquivos.
-- Ao alterar comportamento, comandos, responsabilidades, contratos ou fluxos do framework, revise os guias ingleses afetados e as traduções secundárias na mesma tarefa. Catálogos são derivados das fontes; explicações precisam acompanhar a implementação. Registre sintaxe nova na ajuda da CLI e a descrição inglesa em `docs-site/config.json`, com a descrição secundária no recurso de idioma; inclua novos guias nessa seleção explícita. Não incorporar fichas, mídias, prompts, runs, backups, credenciais ou estado privado ao manual.
+- Ao alterar comportamento, comandos, responsabilidades, contratos ou fluxos do framework, revise os guias ingleses afetados e os recursos de idioma na mesma tarefa. Catálogos são derivados das fontes; explicações precisam acompanhar a implementação. Registre sintaxe nova na ajuda da CLI e sua descrição em `docs-site/config.json` e nos recursos de idioma; inclua novos guias nessa seleção explícita. Não incorporar fichas, mídias, prompts, runs, backups, credenciais ou estado privado ao manual.
 - Conclua mudanças do framework com `npm.cmd run verify`: ele gera a documentação, executa as verificações locais e confere o resultado. Não afirmar atualização semântica ou publicação remota que não ocorreu. Consulte `docs/living-documentation.md`.
 
 `npm.cmd run verify` verifica os scripts, registros e instalação local. `node scripts/studio.mjs help` lista operações. Não instalar frameworks, criar APIs, adicionar banco ou publicar site sem necessidade concreta. A base atual funciona com Node e sem dependências externas.

@@ -25,6 +25,3 @@ Estas são propostas próprias, não conclusões demonstradas pelo vídeo:
 ## Codex
 
 A estrutura local usa `AGENTS.md` e uma skill em `.agents/skills`, conforme [instruções de projeto](https://developers.openai.com/codex/guides/agents-md) e [skills locais](https://developers.openai.com/codex/skills) oficiais. A Higgsfield recomenda CLI e skills para agentes de código, incluindo Codex; veja [guia oficial](https://higgsfield.ai/creator-hub/help-center/integrations/how-do-i-access-higgsfield-via-cli). A execução dessa integração continua pendente; os detalhes estão em [ferramentas](tools.md).
-
-
-> Tradução secundária em português do Brasil. A base canônica, os comandos e os tokens do framework são em inglês. Valores históricos em português continuam compatíveis; essa compatibilidade não reescreve fichas, runs, snapshots, hashes ou aprovações anteriores. O idioma editorial das personagens permanece independente. Consulte a [política de idiomas](localization.md).

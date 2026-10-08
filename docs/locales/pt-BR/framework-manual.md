@@ -37,6 +37,3 @@ O núcleo organiza o processo e verifica sua estrutura. A execução de subagent
 Uma validação estrutural não comprova fidelidade visual, qualidade da voz nem autenticidade de uma declaração. Mídia gerada precisa de inspeção. A identidade é escolhida pelo usuário; publicação e geração externa cobrada exigem autorização aplicável. `production` e `completed` não significam publicado.
 
 Para iniciar, leia [Começar](quick-start.md). Para entender os mecanismos, consulte a [arquitetura](framework-architecture.md) e a [operação do núcleo](framework-02.md).
-
-
-> Tradução secundária em português do Brasil. A base canônica, os comandos e os tokens do framework são em inglês. Valores históricos em português continuam compatíveis; essa compatibilidade não reescreve fichas, runs, snapshots, hashes ou aprovações anteriores. O idioma editorial das personagens permanece independente. Consulte a [política de idiomas](localization.md).

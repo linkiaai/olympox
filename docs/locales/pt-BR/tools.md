@@ -35,6 +35,3 @@ Sem uma execução conectada, o Codex ainda pode preparar o pacote completo: rot
 ## Codex
 
 `AGENTS.md` dá orientação de projeto; `.agents/skills/olympox` concentra o processo reutilizável. As [docs oficiais de skills](https://developers.openai.com/codex/skills) descrevem a descoberta local. Se a skill não aparecer no seletor, recarregue o Codex; nesta conversa também pode ser lida diretamente. Arquivos instalados não comprovam carregamento automático no app.
-
-
-> Tradução secundária em português do Brasil. A base canônica, os comandos e os tokens do framework são em inglês. Valores históricos em português continuam compatíveis; essa compatibilidade não reescreve fichas, runs, snapshots, hashes ou aprovações anteriores. O idioma editorial das personagens permanece independente. Consulte a [política de idiomas](localization.md).

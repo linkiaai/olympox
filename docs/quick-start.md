@@ -45,5 +45,3 @@ node scripts/studio.mjs list
 ## What to include in a handoff
 
 Provide the character, canon version, input files, objective, channel, and expected deliverable. Outstanding tool access, decisions, or reviews must remain visible. Previously granted authorizations remain valid; the team records only work that actually occurred.
-
-English is primary; [Brazilian Portuguese](locales/pt-BR/quick-start.md) is a secondary translation. See the [language policy](localization.md).

@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "private": false,
   "type": "module",
-  "description": "OLYMPOX - AI Influencer framework, directed by Codex with English sources and Brazilian Portuguese translations",
+  "description": "OLYMPOX - AI Influencer framework",
   "engines": {
     "node": ">=22"
   },
