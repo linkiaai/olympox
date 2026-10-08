@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "version": "0.2.0",
+  "id": "deliver-piece",
+  "name": "Deliver reviewed files",
+  "owner": "master",
+  "deliverable": "delivery",
+  "evidenceType": "delivered",
+  "requiresPersona": true,
+  "requiresApprovedCanon": true,
+  "capability": null,
+  "minimumOutputs": 1,
+  "criteria": [
+    "Delivered files match the reviewed media",
+    "Delivery does not mean publication"
+  ]
+}

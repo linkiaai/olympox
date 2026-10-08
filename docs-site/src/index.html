@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="OLYMPOX - AI Influencer framework: team, workflows, contracts and guides to create original AI influencers with Codex.">
+  <title>OLYMPOX - AI Influencer framework</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <script src="content.js" defer></script>
+  <script src="markdown.js" defer></script>
+  <script src="localization.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+  <aside id="sidebar" class="sidebar" aria-label="Manual navigation" data-i18n-aria="manualNavigation">
+    <a class="brand" href="#overview"><span class="brand-symbol" aria-hidden="true">OX</span><span>OLYMPOX<small>AI Influencer framework</small></span></a>
+    <div class="version-label" id="version-label"></div>
+    <div class="locale-control"><label for="locale-select" data-i18n="locale">Manual language</label><select id="locale-select"><option value="en" lang="en">English</option><option value="pt-BR" lang="pt-BR">Português do Brasil</option></select></div>
+    <label class="search-label" for="search" data-i18n="search">Search the manual</label>
+    <div class="search-wrap"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Agents, workflows, commands…" autocomplete="off"><kbd>/</kbd></div>
+    <div id="search-results" class="search-results" aria-live="polite"></div>
+    <nav id="navigation"></nav>
+    <div class="sidebar-bottom"><a href="#sync" data-i18n="sync">Living documentation</a><p data-i18n="sidebarNote">Project sources. History and decisions preserved.</p></div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar">
+      <button id="menu-toggle" class="menu-toggle" aria-controls="sidebar" aria-expanded="false" aria-label="Open navigation" data-i18n-aria="openNavigation">☰</button>
+      <div class="breadcrumb"><span class="breadcrumb-root" data-i18n="studio">Studio</span><span>/</span> <strong id="breadcrumb">Overview</strong></div>
+      <a href="#sync" id="sync-status" class="sync-status">Sources synchronized</a>
+    </header>
+    <div id="update-error" class="update-error" hidden role="status"></div>
+    <main id="main" tabindex="-1"></main>
+    <footer><span data-i18n="footer">OLYMPOX - AI Influencer framework · studio documentation</span><span id="revision"></span></footer>
+  </div>
+  <div id="toast" role="status" class="toast" hidden></div>
+</body>
+</html>

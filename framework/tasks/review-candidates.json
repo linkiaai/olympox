@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "version": "0.2.0",
+  "id": "review-candidates",
+  "name": "Inspect actual candidates",
+  "owner": "qa",
+  "deliverable": "review",
+  "evidenceType": "reviewed",
+  "requiresPersona": true,
+  "requiresApprovedCanon": false,
+  "capability": "inspection",
+  "minimumOutputs": 1,
+  "criteria": [
+    "Declared inspection of the exact file with its hash and method",
+    "No critical issues or pending limitations",
+    "A review does not automatically prove human inspection"
+  ]
+}

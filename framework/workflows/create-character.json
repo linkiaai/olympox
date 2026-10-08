@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "version": "0.2.0",
+  "id": "create-character",
+  "name": "Create a character",
+  "requiresPersona": false,
+  "steps": [
+    {
+      "id": "opportunities",
+      "task": "research-opportunity",
+      "optional": true
+    },
+    {
+      "id": "persona",
+      "task": "propose-persona",
+      "optional": false
+    },
+    {
+      "id": "direction",
+      "task": "choose-direction",
+      "optional": true
+    },
+    {
+      "id": "candidates-plan",
+      "task": "design-candidates",
+      "optional": false
+    },
+    {
+      "id": "candidates",
+      "task": "generate-candidates",
+      "optional": false
+    },
+    {
+      "id": "candidates-review",
+      "task": "review-candidates",
+      "optional": false
+    },
+    {
+      "id": "canon",
+      "task": "approve-canon",
+      "optional": false
+    },
+    {
+      "id": "pilot-plan",
+      "task": "prepare-piece",
+      "optional": false
+    },
+    {
+      "id": "pilot",
+      "task": "generate-piece",
+      "optional": false
+    },
+    {
+      "id": "pilot-review",
+      "task": "review-media",
+      "optional": false
+    },
+    {
+      "id": "delivery",
+      "task": "deliver-piece",
+      "optional": false
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "version": "0.2.0",
+  "id": "review-correct",
+  "name": "Review and correct",
+  "requiresPersona": true,
+  "steps": [
+    {
+      "id": "correction-plan",
+      "task": "plan-correction",
+      "optional": false
+    },
+    {
+      "id": "correction",
+      "task": "generate-piece",
+      "optional": false
+    },
+    {
+      "id": "review",
+      "task": "review-media",
+      "optional": false
+    },
+    {
+      "id": "delivery",
+      "task": "deliver-piece",
+      "optional": false
+    }
+  ]
+}

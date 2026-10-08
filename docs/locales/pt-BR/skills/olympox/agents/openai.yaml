@@ -1,0 +1,4 @@
+interface:
+  display_name: "OLYMPOX"
+  short_description: "Crie personas, imagens e conteúdo com consistência"
+  default_prompt: "Use $olympox para dirigir a próxima produção de um influenciador de IA neste projeto."

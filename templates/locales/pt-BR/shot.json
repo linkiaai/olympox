@@ -1,0 +1,16 @@
+{
+  "purpose": "reference",
+  "medium": "image",
+  "objective": "Avaliar a identidade proposta em luz neutra",
+  "scene": "Fundo neutro simples",
+  "framing": "Retrato frontal, cabeça e ombros",
+  "lighting": "Luz suave lateral, com textura de pele preservada",
+  "wardrobe": "",
+  "expression": "Neutra e relaxada",
+  "action": "Olhar para a câmera",
+  "format": "4:5",
+  "script": "",
+  "durationSeconds": null,
+  "referenceIds": [],
+  "avoid": ["Pele plastificada", "Alterações involuntárias de identidade"]
+}

@@ -1,0 +1,49 @@
+{
+  "name": "olympox",
+  "version": "0.2.0",
+  "private": false,
+  "type": "module",
+  "description": "OLYMPOX - AI Influencer framework, directed by Codex with English sources and Brazilian Portuguese translations",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "studio": "node scripts/studio.mjs",
+    "doctor": "node scripts/studio.mjs doctor",
+    "validate": "node scripts/studio.mjs validate",
+    "test": "node --test tests/*.test.mjs",
+    "docs:build": "node scripts/docs.mjs build",
+    "docs:check": "node scripts/docs.mjs check",
+    "docs:dev": "node scripts/docs.mjs serve",
+    "preverify": "npm run docs:build",
+    "verify": "npm run test && npm run validate && npm run doctor && npm run docs:check"
+  },
+  "license": "MIT",
+  "bin": {
+    "olympox": "bin/olympox.mjs"
+  },
+  "files": [
+    "bin/",
+    "scripts/",
+    "skills/",
+    "framework/",
+    "templates/",
+    "tests/",
+    "vendor/",
+    "docs/",
+    "docs-site/README.md",
+    "docs-site/config.json",
+    "docs-site/locales/",
+    "docs-site/src/",
+    "influencers/README.md",
+    "AGENTS.md",
+    "CONSTITUTION.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/linkiaai/olympox.git"
+  },
+  "homepage": "https://github.com/linkiaai/olympox#readme"
+}

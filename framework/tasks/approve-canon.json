@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "version": "0.2.0",
+  "id": "approve-canon",
+  "name": "Record the human canon decision",
+  "owner": "master",
+  "deliverable": "human-decision",
+  "evidenceType": "human-approved",
+  "requiresPersona": true,
+  "requiresApprovedCanon": false,
+  "capability": null,
+  "minimumOutputs": 0,
+  "criteria": [
+    "Explicit decision with reviewer, date, and event",
+    "The runtime records the declaration; it does not prove the reviewer is human"
+  ]
+}

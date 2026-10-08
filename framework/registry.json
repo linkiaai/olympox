@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "version": "0.2.0",
+  "name": "OLYMPOX",
+  "executionMode": "instruction-packages",
+  "constitutionPaths": [
+    "CONSTITUTION.md",
+    "AGENTS.md",
+    "docs/studio-team.md"
+  ],
+  "roles": [
+    {
+      "id": "master",
+      "name": "Atena",
+      "title": "Master and studio direction",
+      "path": "framework/roles/master.md"
+    },
+    {
+      "id": "opportunity-research",
+      "name": "Gaia",
+      "title": "Opportunity research",
+      "path": "framework/roles/opportunity-research.md"
+    },
+    {
+      "id": "persona",
+      "name": "Psiquê",
+      "title": "Strategy and persona",
+      "path": "framework/roles/persona.md"
+    },
+    {
+      "id": "art",
+      "name": "Íris",
+      "title": "Art direction and identity",
+      "path": "framework/roles/art.md"
+    },
+    {
+      "id": "content-trends",
+      "name": "Aurora",
+      "title": "Trends and content ideas",
+      "path": "framework/roles/content-trends.md"
+    },
+    {
+      "id": "content",
+      "name": "Saraswati",
+      "title": "Content and script",
+      "path": "framework/roles/content.md"
+    },
+    {
+      "id": "production",
+      "name": "Selene",
+      "title": "Audiovisual production",
+      "path": "framework/roles/production.md"
+    },
+    {
+      "id": "qa",
+      "name": "Têmis",
+      "title": "Quality and continuity",
+      "path": "framework/roles/qa.md"
+    },
+    {
+      "id": "growth",
+      "name": "Fortuna",
+      "title": "Growth and partnerships",
+      "path": "framework/roles/growth.md"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "research-opportunity",
+      "path": "framework/tasks/research-opportunity.json"
+    },
+    {
+      "id": "propose-persona",
+      "path": "framework/tasks/propose-persona.json"
+    },
+    {
+      "id": "choose-direction",
+      "path": "framework/tasks/choose-direction.json"
+    },
+    {
+      "id": "design-candidates",
+      "path": "framework/tasks/design-candidates.json"
+    },
+    {
+      "id": "generate-candidates",
+      "path": "framework/tasks/generate-candidates.json"
+    },
+    {
+      "id": "review-candidates",
+      "path": "framework/tasks/review-candidates.json"
+    },
+    {
+      "id": "approve-canon",
+      "path": "framework/tasks/approve-canon.json"
+    },
+    {
+      "id": "research-trends",
+      "path": "framework/tasks/research-trends.json"
+    },
+    {
+      "id": "prepare-piece",
+      "path": "framework/tasks/prepare-piece.json"
+    },
+    {
+      "id": "direct-piece",
+      "path": "framework/tasks/direct-piece.json"
+    },
+    {
+      "id": "generate-piece",
+      "path": "framework/tasks/generate-piece.json"
+    },
+    {
+      "id": "review-media",
+      "path": "framework/tasks/review-media.json"
+    },
+    {
+      "id": "plan-distribution",
+      "path": "framework/tasks/plan-distribution.json"
+    },
+    {
+      "id": "plan-correction",
+      "path": "framework/tasks/plan-correction.json"
+    },
+    {
+      "id": "deliver-piece",
+      "path": "framework/tasks/deliver-piece.json"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "create-character",
+      "path": "framework/workflows/create-character.json"
+    },
+    {
+      "id": "produce-piece",
+      "path": "framework/workflows/produce-piece.json"
+    },
+    {
+      "id": "review-correct",
+      "path": "framework/workflows/review-correct.json"
+    }
+  ]
+}

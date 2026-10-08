@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "version": "0.2.0",
+  "id": "produce-piece",
+  "name": "Produce a piece",
+  "requiresPersona": true,
+  "steps": [
+    {
+      "id": "trends",
+      "task": "research-trends",
+      "optional": true
+    },
+    {
+      "id": "script",
+      "task": "prepare-piece",
+      "optional": false
+    },
+    {
+      "id": "direction",
+      "task": "direct-piece",
+      "optional": false
+    },
+    {
+      "id": "generation",
+      "task": "generate-piece",
+      "optional": false
+    },
+    {
+      "id": "review",
+      "task": "review-media",
+      "optional": false
+    },
+    {
+      "id": "distribution",
+      "task": "plan-distribution",
+      "optional": true
+    },
+    {
+      "id": "delivery",
+      "task": "deliver-piece",
+      "optional": false
+    }
+  ]
+}

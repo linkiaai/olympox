@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "source": "https://github.com/higgsfield-ai/skills",
+  "commit": "f83af0bc1d937c8119099a11f8ebbf5e6fb99819",
+  "retrievedOn": "2026-10-07",
+  "selectedSkills": [
+    "higgsfield-generate"
+  ],
+  "skillVersion": "0.13.0",
+  "activeInstallation": false,
+  "externalSkillDependencies": [],
+  "files": [
+    {
+      "path": "higgsfield-generate/references/marketing-ad-references.md",
+      "sha256": "51ecd110b059d78ec7411fa0a305ba5c2925636af1edb67dd46ba61dea7982e7"
+    },
+    {
+      "path": "higgsfield-generate/references/marketing-avatars.md",
+      "sha256": "0fc1bab974e7b651d652e9bc3f2ff9b37d25cfcfde8986599bab7215d29e90da"
+    },
+    {
+      "path": "higgsfield-generate/references/marketing-brand-kits.md",
+      "sha256": "858d23282bba031ca6095cc88ef35fadf008588baea9a498c40b4e44336ee2f0"
+    },
+    {
+      "path": "higgsfield-generate/references/marketing-dtc-ads.md",
+      "sha256": "4f063300ab84190866f1a63b260a9ac801d2f8c340a4d3438f250383b4b9cacc"
+    },
+    {
+      "path": "higgsfield-generate/references/marketing-modes.md",
+      "sha256": "4614d3df586bad9305de666c060c4f9db6bfda7f91c192be0f1075cbfc6f9f12"
+    },
+    {
+      "path": "higgsfield-generate/references/marketing-products.md",
+      "sha256": "3f10b476ada995379ccd75a5c27010a676da2ed23e5b2c25c7caf24cea7b01be"
+    },
+    {
+      "path": "higgsfield-generate/references/marketing-setup-items.md",
+      "sha256": "ef0c04bfa364333fb2a5ce881f4e3bc0774820da46eef772ca7e403e1a13d1f9"
+    },
+    {
+      "path": "higgsfield-generate/references/media-inputs.md",
+      "sha256": "ec56e0946d6b980e15d49031e48864a8cd547d3cc4f73a4c3da04ea69162d366"
+    },
+    {
+      "path": "higgsfield-generate/references/model-catalog.md",
+      "sha256": "fcf3a58b63b029767fd884b9a584f08067d4a2f7cec46defb99a56f746790cd8"
+    },
+    {
+      "path": "higgsfield-generate/references/prompt-engineering.md",
+      "sha256": "2875fad7bfc58fcdff9d0b901478a460577f2cbb061f1e85fef80af6c327b956"
+    },
+    {
+      "path": "higgsfield-generate/references/troubleshooting.md",
+      "sha256": "e2ba558cbb8d88f9aadd29e4cac6d8aadf78c069743cfc4f677913971416c7c1"
+    },
+    {
+      "path": "higgsfield-generate/references/workflows.md",
+      "sha256": "ca99193c4813e6713cc8d0c4c1e0237a082fdc4f3d6f1210ccc6fa2b4dc02197"
+    },
+    {
+      "path": "higgsfield-generate/SKILL.md",
+      "sha256": "626deb96bed3515d9dc293f49ff181fbf1f10caac43303d5416d0eb34eaceade"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "5ad15ff14201cafc39bd36e91fb615809c0266f00045bb6bb6d3d8d8353e8d7d"
+    }
+  ],
+  "cli": {
+    "package": "@higgsfield/cli",
+    "version": "1.1.26",
+    "npmIntegrity": "sha512-3UyTfHziz7DhoAw8UFowqliVMiRySiK9xpVvA6F/17XQdecEASxKY/qwoA/L2ZTlvXKgBQqSO3rRLS2/w35QzA==",
+    "source": "https://github.com/higgsfield-ai/cli",
+    "buildCommit": "69f3a33c3325d8fdde3a1ecb0b8e7cc5ebc7e8a3",
+    "platform": "windows_amd64",
+    "archiveSha256": "70116002288bf9f4acfe9bfc711c80e8de5d4f8f099634fdf5e903d8434465c1",
+    "binarySha256": "0e973c9cf072ec27af8be61e374c8aba5842766bd21654e28dfa758605ca76da",
+    "installerSha256": "67aa95c60484400e813099affce5a65d374de50ba7efbe2780a4ae9184062261"
+  }
+}

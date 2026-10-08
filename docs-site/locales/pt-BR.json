@@ -1,0 +1,339 @@
+{
+  "schemaVersion": 1,
+  "title": "OLYMPOX - AI Influencer framework",
+  "guideLabels": {
+    "docs/framework-manual.md": "Visão geral",
+    "docs/quick-start.md": "Começar",
+    "docs/living-documentation.md": "Documentação viva",
+    "docs/installation.md": "Instalação",
+    "docs/framework-02.md": "Operar o núcleo",
+    "docs/framework-architecture.md": "Arquitetura",
+    "docs/studio-team.md": "Equipe e responsabilidades",
+    "docs/strategy.md": "Estratégia e persona",
+    "docs/trend-research.md": "Pesquisa e tendências",
+    "docs/production.md": "Produção",
+    "docs/quality.md": "Qualidade e continuidade",
+    "docs/operations.md": "Identidade, registros e backup",
+    "docs/tools.md": "Ferramentas",
+    "framework/README.md": "API e contratos do núcleo",
+    "CONSTITUTION.md": "Constituição",
+    "docs/localization.md": "Idioma e compatibilidade"
+  },
+  "commandDescriptions": {
+    "help": "Mostrar as operações disponíveis.",
+    "new": "Criar a ficha e as pastas de uma personagem em rascunho.",
+    "list": "Listar as personagens e seus estados locais.",
+    "validate": "Verificar a coerência dos registros de uma ou de todas as personagens.",
+    "prompt": "Montar um prompt a partir da persona, do shot e das referências.",
+    "canon-hash": "Calcular o hash da identidade para seu registro de aprovação.",
+    "canon-snapshot": "Preservar uma versão aprovada do cânone e seus arquivos de referência.",
+    "file-hash": "Calcular o hash de um arquivo da personagem.",
+    "register": "Registrar um arquivo de mídia em rascunho no manifesto de ativos.",
+    "execution-seal": "Preservar o contexto informado de geração e o prompt de um ativo.",
+    "migrate-assets": "Preservar registros legados no formato atual, sem inventar aprovações.",
+    "narrative-save": "Salvar uma nova versão da narrativa e sua revisão quando fornecida.",
+    "narrative-show": "Consultar a narrativa atual ou uma versão anterior.",
+    "content-save": "Salvar uma nova versão da peça, com roteiro e vínculos de contexto.",
+    "run-start": "Iniciar um fluxo e retornar o pacote da próxima tarefa.",
+    "run-status": "Consultar estado, responsável, pré-requisitos e mudanças do run.",
+    "run-step": "Registrar uma transição e a evidência do trabalho ocorrido.",
+    "run-resume": "Retomar o trabalho; mudanças de contexto exigem nova tentativa explícita.",
+    "backup": "Criar um backup da personagem com inventário e runs vinculados.",
+    "backup-verify": "Conferir os bytes e a estrutura de um backup.",
+    "backup-test": "Testar restauração em uma cópia temporária.",
+    "restore": "Restaurar um backup sem sobrescrever uma personagem existente.",
+    "check-assets": "Verificar a coerência dos registros da personagem e de seus ativos.",
+    "doctor": "Verificar instruções, templates, guias, framework e instalação das skills."
+  },
+  "roles": {
+    "master": {
+      "title": "Mestra e direção do estúdio",
+      "markdown": "# Atena — Mestra e direção do estúdio\n\nVersão 0.2.0. ID de papel: `master`. Nome interno, separado do personagem público.\n\nCoordena o pedido, seleciona tarefas e sintetiza decisões. Resolve detalhes reversíveis; identidade e autorizações permanecem com o usuário.\n\nLeia `CONSTITUTION.md` e `docs/studio-team.md` a partir da raiz do projeto. Receba o pacote de tarefa com personagem, versão/hash do cânone, entradas, entregas e pendências. Exerça julgamento independente e explique divergências relevantes.\n\nEste perfil orienta o Codex; não cria uma agente em execução. Só registre delegação quando houver identificador e evento de uma subagente real. Entregue arquivos e evidências do que ocorreu, sem transformar preparação em geração ou parecer em aprovação humana.\n"
+    },
+    "opportunity-research": {
+      "title": "Pesquisa de oportunidades",
+      "markdown": "# Gaia — Pesquisa de oportunidades\n\nVersão 0.2.0. ID de papel: `opportunity-research`. Nome interno, separado do personagem público.\n\nPesquisa sinais atuais de público e espaço editorial, com fontes e lacunas. Só atua quando a pergunta exige pesquisa de oportunidade.\n\nLeia `CONSTITUTION.md` e `docs/studio-team.md` a partir da raiz do projeto. Receba o pacote de tarefa com personagem, versão/hash do cânone, entradas, entregas e pendências. Exerça julgamento independente e explique divergências relevantes.\n\nEste perfil orienta o Codex; não cria uma agente em execução. Só registre delegação quando houver identificador e evento de uma subagente real. Entregue arquivos e evidências do que ocorreu, sem transformar preparação em geração ou parecer em aprovação humana.\n"
+    },
+    "persona": {
+      "title": "Estratégia e persona",
+      "markdown": "# Psiquê — Estratégia e persona\n\nVersão 0.2.0. ID de papel: `persona`. Nome interno, separado do personagem público.\n\nTransforma objetivo, público e decisões em persona original adulta e narrativa coerente. Distingue hipóteses, fatos e ficção.\n\nLeia `CONSTITUTION.md` e `docs/studio-team.md` a partir da raiz do projeto. Receba o pacote de tarefa com personagem, versão/hash do cânone, entradas, entregas e pendências. Exerça julgamento independente e explique divergências relevantes.\n\nEste perfil orienta o Codex; não cria uma agente em execução. Só registre delegação quando houver identificador e evento de uma subagente real. Entregue arquivos e evidências do que ocorreu, sem transformar preparação em geração ou parecer em aprovação humana.\n"
+    },
+    "art": {
+      "title": "Direção artística e identidade",
+      "markdown": "# Íris — Direção artística e identidade\n\nVersão 0.2.0. ID de papel: `art`. Nome interno, separado do personagem público.\n\nDefine âncoras, referências, variações permitidas e direção de cenas. Preserva o cânone e apresenta candidatos para decisão do usuário.\n\nLeia `CONSTITUTION.md` e `docs/studio-team.md` a partir da raiz do projeto. Receba o pacote de tarefa com personagem, versão/hash do cânone, entradas, entregas e pendências. Exerça julgamento independente e explique divergências relevantes.\n\nEste perfil orienta o Codex; não cria uma agente em execução. Só registre delegação quando houver identificador e evento de uma subagente real. Entregue arquivos e evidências do que ocorreu, sem transformar preparação em geração ou parecer em aprovação humana.\n"
+    },
+    "content-trends": {
+      "title": "Tendências e ideias de conteúdo",
+      "markdown": "# Aurora — Tendências e ideias de conteúdo\n\nVersão 0.2.0. ID de papel: `content-trends`. Nome interno, separado do personagem público.\n\nPesquisa sinais atuais e propõe adaptações originais para a persona certa. Só atua quando tendências são pertinentes; registra fontes e dependências do áudio.\n\nLeia `CONSTITUTION.md` e `docs/studio-team.md` a partir da raiz do projeto. Receba o pacote de tarefa com personagem, versão/hash do cânone, entradas, entregas e pendências. Exerça julgamento independente e explique divergências relevantes.\n\nEste perfil orienta o Codex; não cria uma agente em execução. Só registre delegação quando houver identificador e evento de uma subagente real. Entregue arquivos e evidências do que ocorreu, sem transformar preparação em geração ou parecer em aprovação humana.\n"
+    },
+    "content": {
+      "title": "Conteúdo e roteiro",
+      "markdown": "# Saraswati — Conteúdo e roteiro\n\nVersão 0.2.0. ID de papel: `content`. Nome interno, separado do personagem público.\n\nEscreve argumento, fala, legenda e cenas com voz editorial reconhecível e fontes quando houver fatos.\n\nLeia `CONSTITUTION.md` e `docs/studio-team.md` a partir da raiz do projeto. Receba o pacote de tarefa com personagem, versão/hash do cânone, entradas, entregas e pendências. Exerça julgamento independente e explique divergências relevantes.\n\nEste perfil orienta o Codex; não cria uma agente em execução. Só registre delegação quando houver identificador e evento de uma subagente real. Entregue arquivos e evidências do que ocorreu, sem transformar preparação em geração ou parecer em aprovação humana.\n"
+    },
+    "production": {
+      "title": "Produção audiovisual",
+      "markdown": "# Selene — Produção audiovisual\n\nVersão 0.2.0. ID de papel: `production`. Nome interno, separado do personagem público.\n\nConfere capacidades, prepara entradas, executa apenas com ferramentas e autorização disponíveis e registra saídas reais. Este runtime não executa geração.\n\nLeia `CONSTITUTION.md` e `docs/studio-team.md` a partir da raiz do projeto. Receba o pacote de tarefa com personagem, versão/hash do cânone, entradas, entregas e pendências. Exerça julgamento independente e explique divergências relevantes.\n\nEste perfil orienta o Codex; não cria uma agente em execução. Só registre delegação quando houver identificador e evento de uma subagente real. Entregue arquivos e evidências do que ocorreu, sem transformar preparação em geração ou parecer em aprovação humana.\n"
+    },
+    "qa": {
+      "title": "Qualidade e continuidade",
+      "markdown": "# Têmis — Qualidade e continuidade\n\nVersão 0.2.0. ID de papel: `qa`. Nome interno, separado do personagem público.\n\nCompara mídia e referências, registra método, regiões ou trechos e limitações. Falha crítica ou inspeção inacessível mantém pendência.\n\nLeia `CONSTITUTION.md` e `docs/studio-team.md` a partir da raiz do projeto. Receba o pacote de tarefa com personagem, versão/hash do cânone, entradas, entregas e pendências. Exerça julgamento independente e explique divergências relevantes.\n\nEste perfil orienta o Codex; não cria uma agente em execução. Só registre delegação quando houver identificador e evento de uma subagente real. Entregue arquivos e evidências do que ocorreu, sem transformar preparação em geração ou parecer em aprovação humana.\n"
+    },
+    "growth": {
+      "title": "Crescimento e parcerias",
+      "markdown": "# Fortuna — Crescimento e parcerias\n\nVersão 0.2.0. ID de papel: `growth`. Nome interno, separado do personagem público.\n\nFormula distribuição e experimentos com dados, custos e denominadores reais. Não publica, compra anúncios ou presume resultados.\n\nLeia `CONSTITUTION.md` e `docs/studio-team.md` a partir da raiz do projeto. Receba o pacote de tarefa com personagem, versão/hash do cânone, entradas, entregas e pendências. Exerça julgamento independente e explique divergências relevantes.\n\nEste perfil orienta o Codex; não cria uma agente em execução. Só registre delegação quando houver identificador e evento de uma subagente real. Entregue arquivos e evidências do que ocorreu, sem transformar preparação em geração ou parecer em aprovação humana.\n"
+    }
+  },
+  "tasks": {
+    "research-opportunity": {
+      "name": "Pesquisar oportunidades",
+      "criteria": [
+        "Documento real preparado e registrado",
+        "Hipóteses e limitações identificadas"
+      ]
+    },
+    "propose-persona": {
+      "name": "Propor persona e briefing",
+      "criteria": [
+        "Documento real preparado e registrado",
+        "Hipóteses e limitações identificadas"
+      ]
+    },
+    "choose-direction": {
+      "name": "Registrar a direção escolhida",
+      "criteria": [
+        "Decisão explícita com revisor, data e evento",
+        "O runtime registra a declaração; não comprova que o revisor é humano"
+      ]
+    },
+    "design-candidates": {
+      "name": "Preparar candidatos e referências",
+      "criteria": [
+        "Documento real preparado e registrado",
+        "Hipóteses e limitações identificadas"
+      ]
+    },
+    "generate-candidates": {
+      "name": "Gerar candidatos de identidade",
+      "criteria": [
+        "Arquivo de mídia existente, tipo e SHA-256 registrados",
+        "Evento de geração declarado com ferramenta, responsável e data",
+        "Não aprova identidade nem publica"
+      ]
+    },
+    "review-candidates": {
+      "name": "Inspecionar os candidatos reais",
+      "criteria": [
+        "Inspeção declarada do arquivo exato com hash e método",
+        "Sem falhas críticas ou limitações pendentes",
+        "Parecer não comprova automaticamente inspeção humana"
+      ]
+    },
+    "approve-canon": {
+      "name": "Registrar decisão humana do cânone",
+      "criteria": [
+        "Decisão explícita com revisor, data e evento",
+        "O runtime registra a declaração; não comprova que o revisor é humano"
+      ]
+    },
+    "research-trends": {
+      "name": "Pesquisar tendências pertinentes",
+      "criteria": [
+        "Documento real preparado e registrado",
+        "Hipóteses e limitações identificadas"
+      ]
+    },
+    "prepare-piece": {
+      "name": "Preparar roteiro e cenas",
+      "criteria": [
+        "Documento real preparado e registrado",
+        "Hipóteses e limitações identificadas"
+      ]
+    },
+    "direct-piece": {
+      "name": "Definir direção visual da peça",
+      "criteria": [
+        "Documento real preparado e registrado",
+        "Hipóteses e limitações identificadas"
+      ]
+    },
+    "generate-piece": {
+      "name": "Gerar a peça real",
+      "criteria": [
+        "Arquivo de mídia existente, tipo e SHA-256 registrados",
+        "Evento de geração declarado com ferramenta, responsável e data",
+        "Não aprova identidade nem publica"
+      ]
+    },
+    "review-media": {
+      "name": "Inspecionar a mídia completa",
+      "criteria": [
+        "Inspeção declarada do arquivo exato com hash e método",
+        "Sem falhas críticas ou limitações pendentes",
+        "Parecer não comprova automaticamente inspeção humana"
+      ]
+    },
+    "plan-distribution": {
+      "name": "Propor distribuição e experimento",
+      "criteria": [
+        "Documento real preparado e registrado",
+        "Hipóteses e limitações identificadas"
+      ]
+    },
+    "plan-correction": {
+      "name": "Preparar correção mínima",
+      "criteria": [
+        "Documento real preparado e registrado",
+        "Hipóteses e limitações identificadas"
+      ]
+    },
+    "deliver-piece": {
+      "name": "Entregar arquivos revisados",
+      "criteria": [
+        "Arquivos entregues coincidem com a mídia revisada",
+        "Entrega não significa publicação"
+      ]
+    }
+  },
+  "workflows": {
+    "create-character": {
+      "name": "Criar personagem"
+    },
+    "produce-piece": {
+      "name": "Produzir peça"
+    },
+    "review-correct": {
+      "name": "Revisar e corrigir"
+    }
+  },
+  "ui": {
+    "manual": "Manual do framework",
+    "manualNavigation": "Navegação do manual",
+    "skip": "Ir para o conteúdo",
+    "search": "Buscar no manual",
+    "searchPlaceholder": "Agentes, fluxos, comandos…",
+    "openNavigation": "Abrir navegação",
+    "studio": "Estúdio",
+    "footer": "OLYMPOX - AI Influencer framework · documentação do estúdio",
+    "sourceSynchronized": "Fontes sincronizadas",
+    "core": "Núcleo {version} · Codex",
+    "revision": "Revisão {revision}",
+    "overview": "Visão geral",
+    "start": "Começar",
+    "team": "Equipe",
+    "workflows": "Fluxos",
+    "tasks": "Contratos de tarefa",
+    "commands": "Comandos",
+    "sync": "Documentação viva",
+    "constitution": "Constituição",
+    "navStudio": "ENTENDA O ESTÚDIO",
+    "navGuides": "GUIAS DE REFERÊNCIA",
+    "navPrinciples": "PRINCÍPIOS E EVOLUÇÃO",
+    "sidebarNote": "Fontes do próprio projeto. Histórico e decisões preservados.",
+    "locale": "Idioma do manual",
+    "source": "Fonte",
+    "profile": "Perfil",
+    "onPage": "Nesta página",
+    "onPageHeading": "NESTA PÁGINA",
+    "eyebrow": "MANUAL DO FRAMEWORK",
+    "getStarted": "Começar a usar",
+    "exploreWorkflows": "Explorar os fluxos",
+    "profilesMetric": "perfis de trabalho",
+    "tasksMetric": "contratos de tarefa",
+    "flowsMetric": "fluxos retomáveis",
+    "requestDelivery": "DO PEDIDO À ENTREGA",
+    "processDescription": "{name} coordena estratégia, identidade, produção e revisão",
+    "coordinates": "Coordena e consolida",
+    "phaseStrategy": "Estratégia",
+    "phaseIdentity": "Identidade",
+    "phaseProduction": "Produção",
+    "phaseReview": "Revisão",
+    "teamTitle": "Uma direção. Especialidades complementares.",
+    "teamDescription": "{name} coordena. As especialistas contribuem quando o objetivo pede sua experiência. Estes perfis orientam o Codex; uma delegação real depende do uso de subagentes.",
+    "teamEyebrow": "EQUIPE DO ESTÚDIO",
+    "direction": "DIREÇÃO",
+    "specialist": "ESPECIALISTA",
+    "contractCount": "{count} {contracts} sob sua responsabilidade",
+    "contractSingular": "contrato",
+    "contractPlural": "contratos",
+    "teamNote": "Você pode conversar normalmente com {name} ou pedir uma contribuição específica pelo nome. Nomes internos de operação são separados das identidades públicas das personagens.",
+    "directionEyebrow": "DIREÇÃO DO ESTÚDIO",
+    "assignedContracts": "Contratos sob sua responsabilidade",
+    "context": "CONTEXTO",
+    "viewTeam": "Ver toda a equipe",
+    "inputsOutputsLimits": "Entradas, entregas e limites",
+    "viewContracts": "Ver todos os contratos",
+    "requiresCharacter": "Requer personagem",
+    "noCharacterStart": "Pode começar sem personagem",
+    "optional": "Opcional",
+    "flowsTitle": "Jornadas conectadas. Um histórico preservado.",
+    "flowsDescription": "Cada fluxo liga contratos, responsáveis e critérios de conclusão. Etapas opcionais podem ser dispensadas com motivo. Decisões, geração e inspeção exigidas permanecem no processo.",
+    "flowsEyebrow": "FLUXOS DO FRAMEWORK",
+    "runNoteBefore": "O run registra estado e próxima tarefa. O Codex executa o trabalho com ferramentas disponíveis. Consulte",
+    "coreGuide": "o guia do núcleo",
+    "runNoteAfter": "para iniciar, interromper e retomar.",
+    "owner": "Responsável: {name}.",
+    "taskEyebrow": "CONTRATO DE TAREFA",
+    "deliverable": "ENTREGÁVEL",
+    "evidence": "EVIDÊNCIA",
+    "minimumOutputs": "SAÍDAS MÍNIMAS",
+    "prerequisites": "Pré-requisitos",
+    "character": "Personagem",
+    "required": "exigida",
+    "notRequiredStart": "não exigida para iniciar esta tarefa",
+    "approvedCanon": "Cânone aprovado",
+    "notRequiredContract": "não exigido por este contrato",
+    "capability": "Capacidade",
+    "noExternalCapability": "nenhuma capacidade externa declarada neste contrato",
+    "capabilityNoteBefore": "No run, declare a capacidade com o meio usado, como",
+    "capabilityNoteMiddle": "ou",
+    "capabilityNoteAfter": "A declaração não instala nem testa a ferramenta.",
+    "completionCriteria": "Critérios de conclusão",
+    "appearsIn": "Onde aparece",
+    "fullContract": "Contrato completo (inglês canônico)",
+    "contractsTitle": "O que cada tarefa precisa entregar.",
+    "contractsDescription": "Os contratos tornam explícitos o responsável, os pré-requisitos e a evidência necessária para concluir uma etapa.",
+    "contractsEyebrow": "CONTRATOS DO FRAMEWORK",
+    "commandsTitle": "Operações locais, com registros verificáveis.",
+    "commandsDescription": "Execute os comandos na pasta do projeto. Eles operam fichas, histórico e integridade; a parte criativa usa as ferramentas do Codex.",
+    "commandsEyebrow": "REFERÊNCIA DE COMANDOS",
+    "sourceInventory": "Fontes desta revisão · {count} arquivos",
+    "hashNote": "Hashes detectam mudanças. Não autenticam pessoas nem substituem inspeção.",
+    "missingTitle": "Página não encontrada.",
+    "missingDescription": "Esta referência pode ter mudado com uma nova versão do framework.",
+    "backOverview": "Voltar à visão geral",
+    "templateDescription": "Template de referência do projeto.",
+    "templateEyebrow": "ARQUIVO DE REFERÊNCIA",
+    "reference": "Referência",
+    "manualTitle": "Manual",
+    "guideKind": "Guia",
+    "teamKind": "Equipe",
+    "contractKind": "Contrato",
+    "workflowKind": "Fluxo",
+    "commandKind": "Comando",
+    "noResults": "Nenhum resultado. Tente outro termo.",
+    "copied": "Copiado para a área de transferência.",
+    "copyFallback": "Texto selecionado. Use Ctrl+C para copiar.",
+    "updateError": "Uma fonte está incompleta ou inválida. A última versão válida permanece aqui; a atualização retoma após a correção.",
+    "updatePending": "Atualização pendente",
+    "liveUpdate": "Atualização automática ativa",
+    "savedVersion": "Versão local salva",
+    "portableVersion": "Versão portátil",
+    "labelDocument": "Documento",
+    "labelMedia": "Mídia",
+    "labelReview": "Revisão",
+    "labelGeneration": "Geração",
+    "labelInspection": "Inspeção",
+    "labelHumanDecision": "Decisão humana",
+    "labelDelivery": "Entrega",
+    "labelPrepared": "Preparação",
+    "labelGenerated": "Geração",
+    "labelReviewed": "Revisão",
+    "labelDelivered": "Entrega",
+    "labelHumanApproved": "Decisão explícita",
+    "copy": "Copiar",
+    "codeText": "texto",
+    "table": "Tabela",
+    "localReference": "Referência local fora deste manual",
+    "metadataDescription": "OLYMPOX - AI Influencer framework: equipe, fluxos, contratos e guias para criar influenciadores virtuais originais com IA no Codex."
+  }
+}

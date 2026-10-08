@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "version": "0.2.0",
+  "id": "choose-direction",
+  "name": "Record the selected direction",
+  "owner": "master",
+  "deliverable": "human-decision",
+  "evidenceType": "human-approved",
+  "requiresPersona": false,
+  "requiresApprovedCanon": false,
+  "capability": null,
+  "minimumOutputs": 0,
+  "criteria": [
+    "Explicit decision with reviewer, date, and event",
+    "The runtime records the declaration; it does not prove the reviewer is human"
+  ]
+}

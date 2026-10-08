@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "version": "0.2.0",
+  "id": "plan-correction",
+  "name": "Prepare a minimal correction",
+  "owner": "art",
+  "deliverable": "document",
+  "evidenceType": "prepared",
+  "requiresPersona": true,
+  "requiresApprovedCanon": true,
+  "capability": null,
+  "minimumOutputs": 1,
+  "criteria": [
+    "Actual document prepared and recorded",
+    "Assumptions and limitations identified"
+  ]
+}

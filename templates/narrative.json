@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "characterId": "",
+  "status": "draft",
+  "audience": "",
+  "valueProposition": "",
+  "backstory": "",
+  "desire": "",
+  "values": [],
+  "contradiction": "",
+  "habits": [],
+  "boundaries": [],
+  "writingVoice": {
+    "language": "en",
+    "tone": "",
+    "rhythm": "",
+    "vocabulary": [],
+    "examples": [],
+    "avoidExamples": []
+  },
+  "timeline": [],
+  "approval": null
+}

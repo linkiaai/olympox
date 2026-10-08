@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "",
+  "characterId": "",
+  "status": "draft",
+  "campaignId": null,
+  "canonVersion": null,
+  "canonHash": null,
+  "narrativeVersion": null,
+  "narrativeHash": null,
+  "channel": "",
+  "objective": "",
+  "pillar": "",
+  "message": "",
+  "script": "",
+  "caption": "",
+  "shots": [],
+  "linkedAssetIds": [],
+  "sources": [],
+  "factualClaims": [],
+  "music": null,
+  "disclosure": {
+    "virtual": "Personagem virtual criado com IA.",
+    "commercial": null
+  },
+  "review": null
+}

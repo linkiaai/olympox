@@ -1,0 +1,158 @@
+{
+  "title": "OLYMPOX - AI Influencer framework",
+  "guides": [
+    {
+      "path": "docs/framework-manual.md",
+      "section": "overview",
+      "label": "Overview",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/framework-manual.md"
+      }
+    },
+    {
+      "path": "docs/quick-start.md",
+      "section": "start",
+      "label": "Get started",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/quick-start.md"
+      }
+    },
+    {
+      "path": "docs/living-documentation.md",
+      "section": "sync",
+      "label": "Living documentation",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/living-documentation.md"
+      }
+    },
+    {
+      "path": "docs/installation.md",
+      "label": "Installation",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/installation.md"
+      }
+    },
+    {
+      "path": "docs/framework-02.md",
+      "label": "Operate the core",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/framework-02.md"
+      }
+    },
+    {
+      "path": "docs/framework-architecture.md",
+      "label": "Architecture",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/framework-architecture.md"
+      }
+    },
+    {
+      "path": "docs/studio-team.md",
+      "label": "Team and responsibilities",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/studio-team.md"
+      }
+    },
+    {
+      "path": "docs/strategy.md",
+      "label": "Strategy and persona",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/strategy.md"
+      }
+    },
+    {
+      "path": "docs/trend-research.md",
+      "label": "Research and trends",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/trend-research.md"
+      }
+    },
+    {
+      "path": "docs/production.md",
+      "label": "Production",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/production.md"
+      }
+    },
+    {
+      "path": "docs/quality.md",
+      "label": "Quality and continuity",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/quality.md"
+      }
+    },
+    {
+      "path": "docs/operations.md",
+      "label": "Identity, records and backup",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/operations.md"
+      }
+    },
+    {
+      "path": "docs/tools.md",
+      "label": "Tools",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/tools.md"
+      }
+    },
+    {
+      "path": "framework/README.md",
+      "label": "Core API and contracts",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/framework/README.md"
+      }
+    },
+    {
+      "path": "CONSTITUTION.md",
+      "section": "constitution",
+      "label": "Constitution",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/CONSTITUTION.md"
+      }
+    },
+    {
+      "path": "docs/localization.md",
+      "label": "Language and compatibility",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/localization.md"
+      }
+    }
+  ],
+  "commandDescriptions": {
+    "help": "Show the available operations.",
+    "new": "Create the profile and folders of a draft character.",
+    "list": "List characters and their local states.",
+    "validate": "Check record consistency for one or all characters.",
+    "prompt": "Build a prompt from the persona, shot and references.",
+    "canon-hash": "Calculate the identity hash for its approval record.",
+    "canon-snapshot": "Preserve an approved canon version and its reference files.",
+    "file-hash": "Calculate the hash of a character file.",
+    "register": "Register a draft media file in the asset manifest.",
+    "execution-seal": "Preserve the reported generation context and prompt of an asset.",
+    "migrate-assets": "Preserve legacy records in the current format without inventing approvals.",
+    "narrative-save": "Save a new narrative version and its review when supplied.",
+    "narrative-show": "Read the current narrative or an earlier version.",
+    "content-save": "Save a new content piece version with script and context links.",
+    "run-start": "Start a workflow and return the next task package.",
+    "run-status": "Read run state, owner, prerequisites and changes.",
+    "run-step": "Record a transition and evidence of work that actually occurred.",
+    "run-resume": "Resume work; context changes require an explicit new attempt.",
+    "backup": "Create a character backup with inventory and linked runs.",
+    "backup-verify": "Check backup bytes and structure.",
+    "backup-test": "Test restoration in a temporary copy.",
+    "restore": "Restore a backup without overwriting an existing character.",
+    "check-assets": "Check character and asset record consistency.",
+    "doctor": "Check instructions, templates, guides, framework and skill installation."
+  },
+  "defaultLocale": "en",
+  "locales": {
+    "en": {
+      "name": "English",
+      "resource": "docs-site/locales/en.json"
+    },
+    "pt-BR": {
+      "name": "Português do Brasil",
+      "resource": "docs-site/locales/pt-BR.json"
+    }
+  }
+}

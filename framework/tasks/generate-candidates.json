@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "version": "0.2.0",
+  "id": "generate-candidates",
+  "name": "Generate identity candidates",
+  "owner": "production",
+  "deliverable": "media",
+  "evidenceType": "generated",
+  "requiresPersona": true,
+  "requiresApprovedCanon": false,
+  "capability": "generation",
+  "minimumOutputs": 1,
+  "criteria": [
+    "Existing media file with its type and SHA-256 recorded",
+    "Generation event declared with tool, responsible actor, and date",
+    "Does not approve identity or publish"
+  ]
+}

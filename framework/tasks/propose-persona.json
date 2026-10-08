@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "version": "0.2.0",
+  "id": "propose-persona",
+  "name": "Propose a persona and brief",
+  "owner": "persona",
+  "deliverable": "document",
+  "evidenceType": "prepared",
+  "requiresPersona": false,
+  "requiresApprovedCanon": false,
+  "capability": null,
+  "minimumOutputs": 1,
+  "criteria": [
+    "Actual document prepared and recorded",
+    "Assumptions and limitations identified"
+  ]
+}

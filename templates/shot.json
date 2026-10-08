@@ -1,0 +1,16 @@
+{
+  "purpose": "reference",
+  "medium": "image",
+  "objective": "Evaluate the proposed identity in neutral light",
+  "scene": "Simple neutral background",
+  "framing": "Front-facing head-and-shoulders portrait",
+  "lighting": "Soft side light with preserved skin texture",
+  "wardrobe": "",
+  "expression": "Neutral and relaxed",
+  "action": "Look at the camera",
+  "format": "4:5",
+  "script": "",
+  "durationSeconds": null,
+  "referenceIds": [],
+  "avoid": ["Plastic-looking skin", "Unintentional identity changes"]
+}
