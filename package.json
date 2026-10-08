@@ -13,6 +13,7 @@
     "validate": "node scripts/studio.mjs validate",
     "test": "node --test tests/*.test.mjs",
     "docs:build": "node scripts/docs.mjs build",
+    "docs:export": "node scripts/docs-export.mjs",
     "docs:check": "node scripts/docs.mjs check",
     "docs:dev": "node scripts/docs.mjs serve",
     "preverify": "npm run docs:build",

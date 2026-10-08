@@ -17,7 +17,7 @@ try {
     if (!Number.isInteger(port) || port < 0 || port > 65535) throw new Error('Invalid port.');
     let current = buildDocumentation(root).data;
     let error = null;
-    const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.svg': 'image/svg+xml' };
+    const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png' };
     const server = http.createServer((request, response) => {
       response.setHeader('Cache-Control', 'no-store');
       response.setHeader('X-Content-Type-Options', 'nosniff');
@@ -34,7 +34,8 @@ try {
       if (!DOCS_ASSETS.includes(name)) { response.writeHead(404); response.end('File unavailable.'); return; }
       try {
         const bytes = fs.readFileSync(sourceFile(root, `docs-site/dist/${name}`));
-        response.setHeader('Content-Type', `${types[path.extname(name)]}; charset=utf-8`);
+        const extension = path.extname(name);
+        response.setHeader('Content-Type', extension === '.png' ? types[extension] : `${types[extension]}; charset=utf-8`);
         response.end(request.method === 'HEAD' ? undefined : bytes);
       } catch { response.writeHead(500); response.end('Unable to read the manual.'); }
     });

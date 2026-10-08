@@ -3,7 +3,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { validateFramework } from './framework-core.mjs';
 
-export const DOCS_ASSETS = ['index.html', 'styles.css', 'markdown.js', 'localization.js', 'app.js', 'favicon.svg', 'content.js', 'manifest.json'];
+export const DOCS_ASSETS = ['index.html', 'styles.css', 'markdown.js', 'localization.js', 'app.js', 'favicon.svg', 'olympox-logo.png', 'olympox-icon.png', 'content.js', 'manifest.json'];
 const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 
 export function sourceFile(root, relative) {

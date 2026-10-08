@@ -112,6 +112,7 @@
     "updatePending": "Update pending",
     "liveUpdate": "Automatic updates active",
     "savedVersion": "Saved local version",
+    "publishedVersion": "Published version",
     "portableVersion": "Portable version",
     "labelDocument": "Document",
     "labelMedia": "Media",

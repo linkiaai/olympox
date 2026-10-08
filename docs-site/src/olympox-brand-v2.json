@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "version": 2,
+  "concept": "single geometric Zeus lightning bolt",
+  "tool": "built-in image_gen",
+  "palette": {
+    "foreground": "#D48CE9",
+    "background": "#19111f"
+  },
+  "assets": [
+    {
+      "file": "olympox-icon.png",
+      "dimensions": {
+        "width": 1254,
+        "height": 1254
+      },
+      "sourceGeneration": "exec-556c3232-c4b1-44c7-b3be-c58cf44654d7.png",
+      "transparentBackground": false,
+      "prompt": "Use case: logo-brand.\nAsset type: final square technology framework brand icon.\nPrimary request: Create ONE simple original solid geometric Zeus lightning-bolt symbol, and nothing else. It must be visually unmistakable and readable at 16px and 24px.\nShape: a single robust lightning bolt silhouette with only six straight boundary segments, few sharp vertices, and one clear zigzag. Slightly vertical, roughly twice as tall as it is wide. Confident simple proportions and a broad solid body; no thin details and no internal cutouts. Premium minimalist modern technology identity.\nComposition: square canvas, exactly one bolt centered horizontally and vertically. Bolt height about 65 percent of the canvas height, with generous even dark space around it. Show the entire shape with clean safety margins.\nColors: the single bolt is uniform solid pink-lilac #D48CE9. Entire canvas is uniform opaque dark plum #19111f. Crisp smooth vector-like edges. Flat two-color digital artwork, no shading or texture.\nConstraints: no text, no letters, no wordmark, no mountain, no temple, no columns, no trident, no circle, no shield, no crest, no portrait, no second lightning bolt, no secondary ray, no outlines, no shadows, no glow, no gradients, no texture, no grunge, no white patches, no watermark, no mockup. Do not copy an existing brand logo. One simple lightning symbol only on a solid opaque plum background.",
+      "references": []
+    },
+    {
+      "file": "olympox-logo.png",
+      "dimensions": {
+        "width": 2172,
+        "height": 724
+      },
+      "sourceGeneration": "exec-5d5e4391-ac3a-43e5-8193-c2a37a6090f3.png",
+      "transparentBackground": false,
+      "prompt": "Use case: precise-object-edit.\nAsset type: final horizontal OLYMPOX logo, single focused proportion correction.\nInput image 1: edit target, the current clean OLYMPOX logo with the single lightning bolt.\nChange ONLY the size of the lightning bolt on the left: scale the existing bolt down uniformly to approximately 52 percent of its current height and width, so its TOTAL height is just 110 percent of the capital letter height. The present bolt is about twice the letter height and is too large. The corrected bolt must be about the SAME height as the letters, only slightly taller. Center the resized bolt vertically against the letters. Keep a clean modest gap to the first O.\nPreserve EXACTLY the bolt's silhouette, zigzag and proportions. Preserve the entire OLYMPOX wordmark exactly: all letterforms, spelling O L Y M P O X, positions, size, spacing and color. Preserve the existing dark plum background and canvas dimensions. Do not enlarge the bolt, do not move or resize any letters, do not add any graphics or text.\nKeep the same clean pink-lilac solid appearance and crisp edges. No texture, no gradient, no white residue, no halo, no magenta fringe, no shadow, no glow. Opaque dark plum background throughout. This is only a symbol-scale correction, not a redesign.",
+      "references": [
+        "exec-8640e93c-0452-44c9-98f2-f05aed41fb2a.png"
+      ],
+      "generationHistory": [
+        {
+          "stage": "replace complex emblem with single lightning bolt",
+          "sourceGeneration": "exec-8640e93c-0452-44c9-98f2-f05aed41fb2a.png",
+          "transparentBackground": false,
+          "prompt": "Use case: precise-object-edit.\nAsset type: final OLYMPOX horizontal logo with simplified lightning icon.\nInput image 1: edit target, the existing clean OLYMPOX horizontal logo. Its wordmark is authoritative and must be preserved.\nInput image 2: authoritative icon reference, the newly generated single simple Zeus lightning bolt on plum.\nPrimary request: Replace the ENTIRE complex mountain/temple emblem at the left of image 1 with EXACTLY the ONE solid geometric lightning bolt from image 2. Remove all mountain roofs, columns and compound emblem pieces. The only symbol to the left of \"OLYMPOX\" is the single simple lightning bolt from image 2.\nInvariants: preserve the exact wordmark text \"OLYMPOX\", spelled O L Y M P O X, the original clean elegant geometric sans capital letter shapes and their kerning. Preserve the new lightning bolt's entire silhouette, one clear zigzag, robust straight-sided body, shape proportions and pink-lilac color. Do not add a second bolt, outline or other symbol.\nComposition: a centered horizontal lockup on a landscape canvas about 3:1. Simple bolt on the left, OLYMPOX on the right. The bolt height equals or is slightly greater than the capital letter height, about 110%. Align their visual centers. Use a tasteful gap between bolt and lettering, approximately half of one capital letter's width. Scale the complete lockup to about 90% canvas width with clean balanced safety margins, retaining icon and letter proportions.\nColor: uniform solid pink-lilac #D48CE9 for both bolt and entire wordmark. Uniform opaque dark plum #19111f for the entire canvas, all negative spaces and letter counters. Crisp clean flat vector-like edges. No transparent pixels.\nConstraints: only one bolt and exact wordmark \"OLYMPOX\"; no tagline, no other text, no mountain, no temple, no column, no trident, no circle, no shield, no crest, no portrait, no secondary rays. No white patches, no halos, no magenta fringe, no speckles, no noise, no texture, no shading, no gradient, no shadow, no glow, no 3D, no watermark, no mockup. Clean premium minimalist technology branding.",
+          "references": [
+            "exec-152fad9a-119a-413e-9cb1-9225dccef341.png",
+            "exec-556c3232-c4b1-44c7-b3be-c58cf44654d7.png"
+          ]
+        },
+        {
+          "stage": "refine bolt height to near capital letter height",
+          "sourceGeneration": "exec-5d5e4391-ac3a-43e5-8193-c2a37a6090f3.png",
+          "transparentBackground": false,
+          "prompt": "Use case: precise-object-edit.\nAsset type: final horizontal OLYMPOX logo, single focused proportion correction.\nInput image 1: edit target, the current clean OLYMPOX logo with the single lightning bolt.\nChange ONLY the size of the lightning bolt on the left: scale the existing bolt down uniformly to approximately 52 percent of its current height and width, so its TOTAL height is just 110 percent of the capital letter height. The present bolt is about twice the letter height and is too large. The corrected bolt must be about the SAME height as the letters, only slightly taller. Center the resized bolt vertically against the letters. Keep a clean modest gap to the first O.\nPreserve EXACTLY the bolt's silhouette, zigzag and proportions. Preserve the entire OLYMPOX wordmark exactly: all letterforms, spelling O L Y M P O X, positions, size, spacing and color. Preserve the existing dark plum background and canvas dimensions. Do not enlarge the bolt, do not move or resize any letters, do not add any graphics or text.\nKeep the same clean pink-lilac solid appearance and crisp edges. No texture, no gradient, no white residue, no halo, no magenta fringe, no shadow, no glow. Opaque dark plum background throughout. This is only a symbol-scale correction, not a redesign.",
+          "references": [
+            "exec-8640e93c-0452-44c9-98f2-f05aed41fb2a.png"
+          ]
+        }
+      ]
+    }
+  ],
+  "qa": {
+    "wordmark": "OLYMPOX",
+    "singleSymbol": true,
+    "opaque": true,
+    "visibleWhiteOrMagentaHalos": false,
+    "colorAccuracy": "nominal requested colors; generated RGB values vary slightly",
+    "notes": "The final logo has a single bolt slightly taller than the capital letters. No manual raster edits were performed."
+  }
+}

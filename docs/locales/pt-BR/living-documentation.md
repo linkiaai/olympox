@@ -42,4 +42,8 @@ Um comando novo precisa de sintaxe na ajuda da CLI e descrição em `commandDesc
 
 ## Evolução e compartilhamento
 
-O manifesto inclui hashes das fontes e a versão do framework, permitindo conferir de onde veio cada geração. O site é local. Hospedagem e atualização de uma versão remota precisam de um processo de publicação definido; o servidor local não envia conteúdo para a internet.
+O manifesto inclui hashes das fontes e a versão do framework, permitindo conferir de onde veio cada geração. O manual público está em `https://olympox.linkia.ai/docs/`. O servidor local não envia conteúdo para a internet.
+
+`npm.cmd run docs:export` regenera o manual e prepara somente os arquivos permitidos em `out/docs/`. O projeto de hospedagem está registrado em `.openai/hosting.json`. Publique essa geração completa pelo Sites sempre que uma mudança no framework atualizar a documentação. Exportar sozinho não publica. Arquivos inesperados em `out/` interrompem a exportação para evitar divulgação acidental.
+
+A página pública consulta seu manifesto publicado uma vez por minuto. Quando chega uma nova publicação, ela atualiza mantendo idioma e seção. Isso detecta alterações já publicadas; não lê os arquivos locais de quem está desenvolvendo nem consulta o servidor de desenvolvimento.

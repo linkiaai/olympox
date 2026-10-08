@@ -11,6 +11,7 @@ const activeSkills = ['olympox', 'higgsfield-studio'];
 const substitutedSources = new Set(['docs/locales/pt-BR/AGENTS.md']);
 const excludedNames = new Set(['.git', '.agents', 'node_modules', 'work', 'tmp', 'tools', 'dist', 'backups', 'personas', 'influencers']);
 const sourceExtensions = new Set(['.md', '.mjs', '.js', '.json', '.yaml', '.yml', '.html', '.css', '.svg']);
+const manualImages = new Set(['docs-site/src/olympox-logo.png', 'docs-site/src/olympox-icon.png']);
 
 function statIfPresent(file) {
   try { return fs.lstatSync(file); }
@@ -74,7 +75,7 @@ function inventory(sourceRoot) {
       const stat = fs.lstatSync(path.join(directory, entry.name));
       if (stat.isSymbolicLink()) throw new Error(`Links and junctions are not permitted: ${child}`);
       if (stat.isDirectory()) walk(child);
-      else if (stat.isFile() && (sourceExtensions.has(path.extname(entry.name)) || ['LICENSE', 'project.gitignore', 'project.gitattributes'].includes(entry.name))) add(child);
+      else if (stat.isFile() && (sourceExtensions.has(path.extname(entry.name)) || manualImages.has(child) || ['LICENSE', 'project.gitignore', 'project.gitattributes'].includes(entry.name))) add(child);
       else if (!stat.isFile()) throw new Error(`Unsupported framework source: ${child}`);
     }
   }

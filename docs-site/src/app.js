@@ -5,6 +5,8 @@
   const main = document.querySelector('main');
   const routes = routeMap(canonical);
   const storedLocale = readStored(localStorage);
+  const served = ['http:', 'https:'].includes(location.protocol);
+  const development = served && ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
   let locale = select(location.search, storedLocale);
   let data, roles, tasks, coordinator, summaries, searchable, liveStatus;
   const t = (key, values) => message(data.ui, key, values);
@@ -176,22 +178,23 @@
   function updateStatus() {
     const notice = document.querySelector('#update-error'); notice.hidden = !liveStatus?.error;
     notice.textContent = liveStatus?.error ? t('updateError') : '';
-    const key = location.protocol === 'file:' ? 'portableVersion' : liveStatus?.error ? 'updatePending' : liveStatus?.watching ? 'liveUpdate' : 'savedVersion';
+    const key = location.protocol === 'file:' ? 'portableVersion' : served && !development ? 'publishedVersion' : liveStatus?.error ? 'updatePending' : liveStatus?.watching ? 'liveUpdate' : 'savedVersion';
     document.querySelector('#sync-status').textContent = t(key);
   }
   activateLocale(locale); paint();
-  if (location.protocol === 'http:' || location.protocol === 'https:') {
+  if (served) {
     let checking = false;
     setInterval(async () => {
       if (document.hidden || checking) return;
       checking = true;
       try {
-        const response = await fetch('__docs-status', { cache: 'no-store' }); if (!response.ok) return;
-        const status = await response.json(); if (!status.watching) return;
-        liveStatus = status; updateStatus();
+        const response = await fetch(development ? '__docs-status' : 'manifest.json', { cache: 'no-store' }); if (!response.ok) return;
+        const status = await response.json(); if (development && !status.watching) return;
+        if (!development && typeof status.fingerprint !== 'string') return;
+        liveStatus = development ? status : null; updateStatus();
         if (!status.error && status.fingerprint !== canonical.fingerprint) location.reload();
       } catch { liveStatus = null; updateStatus(); }
       finally { checking = false; }
-    }, 1500);
+    }, development ? 1500 : 60000);
   }
 })();

@@ -5,7 +5,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { once } from 'node:events';
-import { buildDocumentation, checkDocumentation, collectDocumentation, commandCatalog, sourceFile } from '../scripts/docs-core.mjs';
+import { buildDocumentation, checkDocumentation, collectDocumentation, commandCatalog, sourceFile, DOCS_ASSETS } from '../scripts/docs-core.mjs';
+import { exportDocumentation } from '../scripts/docs-export.mjs';
 import '../docs-site/src/markdown.js';
 import '../docs-site/src/localization.js';
 import vm from 'node:vm';
@@ -32,6 +33,22 @@ test('manual derives catalogs, is deterministic and checks staleness without wri
     const repeated = buildDocumentation(root);
     assert.equal(repeated.manifest.fingerprint, built.manifest.fingerprint);
     for (const [name, bytes] of built.output) assert.deepEqual(repeated.output.get(name), bytes);
+    for (const name of ['olympox-logo.png', 'olympox-icon.png']) {
+      const original = fs.readFileSync(path.join(root, 'docs-site/src', name));
+      assert.deepEqual(built.output.get(name), original);
+      assert.deepEqual(fs.readFileSync(path.join(root, 'docs-site/dist', name)), original);
+      assert.equal(built.manifest.sources.some(item => item.path === `docs-site/src/${name}`), true);
+    }
+    checkDocumentation(root);
+    const iconPath = path.join(root, 'docs-site/src/olympox-icon.png');
+    const originalIcon = fs.readFileSync(iconPath);
+    const modifiedIcon = Buffer.concat([originalIcon, Buffer.from('\nPNG modification fixture\n')]);
+    fs.writeFileSync(iconPath, modifiedIcon);
+    assert.throws(() => checkDocumentation(root), /Manual is stale/);
+    assert.deepEqual(fs.readFileSync(path.join(root, 'docs-site/dist/olympox-icon.png')), originalIcon);
+    const rebranded = buildDocumentation(root);
+    assert.notEqual(rebranded.manifest.fingerprint, built.manifest.fingerprint);
+    assert.deepEqual(fs.readFileSync(path.join(root, 'docs-site/dist/olympox-icon.png')), modifiedIcon);
     checkDocumentation(root);
     const target = path.join(root, 'docs/quick-start.md');
     fs.appendFileSync(target, '\n## Update example\nNew test text.\n');
@@ -58,6 +75,7 @@ test('manual excludes private data, rejects unsafe sources and requires command 
     const marker = 'SECRET-DO-NOT-PUBLISH-73912';
     fs.writeFileSync(path.join(root, 'influencers/privada/persona.json'), marker);
     fs.writeFileSync(path.join(root, '.env'), marker);
+    fs.writeFileSync(path.join(root, 'docs-site/src/private.png'), marker);
     fs.appendFileSync(path.join(root, 'docs/studio-status.md'), marker);
     const built = buildDocumentation(root);
     for (const bytes of built.output.values()) assert.equal(bytes.includes(marker), false);
@@ -104,7 +122,17 @@ test('server watches sources, keeps the last valid version and isolates private 
     };
     const initial = await status();
     assert.equal((await fetch(url)).status, 200);
-    for (const name of ['package.json', '.env', 'framework/registry.json', 'influencers/privada/persona.json', '..%2fpackage.json']) assert.equal((await fetch(`${url}/${name}`)).status, 404);
+    for (const name of ['olympox-logo.png', 'olympox-icon.png']) {
+      const image = await fetch(`${url}/${name}`);
+      assert.equal(image.status, 200);
+      assert.equal(image.headers.get('content-type'), 'image/png');
+      assert.deepEqual(Buffer.from(await image.arrayBuffer()), fs.readFileSync(path.join(instance.root, 'docs-site/src', name)));
+      const head = await fetch(`${url}/${name}`, { method: 'HEAD' });
+      assert.equal(head.status, 200);
+      assert.equal(head.headers.get('content-type'), 'image/png');
+      assert.equal((await head.arrayBuffer()).byteLength, 0);
+    }
+    for (const name of ['package.json', '.env', 'framework/registry.json', 'influencers/privada/persona.json', 'private.png', '..%2fpackage.json']) assert.equal((await fetch(`${url}/${name}`)).status, 404);
     assert.equal((await fetch(url, { method: 'POST' })).status, 405);
     fs.appendFileSync(path.join(instance.root, 'docs/quick-start.md'), '\nReal automatic update text.\n');
     const updated = await until(result => result.fingerprint !== initial.fingerprint);
@@ -244,6 +272,9 @@ function manualBrowser(data, { url = 'file:///manual/index.html', stored = null,
     elements.set(selector, node); return node;
   }
   const location = new URL(url);
+  let reloads = 0;
+  location.reload = () => { reloads++; };
+  const requests = [];
   const textLabels = ['skip', 'manual', 'locale', 'search', 'sync', 'sidebarNote', 'studio', 'footer'].map(key => element(`text:${key}`, { i18n: key }));
   const ariaLabels = ['manualNavigation', 'openNavigation'].map(key => element(`aria:${key}`, { i18nAria: key }));
   const document = { documentElement: { lang: 'en' }, body: element('body'), hidden: false, activeElement: { tagName: 'BODY' },
@@ -251,17 +282,54 @@ function manualBrowser(data, { url = 'file:///manual/index.html', stored = null,
     querySelectorAll: selector => selector === '[data-i18n]' ? textLabels : selector === '[data-i18n-aria]' ? ariaLabels : [],
     addEventListener(key, handler) { listeners.set(`document:${key}`, handler); }
   };
-  let interval, responseStatus;
+  let interval, intervalMs, responseStatus;
   const context = vm.createContext({ STUDIO_DOCS: data, URL, URLSearchParams, document, location, navigator: { language: 'pt-BR', clipboard: { writeText: async () => {} } },
     localStorage: { getItem(key) { if (deniedStorage) throw new Error('Storage denied'); return storedValues.get(key); }, setItem(key, value) { if (deniedStorage) throw new Error('Storage denied'); storedValues.set(key, value); } },
     history: { replaceState(_state, _title, value) { location.href = value; } },
     window: { addEventListener(key, handler) { listeners.set(key, handler); }, scrollTo() {} },
-    setInterval(handler) { interval = handler; }, setTimeout() {}, clearTimeout() {}, matchMedia: () => ({ matches: false }),
-    fetch: async () => ({ ok: true, json: async () => responseStatus })
+    setInterval(handler, ms) { interval = handler; intervalMs = ms; }, setTimeout() {}, clearTimeout() {}, matchMedia: () => ({ matches: false }),
+    fetch: async (url, options) => { requests.push({ url, options }); return { ok: true, json: async () => responseStatus }; }
   });
   for (const file of ['markdown.js', 'localization.js', 'app.js']) vm.runInContext(fs.readFileSync(path.join(source, 'docs-site/src', file), 'utf8'), context);
-  return { element, document, location, storedValues, navigate(route) { location.hash = `#${route}`; listeners.get('hashchange')(); }, switchLocale(value) { element('#locale-select').handlers.get('change')({ target: { value } }); }, async crossEdition(value, route) { const link = { dataset: { locale: value }, getAttribute: () => `?lang=${value}#${route}` }; await element('main').handlers.get('click')({ target: { closest: selector => selector === 'a[data-locale]' ? link : null }, preventDefault() {} }); }, search(value) { element('#search').value = value; element('#search').handlers.get('input')(); }, async status(value) { responseStatus = value; await interval(); } };
+  return { element, document, location, storedValues, requests, get intervalMs() { return intervalMs; }, get reloads() { return reloads; }, navigate(route) { location.hash = `#${route}`; listeners.get('hashchange')(); }, switchLocale(value) { element('#locale-select').handlers.get('change')({ target: { value } }); }, async crossEdition(value, route) { const link = { dataset: { locale: value }, getAttribute: () => `?lang=${value}#${route}` }; await element('main').handlers.get('click')({ target: { closest: selector => selector === 'a[data-locale]' ? link : null }, preventDefault() {} }); }, search(value) { element('#search').value = value; element('#search').handlers.get('input')(); }, async status(value) { responseStatus = value; await interval(); } };
 }
+
+test('public export publishes only selected assets under docs and refuses unrelated output', () => {
+  const instance = fixture();
+  try {
+    const { root } = instance;
+    buildDocumentation(root);
+    fs.writeFileSync(path.join(root, 'docs-site/dist/private.txt'), 'PRIVATE-EXPORT-MARKER');
+    const result = exportDocumentation(root);
+    assert.deepEqual(result.files.filter(name => name.startsWith('docs/')).sort(), DOCS_ASSETS.map(name => `docs/${name}`).sort());
+    for (const name of result.files) assert.equal(fs.readFileSync(path.join(result.directory, name)).includes('PRIVATE-EXPORT-MARKER'), false);
+    assert.match(fs.readFileSync(path.join(result.directory, '_redirects'), 'utf8'), /\/docs \/docs\/ 308/);
+    assert.match(fs.readFileSync(path.join(result.directory, '_headers'), 'utf8'), /Cache-Control: no-cache/);
+    const previous = fs.readFileSync(path.join(result.directory, 'docs/content.js'));
+    fs.appendFileSync(path.join(root, 'docs/quick-start.md'), '\nPublic export revision example.\n');
+    fs.writeFileSync(path.join(result.directory, 'unrelated.txt'), 'PRIVATE-EXPORT-MARKER');
+    assert.throws(() => exportDocumentation(root), /Unexpected public output: unrelated.txt/);
+    assert.deepEqual(fs.readFileSync(path.join(result.directory, 'docs/content.js')), previous);
+  } finally { instance.close(); }
+});
+
+test('public manual checks published manifest and retains docs path, language and section', async () => {
+  const { data } = collectDocumentation(source);
+  const browser = manualBrowser(data, { url: 'https://olympox.linkia.ai/docs/?lang=pt-BR#commands' });
+  assert.equal(browser.element('#sync-status').textContent, 'Versão publicada');
+  assert.equal(browser.intervalMs, 60000);
+  await browser.status({ fingerprint: data.fingerprint });
+  assert.equal(browser.requests[0].url, 'manifest.json');
+  assert.equal(browser.requests[0].options.cache, 'no-store');
+  assert.equal(browser.reloads, 0);
+  browser.switchLocale('en');
+  assert.equal(browser.element('#sync-status').textContent, 'Published version');
+  await browser.status({ fingerprint: 'a-new-published-revision' });
+  assert.equal(browser.reloads, 1);
+  assert.equal(browser.location.pathname, '/docs/');
+  assert.equal(browser.location.search, '?lang=en');
+  assert.equal(browser.location.hash, '#commands');
+});
 
 test('portable manual switches every UI surface, localized search and canonical contracts', () => {
   const { data } = collectDocumentation(source);

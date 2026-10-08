@@ -65,12 +65,22 @@ test('fresh installation contains reusable sources, generated skills and a worki
       for (const file of ['SKILL.md', 'agents/openai.yaml']) assert.deepEqual(fs.readFileSync(path.join(target, '.agents/skills', name, file)), fs.readFileSync(path.join(project, 'skills', name, file)));
     }
     assert.deepEqual(fs.readdirSync(path.join(target, 'influencers')), ['README.md']);
+    for (const name of ['olympox-logo.png', 'olympox-icon.png']) {
+      const relative = `docs-site/src/${name}`;
+      assert.ok(result.copied.includes(relative));
+      assert.deepEqual(fs.readFileSync(path.join(target, relative)), fs.readFileSync(path.join(project, relative)));
+    }
     for (const name of ['work', 'tmp', 'tools', '.git', 'node_modules', 'docs-site/dist']) assert.equal(fs.existsSync(path.join(target, name)), false, name);
     for (const command of ['list', 'doctor']) {
       const execution = spawnSync(process.execPath, [path.join(target, 'scripts/studio.mjs'), command], { cwd: target, encoding: 'utf8' });
       assert.equal(execution.status, 0, execution.stderr);
       if (command === 'list') assert.match(execution.stdout, /No characters created/);
     }
+    for (const command of ['build', 'check']) {
+      const execution = spawnSync(process.execPath, [path.join(target, 'scripts/docs.mjs'), command], { cwd: target, encoding: 'utf8' });
+      assert.equal(execution.status, 0, execution.stderr);
+    }
+    for (const name of ['olympox-logo.png', 'olympox-icon.png']) assert.deepEqual(fs.readFileSync(path.join(target, 'docs-site/dist', name)), fs.readFileSync(path.join(project, 'docs-site/src', name)));
   } finally { instance.close(); }
 });
 
@@ -78,7 +88,7 @@ test('installation excludes private state and regenerates active skills from can
   const instance = temporary();
   try {
     const source = sourceFixture(instance.root), target = path.join(instance.root, 'target');
-    const excluded = ['work/runs/private.json', 'tmp/private.md', 'tools/provider/private.json', 'backups/private.json', '.git/config', '.env', 'node_modules/private.json', 'docs-site/dist/private.js', 'influencers/private/README.md', 'influencers/private/persona.json', 'influencers/private/references/person.png', 'docs/work/private.md', 'scripts/node_modules/private.js'];
+    const excluded = ['work/runs/private.json', 'tmp/private.md', 'tools/provider/private.json', 'backups/private.json', '.git/config', '.env', 'node_modules/private.json', 'docs-site/dist/private.js', 'docs-site/src/private.png', 'docs-site/src/other/olympox-icon.png', 'influencers/private/README.md', 'influencers/private/persona.json', 'influencers/private/references/person.png', 'docs/work/private.md', 'scripts/node_modules/private.js'];
     for (const relative of excluded) write(source, relative, 'PRIVATE-INSTALLER-FIXTURE');
     write(source, 'AGENTS.md', 'PRIVATE-INSTALLER-FIXTURE');
     write(source, 'docs/locales/pt-BR/AGENTS.md', 'PRIVATE-INSTALLER-FIXTURE');
@@ -90,6 +100,7 @@ test('installation excludes private state and regenerates active skills from can
     assert.deepEqual(fs.readFileSync(path.join(target, 'docs/locales/pt-BR/AGENTS.md')), fs.readFileSync(path.join(source, 'templates/locales/pt-BR/studio-AGENTS.md')));
     assert.notDeepEqual(fs.readFileSync(path.join(target, 'docs/locales/pt-BR/AGENTS.md')), fs.readFileSync(path.join(source, 'docs/locales/pt-BR/AGENTS.md')));
     for (const relative of [...excluded, 'docs/portrait.png']) assert.equal(fs.existsSync(path.join(target, relative)), false, relative);
+    for (const name of ['olympox-logo.png', 'olympox-icon.png']) assert.deepEqual(fs.readFileSync(path.join(target, 'docs-site/src', name)), fs.readFileSync(path.join(source, 'docs-site/src', name)));
     assert.deepEqual(fs.readFileSync(path.join(target, '.agents/skills/olympox/SKILL.md')), fs.readFileSync(path.join(source, 'skills/olympox/SKILL.md')));
     assert.equal(snapshot(target).some(([, bytes]) => bytes.includes(Buffer.from('PRIVATE-INSTALLER-FIXTURE').toString('base64'))), false);
   } finally { instance.close(); }
