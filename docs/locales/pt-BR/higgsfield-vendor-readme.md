@@ -14,4 +14,4 @@ Há diferenças relevantes para o estúdio:
 - Defaults de modelo e descrições como “SOTA”, identidade consistente ou proxy objetivo de atenção são recomendações/alegações do fornecedor. Precisam de catálogo atual, piloto e revisão; não demonstram qualidade ou desempenho do estúdio.
 - Entregar uma URL não encerra a preservação do estúdio: guardar mídia, job, entradas, prompt, contexto e revisão real quando a geração estiver autorizada.
 
-O processo vigente está em [preparação Higgsfield](higgsfield-setup.md) e na [constituição](CONSTITUTION.md).
+O processo vigente está em [preparação Higgsfield](higgsfield-setup.md) e na [constituição](CONSTITUTION.md). As fontes importadas do fornecedor mantêm seus hashes de integridade originais.

@@ -14,4 +14,4 @@ The studio applies these operational differences:
 - Default models and claims such as “SOTA”, consistent identity or an objective attention proxy are vendor recommendations/claims. They require a current catalog, pilot and review; they do not demonstrate studio quality or performance.
 - Delivering a URL does not complete studio preservation: retain media, job, inputs, prompt, context and actual review when generation is authorized.
 
-The current process is documented in [Higgsfield setup](../../docs/higgsfield-setup.md) and the [constitution](../../CONSTITUTION.md). Imported vendor sources retain their original integrity hashes; this studio-authored guide has a secondary [Brazilian Portuguese edition](../../docs/locales/pt-BR/higgsfield-vendor-readme.md).
+The current process is documented in [Higgsfield setup](../../docs/higgsfield-setup.md) and the [constitution](../../CONSTITUTION.md). Imported vendor sources retain their original integrity hashes.

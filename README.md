@@ -67,7 +67,7 @@ If there are no preferences yet, Codex proposes directions. The [brief](template
 
 See [strategy](docs/strategy.md), [production](docs/production.md), [quality](docs/quality.md), and [tools](docs/tools.md). The [reference analysis](docs/video-reference.md) identifies the material consulted and what we adapted through our own judgment.
 
-The [framework review and architecture](docs/framework-architecture.md) guides its evolution, inspired by AIOX. The current foundation is local core 0.2: specialists, task contracts, three resumable workflows, canon history, sealed executions, versioned narrative/content, and verifiable backups. The [core guide](docs/framework-02.md) explains its use and limitations.
+The [framework review and architecture](docs/framework-architecture.md) guides its evolution. The current foundation is local core 0.2: specialists, task contracts, three resumable workflows, canon history, sealed executions, versioned narrative/content, and verifiable backups. The [core guide](docs/framework-02.md) explains its use and limitations.
 
 ## Local operation
 

@@ -67,7 +67,7 @@ Se ainda não houver preferências, o Codex propõe caminhos. O [brief](../../..
 
 Consulte [estratégia](strategy.md), [produção](production.md), [qualidade](quality.md) e [ferramentas](tools.md). A [análise da referência](video-reference.md) identifica o que foi consultado e o que adaptamos por decisão própria.
 
-A [revisão e arquitetura do framework](framework-architecture.md) orienta a evolução inspirada no AIOX. A base atual é o núcleo local 0.2: especialistas, contratos de tarefas, três fluxos retomáveis, histórico do cânone, execuções seladas, narrativa/conteúdo versionados e backup verificável. O [guia do núcleo](framework-02.md) explica o uso e seus limites.
+A [revisão e arquitetura do framework](framework-architecture.md) orienta a evolução. A base atual é o núcleo local 0.2: especialistas, contratos de tarefas, três fluxos retomáveis, histórico do cânone, execuções seladas, narrativa/conteúdo versionados e backup verificável. O [guia do núcleo](framework-02.md) explica o uso e seus limites.
 
 ## Operação local
 

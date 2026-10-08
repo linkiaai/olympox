@@ -4,11 +4,9 @@ Versão **0.2.0**. Núcleo local implementado; cada estúdio escolhe seus própr
 
 ## Direção adotada
 
-O OLYMPOX é um framework local de influenciadores de IA, operado pelo Codex e dedicado a influenciadores virtuais originais, produção e aprendizado. A organização por especialistas, tarefas, fluxos e critérios de conclusão foi inspirada no AIOX. As nove agentes têm nomes de deusas e perfis femininos; seus IDs de papel permanecem estáveis. A implementação usa Node e arquivos locais, sem dependências operacionais externas.
+O OLYMPOX é um framework local de influenciadores de IA, operado pelo Codex e dedicado a influenciadores virtuais originais, produção e aprendizado. Organiza o trabalho por especialistas, tarefas, fluxos e critérios de conclusão. As nove agentes têm nomes de deusas e perfis femininos; seus IDs de papel permanecem estáveis. A implementação usa Node e arquivos locais, sem dependências operacionais externas.
 
 O Codex interpreta o pedido, carrega o pacote da próxima tarefa, usa capacidades disponíveis e registra o trabalho ocorrido. O núcleo mantém contratos, contexto e estado; não despacha agentes, gera mídia, consulta fornecedores nem publica. Perfis não são workers permanentes. Delegação existe somente quando uma subagente real é utilizado.
-
-A documentação do AIOX descreve squads compostos por agentes, tarefas e workflows. Um squad formal depende do projeto inicializado com o núcleo AIOX. Esta organização não representa instalação, certificação ou compatibilidade com esse ecossistema. Referências da revisão inicial: [guia de squads](https://github.com/SynkraAI/aiox-core/blob/main/docs/guides/squads-guide.md) e [visão geral](https://github.com/SynkraAI/aiox-core/blob/main/docs/guides/squads-overview.md).
 
 ## O que está implementado
 
@@ -101,4 +99,4 @@ O próximo marco é **uma persona**, com público/direção escolhidos, referên
 
 Depois do piloto, estruturar publicações efetivamente realizadas e experimentos com hipótese, variável, coorte, janela, contagens, denominadores, fonte e decisão. Custos de tentativas rejeitadas contam; moedas diferentes e dados ausentes não são tratados como equivalentes. Campanhas completas, comparação de portfólio, analytics, adaptadores, dashboard e banco de dados entram conforme necessidade observada.
 
-Um adaptador para squads AIOX permanece uma possibilidade futura se houver demanda por esse ecossistema. Deve mapear contratos e validar um projeto real. Escala e automação dependem das evidências do piloto; quantidade de perfis não demonstra qualidade.
+Escala e automação dependem das evidências do piloto; quantidade de perfis não demonstra qualidade.

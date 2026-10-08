@@ -4,11 +4,9 @@ Version **0.2.0**. Local core implemented; each studio chooses its own influence
 
 ## Adopted direction
 
-OLYMPOX is a local AI influencer framework, operated by Codex and dedicated to original virtual influencers, production, and learning. Its organization into specialists, tasks, workflows, and completion criteria was inspired by AIOX. The nine agents have goddess names and female profiles; their role IDs remain stable. The implementation uses Node and local files, with no external operational dependencies.
+OLYMPOX is a local AI influencer framework, operated by Codex and dedicated to original virtual influencers, production, and learning. It organizes work through specialists, tasks, workflows, and completion criteria. The nine agents have goddess names and female profiles; their role IDs remain stable. The implementation uses Node and local files, with no external operational dependencies.
 
 Codex interprets the request, loads the next task's package, uses available capabilities, and records work that occurred. The core maintains contracts, context, and state; it does not dispatch agents, generate media, query providers, or publish. Profiles are not permanent workers. Delegation exists only when a real subagent is used.
-
-AIOX documentation describes squads composed of agents, tasks, and workflows. A formal squad requires a project initialized with AIOX core. This organization does not represent installation, certification, or compatibility with that ecosystem. Initial review references: [squad guide](https://github.com/SynkraAI/aiox-core/blob/main/docs/guides/squads-guide.md) and [overview](https://github.com/SynkraAI/aiox-core/blob/main/docs/guides/squads-overview.md).
 
 ## What is implemented
 
@@ -101,4 +99,4 @@ The next milestone is **one persona**, with a chosen audience/direction, inspect
 
 After the pilot, structure actual publications and experiments with a hypothesis, variable, cohort, window, counts, denominators, source, and decision. Costs of rejected attempts count; different currencies and missing data are not treated as equivalent. Complete campaigns, portfolio comparison, analytics, adapters, a dashboard, and a database are introduced according to observed need.
 
-An AIOX squad adapter remains a future possibility if demand for that ecosystem emerges. It must map contracts and validate a real project. Scale and automation depend on pilot evidence; the number of profiles does not demonstrate quality.
+Scale and automation depend on pilot evidence; the number of profiles does not demonstrate quality.
