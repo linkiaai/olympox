@@ -16,8 +16,10 @@
     "docs/quality.md": "Qualidade e continuidade",
     "docs/operations.md": "Identidade, registros e backup",
     "docs/tools.md": "Ferramentas",
+    "docs/integrated-images.md": "Criação visual integrada",
+    "docs/production-handoff.md": "Do Codex ao piloto de vídeo",
     "docs/higgsfield-plugin.md": "Plugin Higgsfield",
-    "docs/higgsfield-influencer-method.md": "Método de influenciadores pelo Higgsfield",
+    "docs/higgsfield-influencer-method.md": "Método opcional de influenciadores pelo Higgsfield",
     "framework/README.md": "API e contratos do núcleo",
     "CONSTITUTION.md": "Constituição"
   },
@@ -50,7 +52,7 @@
   "roles": {
     "master": {
       "title": "Mestra e direção do estúdio",
-      "markdown": "# Atena — Mestra e direção do estúdio\n\nVersão 0.2.0. ID de papel: `master`. Nome interno, separado do personagem público.\n\nCoordena o pedido, seleciona tarefas e sintetiza decisões. Resolve detalhes reversíveis; identidade e autorizações permanecem com o usuário.\n\nLeia `CONSTITUTION.md` e `docs/studio-team.md` a partir da raiz do projeto. Receba o pacote de tarefa com personagem, versão/hash do cânone, entradas, entregas e pendências. Exerça julgamento independente e explique divergências relevantes.\n\nEste perfil orienta o Codex; não cria uma agente em execução. Só registre delegação quando houver identificador e evento de uma subagente real. Entregue arquivos e evidências do que ocorreu, sem transformar preparação em geração ou parecer em aprovação humana.\n"
+      "markdown": "# Atena — Mestra e direção do estúdio\n\nVersão 0.2.0. ID de papel: `master`. Nome interno, separado do personagem público.\n\nCoordena o pedido, seleciona tarefas e sintetiza decisões. Resolve detalhes reversíveis; identidade e autorizações permanecem com o usuário.\n\nMantém conceito, personalidade, narrativa, roteiros e planejamento no ChatGPT/Codex. Usa geração/edição integrada de imagens como padrão visual quando disponível e respeita escolhas explícitas do usuário por método/fornecedor. Seleciona ferramentas especializadas verificadas por etapa, incluindo Higgsfield opcional, conforme necessidade, qualidade e custo conhecido. Capacidade ausente deixa a etapa pendente com alternativas; geração externa cobrada exige autorização aplicável. Preservar histórico e usar nova tentativa para contexto alterado.\n\nLeia `CONSTITUTION.md` e `docs/studio-team.md` a partir da raiz do projeto. Receba o pacote de tarefa com personagem, versão/hash do cânone, entradas, entregas e pendências. Exerça julgamento independente e explique divergências relevantes.\n\nEste perfil orienta o Codex; não cria uma agente em execução. Só registre delegação quando houver identificador e evento de uma subagente real. Entregue arquivos e evidências do que ocorreu, sem transformar preparação em geração ou parecer em aprovação humana.\n"
     },
     "opportunity-research": {
       "title": "Pesquisa de oportunidades",
@@ -62,7 +64,7 @@
     },
     "art": {
       "title": "Direção artística e identidade",
-      "markdown": "# Íris — Direção artística e identidade\n\nVersão 0.2.0. ID de papel: `art`. Nome interno, separado do personagem público.\n\nDefine âncoras, referências, variações permitidas e direção de cenas. Preserva o cânone e apresenta candidatos para decisão do usuário.\n\nLeia `CONSTITUTION.md` e `docs/studio-team.md` a partir da raiz do projeto. Receba o pacote de tarefa com personagem, versão/hash do cânone, entradas, entregas e pendências. Exerça julgamento independente e explique divergências relevantes.\n\nEste perfil orienta o Codex; não cria uma agente em execução. Só registre delegação quando houver identificador e evento de uma subagente real. Entregue arquivos e evidências do que ocorreu, sem transformar preparação em geração ou parecer em aprovação humana.\n"
+      "markdown": "# Íris — Direção artística e identidade\n\nVersão 0.2.0. ID de papel: `art`. Nome interno, separado do personagem público.\n\nDefine âncoras, referências, variações permitidas e direção de cenas. Preserva o cânone e apresenta candidatos para decisão do usuário.\n\nUsa imagens/edições integradas do ChatGPT/Codex como padrão quando disponíveis, sem exigir Higgsfield, AI Influencer Builder, CLI externa ou chave de API. Respeita um método explícito do usuário. Explora personalidade e uma cena que expresse a premissa; depois desenvolve referências coerentes a partir da escolha visual do usuário. Anexar realmente referências exatas às chamadas posteriores; mencionar caminhos é insuficiente. Confere anatomia, presença e continuidade entre ângulos/cenas com Têmis; canon falante completo também exige referência vocal gerada, escutada e selecionada.\n\nLeia `CONSTITUTION.md` e `docs/studio-team.md` a partir da raiz do projeto. Receba o pacote de tarefa com personagem, versão/hash do cânone, entradas, entregas e pendências. Exerça julgamento independente e explique divergências relevantes.\n\nEste perfil orienta o Codex; não cria uma agente em execução. Só registre delegação quando houver identificador e evento de uma subagente real. Entregue arquivos e evidências do que ocorreu, sem transformar preparação em geração ou parecer em aprovação humana.\n"
     },
     "content-trends": {
       "title": "Tendências e ideias de conteúdo",
@@ -74,11 +76,11 @@
     },
     "production": {
       "title": "Produção audiovisual",
-      "markdown": "# Selene — Produção audiovisual\n\nVersão 0.2.0. ID de papel: `production`. Nome interno, separado do personagem público.\n\nConfere capacidades, prepara entradas, executa apenas com ferramentas e autorização disponíveis e registra saídas reais. Este runtime não executa geração.\n\nLeia `CONSTITUTION.md` e `docs/studio-team.md` a partir da raiz do projeto. Receba o pacote de tarefa com personagem, versão/hash do cânone, entradas, entregas e pendências. Exerça julgamento independente e explique divergências relevantes.\n\nEste perfil orienta o Codex; não cria uma agente em execução. Só registre delegação quando houver identificador e evento de uma subagente real. Entregue arquivos e evidências do que ocorreu, sem transformar preparação em geração ou parecer em aprovação humana.\n"
+      "markdown": "# Selene — Produção audiovisual\n\nVersão 0.2.0. ID de papel: `production`. Nome interno, separado do personagem público.\n\nConfere capacidades, prepara entradas, executa apenas com ferramentas e autorização disponíveis e registra saídas reais. Este runtime não executa geração.\n\nUsa imagens/edições integradas do ChatGPT/Codex como padrão quando disponíveis, salvo escolha explícita de outro método pelo usuário. Higgsfield continua opcional para capacidades úteis verificadas; voz, animação, vídeo e lip-sync usam ferramentas adequadas a necessidade, qualidade e custo conhecido. Anexar realmente referências exatas selecionadas e registrar método/ferramenta/modelo quando exposto, prompts, arquivos/hashes, custos e limitações por etapa. Limites da conta e disponibilidade da ferramenta se aplicam; não chamar a geração integrada de gratuita ou ilimitada. Capacidade ausente mantém a etapa pendente com alternativas, e geração externa cobrada exige autorização aplicável. Preparar, escutar e selecionar voz em rascunho/referência para personagens falantes antes da aprovação completa do canon e depois realizar piloto antes de lotes.\n\nLeia `CONSTITUTION.md` e `docs/studio-team.md` a partir da raiz do projeto. Receba o pacote de tarefa com personagem, versão/hash do cânone, entradas, entregas e pendências. Exerça julgamento independente e explique divergências relevantes.\n\nEste perfil orienta o Codex; não cria uma agente em execução. Só registre delegação quando houver identificador e evento de uma subagente real. Entregue arquivos e evidências do que ocorreu, sem transformar preparação em geração ou parecer em aprovação humana.\n"
     },
     "qa": {
       "title": "Qualidade e continuidade",
-      "markdown": "# Têmis — Qualidade e continuidade\n\nVersão 0.2.0. ID de papel: `qa`. Nome interno, separado do personagem público.\n\nCompara mídia e referências, registra método, regiões ou trechos e limitações. Falha crítica ou inspeção inacessível mantém pendência.\n\nLeia `CONSTITUTION.md` e `docs/studio-team.md` a partir da raiz do projeto. Receba o pacote de tarefa com personagem, versão/hash do cânone, entradas, entregas e pendências. Exerça julgamento independente e explique divergências relevantes.\n\nEste perfil orienta o Codex; não cria uma agente em execução. Só registre delegação quando houver identificador e evento de uma subagente real. Entregue arquivos e evidências do que ocorreu, sem transformar preparação em geração ou parecer em aprovação humana.\n"
+      "markdown": "# Têmis — Qualidade e continuidade\n\nVersão 0.2.0. ID de papel: `qa`. Nome interno, separado do personagem público.\n\nCompara mídia e referências, registra método, regiões ou trechos e limitações. Falha crítica ou inspeção inacessível mantém pendência.\n\nConfere anatomia, presença expressiva e premissa, depois continuidade de identidade entre ângulos e cenas independentemente do fornecedor. Confirma referências visuais exatas e, para personagens falantes, referência vocal em rascunho gerada/escutada/selecionada antes da aprovação completa do canon. Revisa piloto e mídia final completos, incluindo escuta do áudio e todo movimento/áudio do vídeo quando aplicável, antes de lotes/exportação. Disponibilidade da ferramenta, saída gerada e hashes não comprovam qualidade ou aprovação do usuário.\n\nLeia `CONSTITUTION.md` e `docs/studio-team.md` a partir da raiz do projeto. Receba o pacote de tarefa com personagem, versão/hash do cânone, entradas, entregas e pendências. Exerça julgamento independente e explique divergências relevantes.\n\nEste perfil orienta o Codex; não cria uma agente em execução. Só registre delegação quando houver identificador e evento de uma subagente real. Entregue arquivos e evidências do que ocorreu, sem transformar preparação em geração ou parecer em aprovação humana.\n"
     },
     "growth": {
       "title": "Crescimento e parcerias",
@@ -97,6 +99,7 @@
       "name": "Propor persona e briefing",
       "criteria": [
         "Documento real preparado e registrado",
+        "Descoberta adaptativa reutiliza respostas fornecidas; direção aberta produz conceitos originais distintos com personalidade, premissa narrativa e recomendação fundamentada antes da exploração visual",
         "Hipóteses e limitações identificadas"
       ]
     },
@@ -112,11 +115,13 @@
       "criteria": [
         "Documento real preparado e registrado",
         "Direções exploratórias solicitadas são comparáveis, originais e visualmente distintas, cada uma com âncora de reconhecimento e hipótese de conteúdo compartilhável; viralização não é garantida",
-        "Criação de novos influenciadores planeja a sequência completa pelo Higgsfield com AI Influencer Builder, salvo escolha explícita de outro método pelo usuário",
+        "Planejar criação visual com geração/edição integrada de imagens do ChatGPT/Codex como padrão quando disponível, sem exigir Higgsfield, AI Influencer Builder, CLI externa ou chave de API; respeitar escolha explícita do usuário por método ou fornecedor",
         "Preservar o método de produção solicitado pelo usuário, incluindo o fluxo de uma referência quando sua adoção foi solicitada",
-        "Plano de método salvo distingue provedor, módulo, rota de acesso e modelo quando exposto, com evidências da fonte e etapas exigidas de identidade/referências",
+        "Plano de método salvo identifica método, ferramenta, fornecedor/módulo/rota de acesso quando aplicável e modelo quando exposto por etapa, com evidências da fonte e etapas exigidas de identidade/referências; Higgsfield é opcional para capacidades úteis verificadas",
         "Plano de método registrado como entrada do run ou saída de planejamento com caminho e SHA-256",
-        "Capacidades, hipóteses, custos e autorização aplicável identificados; etapas exigidas indisponíveis permanecem pendentes",
+        "Planejar exploração visual expressiva, escolha do usuário, referências coerentes realmente anexadas às gerações seguintes e uma cena da personagem que expresse a premissa",
+        "Planejar inspeção de anatomia, presença e continuidade entre ângulos/cenas, com geração, escuta e seleção vocal antes da aprovação completa do canon para personagens falantes",
+        "Capacidades, hipóteses, custos conhecidos, limites da conta e autorização aplicável identificados; etapas indisponíveis permanecem pendentes com alternativas propostas, e geração externa cobrada exige autorização aplicável",
         "Sem substituição silenciosa de método ou omissão de etapas; preservar qualquer identidade e referências já aprovadas"
       ]
     },
@@ -126,8 +131,11 @@
         "Arquivo de mídia existente, tipo e SHA-256 registrados",
         "Evento de geração declarado com ferramenta, responsável e data",
         "Preservar conceito original selecionado, personalidade, âncoras de reconhecimento e grau de realismo ou estilização escolhido",
-        "Criação de novos influenciadores usa a etapa planejada Higgsfield AI Influencer Builder, salvo escolha explícita de outro método pelo usuário; recurso obrigatório ausente permanece pendente",
-        "Execução segue o plano de método observado e registra provedor, módulo, rota de acesso, modelo exposto e referências realmente usados",
+        "Usar imagens integradas do ChatGPT/Codex como padrão quando disponíveis ou o método explícito escolhido pelo usuário; Higgsfield e AI Influencer Builder são opcionais, e capacidade indisponível fica pendente com alternativas propostas",
+        "Execução segue o plano de método observado por etapa e registra método, ferramenta real, fornecedor/módulo/rota de acesso quando aplicável, modelo exposto, prompts, arquivos exatos de entrada/saída e hashes, custos conhecidos e limitações",
+        "Candidatas e uma cena da personagem expressam personalidade e premissa selecionadas; referências coerentes são desenvolvidas após a escolha visual do usuário",
+        "Arquivos de referência são realmente anexados às chamadas posteriores de geração/edição e registrados com seus hashes; mencionar caminhos no prompt não os anexa",
+        "Geração integrada depende dos limites da conta e disponibilidade da ferramenta; não descrevê-la como gratuita ou ilimitada, e geração externa cobrada exige autorização aplicável",
         "Etapas exigidas de identidade/referências têm evidências reais; etapas indisponíveis permanecem pendentes sem substituição ou omissão silenciosa",
         "Preservar qualquer identidade e referências já aprovadas; alterar um método solicitado exige decisão explícita do usuário e novo planejamento registrado",
         "Não aprova identidade nem publica"
@@ -137,6 +145,8 @@
       "name": "Inspecionar os candidatos reais",
       "criteria": [
         "Inspeção declarada do arquivo exato com hash e método",
+        "Inspecionar anatomia, personalidade/presença, a cena que expressa a premissa e continuidade de identidade entre ângulos e cenas de referência",
+        "Registrar escolha visual do usuário e referências exatas selecionadas; para personagens falantes, gerar, escutar e selecionar mídia vocal em rascunho/referência antes da aprovação completa do canon",
         "Sem falhas críticas ou limitações pendentes",
         "Parecer não comprova automaticamente inspeção humana"
       ]
@@ -145,6 +155,9 @@
       "name": "Registrar decisão humana do cânone",
       "criteria": [
         "Decisão explícita com revisor, data e evento",
+        "Decisão do usuário identifica referências visuais, arquivos e hashes exatos selecionados após revisão de anatomia, presença e continuidade",
+        "Para personagens falantes, a amostra vocal em rascunho/referência foi gerada, escutada e selecionada antes da aprovação completa do canon visual/vocal; escopo sem fala registra voz como não aplicável",
+        "Preservar versão e snapshot do canon aprovado; identidade ou voz alterada exige o procedimento existente de versão e aprovação",
         "O runtime registra a declaração; não comprova que o revisor é humano"
       ]
     },
@@ -160,7 +173,7 @@
       "criteria": [
         "Documento real preparado e registrado",
         "Preservar o método de produção solicitado pelo usuário, incluindo o fluxo de uma referência quando sua adoção foi solicitada",
-        "Roteiro e cenas identificam as etapas exigidas de personagem, referências, voz e vídeo no plano de método salvo, sem inventar capacidades indisponíveis",
+        "Roteiro e cenas identificam as etapas de personagem, referências, voz e vídeo exigidas pela mídia pretendida no plano de método salvo, sem inventar capacidades indisponíveis",
         "Plano de método registrado como entrada do run ou saída de planejamento com caminho e SHA-256",
         "Hipóteses, custos e autorização aplicável identificados; etapas exigidas indisponíveis permanecem pendentes",
         "Sem substituição silenciosa de método ou omissão de etapas; preservar identidade e referências aprovadas"
@@ -171,9 +184,10 @@
       "criteria": [
         "Documento real preparado e registrado",
         "Direção visual segue método de produção salvo, conceito original selecionado, âncoras de reconhecimento e arquivos aprovados de identidade/referências",
-        "Plano de método distingue provedor, módulo, rota de acesso e modelo quando exposto, com capacidades verificadas para a rota selecionada",
+        "Plano de método identifica método/ferramenta por etapa, fornecedor/módulo/rota de acesso quando aplicável e modelo quando exposto; imagens/edições integradas são o padrão disponível, escolhas explícitas do usuário prevalecem e ferramentas especializadas incluindo Higgsfield são opcionais",
         "Plano de método registrado como entrada do run ou saída de planejamento com caminho e SHA-256",
-        "Hipóteses e limitações identificadas; etapas exigidas indisponíveis permanecem pendentes",
+        "Referências visuais exatas aprovadas são planejadas como anexos reais; voz, animação, vídeo e lip-sync usam capacidades verificadas adequadas a necessidade, qualidade e custo conhecido",
+        "Hipóteses, custos conhecidos e limitações identificados; etapas exigidas indisponíveis ficam pendentes com alternativas, e geração externa cobrada exige autorização aplicável",
         "Sem substituição silenciosa de método ou omissão de etapas; alterar um método solicitado exige decisão explícita do usuário e novo planejamento registrado"
       ]
     },
@@ -183,9 +197,12 @@
         "Arquivo de mídia existente, tipo e SHA-256 registrados",
         "Evento de geração declarado com ferramenta, responsável e data",
         "Preservar conceito original selecionado, personalidade, âncoras de reconhecimento e grau de realismo ou estilização escolhido",
-        "Execução segue o plano de método observado e registra provedor, módulo, rota de acesso, modelo exposto e referências realmente usados",
+        "Execução segue o plano de método observado por etapa e registra método, ferramenta real, fornecedor/módulo/rota de acesso quando aplicável, modelo exposto, prompts, arquivos exatos de entrada/saída e hashes, custos conhecidos e limitações",
+        "Imagens e edições visuais usam geração integrada do ChatGPT/Codex como padrão quando disponível ou o método explícito do usuário; mídias especializadas usam ferramentas verificadas incluindo Higgsfield opcional com autorização aplicável",
+        "Referências exatas aprovadas são realmente anexadas às chamadas de geração/edição e registradas; mencionar caminhos no prompt não os anexa",
         "Etapas exigidas de personagem, referências, voz e vídeo têm evidências reais; etapas indisponíveis permanecem pendentes sem substituição ou omissão silenciosa",
         "Preservar identidade e referências aprovadas; alterar um método solicitado exige decisão explícita do usuário e novo planejamento registrado",
+        "Um piloto com canon visual/vocal exato aprovado precede lotes; preservar mídias e tentativas históricas quando o contexto mudar",
         "Não aprova identidade nem publica"
       ]
     },
@@ -193,6 +210,8 @@
       "name": "Inspecionar a mídia completa",
       "criteria": [
         "Inspeção declarada do arquivo exato com hash e método",
+        "Inspecionar mídia completa em relação às referências visuais/vocais exatas aprovadas e ao contexto selado, incluindo anatomia, presença, continuidade, escuta do áudio e visualização de todo movimento/áudio do vídeo quando aplicável",
+        "Inspecionar piloto antes de lotes; escolha de fornecedor, geração bem-sucedida e hashes nunca substituem revisão de qualidade ou aprovação do usuário",
         "Sem falhas críticas ou limitações pendentes",
         "Parecer não comprova automaticamente inspeção humana"
       ]
@@ -215,6 +234,7 @@
       "name": "Entregar arquivos revisados",
       "criteria": [
         "Arquivos entregues coincidem com a mídia revisada",
+        "Exportar bytes reais da mídia revisada com arquivos e hashes exatos; publicação exige autorização aplicável e evidência de publicação real",
         "Entrega não significa publicação"
       ]
     }

@@ -2,7 +2,7 @@
 
 Copie este template para uma nova versão no estúdio instalado, como `influencers/<slug>/work/production-method-v001.md`. Na descoberta antes de existir personagem, use um arquivo local de planejamento em `work/`. Registre o arquivo real como entrada da run ou saída de planejamento. Não sobrescreva uma versão rastreada; um método alterado usa uma nova versão e o procedimento existente de nova tentativa explícita. Este é um documento de planejamento por conversa, não um novo schema do runtime ou adaptador de fornecedor.
 
-Para novos influenciadores, começar pelo método principal **Higgsfield AI Influencer Builder** e sua sequência completa abaixo, salvo se o usuário escolher explicitamente uma alternativa. Falta de recurso mantém a etapa obrigatória pendente; não seleciona imagens do Codex, vídeo direto no Kling nem outro fornecedor. Personagens existentes preservam o canon aprovado e reutilizam evidência compatível de etapas concluídas em vez de reiniciar a criação de identidade.
+Conceito, personalidade, narrativa, roteiros e planejamento ficam no ChatGPT/Codex. Para novos influenciadores, iniciar aparência, candidatas, referências, cenários, imagens e edições visuais com **geração/edição integrada de imagens do ChatGPT/Codex** quando disponível, salvo escolha explícita do usuário por outro método/fornecedor. Ela não exige Higgsfield/AI Influencer Builder, CLI externa nem chave de API. Selecionar ferramentas verificadas de voz, animação, vídeo, lip-sync e necessidades especializadas por etapa conforme necessidade, qualidade e custo conhecido; Higgsfield é opcional. Falta de recurso mantém a etapa pendente com alternativas propostas; troca para geração externa cobrada exige autorização aplicável. Personagens existentes preservam o canon aprovado e reutilizam evidência compatível de etapas concluídas em vez de reiniciar a criação de identidade.
 
 ## Pedido e descoberta
 
@@ -20,35 +20,39 @@ Para novos influenciadores, começar pelo método principal **Higgsfield AI Infl
 
 ## Método da referência e seleção de ferramentas
 
+Siga [criação visual integrada](../../../docs/locales/pt-BR/integrated-images.md) nas etapas visuais padrão. Use o [método opcional do Higgsfield](../../../docs/locales/pt-BR/higgsfield-influencer-method.md) somente nas etapas de integração selecionadas ou método explícito do usuário, sem substituir a sequência criativa/de qualidade.
+
 - Requisito de método do usuário e sua fonte:
 - URL/arquivo de referência e trechos inspecionados:
 - Cobertura e limites da evidência (revisão real de movimento/áudio, análise de cenas pelo fornecedor, frames com timestamps, transcrição ou não verificado):
 - Etapas comprovadas na fonte / etapas ainda incertas:
-- Mapeamento atual dessas etapas escolhido pelo usuário, distinto dos nomes de módulos observados na fonte:
-- Fornecedor:
-- Módulo(s), começando pelo AI Influencer Builder para criação nova no método principal:
-- Rota de acesso (plugin, CLI ou interface suportada):
+- Mapeamento atual do método por etapas e fonte de qualquer escolha explícita do usuário, distinto dos nomes de módulos observados na fonte:
+- Método e ferramenta real por etapa:
+- Fornecedor/módulo(s), quando aplicável; Higgsfield/Builder somente para etapas úteis selecionadas ou escolha explícita do usuário:
+- Rota de acesso (ferramenta integrada, plugin, CLI ou interface suportada):
 - Modelo/preset, quando exposto:
 - Desvios materiais e decisão real do usuário, se houver:
 
-Fornecedor, módulo, rota e modelo são escolhas distintas. Um vídeo gerado pelo Higgsfield/Kling não comprova uma etapa concluída no AI Influencer Builder. O mapeamento principal pelo Builder é o método escolhido do framework; não afirmar que era o módulo exclusivo em um vídeo externo quando as telas efetivamente inspecionadas mostram outros módulos. Uma referência sozinha não autoriza submeter mídia ou gastar créditos.
+Método, ferramenta, fornecedor, módulo, rota e modelo são escolhas distintas; registre por etapa sem inventar detalhes de modelos ocultos. Um vídeo gerado pelo Higgsfield/Kling não comprova uma etapa concluída no AI Influencer Builder quando esse fluxo opcional foi escolhido. Não transformar adaptação de uma fonte em evidência de módulos não observados nela. Uma referência sozinha não autoriza submeter mídia ou gastar créditos. A geração integrada depende de limites da conta e disponibilidade da ferramenta; não descrevê-la como gratuita ou ilimitada.
 
 ## Mapa das etapas
 
-Manter a sequência completa do método principal para novos influenciadores. Registrar qualquer mudança explícita de objetivo/método que torne uma etapa inaplicável; ferramentas indisponíveis, ausência de autorização ou métricas deixam a etapa pendente em vez de omitida. Treinamento continua opcional. Identificar dependências, arquivos/hashes ou IDs reais do fornecedor e evidência efetiva. Reutilizar uma etapa concluída somente quando suas evidências e entradas forem compatíveis com o método escolhido.
+Para vídeo, siga os [pontos de verificação do Codex ao vídeo](../../../docs/locales/pt-BR/production-handoff.md) e salve um [pacote de passagem para vídeo](video-handoff.md) com prontidão, responsáveis e mapa de submissão por plano. Separe a biblioteca rica inspecionada do subconjunto de entradas realmente suportado por ferramenta.
+
+Manter a sequência criativa/de qualidade completa para novos influenciadores e identificar quais mídias o objetivo exige. Registrar qualquer escolha explícita de objetivo/método que torne uma etapa inaplicável; ferramentas indisponíveis, ausência de autorização ou métricas deixam uma etapa exigida pendente em vez de omitida. Treinamento continua opcional. Identificar dependências, arquivos/hashes ou IDs reais do fornecedor e evidência efetiva. Reutilizar uma etapa concluída somente quando suas evidências e entradas forem compatíveis com o método escolhido. Anexar realmente as referências exatas selecionadas às chamadas posteriores de geração/edição; caminhos no prompt não são anexos.
 
 | Etapa | Obrigatória / motivo | Ferramenta/módulo e recurso verificado | Entradas exatas e dependências | Saída esperada / evidência de conclusão | Estado real / pendências |
 | --- | --- | --- | --- | --- | --- |
 | Conceito e direção | | | | | |
-| Amostra de exploração no Builder, retorno e ficha de personagem | Obrigatória para criação nova no método principal | | | | |
+| Candidatas visuais expressivas, retorno e referências da personagem | Imagens integradas como padrão quando disponíveis; respeitar escolha explícita de método | | | | |
 | Pacote de referências e cena em personagem | | | | | |
-| Seleção visual inicial e revisão de fidelidade | Nova persona continua em draft até selecionar as referências vocais necessárias | | | | |
+| Escolha visual do usuário e revisão de anatomia/presença/continuidade | Inspecionar referências coerentes entre ângulos/cenas; nova persona continua em draft até selecionar as referências vocais necessárias | | | | |
 | Rascunhos de roteiro e texto da amostra vocal | Preparação pode ocorrer durante a exploração em rascunho/referência | | | | |
 | Amostra de voz em rascunho/referência, escuta e seleção | Antes do canon final para persona com fala; não aplicável ao escopo sem fala | | | | |
 | Aprovação final do canon visual/vocal e snapshot | Depois das escolhas visuais e vocais necessárias; reutilizar canon existente inalterado | | | | |
 | Soul ID ou outro treinamento, apenas quando justificado | Opcional; autorização aplicável separada | | | | |
 | Cenas e imagens de produção | Exige canon aprovado | | | | |
-| Piloto de vídeo, incluindo fala quando necessário | | | | | |
+| Piloto na mídia pretendida, vídeo/fala quando necessários | Canon exato aprovado; antes de lotes | | | | |
 | Edição e revisão completa da mídia | | | | | |
 | Exportação local e entrega | | | | | |
 | Publicação | Pendente até autorização aplicável e evidência real de publicação | | | | |
@@ -61,15 +65,18 @@ Para uma personagem nova com fala, preparar a amostra vocal com `purpose: refere
 ## Entradas, autorização e custos
 
 - Caminhos locais das referências, SHA-256, papel e versão:
+- Prompt e evidência de anexação exata de referências por etapa de geração/edição:
+- Arquivos reais de entrada/saída e hashes, ferramenta e modelo quando exposto por etapa:
 - IDs/URLs confirmados das entradas no fornecedor e evidência de transferência:
 - Autorizações anteriores que cobrem a ação:
 - Escolhas materiais ou autorizações pendentes:
 - Cotação por etapa, unidade, fonte/data e parâmetros exatos:
 - Limite de tentativas/lote e escopo total conhecido:
 - Cobranças desconhecidas ou estimativas indisponíveis:
+- Limites da conta/ferramenta integrada e capacidades indisponíveis; alternativas propostas:
 - Submissões não resolvidas e IDs dos jobs originais:
 
-Mantenha créditos do fornecedor separados do `cost` monetário do ativo; custo monetário desconhecido continua `null`. Uma cotação de vídeo não cobre fichas do Builder, voz ou treinamento. Inspecione jobs originais antes de repetir qualquer submissão.
+Mantenha créditos do fornecedor separados do `cost` monetário do ativo; custo monetário desconhecido continua `null`. Uma cotação de vídeo não cobre fichas opcionais do Builder, voz ou treinamento. Não inferir custo zero da disponibilidade integrada. Inspecione jobs originais antes de repetir qualquer submissão.
 
 ## Revisão e próximo repasse
 

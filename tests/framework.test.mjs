@@ -102,13 +102,13 @@ function changeApprovedIdentity(root, increment = false) {
   save(root, 'influencers/alpha/persona.json', p);
   return p;
 }
-function reachCanonApproval(root, run = begin(root, 'create-character')) {
+function reachCanonApproval(root, run = begin(root, 'create-character'), tool = 'fixture') {
   run = transitionRun(root, run.runId, { action: 'skip', reason: 'Research already applicable.' });
   run = document(root, run);
   run = transitionRun(root, run.runId, { action: 'skip', reason: 'Direction selected in this fixture.' });
   run = document(root, run);
   const output = save(root, 'influencers/alpha/media/candidate.png', 'Synthetic candidate bytes');
-  run = transitionRun(root, run.runId, { action: 'complete', outputs: [output], evidence: evidence('generated', { tool: 'fixture' }) });
+  run = transitionRun(root, run.runId, { action: 'complete', outputs: [output], evidence: evidence('generated', { tool }) });
   const report = save(root, 'influencers/alpha/work/candidate-review.md', 'Synthetic review');
   return transitionRun(root, run.runId, { action: 'complete', outputs: [report], evidence: evidence('reviewed', {
     reviewer: 'Fixture', method: 'visual', decision: 'approve', criticalIssues: [], limitations: [],
@@ -452,6 +452,61 @@ test('human gate cannot consume itself and requires an explicit event matching t
   const approval = { explicit: true, decision: 'approve', reviewer: 'Fixture', at, eventId: 'simulated-human-event', source: 'fixture', notes: 'Simulated declaration; reviewer does not prove humanity.', canonHash: canonHash(p), identityVersion: p.identityVersion };
   assert.throws(() => transitionRun(root, run.runId, { action: 'complete', approval: { ...approval, canonHash: 'a'.repeat(64) } }), /version\/hash/);
   assert.equal(transitionRun(root, run.runId, { action: 'complete', approval }).nextTask.taskId, 'prepare-piece');
+});
+
+test('a new character advances with integrated image capabilities alone while canon and pilot review remain required', () => {
+  const root = fixture(), p = person(root, 'alpha', false);
+  const method = save(root, 'influencers/alpha/work/method-v1.md', [
+    '# Synthetic stage plan',
+    'Visual candidates, references and image pilot: integrated ChatGPT/Codex images.',
+    'Only image-generation and image-inspection capabilities are declared; no provider connection or API key.',
+    'Silent scope: vocal reference is not applicable. Real speaking scope still needs generated, listened-to, selected voice before complete canon.',
+    'No real image tool, reference attachment, inspection or user decision is performed by this fixture.'
+  ].join('\n'));
+  const identityFiles = ['references/front.png', 'references/three-quarter.png'];
+  const hashes = identityFiles.map(file => digest(path.join(root, 'influencers/alpha', file)));
+  let run = reachCanonApproval(root, begin(root, 'create-character', { inputs: ['brief.md', method] }), 'synthetic-integrated-image-tool');
+  assert.deepEqual(run.run.capabilities, ['image-generation', 'image-inspection']);
+  assert.equal(run.canonBinding, null);
+  assert.equal(run.nextTask.taskId, 'approve-canon');
+  assert.equal(run.inputs.find(input => input.path === method).sha256, digest(path.join(root, method)));
+  for (const relative of ['tools/higgsfield', '.env', '.agents/skills/higgsfield-studio']) assert.equal(fs.existsSync(path.join(root, relative)), false);
+  assert.throws(() => transitionRun(root, run.runId, { action: 'skip', reason: 'Generation cannot replace identity selection.' }), /optional/);
+  assert.throws(() => transitionRun(root, run.runId, { action: 'complete', approval: canonDecision(p) }), /already recorded and approved canon/);
+  p.status = 'canon-approved';
+  p.approval = { reviewer: 'Fixture', at, notes: 'Synthetic silent-scope approval, no actual user decision.', canonHash: canonHash(p) };
+  save(root, 'influencers/alpha/persona.json', p);
+  run = transitionRun(root, run.runId, { action: 'complete', approval: canonDecision(p) });
+  snapshotCanon(p, path.join(root, 'influencers/alpha'));
+  run = document(root, run);
+  assert.equal(run.nextTask.taskId, 'generate-piece');
+  run = generate(root, run);
+  assert.equal(run.nextTask.taskId, 'review-media');
+  assert.throws(() => transitionRun(root, run.runId, { action: 'skip', reason: 'No batches before pilot inspection.' }), /optional/);
+  const pilot = run.run.attempts.at(-1).results.find(result => result.taskId === 'generate-piece').outputs;
+  assert.throws(() => review(root, run, { media: [{ ...pilot[0], sha256: 'a'.repeat(64) }] }), /hashes/);
+  run = review(root, run);
+  run = transitionRun(root, run.runId, { action: 'complete', outputs: pilot.map(item => item.path), evidence: evidence('delivered') });
+  assert.equal(run.state, 'completed');
+  assert.deepEqual(identityFiles.map(file => digest(path.join(root, 'influencers/alpha', file))), hashes);
+  assert.equal(validateRunRecord(run.run), true);
+});
+
+test('unavailable integrated image generation leaves new-character visuals pending without provider substitution', () => {
+  const root = fixture(); person(root, 'alpha', false);
+  let run = begin(root, 'create-character', { capabilities: ['image-inspection'] });
+  run = transitionRun(root, run.runId, { action: 'skip', reason: 'Synthetic brief already defines the direction.' });
+  run = document(root, run);
+  run = transitionRun(root, run.runId, { action: 'skip', reason: 'Synthetic concept already selected.' });
+  run = document(root, run);
+  assert.deepEqual(run.missingCapabilities, ['image-generation']);
+  const before = structuredClone(run.run.attempts.at(-1));
+  run = transitionRun(root, run.runId, { action: 'start' });
+  assert.equal(run.state, 'awaiting-tool');
+  assert.equal(run.nextTask.taskId, 'generate-candidates');
+  assert.equal(run.detail.note, 'No tool was called.');
+  assert.deepEqual(run.run.attempts.at(-1).results, before.results);
+  assert.equal(run.run.attempts.at(-1).job, null);
 });
 
 test('external intent persisted before submission prevents retry after interruption', () => {

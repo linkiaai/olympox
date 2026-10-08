@@ -25,6 +25,12 @@ Este projeto do Codex desenvolve e mantém **OLYMPOX - AI Influencer framework**
 
 ## Instalador, exportação e privacidade
 
+O padrão visual nos estúdios instalados é a geração integrada de imagens do ChatGPT/Codex quando disponível. Conceito, personalidade, universo narrativo, roteiros e planejamento continuam no ChatGPT/Codex. Aparência, candidatas, referências, cenários, imagens e edições dispensam Higgsfield, AI Influencer Builder, CLI externa e chave de API. Aplicam-se limites da conta e disponibilidade da ferramenta; nunca descreva esse caminho como gratuito ou ilimitado.
+
+Respeite métodos/fornecedores escolhidos explicitamente pelo usuário. Voz, animação, vídeo, sincronização labial e recursos especializados usam ferramentas verificadas conforme necessidade, qualidade e custo; Higgsfield continua opcional por etapa útil. Preserve descoberta, conceitos distintos, cenas expressivas da premissa, anexos reais de referência, inspeção de anatomia/presença/continuidade, seleção visual pelo usuário, escolha vocal após escuta antes do canon completo de personagens falantes, aprovação de referências exatas, preservação do canon e piloto antes de lotes.
+
+Registre método por etapa, ferramenta, modelo exposto, prompts, referências reais, arquivos/hashes, custos conhecidos e limitações. Recursos ausentes mantêm uma etapa pendente com alternativas propostas; geração externa paga exige autorização aplicável. Revise mídias completas e exporte bytes reais antes da publicação autorizada. Mudanças de contexto usam o procedimento existente de nova tentativa explícita sem migrar personagens aprovadas nem reescrever evidências antigas.
+
 - Distribua somente fontes reutilizáveis do framework, templates, skills, testes, proveniência permitida de fontes dos fornecedores e documentação. Mantenha fichas pessoais, mídia, prompts, runs, estado de manutenção, backups, credenciais, binários de fornecedores, arquivos temporários e o manual gerado fora do Git e do pacote de instalação.
 - Mantenha seleção explícita das fontes do pacote e do instalador. Confira a lista de exportação e a árvore instalada; `.gitignore` sozinho não comprova privacidade do pacote.
 - Uma instalação nova precisa preservar os metadados Git existentes permitidos. O merge precisa conferir todos os arquivos de destino antes de escrever, manter arquivos idênticos, recusar conflitos e preservar arquivos locais não relacionados. Recuse caminhos inseguros, links e junções.

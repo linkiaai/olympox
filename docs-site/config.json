@@ -103,6 +103,20 @@
       }
     },
     {
+      "path": "docs/integrated-images.md",
+      "label": "Integrated visual creation",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/integrated-images.md"
+      }
+    },
+    {
+      "path": "docs/production-handoff.md",
+      "label": "From Codex to a video pilot",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/production-handoff.md"
+      }
+    },
+    {
       "path": "docs/higgsfield-plugin.md",
       "label": "Higgsfield plugin",
       "translations": {
@@ -111,7 +125,7 @@
     },
     {
       "path": "docs/higgsfield-influencer-method.md",
-      "label": "Higgsfield influencer method",
+      "label": "Optional Higgsfield influencer method",
       "translations": {
         "pt-BR": "docs/locales/pt-BR/higgsfield-influencer-method.md"
       }

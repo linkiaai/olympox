@@ -1,4 +1,4 @@
 interface:
   display_name: "Higgsfield no Estúdio"
-  short_description: "Plugin ou CLI, com produção rastreável"
-  default_prompt: "Use $higgsfield-studio para preparar a integração e o piloto com Higgsfield neste projeto."
+  short_description: "Etapas opcionais no Higgsfield com produção rastreável"
+  default_prompt: "Use $higgsfield-studio para preparar as etapas opcionais escolhidas para Higgsfield e o piloto neste projeto, verificando recursos, referências exatas, custo e autorização aplicável."

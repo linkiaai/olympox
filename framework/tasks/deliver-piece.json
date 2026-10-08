@@ -12,6 +12,7 @@
   "minimumOutputs": 1,
   "criteria": [
     "Delivered files match the reviewed media",
+    "Export the actual reviewed media bytes with exact files and hashes; publication requires applicable authorization and evidence of actual publication",
     "Delivery does not mean publication"
   ]
 }

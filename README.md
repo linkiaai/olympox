@@ -1,6 +1,6 @@
 # OLYMPOX - AI Influencer framework
 
-Framework release **0.3.0** — **October 8, 2026**. Read the [release notes](docs/release-notes.md) and [upgrade guidance](docs/installation.md#upgrade-an-existing-studio) before updating an existing studio. The local core and task component revision remain 0.2.0, with clarified production criteria.
+Framework release **0.4.0** — **October 8, 2026**. Read the [release notes](docs/release-notes.md) and [upgrade guidance](docs/installation.md#upgrade-an-existing-studio) before updating an existing studio. The local core and task component revision remain 0.2.0, with clarified production criteria.
 
 OLYMPOX is a local framework for creating memorable original AI influencers with testable viral potential, coordinated by Atena and a team of goddess-named specialists. Codex connects the character's visual signature, personality, audience, recurring content, voice, and performance. Each influencer has an individual identity and history; virality is a hypothesis to test, never a promised result.
 
@@ -13,7 +13,7 @@ This repository and its Codex project are dedicated to framework development and
 Requires **Node 22 or later** and **Codex**. Install from GitHub:
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.3.0 install ./my-studio
+npx --yes github:linkiaai/olympox#v0.4.0 install ./my-studio
 cd my-studio
 npm run verify
 npm run studio -- help
@@ -58,14 +58,16 @@ For research:
 
 For a new character, Atena starts a short [onboarding conversation](docs/strategy.md), reuses your answers, and proposes three distinct concepts with a recommendation. Choose the goal, such as viral entertainment, a recurring presenter, or a brand role, and the desired character style; "please propose" is valid. The [brief](templates/brief.md) records choices without becoming a mandatory questionnaire. The default creative direction is varied, memorable realism with strong personality and presence; another style remains your choice.
 
-The main new-influencer method uses **Higgsfield AI Influencer Builder**, followed by references, voice when needed, scripts, scenes, video, and review. Follow the [complete method](docs/higgsfield-influencer-method.md), using the [Codex plugin](docs/higgsfield-plugin.md) or another verified route that actually exposes the required operations. The plugin needs no local CLI. External access remains separately configured and the local core remains usable without it; missing required capabilities keep production pending. A different method requires an explicit user choice. Integrated Codex images remain available for tasks that select them. Installation never connects providers or executes production.
+Concept, personality, narrative world, scripts, and planning stay in ChatGPT/Codex. **Integrated ChatGPT/Codex image generation** is the default for appearance, candidates, references, settings, images, and edits when available. Follow [integrated visual creation](docs/integrated-images.md); it requires no Higgsfield, AI Influencer Builder, external CLI, or API key. Availability and account limits apply; do not describe it as free or unlimited. Respect an explicit user-selected method/provider. Voice, animation, video, lip-sync, and specialized work use verified tools according to need, quality, and cost; Higgsfield remains an [optional integration](docs/higgsfield-plugin.md), with its [Builder method](docs/higgsfield-influencer-method.md) available when selected. Missing capabilities leave the stage pending with proposed alternatives; paid external generation requires applicable authorization. Installation never connects providers or executes production.
 
 ## Method
 
+Follow the [Codex-to-video checkpoints](docs/production-handoff.md) for the recommended procedure: prepare identity, exact voice when speaking, scripts and inspected scene images, then pass the supported inputs to a verified video tool. Save the [handoff package](templates/video-handoff.md) with readiness, next owner/action and a submission map per scene; Higgsfield is an optional destination. One inspected pilot precedes batches.
+
 1. Short onboarding, audience/opportunity, and three distinctive character concepts with recurring hooks.
 2. Select a concept and save the [production-method plan](templates/production-method.md), including source evidence, modules, capabilities, stages, and cost scopes.
-3. Explore visual identity through AI Influencer Builder, coherent references and an in-character scene. For a speaking character, prepare and review a vocal sample during draft/reference work; then approve the complete exact visual/vocal canon before production.
-4. Develop scripts, scenes and a small video pilot through verified Higgsfield tools using the approved identity/voice. Evaluate training only when justified.
+3. Explore visual identity with integrated generation by default, coherent references and an expressive scene communicating the premise. Let the user select the candidate, attach real references to subsequent generations, and inspect anatomy, presence, and continuity across angles/scenes. For a speaking character, prepare and review a vocal sample during draft/reference work; then approve the complete exact visual/vocal canon before production.
+4. Develop scripts and scenes in ChatGPT/Codex, then a small pilot with verified tools suited to the medium, need, quality, and cost, using the approved identity/voice. Evaluate training only when justified.
 5. Review the complete media and export its actual bytes before expanding into content batches.
 6. Publish with applicable authorization, compare real results across suitable windows, and adjust the hypothesis without prematurely discarding concepts.
 
@@ -96,8 +98,8 @@ Read [operations](docs/operations.md) for references, hashes, and the manifest. 
 | Character records, prompts, and logs | Local scripts and templates for your own influencers |
 | Coordination and history 0.2 | Registry, contracts, resumable tasks, snapshots, and local editorial records |
 | Character backups | File and linked-task inventory, verification, and restore testing |
-| Integrated images | Available only when the Codex session provides generation and inspection tools |
-| Higgsfield plugin or CLI | Separately configured access for the main new-influencer method; check the selected route's available tools, account access, and costs |
+| Integrated images | Default visual route when generation and inspection tools are available; subject to account limits |
+| Higgsfield plugin or CLI | Optional access selected per useful stage or explicit method choice; check the selected route's available tools, account access, and costs |
 | Identity and pilot | Your own candidate exploration, explicit canon approval, and inspected pilot before batches |
 
 Profiles are instructions, and local packages do not dispatch agents. Commands maintain records and integrity; generation, inspection, paid services, and publication need the tools and authorizations applicable to your studio. Tests do not demonstrate visual identity, voice quality, or provider execution. Plugin availability alone does not demonstrate voice, Soul ID, downloadable media, export, or equivalent CLI billing. Read [framework status](docs/studio-status.md), [Higgsfield plugin](docs/higgsfield-plugin.md), and [optional CLI setup](docs/higgsfield-setup.md).

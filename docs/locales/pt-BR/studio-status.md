@@ -35,7 +35,7 @@ Verificações estruturais não inspecionam pixels, escutam vozes, visualizam mo
 
 O Codex usa as ferramentas de geração, inspeção, pesquisa web e subagentes realmente disponíveis na sessão atual. Skills instaladas não criam acesso a ferramentas nem demonstram nova descoberta pelo Codex. Reabra ou recarregue o projeto quando necessário.
 
-A criação de novos influenciadores segue por padrão o [método completo Higgsfield](higgsfield-influencer-method.md) com AI Influencer Builder, salvo escolha explícita de outro método. Onboarding curto e três conceitos distintos precedem a geração; realismo memorável com personalidade/presença fortes é a direção criativa padrão. Cânone existente fica preservado. São instruções de skills/tarefas; hashes observam planos salvos, mas o núcleo não impõe sua completude semântica nem despacha fornecedores automaticamente.
+A criação de novos influenciadores usa [criação visual integrada do ChatGPT/Codex](integrated-images.md) por padrão quando disponível, sujeita à disponibilidade da ferramenta e limites da conta, sem exigir Higgsfield, Builder, CLI externa ou chave de API. Respeite escolha explícita de método/fornecedor. Onboarding adaptativo curto e conceitos distintos antecedem geração; cenas expressivas de personalidade/premissa e referências coerentes inspecionadas preservam a direção criativa. Personagens falantes exigem referência vocal gerada, ouvida e selecionada pelo usuário antes da aprovação do canon completo. Aprovações exatas, preservação do canon, piloto antes de lotes, revisão completa de mídia, exportação e publicação autorizada continuam exigidos. Ferramentas especializadas, incluindo Higgsfield, são escolhidas por etapa útil conforme necessidade, qualidade e custo. Canon existente fica preservado. São instruções de skills/tarefas; hashes observam planos salvos, mas o núcleo não impõe completude semântica nem despacha fornecedores automaticamente.
 
 Acesso ao fornecedor continua preparado separadamente: o [plugin do Codex](higgsfield-plugin.md) dispensa CLI local; a [CLI e wrapper locais](higgsfield-setup.md) são outra rota, cujos recursos exigidos devem ser conferidos. O pacote inclui orientações, wrapper e proveniência permitida de fontes do fornecedor. A instalação nunca instala/conecta fornecedores externos. O núcleo funciona sem eles; recursos obrigatórios de produção ausentes ficam pendentes em vez de trocar de método silenciosamente.
 
@@ -47,7 +47,7 @@ O núcleo não submete ou consulta jobs externos automaticamente, repete submiss
 
 1. Defina público, proposta editorial e uma persona adulta original.
 2. Explore referências candidatas reais e escolha a identidade explicitamente.
-3. Registre os arquivos aprovados e hashes exatos e preserve o cânone.
+3. Para personagens falantes, gere, ouça e selecione a referência vocal exata antes de aprovar o canon visual/vocal completo; registre arquivos e hashes exatos e preserve o canon. Para conteúdo silencioso, registre por que voz não se aplica.
 4. Prepare narrativa e uma peça concreta; execute um pequeno piloto com ferramentas disponíveis.
 5. Inspecione a mídia completa e corrija falhas críticas em novas versões antes de lotes.
 

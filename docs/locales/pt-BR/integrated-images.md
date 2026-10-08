@@ -1,0 +1,27 @@
+# Criação visual integrada
+
+A geração integrada de imagens do ChatGPT/Codex é o padrão para aparência, candidatas, referências, cenários, imagens e edições de novas personagens quando a sessão a oferece. Conceito, personalidade, universo narrativo, roteiros e planejamento continuam no ChatGPT/Codex. Esse caminho visual dispensa Higgsfield, AI Influencer Builder, CLI externa e chave de API. Aplicam-se disponibilidade e limites da conta; não o descreva como gratuito ou ilimitado. Uma escolha explícita de método ou fornecedor pelo usuário tem prioridade.
+
+## Do conceito às referências
+
+1. Siga a [descoberta adaptativa](strategy.md), reutilizando respostas fornecidas. Quando a direção estiver aberta, proponha três conceitos distintos com assinaturas visuais, personalidade, histórias recorrentes e uma recomendação. Um brief completo dispensa descoberta já resolvida.
+2. Salve um [plano versionado do método de produção](../../../templates/locales/pt-BR/production-method.md). Selecione o método por etapa e confira capacidades reais de geração, anexo, inspeção e exportação na sessão. Prepare prompts e registre etapas ausentes quando um recurso estiver indisponível; proponha alternativas. Uma troca para geração externa paga exige autorização aplicável.
+3. Gere uma candidata expressiva em uma cena que comunique a personalidade e a premissa escolhidas. Especifique idade, silhueta, estilo, expressão, atuação, cenário e ação narrativa. Um retrato neutro sozinho não demonstra presença nem o conceito. Inspecione o resultado e preserve tentativas rejeitadas com evidências úteis.
+4. O usuário seleciona a candidata visual. Desenvolva referências neutras de frente, três quartos, perfil e corpo inteiro conforme necessário, com arquivos individuais legíveis para ângulos utilizáveis, além de uma cena da personagem em ação. Inspecione anatomia, presença, reconhecimento, proporções e continuidade entre ângulos/cenas; correções produzem novas versões.
+5. Inspecione imagens de referência selecionadas antes de reutilizar e anexe seus bytes reais pelo mecanismo de referência suportado pela ferramenta. Nome/caminho citado no prompt não é anexo. Se a ferramenta aceita caminhos locais de referência, use os arquivos inspecionados na entrada de referência; caso contrário, use anexos da conversa ou transferências suportadas. Registre arquivos/hashes realmente anexados e IDs de entrada expostos. Se as referências exatas não puderem ser anexadas, mantenha aquela geração pendente sem afirmar continuidade.
+
+## Voz, canon e piloto
+
+Na transição para vídeo, siga [Da preparação no Codex ao piloto de vídeo](production-handoff.md): prepare personagem e imagens de cena inspecionadas no Codex, salve biblioteca rica coerente e mapeie somente entradas exatas suportadas por chamada especializada de vídeo. Voz pode precisar de ferramenta especializada antes. Pacote preparado e pacote pronto para submissão são pontos de verificação distintos.
+
+Seleção visual preliminar não aprova o canon completo. Para uma personagem que fala, prepare uma amostra vocal enquanto a persona permanece `draft` com `purpose: reference`; gere, ouça e deixe o usuário selecionar a referência vocal exata antes da aprovação final do canon visual/vocal. Voz, animação, vídeo, sincronização labial e etapas especializadas usam ferramentas verificadas conforme necessidade, qualidade e custo; [Higgsfield](higgsfield-plugin.md) é uma opção. Disponibilidade da ferramenta de imagem não comprova esses recursos. Reutilize voz/canon aprovados ou registre por que voz não se aplica a conteúdo silencioso.
+
+Aprove as referências completas exatas e configurações de voz, registre hashes e preserve o canon pelas [operações existentes](operations.md). Use essas referências realmente anexadas nas gerações seguintes. Execute um pequeno piloto antes de lotes, inspecione mídias completas contra o uso pretendido, exporte bytes reais e publique somente com autorização aplicável. Inspeção ou exportação inacessível continua pendente; geração bem-sucedida não aprova identidade nem qualidade.
+
+## Rastreabilidade e contexto preservado
+
+Salve saídas em novas versões locais da personagem, sem sobrescrever referências. Registre método por etapa, ferramenta, modelo quando exposto (caso contrário, desconhecido), prompts exatos, referências realmente usadas, caminhos/hashes dos resultados, custos conhecidos, limites da conta/ferramenta e quem inspecionou o quê. Custo monetário desconhecido permanece `null`; não equipare franquia da conta a custo zero. Preserve IDs de jobs expostos e reconcilie submissões incertas pela ferramenta/job original antes de repetir ou trocar fornecedor. Registre ativos e sele o contexto declarado de execução; a [revisão de qualidade](quality.md) continua vinculada aos arquivos exatos.
+
+O núcleo local registra capacidades como `image-generation` e `image-inspection` sem exigir fornecedor. Ele não chama a ferramenta integrada, anexa arquivos, impõe completude semântica do plano, inspeciona pixels nem aprova canon automaticamente. Testes sintéticos demonstram apenas coordenação local. Cada estúdio precisa verificar anexos reais, geração, qualidade de identidade/voz e exportação com ferramentas e mídia reais.
+
+Personagens aprovadas, mídias, aprovações, snapshots, backups e runs históricos continuam intactos. O novo padrão não os migra nem reescreve evidências anteriores. Mudança em plano rastreado, entrada ou governança segue o procedimento existente de nova tentativa explícita com motivo; tentativas e aprovações anteriores ficam preservadas.

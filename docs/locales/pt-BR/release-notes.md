@@ -1,5 +1,31 @@
 # Notas das versões do OLYMPOX
 
+## 0.4.0 — 8 de outubro de 2026
+
+A geração integrada de imagens do ChatGPT/Codex passa a ser o padrão para aparência, candidatas, referências, cenários, imagens e edições quando disponível. Dispensa Higgsfield, Builder, CLI externa e chave de API; aplicam-se limites da conta e disponibilidade, sem promessa de geração gratuita ou ilimitada. Conceito, personalidade, universo narrativo, roteiros e planejamento continuam no ChatGPT/Codex. Métodos/fornecedores escolhidos explicitamente pelo usuário têm prioridade; voz, animação, vídeo e sincronização labial especializados usam ferramentas verificadas conforme necessidade, qualidade e custo. Procedimentos de plugin/CLI e Builder do Higgsfield continuam opcionais por etapa selecionada.
+
+O [procedimento do Codex ao vídeo](production-handoff.md) define pontos de controle de fidelidade e um [pacote concreto de passagem ao vídeo](../../../templates/locales/pt-BR/video-handoff.md). Preparar referências coerentes de identidade, expressões e vistas úteis, cenários e objetos adequados ao conteúdo planejado, roteiros, áudio vocal exato quando houver fala e imagens por cena inspecionadas no Codex antes de passar as entradas suportadas a uma ferramenta de vídeo verificada. Preservar a biblioteca local rica de referências separada do subconjunto relevante e suportado realmente anexado em cada chamada. Registrar arquivos/hashes exatos, papéis e evidência de transferência desse subconjunto; arquivos adicionais não estabelecem fidelidade melhor. Higgsfield é um destino opcional de vídeo, e uma ferramenta especializada de voz verificada pode ser usada antes quando necessário.
+
+Descoberta adaptativa, conceitos distintos, cenas expressivas da premissa, anexos reais de referência, inspeção de anatomia/presença/continuidade, seleção visual pelo usuário, referências vocais geradas/ouvidas/selecionadas pelo usuário antes do canon completo de personagens falantes, aprovações exatas, canon preservado, piloto antes de lotes, revisão/exportação completas de mídia e publicação autorizada continuam exigidos. Método/ferramenta/modelo por etapa, prompts, referências reais, arquivos/hashes, custos conhecidos e limitações continuam rastreáveis. Recursos ausentes ficam pendentes com alternativas; substituições externas pagas exigem autorização aplicável. A API do núcleo local, schemas de runs e revisão de componente das tarefas continuam em **0.2.0**.
+
+É uma preferência de processo sustentada por retorno do usuário após direção de arte e enquadramento também mudarem, sem constituir comparação controlada nem prova de superioridade geral de fornecedor. Personagens aprovadas, mídias, aprovações, backups, runs e bytes históricos ficam intactos; mudança de método ou contexto observado segue o procedimento existente de nova tentativa explícita em vez de reescrever evidências.
+
+### Instalar ou atualizar
+
+Instale um estúdio independente com acesso ao repositório e à tag:
+
+```sh
+npx --yes github:linkiaai/olympox#v0.4.0 install ./my-studio
+cd my-studio
+npm run verify
+```
+
+Use `npx.cmd` e `npm.cmd` no Windows se necessário. Estúdios existentes seguem as [orientações de atualização](installation.md#atualizar-um-estudio-existente): faça backup dos registros privados e da base do framework, instale separadamente, compare e reconcilie arquivos reutilizáveis, e preserve registros pessoais e bytes históricos. `--merge` recusa arquivos diferentes antes de escrever; ele não é um atualizador automático. A instalação não conecta fornecedores nem executa produção paga.
+
+### Verificação e limites
+
+Concluir `npm.cmd run verify` e revisar a exportação explícita do framework e as verificações de instalação independente para esta release. Testes locais de coordenação não demonstram geração real, condicionamento real por referência, qualidade vocal, fidelidade audiovisual, descoberta de skills pelo Codex ou publicação remota. Não inclui produção pessoal nem benchmark de fornecedores. Cada estúdio instalado ainda precisa de evidência real de geração de mídia, anexos, inspeção e exportação. As seções históricas abaixo preservam comportamento, tags de instalação e evidências de verificação das releases 0.3.0 e 0.2.1.
+
 ## 0.3.0 — 8 de outubro de 2026
 
 A criação de novos influenciadores começa com onboarding adaptativo curto e três conceitos distintos, conectando assinatura visual memorável, personalidade forte e conteúdo recorrente. O método principal usa AI Influencer Builder do Higgsfield e um pacote coerente de referências. Seleção visual preliminar e revisão de fidelidade antecedem a amostra vocal de uma personagem que fala, preparada e ouvida enquanto a persona permanece `draft` com `purpose: reference`. A aprovação final vincula o cânone visual/vocal completo antes de roteiros, cenas e piloto de vídeo em produção seguirem com esse contexto aprovado. Conteúdo silencioso registra por que voz não se aplica; voz e cânone já aprovados são reutilizados. QA/exportação completos antecedem publicação autorizada e comparação de resultados reais. Soul ID continua condicionado à necessidade e com autorização separada.

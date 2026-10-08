@@ -12,6 +12,8 @@
   "minimumOutputs": 1,
   "criteria": [
     "Declared inspection of the exact file with its hash and method",
+    "Inspect complete media against approved exact visual/vocal references and its sealed context, including anatomy, presence, continuity, listening to audio and viewing all video motion/audio when applicable",
+    "Inspect the pilot before batches; provider choice, successful generation, and hashes never replace quality review or user approval",
     "No critical issues or pending limitations",
     "A review does not automatically prove human inspection"
   ]

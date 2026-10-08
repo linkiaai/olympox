@@ -1,5 +1,31 @@
 # OLYMPOX release notes
 
+## 0.4.0 — October 8, 2026
+
+Integrated ChatGPT/Codex image generation becomes the default for appearance, candidates, references, settings, images, and edits when available. It requires no Higgsfield, Builder, external CLI, or API key; account limits and availability apply, with no promise of free or unlimited generation. Concepts, personality, narrative world, scripts, and planning stay in ChatGPT/Codex. Explicit user-selected methods/providers take precedence; specialized voice, animation, video, and lip-sync use verified tools by need, quality, and cost. Higgsfield plugin/CLI and Builder procedures remain optional per selected stage.
+
+The [Codex-to-video procedure](production-handoff.md) defines fidelity checkpoints and a concrete [video handoff package](../templates/video-handoff.md). Prepare coherent identity references, useful expressions and views, settings and props suited to planned content, scripts, exact vocal audio when speaking, and inspected per-scene stills in Codex before handing supported inputs to a verified video tool. Preserve the rich local reference library separately from the relevant supported subset actually attached to each call. Record that subset's exact files/hashes, roles and transfer evidence; additional files do not establish better fidelity. Higgsfield is an optional video destination, and a verified specialized voice tool may be used earlier when needed.
+
+Adaptive discovery, distinct concepts, expressive premise scenes, real reference attachments, anatomy/presence/continuity inspection, user visual selection, generated/listened-to/user-selected vocal references before complete speaking-character canon, exact approvals, preserved canon, a pilot before batches, complete media review/export, and authorized publication remain required. Per-stage method/tool/model, prompts, actual references, files/hashes, known costs, and limitations remain traceable. Missing capabilities stay pending with alternatives; paid external substitutions need applicable authorization. The local core API, run schemas and task component revision remain **0.2.0**.
+
+This is a process preference supported by user feedback after art direction and framing also changed, not a controlled comparison or proof of general provider superiority. Existing approved characters, media, approvals, backups, runs and historical bytes stay intact; a changed method or observed context follows the existing explicit new-attempt procedure instead of rewriting evidence.
+
+### Install or upgrade
+
+Install an independent studio with access to the repository and tag:
+
+```sh
+npx --yes github:linkiaai/olympox#v0.4.0 install ./my-studio
+cd my-studio
+npm run verify
+```
+
+Use `npx.cmd` and `npm.cmd` on Windows if required. Existing studios follow the [upgrade guidance](installation.md#upgrade-an-existing-studio): back up private records and the framework foundation, install separately, compare and reconcile reusable files, and preserve personal records and historical bytes. `--merge` refuses differing files before writing; it is not an automatic updater. Installation does not connect providers or run paid production.
+
+### Verification and limits
+
+Complete `npm.cmd run verify` and review the explicit framework export and independent installer checks for this release. Local coordination tests do not demonstrate live generation, actual reference conditioning, voice quality, audiovisual fidelity, Codex skill discovery, or remote publication. No personal production or provider benchmark is included. Each installed studio still needs real media generation, attachment, inspection and export evidence. The historical sections below preserve the behavior, installation tags and verification evidence of releases 0.3.0 and 0.2.1.
+
 ## 0.3.0 — October 8, 2026
 
 New influencer creation starts with short adaptive onboarding and three distinct concepts connecting a memorable visual signature, strong personality and recurring content. The main method uses Higgsfield AI Influencer Builder and a coherent reference pack. Preliminary visual selection and fidelity review precede a speaking character's vocal sample, prepared and listened to while the persona remains `draft` with `purpose: reference`. Final approval binds the complete visual/vocal canon before scripts, scenes and a production video pilot proceed with that approved context. Silent content records why voice is not applicable; existing approved voice and canon are reused. Complete QA/export precedes authorized publication and comparison of real results. Soul ID remains conditional and separately authorized.

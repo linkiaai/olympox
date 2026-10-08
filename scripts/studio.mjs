@@ -118,7 +118,7 @@ try {
     registerAsset(persona, dir, value, type);
     console.log(`Registered as a draft: ${value}. Fill in origin, prompt, and references; review before approval.`);
   } else if (command === 'doctor') {
-    const required = ['AGENTS.md', 'CONSTITUTION.md', 'README.md', 'framework/registry.json', 'templates/brief.md', 'templates/persona.json', 'templates/shot.json', 'templates/narrative.json', 'templates/content.json', 'templates/opportunity-research.md', 'templates/content-research.md', 'docs/studio-team.md', 'docs/trend-research.md', 'docs/framework-02.md', 'docs/strategy.md', 'docs/production.md', 'docs/quality.md', 'docs/tools.md', 'docs/higgsfield-plugin.md', 'docs/operations.md', 'docs/video-reference.md', '.agents/skills/olympox/SKILL.md'];
+    const required = ['AGENTS.md', 'CONSTITUTION.md', 'README.md', 'framework/registry.json', 'templates/brief.md', 'templates/persona.json', 'templates/shot.json', 'templates/narrative.json', 'templates/content.json', 'templates/opportunity-research.md', 'templates/content-research.md', 'docs/studio-team.md', 'docs/trend-research.md', 'docs/framework-02.md', 'docs/strategy.md', 'docs/production.md', 'docs/quality.md', 'docs/tools.md', 'docs/integrated-images.md', 'docs/higgsfield-plugin.md', 'docs/operations.md', 'docs/video-reference.md', '.agents/skills/olympox/SKILL.md'];
     const missing = required.filter(file => !fs.existsSync(path.join(root, file)));
     if (missing.length) { console.error(`Missing files: ${missing.join(', ')}`); process.exitCode = 1; }
     else {
@@ -138,8 +138,8 @@ try {
       if (!process.exitCode) console.log(`OK local base: instructions, templates, and guides present; skills match: ${skills.join(', ')}.`);
     }
     console.log(`Node ${process.version}; no external dependencies required to operate records.`);
-    console.log('New influencers: follow docs/higgsfield-influencer-method.md with AI Influencer Builder unless an alternative was explicitly selected. Missing required tools keep production pending.');
-    console.log('Integrated images: use imagegen for tasks selecting that route; the shell does not test generation capabilities.');
+    console.log('New influencers: default to integrated ChatGPT/Codex visuals when available; follow docs/integrated-images.md. Respect explicit method/provider choices. Missing capabilities leave stages pending with proposed alternatives.');
+    console.log('Integrated images: no Higgsfield, Builder, external CLI, or API key required. Account limits and tool availability apply; the shell does not test generation, attachments, or inspection.');
     console.log('Higgsfield plugin: optional connected route; follow docs/higgsfield-plugin.md. No local CLI required. This diagnostic does not test plugin connection or tools.');
     console.log('Higgsfield CLI: optional separate route; check installation/integrity with node scripts/higgsfield-local.mjs doctor. This diagnostic does not query account, credits, or generation.');
     console.log('QA: structural verification does not demonstrate identity, audio, or movement.');

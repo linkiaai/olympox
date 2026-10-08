@@ -18,9 +18,9 @@ The creative pattern is distinctive realistic characters whose look, attitude an
 
 ## Current implementation choice
 
-The user requested faithful treatment of the full Higgsfield process and **AI Influencer Builder**. New OLYMPOX influencer creation therefore follows the [Builder-led complete method](higgsfield-influencer-method.md), unless the user explicitly chooses another method. Builder is this current implementation mapping; inspected frames do not prove exclusive Builder use in the original video. Image, voice and video operations remain distinct and need current capability checks.
+The published 0.3.0 adaptation selected the full Higgsfield process and AI Influencer Builder. The current user-directed source update defaults to [integrated ChatGPT/Codex visual creation](integrated-images.md) when available and retains the [Higgsfield method](higgsfield-influencer-method.md) as an optional per-stage integration or explicit method choice. Concepts, narrative and scripts stay in ChatGPT/Codex; specialized voice/video tools are selected by verified capability, need, quality and cost. Inspected source frames still do not prove exclusive Builder use.
 
-The previous adaptation made integrated Codex images the default and left Higgsfield optional at the method level, losing the requested process. External setup remains optional for operating the local core, but missing required creative stages stay pending. They must not silently become direct Kling video or integrated image generation.
+This default records a process preference: in the user-reported character exploration, the preferred integrated candidate also used revised art direction and framing. That result is not a controlled model comparison or evidence of general provider superiority. No new source-video or candidate inspection was performed for this update. Required discovery, identity, vocal selection, canon approval, pilot and quality stages remain intact; missing capabilities leave a stage pending with proposed alternatives, and paid external substitution requires applicable authorization.
 
 Save discovery answers, selected concept, source coverage, stages, cost scopes, capabilities and explicit deviations in the versioned [production-method plan](../templates/production-method.md), observed by existing run input/output hashing. Preserve already approved identities and historical bytes; the new default is not a retroactive redesign or provider migration.
 
@@ -35,7 +35,7 @@ These are our own proposals, not conclusions demonstrated by the video:
 | Naturalism | Direct texture, lighting, anatomy, and performance; preserve diversity and chosen characteristics |
 | Multiple profiles | Separate faces, voices, decisions, and manifests by character |
 | Selecting results | Compare similar windows and formats; record exposure and inconclusive results |
-| Tools | Main new-influencer method: AI Influencer Builder and the complete verified Higgsfield sequence; explicit alternatives remain possible |
+| Tools | Integrated ChatGPT/Codex visuals by default when available; explicit method choices and optional verified Higgsfield/specialized stages remain supported |
 | Revenue | Investigate demand and offer a real deliverable; no income is treated as guaranteed |
 
 ## Codex

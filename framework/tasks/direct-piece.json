@@ -13,9 +13,10 @@
   "criteria": [
     "Actual document prepared and recorded",
     "Visual direction follows the saved production method, selected original concept, recognition anchors, and approved identity/reference files",
-    "Method plan distinguishes provider, module, access route, and model when exposed, with capabilities verified for the selected route",
+    "Method plan identifies method/tool per stage, provider/module/access route where applicable, and model when exposed; integrated images/editing are the available default, explicit user choices prevail, and specialized tools including Higgsfield are optional",
     "Method plan recorded as a run input or planning output with its path and SHA-256",
-    "Assumptions and limitations identified; unavailable required stages remain pending",
+    "Exact approved visual references are planned as actual attachments; voice, animation, video, and lip-sync use verified capabilities suited to need, quality, and known cost",
+    "Assumptions, known costs, and limitations identified; unavailable required stages remain pending with alternatives, and paid external generation requires applicable authorization",
     "No silent method substitution or stage omission; changing a requested method requires an explicit user decision and recorded replanning"
   ]
 }

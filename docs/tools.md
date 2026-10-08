@@ -4,11 +4,11 @@ CLI sources consulted: **October 7, 2026**; Higgsfield plugin catalog checked: *
 
 ## Images
 
-For new influencer creation, the main route is the [Higgsfield influencer method](higgsfield-influencer-method.md), beginning with concept selection and AI Influencer Builder. Check the required operations in the real session. An absent Builder or reference-transfer capability keeps that stage pending; integrated images are not a silent substitute. The user can explicitly choose another method. For tasks that select integrated generation/editing, follow the installed imagegen skill; that route does not require a local API key. Record real generations in the character folder.
+For new influencer creation and later visual work, default appearance, candidates, references, settings, images, and edits to integrated ChatGPT/Codex generation when available. Follow [integrated visual creation](integrated-images.md) and the host's actual image-tool instructions. This path requires no Higgsfield, AI Influencer Builder, external CLI, or API key. Tool availability and account limits apply; never describe it as free or unlimited. An explicit user-selected method/provider takes precedence. Record real generations in the character folder.
 
 For consistency, open and compare the approved set, describe anchors, and attach images to the request. A prompt containing a path does not send that file. A grid is useful for selection, but the final reference for each angle must have its own readable file. Copy results belonging to the project into the character folder, preserving the original version.
 
-Distinguish visual inspiration from a request to follow the demonstrated process. Preserve a requested reference method in a versioned [production-method plan](../templates/production-method.md); inspect the source before claiming its modules. The main Builder mapping is the framework's current choice, not proof of exclusive Builder use in the reference video. Compare alternatives when the user selects a change, using the same identity, scene, camera, and scoped budget. Changing model/version requires retesting. LoRA or Soul ID are optional when fidelity and volume justify separately authorized training.
+Distinguish visual inspiration from a request to follow the demonstrated process. Preserve a requested method and the tool chosen for each stage in a versioned [production-method plan](../templates/production-method.md); inspect the source before claiming its modules. Concepts, personality, narrative world, scripts, and planning stay in ChatGPT/Codex. Voice, animation, video, lip-sync, and specialized work use verified tools according to need, quality, and cost; Higgsfield remains an optional choice for useful stages. Missing capabilities leave the stage pending with proposed alternatives; a switch to paid external generation needs applicable authorization. A user preference observed after changing art direction/framing is process evidence, not a controlled model comparison or proof of general provider superiority. Controlled comparisons require the same identity, scene, camera, and scoped budget. LoRA or Soul ID are optional when fidelity and volume justify separately authorized training.
 
 ## Higgsfield — plugin or local CLI
 
@@ -30,6 +30,8 @@ Both routes use the same production rules: approved canon where required, exact 
 Framework installation supplies reusable instructions and local records; it does not install or authenticate either provider route, send media, or require a paid generation test. Each studio supplies its own provider access and applicable authorization.
 
 ## Video delivery
+
+Follow the [Codex-to-video procedure](production-handoff.md) and its [handoff template](../templates/video-handoff.md). Prepare scripts, approved identity/voice and inspected scene images first, then verify the exact specialized operation and supported input subset. Higgsfield can supply video or earlier voice when selected; Builder is not required for that handoff. Complete pilot review precedes batches.
 
 Vertical briefs can start at 9:16 with a target resolution of 1080 × 1920, adjusted to the model's and channel's real capabilities. Upscaling does not recover lost identity. Confirm duration, speech, reference support, audio, lip-sync, and export before promising a deliverable. Do not replace temporal review with isolated captures.
 

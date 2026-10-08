@@ -1,0 +1,27 @@
+# Integrated visual creation
+
+Integrated ChatGPT/Codex image generation is the default for a new character's appearance, candidates, references, settings, images, and edits when the session provides it. Concepts, personality, narrative world, scripts, and planning stay in ChatGPT/Codex. This visual path requires no Higgsfield, AI Influencer Builder, external CLI, or API key. Availability and account limits apply; do not describe it as free or unlimited. An explicit user-selected method or provider takes precedence.
+
+## From concept to references
+
+1. Follow [adaptive discovery](strategy.md), reusing supplied answers. When direction is open, propose three distinct concepts with visual signatures, personality, recurring stories, and a recommendation. A complete brief skips resolved discovery.
+2. Save a versioned [production-method plan](../templates/production-method.md). Select the method separately for each stage and check actual generation, attachment, inspection, and export capabilities in the session. Prepare prompts and record missing stages if a capability is unavailable; propose alternatives. A switch to paid external generation needs applicable authorization.
+3. Generate an expressive candidate in a scene that communicates the selected personality and premise. Specify age, silhouette, styling, expression, performance, setting, and narrative action. A neutral portrait alone does not demonstrate presence or the concept. Inspect the result and retain rejected attempts with useful evidence.
+4. Let the user select the visual candidate. Develop neutral front, three-quarter, profile, and full-body references as needed, with readable individual files for usable views, plus a scene showing the character in action. Inspect anatomy, presence, recognition, proportions, and continuity between angles/scenes; correction produces new versions.
+5. Inspect selected reference images before reuse and attach their actual bytes through the tool's supported reference mechanism. A filename/path mentioned in a prompt is not an attachment. When the tool supports local reference paths, use the inspected files in its reference input; otherwise use supported conversation attachments or transfers. Record which files/hashes were attached and any exposed input IDs. If exact references cannot be attached, leave that generation pending instead of claiming continuity.
+
+## Voice, canon, and pilot
+
+For the transition to video, follow [From Codex preparation to a video pilot](production-handoff.md): prepare the character and inspected scene images in Codex, save a rich coherent library, then map only supported exact inputs to each specialized video call. Voice may need a specialized tool earlier. A prepared package and a package ready for submission are distinct checkpoints.
+
+Early visual selection is not approval of complete canon. For a speaking character, prepare a vocal sample while the persona remains `draft` with `purpose: reference`, then generate, listen to, and let the user select the exact vocal reference before final visual/vocal canon approval. Voice, animation, video, lip-sync, and specialized stages use verified tools according to need, quality, and cost; [Higgsfield](higgsfield-plugin.md) is one optional choice. Image-tool availability does not establish those capabilities. Reuse approved voice/canon, or record why voice is not applicable for silent content.
+
+Approve the exact complete references and voice settings, record their hashes, and preserve canon through [existing operations](operations.md). Use those real attached references in subsequent generations. Run a small pilot before batches, inspect complete media against the intended use, export its actual bytes, and publish only with applicable authorization. Inaccessible inspection or export remains pending; successful generation does not approve identity or quality.
+
+## Traceability and preserved context
+
+Save outputs in new character-local versions without overwriting references. Record method per stage, tool, model when exposed (otherwise unknown), exact prompts, actual reference inputs, result paths/hashes, known costs, account/tool limitations, and who inspected what. Unknown monetary cost stays `null`; do not equate an account allowance with zero cost. Preserve exposed job identifiers and reconcile uncertain submissions through the original tool/job before retrying or changing providers. Register assets and seal the declared execution context; [quality review](quality.md) remains bound to the exact files.
+
+The local core records capabilities such as `image-generation` and `image-inspection` without requiring a provider. It does not call the integrated tool, attach files, enforce a plan's semantic completeness, inspect pixels, or approve canon automatically. Synthetic tests demonstrate local coordination only. Each studio must verify actual attachments, generation, identity/voice quality, and exports with real tools and media.
+
+Existing approved characters, media, approvals, snapshots, backups, and historical runs remain intact. A new default does not migrate them or rewrite prior evidence. A tracked plan, input, or governance change follows the existing explicit new-attempt procedure with a reason; prior attempts and approvals remain preserved.

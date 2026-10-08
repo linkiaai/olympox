@@ -18,9 +18,9 @@ O padrão criativo é criar personagens realistas e distintos cuja aparência, a
 
 ## Escolha atual de implementação
 
-O usuário solicitou tratamento fiel do processo completo pelo Higgsfield e **AI Influencer Builder**. Novos influenciadores do OLYMPOX passam a seguir o [método completo começando pelo Builder](higgsfield-influencer-method.md), salvo escolha explícita de outro método. Builder é este mapeamento atual; quadros conferidos não provam uso exclusivo dele no vídeo original. Operações de imagem, voz e vídeo continuam distintas e exigem verificação atual de recursos.
+A adaptação publicada em 0.3.0 escolheu o processo completo Higgsfield e AI Influencer Builder. A atualização atual da fonte, determinada pelo usuário, usa [criação visual integrada do ChatGPT/Codex](integrated-images.md) por padrão quando disponível e conserva o [método Higgsfield](higgsfield-influencer-method.md) como integração opcional por etapa ou escolha explícita de método. Conceitos, narrativa e roteiros continuam no ChatGPT/Codex; ferramentas especializadas de voz/vídeo são escolhidas por capacidade verificada, necessidade, qualidade e custo. Quadros da fonte continuam sem provar uso exclusivo do Builder.
 
-A adaptação anterior colocou imagens integradas do Codex como padrão e deixou Higgsfield opcional no método, perdendo o processo solicitado. Preparação externa continua opcional para operar o núcleo local, mas etapas criativas obrigatórias ausentes ficam pendentes. Não podem virar silenciosamente vídeo direto no Kling ou geração integrada de imagens.
+Esse padrão registra uma preferência de processo: na exploração de personagem relatada pelo usuário, a candidata integrada preferida também usou direção de arte e enquadramento revisados. O resultado não é comparação controlada de modelos nem evidência de superioridade geral de fornecedor. Não houve nova inspeção do vídeo-fonte nem das candidatas nesta atualização. Etapas exigidas de descoberta, identidade, seleção vocal, aprovação do canon, piloto e qualidade continuam intactas; recursos ausentes mantêm uma etapa pendente com alternativas propostas, e substituição externa paga exige autorização aplicável.
 
 Salve respostas do onboarding, conceito escolhido, cobertura da fonte, etapas, escopos de custo, recursos e desvios explícitos no [plano versionado de método de produção](../../../templates/locales/pt-BR/production-method.md), observado pelos hashes existentes de entradas/saídas do run. Preserve identidades aprovadas e bytes históricos; o novo padrão não é redesenho retroativo nem migração de fornecedor.
 
@@ -35,7 +35,7 @@ Estas são propostas próprias, não conclusões demonstradas pelo vídeo:
 | Naturalismo | Dirigir textura, luz, anatomia e atuação; preservar diversidade e características escolhidas |
 | Vários perfis | Separar rostos, vozes, decisões e manifestos por personagem |
 | Seleção de resultados | Comparar janelas e formatos semelhantes; registrar exposição e resultados inconclusivos |
-| Ferramentas | Método principal para novos influenciadores: AI Influencer Builder e sequência completa verificada do Higgsfield; alternativas explícitas continuam possíveis |
+| Ferramentas | Imagens integradas do ChatGPT/Codex por padrão quando disponíveis; escolhas explícitas de método e etapas verificadas opcionais Higgsfield/especializadas continuam suportadas |
 | Receita | Investigar demanda e oferecer entrega real; nenhum ganho tratado como garantia |
 
 ## Codex

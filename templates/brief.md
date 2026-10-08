@@ -2,7 +2,7 @@
 
 Use this as a record of the conversation; the user does not need to complete a form. **“Please propose” is a valid answer.** Codex reads existing preferences and asks only unresolved essentials, grouped into at most three short questions about objective, character presence, and audience/subject. Use the host's asynchronous question tool when available or ordinary conversation. Offer concrete options and do not repeat answered questions. Optional fields guide proposals; Codex records supplied information, assumptions and decisions still needed without inventing approved answers. Existing personas skip creation onboarding and preserve approved canon.
 
-New influencer creation uses the main **Higgsfield AI Influencer Builder** method, with the complete reference/voice/script/scene/video/review cycle followed by authorized publication and measured comparison. Record the stages in the [production-method plan](production-method.md). An explicit alternative remains supported; unavailable capability keeps the required stage pending and does not silently select Codex images or direct Kling video.
+New influencer visual creation uses **integrated ChatGPT/Codex image generation/editing** by default when available, with expressive exploration, user selection, coherent attached references, voice when needed, exact canon approval, a pilot and complete media review/export before applicable authorized publication and measured comparison. Concept, personality, narrative, scripts and planning remain in ChatGPT/Codex. Record methods/tools per stage in the [production-method plan](production-method.md). An explicit user method/provider choice prevails; Higgsfield is optional for useful verified capabilities, including specialized media. Integrated visuals require neither Higgsfield/AI Influencer Builder, an external CLI nor an API key, and depend on tool availability and account limits, not a promise of free or unlimited generation. Unavailable capability stays pending with proposed alternatives; paid external generation needs applicable authorization.
 
 ## Record discovered essentials — group questions and reuse answers
 
@@ -14,7 +14,7 @@ New influencer creation uses the main **Higgsfield AI Influencer Builder** metho
    - Answer:
 4. **References and boundaries:** what do we like about the references, and what do we want to avoid? Distinguish inspiration for light, clothing, composition, language or rhythm from a requested production method. Do not copy real people's identities. Record origin and permission for owned or licensed references before using them as identity material.
    - Answer:
-5. **Production conditions:** is there a priority channel, language, available time or an already authorized budget? If unsure, Codex proposes a small main-method pilot and prepares independent local work while capabilities or authorization remain pending. Filling this field does not authorize new spending.
+5. **Production conditions:** is there a priority channel, language, available time or an already authorized budget? If unsure, Codex proposes a small pilot using the available visual default and verified tools for any required specialized stages, and prepares independent local work while capabilities or authorization remain pending. Filling this field does not authorize new spending.
    - Answer:
 
 ## Optional — fill in existing decisions
@@ -79,15 +79,17 @@ New influencer creation uses the main **Higgsfield AI Influencer Builder** metho
 - Existing evidence of interest, if any:
 - Authorized budget, currency and batch limit, if any:
 - Constraints involving deadlines, tools or rights:
-- Selected main method or explicit alternative, relevant source decision, available Higgsfield route and pending modules:
+- Method/tool per stage, source of any explicit user choice, available integrated/specialized capabilities, optional Higgsfield route when selected, and pending stages/alternatives:
 
 ## Codex delivery from this brief
 
+Follow [integrated visual creation](../docs/integrated-images.md) for the default candidate/reference and image editing stages.
+
 1. Summary of known information, proposed assumptions and relevant gaps.
 2. At least three genuinely distinct, comparable concept cards before portraits when direction is still open, each with premise, visual presence, attitude and sample voice, editorial contrast, three content hooks with payoffs, a sharing hypothesis and production difficulty. Recommend one and invite selection or compatible combinations.
-3. After selection: saved character concept and method plan, persona profile, three written voice samples, transparent bio and proposed visual anchors. Prepare one AI Influencer Builder exploration sample under the main method, or the explicit alternative, and revise it from feedback before expanding the set under applicable authorization.
+3. After selection: saved character concept and method plan, persona profile, three written voice samples, transparent bio and proposed visual anchors. Prepare an expressive visual exploration sample and a scene that expresses the premise using available integrated images or the explicit user choice. Revise from user feedback before expanding coherent references under applicable authorization, and actually attach selected exact references to later generations/edits. Record prompts, method/tool, exposed model, files/hashes, known costs and limitations per stage.
 4. Before final canon approval: inspect the identity sheet/reference set and in-character scene or cover, and record initial visual selection while the new persona remains `draft`. If speech is planned, prepare and listen to a draft/reference vocal sample with `purpose: reference`, record the selected exact audio/settings/reference, then obtain final visual/vocal canon approval and freeze the snapshot. For a silent persona, record voice as not applicable. A selected concept or exploration sample does not approve canon.
-5. After final canon approval: produce the scene/video pilot under the selected method using the approved visual and vocal references, complete review and local export. Ideas/scripts with openings and fulfilled payoffs may already have been prepared during exploration. Retain any unavailable stage as pending.
+5. After final canon approval: produce a pilot in the intended medium, with video/speech when planned, using approved exact visual and vocal references before batches, complete media review and local export. Ideas/scripts with openings and fulfilled payoffs may already have been prepared during exploration. Retain any unavailable required stage as pending with proposed alternatives.
 6. Applicable authorized publication and measured comparison plan, then actual post IDs, compatible counts/denominators, costs and learning when available. Concepts and inspection do not promise reach; absent publication or metrics keeps measurement pending.
 
 The user decides the direction and identity anchors. Codex resolves draft details within those choices. If preferences remain open, recommend varied realistic concepts with strong presence and a testable sharing hypothesis as a proposal. For an existing persona, reuse unchanged approved canon/voice without repeating approval and strengthen direction and content within approved variations; changing identity or adding voice to frozen canon follows the normal version and approval process. Publication and costs not yet authorized remain separate decisions.

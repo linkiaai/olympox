@@ -25,6 +25,12 @@ This Codex project develops and maintains **OLYMPOX - AI Influencer framework**.
 
 ## Installer, export, and privacy
 
+The visual default in installed studios is integrated ChatGPT/Codex image generation when available. Concept, personality, narrative world, scripts, and planning stay in ChatGPT/Codex. Appearance, candidates, references, settings, images, and edits require no Higgsfield, AI Influencer Builder, external CLI, or API key. Account limits and tool availability still apply; never describe this path as free or unlimited.
+
+Respect explicit user-selected methods/providers. Voice, animation, video, lip-sync, and specialized work use verified tools according to need, quality, and cost; Higgsfield remains optional per useful stage. Preserve discovery, distinct concepts, expressive premise scenes, real reference attachments, anatomy/presence/continuity inspection, user visual selection, listened-to vocal selection before complete speaking-character canon approval, exact-reference approval, canon preservation, and a pilot before batches.
+
+Record method per stage, tool, exposed model, prompts, actual references, files/hashes, known costs, and limitations. Missing capabilities leave a pending stage with proposed alternatives; paid external generation requires applicable authorization. Review complete media and export actual bytes before authorized publication. Context changes use the existing explicit new-attempt procedure without migrating approved characters or rewriting old evidence.
+
 - Distribute only reusable framework sources, templates, skills, tests, permitted provider-source provenance, and documentation. Keep personal character records, media, prompts, runs, maintenance state, backups, credentials, provider binaries, temporary files, and generated manual output out of Git and the installation package.
 - Maintain explicit package and installer source selection. Check both the export list and installed tree; `.gitignore` alone does not prove package privacy.
 - Fresh installation must preserve any allowed existing Git metadata. Merge must preflight all destination files, retain identical files, refuse conflicts before writing, and preserve unrelated local files. Reject unsafe paths, links, and junctions.

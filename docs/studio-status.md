@@ -35,7 +35,7 @@ Structural checks do not inspect pixels, listen to voices, view motion, confirm 
 
 Codex uses generation, inspection, browsing, and subagent tools actually available in the current session. Installed skills do not create tool access or demonstrate fresh discovery by Codex. Reopen or reload the project when necessary.
 
-New influencer creation follows the [complete Higgsfield method](higgsfield-influencer-method.md) with AI Influencer Builder by default, unless the user explicitly chooses another method. Short onboarding and three distinct concepts precede generation; memorable realism with strong personality/presence is the default creative direction. Existing canon stays preserved. These are skill/task instructions; hashes observe saved plans but the core does not enforce their semantic completeness or dispatch providers automatically.
+New influencer creation defaults to [integrated ChatGPT/Codex visual creation](integrated-images.md) when available, subject to tool availability and account limits, without Higgsfield, Builder, an external CLI, or an API key. Respect an explicit method/provider choice. Short adaptive onboarding and distinct concepts precede generation; expressive personality/premise scenes and inspected coherent references preserve the creative direction. Speaking characters require a generated, listened-to, user-selected vocal reference before complete canon approval. Exact approvals, canon preservation, a pilot before batches, full media review, export, and authorized publication remain required. Specialized tools, including Higgsfield, are selected per useful stage by need, quality, and cost. Existing canon stays preserved. These are skill/task instructions; hashes observe saved plans but the core does not enforce their semantic completeness or dispatch providers automatically.
 
 Provider access remains separately prepared: the [Codex plugin](higgsfield-plugin.md) needs no local CLI; the [local CLI and wrapper](higgsfield-setup.md) are a separate route whose required capabilities must be checked. The package includes guidance, the wrapper and permitted provider-source provenance. Installation never installs/connects external providers. The core remains usable without them; missing required production capabilities stay pending rather than silently switching methods.
 
@@ -47,7 +47,7 @@ The core does not automatically submit or query external jobs, retry uncertain s
 
 1. Define the audience, editorial proposition, and original adult persona.
 2. Explore real candidate references and choose the identity explicitly.
-3. Record exact approved files and hashes, then preserve canon.
+3. For speaking characters, generate, listen to, and select the exact vocal reference before approving complete visual/vocal canon; record exact files and hashes, then preserve canon. For silent content, record why voice is not applicable.
 4. Prepare narrative and a concrete piece; run a small pilot with available tools.
 5. Inspect the complete media and correct critical failures in new versions before batches.
 

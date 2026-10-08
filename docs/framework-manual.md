@@ -2,9 +2,11 @@
 
 OLYMPOX is a local framework for creating memorable original AI influencers with testable viral potential. You talk to Codex; Atena coordinates the request, and specialists contribute as needed. The framework preserves versions, decisions, and evidence so work can continue between sessions.
 
-For new characters, start with [short adaptive onboarding](strategy.md) and three distinct concepts connecting appearance, personality, audience and recurring content. The main [Higgsfield method](higgsfield-influencer-method.md) uses AI Influencer Builder, references and an in-character scene, vocal reference exploration when speaking, then complete canon approval, scripts, scenes, video pilot and review/export. The user can explicitly select another method. Missing required capabilities stay pending; approved existing identities remain intact. Viral potential needs real content and results to be tested.
+For new characters, start with [short adaptive onboarding](strategy.md) and distinct concepts connecting appearance, personality, audience and recurring content. [Integrated visual creation](integrated-images.md) is the default when available, without Higgsfield, Builder, an external CLI, or an API key; account limits apply. The user selects expressive candidates, then coherent references actually attached to subsequent generations. Inspect anatomy, presence and continuity, explore/listen to/select voice when speaking, then approve the complete exact visual/vocal canon and run a pilot before batches. Voice/video/specialized stages use verified tools according to need, quality and cost; the [Higgsfield method](higgsfield-influencer-method.md) remains optional. Respect explicit method choices, keep unavailable stages pending with proposed alternatives, and obtain applicable authorization for paid external generation and publication. Existing approved identities remain intact. Viral potential needs real content and results to be tested.
 
 ## What the framework does
+
+The [Codex-to-video procedure](production-handoff.md) gives ordered readiness checkpoints, owners and a concrete [handoff package](../templates/video-handoff.md). It prepares a rich coherent library in Codex and maps the exact supported input subset for each specialized call, then validates one pilot before batches. Voice can need a verified tool before the video handoff.
 
 | Area | What you gain |
 | --- | --- |
