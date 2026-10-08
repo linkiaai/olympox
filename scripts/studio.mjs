@@ -138,7 +138,8 @@ try {
       if (!process.exitCode) console.log(`OK local base: instructions, templates, and guides present; skills match: ${skills.join(', ')}.`);
     }
     console.log(`Node ${process.version}; no external dependencies required to operate records.`);
-    console.log('Image: use imagegen when available in Codex; the shell does not test this capability.');
+    console.log('New influencers: follow docs/higgsfield-influencer-method.md with AI Influencer Builder unless an alternative was explicitly selected. Missing required tools keep production pending.');
+    console.log('Integrated images: use imagegen for tasks selecting that route; the shell does not test generation capabilities.');
     console.log('Higgsfield plugin: optional connected route; follow docs/higgsfield-plugin.md. No local CLI required. This diagnostic does not test plugin connection or tools.');
     console.log('Higgsfield CLI: optional separate route; check installation/integrity with node scripts/higgsfield-local.mjs doctor. This diagnostic does not query account, credits, or generation.');
     console.log('QA: structural verification does not demonstrate identity, audio, or movement.');

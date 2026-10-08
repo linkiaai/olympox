@@ -18,7 +18,7 @@ Usage:
   olympox --version
 
 Install a new studio:
-  npx --yes github:linkiaai/olympox install ./my-studio
+  npx --yes github:linkiaai/olympox#v0.3.0 install ./my-studio
 
 The installer copies reusable framework files and local skills. Personal
 characters, media, work, backups and credentials are never included.

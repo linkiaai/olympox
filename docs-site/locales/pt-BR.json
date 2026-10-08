@@ -17,6 +17,7 @@
     "docs/operations.md": "Identidade, registros e backup",
     "docs/tools.md": "Ferramentas",
     "docs/higgsfield-plugin.md": "Plugin Higgsfield",
+    "docs/higgsfield-influencer-method.md": "Método de influenciadores pelo Higgsfield",
     "framework/README.md": "API e contratos do núcleo",
     "CONSTITUTION.md": "Constituição"
   },
@@ -110,7 +111,13 @@
       "name": "Preparar candidatos e referências",
       "criteria": [
         "Documento real preparado e registrado",
-        "Hipóteses e limitações identificadas"
+        "Direções exploratórias solicitadas são comparáveis, originais e visualmente distintas, cada uma com âncora de reconhecimento e hipótese de conteúdo compartilhável; viralização não é garantida",
+        "Criação de novos influenciadores planeja a sequência completa pelo Higgsfield com AI Influencer Builder, salvo escolha explícita de outro método pelo usuário",
+        "Preservar o método de produção solicitado pelo usuário, incluindo o fluxo de uma referência quando sua adoção foi solicitada",
+        "Plano de método salvo distingue provedor, módulo, rota de acesso e modelo quando exposto, com evidências da fonte e etapas exigidas de identidade/referências",
+        "Plano de método registrado como entrada do run ou saída de planejamento com caminho e SHA-256",
+        "Capacidades, hipóteses, custos e autorização aplicável identificados; etapas exigidas indisponíveis permanecem pendentes",
+        "Sem substituição silenciosa de método ou omissão de etapas; preservar qualquer identidade e referências já aprovadas"
       ]
     },
     "generate-candidates": {
@@ -118,6 +125,11 @@
       "criteria": [
         "Arquivo de mídia existente, tipo e SHA-256 registrados",
         "Evento de geração declarado com ferramenta, responsável e data",
+        "Preservar conceito original selecionado, personalidade, âncoras de reconhecimento e grau de realismo ou estilização escolhido",
+        "Criação de novos influenciadores usa a etapa planejada Higgsfield AI Influencer Builder, salvo escolha explícita de outro método pelo usuário; recurso obrigatório ausente permanece pendente",
+        "Execução segue o plano de método observado e registra provedor, módulo, rota de acesso, modelo exposto e referências realmente usados",
+        "Etapas exigidas de identidade/referências têm evidências reais; etapas indisponíveis permanecem pendentes sem substituição ou omissão silenciosa",
+        "Preservar qualquer identidade e referências já aprovadas; alterar um método solicitado exige decisão explícita do usuário e novo planejamento registrado",
         "Não aprova identidade nem publica"
       ]
     },
@@ -147,14 +159,22 @@
       "name": "Preparar roteiro e cenas",
       "criteria": [
         "Documento real preparado e registrado",
-        "Hipóteses e limitações identificadas"
+        "Preservar o método de produção solicitado pelo usuário, incluindo o fluxo de uma referência quando sua adoção foi solicitada",
+        "Roteiro e cenas identificam as etapas exigidas de personagem, referências, voz e vídeo no plano de método salvo, sem inventar capacidades indisponíveis",
+        "Plano de método registrado como entrada do run ou saída de planejamento com caminho e SHA-256",
+        "Hipóteses, custos e autorização aplicável identificados; etapas exigidas indisponíveis permanecem pendentes",
+        "Sem substituição silenciosa de método ou omissão de etapas; preservar identidade e referências aprovadas"
       ]
     },
     "direct-piece": {
       "name": "Definir direção visual da peça",
       "criteria": [
         "Documento real preparado e registrado",
-        "Hipóteses e limitações identificadas"
+        "Direção visual segue método de produção salvo, conceito original selecionado, âncoras de reconhecimento e arquivos aprovados de identidade/referências",
+        "Plano de método distingue provedor, módulo, rota de acesso e modelo quando exposto, com capacidades verificadas para a rota selecionada",
+        "Plano de método registrado como entrada do run ou saída de planejamento com caminho e SHA-256",
+        "Hipóteses e limitações identificadas; etapas exigidas indisponíveis permanecem pendentes",
+        "Sem substituição silenciosa de método ou omissão de etapas; alterar um método solicitado exige decisão explícita do usuário e novo planejamento registrado"
       ]
     },
     "generate-piece": {
@@ -162,6 +182,10 @@
       "criteria": [
         "Arquivo de mídia existente, tipo e SHA-256 registrados",
         "Evento de geração declarado com ferramenta, responsável e data",
+        "Preservar conceito original selecionado, personalidade, âncoras de reconhecimento e grau de realismo ou estilização escolhido",
+        "Execução segue o plano de método observado e registra provedor, módulo, rota de acesso, modelo exposto e referências realmente usados",
+        "Etapas exigidas de personagem, referências, voz e vídeo têm evidências reais; etapas indisponíveis permanecem pendentes sem substituição ou omissão silenciosa",
+        "Preservar identidade e referências aprovadas; alterar um método solicitado exige decisão explícita do usuário e novo planejamento registrado",
         "Não aprova identidade nem publica"
       ]
     },

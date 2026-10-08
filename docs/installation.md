@@ -9,14 +9,16 @@
 - Git when cloning the repository. npm's GitHub package route may also require Git on your system.
 - Access to the repository and chosen release tag. A private repository may require authenticated Git access on your machine.
 
-The local core has no external runtime dependencies. You do not need `npm install` to operate its records. Media providers are optional and require their own preparation.
+The local core has no external runtime dependencies. You do not need `npm install` to operate its records. External provider setup is separate from core installation and requires its own preparation.
+
+Release **0.3.0** starts new characters with short conversational onboarding and three distinctive concepts, then follows the [Builder-led Higgsfield method](higgsfield-influencer-method.md) unless the user explicitly chooses another method. Viral potential remains a testable hypothesis. Missing required tools keep creative stages pending; installation does not connect providers or replace the selected method. The commands below pin `v0.3.0`. Existing studios require the explicit upgrade procedure below.
 
 ## Create a studio from GitHub
 
 Run from the parent folder where you want the studio:
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.2.1 install ./my-studio
+npx --yes github:linkiaai/olympox#v0.3.0 install ./my-studio
 cd my-studio
 npm run verify
 npm run studio -- help
@@ -37,7 +39,7 @@ If Codex does not show the new skill, reload Codex or reopen the project. File i
 
 ## Choose optional Higgsfield access
 
-Integrated Codex image generation is the default when available unless you choose Higgsfield. For Higgsfield, choose either its [Codex plugin](higgsfield-plugin.md) or the [local CLI and wrapper](higgsfield-setup.md). Install and connect the plugin in your Codex account separately; that route does not require a local Higgsfield CLI. The CLI route requires its own binary and account preparation. Neither route is required to operate the OLYMPOX core.
+For new influencers, prepare the main Higgsfield method with AI Influencer Builder and its later reference, voice, script, scene and video stages. Choose its [Codex plugin](higgsfield-plugin.md) or another verified route exposing the required operations. The [local CLI and wrapper](higgsfield-setup.md) require their own binary/account preparation and do not establish feature parity. Install/connect providers separately; the plugin does not need a local CLI. The core remains usable without external access. Do not silently replace missing Builder capabilities with integrated Codex images or direct video generation; an alternative method requires an explicit user choice.
 
 ```text
 Atena, use Higgsfield through the plugin for this studio.
@@ -50,7 +52,7 @@ This selects a route; it does not authorize paid generation, training, or public
 ## Use an existing project
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.2.1 install ./existing-project --merge
+npx --yes github:linkiaai/olympox#v0.3.0 install ./existing-project --merge
 ```
 
 Merge checks all intended destinations before any write. Identical framework files are retained and missing framework files are installed. Differing files or collisions stop the operation without overwriting them. Unrelated local files are preserved. The installer rejects symbolic links and junctions in installation source or destination paths.
@@ -59,10 +61,10 @@ If files conflict, review and reconcile them explicitly, or install into a separ
 
 ## Upgrade an existing studio
 
-Release **0.2.1** adds an optional conversational Higgsfield plugin route. The local core API and contracts retain component revision 0.2.0. Read the [release notes](release-notes.md) and preserve the existing studio before comparing framework changes.
+Release **0.3.0** updates onboarding, distinctive character concepts, the main Higgsfield Builder method, production-plan preservation, creative prompt context, and English/pt-BR guidance. The local core API, run schemas, and task component revision remain 0.2.0; task criteria are clarified. Read the [release notes](release-notes.md) and preserve the existing studio before comparing framework changes.
 
 1. Create and verify backups of private characters and linked runs using the existing [backup operations](operations.md). Keep an independent copy of the current framework files, shared context, and local instructions too; character backups exclude that foundation.
-2. Install the release into an independent empty directory, such as `./my-studio-v0.2.1`, using the pinned command above. Run `npm run verify` there and compare its reusable framework sources with the existing studio.
+2. Install the release into an independent empty directory, such as `./my-studio-v0.3.0`, using the pinned command above. Run `npm run verify` there and compare its reusable framework sources with the existing studio.
 3. Explicitly reconcile only the intended framework sources, active skills, studio instruction template, templates, and documentation. Preserve local customizations and keep active skill copies consistent with their canonical sources. `--merge` retains identical files and refuses differing files before writing; it does not perform this reconciliation for you.
 4. Keep existing character files, media, approvals, snapshots, runs, and backups in place with their original bytes and hashes. A new release's empty studio does not replace private records, and historical bytes must not be rewritten to fit new instructions or make verification pass.
 5. Run `npm run verify` in the updated studio and reopen or reload Codex for skill discovery. Review resumed runs for context changes. When governance or inputs have changed, use the existing explicit new-attempt procedure with a reason, preserving prior attempts and approvals; see [core operation](framework-02.md).

@@ -1,6 +1,6 @@
 # Identity and media quality
 
-The objective is a recognizable character with an individual presence and behavior. Quality does not mean textureless skin or perfect symmetry: it means consistency with canon, intentional naturalism, and freedom from defects that interrupt the experience.
+The objective is a recognizable character with an individual presence and behavior. Quality combines alignment with the chosen creative concept, consistency with canon, the intended visual style, and freedom from defects that interrupt the experience. Naturalistic rendering can express an unusual character or a realistic person with strong presence; smooth skin or perfect symmetry do not establish quality.
 
 ## Approval rule
 
@@ -16,6 +16,25 @@ Every generated file starts as `draft`. Valid metadata, high resolution, calcula
 
 In the persona record, each reference uses `candidate`, `approved`, or `rejected`; the approved set supports the persona's `canon-approved` state. In the manifest, assets use `draft`, `production`, or `rejected`.
 
+## Review the concept and candidates
+
+Before choosing a new identity, read the selected concept and compare the actual candidates with its concrete criteria. When direction is open, compare at least three genuinely distinct concept cards under [strategy](strategy.md). Do not approve an ordinary generic portrait for a brief requiring memorable presence merely because anatomy and rendering are clean.
+
+| Area | Evidence to inspect |
+| --- | --- |
+| Concept execution | Which selected age, silhouette/posture, styling, expression, or recurring details are visible? Identify what is missing or contradicts the brief. |
+| Distinction between directions | Can the proposals be described differently by premise, attitude, and editorial contrast, beyond names, hair, clothes, or attractive faces? |
+| Presence in context | Inspect a neutral identity reference and an in-character scene or cover at the intended size/crop. Does the latter express the selected premise and attitude? A neutral reference need not communicate the whole premise. |
+| Voice and content | Do sample lines and three series have a recognizable perspective, concrete openings, fulfilled payoffs, and stated reasons to watch/save/share? Could they be reassigned unchanged to any candidate? |
+| Continuity and originality | Does the character remain recognizable in an allowed variation, without relying only on one accessory? Does the concept preserve an original identity rather than reproducing an identifiable person's look, voice, or biography? |
+| Selected method | Does the versioned method plan identify the actual Builder sheet and later references/voice/scenes/video evidence, or the explicit alternative? Missing required stages remain pending; a direct video or prepared specification does not complete an earlier stage. |
+
+Record observations, exact files and the requested correction. If the selected concept is absent, keep candidate media `draft` and return it for art/persona correction before proposing canon approval; reference records remain `candidate` until approved. An intentionally restrained direction can pass when its specific presence and behavior are visible. Do not add eccentricity, fantasy, a new beauty standard, or new identity traits merely to pass review.
+
+This review assesses creative execution, not audience response. A sharing hypothesis remains unproven until actual publication results exist; do not award a predictive virality score or claim that a visually distinctive concept guarantees reach. For an existing approved character, assess the requested piece within canon and allowed variations. New criteria do not revoke historical approvals or authorize a replacement identity.
+
+For a new character under the main Higgsfield method, inspect the actual Builder exploration sheet and the exported references, including individual readable views and an in-character scene. Keep voice listening and complete video review separate from sheet approval. If adopting this method for an existing character, compare new provider outputs with the exact approved canon; never approve replacement traits to make a provider handoff pass. Track these observations in the [production-method plan](../templates/production-method.md); local contracts validate declarations, not semantic method compliance.
+
 ## Review an image
 
 1. Open the result alongside approved references. First compare a reference with a similar angle and expression; use the others to resolve uncertainty. Do not judge identity solely by hair color or wardrobe.
@@ -27,7 +46,7 @@ In the persona record, each reference uses `candidate`, `approved`, or `rejected
 | --- | --- |
 | Facial identity | Skull and face shape, eye spacing, eyebrows, nose, jaw, chin, ears, and distinctive marks. Expression and perspective can change appearance; structure must remain compatible. |
 | Body and proportions | Limb length, relative head size, shoulders, neck, posture, and approved body characteristics. Avoid unintended changes to apparent age or build. |
-| Naturalism | Skin texture, pores, strands of hair, gentle asymmetries, and plausible light transitions. Preserve the character's actual traits; do not invent new imperfections in every image. |
+| Intended visual style | For naturalistic work, skin texture, pores, strands of hair, gentle asymmetries, and plausible light transitions. For a selected stylized direction, assess its deliberate visual rules. Preserve the character's actual traits; do not invent new imperfections in every image. |
 | Eyes and mouth | Gaze direction, pupils, eyelids, lip alignment, tongue and tooth continuity. Smiles need plausible anatomy without fused, duplicated, or excessively bright teeth. |
 | Hands and contact | Finger count and connection, nails, joints, grip, and object contact. Check places where hands are hidden or partially visible. |
 | Scene and optics | Shadows, reflections in mirrors and glasses, geometry, depth, blur, and light sources. A reflection must match the person, pose, and scene. |
@@ -44,6 +63,7 @@ Watch the complete file with audio at normal speed. Revisit suspicious segments,
 - **Lip-sync:** compare audible speech with mouth opening/closing, pauses, and expressions. Inspect teeth and tongue during speech. Do not accept perceptible delay or mouth movements when audio is silent.
 - **Voice:** listen for vocal identity, pronunciation, approved accent, rhythm, emotion, breathing, and continuity between takes. Look for substituted words, truncated syllables, noise, clipping, and timbre changes. A correct caption does not prove the speech is correct.
 - **Final delivery:** also watch the edited, exported version with music and captions. Check synchronization, speech comprehension, cuts, and duration on the target device.
+- **Creative delivery:** verify that the opening and payoff match the piece's stated idea and that performance expresses the character's selected attitude. Generic delivery or an unfulfilled opening requires correction; it does not establish a failed audience hypothesis.
 
 If Codex or the available tool cannot access audio or motion, record that limitation and leave the corresponding approval pending.
 

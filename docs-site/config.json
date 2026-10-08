@@ -110,6 +110,13 @@
       }
     },
     {
+      "path": "docs/higgsfield-influencer-method.md",
+      "label": "Higgsfield influencer method",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/higgsfield-influencer-method.md"
+      }
+    },
+    {
       "path": "framework/README.md",
       "label": "Core API and contracts",
       "translations": {

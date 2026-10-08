@@ -1,12 +1,28 @@
-# Studied reference and adaptation
+# Reference video: evidence and framework method
 
-Consulted: **October 7, 2026**. Mark Tilbury video: [I Tried The LAZIEST Way to Make Money With AI](https://www.youtube.com/watch?v=LlhTEttKcwQ).
+Reviewed on **October 8, 2026**: Mark Tilbury's [I Tried The LAZIEST Way to Make Money With AI](https://www.youtube.com/watch?v=LlhTEttKcwQ).
 
-YouTube confirmed the title/channel, but direct caption export reported that captions were unavailable. The textual analysis used the [full transcript on Prepublish](https://prepublish.ai/youtube-transcript/LlhTEttKcwQ), which claims to reproduce the channel's captions; we did not verify that claim through a complete comparison with the audio. Chapters come from the [mirrored description](https://videohighlight.com/v/LlhTEttKcwQ). No complete audiovisual review was performed. We did not archive the transcript or copy its prompts.
+The initial October 7 study used a [third-party transcript](https://prepublish.ai/youtube-transcript/LlhTEttKcwQ) and [mirrored chapters](https://videohighlight.com/v/LlhTEttKcwQ) without audiovisual inspection. The October 8 review added Higgsfield's completed analysis of the public video (28 visual/audio scene summaries) and direct inspection of key frames in the YouTube player. The player showed 33:19; the analysis ended at 32:00 and its scene boundaries did not consistently match player timestamps. It supports the sequence, not a frame-accurate transcript. Direct captions remained unavailable. We did not listen to and compare every spoken line or audit the commercial results independently. Private review captures are excluded from the package; source transcripts and prompts are not redistributed.
 
 ## Observed method
 
-The experiment starts with competitors and character ideas (01:14–04:23). It then uses Claude with Higgsfield for multiple-angle, full-body, and close-up references, along with settings (06:36). Skills help with ideas and scripts (11:57); each character receives a voice (14:08); references and scripts become vertical videos (15:22). Accounts with AI disclosure in their bios, publication, and comparison follow (19:07–21:26). The creator selects an initial profile, creates a workbook, and reports sales (22:37). Another profile grows later, revealing the premature selection (29:05). Commercial results are the creator's reports, without independent auditing, and are not estimates for our project.
+The supported sequence is opportunity and differentiator research, original character concepts, coherent reference sheets and scenes, recurring content/scripts, separate voice design, Higgsfield video production, publication and comparison. The source revisits a prematurely selected profile after another grows later. Commercial outcomes are the creator's reports, not estimates for a studio.
+
+| Directly inspected frame | What it establishes |
+| --- | --- |
+| **10:18** | A two-panel portrait/full-body reference and the label **Soul Cinema**; an image/reference step, without proving exclusive AI Influencer Builder use. |
+| **14:49** | Character-specific voice direction in Claude; visual sheets alone do not complete vocal identity. |
+| **15:54** | Separate video controls with **Seedance 2.5**; a video model does not establish completion of earlier stages. |
+
+The creative pattern is distinctive realistic characters whose look, attitude and recurring premise reinforce one another. OLYMPOX must not reduce this to conventional attractive portraits with different clothes, or assume exaggeration alone creates shareable content.
+
+## Current implementation choice
+
+The user requested faithful treatment of the full Higgsfield process and **AI Influencer Builder**. New OLYMPOX influencer creation therefore follows the [Builder-led complete method](higgsfield-influencer-method.md), unless the user explicitly chooses another method. Builder is this current implementation mapping; inspected frames do not prove exclusive Builder use in the original video. Image, voice and video operations remain distinct and need current capability checks.
+
+The previous adaptation made integrated Codex images the default and left Higgsfield optional at the method level, losing the requested process. External setup remains optional for operating the local core, but missing required creative stages stay pending. They must not silently become direct Kling video or integrated image generation.
+
+Save discovery answers, selected concept, source coverage, stages, cost scopes, capabilities and explicit deviations in the versioned [production-method plan](../templates/production-method.md), observed by existing run input/output hashing. Preserve already approved identities and historical bytes; the new default is not a retroactive redesign or provider migration.
 
 ## Our choices
 
@@ -19,9 +35,9 @@ These are our own proposals, not conclusions demonstrated by the video:
 | Naturalism | Direct texture, lighting, anatomy, and performance; preserve diversity and chosen characteristics |
 | Multiple profiles | Separate faces, voices, decisions, and manifests by character |
 | Selecting results | Compare similar windows and formats; record exposure and inconclusive results |
-| Tools | Use integrated images when available; video/voice can use a separately verified integration |
+| Tools | Main new-influencer method: AI Influencer Builder and the complete verified Higgsfield sequence; explicit alternatives remain possible |
 | Revenue | Investigate demand and offer a real deliverable; no income is treated as guaranteed |
 
 ## Codex
 
-The local structure uses `AGENTS.md` and a skill in `.agents/skills`, following the official [project instructions](https://developers.openai.com/codex/guides/agents-md) and [local skills](https://developers.openai.com/codex/skills) documentation. Higgsfield recommends its CLI and skills for coding agents, including Codex; see the [official guide](https://higgsfield.ai/creator-hub/help-center/integrations/how-do-i-access-higgsfield-via-cli). Execution of that integration remains pending; details are in [tools](tools.md).
+Codex replaces the source's conversational coordinator. Project instructions and local skills organize the method; they do not create provider access or automatically execute tools. OLYMPOX adds short adaptive onboarding, three original concept proposals, explicit canon approval, exact-file provenance and complete QA as framework decisions. Do not copy the source's characters, prompts, fictional authority claims or revenue promises. See [tools](tools.md), [strategy](strategy.md) and [production](production.md).

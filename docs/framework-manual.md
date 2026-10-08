@@ -1,6 +1,8 @@
 # OLYMPOX - AI Influencer framework
 
-OLYMPOX is a local AI influencer framework for creating and producing original virtual influencers. You talk to Codex; Atena coordinates the request, and specialists contribute as needed. The framework preserves versions, decisions, and evidence so work can continue between sessions.
+OLYMPOX is a local framework for creating memorable original AI influencers with testable viral potential. You talk to Codex; Atena coordinates the request, and specialists contribute as needed. The framework preserves versions, decisions, and evidence so work can continue between sessions.
+
+For new characters, start with [short adaptive onboarding](strategy.md) and three distinct concepts connecting appearance, personality, audience and recurring content. The main [Higgsfield method](higgsfield-influencer-method.md) uses AI Influencer Builder, references and an in-character scene, vocal reference exploration when speaking, then complete canon approval, scripts, scenes, video pilot and review/export. The user can explicitly select another method. Missing required capabilities stay pending; approved existing identities remain intact. Viral potential needs real content and results to be tested.
 
 ## What the framework does
 
@@ -29,6 +31,7 @@ The constitution establishes shared principles. The guides explain the method. T
 | Asset | An image, audio, or video file and its provenance and review record. |
 | Run | A persisted workflow execution, with tasks, attempts, and a next step. |
 | Execution seal | A local record of the prompt and declared generation context. |
+| Production-method plan | A versioned record of the selected process, source evidence, modules, stages, costs and pending work, observed as a run input/output; not a new runtime schema or automatic provider dispatcher. |
 
 ## Real capabilities and limitations
 

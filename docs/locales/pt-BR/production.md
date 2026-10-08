@@ -1,10 +1,18 @@
 # Produção de influenciadores de IA
 
-Este fluxo prepara personagens originais e repetíveis antes de produzir campanhas. Comece com poucos ativos fortes, aprove a identidade e só então aumente o volume. A escolha de fornecedor vem depois do brief e de um teste controlado; disponibilidade, limites e custos devem ser verificados no momento de uso.
+Este fluxo prepara personagens originais, memoráveis e repetíveis antes de produzir campanhas. Para novos influenciadores, o método principal é **Higgsfield AI Influencer Builder**, seguido por referências, voz, cenas e vídeo no Higgsfield, revisão completa, publicação autorizada e comparação medida. Uma alternativa escolhida explicitamente continua suportada. Conferir recursos e custos reais em cada etapa aplicável; o método principal não comprova acesso a uma conta conectada nem autoriza gastos.
+
+## Registrar o método e as etapas
+
+Começar pela conversa adaptativa e pelas fichas de conceito em [estratégia](strategy.md). Salvar um [plano do método de produção](../../../templates/locales/pt-BR/production-method.md) versionado no estúdio instalado e rastrear o arquivo real como entrada da run ou saída de planejamento conforme [operação do núcleo](framework-02.md). Declarar objetivo, conceito escolhido, fornecedor, módulo, rota de acesso, evidência da fonte, entradas exatas, dependências, autorizações e pendências. O plano usa os mecanismos existentes de arquivos/hashes e tentativas; não é adaptador de fornecedor nem nova imposição semântica do runtime.
+
+O AI Influencer Builder prepara e gera fichas de personagem; sozinho, não conclui voz, treinamento Soul ID, cenas ou vídeo. Mapear essas etapas para recursos do Higgsfield verificados separadamente conforme o [método de influenciadores no Higgsfield](higgsfield-influencer-method.md). Um vídeo direto pelo Higgsfield/Kling não comprova etapa concluída no Builder. Se uma etapa obrigatória estiver indisponível, preparar o trabalho local independente e manter essa etapa pendente ou em `awaiting-tool`; não substituí-la silenciosamente por imagens do Codex, geração direta no Kling ou outro módulo. Uma alternativa explícita altera o plano e segue o procedimento existente de nova tentativa quando entradas rastreadas mudarem.
+
+Para personagens existentes, reutilizar canon aprovado, voz aprovada inalterada e evidência válida de etapas anteriores sem repetir aprovação. Não reiniciar a criação de identidade nem impor uma nova identidade no Builder. Ao adotar o método principal para uma personagem existente, usar as referências aprovadas exatas e inspecionar qualquer nova ficha do fornecedor contra elas; continua candidata até revisão. Falta de importação ou fidelidade mantém essa etapa pendente. Acrescentar ou mudar voz em canon congelado segue a evolução normal da versão de identidade.
 
 ## 1. Definir o personagem
 
-Antes de gerar mídia, resolva a proposta: nome, público, tema, personalidade, valores, idioma, jeito de falar e motivo para acompanhar esse influenciador. Estabeleça idade adulta explícita e crie uma identidade original. Referências visuais servem para direção estética; o uso do rosto ou da voz de uma pessoa real precisa de autorização apropriada.
+Antes de gerar mídia, resolver a proposta: público, tema, premissa memorável, personalidade, valores, idioma, jeito de falar, contraste editorial e motivo para acompanhar esse influenciador. Quando a direção estiver aberta, apresentar pelo menos três conceitos realistas distintos com presença forte e aberturas concretas antes dos retratos, salvo se outra linguagem visual tiver sido escolhida, seguindo [estratégia](strategy.md). O usuário escolhe a direção; salvar o conceito antes de definir nome e identidade finais. Estabelecer idade adulta explícita e criar uma identidade original. Referências visuais orientam a estética; o uso do rosto ou da voz de uma pessoa real precisa de autorização apropriada.
 
 Separe três camadas:
 
@@ -18,7 +26,7 @@ Detalhes variáveis não devem se tornar a única forma de reconhecer a pessoa. 
 
 ## 2. Construir o reference pack
 
-Explore candidatos em `draft`, selecione uma direção e produza referências para fechar lacunas. Não reúna imagens de candidatos diferentes como se fossem uma identidade única.
+Para um novo influenciador no método principal, preparar o conceito escolhido no AI Influencer Builder usando configurações conferidas e schemas reais; uma alternativa explícita usa sua rota escolhida. Gerar uma amostra de exploração autorizada, inspecionar conceito e identidade e ajustar a partir do retorno antes de ampliar a ficha/conjunto de referências. Não randomizar uma identidade existente aprovada nem tratar o nome de um preset como escolha de identidade do usuário. A mídia candidata continua em `draft` e registros de referência continuam em `candidate` até revisão. Não reunir imagens de candidatos diferentes como se fossem uma identidade única.
 
 O pack inicial deve cobrir:
 
@@ -26,15 +34,22 @@ O pack inicial deve cobrir:
 - Perfil e sorriso, para conferir nariz, mandíbula, orelhas e dentes.
 - Meio corpo e corpo inteiro, com postura natural e roupa que permita avaliar proporções.
 - Uma condição de luz e uma expressão diferentes, para testar reconhecimento além do retrato principal.
+- Uma cena da personagem ou capa que demonstre a premissa escolhida, a presença distinta e a atitude no recorte de uso.
 - Se houver voz: uma amostra falada aprovada com frase neutra, pergunta e emoção moderada, acompanhada da descrição de idioma, sotaque, ritmo e timbre.
 
 Esses enquadramentos são uma proposta inicial, não uma garantia de qualidade. Use apenas o conjunto necessário para o personagem e para o meio de produção. Um material invisível ou não inspecionado não pode ser referência aprovada.
 
-Cada referência deve ter arquivo exato, descrição do enquadramento, origem e observações. Escolha uma referência principal e referências complementares coerentes. Preserve os arquivos originais e a versão do pack. Nomear uma imagem “oficial” não a aprova: revise com o [guia de qualidade](quality.md) e obtenha aprovação do responsável antes de marcar `canon-approved`.
+Uma ficha do Builder pode exibir várias vistas, mas uma grade sozinha não estabelece referências separadas e legíveis para cada ângulo. Obter os arquivos exatos necessários por uma rota verificada de exportação ou extração, preservar a ficha de origem e inspecionar cada referência selecionada. Continuar a produção de cenas/referências pelos módulos verificados do Higgsfield registrados no plano. Soul ID ou outro treinamento de identidade é opcional, justificado por necessidade demonstrada e autorizado separadamente.
+
+Cada referência deve ter arquivo exato, descrição do enquadramento, origem e observações. Escolha uma referência principal e referências complementares coerentes. Preserve os arquivos originais e a versão do pack. Nomear uma imagem “oficial” não a aprova: revise com o [guia de qualidade](quality.md) e registre a seleção visual inicial mantendo a nova persona em `draft`.
+
+Se a personagem tiver fala, preparar uma amostra vocal curta com roteiro na exploração em rascunho/referência, usando `purpose: reference` e o recurso de voz conferido do Higgsfield. Escutar o áudio exato e registrar arquivo escolhido, configurações e referência aprovada antes da aprovação final do canon. Descrições escritas de voz não são referências de áudio. Para uma persona sem fala, registrar voz como não aplicável ao escopo escolhido. Somente depois de concluir as escolhas visuais e vocais necessárias, o responsável deve aprovar o canon completo, marcar a persona `canon-approved` e criar seu snapshot preservado conforme [operação](operations.md). Configurações de voz e referências aprovadas entram no hash do canon; acrescentar uma voz depois de congelar a mesma versão é mudança de canon.
 
 ## 3. Testar consistência antes do lote
 
-Depois da aprovação do pack, faça um piloto pequeno que cubra situações reais do conteúdo: close, sorriso, meia figura, corpo inteiro e ambiente diferente. Para vídeo, inclua uma fala curta, giro moderado de cabeça e gesto simples. Se a primeira campanha não usar algum desses elementos, adapte o piloto às necessidades reais.
+Roteiros podem ser preparados durante a exploração em rascunho/referência, com aberturas concretas, entregas cumpridas e a perspectiva reconhecível da personagem. Na produção, preservar o texto falado exato e usar a referência vocal já escolhida e escutada, vinculada ao canon aprovado. Não acrescentar uma nova voz a uma versão congelada para viabilizar o piloto.
+
+Depois da aprovação do canon visual/vocal completo, fazer um piloto pequeno de produção no Higgsfield que cubra situações reais do conteúdo: close, sorriso, meia figura, corpo inteiro e ambiente diferente. Para vídeo, incluir fala curta com a voz aprovada, giro moderado de cabeça e gesto simples quando servirem ao conteúdo planejado; o piloto de uma persona sem fala não usa fala. Preparar cenas/imagens de produção antes das chamadas de vídeo que dependam delas. Se a primeira campanha não usar algum desses elementos, adaptar o piloto às necessidades reais e registrar o motivo.
 
 Compare cada resultado com o cânone, sem adicionar as falhas ao próprio pack. Se o método só funciona em um ângulo ou depende de ocultar o rosto, resolva isso antes de prometer uma produção recorrente. Aprove ativos individuais; não aprove o método inteiro com base em um único take bom.
 
@@ -46,12 +61,15 @@ Todo brief precisa de objetivo, canal, público, formato, mensagem principal, a�
 - **Vídeo:** roteiro falado, duração alvo, sequência de planos, movimentos, gestos, ritmo, voz e composição de áudio. Frases curtas e um movimento principal por take facilitam diagnóstico e edição.
 - **Entrega:** proporção, recorte, resolução e duração pretendidos; legenda ou texto; posição de elementos que precisam sobreviver aos cortes do canal.
 - **Restrições:** âncoras que devem ser preservadas, variações autorizadas e direitos necessários.
+- **Promessa criativa:** conceito escolhido, atitude/perspectiva editorial, abertura, entrega e motivo para assistir/salvar/compartilhar; traduzir isso em cena, enquadramento, estilo e atuação.
 
 Naturalismo deve ser dirigido: pele com textura, cabelo plausível, luz coerente e gestos humanos. Expressões como “perfeita”, “hiper bonita” ou “8K” não substituem essas decisões e podem empurrar o resultado para uma aparência artificial.
 
+O comando local `prompt` inclui público, proposta de valor, personalidade e passado ficcional não vazios como contexto criativo, junto à identidade e aos detalhes do plano. Revisar essa especificação conforme o conceito atual; passado ficcional não estabelece credenciais nem experiências reais. O comando prepara apenas texto e não encaminha ao Builder nem submete referências. Uma especificação de retrato neutro testa identidade; usar especificações de cena separadas para expressar presença e promessa criativa.
+
 ## 5. Produzir e registrar
 
-A geração de imagens integrada do Codex continua sendo o padrão quando disponível, salvo se o usuário escolher Higgsfield ou outro fornecedor. O Higgsfield pode usar seu [plugin opcional do Codex](higgsfield-plugin.md) ou a [CLI e wrapper locais](higgsfield-setup.md). A rota do plugin dispensa a CLI local do Higgsfield; confira separadamente ferramentas reais, acesso à conta, entradas de referências, custos e obtenção de saídas. A disponibilidade do plugin não comprova voz, Soul ID, exportação ou cobrança equivalente à CLI. Ambas as rotas mantêm os mesmos requisitos de cânone, autorização e revisão.
+A criação de novos influenciadores segue o método principal do Higgsfield, salvo se o usuário escolher explicitamente uma alternativa. O acesso ao Higgsfield pode usar seu [plugin do Codex](higgsfield-plugin.md) ou a [CLI e wrapper locais](higgsfield-setup.md), somente quando a rota expuser os módulos exigidos pelo plano. A rota do plugin não exige a CLI local do Higgsfield; conferir separadamente ferramentas reais, acesso à conta, entradas de referência, custos e obtenção de saídas. A disponibilidade do plugin não comprova Builder, voz, Soul ID, exportação nem cobrança equivalente à CLI. Uma rota integrada de imagens do Codex escolhida explicitamente ainda segue os mesmos requisitos de canon, autorização, registros e revisão.
 
 Use as referências aprovadas e registre ferramenta/modelo quando disponível, versão do cânone, prompt, parâmetros relevantes e arquivos de entrada e saída. Registre seed apenas se a ferramenta a expuser; ela ajuda na rastreabilidade, mas não garante a mesma identidade entre ferramentas, versões ou configurações.
 
@@ -77,10 +95,11 @@ Uma campanha pode ter estilo compartilhado sem aproximar involuntariamente as id
 
 ## Primeiro ciclo recomendado
 
-1. Escolher um personagem e resolver posicionamento e âncoras.
-2. Produzir e revisar o pack mínimo; aprovar o cânone.
-3. Testar uma imagem e, quando fizer parte do plano, um vídeo curto com voz.
-4. Corrigir os problemas reais observados e aprovar os ativos finais.
-5. Documentar o método que funcionou e começar a próxima peça ou o próximo personagem.
+1. Descobrir apenas preferências ainda abertas; comparar três conceitos quando a direção estiver aberta e salvar conceito escolhido e plano do método de produção.
+2. Para um novo influenciador, usar AI Influencer Builder para uma amostra de exploração e ficha de identidade revisada; produzir as referências necessárias no Higgsfield e uma cena da personagem.
+3. Manter a nova persona em `draft` depois da seleção visual inicial. Preparar roteiros e, se houver fala, amostra de voz em rascunho/referência; escutar e registrar arquivo/configurações/referência escolhidos. Depois obter aprovação final do canon visual/vocal e congelar o snapshot. Registrar voz como não aplicável para uma persona sem fala; reutilizar voz aprovada inalterada para uma personagem existente.
+4. Produzir um piloto pequeno de cenas/vídeo no Higgsfield, corrigir problemas reais observados, inspecionar movimento/áudio completos e exportação final e aprovar ativos individuais.
+5. Publicar apenas quando autorizado, registrar IDs e datas reais dos posts e comparar janelas, formatos, exposição, compartilhamento/retenção e custo equivalentes conforme [estratégia](strategy.md). Sem publicação ou métricas, manter a etapa de medição pendente.
+6. Salvar o aprendizado e escolher o próximo experimento com resultados reais. Não declarar o método viral a partir de um retrato atraente ou job concluído.
 
 Esse ciclo deixa claro o que foi aprovado, o que ainda precisa de inspeção e quais condições de produção já foram exercitadas. Amplie o processo conforme necessidades verificadas, sem transformar hipóteses em garantias de qualidade.

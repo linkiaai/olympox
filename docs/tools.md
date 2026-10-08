@@ -4,11 +4,11 @@ CLI sources consulted: **October 7, 2026**; Higgsfield plugin catalog checked: *
 
 ## Images
 
-The initial route is the integrated image generation/editing tool when available in the Codex session. This integrated workflow does not require configuring a local API key. Use the installed imagegen skill and its current instructions; record real generations in the character folder.
+For new influencer creation, the main route is the [Higgsfield influencer method](higgsfield-influencer-method.md), beginning with concept selection and AI Influencer Builder. Check the required operations in the real session. An absent Builder or reference-transfer capability keeps that stage pending; integrated images are not a silent substitute. The user can explicitly choose another method. For tasks that select integrated generation/editing, follow the installed imagegen skill; that route does not require a local API key. Record real generations in the character folder.
 
 For consistency, open and compare the approved set, describe anchors, and attach images to the request. A prompt containing a path does not send that file. A grid is useful for selection, but the final reference for each angle must have its own readable file. Copy results belonging to the project into the character folder, preserving the original version.
 
-Do not choose a provider solely from a demonstration. Run the same pilot with the same identity, setting, camera, and budget; compare visual acceptance rate, review time, and cost per approved asset. Changing the model or version requires retesting. LoRA or Soul ID can be future options when fidelity and volume justify training; they are not required to begin.
+Distinguish visual inspiration from a request to follow the demonstrated process. Preserve a requested reference method in a versioned [production-method plan](../templates/production-method.md); inspect the source before claiming its modules. The main Builder mapping is the framework's current choice, not proof of exclusive Builder use in the reference video. Compare alternatives when the user selects a change, using the same identity, scene, camera, and scoped budget. Changing model/version requires retesting. LoRA or Soul ID are optional when fidelity and volume justify separately authorized training.
 
 ## Higgsfield — plugin or local CLI
 

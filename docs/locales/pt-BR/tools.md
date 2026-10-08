@@ -4,11 +4,11 @@ Fontes da CLI consultadas em **7 de outubro de 2026**; catálogo do plugin Higgs
 
 ## Imagens
 
-O caminho inicial é a ferramenta integrada de geração/edição de imagens, quando disponível na sessão do Codex. Nesse fluxo integrado, não é necessário configurar uma chave de API local. Use a skill imagegen instalada e suas instruções atuais; registre as gerações reais na pasta da personagem.
+Para criar novos influenciadores, a rota principal é o [método Higgsfield](higgsfield-influencer-method.md), começando pela escolha do conceito e pelo AI Influencer Builder. Confira as operações exigidas na sessão real. A ausência do Builder ou de transferência de referências mantém essa etapa pendente; imagens integradas não são uma substituição silenciosa. O usuário pode escolher explicitamente outro método. Para tarefas que selecionem geração/edição integrada, siga a skill imagegen instalada; essa rota dispensa chave de API local. Registre gerações reais na pasta do personagem.
 
 Para consistência, abra e compare o conjunto aprovado, descreva as âncoras e anexe as imagens ao pedido. Um prompt contendo um caminho não envia aquele arquivo. Uma grade é útil para seleção, mas a referência final de cada ângulo deve ter arquivo próprio legível. Copie os resultados que pertencem ao projeto para a pasta do personagem, preservando a versão original.
 
-Não escolher um fornecedor só por uma demonstração. Faça o mesmo piloto com a mesma identidade, cenário, câmera e orçamento; compare taxa de aceitação visual, tempo de revisão e custo por ativo aprovado. Trocar modelo ou versão exige testar novamente. LoRA ou Soul ID podem ser opções futuras quando a fidelidade e o volume justificarem treinamento; não são exigência para começar.
+Diferencie inspiração visual de um pedido para seguir o processo demonstrado. Preserve um método de referência solicitado em um [plano versionado de método de produção](../../../templates/locales/pt-BR/production-method.md); confira a fonte antes de afirmar quais módulos ela usa. O caminho principal pelo Builder é a escolha atual do framework, sem provar uso exclusivo do Builder no vídeo de referência. Compare alternativas quando o usuário escolher uma mudança, usando a mesma identidade, cena, câmera e orçamento com escopo definido. Trocar modelo/versão exige testar novamente. LoRA ou Soul ID são opcionais quando fidelidade e volume justificarem treinamento autorizado separadamente.
 
 ## Higgsfield — plugin ou CLI local
 

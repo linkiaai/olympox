@@ -9,14 +9,16 @@
 - Git para clonar o repositório. A instalação de pacotes GitHub pelo npm também pode exigir Git no sistema.
 - Acesso ao repositório e à tag da versão escolhida. Um repositório privado pode exigir acesso Git autenticado na sua máquina.
 
-O núcleo local não tem dependências externas de execução. Não é necessário executar `npm install` para operar seus registros. Fornecedores de mídia são opcionais e exigem preparação própria.
+O núcleo local não tem dependências externas de execução. Não é necessário executar `npm install` para operar seus registros. A preparação de fornecedores externos é separada da instalação do núcleo e exige configuração própria.
+
+Esta release **0.3.0** começa novas personagens com onboarding curto por conversa e três conceitos distintos; depois segue o [método Higgsfield começando pelo Builder](higgsfield-influencer-method.md), salvo escolha explícita de outro método pelo usuário. Potencial de viralização continua sendo uma hipótese para testar. Ferramentas obrigatórias ausentes mantêm etapas criativas pendentes; a instalação não conecta fornecedores nem substitui o método escolhido. Os comandos abaixo fixam `v0.3.0`. Estúdios existentes exigem o procedimento explícito de atualização abaixo.
 
 ## Criar um estúdio pelo GitHub
 
 Execute a partir da pasta onde deseja criar o estúdio:
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.2.1 install ./my-studio
+npx --yes github:linkiaai/olympox#v0.3.0 install ./my-studio
 cd my-studio
 npm run verify
 npm run studio -- help
@@ -37,7 +39,7 @@ Se o Codex não mostrar a nova skill, recarregue o Codex ou reabra o projeto. A 
 
 ## Escolher acesso opcional ao Higgsfield
 
-A geração de imagens integrada do Codex é o padrão quando disponível, salvo se você escolher o Higgsfield. Para o Higgsfield, escolha seu [plugin do Codex](higgsfield-plugin.md) ou a [CLI e wrapper locais](higgsfield-setup.md). Instale e conecte o plugin separadamente na sua conta do Codex; essa rota não exige a CLI local do Higgsfield. A rota da CLI exige a preparação do binário e da conta próprios. Nenhuma das duas é necessária para operar o núcleo do OLYMPOX.
+Para novos influenciadores, prepare o método principal pelo Higgsfield com AI Influencer Builder e etapas posteriores de referência, voz, roteiro, cena e vídeo. Escolha seu [plugin do Codex](higgsfield-plugin.md) ou outra rota verificada que ofereça as operações exigidas. A [CLI e wrapper locais](higgsfield-setup.md) exigem preparação própria de binário/conta e não demonstram equivalência de recursos. Instale/conecte fornecedores separadamente; o plugin dispensa CLI local. O núcleo continua funcionando sem acesso externo. Não substitua silenciosamente recursos ausentes do Builder por imagens integradas do Codex ou geração direta de vídeo; outro método exige escolha explícita do usuário.
 
 ```text
 Atena, use o Higgsfield pelo plugin neste estúdio.
@@ -50,7 +52,7 @@ Isso escolhe uma rota; por si só, não autoriza geração paga, treinamento ou 
 ## Usar um projeto existente
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.2.1 install ./existing-project --merge
+npx --yes github:linkiaai/olympox#v0.3.0 install ./existing-project --merge
 ```
 
 O merge confere todos os destinos planejados antes de escrever. Arquivos idênticos do framework são mantidos, e arquivos ausentes são instalados. Arquivos diferentes ou colisões interrompem a operação sem sobrescrevê-los. Arquivos locais não relacionados são preservados. O instalador recusa links simbólicos e junções nos caminhos de origem ou destino da instalação.
@@ -59,10 +61,10 @@ Se houver conflitos, revise e reconcilie os arquivos explicitamente ou instale e
 
 ## Atualizar um estúdio existente
 
-A release **0.2.1** acrescenta uma rota opcional por conversa para o plugin Higgsfield. A API do núcleo local e os contratos mantêm a revisão de componente 0.2.0. Leia as [notas da versão](release-notes.md) e preserve o estúdio existente antes de comparar mudanças no framework.
+A release **0.3.0** atualiza onboarding, conceitos de personagens distintas, método principal Higgsfield Builder, preservação do plano de produção, contexto criativo nos prompts e orientações em inglês/pt-BR. A API do núcleo local, schemas de runs e revisão de componente das tarefas continuam em 0.2.0; os critérios de tarefas são esclarecidos. Leia as [notas da versão](release-notes.md) e preserve o estúdio existente antes de comparar mudanças no framework.
 
 1. Crie e verifique backups de personagens privados e runs vinculadas pelas [operações de backup](operations.md) existentes. Mantenha também uma cópia independente dos arquivos atuais do framework, contexto compartilhado e instruções locais; os backups de personagens excluem essa base.
-2. Instale a release em um diretório vazio independente, como `./my-studio-v0.2.1`, com o comando fixado na tag acima. Execute `npm run verify` ali e compare as fontes reutilizáveis do framework com o estúdio existente.
+2. Instale a release em um diretório vazio independente, como `./my-studio-v0.3.0`, com o comando fixado na tag acima. Execute `npm run verify` ali e compare as fontes reutilizáveis do framework com o estúdio existente.
 3. Reconcilie explicitamente apenas as fontes pretendidas do framework, skills ativas, template de instruções do estúdio, templates e documentação. Preserve customizações locais e mantenha as cópias ativas das skills consistentes com suas fontes principais. `--merge` mantém arquivos idênticos e recusa arquivos diferentes antes de escrever; ele não faz essa reconciliação por você.
 4. Mantenha fichas existentes, mídia, aprovações, snapshots, runs e backups no lugar com seus bytes e hashes originais. O estúdio vazio de uma nova release não substitui registros privados, e bytes históricos não devem ser reescritos para acomodar novas instruções ou fazer uma verificação passar.
 5. Execute `npm run verify` no estúdio atualizado e reabra ou recarregue o Codex para descoberta das skills. Revise runs retomadas quanto a mudanças no contexto. Quando a governança ou as entradas tiverem mudado, use o procedimento existente de nova tentativa explícita com um motivo, preservando tentativas e aprovações anteriores; consulte [operação do núcleo](framework-02.md).

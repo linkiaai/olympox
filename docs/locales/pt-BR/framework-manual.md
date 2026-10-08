@@ -1,6 +1,8 @@
 # OLYMPOX - AI Influencer framework
 
-O OLYMPOX organiza a criação e a produção de influenciadores virtuais originais com IA. Você conversa com o Codex; Atena coordena o pedido e as especialistas contribuem conforme a necessidade. O framework preserva versões, decisões e evidências para continuar o trabalho entre sessões.
+O OLYMPOX organiza a criação de influenciadores de IA originais e memoráveis com potencial de viralização a ser testado. Você conversa com o Codex; Atena coordena o pedido e as especialistas contribuem conforme a necessidade. O framework preserva versões, decisões e evidências para continuar o trabalho entre sessões.
+
+Para personagens novos, comece pelo [onboarding adaptativo curto](strategy.md) e três conceitos distintos conectando aparência, personalidade, público e conteúdo recorrente. O [método principal pelo Higgsfield](higgsfield-influencer-method.md) usa AI Influencer Builder, referências e cena com atuação, exploração de referência vocal quando há fala, depois aprovação do cânone completo, roteiros, cenas, piloto de vídeo e revisão/exportação. O usuário pode escolher explicitamente outro método. Recursos obrigatórios ausentes ficam pendentes; identidades existentes aprovadas ficam intactas. Potencial viral precisa ser testado com conteúdo e resultados reais.
 
 ## O que o framework faz
 
@@ -29,6 +31,7 @@ A constituição estabelece os princípios comuns. Os guias explicam o método. 
 | Ativo | Arquivo de imagem, áudio ou vídeo e seu registro de origem e revisão. |
 | Run | Execução persistida de um fluxo, com tarefas, tentativas e próxima etapa. |
 | Selo de execução | Registro local do prompt e do contexto informado de geração. |
+| Plano de método de produção | Registro versionado do processo escolhido, evidência da fonte, módulos, etapas, custos e pendências, observado como entrada/saída do run; não é novo schema de execução nem despachante automático de fornecedor. |
 
 ## Capacidades e limites reais
 

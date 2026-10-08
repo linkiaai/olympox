@@ -80,6 +80,8 @@ Example dates/reviewers are not real evidence: replace them with the approval ev
 
 Copy `templates/shot.json` into `prompts/` and fill it in. `purpose: reference` allows exploration of an identity still in draft; `purpose: production` requires approved canon. For video/audio, define `script`, voice, and target duration. A video without speech can have an empty script. Empty `referenceIds` selects approved visual references for image/video and the approved canonical voice reference for audio. Spoken video also includes its approved voice reference. For control, explicitly select only references useful to the piece.
 
+The generated prompt carries nonempty `profile.audience`, `profile.valueProposition`, `profile.personality` and `profile.backstory` as creative context, alongside identity anchors and shot direction. Fictional background is explicitly identified as creative context, not evidence of real experience. Exact speech and reference paths/hashes remain part of the specification. This command writes text only: it neither selects a provider nor submits files. Follow the saved method and [production guide](production.md) when executing it.
+
 ```powershell
 node scripts/studio.mjs prompt my-persona influencers/my-persona/prompts/shot-v1.json
 ```

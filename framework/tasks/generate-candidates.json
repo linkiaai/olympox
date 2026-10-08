@@ -13,6 +13,11 @@
   "criteria": [
     "Existing media file with its type and SHA-256 recorded",
     "Generation event declared with tool, responsible actor, and date",
+    "Preserve the selected original concept, personality, recognition anchors, and chosen level of realism or stylization",
+    "New influencer creation uses the planned Higgsfield AI Influencer Builder stage unless the user explicitly selected another method; missing required capability remains pending",
+    "Execution follows the observed method plan and records the actual provider, module, access route, exposed model, and references used",
+    "Required identity/reference stages have actual evidence; unavailable stages remain pending without silent substitution or omission",
+    "Preserve any existing approved identity and references; changing a requested method requires an explicit user decision and recorded replanning",
     "Does not approve identity or publish"
   ]
 }

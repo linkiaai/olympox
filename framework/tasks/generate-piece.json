@@ -13,6 +13,10 @@
   "criteria": [
     "Existing media file with its type and SHA-256 recorded",
     "Generation event declared with tool, responsible actor, and date",
+    "Preserve the selected original concept, personality, recognition anchors, and chosen level of realism or stylization",
+    "Execution follows the observed method plan and records the actual provider, module, access route, exposed model, and references used",
+    "Required character, reference, voice, and video stages have actual evidence; unavailable stages remain pending without silent substitution or omission",
+    "Preserve approved identity and references; changing a requested method requires an explicit user decision and recorded replanning",
     "Does not approve identity or publish"
   ]
 }

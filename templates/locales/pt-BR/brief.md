@@ -1,18 +1,20 @@
 # Brief da primeira persona
 
-Preencher apenas a parte essencial para começar. **“Pode propor” é uma resposta válida.** As perguntas opcionais ajudam quando já há preferências, mas não bloqueiam propostas. O Codex registra o que foi informado, o que é hipótese e o que ainda precisa de decisão; não inventa respostas como se estivessem aprovadas.
+Usar este documento como registro da conversa; o usuário não precisa completar um formulário. **“Pode propor” é uma resposta válida.** O Codex lê preferências existentes e pergunta apenas os pontos essenciais ainda abertos, agrupados em no máximo três perguntas curtas sobre objetivo, presença da personagem e público/assunto. Usar a ferramenta assíncrona de perguntas do host quando disponível ou uma conversa comum. Oferecer opções concretas e não repetir perguntas respondidas. Campos opcionais orientam propostas; o Codex registra o que foi informado, hipóteses e decisões pendentes sem inventar respostas aprovadas. Personas existentes pulam a descoberta inicial de criação e preservam o canon aprovado.
 
-## Essencial — uma resposta curta por item
+A criação de novos influenciadores usa o método principal **Higgsfield AI Influencer Builder**, com o ciclo completo de referências/voz/roteiro/cenas/vídeo/revisão seguido por publicação autorizada e comparação medida. Registrar as etapas no [plano do método de produção](production-method.md). Uma alternativa explícita continua suportada; recurso indisponível mantém a etapa obrigatória pendente e não seleciona silenciosamente imagens do Codex nem vídeo direto no Kling.
 
-1. **Objetivo:** o que queremos construir com esta persona? Comunidade, entretenimento, educação, presença de marca ou outro resultado?
+## Registrar os pontos essenciais descobertos — agrupar perguntas e reutilizar respostas
+
+1. **Objetivo:** o que queremos construir com esta persona? Entretenimento viral/alcance, comunidade e conexão, marca/embaixadora, conteúdo educativo ou narrativo, ou “pode propor”? Potencial de viralização é uma hipótese a testar, não promessa de alcance.
    - Resposta:
 2. **Público e valor:** para quem ela existe e que dúvida, desejo ou experiência vai atender? Se o nicho ainda estiver aberto, escreva “proponha três direções”.
    - Resposta:
-3. **Tipo de personagem:** que presença imaginamos — aparência realista ou estilizada, energia, expressão e identidade? A persona será adulta e original; idade e demais âncoras serão propostas quando não houver preferência.
+3. **Tipo de personagem:** que presença imaginamos — realismo memorável com conceito incomum, pessoa realista com personalidade expressiva, estilização quando desejado ou “pode propor”? Combinar idade, silhueta/postura, estilo distintivo, atitude e contraste editorial conforme necessário. A persona será adulta e original; essas escolhas não exigem fantasia nem exagero.
    - Resposta:
-4. **Referências e limites:** o que gostamos nas referências e o que não queremos? Descrever luz, roupa, composição, linguagem ou ritmo. Não copiar identidade de pessoas reais. Referências próprias ou licenciadas devem ter origem e permissão registradas antes do uso como material de identidade.
+4. **Referências e limites:** o que gostamos nas referências e o que não queremos? Distinguir inspiração de luz, roupa, composição, linguagem ou ritmo de um método de produção solicitado. Não copiar identidade de pessoas reais. Referências próprias ou licenciadas devem ter origem e permissão registradas antes do uso como material de identidade.
    - Resposta:
-5. **Condições de produção:** há um canal prioritário, idioma, tempo disponível ou orçamento já autorizado? Se não souber, o Codex propõe um piloto compatível com a produção local. Nenhum gasto novo é autorizado por preencher este campo.
+5. **Condições de produção:** há um canal prioritário, idioma, tempo disponível ou orçamento já autorizado? Se não souber, o Codex propõe um piloto pequeno no método principal e prepara trabalho local independente enquanto recursos ou autorização estiverem pendentes. Nenhum gasto novo é autorizado por preencher este campo.
    - Resposta:
 
 ## Opcional — preencher o que já estiver decidido
@@ -23,6 +25,8 @@ Preencher apenas a parte essencial para começar. **“Pode propor” é uma res
 - Público: situação, interesses, idioma e região, se relevantes:
 - Benefício editorial em uma frase:
 - Diferença além da aparência:
+- Premissa memorável: quem é / o que deseja / experiência do público:
+- Contraste editorial: a expectativa que desafia ou a perspectiva incomum que traz:
 - Temas que não vamos abordar:
 - Marcas, produtos ou serviços com que existe relação real:
 
@@ -39,6 +43,7 @@ Preencher apenas a parte essencial para começar. **“Pode propor” é uma res
 - Exemplo de frase que combina com ela:
 - Exemplo de frase que não combina com ela:
 - Limites para conselhos, opiniões e relações com o público:
+- Atitude em ação: uma reação ou cena concreta que mostra sua personalidade:
 
 ### Identidade visual e referências
 
@@ -49,6 +54,8 @@ Preencher apenas a parte essencial para começar. **“Pode propor” é uma res
 - O que pode variar entre conteúdos:
 - Referência / aspecto a estudar / origem / permissão de uso:
 - Semelhanças ou associações com pessoas reais que devemos evitar:
+- Combinação intencional de idade, silhueta/postura, estilo, expressão e detalhes recorrentes; usar apenas o que serve ao conceito:
+- Cena da personagem ou capa que deve tornar a premissa e a presença visíveis:
 
 ### Conteúdo e aprendizado
 
@@ -56,6 +63,8 @@ Preencher apenas a parte essencial para começar. **“Pode propor” é uma res
 - Três possíveis pilares e a função de cada um:
 - Séries ou formatos que gostaria de explorar:
 - Uma hipótese de conteúdo para testar:
+- Para cada série proposta: abertura / entrega / motivo para assistir, salvar ou compartilhar:
+- Mecanismo de compartilhamento a testar: identificação, surpresa, humor, emoção, utilidade ou outro motivo:
 - Janela do piloto, quantidade viável de posts e tempo por peça:
 - Métrica principal: numerador, denominador, fonte e idade do post na coleta:
 - Coorte: quais posts, formatos, canal e período serão comparados:
@@ -70,16 +79,19 @@ Preencher apenas a parte essencial para começar. **“Pode propor” é uma res
 - Evidência de interesse que já existe, se houver:
 - Orçamento autorizado, moeda e limite por lote, se houver:
 - Restrições de prazo, ferramentas ou direitos:
+- Método principal escolhido ou alternativa explícita, fonte da decisão relevante, rota disponível do Higgsfield e módulos pendentes:
 
 ## Entrega do Codex a partir deste brief
 
 1. Resumo do que sabemos, hipóteses propostas e lacunas relevantes.
-2. Até três direções comparáveis, quando a direção ainda não estiver definida.
-3. Após a escolha: ficha da persona, voz com três amostras, bio transparente e proposta de âncoras visuais.
-4. Após escolher as âncoras: lote inicial de ideias/roteiros e plano do piloto com métricas calculáveis.
+2. Pelo menos três fichas de conceito de fato distintas e comparáveis antes dos retratos quando a direção ainda não estiver definida, cada uma com premissa, presença visual, atitude e exemplo de voz, contraste editorial, três aberturas de conteúdo com entregas, hipótese de compartilhamento e dificuldade de produção. Recomendar uma e convidar à seleção ou combinação de elementos compatíveis.
+3. Após a escolha: conceito da personagem e plano do método salvos, ficha da persona, três amostras escritas de voz, bio transparente e proposta de âncoras visuais. Preparar uma amostra de exploração no AI Influencer Builder no método principal, ou na alternativa explícita, e revisá-la a partir do retorno antes de ampliar o conjunto sob a autorização aplicável.
+4. Antes da aprovação final do canon: inspecionar ficha visual/conjunto de referências de identidade e cena da personagem ou capa e registrar a seleção visual inicial mantendo a nova persona em `draft`. Se houver fala planejada, preparar e escutar uma amostra vocal em rascunho/referência com `purpose: reference`, registrar áudio/configurações/referência exatos escolhidos e depois obter aprovação final do canon visual/vocal e congelar o snapshot. Para uma persona sem fala, registrar voz como não aplicável. Conceito escolhido ou amostra de exploração não aprova canon.
+5. Após aprovação final do canon: produzir o piloto de cenas/vídeo no método escolhido usando referências visuais e vocais aprovadas, revisão completa e exportação local. Ideias/roteiros com aberturas e entregas cumpridas já podem ter sido preparados durante a exploração. Manter qualquer etapa indisponível pendente.
+6. Publicação com autorização aplicável e plano de comparação medida; depois, IDs reais dos posts, contagens/denominadores compatíveis, custos e aprendizado quando disponíveis. Conceitos e inspeção não prometem alcance; ausência de publicação ou métricas mantém a medição pendente.
 
-O usuário decide a direção e as âncoras de identidade. O Codex resolve os detalhes de rascunho dentro dessas escolhas. Publicação e custos ainda não autorizados são decisões separadas.
+O usuário decide a direção e as âncoras de identidade. O Codex resolve os detalhes de rascunho dentro dessas escolhas. Se as preferências continuarem abertas, recomendar conceitos realistas variados com presença forte e hipótese testável de compartilhamento como proposta. Para uma persona existente, reutilizar canon/voz aprovados e inalterados sem repetir aprovação e fortalecer direção e conteúdo dentro das variações aprovadas; alterar identidade ou acrescentar voz a canon congelado segue o processo normal de versão e aprovação. Publicação e custos ainda não autorizados são decisões separadas.
 
 ## Mensagem curta para iniciar
 
-> Vamos criar a primeira persona. Meu objetivo é **[objetivo]**, o público é **[público ou “a definir”]** e gosto de **[preferências]**. Quero evitar **[limites]**. Temos **[canal/idioma/tempo/orçamento autorizado, se houver]**. Se faltar direção, apresente três caminhos diferentes com proposta de valor, personalidade, três ideias de conteúdo e dificuldade de produção. Recomende um caminho e explique os motivos, mantendo as escolhas em aberto para decidirmos juntos.
+> Vamos criar a primeira persona. Ajude-me a escolher o objetivo e o tipo de personagem numa conversa curta. Meu público é **[público ou “pode propor”]** e gosto de **[preferências]**. Quero evitar **[limites]**. Temos **[canal/idioma/tempo/orçamento autorizado, se houver]**. Apresente pelo menos três conceitos diferentes com premissa, presença visual memorável, personalidade/voz, contraste editorial, três aberturas com entregas, hipótese de compartilhamento e dificuldade de produção. Incluir pessoas realistas com presença forte quando apropriado. Recomende um caminho e explique os motivos, mantendo as escolhas em aberto para decidirmos juntos.

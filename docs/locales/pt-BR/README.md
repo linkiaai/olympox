@@ -1,8 +1,8 @@
 # OLYMPOX - AI Influencer framework
 
-Release **0.2.1** do framework — **8 de outubro de 2026**. Leia as [notas da versão](release-notes.md) e as [orientações de atualização](installation.md#atualizar-um-estudio-existente) antes de atualizar um estúdio existente. O núcleo local e os contratos continuam na revisão de componente 0.2.0.
+Release **0.3.0** do framework — **8 de outubro de 2026**. Leia as [notas da versão](release-notes.md) e as [orientações de atualização](installation.md#atualizar-um-estudio-existente) antes de atualizar um estúdio existente. O núcleo local e a revisão de componente das tarefas continuam em 0.2.0, com critérios de produção esclarecidos.
 
-OLYMPOX é um framework local de influenciadores de IA coordenado por Atena e uma equipe de especialistas com nomes de deusas. O Codex o utiliza para criar e dirigir influenciadores virtuais originais por meio de estratégia, persona, referências, fotografia, roteiros, voz, vídeo e revisão de qualidade. Cada influenciador tem identidade e histórico próprios.
+OLYMPOX é um framework local para criar influenciadores de IA originais e memoráveis com potencial de viralização a ser testado, coordenado por Atena e uma equipe de especialistas com nomes de deusas. O Codex conecta assinatura visual, personalidade, público, conteúdo recorrente, voz e atuação do personagem. Cada influenciador tem identidade e histórico próprios; viralização é uma hipótese para testar, nunca um resultado prometido.
 
 O pacote reutilizável contém governança, skills, perfis de especialistas, contratos de tarefas, fluxos, comandos locais, templates e um manual. A skill `olympox` organiza o trabalho criativo em um estúdio instalado. Cada usuário instala um estúdio independente e cria ali seus próprios influenciadores originais. Fichas de personagens, mídia, runs, backups, credenciais e binários opcionais de fornecedores ficam fora do pacote do framework.
 
@@ -13,7 +13,7 @@ Este repositório e seu projeto do Codex são dedicados ao desenvolvimento e à 
 Requer **Node 22 ou posterior** e **Codex**. Instale pelo GitHub:
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.2.1 install ./my-studio
+npx --yes github:linkiaai/olympox#v0.3.0 install ./my-studio
 cd my-studio
 npm run verify
 npm run studio -- help
@@ -56,18 +56,18 @@ Para pesquisa:
 
 > Atena, peça à Aurora tendências e ideias para [personagem], com formato, abertura, cenas e opções de áudio verificadas.
 
-Se ainda não houver preferências, o Codex propõe caminhos. O [brief](../../../templates/locales/pt-BR/brief.md) ajuda a organizar escolhas e aceita “pode propor”. Não é necessário preencher todos os campos antes de conversar.
+Para um personagem novo, Atena começa uma [conversa curta de onboarding](strategy.md), reaproveita suas respostas e propõe três conceitos distintos com uma recomendação. Escolha o objetivo, como entretenimento viral, apresentador recorrente ou personagem de marca, e o estilo desejado; “pode propor” é válido. O [brief](../../../templates/locales/pt-BR/brief.md) registra escolhas sem virar questionário obrigatório. A direção criativa padrão é realismo variado e memorável, com personalidade e presença fortes; outro estilo continua sendo sua escolha.
 
-Para imagens, use a ferramenta integrada do Codex quando disponível, salvo se escolher outro fornecedor. Você pode escolher o Higgsfield por seu [plugin opcional do Codex](higgsfield-plugin.md) ou pela [CLI e wrapper locais](higgsfield-setup.md). A rota do plugin dispensa a CLI local do Higgsfield. Ambas seguem os mesmos requisitos do OLYMPOX para cânone, registros de execução, autorização e revisão de mídia. O instalador do framework fornece orientações; cada usuário instala e conecta o plugin externo separadamente.
+O método principal para novos influenciadores usa o **AI Influencer Builder do Higgsfield**, seguido de referências, voz quando necessária, roteiros, cenas, vídeo e revisão. Siga o [método completo](higgsfield-influencer-method.md), pelo [plugin do Codex](higgsfield-plugin.md) ou por outra rota verificada que realmente ofereça as operações exigidas. O plugin dispensa CLI local. O acesso externo continua sendo configurado separadamente e o núcleo local funciona sem ele; recursos obrigatórios ausentes mantêm a produção pendente. Outro método exige escolha explícita do usuário. Imagens integradas do Codex continuam disponíveis para tarefas que as selecionem. A instalação nunca conecta fornecedores nem executa produção.
 
 ## Método
 
-1. Proposta de valor, público, personalidade e voz.
-2. Candidatos visuais e conjunto de referências da mesma pessoa.
-3. Escolha e aprovação da identidade; registro das âncoras e arquivos.
-4. Piloto de cenas, expressões e, quando necessário, fala/movimento.
-5. Conteúdo, produção por peça e inspeção do resultado final.
-6. Publicação autorizada, coleta de resultados e ajustes com evidência.
+1. Onboarding curto, público/oportunidade e três conceitos de personagem distintos com aberturas recorrentes.
+2. Escolha do conceito e registro do [plano de método de produção](../../../templates/locales/pt-BR/production-method.md), incluindo evidência da fonte, módulos, recursos, etapas e escopos de custo.
+3. Exploração da identidade visual pelo AI Influencer Builder, referências coerentes e cena com atuação. Para personagem com fala, prepare e revise amostra vocal durante o trabalho de rascunho/referência; depois aprove o cânone visual/vocal completo e exato antes da produção.
+4. Desenvolvimento de roteiros, cenas e um pequeno piloto de vídeo por ferramentas verificadas do Higgsfield usando identidade/voz aprovadas. Treinamento só é avaliado quando justificado.
+5. Revisão completa da mídia e exportação dos bytes reais antes de ampliar para lotes de conteúdo.
+6. Publicação com autorização aplicável, comparação de resultados reais em janelas adequadas e ajuste da hipótese sem descartar conceitos cedo demais.
 
 Consulte [estratégia](strategy.md), [produção](production.md), [qualidade](quality.md) e [ferramentas](tools.md). A [análise da referência](video-reference.md) identifica o que foi consultado e o que adaptamos por decisão própria.
 
@@ -97,7 +97,7 @@ Leia [operação](operations.md) para referências, hashes e manifesto. Mídia, 
 | Coordenação e histórico 0.2 | Registry, contratos, tarefas retomáveis, snapshots e registros editoriais locais |
 | Backup de personagens | Inventário de arquivos e tarefas vinculadas, verificação e teste de restauração |
 | Imagem integrada | Disponível somente quando a sessão do Codex oferece ferramentas de geração e inspeção |
-| Higgsfield por plugin ou CLI | Fluxo opcional por plugin e wrapper para CLI local; confira separadamente as ferramentas disponíveis, acesso à conta e custos da rota escolhida |
+| Higgsfield por plugin ou CLI | Acesso configurado separadamente para o método principal de novos influenciadores; confira ferramentas disponíveis, acesso à conta e custos da rota escolhida |
 | Identidade e piloto | Sua própria exploração de candidatos, aprovação explícita do cânone e piloto inspecionado antes de lotes |
 
 Os perfis são instruções, e os pacotes locais não despacham agentes. Os comandos mantêm registros e integridade; geração, inspeção, serviços pagos e publicação precisam das ferramentas e autorizações aplicáveis ao seu estúdio. Testes não demonstram identidade visual, qualidade de voz nem execução por um fornecedor. A disponibilidade do plugin por si só não demonstra voz, Soul ID, mídia para download, exportação nem cobrança equivalente à CLI. Consulte [estado do framework](studio-status.md), [plugin Higgsfield](higgsfield-plugin.md) e [preparação opcional da CLI](higgsfield-setup.md).

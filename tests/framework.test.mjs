@@ -324,6 +324,85 @@ test('changed input/canon requires an explicit new attempt without changing hist
   assert.ok(readRun(root, run.runId).drift.some(item => item.path.endsWith('#canon')));
 });
 
+test('a saved production method planning output is observed before generation and drift preserves prior evidence', () => {
+  const root = fixture(), identityBefore = fileInventory(path.join(root, 'influencers/alpha'));
+  let run = begin(root);
+  run = transitionRun(root, run.runId, { action: 'skip', reason: 'This synthetic brief already defines its objective.' });
+  const script = save(root, 'influencers/alpha/work/script.md', 'Synthetic script; no actual production.');
+  const methodContent = [
+    '# Synthetic production method',
+    'Requested provider: Higgsfield; module: AI Influencer Builder; access route: plugin.',
+    'Model: unverified. Required stages: identity references, scenes, voice, video, inspection.',
+    'Preserve approved fixture identity. No external tools or generation were used.'
+  ].join('\n');
+  const method = save(root, 'influencers/alpha/work/production-method-v1.md', methodContent);
+  const methodHash = digest(path.join(root, method));
+  run = transitionRun(root, run.runId, { action: 'complete', outputs: [script, method], evidence: evidence('prepared') });
+  const planning = run.run.attempts.at(-1).results.find(result => result.taskId === 'prepare-piece');
+  assert.deepEqual(planning.outputs.find(output => output.path === method), { path: method, sha256: methodHash });
+  assert.deepEqual(run.inputs.find(input => input.path === method), { path: method, sha256: methodHash });
+  run = document(root, run);
+  assert.equal(run.nextTask.taskId, 'generate-piece');
+  assert.equal(run.canContinue, true);
+  const previous = structuredClone(run.run.attempts.at(-1));
+  save(root, method, 'Synthetic tampering with a recorded method plan before generation.');
+  const changedHash = digest(path.join(root, method)), status = readRun(root, run.runId);
+  assert.equal(status.canContinue, false);
+  assert.deepEqual(status.drift.find(change => change.path === method), { path: method, expected: methodHash, actual: changedHash });
+  const syntheticMedia = save(root, 'influencers/alpha/media/unsubmitted.png', 'Synthetic bytes; no tool was called.');
+  const recordBefore = digest(path.join(root, `work/runs/${run.runId}.json`));
+  for (const options of [
+    { action: 'start' },
+    { action: 'complete', outputs: [syntheticMedia], evidence: evidence('generated', { tool: 'fixture-no-tool' }) }
+  ]) assert.throws(() => transitionRun(root, run.runId, options), /changed/);
+  assert.equal(digest(path.join(root, `work/runs/${run.runId}.json`)), recordBefore);
+  const held = resumeRun(root, run.runId);
+  assert.equal(held.state, 'awaiting-input');
+  assert.equal(held.detail.requiresNewAttempt, true);
+  assert.deepEqual(held.run.attempts[0].results, previous.results);
+  save(root, method, methodContent);
+  const revisedMethod = save(root, 'influencers/alpha/work/production-method-v2.md', methodContent + '\nVersion 2: synthetic explicit decision to revise the scene sequence.');
+  const resumed = resumeRun(root, run.runId, { newAttempt: true, reason: 'Explicit synthetic replanning in version 2; preserve restored version 1 after tamper detection.' });
+  assert.notEqual(resumed.attemptId, run.attemptId);
+  assert.equal(resumed.run.attempts.length, 2);
+  assert.deepEqual(resumed.run.attempts[0].inputs, previous.inputs);
+  assert.deepEqual(resumed.run.attempts[0].results, previous.results);
+  assert.deepEqual(resumed.run.attempts[0].events.slice(0, previous.events.length), previous.events);
+  assert.deepEqual(resumed.inputs.find(input => input.path === method), { path: method, sha256: methodHash });
+  assert.equal(resumed.run.attempts[1].stepIndex, 0);
+  assert.equal(resumed.run.attempts[1].results.length, 0);
+  let replanned = transitionRun(root, run.runId, { action: 'skip', reason: 'Objective still defined by the same synthetic brief.' });
+  const revisedScript = save(root, 'influencers/alpha/work/script-v2.md', 'Revised synthetic scene sequence.');
+  replanned = transitionRun(root, run.runId, { action: 'complete', outputs: [revisedScript, revisedMethod], evidence: evidence('prepared') });
+  assert.deepEqual(replanned.inputs.find(input => input.path === revisedMethod), { path: revisedMethod, sha256: digest(path.join(root, revisedMethod)) });
+  assert.deepEqual(replanned.run.attempts[0].results, previous.results);
+  assert.equal(digest(path.join(root, method)), methodHash);
+  for (const [relative, hash] of Object.entries(identityBefore)) assert.equal(digest(path.join(root, 'influencers/alpha', relative)), hash);
+});
+
+test('a production method input does not bypass a missing generation capability or complete its required stage', () => {
+  const root = fixture();
+  const method = save(root, 'influencers/alpha/work/production-method-v1.md', [
+    '# Synthetic production method',
+    'Requested provider: Higgsfield; module: AI Influencer Builder; access route: plugin.',
+    'Video generation: pending, because no verified video-generation capability exists.'
+  ].join('\n'));
+  const run = reachGeneration(root, begin(root, 'produce-piece', { medium: 'video', inputs: ['brief.md', method], capabilities: [] }));
+  assert.deepEqual(run.inputs.find(input => input.path === method), { path: method, sha256: digest(path.join(root, method)) });
+  assert.deepEqual(run.missingCapabilities, ['video-generation']);
+  const syntheticMedia = save(root, 'influencers/alpha/media/unsubmitted.mp4', 'Synthetic bytes; no actual media or tool submission.');
+  const before = structuredClone(run.run.attempts.at(-1));
+  const held = transitionRun(root, run.runId, { action: 'complete', outputs: [syntheticMedia], evidence: evidence('generated', { tool: 'fixture-no-tool' }) });
+  assert.equal(held.state, 'awaiting-tool');
+  assert.equal(held.nextTask.taskId, 'generate-piece');
+  assert.equal(held.canContinue, false);
+  assert.equal(held.detail.note, 'No tool was called.');
+  assert.deepEqual(held.run.attempts.at(-1).results, before.results);
+  assert.deepEqual(held.run.attempts.at(-1).inputs, before.inputs);
+  assert.equal(held.run.attempts.at(-1).stepIndex, before.stepIndex);
+  assert.equal(held.run.attempts.at(-1).job, null);
+});
+
 test('changed generated file blocks review, delivery, and attempt resume', () => {
   const root = fixture(), run = generate(root, reachGeneration(root));
   const media = run.run.attempts.at(-1).results.find(result => result.taskId === 'generate-piece').outputs[0];

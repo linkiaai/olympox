@@ -80,6 +80,8 @@ Datas/revisores dos exemplos não são evidência real: substitua-os pelo evento
 
 Copie `templates/shot.json` para `prompts/` e preencha. `purpose: reference` permite explorar uma identidade ainda em rascunho; `purpose: production` exige cânone aprovado. Para vídeo/áudio, defina `script`, voz e duração alvo. Um vídeo sem fala pode ter script vazio. `referenceIds` vazio seleciona as referências visuais aprovadas para imagem/vídeo e a referência vocal canônica aprovada para áudio. Vídeo falado também inclui a referência vocal aprovada. Para controle, prefira indicar apenas as referências úteis à peça.
 
+O prompt gerado leva `profile.audience`, `profile.valueProposition`, `profile.personality` e `profile.backstory` quando preenchidos como contexto criativo, junto das âncoras de identidade e direção do shot. História fictícia é identificada explicitamente como contexto criativo, não evidência de experiência real. Fala exata e caminhos/hashes de referências continuam na especificação. O comando escreve apenas texto: não escolhe fornecedor nem envia arquivos. Siga o método salvo e o [guia de produção](production.md) ao executá-lo.
+
 ```powershell
 node scripts/studio.mjs prompt my-persona influencers/my-persona/prompts/shot-v1.json
 ```

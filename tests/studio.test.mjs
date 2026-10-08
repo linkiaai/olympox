@@ -121,6 +121,56 @@ test('exploration builds a prompt; production requires approval and approved ref
   assert.throws(() => buildPrompt(persona, shot, dir), /unknown/);
 });
 
+test('generation prompts retain distinctive fictional profile context without changing source records or exact speech', () => {
+  const { dir, persona, shot } = fixture(true);
+  Object.assign(persona.profile, {
+    name: 'Synthetic urban creator',
+    age: 67,
+    audience: 'Adults who notice overlooked city life',
+    valueProposition: 'Turn ordinary street corners into surprising miniature stories',
+    personality: ['Dry humor', 'Fearless curiosity', 'Playful confidence'],
+    backstory: 'A fictional former night-bus conductor who invents one-minute city tales.'
+  });
+  persona.identity.distinctiveMarks = ['A narrow silver streak in short hair'];
+  persona.identity.invariants.push('Lively eyebrows');
+  persona.approval.canonHash = canonHash(persona);
+  Object.assign(shot, { purpose: 'production', medium: 'video', referenceIds: ['front'], script: 'I am 67. "Watch this corner."\nHere comes the story.', durationSeconds: 8 });
+  const personaFile = path.join(dir, 'persona.json'), shotFile = path.join(dir, 'shot.json');
+  fs.writeFileSync(personaFile, JSON.stringify(persona, null, 4) + '\n');
+  fs.writeFileSync(shotFile, JSON.stringify(shot, null, 4) + '\n');
+  const personaBytes = fs.readFileSync(personaFile), shotBytes = fs.readFileSync(shotFile);
+  const personaBefore = structuredClone(persona), shotBefore = structuredClone(shot), canonBefore = canonHash(persona);
+  const prompt = buildPrompt(persona, shot, dir);
+  for (const value of [persona.profile.audience, persona.profile.valueProposition, ...persona.profile.personality, persona.profile.backstory]) {
+    assert.ok(prompt.includes(value), `Prompt lost selected profile context: ${value}`);
+  }
+  assert.match(prompt, /^Fictional background[^\n]*$/m);
+  assert.ok(prompt.includes(persona.identity.distinctiveMarks[0]));
+  for (const invariant of persona.identity.invariants) assert.ok(prompt.includes(invariant));
+  for (const reference of persona.references.filter(reference => ['front', 'voice'].includes(reference.id))) {
+    assert.ok(prompt.includes(reference.path));
+    assert.ok(prompt.includes(reference.sha256));
+  }
+  assert.ok(prompt.includes(`Exact speech: ${JSON.stringify(shot.script)}`));
+  assert.deepEqual(persona, personaBefore);
+  assert.deepEqual(shot, shotBefore);
+  assert.equal(canonHash(persona), canonBefore);
+  assert.deepEqual(fs.readFileSync(personaFile), personaBytes);
+  assert.deepEqual(fs.readFileSync(shotFile), shotBytes);
+});
+
+test('legacy empty profile context remains usable for reference exploration', () => {
+  const { dir, persona, shot } = fixture();
+  Object.assign(persona.profile, { audience: '', valueProposition: '', backstory: '', personality: [] });
+  const before = structuredClone(persona);
+  assert.deepEqual(validatePersona(persona, dir).errors, []);
+  const prompt = buildPrompt(persona, shot, dir);
+  assert.match(prompt, /Preserve: Facial structure/);
+  assert.match(prompt, /front.png/);
+  assert.doesNotMatch(prompt, /^Audience:\s*$|^Editorial proposition:\s*$|^Personality:\s*$|^Fictional background[^\n]*:\s*$/m);
+  assert.deepEqual(persona, before);
+});
+
 test('audio uses the voice file and spoken video includes image and voice', () => {
   const { dir, persona, shot } = fixture(true);
   Object.assign(shot, { purpose: 'production', medium: 'audio', script: 'Exact text for a test.' });

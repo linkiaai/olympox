@@ -1,5 +1,33 @@
 # Notas das versões do OLYMPOX
 
+## 0.3.0 — 8 de outubro de 2026
+
+A criação de novos influenciadores começa com onboarding adaptativo curto e três conceitos distintos, conectando assinatura visual memorável, personalidade forte e conteúdo recorrente. O método principal usa AI Influencer Builder do Higgsfield e um pacote coerente de referências. Seleção visual preliminar e revisão de fidelidade antecedem a amostra vocal de uma personagem que fala, preparada e ouvida enquanto a persona permanece `draft` com `purpose: reference`. A aprovação final vincula o cânone visual/vocal completo antes de roteiros, cenas e piloto de vídeo em produção seguirem com esse contexto aprovado. Conteúdo silencioso registra por que voz não se aplica; voz e cânone já aprovados são reutilizados. QA/exportação completos antecedem publicação autorizada e comparação de resultados reais. Soul ID continua condicionado à necessidade e com autorização separada.
+
+Escolha explícita do usuário pode selecionar outro método. Recursos obrigatórios ausentes ficam pendentes sem substituição silenciosa por imagens integradas ou geração direta de vídeo. Potencial de viralização continua sendo uma hipótese para testar, não um resultado garantido. Cânone existente e registros históricos ficam preservados.
+
+O [estudo da referência](video-reference.md) atualizado registra análise audiovisual automática por cenas e inspeção direta de quadros importantes, com limites de cobertura. Diferencia a tela observada de Soul Cinema do mapeamento atual pelo Builder. O [guia de método](higgsfield-influencer-method.md), skills, critérios de tarefas, instruções do estúdio e [template versionado de plano](../../../templates/locales/pt-BR/production-method.md) preservam o processo escolhido usando entradas/saídas existentes do run. Não acrescentam despacho automático do fornecedor nem imposição semântica pelo núcleo.
+
+Prompts gerados levam público, proposta editorial, personalidade e história fictícia quando preenchidos, junto das âncoras de identidade e entradas exatas de shot/fala existentes. Fontes inglesas e traduções brasileiras mudam juntas. A API do núcleo local, schemas de runs e revisão de componente das tarefas continuam em **0.2.0**, com critérios de método e direção criativa esclarecidos. Governança atualizada ou entradas observadas podem exigir nova tentativa explícita com motivo na retomada; tentativas e aprovações anteriores ficam preservadas.
+
+### Instalar ou atualizar
+
+Instale um estúdio independente com acesso ao repositório e à tag:
+
+```sh
+npx --yes github:linkiaai/olympox#v0.3.0 install ./my-studio
+cd my-studio
+npm run verify
+```
+
+Use `npx.cmd` e `npm.cmd` no Windows se necessário. Estúdios existentes seguem as [orientações de atualização](installation.md#atualizar-um-estudio-existente): faça backup dos registros privados e da base do framework, instale separadamente, compare e reconcilie arquivos reutilizáveis, e preserve registros pessoais e bytes históricos. `--merge` recusa arquivos diferentes antes de escrever; ele não é um atualizador automático. A instalação não conecta fornecedores nem executa produção paga.
+
+### Verificação e limites
+
+O framework atualizado passou em **128 testes locais** na cópia do código-fonte e **128** em um estúdio independente instalado do arquivo npm. A cobertura de regressão inclui contexto criativo do perfil nos prompts, registros de origem e fala exata intactos, hashes e mudança/retomada do método salvo, e ausência de recurso obrigatório de geração. As verificações de instalador/exportação cobrem seleção do pacote reutilizável, arquivos e metadados preservados, e recusa de conflitos.
+
+Nenhuma geração real do Higgsfield foi executada para esta release. Verificações locais não comprovam descoberta de skills pelo Codex, acesso ou execução do fornecedor, fidelidade de identidade, qualidade de voz, exportação de mídia, resultados de viralização ou publicação. Cada estúdio instalado precisa executar as verificações de produção aplicáveis com ferramentas e mídia reais. As notas históricas abaixo mantêm o comportamento e a tag de instalação da release 0.2.1.
+
 ## 0.2.1 — 8 de outubro de 2026
 
 Esta atualização de correção acrescenta orientações para usar o Higgsfield pelo plugin conectado do Codex, junto à CLI e wrapper locais existentes. O usuário pode escolher o plugin na conversa sem instalar a CLI local do Higgsfield. A release do framework é 0.2.1; a API do núcleo local e os contratos de tarefas, sem mudanças, mantêm a revisão de componente 0.2.0.

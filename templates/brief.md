@@ -1,18 +1,20 @@
 # First persona brief
 
-Fill in only what is essential to begin. **“Please propose” is a valid answer.** Optional questions help when preferences already exist, but do not block proposals. Codex records supplied information, assumptions and decisions still needed; it does not invent answers as though they were approved.
+Use this as a record of the conversation; the user does not need to complete a form. **“Please propose” is a valid answer.** Codex reads existing preferences and asks only unresolved essentials, grouped into at most three short questions about objective, character presence, and audience/subject. Use the host's asynchronous question tool when available or ordinary conversation. Offer concrete options and do not repeat answered questions. Optional fields guide proposals; Codex records supplied information, assumptions and decisions still needed without inventing approved answers. Existing personas skip creation onboarding and preserve approved canon.
 
-## Essential — one short answer per item
+New influencer creation uses the main **Higgsfield AI Influencer Builder** method, with the complete reference/voice/script/scene/video/review cycle followed by authorized publication and measured comparison. Record the stages in the [production-method plan](production-method.md). An explicit alternative remains supported; unavailable capability keeps the required stage pending and does not silently select Codex images or direct Kling video.
 
-1. **Objective:** what do we want to build with this persona? Community, entertainment, education, brand presence or another outcome?
+## Record discovered essentials — group questions and reuse answers
+
+1. **Objective:** what do we want to build with this persona? Viral entertainment/reach, community and connection, brand/ambassador, educational or narrative content, or “please propose”? Viral potential is a hypothesis to test, not a reach promise.
    - Answer:
 2. **Audience and value:** who is she for, and what question, desire or experience will she address? If the niche is open, write “propose three directions”.
    - Answer:
-3. **Character type:** what presence do we imagine — realistic or stylized appearance, energy, expression and identity? The persona will be adult and original; age and other anchors will be proposed when no preference exists.
+3. **Character type:** what presence do we imagine — memorable realism with an unusual concept, a realistic person with expressive personality, stylization when desired, or “please propose”? Combine age, silhouette/posture, distinctive styling, attitude and editorial contrast as appropriate. The persona will be adult and original; these choices do not require fantasy or exaggeration.
    - Answer:
-4. **References and boundaries:** what do we like about the references, and what do we want to avoid? Describe light, clothing, composition, language or rhythm. Do not copy real people's identities. Record origin and permission for owned or licensed references before using them as identity material.
+4. **References and boundaries:** what do we like about the references, and what do we want to avoid? Distinguish inspiration for light, clothing, composition, language or rhythm from a requested production method. Do not copy real people's identities. Record origin and permission for owned or licensed references before using them as identity material.
    - Answer:
-5. **Production conditions:** is there a priority channel, language, available time or an already authorized budget? If unsure, Codex proposes a pilot compatible with local production. Filling this field does not authorize new spending.
+5. **Production conditions:** is there a priority channel, language, available time or an already authorized budget? If unsure, Codex proposes a small main-method pilot and prepares independent local work while capabilities or authorization remain pending. Filling this field does not authorize new spending.
    - Answer:
 
 ## Optional — fill in existing decisions
@@ -23,6 +25,8 @@ Fill in only what is essential to begin. **“Please propose” is a valid answe
 - Audience: situation, interests, language and region, when relevant:
 - Editorial benefit in one sentence:
 - Differentiation beyond appearance:
+- Memorable premise: who she is / what she wants / audience experience:
+- Editorial contrast: the expectation she challenges or unusual perspective she brings:
 - Topics we will not address:
 - Brands, products or services with an actual relationship:
 
@@ -39,6 +43,7 @@ Fill in only what is essential to begin. **“Please propose” is a valid answe
 - Example of a fitting sentence:
 - Example of an unfitting sentence:
 - Boundaries for advice, opinions and audience relationships:
+- Attitude in action: a concrete reaction or scene that shows her personality:
 
 ### Visual identity and references
 
@@ -49,6 +54,8 @@ Fill in only what is essential to begin. **“Please propose” is a valid answe
 - What may vary across content:
 - Reference / aspect to study / origin / usage permission:
 - Real-person resemblance or associations to avoid:
+- Deliberate combination of age, silhouette/posture, styling, expression and recurring details; use only what serves the concept:
+- In-character scene or cover that should make the premise and presence visible:
 
 ### Content and learning
 
@@ -56,6 +63,8 @@ Fill in only what is essential to begin. **“Please propose” is a valid answe
 - Three possible pillars and each one's purpose:
 - Series or formats to explore:
 - One content hypothesis to test:
+- For each proposed series: opening / payoff / reason to watch, save or share:
+- Sharing mechanism to test: recognition, surprise, humor, emotion, usefulness, or another reason:
 - Pilot window, feasible post count and time per piece:
 - Main metric: numerator, denominator, source and post age at collection:
 - Cohort: posts, formats, channel and period being compared:
@@ -70,16 +79,19 @@ Fill in only what is essential to begin. **“Please propose” is a valid answe
 - Existing evidence of interest, if any:
 - Authorized budget, currency and batch limit, if any:
 - Constraints involving deadlines, tools or rights:
+- Selected main method or explicit alternative, relevant source decision, available Higgsfield route and pending modules:
 
 ## Codex delivery from this brief
 
 1. Summary of known information, proposed assumptions and relevant gaps.
-2. Up to three comparable directions when direction is still open.
-3. After selection: persona profile, three voice samples, transparent bio and proposed visual anchors.
-4. After choosing anchors: initial content/script ideas and a pilot plan with calculable metrics.
+2. At least three genuinely distinct, comparable concept cards before portraits when direction is still open, each with premise, visual presence, attitude and sample voice, editorial contrast, three content hooks with payoffs, a sharing hypothesis and production difficulty. Recommend one and invite selection or compatible combinations.
+3. After selection: saved character concept and method plan, persona profile, three written voice samples, transparent bio and proposed visual anchors. Prepare one AI Influencer Builder exploration sample under the main method, or the explicit alternative, and revise it from feedback before expanding the set under applicable authorization.
+4. Before final canon approval: inspect the identity sheet/reference set and in-character scene or cover, and record initial visual selection while the new persona remains `draft`. If speech is planned, prepare and listen to a draft/reference vocal sample with `purpose: reference`, record the selected exact audio/settings/reference, then obtain final visual/vocal canon approval and freeze the snapshot. For a silent persona, record voice as not applicable. A selected concept or exploration sample does not approve canon.
+5. After final canon approval: produce the scene/video pilot under the selected method using the approved visual and vocal references, complete review and local export. Ideas/scripts with openings and fulfilled payoffs may already have been prepared during exploration. Retain any unavailable stage as pending.
+6. Applicable authorized publication and measured comparison plan, then actual post IDs, compatible counts/denominators, costs and learning when available. Concepts and inspection do not promise reach; absent publication or metrics keeps measurement pending.
 
-The user decides the direction and identity anchors. Codex resolves draft details within those choices. Publication and costs not yet authorized remain separate decisions.
+The user decides the direction and identity anchors. Codex resolves draft details within those choices. If preferences remain open, recommend varied realistic concepts with strong presence and a testable sharing hypothesis as a proposal. For an existing persona, reuse unchanged approved canon/voice without repeating approval and strengthen direction and content within approved variations; changing identity or adding voice to frozen canon follows the normal version and approval process. Publication and costs not yet authorized remain separate decisions.
 
 ## Short starting message
 
-> Let's create the first persona. My objective is **[objective]**, the audience is **[audience or “to be defined”]**, and I like **[preferences]**. I want to avoid **[boundaries]**. We have **[channel/language/time/authorized budget, if any]**. If direction is missing, present three different paths with a value proposition, personality, three content ideas and production difficulty. Recommend one and explain why, keeping choices open for us to decide together.
+> Let's create the first persona. Help me choose the objective and character type in a short conversation. My audience is **[audience or “please propose”]**, and I like **[preferences]**. I want to avoid **[boundaries]**. We have **[channel/language/time/authorized budget, if any]**. Present at least three different concepts with premise, memorable visual presence, personality/voice, editorial contrast, three hooks with payoffs, sharing hypothesis and production difficulty. Include realistic people with strong presence when appropriate. Recommend one and explain why, keeping choices open for us to decide together.
