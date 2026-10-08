@@ -12,7 +12,7 @@ node scripts/studio.mjs list
 node scripts/studio.mjs validate my-persona
 ```
 
-`new` prepares the record in a temporary folder and publishes only the complete folder. It rejects an existing destination or concurrent creation. A persona starts as `draft`; empty fields are warnings of outstanding work. `validate` fails on structural errors, missing/changed references, or inconsistent approval records. Complete `brief.md` and `persona.json` with real choices. Keep chronology, decisions, and results in `decisions.md`. There is no fictitiously approved initial persona.
+`new` prepares the record in a temporary folder and publishes only the complete folder. It rejects an existing destination or concurrent creation. A persona starts as `draft`; empty fields are warnings of outstanding work. `validate` fails on structural errors, missing/changed references, inconsistent approval records, or an approved canon that differs from its existing frozen snapshot. Complete `brief.md` and `persona.json` with real choices. Keep chronology, decisions, and results in `decisions.md`. There is no fictitiously approved initial persona.
 
 | Character file/folder | Purpose |
 | --- | --- |
@@ -70,7 +70,7 @@ Before evolving an approved identity, preserve its snapshot:
 node scripts/studio.mjs canon-snapshot my-persona
 ```
 
-Core 0.2 checks old assets against the snapshot of the version used, including reference copies. `register` also freezes approved canon. Each `identityVersion` accepts a single canon; changes require a new version and approval. Without a valid historical snapshot, validation rejects the old context. Preserve originals and reviews.
+Core 0.2 checks old assets against the snapshot of the version used, including reference copies. `register` also freezes approved canon. Each `identityVersion` accepts a single canon; changes require a new version and explicit approval. Persona validation, workflow start, binding, task acceptance, and a new attempt compare an approved current record with any existing frozen snapshot for that version. A changed identity cannot reuse the version by replacing its approval hash. Status and ordinary resumption report conflicts with a bound canon as drift and block continuation; reconciling an uncertain external job remains possible without accepting that canon. These checks do not create snapshots: an approved record without one can remain valid, while a missing historical snapshot is never invented to validate an old context. Preserve originals and reviews.
 
 For core 0.1 manifests, use `migrate-assets my-persona` while the current canon is still approved. Migration freezes that canon and preserves legacy reviews without inventing new inspection. Legacy productions remain identified as such; the full seal applies only after returning the asset to draft, completing its context, and performing a new review.
 
@@ -134,7 +134,7 @@ Historical character records, snapshots, approvals, execution seals, editorial v
 
 ## Skill and backup
 
-`node scripts/install-skill.mjs` installs the local skill in `.agents/skills` without changing personal configuration. Identical installations are retained; differing versions require review and explicit update. The folder may require write permission in the Codex session. `doctor` checks source/installation equality.
+`node scripts/install-skill.mjs` installs `olympox` in `.agents/skills` without changing personal configuration; pass `higgsfield-studio` to select that skill instead. It validates and reads both source files, `SKILL.md` and `agents/openai.yaml`, and preflights both destinations and their parent paths before writing. Missing sources, links or junctions, invalid file/directory types, and differing installed bytes fail before changes. Identical files are retained; missing files are installed only after the complete preflight. Review a differing installation before replacing it. The folder may require write permission in the Codex session. `doctor` checks source/installation equality.
 
 Character records, media, and tasks are ignored by Git by default. Use verifiable backup after an important cycle:
 

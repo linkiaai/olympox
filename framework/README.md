@@ -15,6 +15,8 @@ Input and output paths are relative to the project root, with `/`. Files belongi
 
 Capabilities are session declarations, such as `image-generation`, `image-inspection`, `video-generation`, and `video-inspection`. The shell does not prove that a tool is available. A missing required capability leaves the stage `awaiting-tool`. Profiles and packages carry limitations; this module has no external adapters.
 
+Persona validation with a character directory, workflow start, binding, task acceptance, and a new attempt compare an approved current canon with any existing frozen snapshot for its `identityVersion`, including its character ID and canon hash. A same-version identity change is rejected even if the approval hash was replaced. For a bound canon, `readRun` reports the conflict as drift and ordinary `resumeRun` blocks continuation; an uncertain external job can still be reconciled without accepting that canon. Use a new `identityVersion` and explicit approval for identity evolution. These checks do not create snapshots or invent missing historical context; an approved record without an existing snapshot can remain valid.
+
 The contract and entire record have hashes; the constitution, registry, profiles, and contracts have observed file hashes to detect drift. These hashes detect changes but are neither signatures nor authentication against someone with access who can recalculate them. Codex needs to read only the context of the next task; the hash list does not require loading all profiles into context.
 
 ## Completion declarations

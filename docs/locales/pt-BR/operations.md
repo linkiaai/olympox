@@ -12,7 +12,7 @@ node scripts/studio.mjs list
 node scripts/studio.mjs validate my-persona
 ```
 
-`new` prepara a ficha em uma pasta temporária e só publica a pasta completa. Recusa destino existente e criação concorrente. A persona nasce em `draft`; campos vazios são avisos de trabalho pendente. `validate` falha em erro estrutural, referência ausente/alterada ou registro de aprovação incoerente. Complete `brief.md` e `persona.json` com escolhas reais. Guarde cronologia, decisões e resultados em `decisions.md`. Não há uma persona inicial ficticiamente aprovada.
+`new` prepara a ficha em uma pasta temporária e só publica a pasta completa. Recusa destino existente e criação concorrente. A persona nasce em `draft`; campos vazios são avisos de trabalho pendente. `validate` falha em erro estrutural, referência ausente/alterada, registro de aprovação incoerente ou cânone aprovado divergente do snapshot já congelado. Complete `brief.md` e `persona.json` com escolhas reais. Guarde cronologia, decisões e resultados em `decisions.md`. Não há uma persona inicial ficticiamente aprovada.
 
 | Arquivo/pasta no personagem | Uso |
 | --- | --- |
@@ -70,7 +70,7 @@ Antes de evoluir uma identidade aprovada, preserve seu snapshot:
 node scripts/studio.mjs canon-snapshot my-persona
 ```
 
-O núcleo 0.2 confere ativos antigos contra o snapshot da versão usada, incluindo as cópias das referências. `register` também congela o cânone aprovado. Uma mesma `identityVersion` aceita um único cânone; mudanças exigem nova versão e aprovação. Sem snapshot histórico válido, a verificação recusa o contexto antigo. Preserve originais e revisões.
+O núcleo 0.2 confere ativos antigos contra o snapshot da versão usada, incluindo as cópias das referências. `register` também congela o cânone aprovado. Uma mesma `identityVersion` aceita um único cânone; mudanças exigem nova versão e aprovação explícita. A validação da persona, o início do fluxo, o vínculo, a aceitação de tarefas e uma nova tentativa comparam a ficha atual aprovada com qualquer snapshot já congelado daquela versão. Uma identidade alterada não pode reutilizar a versão pela substituição do hash de aprovação. A consulta de estado e a retomada comum relatam conflitos com o cânone vinculado como drift e bloqueiam a continuação; ainda é possível reconciliar um job externo incerto sem aceitar esse cânone. Essas verificações não criam snapshots: uma ficha aprovada sem snapshot pode continuar válida, enquanto um snapshot histórico ausente nunca é inventado para validar um contexto antigo. Preserve originais e revisões.
 
 Para manifestos da base 0.1, use `migrate-assets my-persona` enquanto o cânone atual ainda estiver aprovado. A migração congela esse cânone e preserva revisões legadas sem inventar uma nova inspeção. Produções legadas continuam identificadas como tal; o selo completo só se aplica depois de voltar o ativo a rascunho, completar o contexto e realizar uma nova revisão.
 
@@ -134,7 +134,7 @@ Renomear o framework atualiza o código, as orientações e a apresentação atu
 
 ## Skill e backup
 
-`node scripts/install-skill.mjs` instala a skill local em `.agents/skills`, sem alterar a configuração pessoal. Instalações idênticas são mantidas; versões divergentes exigem revisão e atualização explícita. A pasta pode exigir permissão de escrita na sessão do Codex. `doctor` verifica a igualdade entre origem e instalação.
+`node scripts/install-skill.mjs` instala `olympox` em `.agents/skills`, sem alterar a configuração pessoal; passe `higgsfield-studio` para selecionar essa skill. Valida e lê os dois arquivos de origem, `SKILL.md` e `agents/openai.yaml`, e verifica previamente ambos os destinos e seus caminhos superiores antes de gravar. Origens ausentes, links ou junctions, tipos inválidos de arquivo/pasta e bytes divergentes na instalação causam falha antes de qualquer mudança. Arquivos idênticos são mantidos; arquivos ausentes só são instalados após a verificação prévia completa. Revise uma instalação divergente antes de substituí-la. A pasta pode exigir permissão de escrita na sessão do Codex. `doctor` verifica a igualdade entre origem e instalação.
 
 Fichas, mídia e tarefas são ignoradas pelo Git por padrão. Use o backup verificável depois de um ciclo importante:
 

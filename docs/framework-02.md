@@ -6,7 +6,7 @@ The studio has nine profiles, fifteen task contracts, and three persistent workf
 
 1. When direction requires research, Gaia investigates up to three opportunities for a market/channel, with sources, assumptions, competitors, and reasons to discard a direction. With an already defined objective, research can be omitted with a reason.
 2. Atena recommends an opportunity and turns the selection into a brief. Psiquê defines value, personality, and boundaries; Íris directs visual candidates.
-3. You choose identity from real files. Approval fixes references and hashes; approved canon receives a snapshot.
+3. You choose identity from real files. Approval fixes references and hashes. Preserve the approved canon with `canon-snapshot` before evolving identity; approval alone does not create a snapshot.
 4. Saraswati prepares content consistent with the character; Aurora researches trends when needed. Selene prepares and executes production with available tools; Têmis inspects the complete result.
 5. Atena delivers the reviewed piece. Fortuna prepares distribution and results collection when publication is authorized.
 
@@ -55,7 +55,7 @@ Locks reject concurrent writes. An interruption can leave a lock or temporary fo
 
 ## Identity and generation execution
 
-`persona.json` preserves current state. `canon-snapshot` preserves an approved version and copies of reference files. Identity evolution requires a new version; old productions stay linked to their snapshot. `migrate-assets` preserves legacy records without creating reviews that never occurred.
+`persona.json` preserves current state. `canon-snapshot` preserves an approved version and copies of reference files. Persona validation, workflow start, binding, task acceptance, and a new attempt check the current approved canon against any existing frozen snapshot for the same `identityVersion`. Status and ordinary resumption report conflicts with a bound canon as drift and block continuation; an uncertain external job can still be reconciled without accepting that canon. Replacing an approval hash cannot make a different identity valid under that version. Identity evolution requires a new `identityVersion` and explicit approval; old productions stay linked to their snapshot. These checks never create a missing snapshot. `migrate-assets` preserves legacy records without inventing historical snapshots or reviews that never occurred.
 
 After generation, file registration, and completion of provenance, `execution-seal` preserves the prompt and declared context. A new production record requires review linked to that seal, media, and canon. This detects subsequent changes to the declared provider/model, references, cost, and other parameters. The seal is a local record; it does not prove execution or inspection occurred.
 

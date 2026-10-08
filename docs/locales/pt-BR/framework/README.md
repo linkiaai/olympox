@@ -15,6 +15,8 @@ Os caminhos de inputs e outputs são relativos à raiz do projeto, com `/`. Arqu
 
 Capacidades são declarações da sessão, por exemplo `image-generation`, `image-inspection`, `video-generation` e `video-inspection`. O shell não prova que uma ferramenta está disponível. Ausência da capacidade requerida deixa a etapa `awaiting-tool`. Perfis e pacotes carregam as limitações; não há adaptadores externos neste módulo.
 
+A validação da persona com a pasta do personagem, o início do fluxo, o vínculo, a aceitação de tarefas e uma nova tentativa comparam o cânone atual aprovado com qualquer snapshot já congelado para sua `identityVersion`, incluindo ID do personagem e hash canônico. Uma mudança de identidade na mesma versão é recusada mesmo que o hash de aprovação tenha sido substituído. Para um cânone vinculado, `readRun` relata o conflito como drift e `resumeRun` comum bloqueia a continuação; um job externo incerto ainda pode ser reconciliado sem aceitar esse cânone. Use nova `identityVersion` e aprovação explícita para evoluir a identidade. Essas verificações não criam snapshots nem inventam contexto histórico ausente; uma ficha aprovada sem snapshot existente pode continuar válida.
+
 O contrato e o registro inteiro têm hashes; constituição, registry, perfis e contratos têm seus arquivos observados para detectar drift. Esses hashes detectam alterações, mas não são assinaturas nem autenticação contra alguém que tenha acesso e possa recalculá-los. Só o contexto da próxima tarefa precisa ser lido pelo Codex; a lista de hashes não exige carregar todos os perfis no contexto.
 
 ## Declarações de conclusão

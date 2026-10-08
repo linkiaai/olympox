@@ -162,6 +162,31 @@ function executionPayload(asset) {
   return payload;
 }
 
+function validateFrozenCanon(persona, base) {
+  const root = fs.realpathSync(base);
+  let current = root;
+  const parts = ['canon', versionKey(persona.identityVersion), 'snapshot.json'];
+  for (let index = 0; index < parts.length; index++) {
+    const candidate = path.join(current, parts[index]);
+    try { fs.lstatSync(candidate); }
+    catch (error) { if (error.code === 'ENOENT') return; throw error; }
+    const resolved = fs.realpathSync(candidate), relative = path.relative(root, resolved);
+    if (!relative || relative === '..' || relative.startsWith('..' + path.sep) || path.isAbsolute(relative)) {
+      throw new Error('Frozen canon path is outside the character directory.');
+    }
+    if (index < parts.length - 1 && !fs.statSync(resolved).isDirectory()) {
+      throw new Error('Frozen canon parent must be a directory.');
+    }
+    current = resolved;
+  }
+  // Embedded snapshot personas are validated without a base, so reading history
+  // does not recursively compare it with the editable current record.
+  const frozen = readCanon(base, persona.identityVersion);
+  if (frozen.characterId !== persona.id || frozen.canonHash !== canonHash(persona)) {
+    throw new Error('Canon version already frozen with another identity. Increment identityVersion.');
+  }
+}
+
 export function validatePersona(p, base) {
   const errors = [], warnings = [];
   if (!obj(p)) return { errors: ['Persona must be an object.'], warnings };
@@ -225,6 +250,10 @@ export function validatePersona(p, base) {
     if (!p.references.some(ref => obj(ref) && isToken(ref.status, 'approved') && ['three-quarter', 'profile'].includes(ref.role))) errors.push('Canon requires another approved angle.');
     if (!obj(p.approval) || !nonempty(p.approval.reviewer) || !date(p.approval.at) || !nonempty(p.approval.notes)) errors.push('Approval from the responsible reviewer is missing.');
     if (!obj(p.approval) || p.approval.canonHash !== canonHash(p)) errors.push('Approval does not match the current canon.');
+    if (base) {
+      try { validateFrozenCanon(p, base); }
+      catch (error) { errors.push(error.message); }
+    }
   }
   return { errors, warnings };
 }

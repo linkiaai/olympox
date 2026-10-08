@@ -38,6 +38,18 @@ function fixture() {
 
 function store(dir, manifest) { fs.writeFileSync(path.join(dir, 'assets.json'), JSON.stringify(manifest, null, 2)); }
 function load(dir) { return readJson(path.join(dir, 'assets.json')); }
+function fileInventory(directory) {
+  const result = {};
+  function visit(current, prefix = '') {
+    for (const entry of fs.readdirSync(current, { withFileTypes: true })) {
+      const relative = prefix + entry.name, target = path.join(current, entry.name);
+      if (entry.isDirectory()) visit(target, relative + '/');
+      else result[relative] = hash(fs.readFileSync(target));
+    }
+  }
+  visit(directory);
+  return result;
+}
 function review(asset, type = asset.type) {
   return {
     reviewer: 'Fixture', at, notes: 'Simulated metadata; does not prove inspection', decision: 'approve',
@@ -108,6 +120,102 @@ test('snapshot does not approve a draft or overwrite an identity at the same ver
   persona.approval.canonHash = canonHash(persona);
   assert.throws(() => snapshotCanon(persona, dir), /Increment identityVersion/);
   assert.deepEqual(readCanon(dir, 1), original);
+});
+
+test('reapproval cannot reuse a frozen version, and rejected mutations preserve all history', () => {
+  const f = fixture(), asset = preparedAsset(f);
+  const sealed = sealExecution(f.persona, f.dir, asset.id), original = readCanon(f.dir, 1);
+  const manifest = load(f.dir);
+  manifest.assets[0].status = 'production';
+  manifest.assets[0].review = { ...review(manifest.assets[0]), executionSha256: sealed.executionSha256 };
+  store(f.dir, manifest);
+  f.persona.identity.face = 'Different identity at the frozen version';
+  f.persona.approval.canonHash = canonHash(f.persona);
+  const before = fileInventory(f.dir);
+  assert.deepEqual(validatePersona(f.persona).errors, []);
+  assert.ok(validatePersona(f.persona, f.dir).errors.some(error => /Increment identityVersion/.test(error)));
+  // Historical delivery integrity remains independent of eligibility for new work.
+  assert.deepEqual(validateAssets(manifest, f.persona, f.dir), []);
+  for (const operation of [
+    () => snapshotCanon(f.persona, f.dir),
+    () => registerAsset(f.persona, f.dir, 'media/v2.png', 'image'),
+    () => sealExecution(f.persona, f.dir, asset.id),
+    () => migrateAssets(f.persona, f.dir)
+  ]) {
+    assert.throws(operation, /Increment identityVersion/);
+    assert.deepEqual(fileInventory(f.dir), before);
+  }
+  assert.deepEqual(readCanon(f.dir, 1), original);
+  assert.equal(readExecution(f.dir, sealed.executionSha256).data.generation.id, asset.id);
+});
+
+test('current validation permits unfrozen approval, matching canon, drafts, and a new version without freezing', () => {
+  const f = fixture(), before = fileInventory(f.dir);
+  assert.deepEqual(validatePersona(f.persona, f.dir).errors, []);
+  assert.deepEqual(fileInventory(f.dir), before);
+  assert.equal(fs.existsSync(path.join(f.dir, 'canon')), false);
+  snapshotCanon(f.persona, f.dir);
+  const frozenBytes = fileInventory(path.join(f.dir, 'canon'));
+  const editorial = structuredClone(f.persona);
+  editorial.profile.audience = 'Updated editorial audience';
+  editorial.approval.notes = 'New notes on the same identity';
+  assert.deepEqual(validatePersona(editorial, f.dir).errors, []);
+  const draft = structuredClone(f.persona);
+  draft.status = 'draft'; draft.approval = null; draft.identity.face = 'Unapproved candidate';
+  assert.deepEqual(validatePersona(draft, f.dir).errors, []);
+  const next = nextCanon(f);
+  assert.deepEqual(validatePersona(next, f.dir).errors, []);
+  assert.equal(fs.existsSync(path.join(f.dir, 'canon/v000002')), false);
+  assert.deepEqual(fileInventory(path.join(f.dir, 'canon')), frozenBytes);
+});
+
+test('frozen canon validation accepts historical machine tokens without rewriting hashes or bytes', () => {
+  const f = fixture();
+  f.persona.status = 'canon_aprovado';
+  for (const ref of f.persona.references) ref.status = 'aprovada';
+  f.persona.approval.canonHash = canonHash(f.persona);
+  const frozen = snapshotCanon(f.persona, f.dir), before = fileInventory(f.dir);
+  assert.deepEqual(validatePersona(f.persona, f.dir).errors, []);
+  assert.deepEqual(validatePersona(frozen.persona).errors, []);
+  assert.equal(readCanon(f.dir, 1).persona.status, 'canon_aprovado');
+  assert.equal(readCanon(f.dir, 1).persona.references[0].status, 'aprovada');
+  assert.deepEqual(fileInventory(f.dir), before);
+});
+
+test('current validation refuses corrupt frozen records and archived bytes without repairing them', () => {
+  for (const corruption of ['record', 'reference']) {
+    const f = fixture(), frozen = snapshotCanon(f.persona, f.dir);
+    const target = corruption === 'record' ? 'canon/v000001/snapshot.json' : `canon/v000001/${frozen.referenceFiles[0].path}`;
+    fs.writeFileSync(path.join(f.dir, target), corruption === 'record' ? '{invalid json' : 'Changed archived bytes');
+    const before = fileInventory(f.dir);
+    assert.ok(validatePersona(f.persona, f.dir).errors.length);
+    assert.throws(() => snapshotCanon(f.persona, f.dir));
+    assert.deepEqual(fileInventory(f.dir), before);
+  }
+});
+
+test('frozen snapshot path must have directory parents and a regular file', () => {
+  for (const target of ['canon', 'canon/v000001', 'canon/v000001/snapshot.json']) {
+    const f = fixture(), absolute = path.join(f.dir, target);
+    fs.mkdirSync(path.dirname(absolute), { recursive: true });
+    if (target.endsWith('snapshot.json')) fs.mkdirSync(absolute);
+    else fs.writeFileSync(absolute, 'File in place of directory');
+    const result = validatePersona(f.persona, f.dir);
+    assert.ok(result.errors.some(error => /directory|regular file/.test(error)), target);
+  }
+});
+
+test('frozen snapshot directories cannot escape through junctions or symlinks even before a snapshot exists', t => {
+  for (const target of ['canon', 'canon/v000001']) {
+    const f = fixture(), outside = fixture(), absolute = path.join(f.dir, target);
+    fs.mkdirSync(path.dirname(absolute), { recursive: true });
+    try { fs.symlinkSync(outside.dir, absolute, process.platform === 'win32' ? 'junction' : 'dir'); }
+    catch (error) { if (error.code === 'EPERM') { t.skip('Host does not allow directory links.'); return; } throw error; }
+    const outsideBefore = fileInventory(outside.dir);
+    assert.ok(validatePersona(f.persona, f.dir).errors.some(error => /outside the character directory/.test(error)));
+    assert.throws(() => snapshotCanon(f.persona, f.dir), /outside the character directory/);
+    assert.deepEqual(fileInventory(outside.dir), outsideBefore);
+  }
 });
 
 test('candidates stay outside the snapshot without changing approved logical paths', () => {

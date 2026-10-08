@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { canonHash } from '../scripts/studio-core.mjs';
+import { canonHash, snapshotCanon, validatePersona, validateAssets } from '../scripts/studio-core.mjs';
 import { validateFramework, startRun, readRun, validateRunRecord, transitionRun, resumeRun } from '../scripts/framework-core.mjs';
 
 const sourceRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -76,6 +76,49 @@ function review(root, run, overrides = {}) {
   const output = save(root, `influencers/alpha/work/review-${crypto.randomUUID()}.md`, 'Simulated inspection report');
   return transitionRun(root, run.runId, { action: 'complete', outputs: [output], evidence: evidence('reviewed', { reviewer: 'Fixture', method: 'visual', decision: 'approve', criticalIssues: [], limitations: [], media, ...overrides }) });
 }
+function fileInventory(directory) {
+  const result = {};
+  function visit(current, prefix = '') {
+    for (const entry of fs.readdirSync(current, { withFileTypes: true })) {
+      const relative = prefix + entry.name, target = path.join(current, entry.name);
+      if (entry.isDirectory()) visit(target, relative + '/');
+      else result[relative] = digest(target);
+    }
+  }
+  visit(directory);
+  return result;
+}
+function freeze(root) {
+  const p = json(path.join(root, 'influencers/alpha/persona.json'));
+  snapshotCanon(p, path.join(root, 'influencers/alpha'));
+  return p;
+}
+function changeApprovedIdentity(root, increment = false) {
+  const p = json(path.join(root, 'influencers/alpha/persona.json'));
+  p.identity.face = 'Different structural identity';
+  if (increment) p.identityVersion++;
+  p.status = 'canon-approved';
+  p.approval = { reviewer: 'Fixture', at, notes: 'Reapproved structural fixture', canonHash: canonHash(p) };
+  save(root, 'influencers/alpha/persona.json', p);
+  return p;
+}
+function reachCanonApproval(root, run = begin(root, 'create-character')) {
+  run = transitionRun(root, run.runId, { action: 'skip', reason: 'Research already applicable.' });
+  run = document(root, run);
+  run = transitionRun(root, run.runId, { action: 'skip', reason: 'Direction selected in this fixture.' });
+  run = document(root, run);
+  const output = save(root, 'influencers/alpha/media/candidate.png', 'Synthetic candidate bytes');
+  run = transitionRun(root, run.runId, { action: 'complete', outputs: [output], evidence: evidence('generated', { tool: 'fixture' }) });
+  const report = save(root, 'influencers/alpha/work/candidate-review.md', 'Synthetic review');
+  return transitionRun(root, run.runId, { action: 'complete', outputs: [report], evidence: evidence('reviewed', {
+    reviewer: 'Fixture', method: 'visual', decision: 'approve', criticalIssues: [], limitations: [],
+    media: [{ path: output, sha256: digest(path.join(root, output)) }]
+  }) });
+}
+function canonDecision(p) {
+  return { explicit: true, decision: 'approve', reviewer: 'Fixture', at, eventId: 'synthetic-human-event', source: 'fixture',
+    notes: 'Simulated declaration, not human identity proof.', canonHash: canonHash(p), identityVersion: p.identityVersion };
+}
 
 test('registry validates nine roles, three workflows, and constitutional files', () => {
   const root = fixture(), result = validateFramework(root);
@@ -105,6 +148,115 @@ test('start/status preserve inputs, hashes, owner, and execution limits', () => 
   assert.deepEqual(status.inputs, [{ path: 'brief.md', sha256: digest(path.join(root, 'brief.md')) }]);
   assert.ok(status.constitutionPaths.includes('CONSTITUTION.md'));
   assert.ok(status.limitation.includes('does not dispatch'));
+});
+
+test('reapproved frozen version cannot start a workflow even with an empty manifest', () => {
+  const root = fixture(); freeze(root);
+  const p = changeApprovedIdentity(root), base = path.join(root, 'influencers/alpha');
+  const manifest = { schemaVersion: 1, assets: [] }; save(root, 'influencers/alpha/assets.json', manifest);
+  assert.ok(validatePersona(p, base).errors.some(error => /Increment identityVersion/.test(error)));
+  assert.deepEqual(validateAssets(manifest, p, base), []);
+  const before = fileInventory(root);
+  for (const workflow of ['create-character', 'produce-piece', 'review-correct']) {
+    assert.throws(() => begin(root, workflow), /Increment identityVersion/);
+    assert.deepEqual(fileInventory(root), before);
+  }
+  assert.equal(fs.existsSync(path.join(root, 'work/runs')), false);
+});
+
+test('reapproved frozen version cannot bind to an unbound creation run', () => {
+  const root = fixture(); freeze(root);
+  const run = begin(root, 'create-character', { personaId: null });
+  changeApprovedIdentity(root);
+  const before = fileInventory(root);
+  assert.throws(() => transitionRun(root, run.runId, { action: 'bind-persona', personaId: 'alpha' }), /Increment identityVersion/);
+  assert.deepEqual(fileInventory(root), before);
+  assert.equal(readRun(root, run.runId).run.personaId, null);
+});
+
+test('changed frozen canon blocks task and final delivery acceptance and new attempts without rewriting history', () => {
+  for (const phase of ['task', 'delivery']) {
+    const root = fixture(); freeze(root);
+    let run = begin(root), completion;
+    if (phase === 'task') {
+      run = transitionRun(root, run.runId, { action: 'skip', reason: 'Research already applicable.' });
+      const output = save(root, 'influencers/alpha/work/prepared.md', 'Synthetic prepared document');
+      completion = { action: 'complete', outputs: [output], evidence: evidence('prepared') };
+    } else {
+      run = review(root, generate(root, reachGeneration(root, run)));
+      run = transitionRun(root, run.runId, { action: 'skip', reason: 'Distribution experiment outside this fixture.' });
+      const media = run.run.attempts.at(-1).results.find(result => result.taskId === 'generate-piece').outputs;
+      completion = { action: 'complete', outputs: media.map(output => output.path), evidence: evidence('delivered') };
+      assert.equal(run.nextTask.taskId, 'deliver-piece');
+    }
+    changeApprovedIdentity(root);
+    const before = fileInventory(root), status = readRun(root, run.runId);
+    assert.equal(status.canContinue, false);
+    assert.ok(status.drift.some(change => /Increment identityVersion/.test(change.actual?.error ?? '')));
+    for (const options of [{ action: 'start' }, completion]) {
+      assert.throws(() => transitionRun(root, run.runId, options), /changed/);
+      assert.deepEqual(fileInventory(root), before);
+    }
+    assert.throws(() => resumeRun(root, run.runId, { newAttempt: true, reason: 'Attempt to accept reapproved same version.' }), /Increment identityVersion/);
+    assert.deepEqual(fileInventory(root), before);
+    assert.equal(json(path.join(root, 'work/runs', `${run.runId}.json`)).attempts.length, 1);
+    const held = resumeRun(root, run.runId);
+    assert.equal(held.state, 'awaiting-input'); assert.equal(held.detail.requiresNewAttempt, true); assert.equal(held.canContinue, false);
+    assert.deepEqual(held.run.attempts[0].results, run.run.attempts[0].results);
+  }
+});
+
+test('a draft creation run cannot record a conflicting same-version canon approval', () => {
+  const root = fixture(), original = freeze(root);
+  save(root, 'influencers/alpha/persona.json', { ...original, status: 'draft', approval: null });
+  const run = reachCanonApproval(root);
+  assert.equal(run.canonBinding, null); assert.equal(run.nextTask.taskId, 'approve-canon');
+  const p = changeApprovedIdentity(root), before = fileInventory(root);
+  for (const options of [{ action: 'start' }, { action: 'complete', approval: canonDecision(p) }]) {
+    assert.throws(() => transitionRun(root, run.runId, options), /Increment identityVersion/);
+    assert.deepEqual(fileInventory(root), before);
+  }
+  assert.equal(readRun(root, run.runId).nextTask.taskId, 'approve-canon');
+});
+
+test('matching and unfrozen approval and valid new versions remain usable without implicit snapshots', () => {
+  const root = fixture(), base = path.join(root, 'influencers/alpha');
+  let run = reachCanonApproval(root);
+  const p = json(path.join(base, 'persona.json'));
+  run = transitionRun(root, run.runId, { action: 'complete', approval: canonDecision(p) });
+  assert.equal(run.nextTask.taskId, 'prepare-piece'); assert.equal(fs.existsSync(path.join(base, 'canon')), false);
+  freeze(root);
+  const frozenBytes = fileInventory(path.join(base, 'canon'));
+  const matching = begin(root); assert.equal(matching.canContinue, true);
+  const next = changeApprovedIdentity(root, true);
+  const fresh = begin(root); assert.equal(fresh.canonBinding.identityVersion, next.identityVersion);
+  const resumed = resumeRun(root, matching.runId, { newAttempt: true, reason: 'Explicitly adopt the approved new version.' });
+  assert.equal(resumed.canContinue, true); assert.equal(resumed.canonBinding.identityVersion, 2); assert.equal(resumed.run.attempts.length, 2);
+  assert.deepEqual(resumed.run.attempts[0].inputs, matching.run.attempts[0].inputs);
+  assert.equal(fs.existsSync(path.join(base, 'canon/v000002')), false);
+  assert.deepEqual(fileInventory(path.join(base, 'canon')), frozenBytes);
+});
+
+test('canon conflict does not obstruct reconciliation or authorize repeating an unresolved external job', () => {
+  const root = fixture(); freeze(root);
+  const run = reachGeneration(root);
+  const pending = transitionRun(root, run.runId, { action: 'start', job: { provider: 'fixture', jobId: 'job-1', requestId: 'request-1', receipt: 'receipt-1' } });
+  changeApprovedIdentity(root);
+  const snapshotBefore = fileInventory(path.join(root, 'influencers/alpha/canon'));
+  const before = fileInventory(root);
+  assert.throws(() => resumeRun(root, run.runId, { newAttempt: true, reason: 'Attempt to repeat an unresolved job.' }), /uncertain/);
+  assert.deepEqual(fileInventory(root), before);
+  const held = resumeRun(root, run.runId);
+  assert.equal(held.detail.needsReconciliation, true); assert.equal(held.state, 'uncertain-result'); assert.equal(held.canContinue, false);
+  const observed = transitionRun(root, run.runId, { action: 'uncertain', reason: 'Preserve outstanding external result.', job: { provider: 'fixture' } });
+  assert.equal(observed.run.attempts.at(-1).job.receipt, 'receipt-1');
+  const resolved = transitionRun(root, run.runId, { action: 'resolve', job: { provider: 'fixture', jobId: 'job-1', requestId: 'request-1', status: 'failed' }, evidence: evidence('reconciled') });
+  assert.equal(resolved.attemptId, pending.attemptId); assert.equal(resolved.nextTask.taskId, 'generate-piece'); assert.equal(resolved.canContinue, false);
+  const resolvedBefore = fileInventory(root);
+  assert.throws(() => transitionRun(root, run.runId, { action: 'start', job: { provider: 'fixture' } }), /changed/);
+  assert.throws(() => resumeRun(root, run.runId, { newAttempt: true, reason: 'Replan after reconciliation.' }), /Increment identityVersion/);
+  assert.deepEqual(fileInventory(root), resolvedBefore);
+  assert.deepEqual(fileInventory(path.join(root, 'influencers/alpha/canon')), snapshotBefore);
 });
 
 test('cross-persona, outside paths, and invalid IDs cannot read or create runs', () => {

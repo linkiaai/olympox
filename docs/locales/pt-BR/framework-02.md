@@ -6,7 +6,7 @@ O estúdio tem nove perfis, quinze contratos de tarefa e três fluxos persistent
 
 1. Quando a direção exigir pesquisa, Gaia investiga até três oportunidades para um mercado/canal, com fontes, hipóteses, concorrência e razões para descartar uma direção. Com um objetivo já definido, essa pesquisa pode ser dispensada com motivo.
 2. Atena recomenda uma oportunidade e transforma a escolha em brief. Psiquê define valor, personalidade e limites; Íris dirige candidatos visuais.
-3. Você escolhe a identidade a partir dos arquivos reais. A aprovação fixa referências e hashes; o cânone aprovado ganha snapshot.
+3. Você escolhe a identidade a partir dos arquivos reais. A aprovação fixa referências e hashes. Preserve o cânone aprovado com `canon-snapshot` antes de evoluir a identidade; a aprovação sozinha não cria um snapshot.
 4. Saraswati prepara conteúdo coerente com a personagem; Aurora pesquisa tendências quando necessário. Selene prepara e executa a produção com as ferramentas disponíveis; Têmis inspeciona o resultado completo.
 5. Atena entrega a peça revisada. Fortuna prepara distribuição e coleta de resultados quando houver publicação autorizada.
 
@@ -55,7 +55,7 @@ Locks recusam gravações concorrentes. Uma interrupção pode deixar lock ou pa
 
 ## Identidade e execução da geração
 
-`persona.json` conserva o estado atual. `canon-snapshot` preserva uma versão aprovada e cópias dos arquivos de referência. A evolução da identidade exige nova versão; produções antigas continuam ligadas ao seu snapshot. `migrate-assets` preserva registros legados, sem criar revisões que nunca ocorreram.
+`persona.json` conserva o estado atual. `canon-snapshot` preserva uma versão aprovada e cópias dos arquivos de referência. A validação da persona, o início do fluxo, o vínculo, a aceitação de tarefas e uma nova tentativa conferem o cânone atual aprovado contra qualquer snapshot já congelado para a mesma `identityVersion`. A consulta de estado e a retomada comum relatam conflitos com o cânone vinculado como drift e bloqueiam a continuação; um job externo incerto ainda pode ser reconciliado sem aceitar esse cânone. Substituir um hash de aprovação não torna válida uma identidade diferente naquela versão. A evolução da identidade exige nova `identityVersion` e aprovação explícita; produções antigas continuam ligadas ao seu snapshot. Essas verificações nunca criam um snapshot ausente. `migrate-assets` preserva registros legados, sem inventar snapshots históricos ou revisões que nunca ocorreram.
 
 Depois de gerar, registrar o arquivo e completar sua origem, `execution-seal` preserva o prompt e contexto informado. O novo registro de produção precisa de revisão vinculada a esse selo, à mídia e ao cânone. Isso detecta mudança posterior em fornecedor/modelo, referências, custo e outros parâmetros informados. O selo é um registro local; não comprova que a execução ou inspeção ocorreu.
 
