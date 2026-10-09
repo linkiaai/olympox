@@ -1,6 +1,6 @@
-# Integrated visual creation
+# Integrated visual creation: explicit alternative
 
-Integrated ChatGPT/Codex image generation is the default for a new character's appearance, candidates, references, settings, images, and edits when the session provides it. Concepts, personality, narrative world, scripts, and planning stay in ChatGPT/Codex. This visual path requires no Higgsfield, AI Influencer Builder, external CLI, or API key. Availability and account limits apply; do not describe it as free or unlimited. An explicit user-selected method or provider takes precedence.
+Integrated ChatGPT/Codex image generation is an explicit opt-in alternative to the [default Higgsfield production method](higgsfield-influencer-method.md). OLYMPOX does not require its conversational coordinator to generate images: Codex or Claude can direct the same external media pipeline using available tools. Use integrated images only when the user selects this route, and record the affected stages and deviation from the reference method. Availability and account limits apply; do not describe it as free or unlimited. A missing Higgsfield capability is not authorization to substitute this route silently.
 
 ## From concept to references
 
@@ -12,9 +12,9 @@ Integrated ChatGPT/Codex image generation is the default for a new character's a
 
 ## Voice, canon, and pilot
 
-For the transition to video, follow [From Codex preparation to a video pilot](production-handoff.md): prepare the character and inspected scene images in Codex, save a rich coherent library, then map only supported exact inputs to each specialized video call. Voice may need a specialized tool earlier. A prepared package and a package ready for submission are distinct checkpoints.
+For the transition to video, follow [From direction to a Higgsfield video pilot](production-handoff.md). The coordinator prepares concepts, scripts, shot direction and the submission map; the explicitly selected image tool creates the scene images. Save a coherent library and map only supported exact inputs to each video call. Voice needs a verified tool earlier when speech is intended. Prepared work and work ready for submission are distinct checkpoints.
 
-Early visual selection is not approval of complete canon. For a speaking character, prepare a vocal sample while the persona remains `draft` with `purpose: reference`, then generate, listen to, and let the user select the exact vocal reference before final visual/vocal canon approval. Voice, animation, video, lip-sync, and specialized stages use verified tools according to need, quality, and cost; [Higgsfield](higgsfield-plugin.md) is one optional choice. Image-tool availability does not establish those capabilities. Reuse approved voice/canon, or record why voice is not applicable for silent content.
+Early visual selection is not approval of complete canon. For a speaking character, prepare a vocal sample while the persona remains `draft` with `purpose: reference`, then generate, listen to, and let the user select the exact vocal reference before final visual/vocal canon approval. Voice, animation, video, lip-sync, and specialized stages use verified tools according to need, quality, and cost; [Higgsfield](higgsfield-plugin.md) remains the default media platform unless the user selects another route. Image-tool availability does not establish those capabilities. Reuse approved voice/canon, or record why voice is not applicable for silent content.
 
 Approve the exact complete references and voice settings, record their hashes, and preserve canon through [existing operations](operations.md). Use those real attached references in subsequent generations. Run a small pilot before batches, inspect complete media against the intended use, export its actual bytes, and publish only with applicable authorization. Inaccessible inspection or export remains pending; successful generation does not approve identity or quality.
 

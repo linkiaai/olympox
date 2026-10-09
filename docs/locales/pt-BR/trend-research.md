@@ -1,6 +1,6 @@
 # Pesquisa de oportunidades e tendências
 
-Data: **7 de outubro de 2026**. Este guia define pesquisa sob demanda conduzida pelo Codex. Não há coleta contínua, contas sociais conectadas ou radar automático instalado.
+Data: **7 de outubro de 2026**. Este guia define pesquisa sob demanda conduzida pelo coordenador conversacional. Não há coleta contínua, contas sociais conectadas ou radar automático instalado.
 
 ## Duas decisões, dois papéis
 

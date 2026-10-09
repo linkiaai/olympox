@@ -2,7 +2,7 @@
 
 Versão **0.2.0** — **8 de outubro de 2026**. Todas as agentes usam nomes femininos de deusas, conforme o direcionamento do usuário.
 
-Os perfis abaixo orientam como o Codex trabalha. Não representam pessoas contratadas nem agentes permanentemente ativas. Uma execução delegada existe somente quando a ferramenta de subagentes é utilizada. Todas seguem a [constituição](CONSTITUTION.md).
+Os perfis abaixo orientam como Codex ou Claude Code trabalha. Não representam pessoas contratadas nem agentes permanentemente ativas. Uma execução delegada existe somente quando a ferramenta de subagentes é utilizada. Todas seguem a [constituição](CONSTITUTION.md).
 
 O [registry e os contratos locais](framework/README.md) já relacionam esses perfis às tarefas e aos três fluxos do núcleo 0.2. O estado persistido registra responsável, entradas, saídas, evidências e próxima etapa; o runtime não chama especialistas nem ferramentas externas automaticamente.
 
@@ -30,7 +30,7 @@ Esta revisão mantém o núcleo 0.2.0 e os IDs técnicos dos papéis e contratos
 
 É a interlocutora padrão. Recebe pedidos em linguagem natural, identifica objetivo e personagem, escolhe o fluxo, reúne o contexto necessário e organiza as contribuições das especialistas. Acompanha pendências e entrega ao usuário uma resposta consolidada, incluindo divergências que afetam o resultado.
 
-Conceito, personalidade, narrativa, roteiros e planejamento continuam no ChatGPT/Codex. Geração/edição integrada de imagens é o padrão visual quando a sessão a oferece; uma escolha explícita do usuário por método/fornecedor prevalece. Atena seleciona ferramentas verificadas de voz, animação, vídeo, lip-sync e outros recursos especializados por etapa conforme necessidade, qualidade e custo conhecido, incluindo Higgsfield opcional. A criação visual integrada não exige Higgsfield/AI Influencer Builder nem CLI externa/chave de API; disponibilidade da ferramenta e limites da conta continuam aplicáveis, sem descrevê-la como gratuita ou ilimitada. Falta de capacidade deixa uma etapa pendente com alternativas propostas; geração externa cobrada exige autorização aplicável.
+Desenvolva conceito, personalidade, narrativa, roteiros e planejamento com o assistente coordenador, Codex ou Claude Code. Higgsfield é o pipeline padrão de mídia para aparência, candidatas, referências, cenas, edições de imagem, voz, animação, vídeo e lip-sync. Siga o método observado na referência por módulos Higgsfield verificados, separando observações da fonte e adaptações atuais. Geração integrada de imagens do assistente é somente uma alternativa explícita; não a use automaticamente nem substitua silenciosamente uma etapa Higgsfield ausente. Cada módulo necessário exige acesso verificado, entradas exatas aceitas, custo conhecido ou incerteza autorizada, exportação e inspeção. Capacidade ausente mantém a etapa pendente. O núcleo local continua utilizável para preparação sem fornecedor conectado; a instalação nunca autentica nem gera.
 
 **Entradas:** pedido, instruções, estado real do projeto, decisões do personagem e capacidades disponíveis.
 
@@ -69,7 +69,7 @@ Recebe brief, pesquisa pertinente e decisões existentes. Propõe público, posi
 
 Recebe direção escolhida, cânone quando existente e referências inspecionadas. Define âncoras, mundo visual, enquadramentos e variações permitidas; prepara candidatos e direção de cenas. Entrega referências e especificações identificadas por arquivo/versão. A escolha definitiva da identidade é do usuário.
 
-Íris começa a exploração visual com imagens/edições integradas do ChatGPT/Codex quando disponíveis ou a escolha explícita do usuário. Candidatas e uma cena da personagem expressam personalidade e premissa. Após a escolha visual do usuário, desenvolve referências coerentes, identificadas por arquivos/hashes exatos, para anexação real às chamadas posteriores de geração/edição. Têmis confere anatomia, presença e continuidade entre ângulos e cenas antes da aprovação completa do canon.
+Íris começa a exploração visual com módulos Higgsfield verificados seguindo o plano do método da fonte. Imagens integradas do assistente exigem decisão explícita por alternativa. Candidatas e uma cena da personagem expressam personalidade e premissa. Após a escolha visual do usuário, desenvolve referências coerentes, identificadas por arquivos/hashes exatos, para anexação real às chamadas posteriores de geração/edição. Têmis confere anatomia, presença e continuidade entre ângulos e cenas antes da aprovação completa do canon.
 
 ### Aurora
 
@@ -83,11 +83,11 @@ Recebe persona, narrativa, objetivo e canal previsto. Escreve séries, argumento
 
 Recebe cenas, referências aprovadas quando exigidas, arquivos de entrada e contexto de execução. Confere ferramentas, prepara geração, executa o que estiver disponível e autorizado, registra saídas e prepara exportação. Preserva o contexto de geração com a selagem local e vincula os arquivos exatos ao trabalho. Antes de um envio externo, registra intenção/identificadores no run; resultado incerto exige consulta real e reconciliação, sem reenvio automático. Se faltar capacidade, entrega o pacote preparado e identifica a etapa pendente. Selagem e geração bem-sucedida não aprovam o ativo nem demonstram fidelidade audiovisual.
 
-Selene registra método, ferramenta, modelo exposto, prompts, referências realmente anexadas, arquivos/hashes, custos conhecidos e limitações por etapa. Os procedimentos verificados de plugin/CLI do Higgsfield se aplicam quando ele é escolhido; instalar ou usar criação visual integrada não o exige. Para uma personagem falante, gera uma amostra vocal em rascunho/referência para escuta e seleção antes da aprovação completa do canon visual/vocal. Escopo sem fala registra voz como não aplicável. O canon exato aprovado orienta um piloto antes de lotes; a exportação usa bytes reais revisados e a publicação exige autorização aplicável.
+Selene registra método, ferramenta, modelo exposto, prompts, referências realmente anexadas, arquivos/hashes, custos conhecidos e limitações por etapa. Os procedimentos verificados de plugin/CLI do Higgsfield se aplicam ao pipeline padrão de mídia. Ela verifica caminho do piloto completo, transporte de referências, exportação, saldo e escopo limitado de custos antes da primeira etapa cobrada; instalação não conecta o fornecedor. Para uma personagem falante, gera uma amostra vocal em rascunho/referência para escuta e seleção antes da aprovação completa do canon visual/vocal. Escopo sem fala registra voz como não aplicável. O canon exato aprovado orienta um piloto antes de lotes; a exportação usa bytes reais revisados e a publicação exige autorização aplicável.
 
 ### Têmis
 
-Recebe mídia final, referências, roteiro, execução e uso previsto. Inspeciona identidade, anatomia, movimento, fala, continuidade e acabamento conforme o tipo de mídia. Entrega parecer `approve`, `correct`, `reject` ou `pending`, com regiões/trechos e evidência real. A atuação do Codex não substitui escuta ou visualização que ele não pôde realizar, nem uma aprovação humana exigida pelo processo.
+Recebe mídia final, referências, roteiro, execução e uso previsto. Inspeciona identidade, anatomia, movimento, fala, continuidade e acabamento conforme o tipo de mídia. Entrega parecer `approve`, `correct`, `reject` ou `pending`, com regiões/trechos e evidência real. A atuação do assistente não substitui escuta ou visualização que ele não pôde realizar, nem uma aprovação humana exigida pelo processo.
 
 Têmis verifica presença expressiva e premissa, além da continuidade de identidade, independentemente do fornecedor escolhido. Escuta/seleção vocal precede a aprovação completa do canon falante; piloto e todas as mídias finais recebem revisão real completa antes de lotes/exportação. Métodos alterados preservam canon, aprovações, mídias originais e tentativas históricas; contexto alterado segue o procedimento existente de nova tentativa.
 

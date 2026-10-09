@@ -4,7 +4,7 @@ O objetivo é um personagem reconhecível, com presença e comportamento própri
 
 ## Regra de aprovação
 
-Todo arquivo gerado começa em `draft`. Metadados válidos, resolução alta, similaridade calculada ou um prompt correto não demonstram fidelidade de identidade. A aprovação exige uma pessoa inspecionando a mídia real e registrando o resultado. O Codex pode apontar defeitos e organizar evidências; não deve apresentar validação automática como prova de que o personagem foi preservado.
+Todo arquivo gerado começa em `draft`. Metadados válidos, resolução alta, similaridade calculada ou um prompt correto não demonstram fidelidade de identidade. A aprovação exige uma pessoa inspecionando a mídia real e registrando o resultado. O coordenador pode apontar defeitos e organizar evidências; não deve apresentar validação automática como prova de que o personagem foi preservado.
 
 | Estado | Significado | Evidência necessária |
 | --- | --- | --- |
@@ -27,7 +27,7 @@ Antes de escolher uma nova identidade, ler o conceito selecionado e comparar os 
 | Presença em contexto | Inspecionar uma referência neutra de identidade e uma cena da personagem ou capa no tamanho/recorte de uso. A segunda expressa a premissa e a atitude escolhidas? Uma referência neutra não precisa comunicar toda a premissa. |
 | Voz e conteúdo | As amostras de fala e três séries têm perspectiva reconhecível, aberturas concretas, entregas cumpridas e motivos declarados para assistir/salvar/compartilhar? Poderiam ser atribuídas sem alterações a qualquer candidata? |
 | Continuidade e originalidade | A personagem permanece reconhecível em uma variação permitida sem depender apenas de um acessório? O conceito preserva identidade original em vez de reproduzir aparência, voz ou biografia de uma pessoa identificável? |
-| Método escolhido | O plano versionado identifica método/ferramenta por etapa, prompts reais, referências anexadas, arquivos/hashes, modelo exposto, custo conhecido e limitações? Geração visual integrada é o padrão quando disponível; evidência do Builder só é exigida para uma etapa que escolheu Builder. Etapas obrigatórias ausentes continuam pendentes; vídeo direto ou especificação preparada não conclui uma etapa anterior. |
+| Método escolhido | O plano versionado identifica método/ferramenta por etapa, prompts reais, referências anexadas, arquivos/hashes, modelo exposto, custo conhecido e limitações? Higgsfield é o padrão de mídia; verifique módulos da referência escolhidos, transporte/exportação/orçamento do piloto completo e evidência real do fornecedor. Builder exige evidência quando selecionado; imagens integradas precisam de escolha explícita de alternativa. Etapas obrigatórias ausentes continuam pendentes; vídeo direto ou especificação preparada não conclui uma etapa anterior. |
 
 Registrar observações, arquivos exatos e a correção solicitada. Se o conceito selecionado estiver ausente, manter a mídia candidata em `draft` e devolvê-la para correção de arte/persona antes de propor aprovação do canon; registros de referência continuam em `candidate` até serem aprovados. Uma direção intencionalmente contida pode passar quando sua presença e seu comportamento específicos forem visíveis. Não acrescentar excentricidade, fantasia, um novo padrão de beleza ou novos traços de identidade apenas para passar na revisão.
 
@@ -65,7 +65,7 @@ Assista ao arquivo completo com áudio na velocidade normal. Revise novamente os
 - **Entrega final:** assista também à versão editada e exportada, com música e legendas. Confira sincronização, compreensão da fala, cortes e duração no dispositivo alvo.
 - **Entrega criativa:** verificar se a abertura e a entrega cumprem a ideia declarada da peça e se a atuação expressa a atitude escolhida da personagem. Atuação genérica ou abertura não cumprida exige correção; não estabelece fracasso da hipótese de público.
 
-Se o Codex ou a ferramenta disponível não puder acessar áudio ou movimento, registre essa limitação e mantenha a aprovação correspondente pendente.
+Se o coordenador ou a ferramenta disponível não puder acessar áudio ou movimento, registre essa limitação e mantenha a aprovação correspondente pendente.
 
 ## Falhas críticas
 

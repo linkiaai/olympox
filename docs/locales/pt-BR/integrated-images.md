@@ -1,6 +1,6 @@
-# Criação visual integrada
+# Criação visual integrada: alternativa explícita
 
-A geração integrada de imagens do ChatGPT/Codex é o padrão para aparência, candidatas, referências, cenários, imagens e edições de novas personagens quando a sessão a oferece. Conceito, personalidade, universo narrativo, roteiros e planejamento continuam no ChatGPT/Codex. Esse caminho visual dispensa Higgsfield, AI Influencer Builder, CLI externa e chave de API. Aplicam-se disponibilidade e limites da conta; não o descreva como gratuito ou ilimitado. Uma escolha explícita de método ou fornecedor pelo usuário tem prioridade.
+A geração integrada de imagens do ChatGPT/Codex é uma alternativa escolhida explicitamente ao [método padrão de produção Higgsfield](higgsfield-influencer-method.md). O OLYMPOX não exige que seu coordenador conversacional gere imagens: Codex ou Claude podem dirigir o mesmo caminho externo de mídia usando ferramentas disponíveis. Use imagens integradas somente quando o usuário escolher essa rota e registre etapas afetadas e desvio do método de referência. Aplicam-se disponibilidade e limites da conta; não descreva como gratuito ou ilimitado. A ausência de um recurso Higgsfield não autoriza substituir silenciosamente essa rota.
 
 ## Do conceito às referências
 
@@ -12,9 +12,9 @@ A geração integrada de imagens do ChatGPT/Codex é o padrão para aparência, 
 
 ## Voz, canon e piloto
 
-Na transição para vídeo, siga [Da preparação no Codex ao piloto de vídeo](production-handoff.md): prepare personagem e imagens de cena inspecionadas no Codex, salve biblioteca rica coerente e mapeie somente entradas exatas suportadas por chamada especializada de vídeo. Voz pode precisar de ferramenta especializada antes. Pacote preparado e pacote pronto para submissão são pontos de verificação distintos.
+Na transição para vídeo, siga [Da direção ao piloto de vídeo Higgsfield](production-handoff.md). O coordenador prepara conceitos, roteiros, direção dos planos e mapa de submissão; a ferramenta de imagem escolhida explicitamente cria as imagens de cena. Salve biblioteca coerente e mapeie somente entradas exatas suportadas por chamada de vídeo. Voz precisa de ferramenta verificada antes quando houver fala. Trabalho preparado e trabalho pronto para submissão são pontos de verificação distintos.
 
-Seleção visual preliminar não aprova o canon completo. Para uma personagem que fala, prepare uma amostra vocal enquanto a persona permanece `draft` com `purpose: reference`; gere, ouça e deixe o usuário selecionar a referência vocal exata antes da aprovação final do canon visual/vocal. Voz, animação, vídeo, sincronização labial e etapas especializadas usam ferramentas verificadas conforme necessidade, qualidade e custo; [Higgsfield](higgsfield-plugin.md) é uma opção. Disponibilidade da ferramenta de imagem não comprova esses recursos. Reutilize voz/canon aprovados ou registre por que voz não se aplica a conteúdo silencioso.
+Seleção visual preliminar não aprova o canon completo. Para uma personagem que fala, prepare uma amostra vocal enquanto a persona permanece `draft` com `purpose: reference`; gere, ouça e deixe o usuário selecionar a referência vocal exata antes da aprovação final do canon visual/vocal. Voz, animação, vídeo, sincronização labial e etapas especializadas usam ferramentas verificadas conforme necessidade, qualidade e custo; [Higgsfield](higgsfield-plugin.md) continua a plataforma padrão de mídia, salvo escolha de outra rota pelo usuário. Disponibilidade da ferramenta de imagem não comprova esses recursos. Reutilize voz/canon aprovados ou registre por que voz não se aplica a conteúdo silencioso.
 
 Aprove as referências completas exatas e configurações de voz, registre hashes e preserve o canon pelas [operações existentes](operations.md). Use essas referências realmente anexadas nas gerações seguintes. Execute um pequeno piloto antes de lotes, inspecione mídias completas contra o uso pretendido, exporte bytes reais e publique somente com autorização aplicável. Inspeção ou exportação inacessível continua pendente; geração bem-sucedida não aprova identidade nem qualidade.
 

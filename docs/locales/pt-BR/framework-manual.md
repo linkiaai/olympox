@@ -1,12 +1,16 @@
 # OLYMPOX - AI Influencer framework
 
-O OLYMPOX organiza a criação de influenciadores de IA originais e memoráveis com potencial de viralização a ser testado. Você conversa com o Codex; Atena coordena o pedido e as especialistas contribuem conforme a necessidade. O framework preserva versões, decisões e evidências para continuar o trabalho entre sessões.
+O OLYMPOX organiza a criação local de influenciadores de IA originais e memoráveis com potencial viral a testar. Você trabalha com Codex ou Claude como coordenador conversacional; Atena organiza o pedido e especialistas contribuem conforme necessário. Higgsfield é a plataforma padrão de mídia. O framework preserva versões, decisões e evidências entre sessões.
 
-Para novas personagens, comece pelo [onboarding adaptativo curto](strategy.md) e conceitos distintos conectando aparência, personalidade, público e conteúdo recorrente. A [criação visual integrada](integrated-images.md) é o padrão quando disponível, sem exigir Higgsfield, Builder, CLI externa ou chave de API; aplicam-se limites da conta. O usuário seleciona candidatas expressivas, depois referências coerentes realmente anexadas às gerações seguintes. Inspecione anatomia, presença e continuidade; explore, ouça e selecione voz quando houver fala, depois aprove o canon visual/vocal completo e exato e execute um piloto antes de lotes. Voz/vídeo/etapas especializadas usam ferramentas verificadas conforme necessidade, qualidade e custo; o [método Higgsfield](higgsfield-influencer-method.md) permanece opcional. Respeite escolhas explícitas de método, mantenha recursos ausentes pendentes com alternativas propostas e obtenha autorização aplicável para geração externa paga e publicação. Identidades já aprovadas continuam intactas. Potencial de viralização precisa de conteúdo e resultados reais para ser testado.
+Para novas personagens, comece por [descoberta adaptativa](strategy.md) e conceitos distintos ligando aparência, personalidade, público e conteúdo recorrente. Siga o [método Higgsfield de referência](higgsfield-influencer-method.md) para identidade/referências, voz selecionada e ouvida antes do canon completo, cenas inspecionadas e piloto de vídeo antes de lotes. Confira conexão, transporte, exportação e orçamento do piloto inteiro cedo. Revise mídias reais completas e exporte bytes efetivos antes da publicação autorizada. O coordenador dispensa geração de imagens; [imagens integradas](integrated-images.md) exigem escolha explícita de alternativa. Preserve módulos escolhidos, mantenha recursos ausentes pendentes e registre mudanças materiais de método e autorização paga aplicável. Canon existente fica intacto. Potencial viral exige conteúdo e resultados reais para testar.
+
+## Instale seu estúdio
+
+Na versão 0.5.0, `npx --yes github:linkiaai/olympox#v0.5.0 setup` executa o instalador publicado; `node bin/olympox.mjs setup` usa cópia revisada ou pacote extraído. O guia orienta escolhas de idioma, assistente e destino, verifica o plano real de instalação e pede confirmação antes de escrever. Escolha Codex, Claude Code ou ambos; a seleção instala instruções e skills locais correspondentes, mantendo Higgsfield como plataforma padrão de mídia. O guia executa verificações locais do manual e da estrutura e apresenta um primeiro pedido. Acesso ao fornecedor, módulos necessários e descoberta real das skills continuam verificações separadas. Consulte [instalação](installation.md) para cancelamento, atualização do plano, uso não interativo e preservação; depois execute `npm run verify` para a suíte local completa.
 
 ## O que o framework faz
 
-O [procedimento do Codex ao vídeo](production-handoff.md) fornece etapas ordenadas de prontidão, responsáveis e um [pacote de passagem](../../../templates/locales/pt-BR/video-handoff.md) concreto. Prepara uma biblioteca rica coerente no Codex e mapeia o subconjunto exato de entradas suportadas por chamada especializada, validando um piloto antes dos lotes. Voz pode exigir ferramenta verificada antes da passagem para vídeo.
+O [procedimento de piloto de vídeo Higgsfield](production-handoff.md) fornece prontidão ordenada, responsáveis e [pacote de passagem](../../../templates/locales/pt-BR/video-handoff.md). O coordenador dirige uma biblioteca coerente e mapeia entradas exatas suportadas por chamada do fornecedor. Higgsfield produz referências/cenas padrão e voz quando há fala; um piloto representativo valida o processo antes de lotes.
 
 | Área | O que você ganha |
 | --- | --- |
@@ -20,7 +24,7 @@ O [procedimento do Codex ao vídeo](production-handoff.md) fornece etapas ordena
 
 **Atena** entende o objetivo e escolhe a sequência. Os **perfis** orientam cada especialidade. Os **contratos** definem o que entregar e como registrar a conclusão. Os **fluxos** ligam as etapas. Um **run** guarda o estado real dessa execução.
 
-A constituição estabelece os princípios comuns. Os guias explicam o método. O núcleo local mantém registros e hashes. O Codex executa o trabalho criativo com as ferramentas realmente disponíveis na sessão.
+A constituição estabelece os princípios comuns. Os guias explicam o método. O núcleo local mantém registros e hashes. O coordenador dirige e trabalha com ferramentas realmente disponíveis na sessão; geração de mídia usa o fornecedor registrado.
 
 ## Termos que aparecem no estúdio
 
@@ -37,7 +41,7 @@ A constituição estabelece os princípios comuns. Os guias explicam o método. 
 
 ## Capacidades e limites reais
 
-O núcleo organiza o processo e verifica sua estrutura. A execução de subagentes depende de delegação real pelo Codex. Perfis cadastrados não ficam permanentemente ativos. Geração, consultas a fornecedores, escuta, visualização de vídeo e publicação dependem das ferramentas disponíveis e das autorizações aplicáveis.
+O núcleo organiza o processo e verifica sua estrutura. A execução de subagentes depende de delegação real no aplicativo atual. Perfis cadastrados não ficam permanentemente ativos. Geração, consultas a fornecedores, escuta, visualização de vídeo e publicação dependem das ferramentas disponíveis e das autorizações aplicáveis.
 
 Uma validação estrutural não comprova fidelidade visual, qualidade da voz nem autenticidade de uma declaração. Mídia gerada precisa de inspeção. A identidade é escolhida pelo usuário; publicação e geração externa cobrada exigem autorização aplicável. `production` e `completed` não significam publicado.
 

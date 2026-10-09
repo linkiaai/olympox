@@ -2,7 +2,7 @@
 
 Version **0.2.0** — **October 8, 2026**. Every agent uses the female name of a goddess, following the user's direction.
 
-The profiles below guide how Codex works. They do not represent hired people or permanently active agents. Delegated execution exists only when the subagent tool is used. All follow the [constitution](../CONSTITUTION.md).
+The profiles below guide how Codex or Claude Code works. They do not represent hired people or permanently active agents. Delegated execution exists only when the subagent tool is used. All follow the [constitution](../CONSTITUTION.md).
 
 The [registry and local contracts](../framework/README.md) already connect these profiles to tasks and the three core 0.2 workflows. Persisted state records the owner, inputs, outputs, evidence, and next step; the runtime does not automatically call specialists or external tools.
 
@@ -30,7 +30,7 @@ This revision retains core 0.2.0 and technical role and contract IDs. Workflow I
 
 She is the default contact. She receives natural-language requests, identifies the objective and character, chooses the workflow, gathers the necessary context, and organizes specialist contributions. She tracks outstanding work and gives the user a consolidated response, including disagreements that affect the result.
 
-Concept, personality, narrative, scripts, and planning remain in ChatGPT/Codex. Integrated image generation/editing is the visual default when the session provides it; an explicit user method/provider choice prevails. Atena selects verified voice, animation, video, lip-sync, and other specialized tools per stage according to need, quality, and known cost, including optional Higgsfield. Integrated visuals require neither Higgsfield/AI Influencer Builder nor an external CLI/API key; tool availability and account limits still apply, so they are not described as free or unlimited. Missing capability leaves a pending stage with proposed alternatives; paid external generation needs applicable authorization.
+Develop concepts, personality, narrative, scripts and planning with the coordinating assistant, Codex or Claude Code. Higgsfield is the default media pipeline for appearance, candidates, reference packs, scenes, image edits, voice, animation, video and lip-sync. Follow the observed reference method through verified Higgsfield modules, preserving source observations separately from current adaptations. Assistant-integrated image generation is an explicit alternative only; do not use it automatically or silently replace a missing Higgsfield stage. Each required module needs checked access, accepted exact inputs, known cost or an authorized uncertainty, export and inspection support. Missing capabilities leave the affected stage pending. The local core remains usable for preparation without a connected provider; installation never authenticates or generates.
 
 **Inputs:** the request, instructions, actual project state, character decisions, and available capabilities.
 
@@ -69,7 +69,7 @@ Receives the brief, relevant research, and existing decisions. Proposes the audi
 
 Receives the selected direction, canon when it exists, and inspected references. Defines anchors, the visual world, framing, and permitted variations; prepares candidates and scene direction. Delivers references and specifications identified by file/version. Final identity selection belongs to the user.
 
-Íris starts visual exploration with integrated ChatGPT/Codex images/edits when available or the user's explicit choice. Candidates and an in-character scene express the personality and premise. After the user's visual selection, she develops coherent references, identified by exact files/hashes, for actual attachment to later generation/editing calls. Têmis checks anatomy, presence, and continuity across angles and scenes before complete canon approval.
+Íris starts visual exploration with verified Higgsfield modules following the source-method plan. Integrated assistant images require an explicit alternative decision. Candidates and an in-character scene express the personality and premise. After the user's visual selection, she develops coherent references, identified by exact files/hashes, for actual attachment to later generation/editing calls. Têmis checks anatomy, presence, and continuity across angles and scenes before complete canon approval.
 
 ### Aurora
 
@@ -83,11 +83,11 @@ Receives the persona, narrative, objective, and intended channel. Writes series,
 
 Receives scenes, approved references when required, input files, and execution context. Checks tools, prepares generation, executes what is available and authorized, records outputs, and prepares export. Preserves generation context through the local seal and links exact files to the work. Before external submission, records intent/identifiers in the run; an uncertain result requires real querying and reconciliation, without automatic resubmission. If a capability is missing, delivers the prepared package and identifies the pending stage. Sealing and successful generation neither approve the asset nor demonstrate audiovisual fidelity.
 
-Selene records method, tool, exposed model, prompts, actual attached references, files/hashes, known costs, and limitations per stage. Higgsfield's verified plugin/CLI procedures apply when selected; installing or using integrated visuals does not require it. For a speaking character, she generates a draft/reference vocal sample for listening and selection before complete visual/vocal canon approval. Silent scope records voice as not applicable. The approved exact canon guides a pilot before batches; export uses reviewed actual bytes and publication needs applicable authorization.
+Selene records method, tool, exposed model, prompts, actual attached references, files/hashes, known costs, and limitations per stage. Higgsfield's verified plugin/CLI procedures apply to the default media pipeline. She checks the complete pilot path, reference transport, export, balance and bounded cost scope before the first paid stage; installation does not connect the provider. For a speaking character, she generates a draft/reference vocal sample for listening and selection before complete visual/vocal canon approval. Silent scope records voice as not applicable. The approved exact canon guides a pilot before batches; export uses reviewed actual bytes and publication needs applicable authorization.
 
 ### Têmis
 
-Receives final media, references, the script, execution, and intended use. Inspects identity, anatomy, motion, speech, continuity, and finish according to media type. Delivers an `approve`, `correct`, `reject`, or `pending` assessment, with regions/segments and real evidence. Codex's involvement does not replace listening or viewing it could not perform, or human approval required by the process.
+Receives final media, references, the script, execution, and intended use. Inspects identity, anatomy, motion, speech, continuity, and finish according to media type. Delivers an `approve`, `correct`, `reject`, or `pending` assessment, with regions/segments and real evidence. The assistant's involvement does not replace listening or viewing it could not perform, or human approval required by the process.
 
 Têmis checks expressive presence and the premise as well as identity continuity, regardless of the chosen provider. Voice listening/selection precedes complete speaking canon approval; a pilot and all final media receive actual full review before batches/export. Changed methods preserve canon, approvals, original media, and historical attempts; changed context follows the existing new-attempt procedure.
 

@@ -4,15 +4,15 @@ Version **0.2.0**. Local core implemented; each studio chooses its own influence
 
 ## Adopted direction
 
-OLYMPOX is a local AI influencer framework, operated by Codex and dedicated to original virtual influencers, production, and learning. It organizes work through specialists, tasks, workflows, and completion criteria. The nine agents have goddess names and female profiles; their role IDs remain stable. The implementation uses Node and local files, with no external operational dependencies.
+OLYMPOX is a local AI influencer framework, operated through Codex or Claude Code and dedicated to original virtual influencers, production, and learning. It organizes work through specialists, tasks, workflows, and completion criteria. The nine agents have goddess names and female profiles; their role IDs remain stable. The implementation uses Node and local files, with no external operational dependencies.
 
-Codex interprets the request, loads the next task's package, uses available capabilities, and records work that occurred. The core maintains contracts, context, and state; it does not dispatch agents, generate media, query providers, or publish. Profiles are not permanent workers. Delegation exists only when a real subagent is used.
+The coordinating assistant interprets the request, loads the next task's package, uses available capabilities, and records work that occurred. The core maintains contracts, context, and state; it does not dispatch agents, generate media, query providers, or publish. Profiles are not permanent workers. Delegation exists only when a real subagent is used.
 
 ## What is implemented
 
 | Area | Local core 0.2 | Current limitation |
 | --- | --- | --- |
-| Direction | Constitution, skill, nine profiles, and task contracts | Profiles guide Codex; they do not execute independently |
+| Direction | Constitution, skill, nine profiles, and task contracts | Profiles guide the assistant; they do not execute independently |
 | Identity | Approved canon snapshots, version/hash, and preserved reference bytes | Approval and inspection must have occurred; missing historical data is not reconstructed |
 | Editorial | Versioned narrative and pieces, chronology, written voice, sources, and context links | Campaign is an optional ID; there is no complete campaign management |
 | Coordination | Three workflows, owners, inputs, outputs, and persisted state | External tool submission happens outside the runtime |
@@ -23,11 +23,13 @@ Codex interprets the request, loads the next task's package, uses available capa
 
 Earlier fixes remain in place: the exact prompt is linked to review, duplicate files through equivalent paths are rejected, references match the media type, known costs are valid, and persona, reference, asset, and task states are separate. The core adds historical preservation and recovery without deleting earlier records.
 
+New runs store `mediaProviders` per attempt, defaulting image/video/audio to `higgsfield`. Generation requires the generic media capability and the selected provider-scoped capability; generated evidence and external intent must match that provider. New character workflows default to a video pilot, with image candidates and candidate review. Provider changes need an explicit new attempt and reason. Historical runs without this policy retain their saved semantics and bytes. Declarations constrain local completion; they do not connect or execute a provider.
+
 ## Layers and storage
 
 1. **Knowledge and direction:** constitution, skill, guides, profiles, and contracts loaded according to the task.
 2. **Verifiable local state:** canons, narratives, pieces, sealed executions, reviews, tasks, and backups.
-3. **Session execution:** Codex uses tools actually available and records outputs and limitations. External adapters require their own need and validation.
+3. **Session execution:** the assistant uses tools actually available and records outputs and limitations. External adapters require their own need and validation.
 
 ```text
 framework/
@@ -67,9 +69,9 @@ Each package identifies the character when applicable, owner, contract, inputs/h
 
 Runs use these states: `planned`, `in-progress`, `awaiting-input`, `awaiting-tool`, `uncertain-result`, `in-review`, `completed`, `failed`, and `cancelled`. Historical state values remain readable for compatibility. Changes to inputs, completed outputs, canon, or governance require a new attempt and a reason to resume. The workflow restarts, preserving the previous attempt without silently reusing its approvals.
 
-Before external submission, persist intent and known identifiers. Resuming an unresolved job enters `uncertain-result`, including after interruption before recording the response. Codex queries the provider with a real tool and records reconciliation before completing or trying again. The runtime neither queries nor resubmits jobs; without recorded intent, it cannot discover calls made outside it. Interruption neither demonstrates failure nor authorizes another charge.
+Before external submission, persist intent and known identifiers. Resuming an unresolved job enters `uncertain-result`, including after interruption before recording the response. The assistant queries the provider with a real tool and records reconciliation before completing or trying again. The runtime neither queries nor resubmits jobs; without recorded intent, it cannot discover calls made outside it. Interruption neither demonstrates failure nor authorizes another charge.
 
-Completion of non-decision tasks requires existing files, hashes, and an evidence declaration appropriate to the stage. Human decision gates instead require explicit `approval`; they can have zero outputs when their contract permits and do not require the normal `evidence` object. Review identifies media bytes, method, and decision, with no outstanding critical failures or limitations. Delivery accepts reviewed bytes; an altered export needs another review. A reviewer name, file extension, and recorded declaration do not prove humanity, pixels, listening, or real execution. Codex must connect declarations to actual events. `completed` means local contracts are fulfilled; publication remains a separate action.
+Completion of non-decision tasks requires existing files, hashes, and an evidence declaration appropriate to the stage. Human decision gates instead require explicit `approval`; they can have zero outputs when their contract permits and do not require the normal `evidence` object. Review identifies media bytes, method, and decision, with no outstanding critical failures or limitations. Delivery accepts reviewed bytes; an altered export needs another review. A reviewer name, file extension, and recorded declaration do not prove humanity, pixels, listening, or real execution. The assistant must connect declarations to actual events. `completed` means local contracts are fulfilled; publication remains a separate action.
 
 ## Canon, editorial work, and execution
 

@@ -18,11 +18,13 @@ The creative pattern is distinctive realistic characters whose look, attitude an
 
 ## Current implementation choice
 
-The published 0.3.0 adaptation selected the full Higgsfield process and AI Influencer Builder. The current user-directed source update defaults to [integrated ChatGPT/Codex visual creation](integrated-images.md) when available and retains the [Higgsfield method](higgsfield-influencer-method.md) as an optional per-stage integration or explicit method choice. Concepts, narrative and scripts stay in ChatGPT/Codex; specialized voice/video tools are selected by verified capability, need, quality and cost. Inspected source frames still do not prove exclusive Builder use.
+The published 0.3.0 adaptation selected a full Higgsfield process and Builder; 0.4.0 later made integrated ChatGPT/Codex visuals the default. Those releases and their historical runs remain intact. The current user-directed framework update restores **Higgsfield as the default media pipeline** so the method does not depend on Codex image generation and can be coordinated in Codex or Claude. Concept, narrative, scripts, voice direction and planning stay with the conversational assistant.
 
-This default records a process preference: in the user-reported character exploration, the preferred integrated candidate also used revised art direction and framing. That result is not a controlled model comparison or evidence of general provider superiority. No new source-video or candidate inspection was performed for this update. Required discovery, identity, vocal selection, canon approval, pilot and quality stages remain intact; missing capabilities leave a stage pending with proposed alternatives, and paid external substitution requires applicable authorization.
+Follow the observed modules and order, including Soul Cinema image/references and Seedance 2.5 video, when current capabilities permit. The modern [AI Influencer description](https://higgsfield.ai/blog/new-ai-influencer), checked October 9, 2026, distinguishes Builder, Motion/Genjutsu and Cinema Studio reuse; it does not prove that the older video used only Builder. Record modern adaptations explicitly, and leave unavailable required stages pending with alternatives. A different provider/module or materially changed cost scope needs the user’s decision and applicable authorization rather than silent replacement.
 
-Save discovery answers, selected concept, source coverage, stages, cost scopes, capabilities and explicit deviations in the versioned [production-method plan](../templates/production-method.md), observed by existing run input/output hashing. Preserve already approved identities and historical bytes; the new default is not a retroactive redesign or provider migration.
+The new default is a portability and method decision, not proof that a provider produces superior images or guarantees the source’s audiovisual results. Preserve discovery, identity and vocal selection, complete canon approval, a speaking-video pilot where intended, full QA, actual-byte export and authorized publication. Integrated images remain an [explicit opt-in alternative](integrated-images.md). No new source-video or controlled candidate comparison was performed for this update.
+
+Save discovery answers, selected concept, source coverage, stages, full-pilot readiness/budget, capabilities and deviations in the versioned [production-method plan](../templates/production-method.md), observed by existing run hashing. Approved identities and historical bytes remain untouched; continuing with changed tracked context requires the existing explicit new-attempt procedure.
 
 ## Our choices
 
@@ -35,9 +37,9 @@ These are our own proposals, not conclusions demonstrated by the video:
 | Naturalism | Direct texture, lighting, anatomy, and performance; preserve diversity and chosen characteristics |
 | Multiple profiles | Separate faces, voices, decisions, and manifests by character |
 | Selecting results | Compare similar windows and formats; record exposure and inconclusive results |
-| Tools | Integrated ChatGPT/Codex visuals by default when available; explicit method choices and optional verified Higgsfield/specialized stages remain supported |
+| Tools | Higgsfield media by default; Codex or Claude coordinates; preserve observed modules and record any explicit alternative or adaptation |
 | Revenue | Investigate demand and offer a real deliverable; no income is treated as guaranteed |
 
-## Codex
+## Conversational coordinator
 
-Codex replaces the source's conversational coordinator. Project instructions and local skills organize the method; they do not create provider access or automatically execute tools. OLYMPOX adds short adaptive onboarding, three original concept proposals, explicit canon approval, exact-file provenance and complete QA as framework decisions. Do not copy the source's characters, prompts, fictional authority claims or revenue promises. See [tools](tools.md), [strategy](strategy.md) and [production](production.md).
+Codex or Claude can perform the source’s conversational coordination: concept, research, scripts, prompts, voice direction and records. Image generation by the assistant is not a standard requirement. Project instructions and local skills do not create provider access or automatically execute tools; actual host capabilities must be verified. OLYMPOX retains adaptive onboarding, original concept proposals, explicit canon approval, exact-file provenance and complete QA. Do not copy the source’s characters, prompts, fictional authority claims or revenue promises. See [tools](tools.md), [strategy](strategy.md) and [production](production.md).

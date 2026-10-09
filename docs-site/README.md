@@ -2,7 +2,11 @@
 
 The navigable manual for **OLYMPOX - AI Influencer framework** is a local, static site with no dependencies, generated from project files. `src/` contains the interface; `config.json` selects guides and describes commands. Catalogs come from the registry, profiles, contracts, workflows, and CLI help.
 
-Create an independent studio using the [installation guide](../docs/installation.md), or clone the framework source for development and maintenance. The package contains the manual's sources; a local build creates `dist/`. From the installed studio or development checkout root:
+Create an independent studio using the [installation guide](../docs/installation.md), or clone the framework source for development and maintenance. The package contains the manual's sources; a local build creates `dist/`.
+
+Version 0.5.0 provides the published guided installer `npx --yes github:linkiaai/olympox#v0.5.0 setup`; a reviewed checkout or extracted package uses `node bin/olympox.mjs setup`. It guides presentation language, Codex/Claude Code/both and destination choices, then reviews the real installation plan before writing. After installation, it builds and checks the local manual and runs local structural checks. The language choice affects setup presentation; the installed manual keeps its own language selector. Full local verification remains `npm run verify`, and host discovery, Higgsfield access and media execution require separate live checks.
+
+Manual commands from the studio or development root:
 
 ```powershell
 npm.cmd run docs:dev

@@ -6,7 +6,7 @@ The studio has nine profiles, fifteen task contracts, and three persistent workf
 
 1. When direction requires research, Gaia investigates up to three opportunities for a market/channel, with sources, assumptions, competitors, and reasons to discard a direction. With an already defined objective, research can be omitted with a reason.
 2. Atena recommends an opportunity and turns the selection into a brief. Psiquê defines value, personality, and boundaries; Íris directs visual candidates.
-3. You choose identity from real files. Approval fixes references and hashes. Preserve the approved canon with `canon-snapshot` before evolving identity; approval alone does not create a snapshot.
+3. You choose visual identity from real files. If speech is planned, generate, listen to and select the exact vocal sample before complete canon approval. Approval fixes complete references/settings and hashes. Preserve the approved canon with `canon-snapshot` before evolving identity; approval alone does not create a snapshot.
 4. Saraswati prepares content consistent with the character; Aurora researches trends when needed. Selene prepares and executes production with available tools; Têmis inspects the complete result.
 5. Atena delivers the reviewed piece. Fortuna prepares distribution and results collection when publication is authorized.
 
@@ -23,8 +23,9 @@ Create a JSON specification file inside the project, such as `tmp/first-cycle.js
   "personaId": null,
   "objective": "Research three opportunities and recommend an original direction for the first pilot",
   "inputs": [],
-  "medium": "image",
-  "capabilities": []
+  "medium": "video",
+  "capabilities": [],
+  "mediaProviders": { "image": "higgsfield", "video": "higgsfield", "audio": "higgsfield" }
 }
 ```
 
@@ -33,13 +34,15 @@ node scripts/studio.mjs run-start create-character tmp/first-cycle.json
 node scripts/studio.mjs run-status RETURNED_RUN_ID
 ```
 
-The package returns the next task, owner, deliverable, criteria, observed context, and outstanding issues. Inputs/outputs use root-relative paths with `/`. Files from another persona and paths outside the project are rejected. The record stays in `work/runs/`; it neither dispatches an agent nor queries services. Codex performs the work and records real events. Actual delegations must identify the event and dispatched agent.
+The package returns the next task, owner, deliverable, criteria, observed context, and outstanding issues. Inputs/outputs use root-relative paths with `/`. Files from another persona and paths outside the project are rejected. The record stays in `work/runs/`; it neither dispatches an agent nor queries services. The conversational coordinator performs work through actual tools and records real events. Actual delegations must identify the event and dispatched agent.
 
 `run-step RUN_ID transition.json` applies a declared transition. To start the local stage, the minimum JSON is `{"action":"start"}`. Completion requires existing files and appropriate evidence: a prepared document, generated media, inspected media, or completed delivery. Complete types and fields are in [framework/README](../framework/README.md). Record the actor, date, event, and notes about what actually happened. Do not fill in hypothetical names and dates as execution evidence.
 
 Once the persona exists, the `bind-persona` transition links its slug. Optional stages can be skipped with a reason; inspection and canon approval cannot be skipped. The approval gate records an actual explicit decision and requires a match with approval already recorded in the persona; it does not approve identity by itself.
 
-Capabilities such as `image-generation` and `image-inspection` represent what is available in the session. Declaring a capability in JSON neither installs nor tests a tool. A missing required capability leaves the task awaiting a tool.
+New `create-character` runs default to `medium: video`, matching the representative audiovisual pilot; an explicit image-only scope can use `medium: image`. Identity candidate generation/review still uses image capabilities in new provider-aware runs, while the pilot uses its selected medium. New runs record `mediaProviders` for `image`, `video` and `audio`; omitted stages default to `higgsfield`. Generation needs both the generic capability, such as `image-generation`, and the selected provider capability, such as `higgsfield:image-generation`. Generated completion evidence and external job intent record the matching `provider`. Generic integrated-image availability alone cannot advance a Higgsfield generation stage. Inspection capabilities remain generic because inspection uses actual available tools. These declarations do not install tools, submit media or prove execution; missing requirements leave the task `awaiting-tool`.
+
+An explicit alternative records its actual provider in `mediaProviders` and saves the user’s method decision and affected stages in the production plan. Changing the provider map of an existing run requires `run-resume` with `newAttempt: true`, a reason and the updated `mediaProviders`; ordinary `run-step` cannot change it. A provider policy does not prove a required Builder/Soul Cinema module was used; retain exact operation/model/inputs in provenance and inspect actual results. Runs saved before provider policy existed retain their historical capability semantics and stored medium without rewriting bytes or approvals. They are not evidence of the new default. Changed observed context still requires the existing explicit new-attempt procedure.
 
 ## Interruptions and resumption
 

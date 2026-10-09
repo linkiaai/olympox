@@ -4,15 +4,15 @@ Versão **0.2.0**. Núcleo local implementado; cada estúdio escolhe seus própr
 
 ## Direção adotada
 
-O OLYMPOX é um framework local de influenciadores de IA, operado pelo Codex e dedicado a influenciadores virtuais originais, produção e aprendizado. Organiza o trabalho por especialistas, tarefas, fluxos e critérios de conclusão. As nove agentes têm nomes de deusas e perfis femininos; seus IDs de papel permanecem estáveis. A implementação usa Node e arquivos locais, sem dependências operacionais externas.
+O OLYMPOX é um framework local de influenciadores de IA, operado por Codex ou Claude Code e dedicado a influenciadores virtuais originais, produção e aprendizado. Organiza o trabalho por especialistas, tarefas, fluxos e critérios de conclusão. As nove agentes têm nomes de deusas e perfis femininos; seus IDs de papel permanecem estáveis. A implementação usa Node e arquivos locais, sem dependências operacionais externas.
 
-O Codex interpreta o pedido, carrega o pacote da próxima tarefa, usa capacidades disponíveis e registra o trabalho ocorrido. O núcleo mantém contratos, contexto e estado; não despacha agentes, gera mídia, consulta fornecedores nem publica. Perfis não são workers permanentes. Delegação existe somente quando uma subagente real é utilizado.
+O assistente coordenador interpreta o pedido, carrega o pacote da próxima tarefa, usa capacidades disponíveis e registra o trabalho ocorrido. O núcleo mantém contratos, contexto e estado; não despacha agentes, gera mídia, consulta fornecedores nem publica. Perfis não são workers permanentes. Delegação existe somente quando uma subagente real é utilizado.
 
 ## O que está implementado
 
 | Área | Núcleo local 0.2 | Limite atual |
 | --- | --- | --- |
-| Direção | Constituição, skill, nove perfis e contratos de tarefa | Perfis orientam o Codex; não executam sozinhos |
+| Direção | Constituição, skill, nove perfis e contratos de tarefa | Perfis orientam o assistente; não executam sozinhos |
 | Identidade | Snapshots de cânone aprovado, versão/hash e bytes de referências preservados | Aprovação e inspeção precisam ter ocorrido; dados históricos ausentes não são reconstruídos |
 | Editorial | Narrativa e peças versionadas, cronologia, voz escrita, fontes e vínculos de contexto | Campanha é um ID opcional; não há gestão completa de campanhas |
 | Coordenação | Três fluxos, responsável, entradas, saídas e estado persistido | Submissão a ferramentas externas acontece fora do runtime |
@@ -23,11 +23,13 @@ O Codex interpreta o pedido, carrega o pacote da próxima tarefa, usa capacidade
 
 As correções anteriores continuam aplicadas: prompt exato vinculado à revisão, recusa de arquivos duplicados por caminhos equivalentes, referências adequadas ao tipo de mídia, custo válido quando conhecido e estados de persona, referência, ativo e tarefa separados. O núcleo adiciona preservação histórica e recuperação sem apagar registros anteriores.
 
+Novos runs guardam `mediaProviders` por tentativa, com image/video/audio em `higgsfield` por padrão. Geração exige capacidade genérica da mídia e capacidade do fornecedor escolhido; evidência gerada e intenção externa devem corresponder ao fornecedor. Novos fluxos de personagem têm piloto em vídeo por padrão, com candidatas e revisão em imagem. Mudanças de fornecedor exigem nova tentativa explícita e motivo. Runs históricos sem essa política conservam semântica e bytes salvos. Declarações limitam a conclusão local; não conectam nem executam fornecedor.
+
 ## Camadas e armazenamento
 
 1. **Conhecimento e direção:** constituição, skill, guias, perfis e contratos carregados conforme a tarefa.
 2. **Estado local verificável:** cânones, narrativas, peças, execuções seladas, revisões, tarefas e backups.
-3. **Execução na sessão:** o Codex usa ferramentas realmente disponíveis e registra saídas e limitações. Adaptadores externos dependem de necessidade e validação próprias.
+3. **Execução na sessão:** o assistente usa ferramentas realmente disponíveis e registra saídas e limitações. Adaptadores externos dependem de necessidade e validação próprias.
 
 ```text
 framework/
@@ -67,9 +69,9 @@ Cada pacote identifica personagem quando aplicável, responsável, contrato, ent
 
 Runs usam os estados `planned`, `in-progress`, `awaiting-input`, `awaiting-tool`, `uncertain-result`, `in-review`, `completed`, `failed` e `cancelled`. Valores históricos dos estados continuam legíveis por compatibilidade. Mudanças de entradas, saídas concluídas, cânone ou governança exigem nova tentativa e motivo para retomar. O fluxo recomeça, preservando a tentativa anterior e sem reaproveitar silenciosamente suas aprovações.
 
-Antes de um envio externo, persistir intenção e identificadores conhecidos. Uma retomada com job não esclarecido fica `uncertain-result`, inclusive após interrupção antes de registrar a resposta. O Codex consulta o fornecedor com uma ferramenta real e registra a reconciliação antes de completar ou tentar novamente. O runtime não consulta nem reenvia jobs; sem intenção registrada, não descobre chamadas feitas fora dele. Interrupção não demonstra falha nem autoriza nova cobrança.
+Antes de um envio externo, persistir intenção e identificadores conhecidos. Uma retomada com job não esclarecido fica `uncertain-result`, inclusive após interrupção antes de registrar a resposta. O assistente consulta o fornecedor com uma ferramenta real e registra a reconciliação antes de completar ou tentar novamente. O runtime não consulta nem reenvia jobs; sem intenção registrada, não descobre chamadas feitas fora dele. Interrupção não demonstra falha nem autoriza nova cobrança.
 
-Conclusão de tarefas que não são gates de decisão exige arquivos existentes, hashes e declaração de evidência adequada à etapa. Gates de decisão humana exigem `approval` explícita; podem ter zero outputs quando o contrato permitir e não exigem o objeto `evidence` habitual. Revisão identifica os bytes da mídia, método e decisão, sem falhas críticas ou limitações pendentes. Entrega aceita os bytes revisados; exportação alterada precisa de outra revisão. Nome de revisor, extensão de arquivo e declaração registrada não comprovam humanidade, pixels, escuta ou execução real. O Codex deve vincular as declarações aos eventos ocorridos. `completed` significa contratos locais preenchidos; publicação continua uma ação separada.
+Conclusão de tarefas que não são gates de decisão exige arquivos existentes, hashes e declaração de evidência adequada à etapa. Gates de decisão humana exigem `approval` explícita; podem ter zero outputs quando o contrato permitir e não exigem o objeto `evidence` habitual. Revisão identifica os bytes da mídia, método e decisão, sem falhas críticas ou limitações pendentes. Entrega aceita os bytes revisados; exportação alterada precisa de outra revisão. Nome de revisor, extensão de arquivo e declaração registrada não comprovam humanidade, pixels, escuta ou execução real. O assistente deve vincular as declarações aos eventos ocorridos. `completed` significa contratos locais preenchidos; publicação continua uma ação separada.
 
 ## Cânone, editorial e execução
 

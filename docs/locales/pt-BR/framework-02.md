@@ -6,7 +6,7 @@ O estúdio tem nove perfis, quinze contratos de tarefa e três fluxos persistent
 
 1. Quando a direção exigir pesquisa, Gaia investiga até três oportunidades para um mercado/canal, com fontes, hipóteses, concorrência e razões para descartar uma direção. Com um objetivo já definido, essa pesquisa pode ser dispensada com motivo.
 2. Atena recomenda uma oportunidade e transforma a escolha em brief. Psiquê define valor, personalidade e limites; Íris dirige candidatos visuais.
-3. Você escolhe a identidade a partir dos arquivos reais. A aprovação fixa referências e hashes. Preserve o cânone aprovado com `canon-snapshot` antes de evoluir a identidade; a aprovação sozinha não cria um snapshot.
+3. Você escolhe identidade visual nos arquivos reais. Com fala planejada, gere, ouça e selecione amostra vocal exata antes do canon completo. Aprovação fixa referências/configurações completas e hashes. Preserve o cânone aprovado com `canon-snapshot` antes de evoluir a identidade; a aprovação sozinha não cria um snapshot.
 4. Saraswati prepara conteúdo coerente com a personagem; Aurora pesquisa tendências quando necessário. Selene prepara e executa a produção com as ferramentas disponíveis; Têmis inspeciona o resultado completo.
 5. Atena entrega a peça revisada. Fortuna prepara distribuição e coleta de resultados quando houver publicação autorizada.
 
@@ -23,8 +23,9 @@ Crie um arquivo JSON de especificação dentro do projeto, por exemplo `tmp/firs
   "personaId": null,
   "objective": "Pesquisar três oportunidades e recomendar uma direção original para o primeiro piloto",
   "inputs": [],
-  "medium": "image",
-  "capabilities": []
+  "medium": "video",
+  "capabilities": [],
+  "mediaProviders": { "image": "higgsfield", "video": "higgsfield", "audio": "higgsfield" }
 }
 ```
 
@@ -33,13 +34,15 @@ node scripts/studio.mjs run-start create-character tmp/first-cycle.json
 node scripts/studio.mjs run-status RETURNED_RUN_ID
 ```
 
-O pacote retorna próxima tarefa, responsável, entregável, critérios, contexto observado e pendências. Inputs/outputs usam caminhos relativos à raiz com `/`. Arquivos de outra persona e caminhos fora do projeto são recusados. O registro fica em `work/runs/`; ele não despacha uma agente nem consulta serviços. O Codex executa o trabalho e registra eventos verdadeiros. Delegações reais devem identificar o evento e a agente que foi despachada.
+O pacote retorna próxima tarefa, responsável, entregável, critérios, contexto observado e pendências. Inputs/outputs usam caminhos relativos à raiz com `/`. Arquivos de outra persona e caminhos fora do projeto são recusados. O registro fica em `work/runs/`; ele não despacha uma agente nem consulta serviços. O coordenador conversacional executa pelas ferramentas reais e registra eventos verdadeiros. Delegações reais devem identificar o evento e a agente que foi despachada.
 
 `run-step RUN_ID transition.json` aplica uma transição declarada. Para iniciar a etapa local, o JSON mínimo é `{"action":"start"}`. Concluir exige arquivos existentes e evidência apropriada: documento preparado, mídia gerada, mídia inspecionada ou entrega realizada. Tipos e campos completos estão em [framework/README](framework/README.md). Registre ator, data, evento e notas do que realmente ocorreu. Não preencher nomes e datas hipotéticos como prova de execução.
 
 Quando a persona existir, a transição `bind-persona` vincula seu slug. Etapas opcionais podem ser puladas com motivo; inspeção e aprovação do cânone não podem ser puladas. O gate de aprovação registra uma decisão explícita real e exige correspondência com a aprovação já registrada na ficha; ele não aprova a identidade sozinho.
 
-Capacidades como `image-generation` e `image-inspection` representam o que está disponível na sessão. Declarar uma capacidade no JSON não instala nem testa uma ferramenta. A ausência de uma capacidade requerida mantém a tarefa aguardando ferramenta.
+Runs novos `create-character` usam `medium: video` por padrão, conforme piloto audiovisual representativo; escopo explícito somente de imagens pode usar `medium: image`. Geração/revisão de candidatas de identidade ainda usa capacidades de imagem em runs novos com política de fornecedor; o piloto usa seu meio escolhido. Runs novos registram `mediaProviders` para `image`, `video` e `audio`; etapas omitidas usam `higgsfield`. Geração exige capacidade genérica, como `image-generation`, e a do fornecedor escolhido, como `higgsfield:image-generation`. Evidência de conclusão gerada e intenção de job externo registram `provider` correspondente. Disponibilidade genérica de imagens integradas não avança etapa Higgsfield. Inspeção permanece genérica por usar ferramentas reais disponíveis. Declarações não instalam ferramentas, enviam mídia nem comprovam execução; requisitos ausentes deixam a tarefa `awaiting-tool`.
+
+Alternativa explícita registra fornecedor real em `mediaProviders` e decisão de método e etapas afetadas no plano. Mudar o mapa de fornecedores em run existente exige `run-resume` com `newAttempt: true`, motivo e `mediaProviders` atualizado; `run-step` comum não o altera. Política de fornecedor não comprova uso de módulo Builder/Soul Cinema exigido; conserve operação/modelo/entradas na proveniência e inspecione resultados. Runs anteriores à política mantêm semântica histórica e meio armazenado, sem reescrever bytes ou aprovações; não comprovam o novo padrão. Contexto observado alterado continua exigindo procedimento existente de tentativa nova explícita.
 
 ## Interrupções e retomada
 

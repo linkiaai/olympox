@@ -1,4 +1,4 @@
 interface:
   display_name: "OLYMPOX"
-  short_description: "Crie influenciadores com imagens integradas como padrão"
-  default_prompt: "Use $olympox para explorar influenciadores de IA memoráveis, usar geração integrada de imagens do ChatGPT/Codex como padrão quando disponível e selecionar ferramentas especializadas verificadas conforme necessário, preservando referências exatas, voz, aprovações e qualidade. Respeite minhas escolhas explícitas de método."
+  short_description: "Crie influenciadores com pipeline de mídia Higgsfield"
+  default_prompt: "Use $olympox para explorar influenciadores de IA originais e memoráveis e seguir o pipeline de mídia da referência Higgsfield. Coordene conceitos e roteiros aqui, verifique entradas exatas, orçamento do piloto inteiro e capacidades, e preserve identidade, voz escutada, aprovações e revisão completa de qualidade."

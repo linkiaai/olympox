@@ -5,7 +5,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { once } from 'node:events';
-import { buildDocumentation, checkDocumentation, collectDocumentation, commandCatalog, sourceFile, DOCS_ASSETS } from '../scripts/docs-core.mjs';
+import { buildDocumentation, checkDocumentation, collectDocumentation, commandCatalog, installationCommandCatalog, sourceFile, DOCS_ASSETS } from '../scripts/docs-core.mjs';
 import { exportDocumentation } from '../scripts/docs-export.mjs';
 import '../docs-site/src/markdown.js';
 import '../docs-site/src/localization.js';
@@ -16,7 +16,7 @@ const parent = path.join(source, 'tmp', 'docs-tests');
 function fixture() {
   fs.mkdirSync(parent, { recursive: true });
   const root = fs.mkdtempSync(path.join(parent, 'manual-'));
-  for (const directory of ['docs', 'framework', 'scripts', 'templates', 'docs-site']) fs.cpSync(path.join(source, directory), path.join(root, directory), { recursive: true, filter: file => !file.startsWith(path.join(source, 'docs-site', 'dist')) });
+  for (const directory of ['bin', 'docs', 'framework', 'scripts', 'templates', 'docs-site']) fs.cpSync(path.join(source, directory), path.join(root, directory), { recursive: true, filter: file => !file.startsWith(path.join(source, 'docs-site', 'dist')) });
   for (const name of ['AGENTS.md', 'CONSTITUTION.md', 'package.json']) fs.copyFileSync(path.join(source, name), path.join(root, name));
   return { root, close() { assert.equal(path.dirname(root), parent); assert.match(path.basename(root), /^manual-/); fs.rmSync(root, { recursive: true, force: true }); } };
 }
@@ -29,7 +29,8 @@ test('manual derives catalogs, is deterministic and checks staleness without wri
     assert.equal(fs.existsSync(path.join(root, 'docs-site/dist')), false);
     const built = buildDocumentation(root);
     assert.equal(built.data.roles.length, 9); assert.equal(built.data.tasks.length, 15); assert.equal(built.data.workflows.length, 3);
-    assert.equal(built.data.commands.length, 24);
+    assert.equal(built.data.commands.length, 26);
+    assert.match(built.data.commands.find(command => command.id === 'setup').syntax, /--assistant codex\|claude\|both.*--locale en\|pt-BR.*--yes/);
     const repeated = buildDocumentation(root);
     assert.equal(repeated.manifest.fingerprint, built.manifest.fingerprint);
     for (const [name, bytes] of built.output) assert.deepEqual(repeated.output.get(name), bytes);
@@ -88,6 +89,10 @@ test('manual excludes private data, rejects unsafe sources and requires command 
     const configFile = path.join(root, 'docs-site/config.json');
     const config = JSON.parse(fs.readFileSync(configFile, 'utf8'));
     const cli = fs.readFileSync(path.join(root, 'scripts/studio.mjs'), 'utf8');
+    const installerCli = fs.readFileSync(path.join(root, 'bin/olympox.mjs'), 'utf8');
+    assert.throws(() => installationCommandCatalog(installerCli, {}), /without description/);
+    assert.throws(() => installationCommandCatalog(installerCli.replace("command === 'setup'", "command === 'unadvertised'"), config.commandDescriptions), /without implementation/);
+    assert.throws(() => installationCommandCatalog(installerCli.replace('olympox setup [directory]', 'olympox hidden [directory]'), config.commandDescriptions), /unique setup and install syntax/);
     assert.throws(() => commandCatalog(cli, {}), /without description/);
     assert.throws(() => commandCatalog(cli.replace("command === 'help'", "command === 'new-operation'"), config.commandDescriptions), /without syntax/);
     const complete = structuredClone(config);

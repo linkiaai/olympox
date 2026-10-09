@@ -1,5 +1,19 @@
 # OLYMPOX release notes
 
+## 0.5.0 — October 9, 2026
+
+Higgsfield becomes the default media pipeline for new influencer appearance, candidates, references, scenes, edits, voice, animation, video and lip-sync. Codex or Claude Code coordinates concepts, personality, narrative, scripts and planning. Assistant-integrated images require an explicit alternative decision. Missing required modules leave the stage pending. The [reference-method guide](higgsfield-influencer-method.md) preserves observed Soul Cinema, separate voice direction and Seedance video, and identifies current Builder adaptations separately; a generic provider connection does not prove the requested module or equivalence.
+
+Guided `setup` selects presentation language, assistant and independent destination, preflights the complete installation, presents its actual plan and runs local manual/doctor/record checks after confirmation. A deterministic plan hash rejects changed reviewed inputs before writes. Cancellation/EOF before installation leaves no files; noninteractive setup requires explicit destination, assistant and `--yes`. Direct installation remains available for automation. Higgsfield readiness is checked in the chosen assistant after installation.
+
+The installer adds `--assistant codex|claude|both` (compatible default: `codex`). Claude Code receives canonical skills under `.claude/skills/` and a `CLAUDE.md` import of the creative `AGENTS.md`. Both targets retain all-file conflict preflight, private-state preservation and identical source projections. Start the published release with `npx --yes github:linkiaai/olympox#v0.5.0 setup`. See [installation](installation.md).
+
+New runs persist `mediaProviders` per attempt, with image/video/audio defaulting to `higgsfield`. Scoped generation capabilities, generated evidence and external intent must match the selected provider. New `create-character` workflows default to a video pilot; candidates and their review use image. A new run may explicitly select an alternative. Changing the selected provider of an existing run requires the normal new-attempt procedure and reason. Historical runs without this policy retain their saved semantics and bytes; approved identities, voice, media and approvals are not migrated. Core/task component revision remains **0.2.0** with an additive new-run policy.
+
+Whole-pilot readiness checks modules, workspace, exact-reference transport/reuse, vocal listening, video, full inspection, export, balance and a bounded cost scope before the first paid stage. Reuse confirmed provider media IDs and supported automatic local transfer before proposing manual attachment. The official local CLI upload-to-plugin bridge is documented when prepared; no reusable upload adapter is shipped or automatic login, generation or dispatch claimed. Existing applicable authorization is reused.
+
+Local verification covers provider policy, video/image stages, history, assistant installation, preservation and export. It does not demonstrate live Claude skill discovery, provider execution, media fidelity or remote publication. Verification outcomes are recorded in local maintenance when completed. Releases below preserve their historical policies.
+
 ## 0.4.0 — October 8, 2026
 
 Integrated ChatGPT/Codex image generation becomes the default for appearance, candidates, references, settings, images, and edits when available. It requires no Higgsfield, Builder, external CLI, or API key; account limits and availability apply, with no promise of free or unlimited generation. Concepts, personality, narrative world, scripts, and planning stay in ChatGPT/Codex. Explicit user-selected methods/providers take precedence; specialized voice, animation, video, and lip-sync use verified tools by need, quality, and cost. Higgsfield plugin/CLI and Builder procedures remain optional per selected stage.

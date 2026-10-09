@@ -1,8 +1,8 @@
 # Optional local Higgsfield CLI setup
 
-This guide covers the optional local CLI route. Higgsfield is also supported through its host plugin, following the [plugin guide](higgsfield-plugin.md), without requiring a local CLI. The routes share canon, traceability, authorization, preservation, and review requirements; account sessions, commands, features, and billing must be checked for the selected route.
+This guide covers a separately prepared local CLI transport for the [default Higgsfield media pipeline](higgsfield-influencer-method.md). The [plugin](higgsfield-plugin.md) can execute supported stages without it; the official CLI can complement the plugin for exact local-file transfer. Codex or Claude can operate the available tools. Both routes share canon, traceability, authorization, preservation and review requirements; check account/workspace, commands, features and billing for the selected route.
 
-Framework installation supplies a skill, wrapper, guides, and provider-source provenance; each studio choosing the CLI installs it and connects its own account separately. Installation does not install or authenticate the plugin or CLI, send media, or require paid generation. The documented wrapper baseline is CLI **1.1.26** on Windows x64. Sources and baseline installer were reviewed on **October 7, 2026**; recheck provider terms and capabilities before use. This is conversational support operated by Codex, not an automatic core adapter.
+Framework installation supplies a skill, wrapper, guides, and provider-source provenance; each studio choosing the CLI installs it and connects its own account separately. Installation does not install or authenticate the plugin or CLI, send media, or require paid generation. The documented wrapper baseline is CLI **1.1.26** on Windows x64. Sources and baseline installer were reviewed on **October 7, 2026**; recheck provider terms and capabilities before use. This is conversational support operated by the available coordinator, not an automatic core adapter.
 
 ## Supported baseline and studio requirements
 
@@ -16,7 +16,7 @@ Framework installation supplies a skill, wrapper, guides, and provider-source pr
 | Balance and cost per model | Query for your account before authorized production |
 | Video, voice, and Soul ID | Requires separately authorized execution, exact references, and complete review |
 
-Prepare the pinned CLI through the installation steps below before running the wrapper checks. Local preparation does not prove model availability in your account, character consistency, audiovisual quality, or Codex access to a skill that has not loaded yet. Candidate images can use Codex's integrated tool when available, following the identity-selection process.
+Prepare the pinned CLI through the installation steps below before wrapper checks. Local preparation does not prove model availability, character consistency, audiovisual quality, skill discovery or a connected provider. Default candidates/references use verified Higgsfield modules; integrated assistant images require an explicit alternative-method choice.
 
 ## Preparation commands
 
@@ -76,6 +76,12 @@ node scripts/higgsfield-local.mjs inspect generate cost kling3_0 --prompt "Cost 
 Check the current schema before this query. An estimate omitting required media can fail or differ from the final request; do not invent a value or treat it as an exact price. When an estimate needs references, use the native CLI only after applicable authorization to send them and with the exact files already approved.
 
 The pilot budget must record initial balance, queried cost per attempt, total credit limit, and maximum attempts. The preparation wrapper neither controls nor guarantees this budget in the service. Without queryable cost, record "unknown" and obtain authorization covering that uncertainty before the job; do not confuse subscription price with cost per approved asset.
+
+## Transfer local files for plugin use
+
+When the connected plugin cannot read a local studio file, check the pinned official CLI and `upload create --help`. With the exact source file, applicable upload authorization, confirmed account/workspace and preserved intent, the coordinator can invoke the native CLI’s `upload create <local-file> --json`. This transmits media externally; it is not a read-only preparation command or an authorized generation/training job. The limited preparation wrapper does not expose this upload.
+
+Record source path, SHA-256 and size, actual returned media ID/URL and the upload response. Verify that ID through the plugin’s actual library/read tool in the correct workspace. Where downloadable original bytes are available, compare their SHA-256/size; if the service transforms the file or verification is unavailable, record that limitation and inspect fidelity before use. Use only confirmed mapped IDs/URLs in generation. An independent studio exercised this bridge with unchanged bytes; that evidence does not establish every host/account’s availability or an automatic runtime upload feature. Keep private URLs and records local. Do not request manual dragging first or paste binary/base64 content into prompts/logs. Missing login, transport or verification remains pending.
 
 ## Authorized production later
 

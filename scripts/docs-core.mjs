@@ -42,6 +42,17 @@ export function commandCatalog(source, descriptions) {
   return commands;
 }
 
+export function installationCommandCatalog(source, descriptions) {
+  const commands = [...source.matchAll(/^\s+olympox (setup|install)([^\r\n]+)/gm)].map(match => ({ id: match[1], syntax: `node bin/olympox.mjs ${match[1]}${match[2]}` }));
+  if (commands.length !== 2 || new Set(commands.map(command => command.id)).size !== 2) throw new Error('Installation commands require unique setup and install syntax in CLI help.');
+  for (const command of commands) {
+    if (!source.includes(`command === '${command.id}'`)) throw new Error(`Installation command without implementation: ${command.id}`);
+    if (!descriptions[command.id]?.trim()) throw new Error(`Installation command without description: ${command.id}`);
+    command.description = descriptions[command.id];
+  }
+  return commands;
+}
+
 export function collectDocumentation(root) {
   const files = new Map();
   const read = relative => {
@@ -76,7 +87,7 @@ export function collectDocumentation(root) {
   const roles = registry.roles.map(role => ({ ...role, markdown: read(role.path) }));
   const tasks = registry.tasks.map(item => ({ ...JSON.parse(read(item.path)), path: item.path }));
   const workflows = registry.workflows.map(item => ({ ...JSON.parse(read(item.path)), path: item.path }));
-  const commands = commandCatalog(read('scripts/studio.mjs'), config.commandDescriptions ?? {});
+  const commands = [...installationCommandCatalog(read('bin/olympox.mjs'), config.commandDescriptions ?? {}), ...commandCatalog(read('scripts/studio.mjs'), config.commandDescriptions ?? {})];
   for (const [locale, settings] of Object.entries(config.locales)) if (!new RegExp(`^docs-site/locales/${locale}\\.json$`).test(settings.resource)) throw new Error(`Locale resource outside the public selection: ${settings.resource}`);
   const ui = JSON.parse(read(config.locales.en.resource)).ui;
   if (!ui || !Object.keys(ui).length || Object.values(ui).some(value => typeof value !== 'string' || !value.trim())) throw new Error('English UI messages must be nonempty strings.');
@@ -116,7 +127,7 @@ export function collectDocumentation(root) {
     const translatedCommands = commands.map(item => ({ ...item, description: requireText(translation.commandDescriptions?.[item.id], `commandDescriptions.${item.id}`) }));
     locales[locale] = { title: requireText(translation.title, 'title'), ui: translation.ui, guides: translatedGuides, roles: translatedRoles, tasks: translatedTasks, workflows: translatedWorkflows, commands: translatedCommands };
   }
-  const templates = fs.readdirSync(path.join(root, 'templates')).filter(name => name === 'studio-AGENTS.md' || /^[a-z0-9-]+\.(json|md)$/.test(name)).sort().map(name => {
+  const templates = fs.readdirSync(path.join(root, 'templates')).filter(name => ['studio-AGENTS.md', 'studio-CLAUDE.md'].includes(name) || /^[a-z0-9-]+\.(json|md)$/.test(name)).sort().map(name => {
     const relative = `templates/${name}`;
     return { path: relative, text: read(relative) };
   });
@@ -126,6 +137,7 @@ export function collectDocumentation(root) {
   });
   // Observe implementation hashes without incorporating source code into the site.
   for (const name of fs.readdirSync(path.join(root, 'scripts')).filter(name => name.endsWith('.mjs')).sort()) read(`scripts/${name}`);
+  for (const locale of ['en', 'pt-BR']) read(`scripts/onboarding-locales/${locale}.json`);
   for (const name of ['AGENTS.md', 'CONSTITUTION.md', 'package.json']) read(name);
   for (const item of registry.constitutionPaths ?? []) read(item);
   for (const asset of DOCS_ASSETS.filter(name => !['content.js', 'manifest.json'].includes(name))) read(`docs-site/src/${asset}`);

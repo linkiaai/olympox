@@ -6,17 +6,17 @@ OLYMPOX is a reusable local AI influencer framework. Its core maintains guidance
 
 | Area | Local capability |
 | --- | --- |
-| Governance and skills | Constitution, Codex project instructions, `olympox`, and optional `higgsfield-studio` skills |
+| Governance and skills | Constitution, selected local-assistant instructions, `olympox`, and `higgsfield-studio` skills |
 | Coordination | Nine goddess-named profiles, task contracts, and three resumable workflows |
 | Research and direction | On-demand opportunity and trend methods, with sources, scope, and limitations |
 | Character records | Brief, identity anchors, references, narrative, content pieces, and generation specifications |
 | Continuity | Approved canon snapshots, execution seals, exact-file review links, and preserved attempts |
 | Recovery | Context change detection, uncertain-result handling, inventoried backups, and restore testing |
 | Documentation | Local navigable manual |
-| Optional Higgsfield access | Plugin workflow guidance and local CLI wrapper, using the same canon, run, and review records |
+| Higgsfield media access | Plugin workflow guidance and local CLI wrapper, using the same canon, run, and review records |
 | Installation | Fresh studio creation and preflight merge that retains identical files and refuses conflicting framework files |
 
-The workflows are `create-character`, `produce-piece`, and `review-correct`. Atena coordinates requests in Codex. Registered profiles guide work; real specialist delegation occurs only when a subagent is actually dispatched.
+The workflows are `create-character`, `produce-piece`, and `review-correct`. Atena coordinates requests in the selected assistant. Registered profiles guide work; real specialist delegation occurs only when a subagent is actually dispatched.
 
 ## What verification demonstrates
 
@@ -33,11 +33,11 @@ Structural checks do not inspect pixels, listen to voices, view motion, confirm 
 
 ## Tools and production
 
-Codex uses generation, inspection, browsing, and subagent tools actually available in the current session. Installed skills do not create tool access or demonstrate fresh discovery by Codex. Reopen or reload the project when necessary.
+The coordinator uses generation, inspection, browsing and subagent tools actually available in its session. Installed files do not create tool access or demonstrate fresh skill discovery in Codex or Claude Code. Reload or reopen the project as needed. Local Claude Code instruction/skill installation is distinct from verified Claude web/cloud support, live provider connection and end-to-end creative execution.
 
-New influencer creation defaults to [integrated ChatGPT/Codex visual creation](integrated-images.md) when available, subject to tool availability and account limits, without Higgsfield, Builder, an external CLI, or an API key. Respect an explicit method/provider choice. Short adaptive onboarding and distinct concepts precede generation; expressive personality/premise scenes and inspected coherent references preserve the creative direction. Speaking characters require a generated, listened-to, user-selected vocal reference before complete canon approval. Exact approvals, canon preservation, a pilot before batches, full media review, export, and authorized publication remain required. Specialized tools, including Higgsfield, are selected per useful stage by need, quality, and cost. Existing canon stays preserved. These are skill/task instructions; hashes observe saved plans but the core does not enforce their semantic completeness or dispatch providers automatically.
+New influencer creation defaults to the [Higgsfield reference method](higgsfield-influencer-method.md), coordinated by Codex or Claude without integrated image-generation dependency. Discovery and distinct concepts precede identity/reference work; explicit visual selection, inspected coherent references, generated/listened-to/selected voice when speaking, complete canon approval, inspected scenes, a representative video pilot, full QA, actual-byte export and authorized publication remain required. Check full-pilot connection, reference transport, export and scoped budget early. Integrated images are an [explicit alternative](integrated-images.md); selected modules are not silently replaced. Current website features do not prove equivalent callable tools or source quality. Existing canon and historical bytes stay preserved.
 
-Provider access remains separately prepared: the [Codex plugin](higgsfield-plugin.md) needs no local CLI; the [local CLI and wrapper](higgsfield-setup.md) are a separate route whose required capabilities must be checked. The package includes guidance, the wrapper and permitted provider-source provenance. Installation never installs/connects external providers. The core remains usable without them; missing required production capabilities stay pending rather than silently switching methods.
+Provider access remains separately prepared: the [host plugin](higgsfield-plugin.md) needs no local CLI; the [local CLI and wrapper](higgsfield-setup.md) are a separate route whose required capabilities must be checked. The package includes guidance, the wrapper and permitted provider-source provenance. Installation never installs/connects external providers. The core remains usable without them; missing required production capabilities stay pending rather than silently switching methods.
 
 Account sessions, credentials, tool/model availability, and balances must be checked for the selected route in the user's environment. Plugin discovery alone does not demonstrate account access, voice, Soul ID, reference handling, media download/export, or equivalent CLI billing. Local verification covers the framework's records and guidance; it does not exercise the plugin service. Follow [tools](tools.md) and the selected route's guide. Both routes require actual execution evidence, local records, and complete media inspection.
 

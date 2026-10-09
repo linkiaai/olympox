@@ -1,6 +1,18 @@
 # Comece pela conversa.
 
-Abra seu [estúdio instalado independente](installation.md) no Codex e faça o pedido normalmente. Nome de agente, sintaxe especial e formulário completo são desnecessários. Atena lê decisões já informadas e faz no máximo três perguntas ainda abertas sobre objetivo, presença da personagem e público/assunto. A cópia do código-fonte do framework é reservada para desenvolvimento e manutenção.
+Abra seu [estúdio instalado independente](installation.md) no assistente local escolhido, Codex ou Claude Code, e faça o pedido normalmente. Nome de agente, sintaxe especial e formulário completo são desnecessários. Atena reutiliza decisões e faz no máximo três perguntas abertas sobre objetivo, presença e público/assunto. O código-fonte do framework fica reservado ao desenvolvimento. O assistente coordena; Higgsfield cria mídia padrão por ferramentas realmente disponíveis naquele aplicativo. Instalação não conecta contas nem comprova Claude web/cloud ou execução real do fornecedor.
+
+## Prepare primeiro um estúdio
+
+A versão 0.5.0 oferece instalador guiado publicado:
+
+```sh
+npx --yes github:linkiaai/olympox#v0.5.0 setup
+```
+
+Da cópia revisada ou pacote extraído, `node bin/olympox.mjs setup` executa o mesmo guia. `npx --yes` aceita apenas a confirmação de pacote do npm.
+
+Escolha idioma de apresentação, Codex, Claude Code ou ambos e um destino independente. Revise o resumo real da verificação prévia antes da instalação; cancelar antes da escrita preserva o destino. A preparação executa verificações locais do manual e da estrutura e mostra a sintaxe de ativação do assistente escolhido e um primeiro pedido. Execute `npm run verify` no estúdio instalado para a suíte local completa. Conexão Higgsfield e prontidão de mídia são verificações separadas na sessão real. O [guia de instalação](installation.md) cobre `--yes` não interativo com diretório e assistente explícitos, instalação direta, mesclagem e preservação.
 
 ## Criar uma personagem
 
@@ -14,9 +26,9 @@ Atena oferece opções úteis: entretenimento viral/alcance, comunidade, marca/e
 
 Quando a direção estiver aberta, receba pelo menos três fichas de conceito distintas antes dos retratos. Compare premissa, aparência/presença, atitude e exemplo de voz, contraste editorial, três aberturas com entregas, hipótese de compartilhamento e dificuldade de produção. Atena recomenda uma direção; você pode escolher, combinar elementos compatíveis ou pedir revisão. Presença forte pode vir de idade, silhueta, estilo e atitude variados sem impor fantasia.
 
-**Geração integrada de imagens do ChatGPT/Codex** é o padrão para aparência, candidatas, referências, cenários, imagens e edições quando disponível. Conceito, personalidade, universo narrativo, roteiros e planejamento continuam no ChatGPT/Codex. Depois de escolher o conceito, dirija uma amostra expressiva de exploração e uma cena que expresse a premissa, inspecione e ajuste antes de ampliar o conjunto de referências. Registre a seleção visual do usuário mantendo a nova persona em `draft` e anexe de verdade as referências exatas escolhidas às vistas, cenas e edições seguintes. Inspecione anatomia, presença e continuidade. Quando houver fala planejada, gere uma amostra vocal em rascunho/referência com ferramenta verificada, escute e registre a seleção do usuário do áudio e das configurações exatos. Então aprove e congele o canon visual/vocal completo antes de um piloto pequeno de produção. Para uma persona sem fala, registre voz como não aplicável. Revise a mídia completa antes dos lotes. Publicação precisa de autorização aplicável e comparação usa resultados reais dos posts. Potencial de viralização continua hipótese.
+**Higgsfield é a plataforma padrão de mídia**, seguindo o [método de referência](higgsfield-influencer-method.md). Codex ou Claude coordena conceito, personalidade, narrativa, roteiros e prompts. Confira conexão, módulos, transporte exato, exportação e orçamento do piloto completo antes da geração externa. Produza candidatas expressivas e cena da premissa com operações Higgsfield verificadas; inspecione, ajuste e registre seleção visual enquanto a persona fica `draft`. Anexe referências exatas às vistas/cenas seguintes e inspecione anatomia, presença e continuidade. Com fala planejada, gere/ouça/selecione amostra vocal de rascunho antes de aprovar canon visual/vocal completo e exato. Depois produza piloto curto representativo de vídeo; QA completo e exportação de bytes reais antecedem lotes e publicação autorizada. Brief somente de imagens pode definir seu escopo. Potencial viral continua hipótese. Imagens integradas pelo assistente são [alternativa explícita](integrated-images.md).
 
-Psiquê desenvolve a persona e Íris dirige os visuais. Gaia pesquisa oportunidades quando útil. Esses perfis orientam o Codex; consulta é relatada apenas quando um subagente realmente trabalhou.
+Psiquê desenvolve a persona e Íris dirige os visuais. Gaia pesquisa oportunidades quando útil. Esses perfis orientam o coordenador; consulta é relatada apenas quando um subagente realmente trabalhou.
 
 ## Produzir para uma personagem existente
 
@@ -31,9 +43,9 @@ Personagens existentes pulam a descoberta inicial de criação e mantêm canon a
 
 ## Conferir recursos e registrar o método por etapa
 
-Siga [produção](production.md) e salve um [plano do método de produção](../../../templates/locales/pt-BR/production-method.md) versionado. Rastreie o arquivo na run existente como entrada ou saída de planejamento; registre método, ferramenta, modelo exposto, prompts, referências realmente anexadas, arquivos/hashes, custos conhecidos e limitações por etapa. Geração de referências, voz, cenas/vídeo, exportação e revisão precisam de verificação real separada. A rota visual integrada não precisa de Higgsfield, AI Influencer Builder, CLI externa nem chave de API. Depende da disponibilidade da ferramenta e dos limites da conta; não descrevê-la como gratuita ou ilimitada. Treinamento é opcional e autorizado separadamente quando justificado.
+Siga [produção](production.md) e salve [plano versionado](../../../templates/locales/pt-BR/production-method.md) como entrada/saída de planejamento rastreada no run. Registre por etapa método, ferramenta, modelo exposto, prompts, entradas exatas anexadas, arquivos/hashes, custos, autorização aplicável e limites. Confira geração de referências, voz, cenas/vídeo, exportação e revisão separadamente. Não exige ferramenta integrada de imagem do coordenador. Treinamento é opcional e autorizado separadamente quando justificado; aprovação de ficha ou vídeo não cobre outra etapa paga.
 
-Selecionar ferramentas verificadas para voz, animação, vídeo, sincronização labial e recursos especializados conforme necessidade, qualidade e custo conhecido. Higgsfield continua como opção conforme seu [guia de método opcional](higgsfield-influencer-method.md), pelo [plugin do Codex](higgsfield-plugin.md) ou pela [CLI e wrapper locais](higgsfield-setup.md) quando a rota suportar a operação escolhida. O plugin exige instalação e conexão próprias, sem exigir a CLI local do Higgsfield. Se faltar um recurso, manter a etapa pendente e propor alternativas enquanto prepara trabalho local independente. Trocar para geração externa paga exige autorização aplicável.
+Use módulos Higgsfield escolhidos e verificados pelo [plugin](higgsfield-plugin.md) ou [CLI oficial](higgsfield-setup.md), com transporte complementar quando apropriado. Preserve módulos observados e registre adaptações propostas; a interface AI Influencer atual não é API única verificada. O plugin precisa de conexão própria; CLI local é dispensável quando suas ferramentas atendem às entradas. Recurso ausente mantém etapa pendente enquanto preparação independente continua. Mudança material de método ou escopo pago exige decisão do usuário e autorização aplicável.
 
 ```text
 Para esta peça, escolho explicitamente [método/fornecedor alternativo].
@@ -62,7 +74,7 @@ node scripts/studio.mjs new my-persona
 node scripts/studio.mjs list
 ```
 
-`new` cria um rascunho. O Codex salva conceito escolhido, ficha da personagem e brief da conversa antes de gerar referências. Esses comandos não produzem mídia, encaminham a um fornecedor nem aprovam identidade. Consulte [operação](operations.md) para registrar arquivos e [operar o núcleo](framework-02.md) para iniciar e retomar fluxos.
+`new` cria um rascunho. O coordenador salva o conceito escolhido, ficha da personagem e brief da conversa antes de gerar referências. Esses comandos não produzem mídia, encaminham a um fornecedor nem aprovam identidade. Consulte [operação](operations.md) para registrar arquivos e [operar o núcleo](framework-02.md) para iniciar e retomar fluxos.
 
 ## O que informar na passagem
 

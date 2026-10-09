@@ -4,7 +4,7 @@ The objective is a recognizable character with an individual presence and behavi
 
 ## Approval rule
 
-Every generated file starts as `draft`. Valid metadata, high resolution, calculated similarity, or a correct prompt do not demonstrate identity fidelity. Approval requires a person inspecting real media and recording the result. Codex can identify defects and organize evidence; it must not present automatic validation as proof that the character was preserved.
+Every generated file starts as `draft`. Valid metadata, high resolution, calculated similarity, or a correct prompt do not demonstrate identity fidelity. Approval requires a person inspecting real media and recording the result. The coordinator can identify defects and organize evidence; it must not present automatic validation as proof that the character was preserved.
 
 | State | Meaning | Required evidence |
 | --- | --- | --- |
@@ -27,7 +27,7 @@ Before choosing a new identity, read the selected concept and compare the actual
 | Presence in context | Inspect a neutral identity reference and an in-character scene or cover at the intended size/crop. Does the latter express the selected premise and attitude? A neutral reference need not communicate the whole premise. |
 | Voice and content | Do sample lines and three series have a recognizable perspective, concrete openings, fulfilled payoffs, and stated reasons to watch/save/share? Could they be reassigned unchanged to any candidate? |
 | Continuity and originality | Does the character remain recognizable in an allowed variation, without relying only on one accessory? Does the concept preserve an original identity rather than reproducing an identifiable person's look, voice, or biography? |
-| Selected method | Does the versioned method plan identify the method/tool for each stage, actual prompts, attached references, files/hashes, exposed model, known cost and limitations? Integrated visual generation is the default when available; Builder evidence is required only for a stage that selected Builder. Missing required stages remain pending; a direct video or prepared specification does not complete an earlier stage. |
+| Selected method | Does the versioned method plan identify the method/tool for each stage, actual prompts, attached references, files/hashes, exposed model, known cost and limitations? Higgsfield is the media default; verify the selected reference modules, full-pilot transport/export/budget readiness and real provider evidence. Builder evidence is required only for a stage that selected Builder; integrated images need an explicit alternative choice. Missing required stages remain pending; a direct video or prepared specification does not complete an earlier stage. |
 
 Record observations, exact files and the requested correction. If the selected concept is absent, keep candidate media `draft` and return it for art/persona correction before proposing canon approval; reference records remain `candidate` until approved. An intentionally restrained direction can pass when its specific presence and behavior are visible. Do not add eccentricity, fantasy, a new beauty standard, or new identity traits merely to pass review.
 
@@ -65,7 +65,7 @@ Watch the complete file with audio at normal speed. Revisit suspicious segments,
 - **Final delivery:** also watch the edited, exported version with music and captions. Check synchronization, speech comprehension, cuts, and duration on the target device.
 - **Creative delivery:** verify that the opening and payoff match the piece's stated idea and that performance expresses the character's selected attitude. Generic delivery or an unfulfilled opening requires correction; it does not establish a failed audience hypothesis.
 
-If Codex or the available tool cannot access audio or motion, record that limitation and leave the corresponding approval pending.
+If the coordinator or the available tool cannot access audio or motion, record that limitation and leave the corresponding approval pending.
 
 ## Critical failures
 

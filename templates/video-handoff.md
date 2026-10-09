@@ -2,6 +2,8 @@
 
 Save a new character-local version, such as `influencers/<slug>/work/video-handoff-v001.md`, and register it with the method plan and exact shot files as run inputs/planning outputs. Follow [the procedure](../docs/production-handoff.md). This document uses existing file/hash records; it is not an automatic submission schema. Never overwrite a tracked version or approved input.
 
+The default media provider is Higgsfield; Codex or Claude Code coordinates the work. Preserve the source-method module mapping, reused exact provider inputs and an early whole-pilot budget. Integrated assistant images require explicit alternative selection.
+
 ## Readiness and next action
 
 | Checkpoint | Ready / pending | Exact evidence / missing requirement | Next owner and concrete action |

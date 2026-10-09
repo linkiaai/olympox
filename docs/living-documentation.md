@@ -36,7 +36,7 @@ The output is in `docs-site/dist/`. You can open `index.html` directly; this cop
 
 ## Keep explanations accurate
 
-When framework behavior changes, Codex must update the corresponding guide in the same task. This responsibility is recorded in `AGENTS.md`. The generator synchronizes structured information; it does not interpret code to invent explanations or promise new capabilities.
+When framework behavior changes, the maintainer must update the corresponding guide in the same task. This responsibility is recorded in `AGENTS.md`. The generator synchronizes structured information; it does not interpret code to invent explanations or promise new capabilities.
 
 A new command needs syntax in CLI help and a description in `commandDescriptions` in the configuration. A new guide goes into `guides`. Allowed files are explicit: character information, media, prompts, runs, backups, credentials, and operational state are excluded.
 

@@ -1,6 +1,6 @@
 # Opportunity and trend research
 
-Date: **October 7, 2026**. This guide defines on-demand research conducted by Codex. There is no continuous collection, connected social accounts, or installed automatic trend radar.
+Date: **October 7, 2026**. This guide defines on-demand research conducted by the conversational coordinator. There is no continuous collection, connected social accounts, or installed automatic trend radar.
 
 ## Two decisions, two roles
 

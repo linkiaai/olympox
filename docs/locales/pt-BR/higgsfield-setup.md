@@ -1,8 +1,8 @@
 # Preparação local opcional da CLI Higgsfield
 
-Este guia cobre o caminho opcional da CLI local. O Higgsfield também é suportado pelo plugin do aplicativo, seguindo o [guia do plugin](higgsfield-plugin.md), sem exigir CLI local. Os caminhos compartilham requisitos de cânone, rastreabilidade, autorização, preservação e revisão; sessões de conta, comandos, recursos e cobrança devem ser conferidos para o caminho selecionado.
+Este guia cobre o transporte CLI local preparado separadamente para o [caminho padrão Higgsfield](higgsfield-influencer-method.md). O [plugin](higgsfield-plugin.md) executa etapas suportadas sem CLI; a CLI oficial pode complementá-lo na transferência exata de arquivos locais. Codex ou Claude podem operar ferramentas disponíveis. Ambos compartilham requisitos de canon, rastreabilidade, autorização, preservação e revisão; confira conta/workspace, comandos, recursos e cobrança da rota escolhida.
 
-A instalação do framework fornece uma skill, um wrapper, guias e proveniência de fontes do fornecedor; cada estúdio que escolher a CLI a instala e conecta sua própria conta separadamente. A instalação não instala nem autentica o plugin ou a CLI, envia mídia ou exige geração paga. A base documentada do wrapper é a CLI **1.1.26** em Windows x64. Fontes e instalador de referência foram revisados em **7 de outubro de 2026**; confira novamente termos e capacidades do fornecedor antes de usar. Este suporte conversacional é operado pelo Codex, sem adaptador automático no núcleo.
+A instalação do framework fornece uma skill, um wrapper, guias e proveniência de fontes do fornecedor; cada estúdio que escolher a CLI a instala e conecta sua própria conta separadamente. A instalação não instala nem autentica o plugin ou a CLI, envia mídia ou exige geração paga. A base documentada do wrapper é a CLI **1.1.26** em Windows x64. Fontes e instalador de referência foram revisados em **7 de outubro de 2026**; confira novamente termos e capacidades do fornecedor antes de usar. Este suporte conversacional é operado pelo coordenador disponível, sem adaptador automático no núcleo.
 
 ## Base suportada e requisitos do estúdio
 
@@ -16,7 +16,7 @@ A instalação do framework fornece uma skill, um wrapper, guias e proveniência
 | Saldo e custo por modelo | Consulte sua conta antes da produção autorizada |
 | Vídeo, voz e Soul ID | Exigem execução autorizada separadamente, referências exatas e revisão completa |
 
-Prepare a CLI fixada pelas etapas de instalação abaixo antes de executar as verificações do wrapper. A preparação local não prova disponibilidade de modelos na sua conta, consistência de personagem, qualidade audiovisual nem acesso do Codex a uma skill ainda não carregada. Imagens candidatas podem usar a ferramenta integrada do Codex quando disponível, respeitando o processo de escolha da identidade.
+Prepare a CLI fixada pelas etapas abaixo antes de conferir o wrapper. Preparação local não comprova modelos, consistência de personagem, qualidade audiovisual, descoberta de skill nem conexão do fornecedor. Candidatas/referências padrão usam módulos Higgsfield verificados; imagens integradas do assistente exigem escolha explícita de método alternativo.
 
 ## Comandos de preparação
 
@@ -76,6 +76,12 @@ node scripts/higgsfield-local.mjs inspect generate cost kling3_0 --prompt "Consu
 Verificar o schema atual antes dessa consulta. Uma estimativa que omite a mídia necessária pode falhar ou diferir do pedido final; não inventar valor nem tratá-la como preço exato. Quando a estimativa precisar das referências, usar o CLI nativo somente após autorização aplicável para enviá-las e com os arquivos exatos já aprovados.
 
 O orçamento do piloto deve registrar saldo inicial, custo consultado por tentativa, limite total de créditos e número máximo de tentativas. O wrapper de preparação não controla nem garante esse orçamento no serviço. Sem custo consultável, registrar “desconhecido” e obter autorização que contemple essa incerteza antes do job; não confundir preço de assinatura com custo por ativo aprovado.
+
+## Transferir arquivos locais para o plugin
+
+Quando o plugin conectado não lê arquivo local do estúdio, confira CLI oficial fixada e `upload create --help`. Com arquivo de origem exato, autorização de envio aplicável, conta/workspace confirmados e intenção preservada, o coordenador pode invocar `upload create <local-file> --json` na CLI nativa. A ação transmite mídia externamente; não é preparação somente de leitura nem autoriza geração/treinamento. O wrapper preparatório limitado não expõe esse upload.
+
+Registre caminho, SHA-256 e tamanho de origem, ID/URL reais retornados e resposta de upload. Verifique o ID pela ferramenta real de biblioteca/leitura do plugin no workspace correto. Quando bytes originais puderem ser baixados, compare SHA-256/tamanho; se o serviço transforma o arquivo ou não permite verificação, registre limite e inspecione fidelidade antes do uso. Use somente IDs/URLs mapeados e confirmados na geração. Um estúdio independente exercitou essa ponte sem alterar bytes; a evidência não comprova disponibilidade em todo aplicativo/conta nem upload automático do runtime. Mantenha URLs e registros privados locais. Não peça para arrastar manualmente como primeira solução nem cole binário/base64 em prompts/logs. Login, transporte ou verificação ausentes ficam pendentes.
 
 ## Produção autorizada depois
 

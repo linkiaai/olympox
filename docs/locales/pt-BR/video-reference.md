@@ -18,11 +18,13 @@ O padrão criativo é criar personagens realistas e distintos cuja aparência, a
 
 ## Escolha atual de implementação
 
-A adaptação publicada em 0.3.0 escolheu o processo completo Higgsfield e AI Influencer Builder. A atualização atual da fonte, determinada pelo usuário, usa [criação visual integrada do ChatGPT/Codex](integrated-images.md) por padrão quando disponível e conserva o [método Higgsfield](higgsfield-influencer-method.md) como integração opcional por etapa ou escolha explícita de método. Conceitos, narrativa e roteiros continuam no ChatGPT/Codex; ferramentas especializadas de voz/vídeo são escolhidas por capacidade verificada, necessidade, qualidade e custo. Quadros da fonte continuam sem provar uso exclusivo do Builder.
+A adaptação publicada em 0.3.0 escolheu processo Higgsfield completo e Builder; depois a versão 0.4.0 adotou imagens integradas ChatGPT/Codex como padrão. Essas versões e runs históricos continuam intactos. A atualização atual determinada pelo usuário restaura **Higgsfield como caminho padrão de mídia**, para o método não depender da geração de imagens do Codex e poder ser coordenado no Codex ou Claude. Conceito, narrativa, roteiros, direção vocal e planejamento continuam com o assistente conversacional.
 
-Esse padrão registra uma preferência de processo: na exploração de personagem relatada pelo usuário, a candidata integrada preferida também usou direção de arte e enquadramento revisados. O resultado não é comparação controlada de modelos nem evidência de superioridade geral de fornecedor. Não houve nova inspeção do vídeo-fonte nem das candidatas nesta atualização. Etapas exigidas de descoberta, identidade, seleção vocal, aprovação do canon, piloto e qualidade continuam intactas; recursos ausentes mantêm uma etapa pendente com alternativas propostas, e substituição externa paga exige autorização aplicável.
+Siga módulos e ordem observados, incluindo imagens/referências Soul Cinema e vídeo Seedance 2.5, quando recursos atuais permitirem. A [descrição moderna AI Influencer](https://higgsfield.ai/blog/new-ai-influencer), conferida em 9 de outubro de 2026, distingue Builder, Motion/Genjutsu e reutilização Cinema Studio; não prova que o vídeo anterior usou somente Builder. Registre adaptações modernas explicitamente e mantenha etapas obrigatórias indisponíveis pendentes com alternativas. Mudar fornecedor/módulo ou escopo material de custo precisa de decisão do usuário e autorização aplicável, sem substituição silenciosa.
 
-Salve respostas do onboarding, conceito escolhido, cobertura da fonte, etapas, escopos de custo, recursos e desvios explícitos no [plano versionado de método de produção](../../../templates/locales/pt-BR/production-method.md), observado pelos hashes existentes de entradas/saídas do run. Preserve identidades aprovadas e bytes históricos; o novo padrão não é redesenho retroativo nem migração de fornecedor.
+O novo padrão é decisão de portabilidade e método, sem provar superioridade de imagens de fornecedor nem garantir resultados audiovisuais da fonte. Preserve descoberta, seleção de identidade e voz, aprovação do canon completo, piloto falante de vídeo quando pretendido, QA completo, exportação dos bytes reais e publicação autorizada. Imagens integradas continuam [alternativa escolhida explicitamente](integrated-images.md). Não houve nova inspeção do vídeo-fonte nem comparação controlada de candidatas nesta atualização.
+
+Salve respostas, conceito selecionado, cobertura da fonte, etapas, prontidão/orçamento do piloto completo, recursos e desvios no [plano versionado](../../../templates/locales/pt-BR/production-method.md), observado pelos hashes existentes do run. Identidades aprovadas e bytes históricos ficam intactos; continuar com contexto rastreado alterado exige procedimento existente de nova tentativa explícita.
 
 ## Nossas escolhas
 
@@ -35,9 +37,9 @@ Estas são propostas próprias, não conclusões demonstradas pelo vídeo:
 | Naturalismo | Dirigir textura, luz, anatomia e atuação; preservar diversidade e características escolhidas |
 | Vários perfis | Separar rostos, vozes, decisões e manifestos por personagem |
 | Seleção de resultados | Comparar janelas e formatos semelhantes; registrar exposição e resultados inconclusivos |
-| Ferramentas | Imagens integradas do ChatGPT/Codex por padrão quando disponíveis; escolhas explícitas de método e etapas verificadas opcionais Higgsfield/especializadas continuam suportadas |
+| Ferramentas | Mídia Higgsfield por padrão; Codex ou Claude coordena; preserve módulos observados e registre alternativa explícita ou adaptação |
 | Receita | Investigar demanda e oferecer entrega real; nenhum ganho tratado como garantia |
 
-## Codex
+## Coordenador conversacional
 
-Codex substitui o coordenador conversacional da fonte. Instruções do projeto e skills locais organizam o método; não criam acesso ao fornecedor nem executam ferramentas automaticamente. OLYMPOX acrescenta onboarding adaptativo curto, três propostas originais de conceito, aprovação explícita do cânone, proveniência dos arquivos exatos e QA completo como decisões do framework. Não copie personagens, prompts, autoridade fictícia nem promessas de receita da fonte. Consulte [ferramentas](tools.md), [estratégia](strategy.md) e [produção](production.md).
+Codex ou Claude pode realizar a coordenação conversacional da fonte: conceito, pesquisa, roteiros, prompts, direção vocal e registros. Geração de imagens pelo assistente não é requisito padrão. Instruções e skills locais não criam acesso ao fornecedor nem executam ferramentas automaticamente; confira capacidades reais do aplicativo. O OLYMPOX conserva descoberta adaptativa, propostas originais de conceito, aprovação explícita do canon, proveniência dos arquivos exatos e QA completo. Não copie personagens, prompts, autoridade fictícia nem promessas de receita da fonte. Consulte [ferramentas](tools.md), [estratégia](strategy.md) e [produção](production.md).

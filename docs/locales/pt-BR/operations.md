@@ -1,6 +1,6 @@
 # Operação local e rastreabilidade do OLYMPOX
 
-Instale um estúdio independente com `npx --yes github:linkiaai/olympox install ./my-studio` e abra essa pasta no Codex. O [guia de instalação](installation.md) explica a criação de um estúdio novo, `--merge` e o desenvolvimento do framework a partir de uma cópia do código-fonte. O pacote contém fontes reutilizáveis do framework; cada estúdio mantém suas próprias fichas de personagens e mídia separadas do desenvolvimento do framework.
+Instale estúdio independente pela release `v0.5.0` ou pacote/fonte revisados, com `--assistant codex`, `--assistant claude` ou `--assistant both`, conforme [instalação](installation.md). Abra no assistente local escolhido. O instalador verifica destinos de merge e preserva arquivos privados/não relacionados. Este checkout desenvolve fontes reutilizáveis; fichas pessoais e produção ficam em estúdios independentes.
 
 Execute comandos na raiz do estúdio com Node 22+. `npm.cmd run verify` executa testes, valida personagens existentes e verifica a base. `npm.cmd run studio -- help` lista as operações locais. Nenhum comando local de registros gera mídia, chama fornecedor ou publica.
 
@@ -136,7 +136,7 @@ Renomear o framework atualiza o código, as orientações e a apresentação atu
 
 ## Skill e backup
 
-`node scripts/install-skill.mjs` instala `olympox` em `.agents/skills`, sem alterar a configuração pessoal; passe `higgsfield-studio` para selecionar essa skill. Valida e lê os dois arquivos de origem, `SKILL.md` e `agents/openai.yaml`, e verifica previamente ambos os destinos e seus caminhos superiores antes de gravar. Origens ausentes, links ou junctions, tipos inválidos de arquivo/pasta e bytes divergentes na instalação causam falha antes de qualquer mudança. Arquivos idênticos são mantidos; arquivos ausentes só são instalados após a verificação prévia completa. Revise uma instalação divergente antes de substituí-la. A pasta pode exigir permissão de escrita na sessão do Codex. `doctor` verifica a igualdade entre origem e instalação.
+`node scripts/install-skill.mjs` instala `olympox` em `.agents/skills`, sem alterar a configuração pessoal; passe `higgsfield-studio` para escolher essa skill e `--assistant codex|claude|both` para o destino (`codex` continua padrão). Claude Code usa `.claude/skills`; o instalador também fornece seu `CLAUDE.md`. Valida e lê os dois arquivos de origem, `SKILL.md` e `agents/openai.yaml`, e verifica previamente ambos os destinos e seus caminhos superiores antes de gravar. Origens ausentes, links ou junctions, tipos inválidos de arquivo/pasta e bytes divergentes na instalação causam falha antes de qualquer mudança. Arquivos idênticos são mantidos; arquivos ausentes só são instalados após a verificação prévia completa. Revise uma instalação divergente antes de substituí-la. A pasta da skill escolhida pode exigir permissão de escrita na sessão atual. `doctor` verifica a igualdade entre origem e instalação.
 
 Fichas, mídia e tarefas são ignoradas pelo Git por padrão. Use o backup verificável depois de um ciclo importante:
 

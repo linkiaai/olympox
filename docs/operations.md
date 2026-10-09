@@ -1,6 +1,6 @@
 # OLYMPOX local operation and traceability
 
-Install an independent studio with `npx --yes github:linkiaai/olympox install ./my-studio`, then open that folder in Codex. The [installation guide](installation.md) explains fresh setup, `--merge`, and framework development from a source checkout. The package contains reusable framework sources; each studio maintains its own character records and media separately from framework development.
+Install an independent studio from release `v0.5.0` or a reviewed package/source, with `--assistant codex`, `--assistant claude` or `--assistant both` as described in [installation](installation.md). Open it in the selected local assistant. The installer preflights merge destinations and preserves unrelated/private studio files. This checkout develops reusable sources; personal records and production belong to independent studios.
 
 Run commands from the studio root with Node 22+. `npm.cmd run verify` runs tests, validates existing characters, and checks the foundation. `npm.cmd run studio -- help` lists local operations. No local record command generates media, calls a provider, or publishes.
 
@@ -136,7 +136,7 @@ Historical character records, snapshots, approvals, execution seals, editorial v
 
 ## Skill and backup
 
-`node scripts/install-skill.mjs` installs `olympox` in `.agents/skills` without changing personal configuration; pass `higgsfield-studio` to select that skill instead. It validates and reads both source files, `SKILL.md` and `agents/openai.yaml`, and preflights both destinations and their parent paths before writing. Missing sources, links or junctions, invalid file/directory types, and differing installed bytes fail before changes. Identical files are retained; missing files are installed only after the complete preflight. Review a differing installation before replacing it. The folder may require write permission in the Codex session. `doctor` checks source/installation equality.
+`node scripts/install-skill.mjs` installs `olympox` in `.agents/skills` without changing personal configuration; pass `higgsfield-studio` to select that skill instead and `--assistant codex|claude|both` to choose the target (`codex` remains the default). Claude Code targets `.claude/skills`; the framework installer also supplies its `CLAUDE.md`. It validates and reads both source files, `SKILL.md` and `agents/openai.yaml`, and preflights both destinations and their parent paths before writing. Missing sources, links or junctions, invalid file/directory types, and differing installed bytes fail before changes. Identical files are retained; missing files are installed only after the complete preflight. Review a differing installation before replacing it. The selected skill folder may require write permission in the current host session. `doctor` checks source/installation equality.
 
 Character records, media, and tasks are ignored by Git by default. Use verifiable backup after an important cycle:
 

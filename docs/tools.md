@@ -1,18 +1,18 @@
 # Tools and integration
 
-CLI sources consulted: **October 7, 2026**; Higgsfield plugin catalog checked: **October 8, 2026**. Check capabilities, plans, and commands again before use: this information can change.
+CLI sources consulted: **October 7, 2026**; plugin metadata checked: **October 8, 2026**; current AI Influencer documentation checked: **October 9, 2026**. Check tools, schemas, plans and billing again before production because they can change.
 
 ## Images
 
-For new influencer creation and later visual work, default appearance, candidates, references, settings, images, and edits to integrated ChatGPT/Codex generation when available. Follow [integrated visual creation](integrated-images.md) and the host's actual image-tool instructions. This path requires no Higgsfield, AI Influencer Builder, external CLI, or API key. Tool availability and account limits apply; never describe it as free or unlimited. An explicit user-selected method/provider takes precedence. Record real generations in the character folder.
+For new influencers and later media, default to [Higgsfield’s reference method](higgsfield-influencer-method.md). Codex or Claude coordinates concept, personality, narrative, scripts, prompts and records. Higgsfield’s verified modules produce identity images, references, scenes, voice, animation, video and lip-sync. Integrated coordinator image generation is not required and is an [explicit opt-in alternative](integrated-images.md). Preserve the selected process, verify actual capabilities and costs, and save real output bytes in the character folder.
 
 For consistency, open and compare the approved set, describe anchors, and attach images to the request. A prompt containing a path does not send that file. A grid is useful for selection, but the final reference for each angle must have its own readable file. Copy results belonging to the project into the character folder, preserving the original version.
 
-Distinguish visual inspiration from a request to follow the demonstrated process. Preserve a requested method and the tool chosen for each stage in a versioned [production-method plan](../templates/production-method.md); inspect the source before claiming its modules. Concepts, personality, narrative world, scripts, and planning stay in ChatGPT/Codex. Voice, animation, video, lip-sync, and specialized work use verified tools according to need, quality, and cost; Higgsfield remains an optional choice for useful stages. Missing capabilities leave the stage pending with proposed alternatives; a switch to paid external generation needs applicable authorization. A user preference observed after changing art direction/framing is process evidence, not a controlled model comparison or proof of general provider superiority. Controlled comparisons require the same identity, scene, camera, and scoped budget. LoRA or Soul ID are optional when fidelity and volume justify separately authorized training.
+Distinguish visual inspiration from a request to follow the demonstrated process. The [reference study](video-reference.md) establishes Soul Cinema image/references, separate Claude voice direction and Seedance 2.5 video; it does not prove exclusive Builder use. The current [AI Influencer documentation](https://higgsfield.ai/blog/new-ai-influencer) distinguishes Builder and Motion/Genjutsu with Cinema Studio reuse. Save the selected module/order and any accepted adaptation in the [production-method plan](../templates/production-method.md). Check full-pilot connection, transport, inspection/export and scoped budget early. Missing capabilities remain pending with concrete alternatives, and materially changed methods or costs require the user’s decision and applicable authorization. A workflow preference is not a controlled quality comparison or a guarantee of source results. Soul ID remains optional training with demonstrated need and separate authorization.
 
 ## Higgsfield — plugin or local CLI
 
-OLYMPOX supports two optional conversational routes. Codex selects and calls the capabilities actually available in the studio, while the local core preserves context, attempts, and reviews. There is no automatic Higgsfield provider adapter or submission through the core.
+OLYMPOX supports complementary plugin and local CLI transports for the default Higgsfield media pipeline. The coordinator uses actual tools and the local core preserves context, attempts and reviews. There is no automatic core provider-submission adapter. A plugin can execute without CLI where it handles the exact inputs; an authorized official CLI upload can bridge local studio files to confirmed plugin media IDs, following [reference transfer](higgsfield-plugin.md#transfer-exact-studio-references). Resolve supported operational transport autonomously; do not default to manual photo dragging.
 
 | Route | Preparation | Actual execution |
 | --- | --- | --- |
@@ -31,12 +31,12 @@ Framework installation supplies reusable instructions and local records; it does
 
 ## Video delivery
 
-Follow the [Codex-to-video procedure](production-handoff.md) and its [handoff template](../templates/video-handoff.md). Prepare scripts, approved identity/voice and inspected scene images first, then verify the exact specialized operation and supported input subset. Higgsfield can supply video or earlier voice when selected; Builder is not required for that handoff. Complete pilot review precedes batches.
+Follow the [Higgsfield pilot procedure](production-handoff.md) and [handoff template](../templates/video-handoff.md). The coordinator prepares script/shot direction; verified Higgsfield modules create identity/reference and scene images and voice when speaking. Approve complete canon, map exact supported inputs and validate a representative video pilot before batches. The observed modules and current Builder/Motion operations are distinct; required stages cannot be completed by simply choosing a video model.
 
 Vertical briefs can start at 9:16 with a target resolution of 1080 × 1920, adjusted to the model's and channel's real capabilities. Upscaling does not recover lost identity. Confirm duration, speech, reference support, audio, lip-sync, and export before promising a deliverable. Do not replace temporal review with isolated captures.
 
-Without connected execution, Codex can still prepare the complete package: exact script, shots, performance, references, voice, captions, publication text, and review criteria. Identify the deliverable as a **production package**, without claiming a rendered video exists.
+Without connected execution, the coordinator can still prepare the complete package: exact script, shots, performance, references, voice, captions, publication text, and review criteria. Identify the deliverable as a **production package**, without claiming a rendered video exists.
 
-## Codex
+## Conversational coordinator
 
-`AGENTS.md` provides project guidance; `.agents/skills/olympox` contains the reusable process. The [official skill documentation](https://developers.openai.com/codex/skills) describes local discovery. If the skill is absent from the selector, reload Codex; it can also be read directly in this conversation. Installed files do not prove automatic loading in the app.
+Install the selected local assistant target as described in [installation](installation.md): Codex uses `AGENTS.md` and `.agents/skills`; Claude Code uses `CLAUDE.md` and `.claude/skills`. The [Codex skill documentation](https://developers.openai.com/codex/skills) explains Codex discovery. Installed files do not prove runtime loading, available subagents, provider access or Claude web/cloud support. Reopen/reload the host and inspect actual tools. The standard method requires available local file/Node operations, generation tools and full media inspection, rather than assistant-native image generation.

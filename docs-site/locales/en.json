@@ -10,7 +10,7 @@
     "studio": "Studio",
     "footer": "OLYMPOX - AI Influencer framework · studio documentation",
     "sourceSynchronized": "Sources synchronized",
-    "core": "Core {version} · Codex",
+    "core": "Core {version} · Codex / Claude Code",
     "revision": "Revision {revision}",
     "overview": "Overview",
     "start": "Get started",
@@ -43,7 +43,7 @@
     "phaseProduction": "Production",
     "phaseReview": "Review",
     "teamTitle": "One direction. Complementary specialties.",
-    "teamDescription": "{name} coordinates. Specialists contribute when the objective calls for their expertise. These profiles guide Codex; real delegation requires subagents.",
+    "teamDescription": "{name} coordinates. Specialists contribute when their expertise is useful. Profiles guide the assistant; real delegation requires subagents.",
     "teamEyebrow": "STUDIO TEAM",
     "direction": "DIRECTION",
     "specialist": "SPECIALIST",
@@ -63,7 +63,7 @@
     "flowsTitle": "Connected journeys. Preserved history.",
     "flowsDescription": "Each workflow connects contracts, owners and completion criteria. Optional steps can be skipped with a reason. Required decisions, generation and inspection remain in the process.",
     "flowsEyebrow": "FRAMEWORK WORKFLOWS",
-    "runNoteBefore": "A run records state and the next task. Codex executes the work with available tools. See",
+    "runNoteBefore": "A run records state and the next task. Your assistant executes with available tools. See",
     "coreGuide": "the core guide",
     "runNoteAfter": "to start, interrupt and resume.",
     "owner": "Owner: {name}.",
@@ -89,7 +89,7 @@
     "contractsDescription": "Contracts make the owner, prerequisites and evidence needed to complete a step explicit.",
     "contractsEyebrow": "FRAMEWORK CONTRACTS",
     "commandsTitle": "Local operations, with verifiable records.",
-    "commandsDescription": "Run commands in the project folder. They manage profiles, history and integrity; creative work uses Codex tools.",
+    "commandsDescription": "Run commands in the project folder. They manage records and integrity; the assistant coordinates the verified Higgsfield media pipeline.",
     "commandsEyebrow": "COMMAND REFERENCE",
     "sourceInventory": "Sources in this revision · {count} files",
     "hashNote": "Hashes detect changes. They do not authenticate people or replace inspection.",
@@ -130,6 +130,6 @@
     "codeText": "text",
     "table": "Table",
     "localReference": "Local reference outside this manual",
-    "metadataDescription": "OLYMPOX - AI Influencer framework: team, workflows, contracts and guides to create original AI influencers with Codex."
+    "metadataDescription": "OLYMPOX - AI Influencer framework: original characters, Higgsfield media, and coordination through Codex or Claude Code."
   }
 }

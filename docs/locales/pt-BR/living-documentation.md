@@ -36,7 +36,7 @@ O resultado fica em `docs-site/dist/`. Você pode abrir `index.html` diretamente
 
 ## Como manter as explicações corretas
 
-Ao mudar o comportamento do framework, o Codex deve atualizar o guia correspondente na mesma tarefa. Essa responsabilidade está registrada em `AGENTS.md`. O gerador sincroniza informações estruturadas; ele não interpreta código para inventar explicações ou prometer capacidades novas.
+Ao mudar comportamento do framework, a pessoa ou assistente responsável deve atualizar o guia correspondente na mesma tarefa. Essa responsabilidade está registrada em `AGENTS.md`. O gerador sincroniza informações estruturadas; ele não interpreta código para inventar explicações ou prometer capacidades novas.
 
 Um comando novo precisa de sintaxe na ajuda da CLI e descrição em `commandDescriptions` no config. Um guia novo entra na lista `guides`. Os arquivos permitidos são explícitos: informações de personagens, mídia, prompts, runs, backups, credenciais e estado operacional não são incorporados.
 
