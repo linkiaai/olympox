@@ -1,4 +1,4 @@
 interface:
   display_name: "Higgsfield no Estúdio"
-  short_description: "Etapas opcionais no Higgsfield com produção rastreável"
-  default_prompt: "Use $higgsfield-studio para preparar as etapas opcionais escolhidas para Higgsfield e o piloto neste projeto, verificando recursos, referências exatas, custo e autorização aplicável."
+  short_description: "Mídia Higgsfield verificada e produção pelo método de referência"
+  default_prompt: "Use $higgsfield-studio para preparar e executar o pipeline padrão de mídia de referência, verificando módulos atuais, entradas exatas, transferência automática, estimativas do piloto inteiro, exportação, inspeção completa e autorização aplicável."

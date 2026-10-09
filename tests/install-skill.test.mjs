@@ -16,7 +16,7 @@ function fixture({ sources = true, cli = false } = {}) {
   if (sources) for (const name of ['olympox', 'higgsfield-studio']) {
     for (const relative of skillFiles) write(root, `skills/${name}/${relative}`, `${name}: ${relative}\n`);
   }
-  if (cli) for (const name of ['install-skill.mjs', 'skill-install-core.mjs']) {
+  if (cli) for (const name of ['install-skill.mjs', 'skill-install-core.mjs', 'assistant-targets.mjs']) {
     write(root, `scripts/${name}`, fs.readFileSync(path.join(project, 'scripts', name)));
   }
   return { root, close() {
@@ -237,4 +237,46 @@ test('skill CLI reports a missing source without partially installing the skill'
     assert.match(result.stderr, /Skill source is missing/);
     assert.deepEqual(snapshot(instance.root), before);
   } finally { instance.close(); }
+});
+
+test('Claude Code skills use canonical SKILL.md only and retain local files', () => {
+  const instance = fixture({ cli: true });
+  try {
+    write(instance.root, '.claude/settings.local.json', '{"local":true}');
+    fs.unlinkSync(path.join(instance.root, 'skills/olympox/agents/openai.yaml'));
+    const result = installSkill(instance.root, 'olympox', { assistant: 'claude' });
+    assert.deepEqual(result.copied, ['SKILL.md']);
+    assert.equal(result.targetRoot, path.join(instance.root, '.claude/skills/olympox'));
+    assert.deepEqual(fs.readFileSync(path.join(result.targetRoot, 'SKILL.md')), fs.readFileSync(path.join(instance.root, 'skills/olympox/SKILL.md')));
+    assert.equal(fs.existsSync(path.join(result.targetRoot, 'agents')), false);
+    assert.equal(fs.existsSync(path.join(instance.root, '.agents')), false);
+    const before = snapshot(instance.root);
+    const execution = spawnSync(process.execPath, [path.join(instance.root, 'scripts/install-skill.mjs'), '--assistant', 'claude'], { encoding: 'utf8' });
+    assert.equal(execution.status, 0, execution.stderr);
+    assert.deepEqual(snapshot(instance.root), before);
+  } finally { instance.close(); }
+});
+
+test('both skill projections preflight a Claude conflict before copying Codex files', () => {
+  const instance = fixture();
+  try {
+    write(instance.root, '.claude/skills/olympox/SKILL.md', 'Local customized Claude skill');
+    const before = snapshot(instance.root);
+    assert.throws(() => installSkill(instance.root, 'olympox', { assistant: 'both' }), /Installed skill differs/);
+    assert.deepEqual(snapshot(instance.root), before);
+    assert.equal(fs.existsSync(path.join(instance.root, '.agents')), false);
+  } finally { instance.close(); }
+});
+
+test('Claude skill destination junctions cannot redirect either host projection', () => {
+  const instance = fixture(), external = fixture({ sources: false });
+  try {
+    write(external.root, 'local-note.md', 'Outside content');
+    junction(external.root, path.join(instance.root, '.claude'));
+    const before = snapshot(instance.root), outsideBefore = snapshot(external.root);
+    assert.throws(() => installSkill(instance.root, 'olympox', { assistant: 'both' }), /Links and junctions/);
+    assert.deepEqual(snapshot(instance.root), before);
+    assert.deepEqual(snapshot(external.root), outsideBefore);
+    assert.equal(fs.existsSync(path.join(instance.root, '.agents')), false);
+  } finally { instance.close(); external.close(); }
 });

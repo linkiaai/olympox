@@ -1,44 +1,58 @@
-# OLYMPOX - AI Influencer framework
+# Manual do framework OLYMPOX
 
-O OLYMPOX organiza a criação de influenciadores de IA originais e memoráveis com potencial de viralização a ser testado. Você conversa com o Codex; Atena coordena o pedido e as especialistas contribuem conforme a necessidade. O framework preserva versões, decisões e evidências para continuar o trabalho entre sessões.
+OLYMPOX é um framework local para desenvolver influenciadores originais de IA com identidade consistente, conteúdo versionado e histórico de produção retomável. Seu assistente coordena o trabalho; Higgsfield fornece o fluxo padrão de mídia.
 
-Para novas personagens, comece pelo [onboarding adaptativo curto](strategy.md) e conceitos distintos conectando aparência, personalidade, público e conteúdo recorrente. A [criação visual integrada](integrated-images.md) é o padrão quando disponível, sem exigir Higgsfield, Builder, CLI externa ou chave de API; aplicam-se limites da conta. O usuário seleciona candidatas expressivas, depois referências coerentes realmente anexadas às gerações seguintes. Inspecione anatomia, presença e continuidade; explore, ouça e selecione voz quando houver fala, depois aprove o canon visual/vocal completo e exato e execute um piloto antes de lotes. Voz/vídeo/etapas especializadas usam ferramentas verificadas conforme necessidade, qualidade e custo; o [método Higgsfield](higgsfield-influencer-method.md) permanece opcional. Respeite escolhas explícitas de método, mantenha recursos ausentes pendentes com alternativas propostas e obtenha autorização aplicável para geração externa paga e publicação. Identidades já aprovadas continuam intactas. Potencial de viralização precisa de conteúdo e resultados reais para ser testado.
+## Escolha por onde começar
 
-## O que o framework faz
-
-O [procedimento do Codex ao vídeo](production-handoff.md) fornece etapas ordenadas de prontidão, responsáveis e um [pacote de passagem](../../../templates/locales/pt-BR/video-handoff.md) concreto. Prepara uma biblioteca rica coerente no Codex e mapeia o subconjunto exato de entradas suportadas por chamada especializada, validando um piloto antes dos lotes. Voz pode exigir ferramenta verificada antes da passagem para vídeo.
-
-| Área | O que você ganha |
+| Você quer… | Leia |
 | --- | --- |
-| Estratégia e identidade | Público, proposta editorial, personalidade e referências aprovadas para cada personagem. |
-| Conteúdo | Narrativa, roteiros, cenas e peças versionadas, ligadas ao contexto usado. |
-| Coordenação | Tarefas com responsável, entradas, entregas e critérios claros; fluxos retomáveis. |
-| Continuidade | Cânone preservado, contexto de geração selado e revisão ligada aos arquivos exatos. |
-| Recuperação | Histórico de tentativas, detecção de mudanças e backups verificáveis. |
+| Instalar um estúdio ou preservar um existente | [Instalação](installation.md) |
+| Fazer seu primeiro pedido | [Início rápido](quick-start.md) |
+| Desenvolver um personagem e escolher sua identidade | [Desenvolvimento de personagens](strategy.md) |
+| Produzir um piloto ou uma peça de conteúdo | [Produção](production.md) |
+| Inspecionar mídia e pedir correções | [Qualidade e continuidade](quality.md) |
+| Manter registros, cânone e backups | [Identidade e registros](operations.md) |
+| Iniciar, concluir ou retomar tarefas de workflow | [Operação dos workflows](framework-02.md) |
+| Entender a implementação ou contribuir | [Arquitetura](framework-architecture.md) e [manutenção do manual](living-documentation.md) |
 
-## Como as partes se conectam
+## Como o trabalho avança no OLYMPOX
 
-**Atena** entende o objetivo e escolhe a sequência. Os **perfis** orientam cada especialidade. Os **contratos** definem o que entregar e como registrar a conclusão. Os **fluxos** ligam as etapas. Um **run** guarda o estado real dessa execução.
+1. Defina público e objetivo. Explore conceitos diferentes e selecione uma direção.
+2. Desenvolva persona, narrativa e referências visuais. Para um personagem que fala, ouça e selecione a voz antes de aprovar o cânone completo.
+3. Prepare roteiros e cenas com as referências aprovadas exatas. Verifique ferramentas, transferência, exportação e orçamento do piloto.
+4. Gere e inspecione um piloto representativo. Corrija falhas em novas versões e revise os bytes exportados.
+5. Amplie para lotes depois da aprovação do piloto. Publique com a autorização aplicável e aprenda com resultados reais.
 
-A constituição estabelece os princípios comuns. Os guias explicam o método. O núcleo local mantém registros e hashes. O Codex executa o trabalho criativo com as ferramentas realmente disponíveis na sessão.
+[A equipe](studio-team.md) distribui responsabilidades entre Atena e oito especialistas. O catálogo de workflows conecta suas tarefas; cada execução preserva entradas, saídas, tentativas e a próxima responsável. Os perfis orientam o assistente, e a delegação real usa subagentes disponíveis na sessão.
 
-## Termos que aparecem no estúdio
+## O que está incluído
+
+| Componente | Finalidade |
+| --- | --- |
+| Instruções e skills | Orientar o trabalho do assistente em um estúdio local independente |
+| Registro, contratos e workflows | Definir responsáveis, entregas obrigatórias e critérios de conclusão |
+| Registros de personagens e editoriais | Vincular persona, narrativa, roteiros e assets ao seu contexto |
+| Snapshots do cânone e selos de execução | Preservar referências aprovadas e entradas declaradas de geração |
+| Execuções e backups | Permitir continuidade, verificação de integridade e recuperação |
+| Manual navegável | Oferecer guias e catálogos de referência derivados das fontes |
+
+Os comandos locais mantêm arquivos e validam registros. Conexão com o provedor, geração, escuta, visualização de vídeo e publicação usam ferramentas disponíveis na sessão. A validação local não comprova qualidade criativa nem execução externa.
+
+## Termos usados neste manual
 
 | Termo | Significado |
 | --- | --- |
-| Persona | Ficha da personagem: público, personalidade, aparência, voz e limites. |
-| Cânone | Identidade visual e vocal aprovada, com versão, referências e hashes. |
-| Narrativa | História, hábitos, valores, contradições e linguagem editorial versionados. |
-| Peça | Unidade de conteúdo: roteiro, legenda, cenas, fontes e vínculos ao contexto. |
-| Ativo | Arquivo de imagem, áudio ou vídeo e seu registro de origem e revisão. |
-| Run | Execução persistida de um fluxo, com tarefas, tentativas e próxima etapa. |
-| Selo de execução | Registro local do prompt e do contexto informado de geração. |
-| Plano de método de produção | Registro versionado do processo escolhido, evidência da fonte, módulos, etapas, custos e pendências, observado como entrada/saída do run; não é novo schema de execução nem despachante automático de fornecedor. |
+| Persona | Registro de trabalho do personagem: público, personalidade, aparência, voz e limites |
+| Cânone | Identidade visual e vocal aprovada com versão, referências exatas e hashes |
+| Narrativa | História fictícia, comportamento e voz editorial versionados |
+| Peça de conteúdo | Roteiro, legenda, cenas, fontes factuais e vínculos de contexto de um item |
+| Asset | Arquivo de mídia com registros de origem e revisão |
+| Run | Execução de workflow que contém tarefas e tentativas preservadas |
+| Selo de execução | Registro preservado do contexto declarado de geração e do prompt |
+| Plano do método de produção | Etapas, ferramentas, entradas, escopo de custo e pendências escolhidos |
 
-## Capacidades e limites reais
+## Escopo e versão
 
-O núcleo organiza o processo e verifica sua estrutura. A execução de subagentes depende de delegação real pelo Codex. Perfis cadastrados não ficam permanentemente ativos. Geração, consultas a fornecedores, escuta, visualização de vídeo e publicação dependem das ferramentas disponíveis e das autorizações aplicáveis.
+Use um estúdio instalado para seus próprios personagens. Este repositório contém o framework reutilizável e sua documentação de desenvolvimento. Personagens privados, mídia, execuções e credenciais ficam fora da distribuição.
 
-Uma validação estrutural não comprova fidelidade visual, qualidade da voz nem autenticidade de uma declaração. Mídia gerada precisa de inspeção. A identidade é escolhida pelo usuário; publicação e geração externa cobrada exigem autorização aplicável. `production` e `completed` não significam publicado.
-
-Para iniciar, leia [Começar](quick-start.md). Para entender os mecanismos, consulte a [arquitetura](framework-architecture.md) e a [operação do núcleo](framework-02.md).
+O código atual é **0.5.0**. Consulte [notas de versão](release-notes.md) para mudanças e situação da release e [capacidades suportadas](studio-status.md) para o limite entre recursos locais e serviços externos. Um piloto de vídeo com fala é o escopo padrão de criação; um brief explícito pode escolher apenas imagens ou um personagem sem fala. Potencial viral é testado por conteúdo e resultados.

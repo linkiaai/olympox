@@ -1,107 +1,64 @@
 # OLYMPOX - AI Influencer framework
 
-Framework release **0.4.0** — **October 8, 2026**. Read the [release notes](docs/release-notes.md) and [upgrade guidance](docs/installation.md#upgrade-an-existing-studio) before updating an existing studio. The local core and task component revision remain 0.2.0, with clarified production criteria.
+OLYMPOX helps you develop original AI influencers and carry their identity, story and production history from one session to the next. Codex or Claude Code coordinates the work through Atena and eight specialist profiles. Higgsfield is the default media pipeline.
 
-OLYMPOX is a local framework for creating memorable original AI influencers with testable viral potential, coordinated by Atena and a team of goddess-named specialists. Codex connects the character's visual signature, personality, audience, recurring content, voice, and performance. Each influencer has an individual identity and history; virality is a hypothesis to test, never a promised result.
+The framework provides local skills, task contracts, resumable workflows, character records, canon snapshots, editorial versions and backups. It runs on **Node 22+**, with no external runtime dependencies.
 
-The reusable package contains governance, skills, specialist profiles, task contracts, workflows, local commands, templates, and a manual. The `olympox` skill organizes creative work in an installed studio. Each user installs an independent studio and creates their own original influencers there. Character records, media, runs, backups, credentials, and optional provider binaries are excluded from the framework package.
+## Set up an independent studio
 
-This repository and its Codex project are dedicated to framework development and maintenance. The root `AGENTS.md` defines development instructions. Installation uses `templates/studio-AGENTS.md` for the separate studio's creative instructions.
-
-## Install your studio
-
-Requires **Node 22 or later** and **Codex**. Install from GitHub:
+Install the published **0.5.0** release:
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.4.0 install ./my-studio
-cd my-studio
-npm run verify
-npm run studio -- help
+npx --yes github:linkiaai/olympox#v0.5.0 setup
 ```
 
-The GitHub command requires access to the repository and release tag. A private repository may require authenticated Git access on your machine. On Windows, use `npx.cmd` and `npm.cmd` if PowerShell blocks the launchers. Open `my-studio` in Codex and use `$olympox`. Reload Codex if the new skill is not discovered; installation alone does not demonstrate that the current session has loaded it.
+From a reviewed checkout or extracted package, use `node bin/olympox.mjs setup`.
 
-For an existing project, add `--merge` to the installation command. The installer checks all destinations before writing, retains identical framework files, and refuses differing files or collisions. Review conflicts before retrying; it preserves unrelated local files.
+Choose Codex, Claude Code or both, then an independent destination. Setup summarizes the installation plan and copy/retain counts, installs the selected host instructions and skills, and checks the local studio. Open the destination in your assistant and invoke `$olympox` in Codex or `/olympox` in Claude Code.
 
-To develop or inspect the framework source:
+For an unattended installation, provide all required choices:
 
 ```sh
-git clone https://github.com/linkiaai/olympox.git
-cd olympox
+node bin/olympox.mjs setup ../my-studio --assistant codex --yes
+```
+
+Use `--locale pt-BR` for Portuguese setup prompts. On Windows, use `npm.cmd` when PowerShell blocks the npm launcher.
+
+See [installation](docs/installation.md) for source selection, merge conflicts and preserving an existing studio. Updating these guides locally does not change the already published package or hosted manual.
+
+This repository is the framework development checkout. Create personal characters and media in the independently installed studio.
+
+## Create your first character
+
+In your studio, say:
+
+> Use OLYMPOX to create an original influencer for [audience/topic]. Propose three distinct concepts and recommend one.
+
+The assistant develops the concept, persona, narrative and scripts. The production sequence is visual exploration, selected references, a listened-to voice sample when the character speaks, approval of the exact canon, and one inspected pilot before batches. Check Higgsfield access, accepted references, export and the whole pilot budget before paid production. Assistant-integrated images are an explicit alternative.
+
+Start with [the quick start](docs/quick-start.md), then follow [character development](docs/strategy.md) and [production](docs/production.md).
+
+## Documentation
+
+The [framework manual](docs/framework-manual.md) explains the product and routes you to the appropriate guide. To open the navigable manual locally:
+
+```sh
+npm run docs:dev
+```
+
+The manual includes English and Brazilian Portuguese, the team, workflow and contract catalogs, and command syntax drawn from CLI help. Read [manual maintenance](docs/living-documentation.md) for builds and exports.
+
+## Verify and develop
+
+From the framework or installed studio root:
+
+```sh
 npm run verify
-npm run studio -- help
+node scripts/studio.mjs help
 ```
 
-Keep creative production in an independently installed studio. The source checkout is for framework development and maintenance. The local core has no external runtime dependencies and needs no `npm install` for these commands. See [installation](docs/installation.md) for package contents, merge behavior, and verification.
+`verify` builds the manual and runs tests, record validation, structural diagnosis and documentation checks. These checks establish local consistency; provider access and media quality need their own execution and inspection.
 
-**Atena** is the studio master and director: speak to her, or make a request normally, and Codex organizes the work. The [team](docs/studio-team.md) consists of nine female profiles named after goddesses: Atena and eight specialists, governed by the [constitution](CONSTITUTION.md). Core 0.2 saves tasks and attempts, identifies the next owner, and detects context changes. Profiles are instructions; real delegation depends on the tools available in the session.
-
-**Gaia** researches opportunities before a new persona is explored. **Aurora** researches trends and develops content ideas for existing characters, including formats and audio when available. The [research method](docs/trend-research.md) requires current sources and adaptations that fit each character. Both work on demand.
-
-## Start in conversation
-
-The [framework manual](docs/framework-manual.md) is also available as a website. Run `npm.cmd run docs:dev` and open the address shown in the terminal. The site brings together the overview, quick start, team, workflows, contracts, commands, and guides, and follows source changes while the server is running. `npm.cmd run verify` also builds and checks the manual. Read [living documentation](docs/living-documentation.md) for its operation, limitations, and maintenance.
-
-In the installed studio's Codex project, you can say:
-
-> Let's create our first influencer. I want to explore [topic/audience/style]. Use the studio to propose three different directions and recommend the most interesting one.
-
-Or:
-
-> Use $olympox. I want to create a persona with these references: [...]. Prepare the identity and the first candidate images.
-
-For research:
-
-> Atena, ask Gaia for three opportunities for new influencers in [market/channel], with sources and a recommendation.
-
-> Atena, ask Aurora for trends and ideas for [character], including the format, opening, scenes, and verified audio options.
-
-For a new character, Atena starts a short [onboarding conversation](docs/strategy.md), reuses your answers, and proposes three distinct concepts with a recommendation. Choose the goal, such as viral entertainment, a recurring presenter, or a brand role, and the desired character style; "please propose" is valid. The [brief](templates/brief.md) records choices without becoming a mandatory questionnaire. The default creative direction is varied, memorable realism with strong personality and presence; another style remains your choice.
-
-Concept, personality, narrative world, scripts, and planning stay in ChatGPT/Codex. **Integrated ChatGPT/Codex image generation** is the default for appearance, candidates, references, settings, images, and edits when available. Follow [integrated visual creation](docs/integrated-images.md); it requires no Higgsfield, AI Influencer Builder, external CLI, or API key. Availability and account limits apply; do not describe it as free or unlimited. Respect an explicit user-selected method/provider. Voice, animation, video, lip-sync, and specialized work use verified tools according to need, quality, and cost; Higgsfield remains an [optional integration](docs/higgsfield-plugin.md), with its [Builder method](docs/higgsfield-influencer-method.md) available when selected. Missing capabilities leave the stage pending with proposed alternatives; paid external generation requires applicable authorization. Installation never connects providers or executes production.
-
-## Method
-
-Follow the [Codex-to-video checkpoints](docs/production-handoff.md) for the recommended procedure: prepare identity, exact voice when speaking, scripts and inspected scene images, then pass the supported inputs to a verified video tool. Save the [handoff package](templates/video-handoff.md) with readiness, next owner/action and a submission map per scene; Higgsfield is an optional destination. One inspected pilot precedes batches.
-
-1. Short onboarding, audience/opportunity, and three distinctive character concepts with recurring hooks.
-2. Select a concept and save the [production-method plan](templates/production-method.md), including source evidence, modules, capabilities, stages, and cost scopes.
-3. Explore visual identity with integrated generation by default, coherent references and an expressive scene communicating the premise. Let the user select the candidate, attach real references to subsequent generations, and inspect anatomy, presence, and continuity across angles/scenes. For a speaking character, prepare and review a vocal sample during draft/reference work; then approve the complete exact visual/vocal canon before production.
-4. Develop scripts and scenes in ChatGPT/Codex, then a small pilot with verified tools suited to the medium, need, quality, and cost, using the approved identity/voice. Evaluate training only when justified.
-5. Review the complete media and export its actual bytes before expanding into content batches.
-6. Publish with applicable authorization, compare real results across suitable windows, and adjust the hypothesis without prematurely discarding concepts.
-
-See [strategy](docs/strategy.md), [production](docs/production.md), [quality](docs/quality.md), and [tools](docs/tools.md). The [reference analysis](docs/video-reference.md) identifies the material consulted and what we adapted through our own judgment.
-
-The [framework review and architecture](docs/framework-architecture.md) guides its evolution. The current foundation is local core 0.2: specialists, task contracts, three resumable workflows, canon history, sealed executions, versioned narrative/content, and verifiable backups. The [core guide](docs/framework-02.md) explains its use and limitations.
-
-## Local operation
-
-Run these creative operations from your installed studio:
-
-```powershell
-npm.cmd run verify
-node scripts/studio.mjs new my-persona
-node scripts/studio.mjs list
-node scripts/studio.mjs validate my-persona
-```
-
-The commands create records, assemble generation specifications, and validate records. They do not call models, approve media, or publish. Codex uses the available tools to carry out the creative work.
-
-Read [operations](docs/operations.md) for references, hashes, and the manifest. Media, character records, tasks, and backups stay local and are ignored by Git. Use `backup`, `backup-verify`, and `backup-test` after important cycles, and keep a copy of the backups elsewhere. The source skill in `skills/` and its installation in `.agents/skills/` must remain identical; `doctor` detects discrepancies.
-
-## Capabilities and limits
-
-| Component | Included behavior |
-| --- | --- |
-| Project instructions and skill | Governance and reusable skills installed into the chosen studio |
-| Character records, prompts, and logs | Local scripts and templates for your own influencers |
-| Coordination and history 0.2 | Registry, contracts, resumable tasks, snapshots, and local editorial records |
-| Character backups | File and linked-task inventory, verification, and restore testing |
-| Integrated images | Default visual route when generation and inspection tools are available; subject to account limits |
-| Higgsfield plugin or CLI | Optional access selected per useful stage or explicit method choice; check the selected route's available tools, account access, and costs |
-| Identity and pilot | Your own candidate exploration, explicit canon approval, and inspected pilot before batches |
-
-Profiles are instructions, and local packages do not dispatch agents. Commands maintain records and integrity; generation, inspection, paid services, and publication need the tools and authorizations applicable to your studio. Tests do not demonstrate visual identity, voice quality, or provider execution. Plugin availability alone does not demonstrate voice, Soul ID, downloadable media, export, or equivalent CLI billing. Read [framework status](docs/studio-status.md), [Higgsfield plugin](docs/higgsfield-plugin.md), and [optional CLI setup](docs/higgsfield-setup.md).
+Contributors follow [AGENTS.md](AGENTS.md), the [constitution](CONSTITUTION.md), [architecture](docs/framework-architecture.md) and [localization](docs/localization.md). Preserve unrelated work and private history. Installation copies reusable files; it does not authenticate providers, generate media or publish.
 
 Released under the [MIT license](LICENSE).

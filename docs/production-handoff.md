@@ -1,41 +1,54 @@
-# From Codex preparation to a video pilot
+# From direction to a video pilot
 
-The recommended procedure prepares the character and inspected scene images in ChatGPT/Codex, then uses a verified specialized tool for the required video operation. Integrated images are the visual default when available; Higgsfield is an optional video/voice integration, not a mandatory destination. Respect an explicit user-selected method. This procedure aims for fidelity through coherent evidence and checkpoints; neither more images nor a provider/model name guarantees it.
+Use this handoff when a selected character and script will become a video. The coordinator develops direction; Íris prepares visual inputs, Saraswati develops the script, Selene maps and executes supported operations, and Têmis reviews the result. These responsibilities guide the available assistant and any actually delegated work.
 
-Voice can require a specialized tool earlier: a speaking character's vocal sample must be generated, listened to, and selected before complete visual/vocal canon approval. Do not describe the entire process as local or promise that integrated images can generate voice or video. Account limits, availability, known costs, and applicable authorization govern each stage.
+Higgsfield is the default media pipeline. Follow the [selected production method](higgsfield-influencer-method.md); an [integrated image alternative](integrated-images.md) must be explicit. Save a versioned [video handoff package](../templates/video-handoff.md) and record its exact files as run inputs or planning outputs.
 
-## Follow these checkpoints in order
+## Readiness checkpoints
 
-| Checkpoint | Work and owner | Ready to advance when |
-| --- | --- | --- |
-| 1. Character direction | Atena, Psiquê and Íris develop concept, personality, narrative world and recurring premise in ChatGPT/Codex. Use adaptive discovery and distinct concepts when direction is open. | The user has selected a concrete direction; assumptions and boundaries are saved. |
-| 2. Visual exploration | Íris directs an expressive integrated candidate and a scene communicating the premise; the user selects the visual identity. Develop coherent neutral views, relevant expressions, and body/proportion references from that candidate using actual attachments. | Inspected references preserve recognition, anatomy, personality/presence and continuity across views/scenes. Rejected attempts remain preserved. |
-| 3. Complete canon | Selene uses a verified voice tool if speech is intended. Têmis supports visual/vocal inspection; Atena records the user's exact decisions. | The vocal sample has been generated, listened to and selected when required; exact complete references/settings are approved, hashed and preserved. Silent scope states why voice does not apply. |
-| 4. Episode and scene preparation | Saraswati writes the script in ChatGPT/Codex. Íris prepares shot direction and integrated scene/start images from approved canon. Selene saves the [handoff package](../templates/video-handoff.md). | Each planned shot has a purpose, exact speech or silent scope, performance, camera/motion, continuity notes and inspected input files. |
-| 5. Tool mapping and one pilot | Selene verifies the specialized operation, exact reference transfer, supported parameters, audio/lip-sync, output/export, costs and applicable authorization. Higgsfield uses its preserved [plugin](higgsfield-plugin.md), [method](higgsfield-influencer-method.md) or [CLI](higgsfield-setup.md) procedures. | A representative pilot is generated with the actual accepted inputs and recorded intent/IDs. Its real exported bytes are registered and hashed, with the applicable `execution-seal`. Complete review of those exact files records `approve`, with no blocking issues or required media left uninspected. Corrections use new versions that are reviewed and approved again before batches. |
-| 6. Remaining shots and delivery | Selene expands the validated pipeline; Têmis reviews complete clips, audio and final edit; Atena consolidates export and applicable publication decisions. | Reviewed final bytes are saved and registered/sealed with exact context. Publication occurs only with applicable authorization and real evidence. |
+Check the whole pilot path and budget before the first paid stage, including identity/reference work, voice when needed, scenes, video, corrections, export and complete inspection. An authorization covering a bounded pilot can cover its included stages and limits; reuse it where applicable.
 
-If a checkpoint is incomplete, record what is missing, the next owner/action, and alternatives. Keep the affected stage pending instead of claiming readiness. Paid external substitutions need applicable authorization. Existing approved characters begin at the first unfinished checkpoint; do not recreate canon or migrate their records automatically.
+| Checkpoint | Ready to advance when |
+| --- | --- |
+| Direction | The selected concept, personality, recurring premise and intended content are saved |
+| Visual selection | The user has selected the new identity; inspected coherent references preserve anatomy, recognition and presence across views/scenes |
+| Complete canon | Exact visual references and, for speaking characters, generated/listened-to/selected vocal references and settings are approved and preserved |
+| Script and scenes | Each shot has a purpose, exact speech or silent scope, performance/motion direction, continuity notes and inspected scene inputs |
+| Submission | The chosen operation accepts the exact transferred inputs; parameters, cost scope, export/review route and applicable authorization are confirmed |
+| Pilot | Actual output bytes are exported, registered and hashed with the applicable `execution-seal`; complete review records `approve` without blocking issues or required media left uninspected |
+| Delivery | Remaining shots and the final edit/export have their own complete review and exact file records |
 
-## Prepare a rich library, submit a precise shot
+An existing approved character begins at its first unfinished checkpoint. A new speaking character's voice sample is prepared while it remains `draft`, with `purpose: reference`, before complete canon approval. Adding a changed voice to frozen canon requires normal canon evolution.
 
-Maintain two distinct parts of the package. The **production library** contains useful approved character references, expression/body views, costume/prop details, setting references, inspected scene images, scripts and continuity notes. Build only material needed by the planned shots; inspect new references before promoting them. A storyboard or grid assists planning but does not replace usable individual image files.
+For an incomplete checkpoint, record the missing requirement, next owner/action and a proposed alternative. Keep essential transfer, listening, generation, export or inspection pending.
 
-The **submission map for each shot** lists only inputs the selected operation actually accepts: exact files/hashes, their roles and order, supported provider media IDs/URLs when applicable, the prompt and supported parameters. For example, a tool accepting one start image receives a carefully composed, inspected scene frame. The other library views support preparation and QA; do not pretend that all were attached or that an unsupported field conditions identity. End frames, multiple identity references, separate audio, camera controls and lip-sync are included only when verified for that operation. If an essential input cannot be transferred or used, leave that shot pending and propose a compatible route.
+## Build the production library
 
-Compare every derivative against exact approved canon, not only the previous derivative. Do not let an unapproved scene image become the sole identity source for later shots. Choose supported references for the target angle and role; a style slot is not an identity slot. Inspect contact/scene geometry, hands and teeth at readable resolution and the intended crop, then check recognition under permitted expression, lighting and wardrobe changes.
+Keep the material needed by the script: approved identity/body/expression references, costume and prop details, setting references, scene images, audio, script and continuity notes. Inspect new derivative material against exact canon before use. A storyboard or reference grid can help planning; usable reference files remain separately identified.
 
-For every scene, prepare:
+The library supports preparation and QA. Each provider call receives only the inputs its actual schema accepts. A one-start-image operation uses a composed scene frame; other views remain preparation/review material unless explicitly accepted. Style inputs, identity inputs and audio inputs serve different roles.
 
-- A shot ID, editorial purpose, duration/format within verified tool limits, exact spoken text or silent scope, and links to the character/canon/content versions.
-- Acting direction tied to personality: intention, expression, gaze, gesture and rhythm. Specify subject movement separately from camera movement, and avoid contradictory actions.
-- An inspected image composed for that scene, using approved identity, wardrobe, setting, props and lighting; relevant start/end states only if supported. Inspect face, body, hands, mouth, anatomy and premise/presence before animation.
-- The approved vocal reference/settings and actual audio inputs when speech is required; record listening, pronunciation, pacing and intended timing. Audio changes that alter frozen identity use canon evolution, not a silent replacement.
-- Continuity between shots: identity anchors, permitted variations, costume, props, spatial direction, lighting and narrative state. Record what should move and what must remain stable.
-- A review plan covering identity through movement, anatomy, temporal artifacts, speech/audio/lip-sync when present, duration, composition and export. Static frames do not establish temporal fidelity.
+## Map every shot to accepted inputs
 
-## Execute and learn from the pilot
+For each shot, save:
 
-Choose a short representative shot that exercises the important risks for this character, including speech or a difficult gesture when relevant. Read the current tool instructions/schema and test the selected operation rather than inferring support from the platform's catalog. Do not submit batches until the pilot's real exported bytes are registered and hashed with the applicable `execution-seal`, and complete review of those exact files records `approve` without blocking issues or required media left uninspected. Keep declared nonblocking limitations in the record. After a failure, diagnose the input, prompt, motion, tool capability or export; change a useful variable, save a new version, and repeat complete review and approval before batches. A tool/model change requires another applicable pilot.
+- Shot ID, purpose, character/canon/content versions, exact speech or silent scope.
+- Acting intention, expression, gaze, gesture and rhythm; subject movement separately from camera movement.
+- Target duration, format and continuity into/out of the shot.
+- Inspected scene/start image; end images, multiple references or separate audio only where supported.
+- Tool/route, exposed model, supported parameter values and exact prompt.
+- Submitted files/SHA-256, input roles/order, confirmed provider media IDs/URLs and actual transfer evidence.
+- Stage quote/unit, applicable budget and authorization, recorded intent and returned job IDs.
+- Output files/hashes, seal, reviewer/method/decision, blocking issues and declared nonblocking limitations.
 
-Track the saved method plan, handoff document and exact shot inputs as existing run inputs/planning outputs so their paths/hashes are observed. Record method/tool/model when exposed, prompts, attached bytes/IDs, actual parameters, quotes/known costs, applicable authorization, job intent and returned IDs, output files/hashes and inspection limitations. Uncertain submission is reconciled through the original job before retrying or changing routes. A prepared package, remote preview, completed job or local test does not demonstrate final fidelity, export or approval. Changed observed context follows the existing explicit new-attempt procedure, preserving prior evidence.
+Compare new scenes with approved canon, rather than only their previous derivative. Inspect hands, mouth, body, contact geometry and composition before animation. For speech, use the approved vocal reference/settings and check pronunciation, pacing and timing.
+
+The canon sample identifies the approved voice. If the operation requires external driving audio, generate a new take of the exact shot text with that voice, listen to it and measure its duration before attaching its exact file/hash; a sample containing different words is not that shot's audio. For internally generated speech, submit the supported exact script/voice inputs and review the resulting speech.
+
+## Generate and review the pilot
+
+Choose a short representative shot that exercises the content's real risks: identity through movement, speech/lip-sync when needed, or an important gesture. Record intent before submission and reconcile the original job if the result is uncertain. Follow [plugin execution](higgsfield-plugin.md) or the [CLI procedure](higgsfield-setup.md).
+
+Review complete motion and audio against the exact references, script and intended crop. A still image cannot establish temporal fidelity. Export and register the actual pilot bytes, create the applicable execution seal and record a complete `approve` review before batches. After correction, save a new version and repeat complete review and approval. A tool/model change needs an applicable pilot for the new conditions.
+
+Expand only settings supported by the pilot's evidence. Review the final edit again after captions, music, cropping or compression. Deliver the reviewed bytes; publication needs applicable authorization and actual publication evidence. Tracked input/method/governance changes use the existing explicit new-attempt procedure and preserve prior evidence.

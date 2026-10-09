@@ -1,69 +1,60 @@
-# Comece pela conversa.
+# Início rápido
 
-Abra seu [estúdio instalado independente](installation.md) no Codex e faça o pedido normalmente. Nome de agente, sintaxe especial e formulário completo são desnecessários. Atena lê decisões já informadas e faz no máximo três perguntas ainda abertas sobre objetivo, presença da personagem e público/assunto. A cópia do código-fonte do framework é reservada para desenvolvimento e manutenção.
+Instale um estúdio independente, abra-o no Codex ou Claude Code e descreva o que quer criar. Você pode conversar normalmente; Atena coordena o pedido e carrega as orientações relevantes do OLYMPOX.
 
-## Criar uma personagem
+## 1. Instale e abra o estúdio
 
-```text
-Vamos criar uma influencer. Ajude-me a escolher o objetivo e o tipo de personagem.
-Quero personagens realistas com aparência memorável e personalidade forte,
-com potencial para conteúdo compartilhável. O público/tema pode ser proposto.
+Requer Node 22+ e um ambiente local de Codex ou Claude Code. Instale a release publicada:
+
+```sh
+npx --yes github:linkiaai/olympox#v0.5.0 setup
 ```
 
-Atena oferece opções úteis: entretenimento viral/alcance, comunidade, marca/embaixadora, educação ou narrativa; realismo memorável, pessoa realista com personalidade expressiva ou estilização quando desejado. “Pode propor” é uma resposta válida. O [guia de estratégia](strategy.md) descreve a conversa curta; o [brief](../../../templates/locales/pt-BR/brief.md) registra seu resultado.
+A partir de checkout revisado ou pacote extraído, use `node bin/olympox.mjs setup`.
 
-Quando a direção estiver aberta, receba pelo menos três fichas de conceito distintas antes dos retratos. Compare premissa, aparência/presença, atitude e exemplo de voz, contraste editorial, três aberturas com entregas, hipótese de compartilhamento e dificuldade de produção. Atena recomenda uma direção; você pode escolher, combinar elementos compatíveis ou pedir revisão. Presença forte pode vir de idade, silhueta, estilo e atitude variados sem impor fantasia.
+Escolha assistente e destino, revise o plano de instalação e abra a pasta instalada. Invoque `$olympox` no Codex ou `/olympox` no Claude Code. Recarregue o assistente se as novas skills ainda não forem descobertas. Consulte [instalação](installation.md) para setup por script, merge e atualizações.
 
-**Geração integrada de imagens do ChatGPT/Codex** é o padrão para aparência, candidatas, referências, cenários, imagens e edições quando disponível. Conceito, personalidade, universo narrativo, roteiros e planejamento continuam no ChatGPT/Codex. Depois de escolher o conceito, dirija uma amostra expressiva de exploração e uma cena que expresse a premissa, inspecione e ajuste antes de ampliar o conjunto de referências. Registre a seleção visual do usuário mantendo a nova persona em `draft` e anexe de verdade as referências exatas escolhidas às vistas, cenas e edições seguintes. Inspecione anatomia, presença e continuidade. Quando houver fala planejada, gere uma amostra vocal em rascunho/referência com ferramenta verificada, escute e registre a seleção do usuário do áudio e das configurações exatos. Então aprove e congele o canon visual/vocal completo antes de um piloto pequeno de produção. Para uma persona sem fala, registre voz como não aplicável. Revise a mídia completa antes dos lotes. Publicação precisa de autorização aplicável e comparação usa resultados reais dos posts. Potencial de viralização continua hipótese.
+O setup verifica arquivos locais e manual. Conecte o Higgsfield separadamente e verifique os módulos necessários para o piloto pretendido.
 
-Psiquê desenvolve a persona e Íris dirige os visuais. Gaia pesquisa oportunidades quando útil. Esses perfis orientam o Codex; consulta é relatada apenas quando um subagente realmente trabalhou.
+## 2. Peça um personagem
 
-## Produzir para uma personagem existente
+> Use OLYMPOX para criar um influenciador para [público/tema]. Proponha três conceitos diferentes, mostre como cada um sustentaria uma série recorrente e recomende um.
 
-```text
-Atena, prepare uma peça para [personagem], usando o cânone e a narrativa
-aprovados. Quero um roteiro de [formato] sobre [tema], com cenas e legenda.
-```
+Se a direção estiver aberta, o assistente faz poucas perguntas pendentes sobre objetivo, presença e público. “Pode propor” é uma resposta válida. Compare premissa, personalidade, assinatura visual, exemplo de voz, ganchos recorrentes e dificuldade de produção antes de escolher.
 
-Saraswati escreve; Selene prepara e executa a produção disponível e autorizada; Têmis inspeciona a mídia completa. Aurora pesquisa tendências quando necessário. Fortuna prepara experimentos de distribuição e analisa dados próprios quando existirem.
+A direção selecionada vira uma persona em rascunho e um brief. [Desenvolvimento de personagens](strategy.md) explica essa etapa.
 
-Personagens existentes pulam a descoberta inicial de criação e mantêm canon aprovado, idioma e decisões. Reutilize referências de voz aprovadas e inalteradas sem repetir aprovação; acrescentar ou mudar voz em canon congelado exige o processo normal de versão de identidade. Fortaleça atuação, cenas e conteúdo dentro das variações permitidas; adotar Higgsfield não substitui sua identidade.
+## 3. Selecione identidade e voz
 
-## Conferir recursos e registrar o método por etapa
+Antes da geração paga, verifique o caminho do piloto completo: acesso à conta, módulos necessários, referências aceitas, exportação, inspeção e orçamento. [O método de produção](higgsfield-influencer-method.md) descreve a sequência padrão no Higgsfield.
 
-Siga [produção](production.md) e salve um [plano do método de produção](../../../templates/locales/pt-BR/production-method.md) versionado. Rastreie o arquivo na run existente como entrada ou saída de planejamento; registre método, ferramenta, modelo exposto, prompts, referências realmente anexadas, arquivos/hashes, custos conhecidos e limitações por etapa. Geração de referências, voz, cenas/vídeo, exportação e revisão precisam de verificação real separada. A rota visual integrada não precisa de Higgsfield, AI Influencer Builder, CLI externa nem chave de API. Depende da disponibilidade da ferramenta e dos limites da conta; não descrevê-la como gratuita ou ilimitada. Treinamento é opcional e autorizado separadamente quando justificado.
+Gere candidatos expressivos e uma cena da premissa. Selecione a direção visual, construa referências coerentes e inspecione anatomia, presença e continuidade. Se o personagem fala, ouça e selecione uma amostra vocal em rascunho. Aprove o cânone visual/vocal exato quando essas escolhas estiverem prontas.
 
-Selecionar ferramentas verificadas para voz, animação, vídeo, sincronização labial e recursos especializados conforme necessidade, qualidade e custo conhecido. Higgsfield continua como opção conforme seu [guia de método opcional](higgsfield-influencer-method.md), pelo [plugin do Codex](higgsfield-plugin.md) ou pela [CLI e wrapper locais](higgsfield-setup.md) quando a rota suportar a operação escolhida. O plugin exige instalação e conexão próprias, sem exigir a CLI local do Higgsfield. Se faltar um recurso, manter a etapa pendente e propor alternativas enquanto prepara trabalho local independente. Trocar para geração externa paga exige autorização aplicável.
+Suas escolhas ficam explícitas no registro. Aprovar a persona, por si só, não cria um snapshot congelado; as operações de registro o preservam. A geração de imagens integrada ao assistente exige uma [escolha alternativa explícita](integrated-images.md).
 
-```text
-Para esta peça, escolho explicitamente [método/fornecedor alternativo].
-Registre a mudança de método, preserve as referências aprovadas e confira recursos.
-```
+## 4. Produza e inspecione um piloto
 
-Respeitar uma escolha explícita do usuário por outro método ou fornecedor. Mantém os mesmos registros de canon e runs, verificações de custos/autorizações e revisão de mídia. Uma cotação de vídeo não cobre outras etapas, como fichas do Builder, voz ou treinamento. Um método rastreado alterado segue o procedimento existente de nova tentativa; jobs externos incertos precisam primeiro ser reconciliados. Personagens e evidências históricos são preservados sem migração automática.
+> Prepare um piloto curto com a identidade e voz aprovadas. Mostre roteiro, cenas, entradas exatas e escopo de custo antes da geração.
 
-## Revisar e corrigir
+O assistente escreve e dirige; ferramentas verificadas do Higgsfield geram a mídia. Inspecione o piloto completo e os bytes efetivamente exportados. Corrija falhas em novas versões. Amplie para lotes após a aprovação do piloto.
 
-```text
-Têmis, revise estes arquivos contra as referências aprovadas.
-Identifique os trechos ou regiões que precisam de correção.
-```
+Siga [produção](production.md), [handoff do piloto](production-handoff.md) e [qualidade](quality.md). A publicação usa a autorização aplicável.
 
-Uma falha crítica reprova o ativo. A correção cria uma nova versão e exige outra inspeção; os originais e o histórico permanecem preservados.
+## Trabalhe com um personagem existente
 
-## Operar os registros locais
+> Prepare uma peça em [formato] para [personagem] sobre [tema], usando o cânone aprovado e a narrativa atual.
 
-Requer Node 22 ou posterior. Não há dependências externas para operar os registros.
+O assistente reutiliza decisões, idioma e referências aprovadas. Mudanças dentro da variação permitida mantêm a identidade; mudanças na identidade congelada exigem nova versão do cânone e aprovação. Use [operação dos workflows](framework-02.md) para retomar uma execução salva.
 
-```powershell
-npm.cmd run verify
-node scripts/studio.mjs help
-node scripts/studio.mjs new my-persona
+## Verifique os registros locais
+
+Execute estes comandos na raiz do estúdio instalado:
+
+```sh
 node scripts/studio.mjs list
+node scripts/studio.mjs validate
+node scripts/studio.mjs help
+npm run verify
 ```
 
-`new` cria um rascunho. O Codex salva conceito escolhido, ficha da personagem e brief da conversa antes de gerar referências. Esses comandos não produzem mídia, encaminham a um fornecedor nem aprovam identidade. Consulte [operação](operations.md) para registrar arquivos e [operar o núcleo](framework-02.md) para iniciar e retomar fluxos.
-
-## O que informar na passagem
-
-Informe personagem, versão do canon, conceito escolhido, plano do método de produção, arquivos exatos de entrada, objetivo, canal e entrega esperada. Pendências de ferramenta, decisão, revisão, publicação ou métricas devem permanecer visíveis. Autorizações já dadas continuam válidas; a equipe registra apenas o trabalho realmente executado.
+Os comandos mantêm e verificam registros. Consulte [identidade e backups](operations.md) para arquivos, snapshots e recuperação. Se uma ferramenta estiver indisponível, mantenha a etapa afetada pendente e continue a preparação que não depende dela.

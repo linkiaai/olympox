@@ -8,6 +8,7 @@ const STATES = new Set(RUN_STATES);
 const KINDS = new Set(['document', 'media', 'review', 'human-decision', 'delivery']);
 const EVIDENCE = new Set(['prepared', 'generated', 'reviewed', 'human-approved', 'delivered']);
 const MEDIA = { image: ['.png', '.jpg', '.jpeg', '.webp', '.avif', '.gif'], video: ['.mp4', '.mov', '.webm', '.mkv'], audio: ['.wav', '.mp3', '.m4a', '.ogg', '.flac'] };
+const DEFAULT_MEDIA_PROVIDERS = { image: 'higgsfield', video: 'higgsfield', audio: 'higgsfield' };
 const DOCUMENTS = ['.md', '.txt', '.json', '.yaml', '.yml', '.csv', '.html', '.pdf'];
 const obj = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const text = value => typeof value === 'string' && value.trim().length > 0;
@@ -23,6 +24,13 @@ const objectHash = value => hash(JSON.stringify(stable(value)));
 function recordDigest(run) { const { recordHash, ...body } = run; return objectHash(body); }
 function ensure(condition, message) { if (!condition) throw new Error(message); }
 function readJson(file) { return JSON.parse(fs.readFileSync(file, 'utf8').replace(/^\uFEFF/, '')); }
+function mediaProviders(value, defaults = DEFAULT_MEDIA_PROVIDERS) {
+  ensure(value === undefined || obj(value), 'mediaProviders must be an object keyed by image, video, or audio.');
+  const selected = { ...defaults, ...value };
+  ensure(Object.keys(selected).every(medium => Object.hasOwn(MEDIA, medium)) && Object.keys(MEDIA).every(medium => id(selected[medium])), 'Each media provider must be an English machine token for image, video, or audio.');
+  ensure(selected.video !== 'integrated-images' && selected.audio !== 'integrated-images', 'integrated-images is an explicit image alternative, not a video or voice provider.');
+  return selected;
+}
 function inside(root, target) {
   const relative = path.relative(root, target);
   return relative === '' || (!path.isAbsolute(relative) && relative !== '..' && !relative.startsWith('..' + path.sep));
@@ -116,6 +124,7 @@ export function validateFramework(root) {
   try {
     registry = readJson(file(root, 'framework/registry.json'));
     ensure(obj(registry) && registry.schemaVersion === 1 && text(registry.version) && registry.executionMode === 'instruction-packages', 'Invalid registry/schema or execution mode.');
+    if (registry.defaultMediaProviders !== undefined) mediaProviders(registry.defaultMediaProviders);
     ensure(list(registry.constitutionPaths) && registry.constitutionPaths.includes('CONSTITUTION.md') && registry.constitutionPaths.includes('AGENTS.md'), 'Registry must declare the constitution and AGENTS.');
     for (const governance of registry.constitutionPaths) file(root, governance);
     const roles = new Map(), tasks = new Map(), workflows = new Map();
@@ -188,6 +197,7 @@ function validateRun(run) {
   const ids = new Set();
   for (const a of run.attempts) {
     ensure(obj(a) && /^attempt-[a-f0-9-]{36}$/.test(a.id) && !ids.has(a.id) && STATES.has(canonicalToken(a.state)) && Array.isArray(a.inputs) && Array.isArray(a.results) && Array.isArray(a.events), 'Invalid attempt.'); ids.add(a.id);
+    if (a.mediaProviders !== undefined) ensure(objectHash(mediaProviders(a.mediaProviders)) === objectHash(a.mediaProviders), 'Attempt must preserve the complete selected media provider map.');
     ensure(Number.isInteger(a.stepIndex) && a.stepIndex >= 0 && a.stepIndex <= run.contract.workflow.steps.length && a.results.length === a.stepIndex, 'Inconsistent attempt step/result.');
     if (isToken(a.state, 'completed')) ensure(a.stepIndex === run.contract.workflow.steps.length, 'Completion without all steps.');
     for (const input of a.inputs) ensure(obj(input) && text(input.path) && digest(input.sha256), 'Invalid input snapshot.');
@@ -241,23 +251,35 @@ function changes(root, run) {
   return changed;
 }
 function unresolvedJob(a) { return a.job && ['planned', 'submitted', 'pending', 'unknown'].includes(a.job.status); }
+function taskMedium(run, task) {
+  // Historical attempts retain their saved single-medium behavior.
+  return attempt(run).mediaProviders && ['generate-candidates', 'review-candidates'].includes(task.id) ? 'image' : run.medium;
+}
+function missingTaskCapabilities(run, task) {
+  if (!task?.capability) return [];
+  const medium = taskMedium(run, task), capability = `${medium}-${task.capability}`;
+  const required = [capability];
+  if (task.capability === 'generation' && attempt(run).mediaProviders) required.push(`${attempt(run).mediaProviders[medium]}:${capability}`);
+  return required.filter(requiredCapability => !run.capabilities.includes(requiredCapability));
+}
 function packageRun(root, run, detail) {
   const a = attempt(run), next = current(run), drift = changes(root, run);
-  const missingCapabilities = next?.task.capability && !run.capabilities.includes(`${run.medium}-${next.task.capability}`) ? [`${run.medium}-${next.task.capability}`] : [];
+  const missingCapabilities = missingTaskCapabilities(run, next?.task);
   return {
     run: clone(run), runId: run.id, attemptId: a.id, state: canonicalToken(a.state),
-    nextTask: next ? { stepId: next.step.id, taskId: next.task.id, name: next.task.name, optional: next.step.optional, criteria: next.task.criteria, expectedDelivery: next.task.deliverable, evidenceType: next.task.evidenceType, requiresPersona: next.task.requiresPersona, requiresApprovedCanon: next.task.requiresApprovedCanon } : null,
+    nextTask: next ? { stepId: next.step.id, taskId: next.task.id, name: next.task.name, optional: next.step.optional, criteria: next.task.criteria, expectedDelivery: next.task.deliverable, evidenceType: next.task.evidenceType, requiresPersona: next.task.requiresPersona, requiresApprovedCanon: next.task.requiresApprovedCanon, medium: taskMedium(run, next.task) } : null,
     responsible: next ? clone(run.contract.roles[next.task.owner]) : null,
     constitutionPaths: clone(run.constitutionPaths), governanceFiles: clone(run.governanceFiles),
     inputs: clone(a.inputs), canonBinding: clone(run.canonBinding), drift, missingCapabilities,
+    mediaProviders: a.mediaProviders ? clone(a.mediaProviders) : null,
     executionMode: a.execution?.mode ?? 'instruction', automaticallyDispatched: false,
     canContinue: !drift.length && !unresolvedJob(a) && !missingCapabilities.length && !oneOfTokens(a.state, ['completed', 'failed', 'cancelled', 'uncertain-result']),
     limitation: 'Instruction package and recorded declarations. This module does not dispatch agents, generate media, query providers, publish, or prove a reviewer is human.',
     ...(detail === undefined ? {} : { detail })
   };
 }
-function newAttempt(inputs, reason) {
-  return { id: `attempt-${crypto.randomUUID()}`, startedAt: now(), finishedAt: null, state: 'planned', stepIndex: 0, inputs, results: [], events: [], job: null, execution: null, reason };
+function newAttempt(inputs, reason, selectedProviders) {
+  return { id: `attempt-${crypto.randomUUID()}`, startedAt: now(), finishedAt: null, state: 'planned', stepIndex: 0, inputs, results: [], events: [], job: null, execution: null, reason, ...(selectedProviders ? { mediaProviders: clone(selectedProviders) } : {}) };
 }
 
 export function startRun(root, options) {
@@ -265,20 +287,21 @@ export function startRun(root, options) {
   const framework = validateFramework(root); ensure(framework.valid, framework.errors.join('\n'));
   const workflow = framework.workflows[canonicalToken(options.workflowId)]; ensure(workflow, 'Workflow does not exist.');
   ensure(text(options.objective), 'Provide a concrete objective.');
-  const personaId = options.personaId ?? null, medium = options.medium ?? 'image';
+  const personaId = options.personaId ?? null, medium = options.medium ?? (isToken(workflow.id, 'create-character') ? 'video' : 'image');
   ensure(['image', 'video', 'audio'].includes(medium), 'medium must be image, video, or audio.');
   ensure(!workflow.requiresPersona || personaId, 'Workflow requires personaId.');
   const p = personaId ? persona(root, personaId) : null;
   if (workflow.requiresPersona) ensure(!isToken(p.status, 'draft'), 'Production/correction requires an approved canon.');
   const inputs = records(root, options.inputs ?? [], personaId);
   const capabilities = options.capabilities ?? []; ensure(list(capabilities), 'capabilities must be a list of strings.');
+  const selectedProviders = mediaProviders(options.mediaProviders, mediaProviders(framework.registry.defaultMediaProviders));
   const run = {
     schemaVersion: 1, id: `run-${crypto.randomUUID()}`, frameworkVersion: framework.registry.version,
     workflowId: workflow.id, personaId, medium, objective: options.objective.trim(), createdAt: now(), updatedAt: now(), capabilities,
     canonBinding: p && !isToken(p.status, 'draft') ? binding(p) : null,
     constitutionPaths: clone(framework.registry.constitutionPaths),
     contract: { workflow: clone(workflow), tasks: clone(framework.tasks), roles: clone(framework.roles) }, contractHash: null,
-    governanceFiles: records(root, [...new Set([...framework.registry.constitutionPaths, 'framework/registry.json', ...framework.registry.roles.map(role => role.path), ...framework.registry.tasks.map(task => task.path), ...framework.registry.workflows.map(flow => flow.path)])], null), attempts: [newAttempt(inputs, 'Explicit start')]
+    governanceFiles: records(root, [...new Set([...framework.registry.constitutionPaths, 'framework/registry.json', ...framework.registry.roles.map(role => role.path), ...framework.registry.tasks.map(task => task.path), ...framework.registry.workflows.map(flow => flow.path)])], null), attempts: [newAttempt(inputs, 'Explicit start', selectedProviders)]
   };
   run.contractHash = objectHash(run.contract);
   event(run, 'created', { note: 'Local run created; no agent or service was called.' });
@@ -316,13 +339,15 @@ function checkOutputs(root, run, task, options) {
   const outputs = records(root, options.outputs ?? [], run.personaId);
   ensure(outputs.length >= task.minimumOutputs, 'The step requires existing output files; preparation is not execution.');
   if (task.deliverable === 'media') {
-    ensure(outputs.every(output => MEDIA[run.medium].includes(path.extname(output.path).toLowerCase())), 'Generation requires files of the requested media type; documents are not generated media.');
+    const medium = taskMedium(run, task);
+    ensure(outputs.every(output => MEDIA[medium].includes(path.extname(output.path).toLowerCase())), 'Generation requires files of the requested media type; documents are not generated media.');
     declaredEvidence(options.evidence, 'generated'); ensure(text(options.evidence.tool), 'Generation requires a declared tool.');
+    if (attempt(run).mediaProviders) ensure(options.evidence.provider === attempt(run).mediaProviders[medium], 'Generation must declare the selected media provider; changing a method requires an explicit new attempt.');
   } else if (task.deliverable === 'document') {
     ensure(outputs.every(output => DOCUMENTS.includes(path.extname(output.path).toLowerCase())), 'Preparation requires documents.'); declaredEvidence(options.evidence, 'prepared');
   } else if (task.deliverable === 'review') {
     declaredEvidence(options.evidence, 'reviewed');
-    const e = options.evidence, expectedMethod = { image: 'visual', video: 'visual-and-audio', audio: 'listening' }[run.medium];
+    const e = options.evidence, expectedMethod = { image: 'visual', video: 'visual-and-audio', audio: 'listening' }[taskMedium(run, task)];
     ensure(text(e.reviewer) && isToken(e.method, expectedMethod) && isToken(e.decision, 'approve') && list(e.criticalIssues) && !e.criticalIssues.length && list(e.limitations) && !e.limitations.length, 'Review requires a complete method, reviewer, approve decision, and no critical issues/pending limitations.');
     const generated = lastMedia(run); ensure(generated.length && Array.isArray(e.media) && e.media.length === generated.length, 'Review must bind every file from the latest generation.');
     ensure(e.media.every(record => obj(record) && generated.some(output => output.path === record.path && output.sha256 === record.sha256)) && new Set(e.media.map(record => record.path)).size === generated.length, 'Review does not match generated media hashes.');
@@ -337,6 +362,7 @@ function checkOutputs(root, run, task, options) {
 
 export function transitionRun(root, runId, options) {
   ensure(obj(options) && text(options.action), 'Provide action in the transition.');
+  ensure(options.mediaProviders === undefined, 'Changing mediaProviders requires resume with newAttempt:true and a reason.');
   options = clone(options);
   if (options.state !== undefined) options.state = canonicalToken(options.state);
   for (const item of [options.approval, options.evidence]) {
@@ -385,9 +411,9 @@ export function transitionRun(root, runId, options) {
       ensure(text(options.reason), 'Failure requires a reason.'); a.state = 'failed'; a.finishedAt = now(); event(run, 'failed', { reason: options.reason });
     } else if (options.action === 'start' || options.action === 'complete') {
       prerequisites(root, run, next.task);
-      const capability = next.task.capability ? `${run.medium}-${next.task.capability}` : null;
-      if (capability && !run.capabilities.includes(capability)) {
-        a.state = 'awaiting-tool'; event(run, 'capability-missing', { capability, stepId: next.step.id }); return { pending: capability, note: 'No tool was called.' };
+      const missingCapabilities = missingTaskCapabilities(run, next.task);
+      if (missingCapabilities.length) {
+        a.state = 'awaiting-tool'; event(run, 'capability-missing', { capability: missingCapabilities[0], capabilities: missingCapabilities, stepId: next.step.id }); return { pending: missingCapabilities[0], missingCapabilities, note: 'No tool was called.' };
       }
       if (options.action === 'start') {
         if (options.execution !== undefined) {
@@ -397,6 +423,7 @@ export function transitionRun(root, runId, options) {
         } else a.execution = { mode: 'instruction' };
         if (options.job !== undefined) {
           ensure(obj(options.job) && text(options.job.provider) && next.task.deliverable === 'media', 'External planning requires a provider and generation step.');
+          if (a.mediaProviders) ensure(options.job.provider === a.mediaProviders[taskMedium(run, next.task)], 'External intent must identify the selected media provider; changing a method requires an explicit new attempt.');
           a.job = { ...clone(options.job), status: 'planned', recordedAt: now() };
           event(run, 'external-attempt-planned', { job: clone(a.job), note: 'Intent recorded before submission; this module does not submit the job.' });
         }
@@ -414,6 +441,7 @@ export function transitionRun(root, runId, options) {
 
 export function resumeRun(root, runId, options = {}) {
   ensure(obj(options), 'Invalid resume options.');
+  ensure(options.mediaProviders === undefined || options.newAttempt === true, 'Changing mediaProviders requires newAttempt:true and a reason.');
   return locked(root, runId, run => {
     const a = attempt(run), drift = changes(root, run);
     if (unresolvedJob(a) || isToken(a.state, 'uncertain-result')) { a.state = 'uncertain-result'; event(run, 'resume-held', { reason: 'Reconcile submission before repeating or creating an attempt.' }); ensure(!options.newAttempt, 'Cannot create an attempt while the external result is uncertain.'); return { needsReconciliation: true }; }
@@ -424,6 +452,7 @@ export function resumeRun(root, runId, options = {}) {
       event(run, 'superseded', { reason: options.reason, drift });
       const framework = validateFramework(root);
       ensure(framework.valid, framework.errors.join('\n'));
+      const selectedProviders = mediaProviders(options.mediaProviders, a.mediaProviders ?? mediaProviders(framework.registry.defaultMediaProviders));
       const currentGovernance = [...new Set([...framework.registry.constitutionPaths, 'framework/registry.json',
         ...framework.registry.roles.map(role => role.path), ...framework.registry.tasks.map(task => task.path),
         ...framework.registry.workflows.map(flow => flow.path)])];
@@ -432,7 +461,7 @@ export function resumeRun(root, runId, options = {}) {
       run.governanceFiles = records(root, currentGovernance, null);
       run.constitutionPaths = clone(framework.registry.constitutionPaths);
       if (run.personaId) { const p = persona(root, run.personaId); run.canonBinding = isToken(p.status, 'draft') ? null : binding(p); }
-      run.attempts.push(newAttempt(inputs, options.reason)); event(run, 'new-attempt', { previousAttempt: a.id, drift });
+      run.attempts.push(newAttempt(inputs, options.reason, selectedProviders)); event(run, 'new-attempt', { previousAttempt: a.id, drift });
       return { note: 'An explicit new attempt starts the workflow from the first step; no job was resubmitted or approval consumed.' };
     }
     if (oneOfTokens(a.state, ['completed', 'failed', 'cancelled'])) return { note: 'Finished attempt preserved; a new run requires newAttempt:true and a reason.', drift };

@@ -5,7 +5,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { once } from 'node:events';
-import { buildDocumentation, checkDocumentation, collectDocumentation, commandCatalog, sourceFile, DOCS_ASSETS } from '../scripts/docs-core.mjs';
+import { buildDocumentation, checkDocumentation, collectDocumentation, commandCatalog, installationCommandCatalog, sourceFile, DOCS_ASSETS } from '../scripts/docs-core.mjs';
 import { exportDocumentation } from '../scripts/docs-export.mjs';
 import '../docs-site/src/markdown.js';
 import '../docs-site/src/localization.js';
@@ -16,7 +16,7 @@ const parent = path.join(source, 'tmp', 'docs-tests');
 function fixture() {
   fs.mkdirSync(parent, { recursive: true });
   const root = fs.mkdtempSync(path.join(parent, 'manual-'));
-  for (const directory of ['docs', 'framework', 'scripts', 'templates', 'docs-site']) fs.cpSync(path.join(source, directory), path.join(root, directory), { recursive: true, filter: file => !file.startsWith(path.join(source, 'docs-site', 'dist')) });
+  for (const directory of ['bin', 'docs', 'framework', 'scripts', 'templates', 'docs-site']) fs.cpSync(path.join(source, directory), path.join(root, directory), { recursive: true, filter: file => !file.startsWith(path.join(source, 'docs-site', 'dist')) });
   for (const name of ['AGENTS.md', 'CONSTITUTION.md', 'package.json']) fs.copyFileSync(path.join(source, name), path.join(root, name));
   return { root, close() { assert.equal(path.dirname(root), parent); assert.match(path.basename(root), /^manual-/); fs.rmSync(root, { recursive: true, force: true }); } };
 }
@@ -29,7 +29,8 @@ test('manual derives catalogs, is deterministic and checks staleness without wri
     assert.equal(fs.existsSync(path.join(root, 'docs-site/dist')), false);
     const built = buildDocumentation(root);
     assert.equal(built.data.roles.length, 9); assert.equal(built.data.tasks.length, 15); assert.equal(built.data.workflows.length, 3);
-    assert.equal(built.data.commands.length, 24);
+    assert.equal(built.data.commands.length, 26);
+    assert.match(built.data.commands.find(command => command.id === 'setup').syntax, /--assistant codex\|claude\|both.*--locale en\|pt-BR.*--yes/);
     const repeated = buildDocumentation(root);
     assert.equal(repeated.manifest.fingerprint, built.manifest.fingerprint);
     for (const [name, bytes] of built.output) assert.deepEqual(repeated.output.get(name), bytes);
@@ -76,7 +77,7 @@ test('manual excludes private data, rejects unsafe sources and requires command 
     fs.writeFileSync(path.join(root, 'influencers/privada/persona.json'), marker);
     fs.writeFileSync(path.join(root, '.env'), marker);
     fs.writeFileSync(path.join(root, 'docs-site/src/private.png'), marker);
-    fs.appendFileSync(path.join(root, 'docs/studio-status.md'), marker);
+    fs.writeFileSync(path.join(root, 'docs/diagnostic-notes.md'), marker);
     const built = buildDocumentation(root);
     for (const bytes of built.output.values()) assert.equal(bytes.includes(marker), false);
     assert.equal(built.manifest.sources.some(item => /^(?:influencers|work|backups|\.env)/.test(item.path)), false);
@@ -88,6 +89,10 @@ test('manual excludes private data, rejects unsafe sources and requires command 
     const configFile = path.join(root, 'docs-site/config.json');
     const config = JSON.parse(fs.readFileSync(configFile, 'utf8'));
     const cli = fs.readFileSync(path.join(root, 'scripts/studio.mjs'), 'utf8');
+    const installerCli = fs.readFileSync(path.join(root, 'bin/olympox.mjs'), 'utf8');
+    assert.throws(() => installationCommandCatalog(installerCli, {}), /without description/);
+    assert.throws(() => installationCommandCatalog(installerCli.replace("command === 'setup'", "command === 'unadvertised'"), config.commandDescriptions), /without implementation/);
+    assert.throws(() => installationCommandCatalog(installerCli.replace('olympox setup [directory]', 'olympox hidden [directory]'), config.commandDescriptions), /unique setup and install syntax/);
     assert.throws(() => commandCatalog(cli, {}), /without description/);
     assert.throws(() => commandCatalog(cli.replace("command === 'help'", "command === 'new-operation'"), config.commandDescriptions), /without syntax/);
     const complete = structuredClone(config);
@@ -421,4 +426,74 @@ test('cross-edition links change language and retain their target route for port
     assert.equal(browser.document.documentElement.lang, 'en');
     assert.match(browser.element('main').innerHTML, /Start using the studio/);
   }
+});
+
+test('manual navigation covers every maintained guide and renders each edition and profile', () => {
+  const { data } = collectDocumentation(source);
+  const role = data.roles[0];
+  role.markdown += '\nHidden-profile-marker-73912\n';
+  const teamGuide = data.guides.find(guide => guide.path === 'docs/studio-team.md');
+  teamGuide.markdown = teamGuide.markdown.replace(`### ${role.name}\n`, `### ${role.name}\nVisible-role-marker-73912\n`);
+  const selected = new Set(data.guides.map(guide => guide.path));
+  for (const name of fs.readdirSync(path.join(source, 'docs')).filter(name => name.endsWith('.md'))) {
+    assert.equal(selected.has(`docs/${name}`), true, `Guide missing from manual: ${name}`);
+  }
+  const browser = manualBrowser(data);
+  browser.search('Hidden-profile-marker-73912');
+  assert.match(browser.element('#search-results').innerHTML, /No results/);
+  browser.search('Visible-role-marker-73912');
+  assert.ok(browser.element('#search-results').innerHTML.includes(`href="#agent/${role.id}"`));
+  browser.navigate(`agent/${role.id}`);
+  assert.match(browser.element('main').innerHTML, /Visible-role-marker-73912/);
+  assert.doesNotMatch(browser.element('main').innerHTML, /Hidden-profile-marker-73912/);
+  browser.search('');
+  for (const locale of ['en', 'pt-BR']) {
+    browser.switchLocale(locale);
+    const edition = locale === 'en' ? data : data.locales[locale];
+    const navigation = browser.element('#navigation').innerHTML;
+    for (const guide of edition.guides) {
+      const route = guide.section ?? `guide/${encodeURIComponent(guide.path)}`;
+      assert.ok(navigation.includes(`href="#${route}"`), `Navigation omits ${locale} ${guide.path}`);
+      browser.navigate(route);
+      assert.match(browser.element('main').innerHTML, /<h1(?:\s[^>]*)?>/);
+      assert.equal(browser.element('main').innerHTML.includes(edition.ui.missingTitle), false);
+      assert.equal(browser.document.documentElement.lang, locale);
+    }
+    for (const role of edition.roles) {
+      browser.navigate(`agent/${role.id}`);
+      const html = browser.element('main').innerHTML;
+      assert.ok(html.includes(`<h1>${role.name}</h1>`));
+      assert.ok(html.includes(edition.ui.assignedContracts));
+      assert.equal(html.includes('Version <strong>0.2.0</strong>'), false);
+    }
+  }
+  const instance = fixture();
+  try {
+    const file = path.join(instance.root, 'docs-site/config.json');
+    const config = JSON.parse(fs.readFileSync(file, 'utf8'));
+    config.guides[0].group = 'invalid';
+    fs.writeFileSync(file, JSON.stringify(config));
+    assert.throws(() => collectDocumentation(instance.root), /Unknown guide navigation group/);
+  } finally { instance.close(); }
+});
+
+test('maintained documentation local links resolve to files and existing heading anchors', () => {
+  const { data } = collectDocumentation(source);
+  const files = new Set(data.guides.flatMap(guide => [guide.path, ...Object.values(guide.translations)]));
+  const failures = [];
+  for (const relative of files) {
+    const markdown = fs.readFileSync(path.join(source, relative), 'utf8').replace(/^```[^\n]*\n[\s\S]*?^```\s*$/gm, '');
+    for (const match of markdown.matchAll(/!?\[[^\]]+\]\(([^)]+)\)/g)) {
+      const target = match[1];
+      if (/^https?:\/\//i.test(target)) continue;
+      const [file, anchor] = target.split('#');
+      const absolute = file ? path.resolve(source, path.dirname(relative), file) : path.resolve(source, relative);
+      if (!fs.existsSync(absolute) || !fs.statSync(absolute).isFile()) { failures.push(`${relative}: missing ${target}`); continue; }
+      if (anchor && absolute.endsWith('.md')) {
+        const headings = globalThis.StudioMarkdown.render(fs.readFileSync(absolute, 'utf8')).headings;
+        if (!headings.some(heading => heading.id === `heading-${globalThis.StudioMarkdown.slug(anchor)}`)) failures.push(`${relative}: missing anchor ${target}`);
+      }
+    }
+  }
+  assert.deepEqual(failures, []);
 });

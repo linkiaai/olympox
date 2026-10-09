@@ -1,113 +1,130 @@
-# Instalar o OLYMPOX
+# Instalar e atualizar o OLYMPOX
 
-**OLYMPOX - AI Influencer framework** instala um estúdio local reutilizável para o Codex. Cada usuário cria influenciadores originais e mantém seus registros privados nesse estúdio independente. O repositório de origem é dedicado ao desenvolvimento e à manutenção do framework. O pacote inclui fontes e templates do framework, sem fichas reais de personagens nem credenciais.
+Instale **OLYMPOX - AI Influencer framework** em um estúdio independente para Codex, Claude Code ou ambos. A cópia de desenvolvimento mantém fontes reutilizáveis; o estúdio guarda seus personagens, mídias, runs e backups.
 
-## Requisitos
+## Requisitos e escolha da origem
 
-- Node **22 ou posterior**, incluindo npm e npx.
-- Codex para coordenação por conversa e as ferramentas disponíveis na sua sessão.
-- Git para clonar o repositório. A instalação de pacotes GitHub pelo npm também pode exigir Git no sistema.
-- Acesso ao repositório e à tag da versão escolhida. Um repositório privado pode exigir acesso Git autenticado na sua máquina.
+- **Node 22 ou posterior**, com npm.
+- **Codex ou Claude Code** com leitura e escrita nos arquivos do estúdio.
+- Uma cópia revisada do framework ou pacote extraído. Git e acesso ao repositório são necessários para obter a origem pelo GitHub.
 
-O núcleo local não tem dependências externas de execução. Não é necessário executar `npm install` para operar seus registros. A preparação de fornecedores externos é separada da instalação do núcleo e exige configuração própria.
+O núcleo local não tem dependências externas de execução; os comandos dispensam `npm install`. O acesso ao Higgsfield é preparado separadamente. É possível instalar, planejar personagens e manter registros antes de conectar um fornecedor.
 
-A release **0.4.0** usa [criação visual integrada do ChatGPT/Codex](integrated-images.md) por padrão quando disponível, com onboarding adaptativo e conceitos distintos. Dispensa Higgsfield, Builder, CLI externa e chave de API; aplicam-se limites da conta. Escolhas explícitas de método pelo usuário têm prioridade. O [procedimento do Codex ao vídeo](production-handoff.md) prepara referências coerentes, voz exata quando houver fala, roteiros e imagens de cena inspecionadas antes de uma ferramenta de vídeo especializada e verificada; Higgsfield continua opcional. Recursos ausentes mantêm etapas pendentes com alternativas propostas; substituição externa paga exige autorização aplicável. Os comandos abaixo fixam `v0.4.0`. Estúdios existentes exigem o procedimento explícito de atualização abaixo.
+Este guia descreve a **0.5.0**. Instale a tag publicada com `npx --yes github:linkiaai/olympox#v0.5.0 setup`. Use os comandos locais abaixo para uma cópia revisada ou um pacote extraído. Uma edição local posterior não atualiza a tag publicada nem o manual hospedado. Consulte [notas das versões](release-notes.md).
 
-## Criar um estúdio pelo GitHub
+## Preparação guiada
 
-Execute a partir da pasta onde deseja criar o estúdio:
+Da cópia do framework ou pacote extraído:
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.4.0 install ./my-studio
-cd my-studio
+node bin/olympox.mjs setup
+```
+
+O guia pergunta idioma da apresentação (`en` ou `pt-BR`), assistente (`codex`, `claude` ou `both`) e diretório fora da origem. Confere todos os arquivos de origem e destino selecionados, depois apresenta destino resolvido, opções, quantidades a copiar/manter e verificações previstas. Cancelamento, EOF ou Ctrl+C antes de instalar deixam o destino intacto.
+
+Para fornecer escolhas antecipadamente:
+
+```sh
+node bin/olympox.mjs setup ../my-studio --assistant both --locale pt-BR
+```
+
+Em terminal não interativo, informe diretório explícito, assistente e `--yes`:
+
+```sh
+node bin/olympox.mjs setup ../my-studio --assistant claude --locale en --yes
+```
+
+`--yes` aceita instalação e verificação locais. Não implica `--merge` nem autoriza geração, treinamento ou publicação. Ao usar npx, seu `--yes` aceita a confirmação de pacote do npm; o `--yes` do OLYMPOX vem depois de `setup` e tem finalidade própria. `--locale` muda somente a apresentação do setup; instruções, skills, comandos e identificadores canônicos instalados continuam em inglês.
+
+O plano é conferido novamente antes da escrita. Mudanças em origens, destinos ou opções previstas interrompem a instalação; revise um plano novo antes de tentar novamente. Após instalar, o setup executa estes scripts instalados, nesta ordem:
+
+```sh
+node scripts/docs.mjs build
+node scripts/studio.mjs doctor
+node scripts/studio.mjs validate
+node scripts/docs.mjs check
+```
+
+Para na primeira falha e preserva os arquivos instalados para diagnóstico. Verifica manual, base, skills e registros, mas não executa a suíte completa. No estúdio instalado, conclua com `npm run verify`. No Windows, use `npm.cmd` ou `npx.cmd` se o PowerShell bloquear o launcher normal.
+
+## Instalação direta
+
+Use seleção explícita de assistente para instalação previsível em scripts:
+
+```sh
+node bin/olympox.mjs install ../my-studio --assistant both
+cd ../my-studio
 npm run verify
-npm run studio -- help
 ```
 
-Use `npx.cmd` e `npm.cmd` no Windows se o PowerShell bloquear os inicializadores comuns. O diretório de instalação padrão é `.` quando omitido. Uma instalação nova aceita um diretório ausente ou vazio; um diretório `.git` existente pode ser mantido. Outros itens existentes exigem `--merge`.
+Sintaxe: `install [directory] [--merge] [--assistant codex|claude|both]`. A instalação direta usa `codex` e diretório `.` por padrão. Escolha um destino independente explicitamente. A instalação nova aceita diretório ausente ou vazio, incluindo metadados `.git` existentes permitidos; outros conteúdos exigem `--merge`. O instalador de baixo nível é `node scripts/install-framework.mjs` com as mesmas opções.
 
-O instalador copia arquivos reutilizáveis do framework, escreve o `AGENTS.md` do estúdio a partir de `templates/studio-AGENTS.md` e cria as skills locais ativas a partir de suas fontes versionadas. As instruções da raiz da cópia de desenvolvimento continuam separadas. A instalação não instala plugins externos ou binários de fornecedores, autentica contas, gera mídia ou publica um site. `verify` gera o manual local e verifica o comportamento local e a integridade da instalação.
+Em terminal interativo, ausência de comando ou `install` sem `--assistant` explícito abre o guia. Sem argumentos em terminal não interativo, a entrada mostra ajuda. `--locale` e `--yes` pertencem a `setup`, não a `install` direto.
 
-Abra a pasta do estúdio instalado no Codex. Invoque a skill na conversa:
+| Assistente | Diretório de skills ativas | Instruções do projeto | Invocação |
+| --- | --- | --- | --- |
+| `codex` | `.agents/skills/` | `AGENTS.md` criativo | `$olympox` |
+| `claude` | `.claude/skills/` | `AGENTS.md` criativo, importado por `CLAUDE.md` | `/olympox` |
+| `both` | Ambos os diretórios | Ambas as entradas de instrução | Sintaxe do host acima |
+
+Ambos recebem `olympox` e `higgsfield-studio` das mesmas fontes canônicas. Codex também recebe metadados `agents/openai.yaml`. O instalador escreve instruções de `templates/studio-AGENTS.md` e, quando selecionado, `templates/studio-CLAUDE.md`; não copia instruções de desenvolvimento para o estúdio.
+
+Abra o diretório instalado no assistente selecionado e invoque a skill. Recarregue ou reabra o projeto se a descoberta estiver pendente. Um primeiro pedido útil é:
 
 ```text
-Use $olympox. Ajude-me a criar um influenciador original para [público/tema].
-Proponha três direções e recomende uma antes de explorar a identidade.
+Atena, ajude-me a criar um influenciador original para [público/tema].
+Proponha três direções e recomende uma.
+Confira primeiro o caminho completo do piloto Higgsfield, referências, exportação e orçamento.
 ```
 
-Se o Codex não mostrar a nova skill, recarregue o Codex ou reabra o projeto. A instalação dos arquivos e a descoberta automática são verificações separadas.
+Arquivos instalados e verificações locais aprovadas não demonstram descoberta real das skills. O destino Claude configura arquivos locais do projeto no Claude Code, não Claude web nem outros ambientes.
 
-## Escolher acesso opcional ao Higgsfield
-
-Higgsfield é opcional, escolhido quando suas capacidades verificadas forem úteis a uma etapa ou o usuário solicitar explicitamente seu método/fornecedor. Escolha seu [plugin do Codex](higgsfield-plugin.md) ou outra rota verificada com as operações exigidas; o [fluxo Builder](higgsfield-influencer-method.md) escolhido conserva os procedimentos. A [CLI e wrapper locais](higgsfield-setup.md) exigem preparação própria de binário/conta e não demonstram equivalência de recursos. Instale/conecte fornecedores separadamente; o plugin dispensa CLI local. O núcleo e o padrão de criação visual integrada continuam utilizáveis sem acesso externo. Recurso obrigatório ausente mantém aquela etapa pendente; proponha alternativas sem substituir silenciosamente método explicitamente escolhido nem autorizar geração paga.
-
-```text
-Atena, use o Higgsfield pelo plugin neste estúdio.
-Confira as ferramentas disponíveis nesta sessão e prepare um piloto para [personagem].
-Registre as entradas, a execução e a revisão no OLYMPOX.
-```
-
-Isso escolhe uma rota; por si só, não autoriza geração paga, treinamento ou publicação. Siga as autorizações anteriores aplicáveis e as mesmas regras de cânone, tentativas, custos e inspeção em ambas as rotas. A descoberta do plugin não comprova acesso à conta nem disponibilidade de recursos; inspecione ferramentas e resultados reais antes de prometer uma capacidade.
-
-## Usar um projeto existente
+## Mesclar em um projeto existente
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.4.0 install ./existing-project --merge
+node bin/olympox.mjs install ../existing-project --merge --assistant both
 ```
 
-O merge confere todos os destinos planejados antes de escrever. Arquivos idênticos do framework são mantidos, e arquivos ausentes são instalados. Arquivos diferentes ou colisões interrompem a operação sem sobrescrevê-los. Arquivos locais não relacionados são preservados. O instalador recusa links simbólicos e junções nos caminhos de origem ou destino da instalação.
+A mesclagem pré-verifica todos os arquivos pretendidos nos assistentes selecionados antes de escrever. Mantém arquivos idênticos, acrescenta ausentes e recusa diferenças ou colisões entre arquivos/diretórios. Preserva arquivos locais não relacionados, metadados Git permitidos e projeções de assistentes não selecionadas. Rejeita caminhos inseguros, links e junctions nos caminhos verificados de origem e destino.
 
-Se houver conflitos, revise e reconcilie os arquivos explicitamente ou instale em um estúdio separado e vazio para comparar as duas versões. `--merge` não é um atualizador automático de fontes modificadas do framework nem de instruções locais. Fichas existentes, aprovações, hashes e histórico de runs continuam sujeitos às suas regras de preservação.
+**`--merge` não é atualizador automático.** Uma instrução ou skill ativa personalizada causa conflito. Revise e reconcilie explicitamente. É possível acrescentar outro assistente a uma instalação idêntica com `--merge --assistant both`; arquivos diferentes ainda bloqueiam toda a verificação prévia.
 
 ## Atualizar um estúdio existente
 
-A release **0.4.0** muda o padrão visual para geração integrada do ChatGPT/Codex e define preparação e pontos de controle de fidelidade antes do vídeo, conservando Higgsfield como integração opcional por etapa. Identidades aprovadas existentes e evidências históricas são preservadas sem migração automática. A API do núcleo local, schemas de runs e revisão de componente das tarefas continuam em 0.2.0. Leia as [notas da versão](release-notes.md) e preserve o estúdio antes de comparar mudanças no framework.
+Leia as [notas das versões](release-notes.md), depois compare uma instalação limpa da revisão desejada com o estúdio existente.
 
-1. Crie e verifique backups de personagens privados e runs vinculadas pelas [operações de backup](operations.md) existentes. Mantenha também uma cópia independente dos arquivos atuais do framework, contexto compartilhado e instruções locais; os backups de personagens excluem essa base.
-2. Instale a release em um diretório vazio independente, como `./my-studio-v0.4.0`, com o comando fixado na tag acima. Execute `npm run verify` ali e compare as fontes reutilizáveis do framework com o estúdio existente.
-3. Reconcilie explicitamente apenas as fontes pretendidas do framework, skills ativas, template de instruções do estúdio, templates e documentação. Preserve customizações locais e mantenha as cópias ativas das skills consistentes com suas fontes principais. `--merge` mantém arquivos idênticos e recusa arquivos diferentes antes de escrever; ele não faz essa reconciliação por você.
-4. Mantenha fichas existentes, mídia, aprovações, snapshots, runs e backups no lugar com seus bytes e hashes originais. O estúdio vazio de uma nova release não substitui registros privados, e bytes históricos não devem ser reescritos para acomodar novas instruções ou fazer uma verificação passar.
-5. Execute `npm run verify` no estúdio atualizado e reabra ou recarregue o Codex para descoberta das skills. Revise runs retomadas quanto a mudanças no contexto. Quando a governança ou as entradas tiverem mudado, use o procedimento existente de nova tentativa explícita com um motivo, preservando tentativas e aprovações anteriores; consulte [operação do núcleo](framework-02.md).
+1. Interrompa escritas concorrentes e preserve o estúdio atual. Crie, verifique e teste restauração dos [backups de personagens](operations.md#backups-e-recuperacao). Eles exigem registros estruturalmente válidos; se a validação falhar, preserve uma cópia independente com os bytes originais antes de diagnosticar, em vez de mudar o histórico para passar. Preserve separadamente contexto compartilhado, arquivos do framework e instruções personalizadas.
+2. Instale a revisão examinada em outro diretório vazio com o assistente desejado. Execute `npm run verify` ali.
+3. Compare e reconcilie explicitamente fontes reutilizáveis, skills, templates, instruções e guias pretendidos. Preserve personalizações e mantenha skills ativas consistentes com suas fontes canônicas. Confira mudanças concorrentes novamente antes de escrever.
+4. Verifique que registros privados, mídia, aprovações, snapshots, runs e backups conservam bytes e hashes originais.
+5. Execute `npm run verify` no estúdio atualizado e reabra o assistente. Para retomar um run com mudanças em entradas observadas, canon ou governança, use [nova tentativa explícita](framework-02.md#retomar-trabalho-e-revisar-mudancas-de-contexto). Mudar fornecedor também exige nova tentativa e motivo.
 
-A atualização do framework não instala nem autentica o plugin Higgsfield, submete geração, treina identidades ou publica conteúdo.
+A atualização não migra identidades aprovadas nem resolve jobs. Reconcilie submissões externas pela rota original antes de outra tentativa. Tentativas anteriores e seus contratos salvos ficam preservados.
 
-Reconcilie qualquer submissão pendente do fornecedor pelo job original antes de uma nova tentativa ou troca de ferramenta. Atualizar o framework não cancela nem resolve trabalho externo.
+## Manter skills e acesso ao fornecedor
 
-## Desenvolver com uma cópia do código-fonte
+O instalador individual seleciona skills registradas e assistentes:
 
 ```sh
-git clone https://github.com/linkiaai/olympox.git
-cd olympox
-npm run verify
-npm run studio -- help
+node scripts/install-skill.mjs olympox --assistant both
+node scripts/install-skill.mjs higgsfield-studio --assistant both
 ```
 
-Abra essa cópia no Codex para desenvolver e manter o framework conforme seu `AGENTS.md` da raiz. Crie um estúdio independente com o comando de instalação para trabalho real com influenciadores. Fixtures sintéticas dos testes demonstram comportamento local; personagens pessoais e produção pertencem a esse estúdio separado.
+Pré-verifica todos os arquivos selecionados, mantém cópias idênticas e recusa diferenças. Não cria a ponte de instruções Claude sozinho. Revise cópias ativas alteradas durante uma atualização explícita; o instalador não as sobrescreve.
 
-## Conteúdo do pacote
+Conecte Higgsfield na sessão real do assistente pela [rota de plugin](higgsfield-plugin.md) ou [CLI local](higgsfield-setup.md). Confira cada módulo necessário, referências aceitas, submissão/consulta, exportação, inspeção, custo conhecido e autorização aplicável. Acesso em um assistente não comprova acesso em outro. Etapas ausentes ficam pendentes; método alternativo exige decisão explícita. Instalar não autentica, instala binários de fornecedores, gera, treina ou publica.
 
-| Incluído | Mantido no estúdio de cada usuário |
-| --- | --- |
-| Constituição e instruções do projeto | Fichas de personagens e identidade aprovada |
-| Perfis, contratos e fluxos do framework | Referências, mídia gerada, prompts e exportações |
-| Scripts e templates locais | Runs, estado de manutenção e backups |
-| Guias e manual local | Instalações de fornecedores, contas e credenciais |
-| Fontes do manual e ferramentas de geração | Manual gerado e arquivos temporários locais |
-| Skills versionadas e proveniência permitida de fontes dos fornecedores | Arquivos produzidos pelo seu próprio trabalho criativo |
+## Limites do pacote e verificações locais
 
-O instalador cria `.agents/skills/olympox` e `.agents/skills/higgsfield-studio` a partir das fontes principais. As instruções criativas instaladas vêm do template do estúdio, em vez do `AGENTS.md` da raiz de desenvolvimento. A proveniência e o material de leitura dos fornecedores não autenticam contas nem instalam binários externos.
+A instalação seleciona governança reutilizável, código, skills, perfis, contratos, fluxos, templates, testes, guias, fontes do manual e proveniência permitida de fornecedores. Exclui personagens privados, mídia gerada, runs, manutenção, backups, credenciais, instalações de fornecedores e manual gerado. Skills ativas são projetadas de `skills/`.
 
-## Verificar e começar
-
-A partir da raiz do seu estúdio:
+No estúdio instalado:
 
 ```sh
-npm run verify
+npm run studio -- help
 npm run studio -- doctor
 npm run studio -- list
 npm run docs:dev
 ```
 
-Uma lista de personagens vazia é esperada em um estúdio novo. Abra o endereço mostrado por `docs:dev` para ler o manual. O manual é local; seu servidor de desenvolvimento não o publica remotamente. Consulte [início rápido](quick-start.md), [operação](operations.md) e [capacidades do framework](studio-status.md).
-
-O OLYMPOX é distribuído sob a [licença MIT](../../../LICENSE). Conteúdo de personagens, referências externas e serviços de fornecedores mantêm seus próprios termos e direitos aplicáveis.
+Uma lista vazia de personagens é esperada numa instalação nova. `doctor` verifica base local e consistência das skills; o servidor de desenvolvimento disponibiliza o manual localmente. Nenhuma operação comprova execução do fornecedor, fidelidade da mídia ou publicação. Continue com [início rápido](quick-start.md), [operações](operations.md) e [capacidades](studio-status.md).

@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { assistantTargets } from './assistant-targets.mjs';
 
 const names = new Set(['olympox', 'higgsfield-studio']);
-const files = ['SKILL.md', 'agents/openai.yaml'];
 
 function statIfPresent(file) {
   try { return fs.lstatSync(file); }
@@ -35,35 +35,41 @@ function checkedFile(root, relative) {
   return { file, stat };
 }
 
-/** Install only the two registered skill files after all sources and destinations pass preflight. */
-export function installSkill(studioRoot, name = 'olympox') {
+/** Install only the registered host projection after every source and destination passes preflight. */
+export function installSkill(studioRoot, name = 'olympox', { assistant = 'codex' } = {}) {
   if (!names.has(name)) throw new Error('Choose olympox or higgsfield-studio; arbitrary paths are not accepted.');
   if (typeof studioRoot !== 'string' || !studioRoot) throw new Error('Provide the studio directory.');
+  const targets = assistantTargets(assistant);
   const root = directoryPath(studioRoot);
   if (!statIfPresent(root)?.isDirectory()) throw new Error('Studio directory does not exist.');
 
   // Load every source before checking destinations or creating any directory.
-  const sources = files.map(relative => {
+  const sources = [...new Set(targets.flatMap(target => target.files))].map(relative => {
     const source = checkedFile(root, `skills/${name}/${relative}`);
     if (!source.stat) throw new Error(`Skill source is missing: skills/${name}/${relative}`);
     return { relative, bytes: fs.readFileSync(source.file), mode: source.stat.mode & 0o777 };
   });
   const pending = [], retained = [];
-  for (const source of sources) {
-    const destination = checkedFile(root, `.agents/skills/${name}/${source.relative}`);
-    if (destination.stat) {
-      if (!fs.readFileSync(destination.file).equals(source.bytes)) {
-        throw new Error(`Installed skill differs at ${source.relative}; review before updating. Nothing was overwritten.`);
-      }
-      retained.push(source.relative);
-    } else pending.push(source);
+  for (const target of targets) {
+    for (const source of sources.filter(source => target.files.includes(source.relative))) {
+      const destinationRelative = `${target.skillRoot}/${name}/${source.relative}`;
+      const label = targets.length === 1 ? source.relative : `${target.name}/${source.relative}`;
+      const destination = checkedFile(root, destinationRelative);
+      if (destination.stat) {
+        if (!fs.readFileSync(destination.file).equals(source.bytes)) {
+          throw new Error(`Installed skill differs at ${source.relative} (${target.name}); review before updating. Nothing was overwritten.`);
+        }
+        retained.push(label);
+      } else pending.push({ ...source, destinationRelative, label });
+    }
   }
 
-  for (const { relative, bytes, mode } of pending) {
-    const destination = checkedFile(root, `.agents/skills/${name}/${relative}`);
+  for (const { destinationRelative, bytes, mode } of pending) {
+    const destination = checkedFile(root, destinationRelative);
     fs.mkdirSync(path.dirname(destination.file), { recursive: true });
-    checkedFile(root, `.agents/skills/${name}/${relative}`);
+    checkedFile(root, destinationRelative);
     fs.writeFileSync(destination.file, bytes, { flag: 'wx', mode });
   }
-  return { targetRoot: path.join(root, '.agents', 'skills', name), copied: pending.map(item => item.relative), retained };
+  const targetRoots = targets.map(target => path.join(root, target.skillRoot, name));
+  return { targetRoot: targetRoots[0], targetRoots, assistant, copied: pending.map(item => item.label), retained };
 }

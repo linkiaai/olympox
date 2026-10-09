@@ -21,10 +21,10 @@ export function sourceFile(root, relative) {
 function assertPublicGuide(relative, locale = 'en') {
   if (typeof relative !== 'string') throw new Error(`Missing ${locale} guide source in the public selection.`);
   const allowed = locale === 'en'
-    ? relative === 'CONSTITUTION.md' || relative === 'framework/README.md' || /^docs\/[a-z0-9-]+\.md$/.test(relative)
-    : relative === 'docs/locales/pt-BR/framework/README.md' || /^docs\/locales\/pt-BR\/(?:[a-z0-9-]+|CONSTITUTION|README)\.md$/.test(relative);
+    ? relative === 'CONSTITUTION.md' || relative === 'framework/README.md' || relative === 'docs-site/README.md' || /^docs\/[a-z0-9-]+\.md$/.test(relative)
+    : ['docs/locales/pt-BR/framework/README.md', 'docs/locales/pt-BR/docs-site/README.md'].includes(relative) || /^docs\/locales\/pt-BR\/(?:[a-z0-9-]+|CONSTITUTION|README)\.md$/.test(relative);
   const filename = path.posix.basename(relative);
-  if (!allowed || ['studio-status.md', 'video-reference.md', 'higgsfield-setup.md', 'estado-do-estudio.md', 'referencia-video.md', 'preparacao-higgsfield.md'].includes(filename)) throw new Error(`Guide outside the public selection: ${relative}`);
+  if (!allowed || ['estado-do-estudio.md', 'referencia-video.md', 'preparacao-higgsfield.md'].includes(filename)) throw new Error(`Guide outside the public selection: ${relative}`);
 }
 
 export function commandCatalog(source, descriptions) {
@@ -37,6 +37,17 @@ export function commandCatalog(source, descriptions) {
   for (const command of commands) {
     if (!implementations.includes(command.id)) throw new Error(`Advertised command without implementation: ${command.id}`);
     if (!descriptions[command.id]?.trim()) throw new Error(`Command without description in the manual: ${command.id}`);
+    command.description = descriptions[command.id];
+  }
+  return commands;
+}
+
+export function installationCommandCatalog(source, descriptions) {
+  const commands = [...source.matchAll(/^\s+olympox (setup|install)([^\r\n]+)/gm)].map(match => ({ id: match[1], syntax: `node bin/olympox.mjs ${match[1]}${match[2]}` }));
+  if (commands.length !== 2 || new Set(commands.map(command => command.id)).size !== 2) throw new Error('Installation commands require unique setup and install syntax in CLI help.');
+  for (const command of commands) {
+    if (!source.includes(`command === '${command.id}'`)) throw new Error(`Installation command without implementation: ${command.id}`);
+    if (!descriptions[command.id]?.trim()) throw new Error(`Installation command without description: ${command.id}`);
     command.description = descriptions[command.id];
   }
   return commands;
@@ -58,6 +69,7 @@ export function collectDocumentation(root) {
   const guides = config.guides.map(guide => {
     if (!guide || typeof guide.path !== 'string' || typeof guide.label !== 'string' || !guide.label.trim() || (guide.section && !requiredSections.includes(guide.section))) throw new Error('Guide without path/label or with an unknown section.');
     assertPublicGuide(guide.path);
+    if (guide.group && !['start', 'create', 'produce', 'records', 'reference', 'maintain'].includes(guide.group)) throw new Error(`Unknown guide navigation group: ${guide.group}`);
     if (seen.has(guide.path)) throw new Error(`Duplicate guide: ${guide.path}`);
     seen.add(guide.path);
     return { ...guide, markdown: read(guide.path) };
@@ -76,7 +88,7 @@ export function collectDocumentation(root) {
   const roles = registry.roles.map(role => ({ ...role, markdown: read(role.path) }));
   const tasks = registry.tasks.map(item => ({ ...JSON.parse(read(item.path)), path: item.path }));
   const workflows = registry.workflows.map(item => ({ ...JSON.parse(read(item.path)), path: item.path }));
-  const commands = commandCatalog(read('scripts/studio.mjs'), config.commandDescriptions ?? {});
+  const commands = [...installationCommandCatalog(read('bin/olympox.mjs'), config.commandDescriptions ?? {}), ...commandCatalog(read('scripts/studio.mjs'), config.commandDescriptions ?? {})];
   for (const [locale, settings] of Object.entries(config.locales)) if (!new RegExp(`^docs-site/locales/${locale}\\.json$`).test(settings.resource)) throw new Error(`Locale resource outside the public selection: ${settings.resource}`);
   const ui = JSON.parse(read(config.locales.en.resource)).ui;
   if (!ui || !Object.keys(ui).length || Object.values(ui).some(value => typeof value !== 'string' || !value.trim())) throw new Error('English UI messages must be nonempty strings.');
@@ -116,7 +128,7 @@ export function collectDocumentation(root) {
     const translatedCommands = commands.map(item => ({ ...item, description: requireText(translation.commandDescriptions?.[item.id], `commandDescriptions.${item.id}`) }));
     locales[locale] = { title: requireText(translation.title, 'title'), ui: translation.ui, guides: translatedGuides, roles: translatedRoles, tasks: translatedTasks, workflows: translatedWorkflows, commands: translatedCommands };
   }
-  const templates = fs.readdirSync(path.join(root, 'templates')).filter(name => name === 'studio-AGENTS.md' || /^[a-z0-9-]+\.(json|md)$/.test(name)).sort().map(name => {
+  const templates = fs.readdirSync(path.join(root, 'templates')).filter(name => ['studio-AGENTS.md', 'studio-CLAUDE.md'].includes(name) || /^[a-z0-9-]+\.(json|md)$/.test(name)).sort().map(name => {
     const relative = `templates/${name}`;
     return { path: relative, text: read(relative) };
   });
@@ -126,6 +138,7 @@ export function collectDocumentation(root) {
   });
   // Observe implementation hashes without incorporating source code into the site.
   for (const name of fs.readdirSync(path.join(root, 'scripts')).filter(name => name.endsWith('.mjs')).sort()) read(`scripts/${name}`);
+  for (const locale of ['en', 'pt-BR']) read(`scripts/onboarding-locales/${locale}.json`);
   for (const name of ['AGENTS.md', 'CONSTITUTION.md', 'package.json']) read(name);
   for (const item of registry.constitutionPaths ?? []) read(item);
   for (const asset of DOCS_ASSETS.filter(name => !['content.js', 'manifest.json'].includes(name))) read(`docs-site/src/${asset}`);

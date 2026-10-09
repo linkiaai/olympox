@@ -1,6 +1,6 @@
 {
   "name": "olympox",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "private": false,
   "type": "module",
   "description": "OLYMPOX - AI Influencer framework",
@@ -8,6 +8,7 @@
     "node": ">=22"
   },
   "scripts": {
+    "setup": "node bin/olympox.mjs setup",
     "studio": "node scripts/studio.mjs",
     "doctor": "node scripts/studio.mjs doctor",
     "validate": "node scripts/studio.mjs validate",

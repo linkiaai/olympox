@@ -54,9 +54,9 @@ test.after(() => {
     fs.rmSync(root, { recursive: true, force: true });
   }
 });
-function evidence(type, extra = {}) { return { type, performed: true, actor: 'Fixture', at, eventId: `fixture-${crypto.randomUUID()}`, notes: 'Simulated declaration; tests do not generate or inspect media.', ...extra }; }
+function evidence(type, extra = {}) { return { type, performed: true, actor: 'Fixture', at, eventId: `fixture-${crypto.randomUUID()}`, notes: 'Simulated declaration; tests do not generate or inspect media.', ...(type === 'generated' ? { provider: 'fixture' } : {}), ...extra }; }
 function begin(root, workflowId = 'produce-piece', overrides = {}) {
-  return startRun(root, { workflowId, personaId: 'alpha', objective: 'Exercise local coordination without tools', inputs: ['brief.md'], capabilities: ['image-generation', 'image-inspection'], ...overrides });
+  return startRun(root, { workflowId, personaId: 'alpha', objective: 'Exercise local coordination without tools', inputs: ['brief.md'], medium: 'image', capabilities: ['image-generation', 'image-inspection', 'fixture:image-generation'], mediaProviders: { image: 'fixture', video: 'fixture', audio: 'fixture' }, ...overrides });
 }
 function document(root, run, suffix = '') {
   const output = save(root, `influencers/alpha/work/${run.nextTask.stepId}${suffix}.md`, `Document ${run.nextTask.stepId}${suffix}`);
@@ -69,7 +69,7 @@ function reachGeneration(root, run = begin(root)) {
 }
 function generate(root, run) {
   const output = save(root, `influencers/alpha/media/${crypto.randomUUID()}.png`, 'Fixture .png without actual media evidence; extension only classifies the file.');
-  return transitionRun(root, run.runId, { action: 'complete', outputs: [output], evidence: evidence('generated', { tool: 'fixture-no-tool' }) });
+  return transitionRun(root, run.runId, { action: 'complete', outputs: [output], evidence: evidence('generated', { tool: 'fixture-no-tool', provider: run.mediaProviders?.image ?? 'fixture' }) });
 }
 function review(root, run, overrides = {}) {
   const media = run.run.attempts.at(-1).results.filter(result => result.taskId === 'generate-piece').at(-1).outputs;
@@ -108,7 +108,7 @@ function reachCanonApproval(root, run = begin(root, 'create-character'), tool = 
   run = transitionRun(root, run.runId, { action: 'skip', reason: 'Direction selected in this fixture.' });
   run = document(root, run);
   const output = save(root, 'influencers/alpha/media/candidate.png', 'Synthetic candidate bytes');
-  run = transitionRun(root, run.runId, { action: 'complete', outputs: [output], evidence: evidence('generated', { tool }) });
+  run = transitionRun(root, run.runId, { action: 'complete', outputs: [output], evidence: evidence('generated', { tool, provider: run.mediaProviders?.image ?? 'fixture' }) });
   const report = save(root, 'influencers/alpha/work/candidate-review.md', 'Synthetic review');
   return transitionRun(root, run.runId, { action: 'complete', outputs: [report], evidence: evidence('reviewed', {
     reviewer: 'Fixture', method: 'visual', decision: 'approve', criticalIssues: [], limitations: [],
@@ -387,9 +387,9 @@ test('a production method input does not bypass a missing generation capability 
     'Requested provider: Higgsfield; module: AI Influencer Builder; access route: plugin.',
     'Video generation: pending, because no verified video-generation capability exists.'
   ].join('\n'));
-  const run = reachGeneration(root, begin(root, 'produce-piece', { medium: 'video', inputs: ['brief.md', method], capabilities: [] }));
+  const run = reachGeneration(root, begin(root, 'produce-piece', { medium: 'video', inputs: ['brief.md', method], capabilities: [], mediaProviders: { video: 'higgsfield' } }));
   assert.deepEqual(run.inputs.find(input => input.path === method), { path: method, sha256: digest(path.join(root, method)) });
-  assert.deepEqual(run.missingCapabilities, ['video-generation']);
+  assert.deepEqual(run.missingCapabilities, ['video-generation', 'higgsfield:video-generation']);
   const syntheticMedia = save(root, 'influencers/alpha/media/unsubmitted.mp4', 'Synthetic bytes; no actual media or tool submission.');
   const before = structuredClone(run.run.attempts.at(-1));
   const held = transitionRun(root, run.runId, { action: 'complete', outputs: [syntheticMedia], evidence: evidence('generated', { tool: 'fixture-no-tool' }) });
@@ -454,19 +454,116 @@ test('human gate cannot consume itself and requires an explicit event matching t
   assert.equal(transitionRun(root, run.runId, { action: 'complete', approval }).nextTask.taskId, 'prepare-piece');
 });
 
-test('a new character advances with integrated image capabilities alone while canon and pilot review remain required', () => {
+test('the Higgsfield default cannot silently consume a generic or integrated image capability', () => {
+  const root = fixture(); person(root, 'alpha', false);
+  let run = startRun(root, { workflowId: 'create-character', personaId: 'alpha', objective: 'Test the default media provider without actual generation', capabilities: ['image-generation', 'image-inspection', 'integrated-images:image-generation'] });
+  assert.equal(run.run.medium, 'video');
+  assert.deepEqual(run.mediaProviders, { image: 'higgsfield', video: 'higgsfield', audio: 'higgsfield' });
+  run = transitionRun(root, run.runId, { action: 'skip', reason: 'Synthetic brief defines the opportunity.' });
+  run = document(root, run);
+  run = transitionRun(root, run.runId, { action: 'skip', reason: 'Synthetic selected concept.' });
+  run = document(root, run);
+  assert.deepEqual(run.missingCapabilities, ['higgsfield:image-generation']);
+  assert.equal(run.nextTask.medium, 'image');
+  const before = structuredClone(run.run.attempts.at(-1));
+  run = transitionRun(root, run.runId, { action: 'complete', outputs: [], evidence: evidence('generated', { tool: 'synthetic-integrated-tool', provider: 'integrated-images' }) });
+  assert.equal(run.state, 'awaiting-tool');
+  assert.deepEqual(run.run.attempts.at(-1).results, before.results);
+  assert.equal(run.run.attempts.at(-1).job, null);
+  assert.throws(() => transitionRun(root, run.runId, { action: 'start', mediaProviders: { image: 'integrated-images' } }), /explicit new attempt|newAttempt/);
+});
+
+test('a selected provider requires matching intent and generation evidence', () => {
+  const root = fixture();
+  let run = reachGeneration(root, begin(root, 'produce-piece', { mediaProviders: { image: 'higgsfield' }, capabilities: ['image-generation', 'image-inspection', 'higgsfield:image-generation'] }));
+  const output = save(root, 'influencers/alpha/media/synthetic-provider.png', 'Synthetic bytes, not provider output');
+  const before = fs.readFileSync(path.join(root, 'work/runs', `${run.runId}.json`));
+  assert.throws(() => transitionRun(root, run.runId, { action: 'start', job: { provider: 'integrated-images' } }), /selected media provider/);
+  assert.throws(() => transitionRun(root, run.runId, { action: 'complete', outputs: [output], evidence: evidence('generated', { tool: 'synthetic-tool', provider: 'integrated-images' }) }), /selected media provider/);
+  assert.deepEqual(fs.readFileSync(path.join(root, 'work/runs', `${run.runId}.json`)), before);
+  run = transitionRun(root, run.runId, { action: 'complete', outputs: [output], evidence: evidence('generated', { tool: 'synthetic-higgsfield', provider: 'higgsfield' }) });
+  assert.equal(run.nextTask.taskId, 'review-media');
+  assert.equal(run.run.attempts.at(-1).results.at(-1).evidence.provider, 'higgsfield');
+});
+
+test('new character image candidates lead to a video pilot with separate capabilities and complete review', () => {
+  const root = fixture(), p = person(root);
+  let run = reachCanonApproval(root, begin(root, 'create-character', { medium: 'video', mediaProviders: { image: 'higgsfield', video: 'higgsfield' }, capabilities: ['image-generation', 'image-inspection', 'higgsfield:image-generation'] }));
+  assert.equal(run.nextTask.taskId, 'approve-canon');
+  assert.equal(run.run.attempts.at(-1).results.find(result => result.taskId === 'generate-candidates').outputs[0].path.endsWith('.png'), true);
+  run = transitionRun(root, run.runId, { action: 'complete', approval: canonDecision(p) });
+  run = document(root, run);
+  assert.equal(run.nextTask.medium, 'video');
+  assert.deepEqual(run.missingCapabilities, ['video-generation', 'higgsfield:video-generation']);
+  const pilot = save(root, 'influencers/alpha/media/synthetic-pilot.mp4', 'Synthetic video extension only; no actual motion, speech, or provider execution');
+  const videoEvidence = evidence('generated', { tool: 'synthetic-higgsfield-video', provider: 'higgsfield' });
+  run = transitionRun(root, run.runId, { action: 'complete', outputs: [pilot], evidence: videoEvidence });
+  assert.equal(run.state, 'awaiting-tool');
+  run = transitionRun(root, run.runId, { action: 'complete', capabilities: [...run.run.capabilities, 'video-generation', 'higgsfield:video-generation', 'video-inspection'], outputs: [pilot], evidence: videoEvidence });
+  assert.equal(run.nextTask.medium, 'video');
+  const media = run.run.attempts.at(-1).results.at(-1).outputs;
+  const report = save(root, 'influencers/alpha/work/synthetic-video-review.md', 'Synthetic complete review declaration');
+  const reviewEvidence = evidence('reviewed', { reviewer: 'Fixture', method: 'visual', decision: 'approve', criticalIssues: [], limitations: [], media });
+  assert.throws(() => transitionRun(root, run.runId, { action: 'complete', outputs: [report], evidence: reviewEvidence }), /Review requires/);
+  run = transitionRun(root, run.runId, { action: 'complete', outputs: [report], evidence: { ...reviewEvidence, method: 'visual-and-audio' } });
+  run = transitionRun(root, run.runId, { action: 'complete', outputs: [pilot], evidence: evidence('delivered') });
+  assert.equal(run.state, 'completed');
+});
+
+test('an explicit new attempt changes the media route while preserving prior method and candidate evidence', () => {
+  const root = fixture();
+  const run = reachCanonApproval(root, begin(root, 'create-character', { mediaProviders: { image: 'higgsfield' }, capabilities: ['image-generation', 'image-inspection', 'higgsfield:image-generation'] }));
+  const previous = structuredClone(run.run.attempts.at(-1)), references = fileInventory(path.join(root, 'influencers/alpha/references'));
+  assert.throws(() => resumeRun(root, run.runId, { mediaProviders: { image: 'integrated-images' } }), /newAttempt/);
+  const changed = resumeRun(root, run.runId, { newAttempt: true, reason: 'Synthetic explicit user choice to use integrated images', mediaProviders: { image: 'integrated-images' } });
+  assert.deepEqual(changed.mediaProviders, { image: 'integrated-images', video: 'higgsfield', audio: 'higgsfield' });
+  assert.deepEqual(changed.run.attempts[0].mediaProviders, previous.mediaProviders);
+  assert.deepEqual(changed.run.attempts[0].results, previous.results);
+  assert.deepEqual(changed.run.attempts[0].inputs, previous.inputs);
+  assert.deepEqual(fileInventory(path.join(root, 'influencers/alpha/references')), references);
+  assert.equal(validateRunRecord(changed.run), true);
+  assert.throws(() => begin(root, 'produce-piece', { mediaProviders: { video: 'integrated-images' } }), /not a video or voice/);
+});
+
+test('historical attempts without provider selection remain readable and do not acquire a route on resume', () => {
+  const root = fixture(), run = reachGeneration(root, begin(root, 'produce-piece', { medium: 'video', capabilities: ['video-generation', 'video-inspection'] }));
+  const saved = structuredClone(run.run);
+  delete saved.attempts[0].mediaProviders;
+  delete saved.recordHash;
+  const stable = value => Array.isArray(value) ? value.map(stable) : value && typeof value === 'object' ? Object.fromEntries(Object.keys(value).sort().map(key => [key, stable(value[key])])) : value;
+  saved.recordHash = crypto.createHash('sha256').update(JSON.stringify(stable(saved))).digest('hex');
+  save(root, `work/runs/${run.runId}.json`, saved);
+  const before = fs.readFileSync(path.join(root, 'work/runs', `${run.runId}.json`));
+  assert.equal(validateRunRecord(saved), true);
+  const read = readRun(root, run.runId);
+  assert.equal(read.mediaProviders, null);
+  assert.deepEqual(read.missingCapabilities, []);
+  assert.deepEqual(fs.readFileSync(path.join(root, 'work/runs', `${run.runId}.json`)), before);
+  const resumed = resumeRun(root, run.runId);
+  assert.equal(resumed.mediaProviders, null);
+  assert.equal(Object.hasOwn(resumed.run.attempts[0], 'mediaProviders'), false);
+  const output = save(root, 'influencers/alpha/media/historical.mp4', 'Synthetic legacy video');
+  const generated = transitionRun(root, run.runId, { action: 'complete', outputs: [output], evidence: evidence('generated', { tool: 'legacy-tool', provider: 'legacy-provider' }) });
+  assert.equal(generated.nextTask.taskId, 'review-media');
+  const changed = resumeRun(root, run.runId, { newAttempt: true, reason: 'Explicit new method using current framework defaults' });
+  assert.deepEqual(changed.mediaProviders, { image: 'higgsfield', video: 'higgsfield', audio: 'higgsfield' });
+  assert.equal(Object.hasOwn(changed.run.attempts[0], 'mediaProviders'), false);
+});
+
+test('an explicit integrated image alternative preserves canon selection and pilot review requirements', () => {
   const root = fixture(), p = person(root, 'alpha', false);
   const method = save(root, 'influencers/alpha/work/method-v1.md', [
     '# Synthetic stage plan',
     'Visual candidates, references and image pilot: integrated ChatGPT/Codex images.',
-    'Only image-generation and image-inspection capabilities are declared; no provider connection or API key.',
+    'Only image-generation, image-inspection, and integrated-images:image-generation are declared; no Higgsfield capability.',
     'Silent scope: vocal reference is not applicable. Real speaking scope still needs generated, listened-to, selected voice before complete canon.',
     'No real image tool, reference attachment, inspection or user decision is performed by this fixture.'
   ].join('\n'));
   const identityFiles = ['references/front.png', 'references/three-quarter.png'];
   const hashes = identityFiles.map(file => digest(path.join(root, 'influencers/alpha', file)));
-  let run = reachCanonApproval(root, begin(root, 'create-character', { inputs: ['brief.md', method] }), 'synthetic-integrated-image-tool');
-  assert.deepEqual(run.run.capabilities, ['image-generation', 'image-inspection']);
+  let run = reachCanonApproval(root, begin(root, 'create-character', { inputs: ['brief.md', method], mediaProviders: { image: 'integrated-images' }, capabilities: ['image-generation', 'image-inspection', 'integrated-images:image-generation'] }), 'synthetic-integrated-image-tool');
+  assert.deepEqual(run.run.capabilities, ['image-generation', 'image-inspection', 'integrated-images:image-generation']);
+  assert.deepEqual(run.mediaProviders, { image: 'integrated-images', video: 'higgsfield', audio: 'higgsfield' });
   assert.equal(run.canonBinding, null);
   assert.equal(run.nextTask.taskId, 'approve-canon');
   assert.equal(run.inputs.find(input => input.path === method).sha256, digest(path.join(root, method)));
@@ -494,7 +591,7 @@ test('a new character advances with integrated image capabilities alone while ca
 
 test('unavailable integrated image generation leaves new-character visuals pending without provider substitution', () => {
   const root = fixture(); person(root, 'alpha', false);
-  let run = begin(root, 'create-character', { capabilities: ['image-inspection'] });
+  let run = begin(root, 'create-character', { mediaProviders: { image: 'integrated-images' }, capabilities: ['image-inspection', 'integrated-images:image-generation'] });
   run = transitionRun(root, run.runId, { action: 'skip', reason: 'Synthetic brief already defines the direction.' });
   run = document(root, run);
   run = transitionRun(root, run.runId, { action: 'skip', reason: 'Synthetic concept already selected.' });
@@ -511,12 +608,12 @@ test('unavailable integrated image generation leaves new-character visuals pendi
 
 test('external intent persisted before submission prevents retry after interruption', () => {
   const root = fixture(), run = reachGeneration(root);
-  const armed = transitionRun(root, run.runId, { action: 'start', job: { provider: 'fixture-external' } });
+  const armed = transitionRun(root, run.runId, { action: 'start', job: { provider: 'fixture' } });
   assert.equal(armed.run.attempts.at(-1).job.status, 'planned');
   assert.equal(armed.canContinue, false);
   assert.equal(resumeRun(root, run.runId).state, 'uncertain-result');
   assert.throws(() => resumeRun(root, run.runId, { newAttempt: true, reason: 'New call' }), /uncertain/);
-  const clarified = transitionRun(root, run.runId, { action: 'resolve', job: { provider: 'fixture-external', status: 'not-submitted' }, evidence: evidence('reconciled') });
+  const clarified = transitionRun(root, run.runId, { action: 'resolve', job: { provider: 'fixture', status: 'not-submitted' }, evidence: evidence('reconciled') });
   assert.equal(clarified.state, 'planned');
 });
 

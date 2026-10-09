@@ -1,42 +1,45 @@
-# Ferramentas e integração
+# Ferramentas e prontidão dos fornecedores
 
-Fontes da CLI consultadas em **7 de outubro de 2026**; catálogo do plugin Higgsfield conferido em **8 de outubro de 2026**. Verifique recursos, planos e comandos novamente antes do uso: essas informações podem mudar.
+Use este guia para escolher a rota de execução e verificar se o estúdio consegue concluir a mídia planejada. OLYMPOX fornece registros e instruções locais; Codex ou Claude Code usa as ferramentas disponíveis na sessão. A instalação do framework não conecta fornecedor nem gera mídia.
 
-## Imagens
+## Responsabilidades
 
-Para criar novos influenciadores e trabalho visual posterior, use geração integrada do ChatGPT/Codex por padrão para aparência, candidatas, referências, cenários, imagens e edições quando disponível. Siga a [criação visual integrada](integrated-images.md) e as instruções reais da ferramenta de imagem do aplicativo. Esse caminho dispensa Higgsfield, AI Influencer Builder, CLI externa e chave de API. Aplicam-se disponibilidade da ferramenta e limites da conta; nunca o descreva como gratuito ou ilimitado. Uma escolha explícita de método/fornecedor pelo usuário tem prioridade. Registre gerações reais na pasta da personagem.
-
-Para consistência, abra e compare o conjunto aprovado, descreva as âncoras e anexe as imagens ao pedido. Um prompt contendo um caminho não envia aquele arquivo. Uma grade é útil para seleção, mas a referência final de cada ângulo deve ter arquivo próprio legível. Copie os resultados que pertencem ao projeto para a pasta do personagem, preservando a versão original.
-
-Diferencie inspiração visual de um pedido para seguir o processo demonstrado. Preserve o método solicitado e a ferramenta escolhida por etapa em um [plano versionado de método de produção](../../../templates/locales/pt-BR/production-method.md); confira a fonte antes de afirmar quais módulos ela usa. Conceito, personalidade, universo narrativo, roteiros e planejamento continuam no ChatGPT/Codex. Voz, animação, vídeo, sincronização labial e recursos especializados usam ferramentas verificadas conforme necessidade, qualidade e custo; Higgsfield continua opcional para etapas úteis. Recursos ausentes mantêm a etapa pendente com alternativas propostas; uma troca para geração externa paga exige autorização aplicável. Preferência observada após mudar direção de arte/enquadramento é evidência de processo, sem constituir comparação controlada de modelos nem prova de superioridade geral de fornecedor. Comparações controladas exigem a mesma identidade, cena, câmera e orçamento delimitado. LoRA ou Soul ID são opcionais quando fidelidade e volume justificam treinamento autorizado separadamente.
-
-## Higgsfield — plugin ou CLI local
-
-OLYMPOX oferece dois caminhos conversacionais opcionais. O Codex seleciona e chama os recursos realmente disponíveis no estúdio, enquanto o núcleo local preserva contexto, tentativas e revisões. Não há adaptador automático do fornecedor Higgsfield nem submissão pelo núcleo.
-
-| Caminho | Preparação | Execução real |
+| Trabalho | Rota padrão | Conferir antes do uso |
 | --- | --- | --- |
-| Plugin Higgsfield | Descobrir e instalar o plugin no aplicativo, conectar a conta do usuário e conferir as ferramentas e schemas expostos; não exige CLI local | Ferramentas disponíveis do plugin para a mídia, referências e fluxos criativos suportados |
-| CLI local | Instalar separadamente a CLI inspecionada e fixada, depois conectar a conta do usuário | Executável nativo local com parâmetros de modelo confirmados; o wrapper preparatório permite somente suas operações documentadas |
+| Pesquisa, conceito, personalidade, narrativa, roteiros e planejamento | Coordenador conversacional | Fontes, contexto da personagem e entrega solicitada |
+| Candidatas, pacotes de referência, cenas e edições de imagens | Higgsfield | Módulo escolhido, referências exatas, exportação e inspeção visual |
+| Voz, animação, vídeo e sincronização labial | Higgsfield | Entradas de áudio/movimento, operação suportada, escuta e revisão completa do vídeo |
+| Runs locais, histórico de canon, registros de ativos e backups | Comandos OLYMPOX | Arquivos exatos, versões e decisões registradas |
+| Imagens integradas ao assistente | Alternativa escolhida explicitamente pelo usuário | Geração de imagens, anexos, exportação e inspeção no aplicativo |
 
-O catálogo do plugin descreve geração de imagens/vídeos, entradas de referência, presets criativos e fluxos UGC. Uma entrada no catálogo ou skill instalada não comprova ferramentas chamáveis, acesso à conta, disponibilidade de modelos nem equivalência com a CLI. Siga o [guia do plugin](higgsfield-plugin.md) para descoberta, conexão, verificação de recursos e produção rastreável. Use `higgsfield-studio` para selecionar o caminho; não exija a CLI quando o plugin fornecer o recurso necessário.
+Higgsfield é o fornecedor padrão de mídia. O [método de produção](higgsfield-influencer-method.md) separa seus módulos; o [estudo da fonte](video-reference.md) explica a referência desse método. Um recurso do site ou uma skill instalada não comprova acesso executável no assistente.
 
-Para o caminho da CLI, o framework fornece um wrapper local e proveniência inspecionada de fontes do fornecedor em `vendor/higgsfield-skills`. Sua base espera a CLI oficial **1.1.26** em `tools/higgsfield`, instalada e conferida separadamente. `doctor`, `version` e `help` conferem a preparação local sem login. Siga a [preparação da CLI local](higgsfield-setup.md) antes de usar `login` interativo ou consultar conta, workspace, créditos e schemas dos modelos. **Uma estimativa nativa `generate cost` com mídia local pode enviar esses arquivos**; o wrapper preparatório recusa essas entradas e permite somente parâmetros simples. O wrapper não submete jobs de produção nem impõe teto de gastos no servidor.
+## Escolher uma rota Higgsfield
 
-O [guia oficial da CLI](https://higgsfield.ai/creator-hub/help-center/integrations/how-do-i-access-higgsfield-via-cli) descreve login e créditos da conta sem API key e distingue CLI/MCP das gerações gratuitas ou ilimitadas do site e do produto separado de API. Verifique as condições reais de cobrança do caminho escolhido, plugin ou CLI, antes de produzir; não presuma compartilhamento de condições ou sessões de conta. As [skills oficiais](https://higgsfield.ai/skills) e o [repositório do fornecedor](https://github.com/higgsfield-ai/skills) são material de referência cujos recursos atuais ainda precisam ser conferidos.
+Use o [plugin](higgsfield-plugin.md) quando suas ferramentas conectadas aceitam as entradas necessárias. Ele dispensa CLI local. A [CLI local opcional](higgsfield-setup.md) pode oferecer operações verificadas separadamente ou transferir referências locais quando suportado. Sessões de conta, modelos, mecanismos de entrada e cobrança podem diferir; verifique a rota escolhida de forma independente.
 
-Os dois caminhos seguem as mesmas regras de produção: cânone aprovado quando exigido, entradas exatas realmente anexadas e hashes, intenção externa registrada antes da submissão, identificadores/modelo/custo expostos, versões locais de mídia preservadas, selos de execução e inspeção completa. Um caminho escrito no prompt não anexa um arquivo. Custo desconhecido permanece desconhecido. Uma submissão incerta exige consulta real e reconciliação antes de outra tentativa; mudar para a CLI ou o plugin não justifica submissão duplicada. Mantenha pendentes geração, exportação ou inspeção indisponíveis. Nunca guarde senhas, tokens ou chaves em fichas de personagens, runs, manifestos ou commits.
+O wrapper de CLI do framework oferece verificações locais de integridade, login interativo e consultas limitadas. Ele não submete geração, envia mídia nem treina identidade. Nenhuma rota possui adaptador automático de submissão no núcleo local.
 
-A instalação do framework fornece instruções reutilizáveis e registros locais; não instala nem autentica nenhum dos caminhos do fornecedor, envia mídia ou exige um teste de geração pago. Cada estúdio fornece seu próprio acesso ao fornecedor e a autorização aplicável.
+Para referências locais, confira transferência suportada por ferramentas antes de propor anexos manuais. Reutilize IDs confirmados do fornecedor quando adequado. Um caminho escrito no prompt não anexa arquivo; registre quais arquivos/hashes exatos chegaram ao fornecedor e seus papéis de entrada.
 
-## Entrega de vídeo
+## Conferir o piloto completo antes da primeira etapa paga
 
-Siga o [procedimento do Codex ao vídeo](production-handoff.md) e seu [template de passagem](../../../templates/locales/pt-BR/video-handoff.md). Prepare primeiro roteiros, identidade/voz aprovadas e imagens de cena inspecionadas; depois confira operação especializada exata e subconjunto de entradas suportado. Higgsfield pode fornecer vídeo ou voz antecipada quando escolhido; Builder não é exigido nessa passagem. Revisão completa do piloto precede lotes.
+Salve um [plano de método de produção](../../../templates/locales/pt-BR/production-method.md) com:
 
-Briefs verticais podem começar em 9:16 com resolução alvo 1080 × 1920, ajustando à capacidade real do modelo e do canal. Upscale não recupera identidade perdida. Confirmar duração, fala, suporte a referência, áudio, lip-sync e exportação antes de prometer a entrega. Não substituir uma revisão temporal por capturas isoladas.
+1. Módulos e operações executáveis para identidade, referências, voz quando necessária, cenas e piloto.
+2. Acesso à conta/workspace, transferência e reutilização de referências e schemas atuais dos parâmetros.
+3. Como exportar e inspecionar saídas reais: imagens visualmente, áudio por escuta e vídeo com revisão completa de movimento/áudio.
+4. Estimativas por etapa, unidades, saldo disponível, limites de tentativas/correções e cobranças desconhecidas. Separe créditos de custo monetário.
+5. Autorização aplicável para uploads, geração paga e treinamento opcional. Reutilize autorizações que já cobrem o escopo.
 
-Sem uma execução conectada, o Codex ainda pode preparar o pacote completo: roteiro exato, planos, atuação, referências, voz, legendas, texto de publicação e critérios de revisão. Identificar a entrega como **pacote de produção**, sem alegar que há vídeo renderizado.
+Se uma etapa obrigatória estiver indisponível, identifique o recurso ausente, próxima ação e alternativa proposta. Mantenha essa etapa pendente. [Imagens integradas](integrated-images.md) exigem escolha explícita de alternativa; falta de acesso ao Higgsfield não as seleciona automaticamente.
 
-## Codex
+## Registrar execução e entrega
 
-`AGENTS.md` dá orientação de projeto; `.agents/skills/olympox` concentra o processo reutilizável. As [docs oficiais de skills](https://developers.openai.com/codex/skills) descrevem a descoberta local. Se a skill não aparecer no seletor, recarregue o Codex; nesta conversa também pode ser lida diretamente. Arquivos instalados não comprovam carregamento automático no app.
+Persista intenção externa antes da submissão, preserve IDs retornados e reconcilie resultados incertos pelo job original antes de repetir. Salve saídas como novas versões locais, registre os ativos, sele o contexto declarado e inspecione os arquivos finais exatos. Veja [execução pelo plugin](higgsfield-plugin.md), [operações locais](operations.md) e [qualidade](quality.md).
+
+Para vídeo, prepare a [passagem dos planos](production-handoff.md) e aprove um piloto inspecionado antes de lotes. Prévia do fornecedor, job concluído ou teste local não comprova fidelidade final. A entrega usa bytes revisados; publicação exige autorização aplicável própria e evidência real.
+
+## Fontes do fornecedor
+
+A base preservada da CLI/skill e a licença estão inventariadas na [proveniência do fornecedor](../../../vendor/higgsfield-skills/provenance.json). Referências importadas ajudam na pesquisa de schemas/prompts; não ativam fornecedor, autorizam cobranças nem demonstram qualidade. Confira o catálogo atual e ferramentas reais da sessão em vez de depender de listas de modelos ou preços copiados para a documentação.

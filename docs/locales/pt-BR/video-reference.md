@@ -1,43 +1,38 @@
-# Vídeo de referência: evidência e método do framework
+# Vídeo de referência e proveniência do método
 
-Revisado em **8 de outubro de 2026**: [I Tried The LAZIEST Way to Make Money With AI](https://www.youtube.com/watch?v=LlhTEttKcwQ), de Mark Tilbury.
+Esta página explica a referência externa que orienta a sequência de produção OLYMPOX. A fonte é [I Tried The LAZIEST Way to Make Money With AI](https://www.youtube.com/watch?v=LlhTEttKcwQ), de Mark Tilbury. É referência criativa/de processo, não especificação de produção, garantia do fornecedor ou previsão de renda.
 
-O estudo inicial de 7 de outubro usou uma [transcrição de terceiro](https://prepublish.ai/youtube-transcript/LlhTEttKcwQ) e [capítulos espelhados](https://videohighlight.com/v/LlhTEttKcwQ), sem inspeção audiovisual. A revisão de 8 de outubro acrescentou a análise concluída do vídeo público pelo Higgsfield (28 resumos visuais/de áudio por cena) e inspeção direta de quadros importantes no player do YouTube. O player mostrou 33:19; a análise terminou em 32:00 e seus limites de cena não corresponderam consistentemente aos tempos do player. Ela sustenta a sequência, não uma transcrição precisa por quadro. Legendas diretas continuaram indisponíveis. Não escutamos e comparamos cada fala nem auditamos resultados comerciais independentemente. Capturas privadas ficam fora do pacote; transcrição e prompts da fonte não são redistribuídos.
+## Cobertura da evidência
 
-## Método observado
+O estudo do framework combinou análise do vídeo público e quadros inspecionados diretamente. Ele sustenta sequência geral, não transcrição precisa por quadro nem resultado comercial auditado independentemente. Capturas privadas, transcrições e prompts da fonte são excluídos do pacote.
 
-A sequência sustentada é pesquisa de oportunidades e diferenciais, conceitos originais, referências e cenas coerentes, conteúdo recorrente/roteiros, direção vocal separada, produção de vídeo no Higgsfield, publicação e comparação. A fonte revê um perfil escolhido cedo demais depois que outro cresce. Resultados comerciais são relatos do criador, não estimativas para um estúdio.
-
-| Quadro inspecionado diretamente | O que estabelece |
+| Quadro da fonte inspecionado | Observação sustentada |
 | --- | --- |
-| **10:18** | Referência em dois painéis de retrato/corpo inteiro e o rótulo **Soul Cinema**; etapa de imagem/referência, sem provar uso exclusivo do AI Influencer Builder. |
-| **14:49** | Direção vocal específica da personagem no Claude; fichas visuais não completam identidade vocal. |
-| **15:54** | Controles separados de vídeo com **Seedance 2.5**; modelo de vídeo não estabelece conclusão de etapas anteriores. |
+| 10:18 | Referências de retrato/corpo inteiro e rótulo Soul Cinema: etapa de imagem/referência |
+| 14:49 | Direção vocal específica no Claude: voz é trabalho separado de fichas visuais |
+| 15:54 | Controles de vídeo com Seedance 2.5: etapa de vídeo separada |
 
-O padrão criativo é criar personagens realistas e distintos cuja aparência, atitude e premissa recorrente se reforçam. OLYMPOX não deve reduzir isso a retratos atraentes convencionais com roupas diferentes, nem presumir que exagero sozinho cria conteúdo compartilhável.
+Essas observações não estabelecem uso exclusivo do AI Influencer Builder, operação única completa nem disponibilidade atual dos módulos. Resultados comerciais relatados pelo criador não foram auditados independentemente pelo OLYMPOX.
 
-## Escolha atual de implementação
+## Método incorporado ao framework
 
-A adaptação publicada em 0.3.0 escolheu o processo completo Higgsfield e AI Influencer Builder. A atualização atual da fonte, determinada pelo usuário, usa [criação visual integrada do ChatGPT/Codex](integrated-images.md) por padrão quando disponível e conserva o [método Higgsfield](higgsfield-influencer-method.md) como integração opcional por etapa ou escolha explícita de método. Conceitos, narrativa e roteiros continuam no ChatGPT/Codex; ferramentas especializadas de voz/vídeo são escolhidas por capacidade verificada, necessidade, qualidade e custo. Quadros da fonte continuam sem provar uso exclusivo do Builder.
+A referência conecta oportunidade/diferenciação, conceitos originais, referências/cenas coerentes, roteiros recorrentes, direção vocal, vídeo, publicação e comparação. Também ilustra por que resultado inicial não deve decidir automaticamente potencial de longo prazo da personagem.
 
-Esse padrão registra uma preferência de processo: na exploração de personagem relatada pelo usuário, a candidata integrada preferida também usou direção de arte e enquadramento revisados. O resultado não é comparação controlada de modelos nem evidência de superioridade geral de fornecedor. Não houve nova inspeção do vídeo-fonte nem das candidatas nesta atualização. Etapas exigidas de descoberta, identidade, seleção vocal, aprovação do canon, piloto e qualidade continuam intactas; recursos ausentes mantêm uma etapa pendente com alternativas propostas, e substituição externa paga exige autorização aplicável.
+OLYMPOX adota essa sequência pelo [método de produção Higgsfield](higgsfield-influencer-method.md). Higgsfield é o caminho padrão de mídia; Codex ou Claude Code coordena conceito, personalidade, narrativa, roteiro e registros. Operações atuais escolhidas são verificadas no estúdio e documentadas separadamente das observações da fonte.
 
-Salve respostas do onboarding, conceito escolhido, cobertura da fonte, etapas, escopos de custo, recursos e desvios explícitos no [plano versionado de método de produção](../../../templates/locales/pt-BR/production-method.md), observado pelos hashes existentes de entradas/saídas do run. Preserve identidades aprovadas e bytes históricos; o novo padrão não é redesenho retroativo nem migração de fornecedor.
+Salve fonte, cobertura, etapas demonstradas, módulos selecionados e adaptações no [plano de método de produção](../../../templates/locales/pt-BR/production-method.md). Uma operação atual de Builder, voz ou vídeo não identifica retroativamente a rota da fonte. Se módulo observado obrigatório estiver indisponível, registre adaptação proposta e decisão antes de mudar materialmente o método.
 
-## Nossas escolhas
+## Acréscimos do framework
 
-Estas são propostas próprias, não conclusões demonstradas pelo vídeo:
-
-| Questão | Decisão neste projeto |
+| Aspecto | Procedimento OLYMPOX |
 | --- | --- |
-| Consistência | Ficha da persona, âncoras, referências aprovadas e hash do cânone; não depender da memória da conversa |
-| Qualidade | Inspecionar arquivos reais e testar expressões, ângulos e movimento antes dos lotes |
-| Naturalismo | Dirigir textura, luz, anatomia e atuação; preservar diversidade e características escolhidas |
-| Vários perfis | Separar rostos, vozes, decisões e manifestos por personagem |
-| Seleção de resultados | Comparar janelas e formatos semelhantes; registrar exposição e resultados inconclusivos |
-| Ferramentas | Imagens integradas do ChatGPT/Codex por padrão quando disponíveis; escolhas explícitas de método e etapas verificadas opcionais Higgsfield/especializadas continuam suportadas |
-| Receita | Investigar demanda e oferecer entrega real; nenhum ganho tratado como garantia |
+| Identidade | Seleção visual explícita, referências exatas revisadas, seleção vocal completa quando há fala e canon versionado |
+| Execução | Capacidades conferidas, anexos reais suportados, orçamentos por etapa, intenção registrada e reconciliação de jobs |
+| Qualidade | Inspeção de anatomia/presença/continuidade, escuta e movimento/áudio completos |
+| Repetibilidade | Piloto representativo aprovado antes de lotes, tentativas e contexto preservados |
+| Entrega | Bytes locais reais, registros/selos e revisão de edições/exportações finais |
+| Avaliação | Publicação autorizada e resultados comparáveis com exposição, janelas e custos |
 
-## Codex
+São escolhas de projeto do framework. Não prometem reproduzir personagens, resultados ou qualidade audiovisual da fonte. Potencial viral e receita são hipóteses que exigem conteúdo real, evidência de público e resultados medidos.
 
-Codex substitui o coordenador conversacional da fonte. Instruções do projeto e skills locais organizam o método; não criam acesso ao fornecedor nem executam ferramentas automaticamente. OLYMPOX acrescenta onboarding adaptativo curto, três propostas originais de conceito, aprovação explícita do cânone, proveniência dos arquivos exatos e QA completo como decisões do framework. Não copie personagens, prompts, autoridade fictícia nem promessas de receita da fonte. Consulte [ferramentas](tools.md), [estratégia](strategy.md) e [produção](production.md).
+Use [estratégia](strategy.md) para conceitos originais e [produção](production.md) para transformá-los em referências/mídia exatas. Preserve sequência útil do método e torne decisões/execução de cada estúdio rastreáveis.

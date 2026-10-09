@@ -1,43 +1,38 @@
-# Reference video: evidence and framework method
+# Reference video and method provenance
 
-Reviewed on **October 8, 2026**: Mark Tilbury's [I Tried The LAZIEST Way to Make Money With AI](https://www.youtube.com/watch?v=LlhTEttKcwQ).
+This page explains the external reference informing OLYMPOX's production sequence. The source is Mark Tilbury's [I Tried The LAZIEST Way to Make Money With AI](https://www.youtube.com/watch?v=LlhTEttKcwQ). It is a creative/process reference, not a production specification, provider guarantee or forecast of income.
 
-The initial October 7 study used a [third-party transcript](https://prepublish.ai/youtube-transcript/LlhTEttKcwQ) and [mirrored chapters](https://videohighlight.com/v/LlhTEttKcwQ) without audiovisual inspection. The October 8 review added Higgsfield's completed analysis of the public video (28 visual/audio scene summaries) and direct inspection of key frames in the YouTube player. The player showed 33:19; the analysis ended at 32:00 and its scene boundaries did not consistently match player timestamps. It supports the sequence, not a frame-accurate transcript. Direct captions remained unavailable. We did not listen to and compare every spoken line or audit the commercial results independently. Private review captures are excluded from the package; source transcripts and prompts are not redistributed.
+## Evidence coverage
 
-## Observed method
+The framework's source study combined analysis of the public video and directly inspected frames. It supports a broad sequence, not a frame-accurate transcript or independently audited commercial outcome. Private review captures, source transcripts and prompts are excluded from the framework package.
 
-The supported sequence is opportunity and differentiator research, original character concepts, coherent reference sheets and scenes, recurring content/scripts, separate voice design, Higgsfield video production, publication and comparison. The source revisits a prematurely selected profile after another grows later. Commercial outcomes are the creator's reports, not estimates for a studio.
-
-| Directly inspected frame | What it establishes |
+| Inspected source frame | Supported observation |
 | --- | --- |
-| **10:18** | A two-panel portrait/full-body reference and the label **Soul Cinema**; an image/reference step, without proving exclusive AI Influencer Builder use. |
-| **14:49** | Character-specific voice direction in Claude; visual sheets alone do not complete vocal identity. |
-| **15:54** | Separate video controls with **Seedance 2.5**; a video model does not establish completion of earlier stages. |
+| 10:18 | Portrait/full-body references and the label Soul Cinema: an image/reference stage |
+| 14:49 | Character-specific voice direction in Claude: voice work is separate from visual sheets |
+| 15:54 | Video controls showing Seedance 2.5: a separate video stage |
 
-The creative pattern is distinctive realistic characters whose look, attitude and recurring premise reinforce one another. OLYMPOX must not reduce this to conventional attractive portraits with different clothes, or assume exaggeration alone creates shareable content.
+These observations do not establish exclusive AI Influencer Builder use, a single all-in-one operation or current availability of the shown modules. The creator's reported commercial results have not been independently audited by OLYMPOX.
 
-## Current implementation choice
+## Method carried into the framework
 
-The published 0.3.0 adaptation selected the full Higgsfield process and AI Influencer Builder. The current user-directed source update defaults to [integrated ChatGPT/Codex visual creation](integrated-images.md) when available and retains the [Higgsfield method](higgsfield-influencer-method.md) as an optional per-stage integration or explicit method choice. Concepts, narrative and scripts stay in ChatGPT/Codex; specialized voice/video tools are selected by verified capability, need, quality and cost. Inspected source frames still do not prove exclusive Builder use.
+The reference connects opportunity/differentiation, original concepts, coherent references and scenes, recurring scripts, voice direction, video, publication and comparison. It also illustrates why an early result should not automatically decide a character's long-term potential.
 
-This default records a process preference: in the user-reported character exploration, the preferred integrated candidate also used revised art direction and framing. That result is not a controlled model comparison or evidence of general provider superiority. No new source-video or candidate inspection was performed for this update. Required discovery, identity, vocal selection, canon approval, pilot and quality stages remain intact; missing capabilities leave a stage pending with proposed alternatives, and paid external substitution requires applicable authorization.
+OLYMPOX adopts that sequence through its [Higgsfield production method](higgsfield-influencer-method.md). Higgsfield is the default media pipeline; Codex or Claude Code coordinates concepts, personality, narrative, scripts and records. Selected current operations are verified in the studio and documented separately from source observations.
 
-Save discovery answers, selected concept, source coverage, stages, cost scopes, capabilities and explicit deviations in the versioned [production-method plan](../templates/production-method.md), observed by existing run input/output hashing. Preserve already approved identities and historical bytes; the new default is not a retroactive redesign or provider migration.
+Save the source, coverage, demonstrated stages, selected modules and any adaptation in the [production-method plan](../templates/production-method.md). A current Builder, voice or video operation does not retroactively identify the source's route. If a required observed module is unavailable, record a proposed adaptation and the decision before materially changing the method.
 
-## Our choices
+## Framework additions
 
-These are our own proposals, not conclusions demonstrated by the video:
-
-| Question | Decision in this project |
+| Concern | OLYMPOX procedure |
 | --- | --- |
-| Consistency | A persona record, anchors, approved references, and canon hash; do not depend on conversation memory |
-| Quality | Inspect real files and test expressions, angles, and movement before batches |
-| Naturalism | Direct texture, lighting, anatomy, and performance; preserve diversity and chosen characteristics |
-| Multiple profiles | Separate faces, voices, decisions, and manifests by character |
-| Selecting results | Compare similar windows and formats; record exposure and inconclusive results |
-| Tools | Integrated ChatGPT/Codex visuals by default when available; explicit method choices and optional verified Higgsfield/specialized stages remain supported |
-| Revenue | Investigate demand and offer a real deliverable; no income is treated as guaranteed |
+| Identity | Explicit visual selection, reviewed exact references, complete vocal selection when speaking and versioned canon |
+| Execution | Checked capabilities, supported real attachments, stage budgets, recorded intent and job reconciliation |
+| Quality | Anatomy/presence/continuity inspection, listening and complete motion/audio review |
+| Repeatability | One approved representative pilot before batches, preserved attempts and context |
+| Delivery | Actual local output bytes, registration/seals and review of final edits/exports |
+| Evaluation | Authorized publication and comparable results with exposure, time windows and costs |
 
-## Codex
+These are framework design choices. They do not claim to reproduce the source's characters, results or audiovisual quality. Viral potential and revenue remain hypotheses requiring real content, audience evidence and measured outcomes.
 
-Codex replaces the source's conversational coordinator. Project instructions and local skills organize the method; they do not create provider access or automatically execute tools. OLYMPOX adds short adaptive onboarding, three original concept proposals, explicit canon approval, exact-file provenance and complete QA as framework decisions. Do not copy the source's characters, prompts, fictional authority claims or revenue promises. See [tools](tools.md), [strategy](strategy.md) and [production](production.md).
+Use [strategy](strategy.md) to develop original concepts and [production](production.md) to carry them into exact references and media. Preserve the method's useful sequence while making each studio's decisions and execution traceable.
