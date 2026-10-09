@@ -1,92 +1,85 @@
 # Identity and media quality
 
-The objective is a recognizable character with an individual presence and behavior. Quality combines alignment with the chosen creative concept, consistency with canon, the intended visual style, and freedom from defects that interrupt the experience. Naturalistic rendering can express an unusual character or a realistic person with strong presence; smooth skin or perfect symmetry do not establish quality.
+Use this guide to evaluate actual candidates, references and finished media against the chosen concept, exact canon and intended use. Têmis records the assessment; Atena routes corrections and user decisions. Successful generation, hashes, resolution and valid records establish neither fidelity nor approval.
 
-## Approval rule
+## Separate selection, inspection and asset state
 
-Every generated file starts as `draft`. Valid metadata, high resolution, calculated similarity, or a correct prompt do not demonstrate identity fidelity. Approval requires a person inspecting real media and recording the result. The coordinator can identify defects and organize evidence; it must not present automatic validation as proof that the character was preserved.
+| Record | States and meaning |
+| --- | --- |
+| Persona | `draft` during discovery; `canon-approved` after the explicit identity decision |
+| Reference | `candidate`, `approved` or `rejected`; exact selected files support canon |
+| Manifest asset | `draft` before approval, `production` for reviewed approved use, or `rejected` |
+| Review decision | `approve`, `correct`, `reject` or `pending`, tied to exact files and scope |
 
-| State | Meaning | Required evidence |
+`production` does not mean published. The user selects identity and approves complete canon; inspection supplies evidence for that decision. Record the actual reviewer and method without inventing human inspection or specialist consensus. New edits create a new version for review; preserve prior files, decisions and snapshots.
+
+## Check concept and references before canon
+
+Read the selected concept and compare the actual files with its concrete criteria. For open direction, [strategy](strategy.md) requires at least three distinct concept proposals before portraits. Review candidates for the direction the user selected, without adding identity traits to satisfy a new preference.
+
+| Check | Evidence needed |
+| --- | --- |
+| Concept and presence | A neutral identity view plus an expressive scene or target-size cover; posture, expression, styling and behavior should communicate the chosen premise |
+| Anatomy and identity | Readable reference angles and relevant body views; plausible proportions and recognition across scenes, beyond one accessory |
+| Originality | An original adult character rather than reproduction of an identifiable person's face, voice or biography |
+| Creative voice | Sample lines and series with a recognizable perspective, concrete opening and fulfilled payoff |
+| Reference continuity | Exact user-selected files/hashes and evidence those references were actually attached to later calls |
+| Method completion | Saved [method plan](../templates/production-method.md), verified selected stages, real output files, known costs or authorized uncertainty, and unresolved limitations |
+
+An intentionally restrained concept can pass if its specific presence is visible. A clean neutral portrait alone does not establish the premise, and a memorable concept does not prove viral potential. For existing characters, assess allowed variation against approved canon; new creative criteria do not revoke historical approval or authorize a replacement identity.
+
+For a speaking character, keep the persona `draft` through visual selection and vocal exploration. Generate a draft/reference vocal sample, listen to the exact audio, and record the user's selected file/settings before complete visual/vocal canon approval. For a silent scope, record voice as not applicable. Create the approved snapshot through [operations](operations.md); never add new voice settings to a frozen version or replace a canon reference with an unapproved output.
+
+Higgsfield is the default media pipeline. Verify the modules chosen in the reference-method plan; a separate Builder capability is required only when the plan actually selects it. Assistant-integrated images need an explicit alternative choice. A missing required stage stays pending; later video output or a prepared specification does not complete it.
+
+## Inspect images at two scales
+
+Open the actual result alongside exact references. Compare similar angles/expressions first, inspect the whole composition and critical details at original resolution, then check the audience's intended crop/size.
+
+| Area | Practical checks |
+| --- | --- |
+| Face and body | Face structure, eye spacing, nose, jaw, ears, distinctive marks, apparent age, body proportions and approved characteristics |
+| Eyes and mouth | Gaze, pupils, eyelids, lip alignment, teeth and tongue; plausible expressions without fused or duplicated features |
+| Hands and contact | Connected fingers, joints, grip, contact with objects and partly hidden anatomy |
+| Scene and light | Perspective, shadows, reflections, scale and light sources consistent with pose and surroundings |
+| Style and objects | Chosen rendering rules, skin/hair detail when naturalistic, seams, patterns, accessories, logos and text |
+| Final framing | Crop, safe margins, legibility, focus and channel fit |
+
+Preserve intentional asymmetry and selected stylistic rules. Do not replace the character's traits with a generic beauty standard or invent new imperfections in every image. Identify defective regions concretely instead of reporting only “looks wrong.”
+
+## Listen to audio and review complete video
+
+Listen to the exact vocal file. For video, watch the entire file with audio at normal speed, then revisit suspicious timestamps and shot joins. Still frames support investigation but do not replace motion review. Check the edited export again after music, captions or cuts are applied.
+
+| Area | Practical checks |
+| --- | --- |
+| Vocal identity | Approved timbre, accent, pronunciation, rhythm, emotion and continuity between takes |
+| Speech | Exact meaning, complete words, intelligibility, breathing, noise and clipping; captions do not prove spoken accuracy |
+| Identity in motion | Face/body stability through turns, expressions and occlusion; stable hair, clothes and accessories |
+| Motion and scene | Plausible anatomy, gestures, object contact, inertia, camera movement, reflections, flicker and backgrounds over time |
+| Lip-sync | Audible words, mouth movement, pauses, teeth/tongue and expressions stay aligned |
+| Edited delivery | Comprehensible speech with music, synchronized captions, coherent cuts, intended duration and final framing |
+| Performance | Opening/payoff and acting deliver the piece's premise and selected attitude |
+
+A short pilot in the intended medium is reviewed and exported before batches. An approved still image covers only its scoped visual use; it does not approve motion, speech or lip-sync. If audio or video cannot be accessed, leave that review pending and identify the needed inspection.
+
+## Decide and route the result
+
+| Decision | When to use it | Next step |
 | --- | --- | --- |
-| `draft` | Exploration or an asset not yet approved. | An available file and identified provenance. |
-| `canon-approved` | Persona state whose identity has been chosen and recorded. | Reference inspection and explicit approval by the person responsible for the character. |
-| `production` | An asset approved for the use specified in its brief. | Visual inspection; listening when audio is present; continuity review for video; recorded decision. |
+| `approve` | Applicable checks completed with no critical defect or pending limitation | Deliver the exact reviewed bytes for the stated use |
+| `correct` | The direction remains useful but a concrete repair is needed | Save a new version and repeat affected checks plus whole-file review |
+| `reject` | Wrong identity, impossible anatomy, severe continuity failure or unusable speech/lip-sync defeats the result | Preserve the attempt and prepare another approach within canon |
+| `pending` | Missing references, inspection access, authorization or usage evidence prevents a decision | Identify the exact missing input/check and responsible next step |
 
-`production` does not mean published. Changing the face, body, voice, or essential characteristics requires a new canon review. Subsequent changes to an approved file return that version to `draft`.
+Critical failures prevent approval regardless of an average score: identity drift, impossible anatomy or reflections, temporal deformation, speech changing the intended meaning, incomprehensible audio, or perceptibly wrong lip-sync. Known unsuitable usage rights prevent delivery; uncertain rights or reference permission remain pending. Composition, wardrobe, expression or timing can warrant correction when identity remains intact.
 
-In the persona record, each reference uses `candidate`, `approved`, or `rejected`; the approved set supports the persona's `canon-approved` state. In the manifest, assets use `draft`, `production`, or `rejected`.
+Make the smallest useful repair and compare versions. Check neighboring regions and the whole result afterward: a hand correction may change the face; a lip-sync repair may damage teeth. Never resolve a failure by rewriting approved canon or historical evidence.
 
-## Review the concept and candidates
+## Record a review someone can act on
 
-Before choosing a new identity, read the selected concept and compare the actual candidates with its concrete criteria. When direction is open, compare at least three genuinely distinct concept cards under [strategy](strategy.md). Do not approve an ordinary generic portrait for a brief requiring memorable presence merely because anatomy and rendering are clean.
+Save the exact file/version and SHA-256, canon version/hash, intended use/crop, reviewer, date, inspection method, decision, concrete regions/timestamps and unresolved checks. Methods are `visual`, `listening` and `visual-and-audio`; historical records retain their original bytes.
 
-| Area | Evidence to inspect |
-| --- | --- |
-| Concept execution | Which selected age, silhouette/posture, styling, expression, or recurring details are visible? Identify what is missing or contradicts the brief. |
-| Distinction between directions | Can the proposals be described differently by premise, attitude, and editorial contrast, beyond names, hair, clothes, or attractive faces? |
-| Presence in context | Inspect a neutral identity reference and an in-character scene or cover at the intended size/crop. Does the latter express the selected premise and attitude? A neutral reference need not communicate the whole premise. |
-| Voice and content | Do sample lines and three series have a recognizable perspective, concrete openings, fulfilled payoffs, and stated reasons to watch/save/share? Could they be reassigned unchanged to any candidate? |
-| Continuity and originality | Does the character remain recognizable in an allowed variation, without relying only on one accessory? Does the concept preserve an original identity rather than reproducing an identifiable person's look, voice, or biography? |
-| Selected method | Does the versioned method plan identify the method/tool for each stage, actual prompts, attached references, files/hashes, exposed model, known cost and limitations? Higgsfield is the media default; verify the selected reference modules, full-pilot transport/export/budget readiness and real provider evidence. Builder evidence is required only for a stage that selected Builder; integrated images need an explicit alternative choice. Missing required stages remain pending; a direct video or prepared specification does not complete an earlier stage. |
+> `pilot-v002.mp4`, [file hash], canon 1 [canon hash], vertical video; complete motion/audio review by [actual reviewer], [date], `visual-and-audio`; `correct`: necklace disappears at 00:04 and final word is clipped. New version required before approval.
 
-Record observations, exact files and the requested correction. If the selected concept is absent, keep candidate media `draft` and return it for art/persona correction before proposing canon approval; reference records remain `candidate` until approved. An intentionally restrained direction can pass when its specific presence and behavior are visible. Do not add eccentricity, fantasy, a new beauty standard, or new identity traits merely to pass review.
-
-This review assesses creative execution, not audience response. A sharing hypothesis remains unproven until actual publication results exist; do not award a predictive virality score or claim that a visually distinctive concept guarantees reach. For an existing approved character, assess the requested piece within canon and allowed variations. New criteria do not revoke historical approvals or authorize a replacement identity.
-
-For a new character, inspect the actual exploration candidate and reference files, including individual readable views and an in-character scene, regardless of the chosen tool. Verify that the selected identity references were actually attached to subsequent generations; a path or description in a prompt is not evidence of attachment. Review anatomy, presence and recognition across angles and scenes. For speaking characters, generation, listening and user selection of the exact vocal reference precede complete visual/vocal canon approval. Keep vocal listening and complete video review separate from visual selection. For an existing character, compare every new output with exact approved canon; never approve replacement traits to make a tool handoff pass. Track these observations in the [production-method plan](../templates/production-method.md); local contracts validate declarations, not semantic method compliance. The provider never replaces approval or inspection.
-
-## Review an image
-
-1. Open the result alongside approved references. First compare a reference with a similar angle and expression; use the others to resolve uncertainty. Do not judge identity solely by hair color or wardrobe.
-2. Examine the entire composition to check proportions, pose, scale, perspective, and relationship to the scene.
-3. Inspect the face, hands, and details at original resolution. Then check the media at the size and crop the audience will see.
-4. Decide `approve`, `correct`, or `reject`. Record concrete defects and affected regions. If references are insufficient, record `pending` and retain `draft`.
-
-| Area | What to check |
-| --- | --- |
-| Facial identity | Skull and face shape, eye spacing, eyebrows, nose, jaw, chin, ears, and distinctive marks. Expression and perspective can change appearance; structure must remain compatible. |
-| Body and proportions | Limb length, relative head size, shoulders, neck, posture, and approved body characteristics. Avoid unintended changes to apparent age or build. |
-| Intended visual style | For naturalistic work, skin texture, pores, strands of hair, gentle asymmetries, and plausible light transitions. For a selected stylized direction, assess its deliberate visual rules. Preserve the character's actual traits; do not invent new imperfections in every image. |
-| Eyes and mouth | Gaze direction, pupils, eyelids, lip alignment, tongue and tooth continuity. Smiles need plausible anatomy without fused, duplicated, or excessively bright teeth. |
-| Hands and contact | Finger count and connection, nails, joints, grip, and object contact. Check places where hands are hidden or partially visible. |
-| Scene and optics | Shadows, reflections in mirrors and glasses, geometry, depth, blur, and light sources. A reflection must match the person, pose, and scene. |
-| Clothing and objects | Seams, patterns, jewelry, accessories, text, and logos. Check distortions and elements appearing or disappearing. |
-| Final framing | Crops, safe margins, legibility, focus, and channel fit. An intact image can fail after cropping. |
-
-## Review video and voice
-
-Watch the complete file with audio at normal speed. Revisit suspicious segments, including frames near the beginning and end. A selection of frames does not replace temporal review.
-
-- **Identity and continuity:** face, hair, body, clothing, and accessories must remain stable as the person turns their head, blinks, smiles, or becomes partially occluded. Look for identity drift, merging, and apparent age changes.
-- **Motion:** gestures need intention, anatomy, and plausible inertia. Check the neck, shoulders, fingers, walking, object contact, and camera motion.
-- **Scene over time:** check skin/light flicker, rebuilding backgrounds, inconsistent reflections, jumping objects, and joins between shots. Camera movement requires additional attention to edges and parallax.
-- **Lip-sync:** compare audible speech with mouth opening/closing, pauses, and expressions. Inspect teeth and tongue during speech. Do not accept perceptible delay or mouth movements when audio is silent.
-- **Voice:** listen for vocal identity, pronunciation, approved accent, rhythm, emotion, breathing, and continuity between takes. Look for substituted words, truncated syllables, noise, clipping, and timbre changes. A correct caption does not prove the speech is correct.
-- **Final delivery:** also watch the edited, exported version with music and captions. Check synchronization, speech comprehension, cuts, and duration on the target device.
-- **Creative delivery:** verify that the opening and payoff match the piece's stated idea and that performance expresses the character's selected attitude. Generic delivery or an unfulfilled opening requires correction; it does not establish a failed audience hypothesis.
-
-If the coordinator or the available tool cannot access audio or motion, record that limitation and leave the corresponding approval pending.
-
-## Critical failures
-
-Any item below rejects the asset, even if other dimensions are good or a numerical average is high:
-
-- The person looks like another character, or face, body, and voice diverge from canon.
-- Impossible anatomy, an incompatible reflection, or a visible deformation remains in final use.
-- Identity or anatomy changes during the video.
-- Speech changes the script's meaning, becomes incomprehensible, or has noticeably incorrect lip-sync.
-- Media relies on a reference, authorization, or usage right that is still unconfirmed.
-
-Composition, expression, wardrobe, duration, or text issues can justify correction without discarding the approach. Describe the correction and keep the asset `draft` until the new version is reviewed. Do not use an overall score to dilute a critical failure.
-
-## Minimum review record
-
-Record alongside the asset: exact version/file, canon version, intended use and crop, reviewer, date, review method, decision, and identified problems. For video, identify affected segments; for images, regions. Also record items that could not be checked. Canon approval and identity changes belong to the person responsible for the character.
-
-Example: "`take-03-v2.mp4`, canon 1, vertical Reel; complete review with audio by [reviewer], [date]; correct: the necklace disappears at 00:04 and the final word is cut off; remains a draft."
-
-## Correct without losing identity
-
-Make the smallest necessary change. Prefer correcting the setting, framing, or a local detail while preserving approved references. Change one variable per attempt and compare versions. After a repair, also inspect neighboring regions and the entire media: correcting a hand can alter the face; improving lip-sync can introduce defective teeth. Preserve the original and never replace a canon reference with an unapproved result.
-
-Review methods are `visual`, `listening`, and `visual-and-audio`. Historical tokens remain supported without rewriting prior files or approvals.
+The local contracts check structured declarations and file integrity. They cannot prove that viewing/listening occurred, that a reviewer is human or that a creative process succeeded. Follow [production](production.md) for sealed context and actual exports; use the applicable user authorization and record real evidence separately for publication.

@@ -1,54 +1,64 @@
-# Capacidades e limites do OLYMPOX
+# Capacidades e limites
 
-O OLYMPOX é um framework local reutilizável de influenciadores de IA. Seu núcleo mantém orientações, fichas de personagens, estado das tarefas, versões e evidências. Cada estúdio fornece seus próprios influenciadores originais, arquivos de produção, acesso a fornecedores e decisões. Consulte [instalação](installation.md) para criar um estúdio a partir do pacote público.
+OLYMPOX combina instruções para assistentes com runtime Node local para estúdios de influenciadores originais. O framework fornece métodos e registros reutilizáveis; cada estúdio instalado fornece escolhas de personagens, mídia, acesso ao fornecedor e evidência de execução. Consulte [instalação](installation.md) e [início rápido](quick-start.md).
 
-## Incluído no framework
+## Capacidades locais incluídas
 
-| Área | Capacidade local |
-| --- | --- |
-| Governança e skills | Constituição, instruções do assistente local escolhido, `olympox` e `higgsfield-studio` |
-| Coordenação | Nove perfis com nomes de deusas, contratos de tarefas e três fluxos retomáveis |
-| Pesquisa e direção | Métodos de oportunidades e tendências sob demanda, com fontes, recorte e limitações |
-| Fichas de personagens | Brief, âncoras de identidade, referências, narrativa, peças de conteúdo e especificações de geração |
-| Continuidade | Snapshots do cânone aprovado, selos de execução, vínculos de revisão com arquivos exatos e tentativas preservadas |
-| Recuperação | Detecção de mudanças no contexto, tratamento de resultados incertos, backups com inventário e testes de restauração |
-| Documentação | Manual local navegável |
-| Acesso à mídia Higgsfield | Orientações para o fluxo por plugin e wrapper da CLI local, usando os mesmos registros de cânone, runs e revisão |
-| Instalação | Criação de estúdio novo e merge com verificação prévia que mantém arquivos idênticos e recusa arquivos conflitantes do framework |
+| Área | Comportamento incluído | Evidência ainda necessária no estúdio |
+| --- | --- | --- |
+| Instalação | Setup guiado, destinos Codex/Claude/ambos, verificação integral de conflitos e checks locais | Descoberta real da skill no assistente escolhido |
+| Coordenação | Nove perfis, quinze contratos e três fluxos persistentes | Execução real e dispatch real de subagentes quando relatado |
+| Identidade | Drafts, hashes de referências, declarações de aprovação e snapshots congelados | Seleção do usuário, fidelidade visual e escuta/seleção vocal quando há fala |
+| Registros de produção | Shots/prompts, cadastro draft de mídia, selos e revisões vinculadas | Referências submetidas, geração real e inspeção completa |
+| Histórico editorial | Narrativa/conteúdo versionados, fontes e vínculos de canon/narrativa | Escrita adequada, verificação factual e elegibilidade de áudio aplicável |
+| Retomada | Detecção de mudanças, tentativas preservadas e bloqueio de jobs pendentes | Reconciliação do fornecedor pelas ferramentas reais |
+| Recuperação | Inventário de personagem/runs, verificação e teste de restauração | Cópias independentes e contexto compartilhado preservado separadamente |
+| Documentação | Fonte inglesa, edição pt-BR, catálogos derivados e manual local | Revisão do texto/tradução e eventual publicação remota |
+| Rota Higgsfield | Orientações, wrapper local e proveniência permitida | Conta, módulos exatos, entradas aceitas, exportação, inspeção e orçamento |
 
-Os fluxos são `create-character`, `produce-piece` e `review-correct`. Atena coordena pedidos no assistente escolhido. Perfis registrados orientam o trabalho; a delegação real para uma especialista ocorre somente quando uma subagente é efetivamente despachada.
+Fluxos: `create-character`, `produce-piece` e `review-correct`. Perfis orientam o assistente; não são trabalhadores persistentes. Comandos não despacham especialistas, geram mídia, consultam fornecedores, repetem trabalho pago, publicam, agendam pesquisa ou coletam métricas automaticamente.
 
-## O que a verificação demonstra
+## Suporte a assistentes e fornecedores
 
-A partir da raiz do estúdio, execute:
+O instalador cria instruções de projeto e projeções de skills locais para Codex, Claude Code ou ambos. É estrutura de arquivos suportada e caminho de instalação testado localmente. Não comprova descoberta por uma sessão específica nem configura Claude web ou outro ambiente.
 
-```powershell
-npm.cmd run verify
-npm.cmd run studio -- help
+Higgsfield é o método padrão de mídia para trabalho novo. Conceitos, personalidade, narrativa, roteiros e planejamento ficam com o assistente. [Geração integrada](integrated-images.md) é alternativa explícita para imagens. Etapa Higgsfield ausente fica pendente até existir capacidade necessária ou decisão explícita de método.
+
+[Plugin](higgsfield-plugin.md) e [CLI local](higgsfield-setup.md) precisam ser conferidos independentemente na sessão real. Recursos do site, plugin conectado ou CLI autenticada não comprovam acesso a todo módulo, voz, treinamento, upload de referências, exportação ou saldo de cobrança equivalente. Confira o [piloto completo](production-handoff.md) antes da primeira etapa paga e aplique autorização existente aplicável.
+
+O método exige identidade visual coerente selecionada, canon visual/vocal exato, voz ouvida para fala, entradas de cenas inspecionadas e piloto completamente revisado antes de lotes. Bytes finais reais devem ser exportados e revisados; publicação tem autorização e evidência próprias. Testes não substituem produção.
+
+## O que a verificação local confere
+
+No estúdio instalado:
+
+```sh
+npm run verify
+npm run studio -- help
 ```
 
-A verificação gera o manual, executa testes locais, valida os registros disponíveis, confere a consistência entre fontes e instalação das skills e verifica o manual resultante. Os testes exercitam registros, caminhos, preservação, transições de estado e comportamento dos comandos locais. Os resultados pertencem à versão e ao ambiente em que esses comandos foram executados; contagens históricas copiadas não demonstram o funcionamento de uma nova instalação.
+`verify` compila manual, executa testes, valida registros disponíveis de personagens/editoriais, executa `doctor` e confere integridade do manual. Estúdio vazio pode passar sem personagem ou mídia gerada. Draft pode passar validação estrutural com campos pendentes relatados como avisos.
 
-Verificações estruturais não inspecionam pixels, escutam vozes, visualizam movimento, confirmam a execução de fornecedores nem autenticam um revisor nomeado. Um contrato concluído ou um teste de restauração bem-sucedido não comprova qualidade audiovisual ou publicação. Hashes detectam mudanças; não comprovam autoria ou aprovação.
+| Resultado | O que estabelece |
+| --- | --- |
+| Testes aprovados | Comportamento local coberto funcionou nessa versão/ambiente |
+| Validação de personagem aprovada | Registros, hashes e vínculos de revisão declarados são consistentes |
+| `doctor` aprovado | Base, contratos registrados e projeções de skills são consistentes |
+| Check da documentação aprovado | Fontes selecionadas e manual gerado correspondem |
+| Teste de restauração aprovado | Registros inventariados podem ser restaurados e validados localmente |
 
-## Ferramentas e produção
+Nenhum autentica responsável, inspeciona pixels, ouve áudio, revisa movimento, comprova condicionamento por referência ou estabelece publicação. Hashes detectam mudanças; quem escreve pode editar e recalcular. Contagem de testes de release anterior não comprova saúde atual do estúdio.
 
-O coordenador usa geração, inspeção, pesquisa e subagentes realmente disponíveis na sessão. Arquivos instalados não criam ferramentas nem demonstram nova descoberta de skills no Codex ou Claude Code. Reabra ou recarregue conforme necessário. Instalação local de instruções/skills no Claude Code é distinta de suporte verificado ao Claude web/cloud, conexão real e execução criativa completa.
+## Quando o trabalho fica pendente
 
-A criação de novos influenciadores usa o [método Higgsfield de referência](higgsfield-influencer-method.md), coordenado por Codex ou Claude sem depender de geração integrada de imagens. Descoberta e conceitos distintos antecedem identidade/referências; seleção visual explícita, referências coerentes inspecionadas, voz gerada/ouvida/selecionada quando há fala, canon completo aprovado, cenas inspecionadas, piloto representativo de vídeo, QA completo, exportação dos bytes reais e publicação autorizada continuam exigidos. Confira conexão, transporte das referências, exportação e orçamento do piloto inteiro cedo. Imagens integradas são [alternativa explícita](integrated-images.md); módulos escolhidos não são substituídos silenciosamente. Recursos atuais do site não comprovam ferramentas equivalentes chamáveis nem qualidade da fonte. Canon e bytes históricos ficam preservados.
+| Condição | Próxima ação |
+| --- | --- |
+| Capacidade obrigatória de geração/inspeção ausente | Mantenha etapa pendente e confira rota/módulo exato |
+| Transporte de referência ou exportação não suportado | Resolva antes de assumir o piloto completo |
+| Canon/contexto observado alterado | Revise e use nova tentativa explícita; preserve histórico |
+| Submissão externa não resolvida | Consulte/reconcilie job original antes de continuar ou tentar novamente |
+| Falha crítica ou inspeção incompleta | Preserve tentativa, corrija nova versão e inspecione novamente |
+| Instalador encontra arquivos diferentes | Compare/reconcilie; `--merge` não sobrescreve |
+| Dado histórico falha na validação | Preserve originais e diagnostique sem reescrever evidência |
 
-Acesso ao fornecedor continua preparado separadamente: o [plugin do aplicativo](higgsfield-plugin.md) dispensa CLI local; a [CLI e wrapper locais](higgsfield-setup.md) são outra rota, cujos recursos exigidos devem ser conferidos. O pacote inclui orientações, wrapper e proveniência permitida de fontes do fornecedor. A instalação nunca instala/conecta fornecedores externos. O núcleo funciona sem eles; recursos obrigatórios de produção ausentes ficam pendentes em vez de trocar de método silenciosamente.
-
-Sessões de conta, credenciais, disponibilidade de ferramentas/modelos e saldos devem ser conferidos no ambiente do usuário para a rota escolhida. A descoberta do plugin por si só não demonstra acesso à conta, voz, Soul ID, uso de referências, download/exportação de mídia ou cobrança equivalente à CLI. A verificação local cobre registros e orientações do framework; ela não exercita o serviço do plugin. Siga [ferramentas](tools.md) e o guia da rota escolhida. Ambas exigem evidência real de execução, registros locais e inspeção completa da mídia.
-
-O núcleo não submete ou consulta jobs externos automaticamente, repete submissões incertas, agenda um radar de tendências, publica conteúdo ou coleta métricas dos canais. Geração paga, treinamento de identidade e publicação precisam de autorização aplicável. Um roteiro ou pacote de produção preparado continua sendo preparação até que execução e revisão ocorram.
-
-## Seu primeiro ciclo criativo
-
-1. Defina público, proposta editorial e uma persona adulta original.
-2. Explore referências candidatas reais e escolha a identidade explicitamente.
-3. Para personagens falantes, gere, ouça e selecione a referência vocal exata antes de aprovar o canon visual/vocal completo; registre arquivos e hashes exatos e preserve o canon. Para conteúdo silencioso, registre por que voz não se aplica.
-4. Prepare narrativa e uma peça concreta; execute um pequeno piloto com ferramentas disponíveis.
-5. Inspecione a mídia completa e corrija falhas críticas em novas versões antes de lotes.
-
-Mantenha fichas de personagens, mídia, runs e backups locais. O framework distribuído não contém arquivos reais de personagens. Use backup verificável e mantenha uma cópia independente fora do disco de trabalho; o contexto compartilhado do framework precisa de preservação própria.
+Siga [operações](operations.md) para arquivos, mídia e backups e [runs e retomada](framework-02.md) para estado. Pacote preparado, execução selada, run concluído e conteúdo publicado descrevem resultados distintos; registre apenas o que ocorreu.

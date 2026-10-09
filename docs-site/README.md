@@ -1,29 +1,39 @@
-# OLYMPOX navigable manual
+# Manual source layout
 
-The navigable manual for **OLYMPOX - AI Influencer framework** is a local, static site with no dependencies, generated from project files. `src/` contains the interface; `config.json` selects guides and describes commands. Catalogs come from the registry, profiles, contracts, workflows, and CLI help.
+The OLYMPOX manual is a static site built by the local Node scripts. It uses no browser framework or external runtime dependencies.
 
-Create an independent studio using the [installation guide](../docs/installation.md), or clone the framework source for development and maintenance. The package contains the manual's sources; a local build creates `dist/`.
+## Files
 
-Version 0.5.0 provides the published guided installer `npx --yes github:linkiaai/olympox#v0.5.0 setup`; a reviewed checkout or extracted package uses `node bin/olympox.mjs setup`. It guides presentation language, Codex/Claude Code/both and destination choices, then reviews the real installation plan before writing. After installation, it builds and checks the local manual and runs local structural checks. The language choice affects setup presentation; the installed manual keeps its own language selector. Full local verification remains `npm run verify`, and host discovery, Higgsfield access and media execution require separate live checks.
+| Path | Purpose |
+| --- | --- |
+| `config.json` | Explicit guide selection, navigation groups and English command descriptions |
+| `locales/en.json` | Canonical interface text |
+| `locales/pt-BR.json` | Translated interface, labels and structured catalogs |
+| `src/index.html`, `src/app.js`, `src/styles.css` | Manual shell, navigation and page rendering |
+| `src/markdown.js`, `src/localization.js` | Safe Markdown rendering, links and language selection |
+| `src/landing.*`, `src/doc-redirect.js` | Public landing and legacy manual redirects |
+| `src/olympox-logo.png`, `src/olympox-icon.png` | Distributed brand assets |
+| `dist/` | Generated portable manual, ignored by Git |
 
-Manual commands from the studio or development root:
+Guide content comes from selected Markdown sources. Role, contract, workflow and command catalogs use the framework registry, JSON contracts and CLI help. The build also observes implementation hashes so changes prompt a documentation review.
 
-```powershell
-npm.cmd run docs:dev
-npm.cmd run docs:build
-npm.cmd run docs:check
-npm.cmd run docs:export
+## Commands
+
+Run from the project root:
+
+```sh
+npm run docs:dev
+npm run docs:build
+npm run docs:check
+npm run docs:export
 ```
 
-The server watches sources at `http://127.0.0.1:4321`. Set the port with `npm.cmd run docs:dev -- 4322`. The portable copy is at `dist/index.html` and works when opened directly. `dist/` is generated and ignored by Git.
+The development server normally uses `http://127.0.0.1:4321`; append `-- 4322` to choose another port. Open `docs-site/dist/index.html` directly for the portable build.
 
-See [living documentation](../docs/living-documentation.md) for maintenance and limitations. Only permitted output files are served; the project root and character data are not accessible.
+Export prepares a landing at `out/index.html`, manual at `out/doc/`, shared assets at `out/site/` and legacy entry at `out/docs/`. It preflights existing output and refuses unexpected files. Only explicitly permitted assets are served or exported.
 
-The public manual lives at `https://olympox.linkia.ai/doc/`. `docs:export` regenerates the manual and exports only permitted assets to `out/doc/`, along with root navigation, redirects, and cache/security headers. Unexpected files in `out/` stop the export. Sites publishing uses the project identity in `.openai/hosting.json` and the complete `out/` build; generated files are not committed. On the public site, the browser checks `doc/manifest.json` once a minute and reloads when a new publication changes the source revision, preserving the current language and section. The development endpoint is polled only on localhost. Local source changes require a new export and publication to reach the public domain.
+## Editing and review
 
-The visual identity uses rose and lilac accents, a plum navigation panel, and a single geometric Zeus lightning bolt. `src/olympox-logo.png` is the horizontal wordmark; `src/olympox-icon.png` is the icon and browser favicon. The PNGs use a dark plum background. Both are included in builds, source fingerprints, and studio installations, so changes to the brand trigger the same automatic local refresh as other manual sources. Brand colors live in `src/styles.css`; the primary action color is `#ad2b91` and the light lilac accent is `#d48ce9`. The [brand generation record](src/olympox-brand-v2.json) preserves the final prompts and source image identifiers.
+Keep guides in their assigned navigation groups and update both English and pt-BR. Preserve existing route paths when reorganizing labels; source-file links and saved bookmarks use those paths. Public generated output stays outside Git and the installation package.
 
-## Public landing page
-
-The site root presents OLYMPOX in Portuguese and English, with profiles and workflow steps derived from the same canonical catalogs as the manual. Landing HTML, CSS, JavaScript and the legacy redirect live in src/ and participate in source fingerprints. The export includes the landing at out/index.html, its assets under out/site/, the manual under out/doc/, and a minimal compatibility entry under out/docs/. Legacy links preserve language and section through the redirect script, including on static hosts that do not process _redirects. Known old generated manual assets are removed only after public-output preflight; unexpected files still stop export before any write.
-
+Follow [manual maintenance](../docs/living-documentation.md) and [localization](../docs/localization.md). Review both rendered editions, search, routes and responsive navigation, then run `npm run verify`. Deployment is a separate authorized action.

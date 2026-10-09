@@ -1,51 +1,56 @@
-# Living documentation for OLYMPOX
+# Build and maintain the manual
 
-The manual uses project files as its sources. Names and roles come from the registry; contracts and sequences come from the JSON files; command syntax comes from the help written in the CLI. Guides are the Markdown documents selected in `docs-site/config.json`.
+The navigable manual is generated from reusable framework sources. Guides supply explanations; the registry, contracts, workflows and CLI help supply reference catalogs. The generator detects source changes but does not interpret code or rewrite prose.
 
-## Open it and follow changes
+## Read locally
 
-In the project folder, run:
+From the studio or framework root:
 
-```powershell
-npm.cmd run docs:dev
+```sh
+npm run docs:dev
 ```
 
-Open the address shown in the terminal. While this process is running, source changes are detected and the site is regenerated. The browser refreshes the page while retaining the selected section. If a source is temporarily invalid during editing, the last valid version stays visible and the issue is flagged. Updating resumes when the source is corrected.
+Open the address printed by the command, normally `http://127.0.0.1:4321`. Set another port with `npm run docs:dev -- 4322`. The server watches sources and the browser follows valid builds while retaining its section and language.
 
-## Build a portable version
+If an edit temporarily makes a source invalid, the last valid build remains visible with an update notice. Correct the source to resume updates. Only selected manual assets are served; private studio files are outside the served tree.
 
-```powershell
-npm.cmd run docs:build
-npm.cmd run docs:check
+## Build and check
+
+```sh
+npm run docs:build
+npm run docs:check
 ```
 
-The output is in `docs-site/dist/`. You can open `index.html` directly; this copy works without a server but follows changes only after another build. `docs:check` detects missing, modified, or outdated content without changing files.
+Build writes `docs-site/dist/`. Open `docs-site/dist/index.html` directly for a portable manual; rebuilding is required to incorporate later edits. Check compares the expected output with saved bytes and reports missing, changed or stale output without writing.
 
-`npm.cmd run verify` builds the manual before the tests and then checks its integrity. Normal project verification therefore also keeps the site current.
+`npm run verify` builds the manual first, then runs the framework checks and verifies documentation integrity.
 
-## What updates automatically
+## Update a page or catalog
 
-| Source change | Effect on the manual |
-| --- | --- |
-| Name or profile in the registry | Coordinator name, team catalog, counts, and task relationships. |
-| Task contract | Owner, criteria, requirements, capability, and deliverable. |
-| Workflow stages | Sequence, owners, and optional stages. |
-| CLI help | Command syntax; editorial description coverage is required. |
-| Selected Markdown guide | Text, examples, tables, and internal navigation. |
-| Project code or instructions | A new source revision; behavioral explanations must be reviewed alongside the change. |
+1. Identify the changed behavior in code, help and contracts.
+2. Update the canonical English guide and its matching pt-BR translation. Explain the behavior and executable procedure in the page responsible for it.
+3. For a new guide, add its path, label, navigation group and translation to `docs-site/config.json`, plus its pt-BR label in the locale resource.
+4. For a new command, add syntax to CLI help and descriptions to the configuration and locale resource.
+5. Build, review both language editions, check links and run `npm run verify`.
 
-## Keep explanations accurate
+The manual groups getting started, character development, production, records, framework references and maintenance. Keep each guide focused. Use links for shared procedures instead of copying policy paragraphs into every page.
 
-When framework behavior changes, the maintainer must update the corresponding guide in the same task. This responsibility is recorded in `AGENTS.md`. The generator synchronizes structured information; it does not interpret code to invent explanations or promise new capabilities.
+Role pages use the responsibilities documented in the team guide; the registered profiles remain their instruction sources. Contract and workflow pages derive from the registered JSON. Command syntax derives from CLI help.
 
-A new command needs syntax in CLI help and a description in `commandDescriptions` in the configuration. A new guide goes into `guides`. Allowed files are explicit: character information, media, prompts, runs, backups, credentials, and operational state are excluded.
+## Sources, versions and privacy
 
-## Evolution and sharing
+The manifest records source paths, hashes and the registry's framework version. Component revisions inside contracts can differ from the framework release. A build fingerprint detects changed sources; it does not prove accuracy, translation quality or a published release.
 
-The manifest includes source hashes and the framework version, allowing each build's sources to be checked. The public manual is at `https://olympox.linkia.ai/doc/`. The local server does not send content to the internet.
+The public source selection excludes character records, generated media, personal prompts, runs, backups, credentials and maintenance state. Preserve that selection when adding material. Do not add local sessions, private account balances, receipts or character examples to public guides.
 
-`npm.cmd run docs:export` regenerates the manual and prepares only the permitted assets under `out/doc/`. The hosting project is recorded in `.openai/hosting.json`. Publish this complete build through Sites whenever a framework change updates the documentation. Exporting alone does not publish. Unexpected files in `out/` stop the export to prevent accidental disclosure.
+## Prepare a publication
 
-The root at `https://olympox.linkia.ai/` presents the framework through a bilingual landing page. Its profile counts, team and workflow steps come from the same canonical sources as the manual. Landing sources participate in the documentation fingerprint. The old `/docs/` entry forwards to `/doc/`, retaining language and section; its compatibility manifest lets already-open pages discover the migration.
+```sh
+npm run docs:export
+```
 
-The public page checks its published manifest once a minute. When a new publication arrives, it refreshes while retaining the language and section. This detects published changes; it does not read a developer's local files or call the local development server.
+Export rebuilds the manual and prepares the permitted public files under `out/`: landing page, `doc/` manual, assets and legacy redirects. Unexpected output files stop the export before writing. Export does not publish.
+
+A hosting deployment must use the complete reviewed export and applicable publication authorization. The public manual entry is `/doc/`; legacy `/docs/` links preserve language and section through a redirect. Public pages poll the published manifest once a minute and reload on a new published revision. Local edits reach a hosted manual only through a new export and deployment.
+
+See [manual source layout](../docs-site/README.md) and [localization](localization.md) for contributor details.

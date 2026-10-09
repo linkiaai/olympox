@@ -1,81 +1,60 @@
-# Start with a conversation.
+# Quick start
 
-Open your [independently installed studio](installation.md) in its selected local assistant, Codex or Claude Code, and make the request normally. An agent name, special syntax and a complete form are unnecessary. Atena reuses existing decisions and asks at most three unresolved questions about objective, presence and audience/subject. The framework source checkout is reserved for development. The assistant coordinates; Higgsfield creates default media through tools actually available in that host. Installation does not connect accounts or demonstrate Claude web/cloud or live provider execution.
+Install an independent studio, open it in Codex or Claude Code, and describe what you want to create. You can speak normally; Atena coordinates the request and loads the relevant OLYMPOX guidance.
 
-## Set up a studio first
+## 1. Install and open the studio
 
-Version 0.5.0 provides a published guided installer:
+Requires Node 22+ and a local Codex or Claude Code environment. Install the published release:
 
 ```sh
 npx --yes github:linkiaai/olympox#v0.5.0 setup
 ```
 
-From a reviewed checkout or extracted package, `node bin/olympox.mjs setup` runs the same guide. `npx --yes` accepts only the npm package prompt.
+From a reviewed source checkout or extracted package, use `node bin/olympox.mjs setup`.
 
-Choose the presentation language, Codex, Claude Code or both, then an independent destination. Review the actual preflight summary before installation; cancellation before writing preserves the destination. Setup runs local manual and structural checks and prints your selected assistant's activation syntax and first prompt. Run `npm run verify` in the installed studio for the complete local suite. Higgsfield connection and media readiness are separate live checks. The [installation guide](installation.md) covers noninteractive `--yes` with an explicit directory and assistant, direct installation, merge and preservation.
+Choose the assistant and destination, review the installation plan, and open the installed folder. Invoke `$olympox` in Codex or `/olympox` in Claude Code. Reload the host if it has not discovered the new skills. See [installation](installation.md) for scripted setup, merge and upgrades.
 
-## Create a character
+Setup checks the local files and manual. Connect Higgsfield separately and check the modules needed for your intended pilot.
 
-```text
-Let's create an influencer. Help me choose the objective and character type.
-I want realistic characters with a memorable look and strong personality,
-with potential for shareable content. The audience/topic can be proposed.
-```
+## 2. Ask for a character
 
-Atena offers useful options: viral entertainment/reach, community, brand/ambassador, education or narrative; memorable realism, a realistic person with expressive personality, or stylization when desired. "Please propose" is a valid answer. The [strategy guide](strategy.md) describes the short conversation; the [brief](../templates/brief.md) records its result.
+> Use OLYMPOX to create an influencer for [audience/topic]. Propose three distinct concepts, show how each could sustain a recurring series, and recommend one.
 
-When direction is open, receive at least three distinct concept cards before portraits. Compare their premise, look/presence, attitude and sample voice, editorial contrast, three hooks with payoffs, sharing hypothesis and production difficulty. Atena recommends a direction; you can choose, combine compatible elements or ask for revision. Strong presence can come from varied age, silhouette, styling and attitude without forcing fantasy.
+If the direction is open, the assistant asks a short set of unresolved questions about objective, presence and audience. “Please propose” is a valid answer. Compare the premise, personality, visual signature, sample voice, recurring hooks and production difficulty before choosing.
 
-**Higgsfield is the default media platform**, following the [reference method](higgsfield-influencer-method.md). Codex or Claude coordinates concept, personality, narrative, scripts and prompts. Check the whole pilot’s connection, module access, exact-reference transport, export and budget before external generation. Produce expressive candidates and a premise scene through verified Higgsfield image/identity operations; inspect, adjust and record visual selection while the persona stays `draft`. Attach exact selected references to subsequent views/scenes and inspect anatomy, presence and continuity. When speech is planned, generate/listen to/select a draft vocal sample before approving complete exact visual/vocal canon. Then produce a representative short video pilot; full QA and actual-byte export precede batches and authorized publication. An image-only brief can select its own scope. Viral potential remains a hypothesis. Integrated assistant images are an [explicit alternative](integrated-images.md).
+The selected direction becomes a draft persona and brief. [Character development](strategy.md) explains this stage.
 
-Psiquê develops the persona and Íris directs the visuals. Gaia researches opportunities when helpful. These profiles guide the coordinator; consultation is reported only when a subagent actually ran.
+## 3. Select identity and voice
 
-## Produce for an existing character
+Before paid generation, check the complete pilot path: account access, required modules, accepted references, export, inspection and budget. [The production method](higgsfield-influencer-method.md) describes the default Higgsfield sequence.
 
-```text
-Atena, prepare a content piece for [character], using the approved canon
-and narrative. I want a [format] script about [topic], with scenes and a caption.
-```
+Generate expressive candidates and a premise scene. Select the visual direction, build coherent references and inspect anatomy, presence and continuity. If the character speaks, listen to and select a draft vocal sample. Approve the exact visual/vocal canon after those choices are ready.
 
-Saraswati writes; Selene prepares and executes available, authorized production; Têmis inspects the complete media. Aurora researches trends when needed. Fortuna prepares distribution experiments and analyzes first-party data when it exists.
+Your choices stay explicit in the record. An approved persona alone does not create a frozen snapshot; the record operations preserve it. Assistant-integrated image generation requires an [explicit alternative choice](integrated-images.md).
 
-Existing characters skip creation onboarding and keep their approved canon, language and decisions. Reuse unchanged approved voice references without repeating approval; adding or changing voice in frozen canon requires the normal identity-version process. Strengthen performance, scenes and content within allowed variations; adopting Higgsfield does not replace their identity.
+## 4. Produce and inspect one pilot
 
-## Check capabilities and record the method per stage
+> Prepare one short pilot with the approved identity and voice. Show the script, scenes, exact inputs and cost scope before generation.
 
-Follow [production](production.md) and save a versioned [production-method plan](../templates/production-method.md) as a tracked run input/planning output. Record each stage’s method, tool, exposed model, prompts, exact attached inputs, files/hashes, costs, applicable authorization and limitations. Check reference generation, voice, scenes/video, export and review separately. No integrated coordinator image tool is required. Training is optional and separately authorized when justified; approval for a sheet or video does not cover another paid stage.
+The assistant writes and directs; verified Higgsfield tools generate the media. Inspect the complete pilot and its actual exported bytes. Correct failures in new versions. Expand into batches after the pilot passes.
 
-Use the selected verified Higgsfield modules through the [plugin](higgsfield-plugin.md) or [official CLI](higgsfield-setup.md), with complementary transport when appropriate. Preserve the observed source modules and record proposed adaptations; the current AI Influencer interface is not one verified all-in-one API. The plugin requires its own connection; no local CLI is needed when its own tools handle required inputs. Missing capability keeps that stage pending while independent preparation continues. A materially changed method or paid scope needs the user’s decision and applicable authorization.
+Follow [production](production.md), [pilot handoff](production-handoff.md) and [quality](quality.md). Publication uses the applicable authorization.
 
-```text
-For this piece I explicitly choose [alternative method/provider].
-Record the method change, preserve the approved references and check capabilities.
-```
+## Work with an existing character
 
-Respect an explicit user choice of another method or provider. It retains the same canon, run records, costs/authorization checks and media review. A quote for one video does not cover other stages such as Builder sheets, voice or training. A changed tracked method follows the existing new-attempt procedure; uncertain external jobs must first be reconciled. Historical characters and evidence are preserved without automatic migration.
+> Prepare a [format] piece for [character] about [topic], using its approved canon and current narrative.
 
-## Review and correct
+The assistant reuses the existing decisions, language and approved references. Changes within permitted variation keep the identity; changes to frozen identity require a new canon version and approval. Use [workflow operation](framework-02.md) to resume a saved run.
 
-```text
-Têmis, review these files against the approved references.
-Identify the segments or regions that need correction.
-```
+## Check local records
 
-A critical failure rejects the asset. Correction creates a new version and requires another inspection; originals and history remain preserved.
+Run these commands from the installed studio root:
 
-## Operate local records
-
-Requires Node 22 or later. Operating the records requires no external dependencies.
-
-```powershell
-npm.cmd run verify
-node scripts/studio.mjs help
-node scripts/studio.mjs new my-persona
+```sh
 node scripts/studio.mjs list
+node scripts/studio.mjs validate
+node scripts/studio.mjs help
+npm run verify
 ```
 
-`new` creates a draft. The coordinator saves the selected concept, character record and conversation brief before generating references. These commands do not produce media, route to a provider or approve identity. See [operations](operations.md) to register files and [core operation](framework-02.md) to start and resume workflows.
-
-## What to include in a handoff
-
-Provide the character, canon version, selected concept, production-method plan, exact input files, objective, channel, and expected deliverable. Outstanding tool access, decisions, reviews, publication or metrics must remain visible. Previously granted authorizations remain valid; the team records only work that actually occurred.
+The commands maintain and check records. See [identity and backups](operations.md) for files, snapshots and recovery. If a tool is unavailable, keep the affected stage pending and continue preparation that does not depend on it.

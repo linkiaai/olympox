@@ -1,171 +1,107 @@
-# Estratégia de personagens e conteúdo
+# Estratégia de personagem e conteúdo
 
-Este estúdio cria personagens virtuais originais com presença memorável e algo interessante a dizer. A qualidade será avaliada pelo conceito da personagem, pela continuidade da identidade, pela utilidade ou emoção do conteúdo e pela confiança do público. Uma pessoa realista pode ter aparência, atitude e ponto de vista editorial distintos; personagens fora do comum também podem ser visualmente críveis. Aparência impecável, sozinha, não comprova nenhum desses resultados.
+Use este guia em um estúdio instalado para transformar um objetivo de público em personagem original, proposta editorial repetível e teste pequeno. Atena coordena a conversa; Gaia, Psiquê, Íris, Saraswati e Fortuna contribuem quando seu julgamento ajuda. O potencial de viralização de um conceito é uma hipótese a testar por meio de conteúdo e distribuição reais.
 
-Este documento define o método de estratégia de um estúdio instalado independente. Cada estúdio seleciona sua própria persona original, público, aparência e canais.
+## Descubra o objetivo
 
-## 1. Escolher uma direção com motivo para existir
+Reutilize preferências informadas e decisões anteriores. Pergunte apenas os pontos essenciais ainda abertos, agrupados em no máximo três perguntas curtas sobre objetivo, presença da personagem e público/tema. “Pode propor” é uma resposta válida. Registre a conversa no [brief](../../../templates/locales/pt-BR/brief.md); o usuário não precisa completar um questionário.
 
-Usar uma conversa curta para descobrir a direção. O [brief](../../../templates/locales/pt-BR/brief.md) registra o resultado; não é um formulário que o usuário precisa completar. Ler preferências e decisões já informadas e perguntar apenas os pontos essenciais ainda abertos, agrupados em no máximo três perguntas. Usar a ferramenta assíncrona de perguntas do host quando disponível ou uma conversa comum; não é necessário comando nem sintaxe especial. Oferecer estas escolhas, aceitando “pode propor” como resposta:
-
-| Tema | Opções úteis |
+| Decisão | Opções iniciais úteis |
 | --- | --- |
-| Objetivo | Entretenimento viral/alcance; comunidade e conexão; marca/embaixadora; conteúdo educativo ou narrativo; propor uma direção |
-| Presença da personagem | Realismo memorável com conceito incomum; pessoa realista com personalidade expressiva; personagem estilizada quando desejado; propor uma direção |
-| Público e assunto | Nicho/público informado; alguns interesses a explorar; oportunidade aberta para o estúdio propor |
+| Objetivo | Entretenimento/alcance, comunidade, educação/narrativa, papel de marca ou uma direção proposta |
+| Presença | Realismo memorável, pessoa realista com personalidade expressiva, estética estilizada escolhida ou uma proposta |
+| Público/tema | Público definido, interesses a explorar ou oportunidade aberta |
 
-Tratar essas opções como adaptáveis, não como categorias obrigatórias. Se o usuário escolher potencial de viralização e personagens realistas variados com presença forte, conservar isso no brief de trabalho; não substituir silenciosamente por um retrato comum nem forçar fantasia. Se as preferências continuarem abertas, recomendar conceitos realistas variados com presença forte e hipótese testável de compartilhamento, identificando isso como proposta. Ausência de resposta não seleciona identidade nem autoriza gastos ou publicação. Personagens existentes pulam a descoberta inicial de criação: carregar suas decisões e o canon aprovado e perguntar apenas sobre um objetivo novo quando necessário.
+Quando a direção estiver aberta, recomende conceitos realistas variados com presença forte como proposta. Preserve a estética selecionada; personagens memoráveis podem ser discretas, incomuns ou estilizadas sem exagero forçado. Uma pergunta sem resposta deixa a decisão correspondente aberta. Personagens existentes reutilizam a identidade aprovada e dispensam o onboarding de criação.
 
-Conceito, personalidade, narrativa, roteiros e planejamento continuam com o coordenador conversacional, Codex ou Claude. Produção de mídia usa o [método Higgsfield de referência](higgsfield-influencer-method.md): preparação de identidade/referências, cenas inspecionadas, voz e vídeo verificados. Siga módulos observados e registre adaptações sem afirmar uso exclusivo do Builder nem qualidade garantida. Geração integrada pelo assistente é [alternativa explícita](integrated-images.md), sem ser requisito do framework. Salve escolhas, entradas exatas, recursos reais e custos no [plano de método](../../../templates/locales/pt-BR/production-method.md). Confira conexão, transporte, exportação e orçamento do piloto completo cedo; recursos ausentes permanecem pendentes com alternativas e etapas pagas exigem autorização aplicável.
+Escreva a proposta em uma frase:
 
-Após essa descoberta, uma frase deve explicar a proposta:
+> Para **[público em uma situação concreta]**, esta personagem oferece **[utilidade ou experiência]** por meio de **[perspectiva e linguagem individuais]**.
 
-> Para **[público em uma situação concreta]**, esta personagem entrega **[utilidade ou experiência]**, com **[ponto de vista e linguagem próprios]**.
+Use [pesquisa de oportunidades](trend-research.md) quando for necessário investigar público ou espaço editorial. Demanda e potencial financeiro exigem evidências; um concorrente popular ou pico de buscas, sozinho, não estabelece nenhum dos dois.
 
-Se o usuário ainda não tiver a direção, o coordenador apresenta pelo menos três fichas de conceito de fato distintas e comparáveis antes de gerar retratos. Cada uma inclui público, promessa editorial, premissa em uma frase, presença visual memorável, atitude e exemplo de voz, contraste editorial, três aberturas concretas de conteúdo com entregas, hipótese de compartilhamento e dificuldade de produção. Um nome provisório pode ajudar na comparação; não representa identidade escolhida. Mudar apenas cabelo, roupa ou rótulo do nicho não cria uma direção diferente. Recomendar uma, explicar a principal escolha e convidar à seleção ou combinação de elementos compatíveis. Avaliar:
+## Compare conceitos distintos antes dos retratos
 
-| Critério | Pergunta prática |
+Para uma direção aberta, apresente pelo menos três fichas de conceito comparáveis. Cada uma inclui:
+
+- Público, promessa editorial e premissa narrativa em uma frase.
+- Presença visual memorável: idade adulta, silhueta/postura, estilo, expressão e detalhes recorrentes conforme o conceito.
+- Atitude, amostra de voz e contraste editorial: qual expectativa ou perspectiva torna a personagem distinta.
+- Três ganchos concretos de conteúdo com aberturas e desfechos cumpridos, além de um motivo para assistir, salvar ou compartilhar.
+- Dificuldade de produção, possibilidades recorrentes e a principal incerteza a testar.
+
+Mudar apenas nome, cabelo ou roupa não cria outro conceito. Recomende um, explique a troca envolvida e permita que o usuário selecione ou combine elementos compatíveis antes da exploração de identidade.
+
+| Compare | Pergunte |
 | --- | --- |
-| Interesse do público | Que dúvida, desejo ou experiência faria alguém voltar? |
-| Originalidade | O que muda além do rosto e da roupa? |
-| Presença memorável | Que combinação concreta de aparência, atitude e ponto de vista torna esta personagem distinguível? |
-| Hipótese de compartilhamento | Que identificação, surpresa, emoção ou entrega útil poderia levar esse público a compartilhar uma peça específica? |
-| Sustentação | É possível escrever dez conteúdos diferentes que cumpram a promessa? |
-| Produção | Conseguimos manter essa proposta com tempo e recursos disponíveis? |
-| Confiança | A personagem pode entregar isso sem inventar autoridade ou experiências reais? |
+| Relevância | O que faz este público voltar? |
+| Diferenciação | A premissa e a voz podem ser reconhecidas sem um retrato? |
+| Presença | Quais comportamentos e detalhes visíveis expressam a proposta? |
+| Repetibilidade | Dez peças diferentes podem cumprir a promessa? |
+| Viabilidade | O estúdio sustenta o conceito com ferramentas, tempo e orçamento disponíveis? |
+| Confiança | Ele funciona sem credenciais, depoimentos ou experiências reais inventados? |
 
-Escolher uma direção com o usuário antes de consolidar a identidade. Pesquisa de demanda deve registrar evidências e lacunas; uma tendência encontrada ou um concorrente famoso não comprovam demanda pelo nosso perfil.
+Por exemplo, uma entusiasta mais velha de reparos que trata objetos descartados como peças de luxo, uma entusiasta de força que faz demonstrações calmas e uma exploradora urbana que transforma caminhos conhecidos em mistérios têm premissas e atuações diferentes. São conceitos ilustrativos, não personagens aprovadas.
 
-### Resolver o conceito da personagem antes dos retratos
+Salve conceito selecionado, retorno e decisão no brief e nos registros da personagem. Leve esses detalhes para os candidatos e cenas, em vez de reiniciar a descoberta a cada etapa.
 
-Quando o pedido for criar influenciadores virais ou fora do comum, traduzir esse objetivo em um conceito distinto e uma hipótese testável de conteúdo antes de gerar candidatos. Não reduzir o pedido a um retrato neutro atraente. Definir:
+## Desenvolva a personagem e as referências exatas
 
-- **Premissa:** uma frase ligando quem é a personagem, o que deseja e a experiência do público.
-- **Presença visual:** uma combinação intencional de idade adulta, silhueta/postura, estilo distintivo, expressão e detalhes visuais recorrentes. Usar as dimensões que servem ao conceito; não forçar um traço chamativo em cada dimensão.
-- **Atitude e voz:** comportamento específico e exemplos de frases que poderiam pertencer à personagem, incluindo como reage a uma discordância.
-- **Contraste editorial:** a expectativa que desafia ou a perspectiva incomum que traz ao assunto escolhido.
-- **Conteúdo repetível:** três séries com abertura concreta, entrega, motivo de compartilhamento e variação que sustente dez peças diferentes.
-- **Teste de produção:** uma referência neutra de identidade e uma cena da personagem ou capa no tamanho de uso que torne a premissa e a presença escolhidas visíveis.
+Defina uma identidade adulta, fictícia e original. Referências podem orientar luz, composição, roupa, ritmo ou linguagem; não devem copiar rosto, voz ou biografia de uma pessoa identificável. Dê à personagem um desejo, dois ou três valores, uma contradição plausível, interesses/hábitos e limites. Mostre a personalidade por decisões e reações concretas.
 
-Por exemplo, uma entusiasta de reparos mais velha e impecavelmente vestida que trata objetos descartados como peças de luxo, uma entusiasta de força física de fala suave que apresenta demonstrações calmas e uma exploradora urbana inquieta que transforma rotas conhecidas em pequenos mistérios oferecem conceitos distintos sem exigir fantasia nem copiar uma influenciadora existente. São direções ilustrativas, não personagens aprovadas. Personalidade forte, estilo contido ou combinações incomuns podem funcionar; seguir a estética escolhida pelo usuário sem forçar exageros.
+Escreva uma apresentação, uma opinião e uma resposta à discordância. Explique, com exemplos, vocabulário, humor, ritmo e intimidade compatíveis com a voz. Mantenha cronologia fictícia e afirmações sobre o mundo real separadas. Narrativa e conteúdo têm versões próprias; evolução editorial não muda automaticamente o canon visual/vocal.
 
-Salvar o conceito escolhido no brief e nas decisões da personagem e levar seus detalhes concretos às especificações dos candidatos e das cenas. Referências neutras estabelecem identidade; uma cena da personagem testa a promessa criativa. Íris confere se a imagem expressa o conceito e Têmis revisa os candidatos reais antes da seleção de identidade, seguindo [qualidade](quality.md). Um pacote de referências sem defeitos, sozinho, não demonstra conceito memorável nem potencial de viralização.
+Desenvolva conceitos, narrativa, roteiros e planejamento com Codex ou Claude Code. Higgsfield é o pipeline padrão para candidatos, referências, cenas, edições de imagem, voz e vídeo. Salve o [plano do método de produção](../../../templates/locales/pt-BR/production-method.md) e verifique cedo todo o caminho do piloto, entradas, exportação, inspeção e orçamento. Preserve os métodos de referência pedidos e registre adaptações. Imagens integradas ao assistente exigem [escolha explícita de alternativa](integrated-images.md). Recursos ausentes deixam a etapa afetada pendente; geração externa paga precisa de autorização aplicável.
 
-Depois que o usuário selecionar uma direção, preparar amostra de exploração pelo módulo Higgsfield verificado de identidade/imagem escolhido, ou alternativa explicitamente selecionada, e revisá-la a partir do retorno antes de ampliar o conjunto. Dar à amostra expressão, estilo, enquadramento e cena intencionais que expressem a premissa; preparar também referências neutras para inspecionar a identidade. Depois da seleção visual, anexar os arquivos exatos das referências escolhidas pelo mecanismo de entrada suportado pela ferramenta nas vistas, cenas e edições seguintes. Um nome de arquivo no prompt não é anexo. Inspecionar anatomia, presença e continuidade entre ângulos e cenas, seguindo [produção](production.md) e [qualidade](quality.md). A amostra de exploração continua candidata; preferência por um conceito e silêncio não aprovam o canon. Manter o conceito escolhido e o retorno visíveis na próxima etapa, sem reiniciar a entrevista.
+Siga esta sequência para uma nova identidade:
 
-Para uma personagem nova com fala, primeiro selecionar a identidade visual, mantendo a persona em `draft`. Preparar uma referência vocal com `purpose: reference`, escutar a amostra exata e registrar sua escolha/aprovação; depois aprovar e congelar o canon visual/vocal completo antes de cenas de produção ou piloto de vídeo falado. O hash do canon inclui configurações de voz e referências aprovadas: acrescentar voz depois de congelar a mesma versão mudaria esse canon. Para uma persona sem fala, registrar voz como não aplicável ao escopo escolhido. Reutilizar uma voz aprovada existente e inalterada sem repetir a aprovação; acrescentar ou mudar voz em canon congelado segue a evolução normal da versão de identidade.
+1. Explore o conceito selecionado pelo método verificado. Inspecione uma vista neutra de identidade e uma cena expressiva ou capa no tamanho final que comunique a premissa. Revise a partir do retorno antes de ampliar o conjunto.
+2. Deixe o usuário selecionar a candidata visual. Desenvolva ângulos e cenas coerentes de referência a partir dessa seleção, anexando os bytes exatos pelos campos aceitos da ferramenta; citar um caminho no prompt é insuficiente.
+3. Inspecione anatomia, presença e continuidade entre essas vistas conforme [qualidade](quality.md). Seleção visual, sozinha, não aprova o canon completo.
+4. Para uma personagem falante, mantenha a persona `draft` ao gerar uma amostra vocal com `purpose: reference`. Ouça o áudio exato e registre arquivo selecionado, configurações e decisão do usuário. Em um escopo silencioso, registre voz como não aplicável.
+5. Obtenha aprovação explícita do canon visual/vocal completo e exato e crie seu snapshot por [operações](operations.md). A produção então usa essa versão preservada e o conjunto de referências.
 
-Para uma personagem existente, preservar o canon aprovado e desenvolver presença, direção e conteúdo dentro das variações permitidas. Um pedido de personalidade mais forte não autoriza substituir rosto, corpo, voz, idade ou âncoras aprovadas. Evolução de identidade requer o processo normal de versão e aprovação.
+Uma personagem já aprovada conserva rosto, corpo, idade, voz e âncoras. Fortaleça atuação e conteúdo dentro das variações permitidas. Adicionar ou alterar voz no canon congelado exige o processo normal de versão de identidade e aprovação; voz aprovada sem mudanças não exige seleção repetida.
 
-Quando a direção depender de oportunidade externa, **Gaia** pesquisa público, necessidades, persistência dos sinais e diferenciação; **Psiquê** desenvolve a persona a partir da direção escolhida. Seguir [pesquisa de tendências](trend-research.md) e o [template de oportunidades](../../../templates/locales/pt-BR/opportunity-research.md). Uma proposta de criação também pode concluir que melhorar uma persona existente é a melhor escolha.
+## Construa conteúdo repetível
 
-## 2. Construir uma pessoa ficcional reconhecível
+Comece com um conjunto pequeno de séries que cumpra a proposta. Cada peça precisa de uma ideia, abertura concreta, desfecho, perspectiva da personagem e resposta pretendida do público.
 
-Definir uma personagem adulta e original. Referências servem para descrever luz, composição, vestuário, ritmo ou linguagem; não para copiar o rosto, a voz, a biografia ou os maneirismos de uma pessoa identificável.
-
-O núcleo da personagem precisa de poucos elementos úteis:
-
-- **Desejo:** algo que move suas escolhas e gera assuntos recorrentes.
-- **Valores:** duas ou três prioridades que aparecem em decisões concretas.
-- **Contradição:** duas tendências plausíveis em tensão, como planejar com cuidado e se entusiasmar com novidades. A tensão precisa aparecer nas histórias, sem transformar a personagem numa coleção de defeitos.
-- **Limites:** o que não afirma, não faz ou não promove.
-- **Interesses e hábitos:** detalhes específicos que produzem cenas e conversas.
-- **Voz:** vocabulário, humor, ritmo, grau de intimidade e exemplos de frases.
-
-Registrar a idade adulta, os traços estáveis, a identidade virtual, a voz e os limites no canon da persona. Mudanças de roupa, humor ou cenário podem variar; alterações de identidade precisam de uma decisão explícita. Não acrescentar um passado diferente para justificar cada post.
-
-Manter uma cronologia simples: evento ficcional, data dentro da história, consequência e conteúdos relacionados. Marcar claramente o que é ficção e o que é fato do mundo real. Histórias ficcionais não viram provas de viagens, compras, tratamentos, qualificações ou resultados comerciais.
-
-## 3. Definir voz editorial e preparar referências vocais antes do canon
-
-Escrever três pequenas amostras: uma apresentação, uma opinião e uma resposta a uma discordância. A personagem deve ser reconhecível nas três e continuar respeitosa quando contrariada.
-
-Guardar exemplos de “soa como ela” e “não soa como ela”, com explicação curta. Preferir exemplos a adjetivos vagos como “autêntica” ou “premium”. O estilo pode evoluir a partir de resultados; a identidade não deve mudar a cada tendência.
-
-Essas amostras escritas estabelecem voz editorial, não referência de áudio. Quando houver fala planejada, usar um trecho curto de roteiro para exploração vocal em rascunho/referência no método escolhido, inspecionar por escuta e registrar arquivo exato escolhido, configurações de voz e referência antes da aprovação final do canon. Roteiros completos de produção podem ser preparados nessa fase de rascunho; produção real com fala espera o canon visual/vocal aprovado.
-
-A bio deve indicar a natureza virtual de maneira visível. Modelo ajustável:
-
-> Personagem virtual criada com IA. **[proposta editorial]**. Conteúdo produzido por **[estúdio ou equipe, quando definido]**.
-
-Usar também a identificação de IA por publicação quando aplicável. A bio não substitui os recursos de identificação exigidos pelas plataformas. O TikTok exige identificação de conteúdo de IA que retrata pessoas ou cenas realistas; a Meta descreve seus rótulos de informação sobre IA. As regras devem ser conferidas novamente no canal escolhido antes de publicar. Fontes consultadas em **7 de outubro de 2026**: [TikTok: integridade e autenticidade](https://www.tiktok.com/community-guidelines/en/integrity-authenticity) e [Meta: identificação de conteúdo gerado por IA](https://about.fb.com/news/2024/04/metas-approach-to-labeling-ai-generated-content-and-manipulated-media/).
-
-## 4. Transformar o posicionamento em séries
-
-Escolher inicialmente três pilares. Cada um precisa de uma função e de uma série repetível, para que a produção não dependa de inventar tudo novamente.
-
-| Função | Estrutura de série | Evidência de entrega |
-| --- | --- | --- |
-| Ajudar ou esclarecer | Uma dúvida concreta → resposta demonstrável → limite ou próximo passo | A pessoa aprende algo que consegue explicar ou aplicar |
-| Entreter ou construir vínculo | Desejo da personagem → pequena tensão → consequência → continuação | A história tem mudança e continuidade |
-| Conversar com a comunidade | Uma escolha ou tema → ponto de vista → pergunta específica | As respostas revelam interesses, dúvidas ou preferências |
-
-Essa combinação é uma proposta inicial, não uma regra para todos os nichos. Ajustar as funções à experiência prometida. Todo post precisa de uma ideia principal, uma abertura concreta, uma entrega que cumpra essa abertura, a perspectiva reconhecível da personagem e um motivo para o público assistir, salvar ou compartilhar. Identificar o mecanismo pretendido, como identificação, surpresa, humor, emoção ou utilidade prática, e uma ação final quando fizer sentido. Não pedir comentário só para inflar um número.
-
-Criar primeiro um lote pequeno de roteiros e legendas. Revisar repetição, voz e coerência antes de investir em imagens ou vídeos. Depois produzir mídia com as referências aprovadas e aplicar a revisão visual do estúdio.
-
-Para conteúdo guiado por tendências, **Aurora** pesquisa sinais atuais e entrega conceitos originais para a persona adequada, com formato, abertura, cenas e áudio quando confirmado. **Saraswati** escreve as peças finais; **Fortuna** acompanha os experimentos. Tendências podem complementar séries atemporais; não mudar identidade ou proposta editorial só para seguir um formato popular. Usar o [template de conteúdo](../../../templates/locales/pt-BR/content-research.md) e reconferir sinais efêmeros antes de produzir/publicar.
-
-## 5. Executar um piloto que ensine algo
-
-Como proposta de planejamento, usar **14 dias e até 12 publicações**, se a capacidade permitir. Essa quantidade não é um padrão da indústria nem garante amostra suficiente. O usuário pode definir outra janela e outro volume. Começar em um canal prioritário; adaptar a outros quando a produção estiver consistente.
-
-Tratar “viral” como a ambição do usuário e uma hipótese a testar. Conceito de personagem, pontuação de uma ferramenta e inspeção não prometem alcance. Avaliar a execução criativa antes de publicar; avaliar a resposta do público somente com exposição real e resultados da plataforma.
-
-Para cada experimento, registrar antes da produção:
-
-| Campo | Como preencher |
+| Função da série | Estrutura prática |
 | --- | --- |
-| Hipótese | “Uma abertura com demonstração pode gerar mais compartilhamentos do que uma abertura com pergunta neste tema.” |
-| Variável | Mudar uma característica por vez; manter tema, duração aproximada e entrega comparáveis |
-| Coorte | Lista dos IDs dos posts, canal, formato, público/configuração e período; separar orgânico de pago |
-| Janela | Comparar cada post na mesma idade, por exemplo 72 horas após publicar |
-| Métrica principal | Numerador, denominador, unidade e fonte da plataforma |
-| Métrica de qualidade | Retenção, comentários relevantes ou feedback qualitativo, conforme o objetivo |
-| Regra de decisão | Registrar o ganho considerado útil e a exposição mínima necessária; se faltar base, resultado “inconclusivo” |
-| Custo | Tempo de produção e custo autorizado efetivamente usado |
+| Ajudar ou esclarecer | Pergunta concreta → resposta demonstrável → limite ou próximo passo |
+| Entreter ou conectar | Desejo da personagem → tensão → consequência ou continuação |
+| Convidar à conversa | Escolha ou situação → perspectiva → pergunta específica |
 
-Resultados orgânicos são observacionais: horário, distribuição e público podem mudar. Pares comparáveis ajudam a aprender, mas não provam que uma alteração causou o resultado. Não chamar um post isolado de teste A/B controlado. Não interromper o período só porque surgiu um resultado favorável.
+Adapte essas funções ao conceito. Identificação, surpresa, humor, emoção e utilidade são possíveis mecanismos de compartilhamento. Evite roteiros intercambiáveis, abertura não cumprida ou pedido de comentários sem pergunta significativa.
 
-Exemplos de métricas, **somente se os dados estiverem disponíveis**:
+Aurora pode trazer [ideias de tendências atuais](trend-research.md); Saraswati desenvolve roteiros e legendas finais. Confira novamente sinais passageiros e áudio antes de produzir/publicar. Mantenha séries atemporais úteis independentemente de tendências.
 
-- **Compartilhamentos por 1.000 contas alcançadas:** compartilhamentos ÷ alcance × 1.000. É uma taxa de eventos por alcance, não percentual de pessoas que compartilharam.
-- **Salvamentos por 1.000 contas alcançadas:** salvamentos ÷ alcance × 1.000, com a mesma ressalva.
-- **Conclusão de vídeo:** reproduções completas ÷ reproduções iniciadas × 100, apenas quando a plataforma fornecer ambos com definições compatíveis.
-- **Cliques por impressão do link ou chamada:** cliques ÷ exposições registradas × 100, se houver esse denominador. Não usar visualizações de outro canal como substituto.
+## Teste a produção antes de ampliar
 
-Registrar contagens brutas junto às taxas e a definição exibida pela plataforma. Não misturar alcance, impressões e reproduções. Denominador ausente ou zero significa “não calculável”. Comparar formatos semelhantes e usar a mediana por post para reduzir a influência de um pico; uma taxa agregada precisa guardar a soma do numerador e do denominador. Somar alcance de posts não produz público único da campanha.
+Produza primeiro um piloto pequeno no meio pretendido. Para uma personagem construída em torno de vídeo viral, comece com atuação vertical curta, incluindo fala/atuação quando planejadas. O piloto testa identidade em movimento, voz, interpretação, continuidade e o caminho de produção. Roteiros podem ser preparados durante a descoberta; a produção usa o canon exato aprovado.
 
-Seguidores são um sinal de contexto. Se não houver atribuição por publicação, registrar variação de seguidores no período sem atribuí-la a um post específico. Anotar comentários que repetem dúvidas ou demonstram interesse, sem armazenar dados pessoais desnecessários.
+Revise a mídia completa e exporte os bytes realmente revisados antes de lotes. Resolva defeitos com outra versão e inspeção. Uma imagem estática não estabelece qualidade de movimento, identidade vocal ou lip-sync. Consulte [produção](production.md) e [qualidade](quality.md).
 
-Ao fim da janela, decidir: **repetir**, **ajustar** ou **abandonar a hipótese**. Se a exposição for insuficiente, ampliar o teste ou manter a dúvida aberta. Não confundir “ainda não sabemos” com “não funciona”.
+Depois, escolha um experimento de público adequado à capacidade do estúdio e à autorização aplicável de publicação. Defina antes de publicar:
 
-## 6. Tratar monetização como uma hipótese de valor
-
-Só formular uma oferta a partir de um problema ou interesse observado. A oferta pode ser um produto próprio, serviço, licenciamento da personagem, colaboração ou afiliação; a escolha depende da persona e da demanda, ainda não definidas.
-
-Registrar: quem se beneficia, o que recebe, evidência de interesse, entrega real, custos, preço a testar e limitações. Uma personagem virtual pode apresentar uma demonstração feita pela equipe, com essa origem clara. Não deve afirmar que usou fisicamente um produto, fez um tratamento ou obteve um resultado pessoal que nunca aconteceu.
-
-Toda colaboração comercial deve ser identificada. Depoimentos, parcerias, clientes, resultados e receitas precisam de evidência real. Não colocar ganhos imaginários no perfil, media kit ou argumento de venda. Projeções devem declarar suas premissas; receita bruta, custos e resultado líquido são números diferentes.
-
-## 7. Escalar sem criar cópias do mesmo perfil
-
-Antes de adicionar outra persona, comparar o portfólio:
-
-| Dimensão | Diferença que precisa existir |
+| Campo | Registre |
 | --- | --- |
-| Público e necessidade | Uma razão própria para seguir cada perfil |
-| Ponto de vista e voz | Textos distinguíveis mesmo sem foto |
-| Mundo visual | Identidade reconhecível e referências independentes |
-| Séries | Conteúdos com funções e assuntos próprios |
-| Oferta eventual | Uma hipótese de valor coerente com aquele público |
+| Hipótese e variável | Uma diferença esperada concreta; altere uma característica principal quando a comparação for possível |
+| Conjunto comparado | IDs reais das publicações, canal, formato, público/configurações e contexto orgânico/pago |
+| Janela | Compare publicações na mesma idade; escolha duração e volume viáveis |
+| Métrica principal | Numerador, denominador, unidade e fonte real da plataforma |
+| Qualidade e regra de decisão | Retorno útil, evidência mínima e o que sustenta repetir/ajustar/encerrar |
+| Custo | Tempo de produção e gasto autorizado real |
 
-Cada persona mantém canon, cronologia, referências e resultados próprios. Ferramentas e processos podem ser compartilhados. Histórias, rostos e números não migram entre personas. Colaborações entre personagens devem respeitar as duas cronologias e deixar a ficção compreensível.
+Mantenha contagens brutas junto às taxas. Exemplos incluem compartilhamentos ÷ alcance × 1.000 e salvamentos ÷ alcance × 1.000: contam eventos por alcance, não a porcentagem de pessoas que agiram. Conclusão de vídeo só é calculável com dados compatíveis de reproduções concluídas/iniciadas. Denominadores ausentes ou zero não são calculáveis. Separe alcance, impressões e reproduções; somar alcance de posts não produz o público único da campanha.
 
-## Trabalhar com o coordenador conversacional
+Comparações orgânicas são observacionais. Momento, público e distribuição podem diferir; um post bem-sucedido não prova causalidade nem valida toda uma personagem. Se a exposição for insuficiente, registre resultado inconclusivo e decida se deve ampliar ou redesenhar o teste. Encerre ou ajuste a hipótese com evidências, sem descartar a persona prematuramente.
 
-Codex ou Claude pesquisa, apresenta direções quando faltam escolhas, redige, organiza, revisa e prepara lotes para inspeção. Não é necessário aprovar cada legenda ou ajuste de composição. Dentro das âncoras escolhidas, o trabalho avança e as hipóteses ficam registradas.
+## Cresça com evidências e confiança do público
 
-As decisões do usuário se concentram na direção e nas âncoras da persona, nas referências de identidade, na publicação e em gastos ainda não autorizados. Rascunhos e propostas não viram canon aprovado por silêncio. Publicar, iniciar anúncios ou contratar uma ferramenta requer autorização correspondente; revisar documentos e preparar conteúdo local pode avançar.
+Identifique a natureza virtual da personagem na apresentação pública e aplique os requisitos atuais da plataforma escolhida. Mantenha registros internos de identificação; legendas editoriais e artes não precisam repetir uma frase fixa. Relações comerciais precisam de identificação clara, e fatos, credenciais, uso de produtos, depoimentos, parcerias e resultados precisam de evidências.
 
-**Próximo passo:** começar uma conversa curta sobre objetivo, tipo de personagem e público ou pedir três fichas de conceito. Após escolher uma direção, salvar brief e plano do método e preparar o trabalho de persona, voz e referências no estúdio instalado.
+Trate uma oferta como hipótese de valor: registre quem se beneficia, o que recebe, interesse observado, custo, preço proposto e limitações. Uma personagem fictícia não fornece prova de uma experiência física que nunca aconteceu. Separe projeções, receita bruta, custos e resultado líquido.
+
+Antes de adicionar outra personagem, confirme necessidade de público, perspectiva/voz, mundo visual e séries distintos. Cada uma mantém canon, referências, cronologia e resultados independentes. Processos podem ser compartilhados enquanto os registros privados das personagens permanecem no estúdio instalado. Atena avança com escrita e organização reversíveis; escolhas de identidade, novos gastos, treinamento e publicação usam decisões e autorizações aplicáveis do usuário.

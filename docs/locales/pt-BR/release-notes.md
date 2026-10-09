@@ -1,103 +1,59 @@
-# Notas das versões do OLYMPOX
+# Notas das versões
+
+Estas notas explicam comportamento por versão. Os guias atuais descrevem o código da 0.5.0. Padrões históricos abaixo pertencem às suas revisões e não substituem orientação atual. Leia [instalação e atualização](installation.md) antes de mudar estúdio existente.
 
 ## 0.5.0 — 9 de outubro de 2026
 
-Higgsfield passa a ser o pipeline padrão de mídia para aparência, candidatas, referências, cenas, edições, voz, animação, vídeo e lip-sync de novos influenciadores. Codex ou Claude Code coordena conceitos, personalidade, narrativa, roteiros e planejamento. Imagens integradas do assistente exigem decisão explícita por alternativa. Módulos necessários ausentes mantêm a etapa pendente. O [guia do método de referência](higgsfield-influencer-method.md) preserva Soul Cinema observado, direção de voz separada e vídeo Seedance, identificando adaptações atuais para Builder separadamente; conexão genérica ao fornecedor não comprova módulo solicitado ou equivalência.
+A tag `v0.5.0` identifica a release publicada do framework. Instale com `npx --yes github:linkiaai/olympox#v0.5.0 setup` ou use `node bin/olympox.mjs setup` a partir de checkout revisado ou pacote extraído. Mudanças na documentação posteriores à release exigem exportação e publicação próprias.
 
-O `setup` guiado seleciona idioma da apresentação, assistente e destino independente, pré-verifica toda a instalação, mostra seu plano real e executa verificações locais de manual/doctor/registros após confirmação. Um hash determinístico recusa entradas revisadas que mudaram antes de escrever. Cancelamento/EOF antes de instalar não deixa arquivos; setup sem interação exige destino explícito, assistente e `--yes`. Instalação direta continua disponível para automação. A prontidão do Higgsfield é verificada no assistente escolhido após instalar.
+### Instalação e assistentes
 
-O instalador acrescenta `--assistant codex|claude|both` (padrão compatível: `codex`). Claude Code recebe skills canônicas em `.claude/skills/` e importação do `AGENTS.md` criativo por `CLAUDE.md`. Ambos os destinos preservam pré-verificação integral de conflitos, estado privado e projeções idênticas à origem. Inicie a versão publicada com `npx --yes github:linkiaai/olympox#v0.5.0 setup`. Consulte [instalação](installation.md).
+- `setup` guiado escolhe idioma da apresentação, Codex/Claude Code/ambos e destino independente. Apresenta plano completo e confere que permaneceu igual antes de escrever.
+- Cancelar antes de instalar deixa destino intacto. Setup não interativo exige diretório, assistente e `--yes` explícitos.
+- Setup executa build do manual, doctor, validação de registros e check da documentação em ordem. A suíte completa continua sendo `npm run verify` no estúdio instalado.
+- Instalação direta aceita `--assistant codex|claude|both`, com padrão compatível `codex`. Claude Code recebe `.claude/skills/` e importação do `AGENTS.md` criativo por `CLAUDE.md`.
+- Todos os destinos selecionados são pré-verificados. Arquivos idênticos são mantidos; diferenças são recusadas. `--merge` não atualiza personalizações automaticamente.
 
-Novos runs persistem `mediaProviders` por tentativa, com image/video/audio em `higgsfield` por padrão. Capacidades de geração do fornecedor, evidência gerada e intenção externa devem corresponder ao fornecedor escolhido. Novos fluxos `create-character` têm piloto em vídeo por padrão; candidatas e sua revisão usam imagem. Um novo run pode selecionar uma alternativa explícita. Mudar o fornecedor escolhido de um run existente exige o procedimento normal de nova tentativa e motivo. Runs históricos sem essa política conservam semântica e bytes salvos; identidade, voz, mídia e aprovações existentes não são migradas. A revisão de componente do núcleo/tarefas permanece **0.2.0** com política aditiva para novos runs.
+### Método de mídia e política dos runs
 
-Prontidão do piloto completo verifica módulos, workspace, transporte/reutilização da referência exata, escuta vocal, vídeo, inspeção completa, exportação, saldo e escopo limitado de custo antes da primeira etapa cobrada. Reutilize IDs confirmados do fornecedor e transferência automática local suportada antes de propor anexo manual. A ponte oficial de upload da CLI local ao plugin é documentada quando preparada; não é entregue adaptador reutilizável de upload nem se afirma login, geração ou dispatch automáticos. Autorizações anteriores aplicáveis são reutilizadas.
+Higgsfield é pipeline padrão para aparência, candidatas, referências, cenas, edições, voz, animação, vídeo e lip-sync novos. Codex ou Claude Code coordena conceitos, personalidade, narrativa, roteiros e planejamento. Imagens integradas exigem escolha explícita de alternativa. Módulos necessários ausentes ficam pendentes.
 
-Verificação local cobre política de fornecedor, etapas de vídeo/imagem, histórico, instalação por assistente, preservação e exportação. Não demonstra descoberta real de skills no Claude, execução do fornecedor, fidelidade da mídia ou publicação remota. Resultados são registrados na manutenção local quando concluídos. As versões abaixo preservam suas políticas históricas.
+Runs novos salvam `mediaProviders` por tentativa para image/video/audio. Capacidades de geração, intenção externa e evidência de conclusão devem corresponder ao fornecedor. Novos runs `create-character` usam piloto em vídeo por padrão; geração/revisão de candidatas usa imagem. Mudar fornecedor de run existente exige nova tentativa explícita e motivo.
+
+O [guia do método](higgsfield-influencer-method.md) separa etapas observadas da fonte e adaptações atuais. Conexão genérica não comprova módulo exato. A [passagem do piloto](production-handoff.md) confere rota completa, transporte exato, escuta vocal, inspeção de vídeo, exportação e custo delimitado antes de produção paga. O framework oferece preparação e registros rastreáveis, não upload ou execução automáticos.
+
+### Compatibilidade e documentação
+
+Tentativas históricas sem política conservam semântica salva. Identidade, voz aprovada, mídia, snapshots, aprovações e tentativas antigas ficam intactos. Nova tentativa preserva contrato salvo no run; inicie run separado quando precisar de definição de fluxo alterada.
+
+Revisões dos contratos de tarefas/fluxos permanecem 0.2.0 com política aditiva; isso não torna 0.2.0 a release do framework. Guias ingleses e pt-BR explicam comportamento, comandos, responsabilidades, preservação e limites conjuntamente.
+
+Verificação local cobre registros, política, meios das etapas, instalação, seleção da exportação e preservação. Não demonstra descoberta real, execução do fornecedor, fidelidade audiovisual ou publicação remota. Resultados pertencem à revisão e ambiente realmente verificados.
 
 ## 0.4.0 — 8 de outubro de 2026
 
-A geração integrada de imagens do ChatGPT/Codex passa a ser o padrão para aparência, candidatas, referências, cenários, imagens e edições quando disponível. Dispensa Higgsfield, Builder, CLI externa e chave de API; aplicam-se limites da conta e disponibilidade, sem promessa de geração gratuita ou ilimitada. Conceito, personalidade, universo narrativo, roteiros e planejamento continuam no ChatGPT/Codex. Métodos/fornecedores escolhidos explicitamente pelo usuário têm prioridade; voz, animação, vídeo e sincronização labial especializados usam ferramentas verificadas conforme necessidade, qualidade e custo. Procedimentos de plugin/CLI e Builder do Higgsfield continuam opcionais por etapa selecionada.
+Política histórica de imagens: geração integrada ChatGPT/Codex passou a ser preferida para aparência, candidatas, referências, cenas, imagens e edições quando disponível. Métodos explícitos do usuário tinham prioridade; voz/vídeo/lip-sync especializados continuavam dependentes de ferramentas verificadas. Rotas Higgsfield eram opcionais nas etapas selecionadas.
 
-O [procedimento do Codex ao vídeo](production-handoff.md) define pontos de controle de fidelidade e um [pacote concreto de passagem ao vídeo](../../../templates/locales/pt-BR/video-handoff.md). Preparar referências coerentes de identidade, expressões e vistas úteis, cenários e objetos adequados ao conteúdo planejado, roteiros, áudio vocal exato quando houver fala e imagens por cena inspecionadas no Codex antes de passar as entradas suportadas a uma ferramenta de vídeo verificada. Preservar a biblioteca local rica de referências separada do subconjunto relevante e suportado realmente anexado em cada chamada. Registrar arquivos/hashes exatos, papéis e evidência de transferência desse subconjunto; arquivos adicionais não estabelecem fidelidade melhor. Higgsfield é um destino opcional de vídeo, e uma ferramenta especializada de voz verificada pode ser usada antes quando necessário.
+A passagem ao vídeo introduziu controles concretos de identidade/voz, script, cena, subconjunto de referências, transferência e exportação. Aprovação completa de canon falante, anexos reais, piloto antes de lotes, inspeção completa e autorização de publicação permaneceram exigidos. Essa preferência não constituía benchmark nem promessa de geração grátis/ilimitada.
 
-Descoberta adaptativa, conceitos distintos, cenas expressivas da premissa, anexos reais de referência, inspeção de anatomia/presença/continuidade, seleção visual pelo usuário, referências vocais geradas/ouvidas/selecionadas pelo usuário antes do canon completo de personagens falantes, aprovações exatas, canon preservado, piloto antes de lotes, revisão/exportação completas de mídia e publicação autorizada continuam exigidos. Método/ferramenta/modelo por etapa, prompts, referências reais, arquivos/hashes, custos conhecidos e limitações continuam rastreáveis. Recursos ausentes ficam pendentes com alternativas; substituições externas pagas exigem autorização aplicável. A API do núcleo local, schemas de runs e revisão de componente das tarefas continuam em **0.2.0**.
-
-É uma preferência de processo sustentada por retorno do usuário após direção de arte e enquadramento também mudarem, sem constituir comparação controlada nem prova de superioridade geral de fornecedor. Personagens aprovadas, mídias, aprovações, backups, runs e bytes históricos ficam intactos; mudança de método ou contexto observado segue o procedimento existente de nova tentativa explícita em vez de reescrever evidências.
-
-### Instalar ou atualizar
-
-Instale um estúdio independente com acesso ao repositório e à tag:
-
-```sh
-npx --yes github:linkiaai/olympox#v0.4.0 install ./my-studio
-cd my-studio
-npm run verify
-```
-
-Use `npx.cmd` e `npm.cmd` no Windows se necessário. Estúdios existentes seguem as [orientações de atualização](installation.md#atualizar-um-estudio-existente): faça backup dos registros privados e da base do framework, instale separadamente, compare e reconcilie arquivos reutilizáveis, e preserve registros pessoais e bytes históricos. `--merge` recusa arquivos diferentes antes de escrever; ele não é um atualizador automático. A instalação não conecta fornecedores nem executa produção paga.
-
-### Verificação e limites
-
-Concluir `npm.cmd run verify` e revisar a exportação explícita do framework e as verificações de instalação independente para esta release. Testes locais de coordenação não demonstram geração real, condicionamento real por referência, qualidade vocal, fidelidade audiovisual, descoberta de skills pelo Codex ou publicação remota. Não inclui produção pessoal nem benchmark de fornecedores. Cada estúdio instalado ainda precisa de evidência real de geração de mídia, anexos, inspeção e exportação. As seções históricas abaixo preservam comportamento, tags de instalação e evidências de verificação das releases 0.3.0 e 0.2.1.
+A tag `v0.4.0` identifica essa revisão histórica. Canon e registros de execução salvos são preservados nas atualizações explícitas. Use o guia atual para trabalho novo após atualizar; não aplique esses padrões históricos automaticamente à 0.5.0.
 
 ## 0.3.0 — 8 de outubro de 2026
 
-A criação de novos influenciadores começa com onboarding adaptativo curto e três conceitos distintos, conectando assinatura visual memorável, personalidade forte e conteúdo recorrente. O método principal usa AI Influencer Builder do Higgsfield e um pacote coerente de referências. Seleção visual preliminar e revisão de fidelidade antecedem a amostra vocal de uma personagem que fala, preparada e ouvida enquanto a persona permanece `draft` com `purpose: reference`. A aprovação final vincula o cânone visual/vocal completo antes de roteiros, cenas e piloto de vídeo em produção seguirem com esse contexto aprovado. Conteúdo silencioso registra por que voz não se aplica; voz e cânone já aprovados são reutilizados. QA/exportação completos antecedem publicação autorizada e comparação de resultados reais. Soul ID continua condicionado à necessidade e com autorização separada.
+Descoberta adaptativa curta e três conceitos distintos conectaram assinatura visual, personalidade e conteúdo recorrente. O método Higgsfield documentado usava seleção de candidatas, referências coerentes, exploração/escuta vocal draft para personagens falantes, aprovação completa do canon e piloto em vídeo antes de lotes. Soul ID permaneceu condicionado à necessidade e com autorização separada.
 
-Escolha explícita do usuário pode selecionar outro método. Recursos obrigatórios ausentes ficam pendentes sem substituição silenciosa por imagens integradas ou geração direta de vídeo. Potencial de viralização continua sendo uma hipótese para testar, não um resultado garantido. Cânone existente e registros históricos ficam preservados.
+O estudo da referência separou imagens observadas e adaptações para Builder. Plano de método versionado preservou mapeamento das etapas e lacunas. Prompts passaram a incluir contexto de público, proposta, personalidade e história fictícia quando presentes, junto da identidade e fala exata.
 
-O [estudo da referência](video-reference.md) atualizado registra análise audiovisual automática por cenas e inspeção direta de quadros importantes, com limites de cobertura. Diferencia a tela observada de Soul Cinema do mapeamento atual pelo Builder. O [guia de método](higgsfield-influencer-method.md), skills, critérios de tarefas, instruções do estúdio e [template versionado de plano](../../../templates/locales/pt-BR/production-method.md) preservam o processo escolhido usando entradas/saídas existentes do run. Não acrescentam despacho automático do fornecedor nem imposição semântica pelo núcleo.
-
-Prompts gerados levam público, proposta editorial, personalidade e história fictícia quando preenchidos, junto das âncoras de identidade e entradas exatas de shot/fala existentes. Fontes inglesas e traduções brasileiras mudam juntas. A API do núcleo local, schemas de runs e revisão de componente das tarefas continuam em **0.2.0**, com critérios de método e direção criativa esclarecidos. Governança atualizada ou entradas observadas podem exigir nova tentativa explícita com motivo na retomada; tentativas e aprovações anteriores ficam preservadas.
-
-### Instalar ou atualizar
-
-Instale um estúdio independente com acesso ao repositório e à tag:
-
-```sh
-npx --yes github:linkiaai/olympox#v0.3.0 install ./my-studio
-cd my-studio
-npm run verify
-```
-
-Use `npx.cmd` e `npm.cmd` no Windows se necessário. Estúdios existentes seguem as [orientações de atualização](installation.md#atualizar-um-estudio-existente): faça backup dos registros privados e da base do framework, instale separadamente, compare e reconcilie arquivos reutilizáveis, e preserve registros pessoais e bytes históricos. `--merge` recusa arquivos diferentes antes de escrever; ele não é um atualizador automático. A instalação não conecta fornecedores nem executa produção paga.
-
-### Verificação e limites
-
-O framework atualizado passou em **128 testes locais** na cópia do código-fonte e **128** em um estúdio independente instalado do arquivo npm. A cobertura de regressão inclui contexto criativo do perfil nos prompts, registros de origem e fala exata intactos, hashes e mudança/retomada do método salvo, e ausência de recurso obrigatório de geração. As verificações de instalador/exportação cobrem seleção do pacote reutilizável, arquivos e metadados preservados, e recusa de conflitos.
-
-Nenhuma geração real do Higgsfield foi executada para esta release. Verificações locais não comprovam descoberta de skills pelo Codex, acesso ou execução do fornecedor, fidelidade de identidade, qualidade de voz, exportação de mídia, resultados de viralização ou publicação. Cada estúdio instalado precisa executar as verificações de produção aplicáveis com ferramentas e mídia reais. As notas históricas abaixo mantêm o comportamento e a tag de instalação da release 0.2.1.
+A tag `v0.3.0` identifica essa revisão histórica. Testes locais cobriram contexto de prompt, mudanças no método salvo, capacidades obrigatórias e preservação do pacote/instalador; não comprovaram produção real nem viralização.
 
 ## 0.2.1 — 8 de outubro de 2026
 
-Esta atualização de correção acrescenta orientações para usar o Higgsfield pelo plugin conectado do Codex, junto à CLI e wrapper locais existentes. O usuário pode escolher o plugin na conversa sem instalar a CLI local do Higgsfield. A release do framework é 0.2.1; a API do núcleo local e os contratos de tarefas, sem mudanças, mantêm a revisão de componente 0.2.0.
+Orientações e skill `higgsfield-studio` acrescentaram plugin conectado junto da CLI/wrapper existentes. Ambas as rotas usaram canon, intenção no run, reconciliação, selos e revisão do arquivo exato. Imagens integradas continuavam padrão documentado quando disponíveis nessa revisão.
 
-### Mudanças
+Orientações de jobs esclareceram `resolve` para sucesso normal, falha e não submissão confirmada. Arquivos de testes passaram a executar sequencialmente para reduzir pico de recursos. A tag `v0.2.1` identifica essa revisão histórica; componente local de núcleo/tarefas permaneceu 0.2.0.
 
-- A skill opcional `higgsfield-studio` e as instruções do estúdio cobrem a escolha de plugin ou CLI, verificações de capacidades, submissão real de referências e passagem dos resultados. A geração de imagens integrada do Codex continua sendo o padrão quando disponível, salvo se o usuário escolher outro fornecedor.
-- O [guia do plugin Higgsfield](higgsfield-plugin.md) explica descoberta de ferramentas na sessão, verificações de conta e custos, anexo de referências, obtenção de saídas e a sequência existente dos registros de produção. Ambas as rotas usam os mesmos registros de cânone, runs, intenção de submissão, selos de execução e revisão de qualidade dos arquivos exatos.
-- Instalação, início rápido, ferramentas, produção, estado do framework e manual local explicam a rota opcional em inglês e português brasileiro.
-- A documentação de jobs externos esclarece `resolve` em sucesso normal, falha e ausência de submissão confirmada, preservando a sintaxe e o comportamento existentes da transição.
-- Os arquivos de testes executam em sequência para reduzir o pico de uso de recursos na verificação local; os mesmos checks continuam obrigatórios.
+Orientações de plugin não acrescentaram adaptador automático, autenticação, submissão, consulta, repetição, download ou aprovação. Continuaram sendo operações reais do estúdio, com ferramentas e autorização aplicável.
 
-O pacote fornece instruções para usar ferramentas reais disponíveis na sessão. Ele não acrescenta um adaptador automatizado de fornecedor, instala ou autentica o plugin externo, nem submete, consulta, repete, baixa ou aprova jobs de fornecedores automaticamente. Voz, Soul ID, uso de referências, obtenção/exportação de mídia e cobrança devem ser verificados pela rota escolhida. Um caminho local de cânone no Windows não comprova acesso de upload pelo plugin; uma galeria ou URL remota só se torna um ativo local final depois que os bytes exatos são salvos e inspecionados.
+## Atualizar a partir de uma versão histórica
 
-### Instalar ou atualizar
-
-Para um estúdio independente novo, com acesso ao repositório e à tag:
-
-```sh
-npx --yes github:linkiaai/olympox#v0.2.1 install ./my-studio
-cd my-studio
-npm run verify
-```
-
-Use `npx.cmd` e `npm.cmd` no Windows se necessário. Um repositório privado do GitHub pode exigir acesso Git autenticado na máquina.
-
-Para um estúdio existente, faça primeiro backup dos registros privados e da base compartilhada do framework. Instale esta release em um diretório independente, compare as fontes reutilizáveis e reconcilie explicitamente o framework, skills, templates e documentação pretendidos. Preserve registros privados e bytes históricos. `--merge` verifica conflitos previamente e recusa arquivos diferentes; ele não é um atualizador automático. Siga as [orientações de atualização](installation.md#atualizar-um-estudio-existente), incluindo uma nova tentativa com motivo quando uma run existente detectar mudanças na governança ou nas entradas.
-
-### Verificação e limites
-
-A release **0.2.1** passou em **124 testes locais** na cópia do código-fonte e **124** em um estúdio independente instalado do arquivo npm. A verificação cobre registros locais, preservação, seleção do instalador/exportação, documentação, consistência das skills e o tratamento existente de estados de jobs externos. O pacote contém apenas fontes reutilizáveis; a instalação preserva metadados Git permitidos e arquivos não relacionados, enquanto conflitos de merge são recusados antes de qualquer escrita.
-
-Nenhuma geração real do Higgsfield foi executada para esta mudança. Testes locais não comprovam nova descoberta de skills pelo Codex, acesso à conta do plugin, geração do fornecedor, fidelidade de identidade, qualidade de voz, exportação de mídia ou publicação remota. O fluxo do plugin preserva essas verificações como trabalho real de produção em cada estúdio instalado.
+Preserve registros privados e base compartilhada, instale revisão desejada separadamente, compare fontes reutilizáveis e reconcilie mudanças explícitas. Verifique estúdio atualizado e revise contexto observado dos runs retomados. Jobs externos pendentes precisam ser reconciliados antes de nova tentativa. Siga [atualização completa](installation.md#atualizar-um-estudio-existente); não reescreva histórico para adequar à política atual.

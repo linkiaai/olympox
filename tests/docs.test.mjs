@@ -77,7 +77,7 @@ test('manual excludes private data, rejects unsafe sources and requires command 
     fs.writeFileSync(path.join(root, 'influencers/privada/persona.json'), marker);
     fs.writeFileSync(path.join(root, '.env'), marker);
     fs.writeFileSync(path.join(root, 'docs-site/src/private.png'), marker);
-    fs.appendFileSync(path.join(root, 'docs/studio-status.md'), marker);
+    fs.writeFileSync(path.join(root, 'docs/diagnostic-notes.md'), marker);
     const built = buildDocumentation(root);
     for (const bytes of built.output.values()) assert.equal(bytes.includes(marker), false);
     assert.equal(built.manifest.sources.some(item => /^(?:influencers|work|backups|\.env)/.test(item.path)), false);
@@ -426,4 +426,74 @@ test('cross-edition links change language and retain their target route for port
     assert.equal(browser.document.documentElement.lang, 'en');
     assert.match(browser.element('main').innerHTML, /Start using the studio/);
   }
+});
+
+test('manual navigation covers every maintained guide and renders each edition and profile', () => {
+  const { data } = collectDocumentation(source);
+  const role = data.roles[0];
+  role.markdown += '\nHidden-profile-marker-73912\n';
+  const teamGuide = data.guides.find(guide => guide.path === 'docs/studio-team.md');
+  teamGuide.markdown = teamGuide.markdown.replace(`### ${role.name}\n`, `### ${role.name}\nVisible-role-marker-73912\n`);
+  const selected = new Set(data.guides.map(guide => guide.path));
+  for (const name of fs.readdirSync(path.join(source, 'docs')).filter(name => name.endsWith('.md'))) {
+    assert.equal(selected.has(`docs/${name}`), true, `Guide missing from manual: ${name}`);
+  }
+  const browser = manualBrowser(data);
+  browser.search('Hidden-profile-marker-73912');
+  assert.match(browser.element('#search-results').innerHTML, /No results/);
+  browser.search('Visible-role-marker-73912');
+  assert.ok(browser.element('#search-results').innerHTML.includes(`href="#agent/${role.id}"`));
+  browser.navigate(`agent/${role.id}`);
+  assert.match(browser.element('main').innerHTML, /Visible-role-marker-73912/);
+  assert.doesNotMatch(browser.element('main').innerHTML, /Hidden-profile-marker-73912/);
+  browser.search('');
+  for (const locale of ['en', 'pt-BR']) {
+    browser.switchLocale(locale);
+    const edition = locale === 'en' ? data : data.locales[locale];
+    const navigation = browser.element('#navigation').innerHTML;
+    for (const guide of edition.guides) {
+      const route = guide.section ?? `guide/${encodeURIComponent(guide.path)}`;
+      assert.ok(navigation.includes(`href="#${route}"`), `Navigation omits ${locale} ${guide.path}`);
+      browser.navigate(route);
+      assert.match(browser.element('main').innerHTML, /<h1(?:\s[^>]*)?>/);
+      assert.equal(browser.element('main').innerHTML.includes(edition.ui.missingTitle), false);
+      assert.equal(browser.document.documentElement.lang, locale);
+    }
+    for (const role of edition.roles) {
+      browser.navigate(`agent/${role.id}`);
+      const html = browser.element('main').innerHTML;
+      assert.ok(html.includes(`<h1>${role.name}</h1>`));
+      assert.ok(html.includes(edition.ui.assignedContracts));
+      assert.equal(html.includes('Version <strong>0.2.0</strong>'), false);
+    }
+  }
+  const instance = fixture();
+  try {
+    const file = path.join(instance.root, 'docs-site/config.json');
+    const config = JSON.parse(fs.readFileSync(file, 'utf8'));
+    config.guides[0].group = 'invalid';
+    fs.writeFileSync(file, JSON.stringify(config));
+    assert.throws(() => collectDocumentation(instance.root), /Unknown guide navigation group/);
+  } finally { instance.close(); }
+});
+
+test('maintained documentation local links resolve to files and existing heading anchors', () => {
+  const { data } = collectDocumentation(source);
+  const files = new Set(data.guides.flatMap(guide => [guide.path, ...Object.values(guide.translations)]));
+  const failures = [];
+  for (const relative of files) {
+    const markdown = fs.readFileSync(path.join(source, relative), 'utf8').replace(/^```[^\n]*\n[\s\S]*?^```\s*$/gm, '');
+    for (const match of markdown.matchAll(/!?\[[^\]]+\]\(([^)]+)\)/g)) {
+      const target = match[1];
+      if (/^https?:\/\//i.test(target)) continue;
+      const [file, anchor] = target.split('#');
+      const absolute = file ? path.resolve(source, path.dirname(relative), file) : path.resolve(source, relative);
+      if (!fs.existsSync(absolute) || !fs.statSync(absolute).isFile()) { failures.push(`${relative}: missing ${target}`); continue; }
+      if (anchor && absolute.endsWith('.md')) {
+        const headings = globalThis.StudioMarkdown.render(fs.readFileSync(absolute, 'utf8')).headings;
+        if (!headings.some(heading => heading.id === `heading-${globalThis.StudioMarkdown.slug(anchor)}`)) failures.push(`${relative}: missing anchor ${target}`);
+      }
+    }
+  }
+  assert.deepEqual(failures, []);
 });

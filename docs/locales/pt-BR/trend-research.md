@@ -1,107 +1,72 @@
 # Pesquisa de oportunidades e tendências
 
-Data: **7 de outubro de 2026**. Este guia define pesquisa sob demanda conduzida pelo coordenador conversacional. Não há coleta contínua, contas sociais conectadas ou radar automático instalado.
+Use pesquisa para resolver uma decisão criativa: qual público merece uma nova personagem ou qual sinal atual combina com uma existente. Gaia cuida de oportunidades; Aurora, de adaptações de tendências. Trabalham sob demanda com as ferramentas disponíveis do assistente. O OLYMPOX não instala coleta contínua, contas sociais conectadas ou radar automático de tendências.
 
-## Duas decisões, dois papéis
+## Defina um escopo útil
 
-**Gaia — oportunidades de novas personas** pesquisa que público, necessidade e espaço editorial merecem uma nova personagem. A oportunidade precisa sustentar identidade e séries de conteúdo além de uma tendência passageira.
+Registre decisão, plataforma, região/idioma, público, período e restrições de produção. Reutilize brief e pesquisa anterior. Para campos abertos, declare uma hipótese exploratória e continue o trabalho útil; pergunte apenas quando a resposta ausente mudar materialmente o resultado.
 
-**Aurora — tendências e ideias de conteúdo** pesquisa temas, formatos, músicas, aberturas e linguagem visual para personagens existentes. Entrega adaptações originais, com motivo para cada personagem participar ou deixar a tendência passar.
-
-São papéis acionados conforme o pedido. Gaia não é uma etapa obrigatória quando o usuário já definiu a direção. Aurora não precisa participar de toda peça: conteúdo atemporal, episódios de uma série e pedidos diretos podem seguir para Saraswati.
-
-## Escopo e evidência comuns
-
-Antes de pesquisar, registrar objetivo, plataforma, região, idioma, público, período e restrições de produção. Quando algo estiver aberto, adotar uma hipótese explícita para exploração; ela não vira decisão aprovada. Se o pedido não depender da resposta, avançar sem uma entrevista longa.
-
-Pesquisar fontes atuais. Tendências, disponibilidade de áudio e regras de uso precisam de consulta ao vivo, não de lembrança do modelo. Registrar para cada sinal:
-
-| Campo | Registro |
+| Pergunta de pesquisa | Papel e entrega |
 | --- | --- |
-| Identificação | ID do sinal e tema/formato/áudio observado |
-| Fonte | URL direta, plataforma, autor/origem e tipo de fonte |
-| Datas | Publicação quando exposta, coleta e período a que o dado se refere |
-| Recorte | Região, idioma, público e filtros realmente utilizados |
-| Observação | O que foi visto e quais métricas estão acessíveis |
-| Amostra | Quantos exemplos/criadores independentes foram observados e como foram escolhidos |
-| Interpretação | Inferência da pesquisadora, alternativas e limitações |
-| Atualidade | Momento de reconferir o sinal antes de investir em produção |
+| Há uma oportunidade editorial para outra personagem? | Gaia: até três oportunidades comparáveis com evidências e recomendação |
+| Como esta personagem deve adaptar um tema, formato ou áudio atual? | Aurora: conjunto pequeno e priorizado de ideias originais de conteúdo |
 
-Separar sinais observados, hipóteses promissoras e dados insuficientes. Resultado de busca indexado não demonstra um ranking atual. Um post muito visto não comprova tendência crescente; crescimento exige uma série comparável ou evidência de evolução. Vários posts do mesmo criador não são confirmações independentes.
+Conteúdo atemporal e pedidos diretos de roteiro podem ir para Saraswati sem pesquisa de tendências. Nos fluxos registrados, `research-opportunity` não exige persona; `research-trends` exige personagem/canon aprovado. Pesquisa exploratória durante a descoberta continua sendo preparação e não satisfaz essa condição do fluxo.
 
-Como ponto de partida, Gaia pode comparar 30/90 dias e Aurora 7/30 dias, quando as fontes permitirem. Essas janelas são escolhas operacionais do estúdio, ajustáveis ao tema; não são requisitos das plataformas nem evidência por si mesmas. Também procurar persistência, sazonalidade e sinais contrários.
+## Colete evidências e depois interprete
 
-Descrever saturação apenas dentro da amostra observada: repetição, concentração em grandes contas e espaço aparente para diferenciação. Não afirmar cobertura completa do mercado. Se houver pontuação, explicitar critérios e julgamento; não apresentá-la como probabilidade de viralização.
+Tendências atuais, disponibilidade de áudio e regras de uso precisam de consulta ao vivo. Para cada sinal, registre contexto suficiente para outra pessoa avaliá-lo:
 
-## Fontes e limites de acesso
+| Campo | O que pertence ao registro |
+| --- | --- |
+| Fonte | URL direta ou ID da fonte, autor/origem e tipo de fonte |
+| Tempo | Data de publicação quando exposta, coleta e período coberto |
+| Escopo | Região, idioma, público, termos de busca e filtros realmente usados |
+| Observação | Tema/formato/áudio exato observado e métricas acessíveis |
+| Amostra | Exemplos e criadores independentes consultados; como foram selecionados |
+| Interpretação | Mecanismo proposto, explicações alternativas e evidências contrárias |
+| Atualidade | O que conferir novamente e quando isso afeta a produção |
 
-| Fonte | Uso | Limite a registrar |
+Separe observação, inferência e recomendação. Por exemplo, observar a mesma pergunta nos comentários de cinco criadores independentes sustenta uma hipótese de pergunta recorrente naquela amostra. Não estabelece demanda em toda a população nem disposição a pagar.
+
+Um post com muitas visualizações é um exemplo de alcance; crescimento precisa de observações comparáveis ao longo do tempo. Vários posts do mesmo criador não são confirmação independente. Descreva repetição e saturação dentro da amostra observada e explique seus limites de seleção. Uma pontuação pode resumir critérios declarados, mas não é uma probabilidade de viralização.
+
+## Escolha fontes conforme a pergunta
+
+| Tipo de fonte | Evidência útil | Limites a conservar |
 | --- | --- | --- |
-| Google Trends | Comparar interesse de busca, consultas relacionadas e persistência | Índice relativo, região, intervalo e termos comparados; não é volume absoluto nem prova de demanda por um perfil |
-| TikTok Creative Center / Trends | Consultar hashtags, músicas, formatos e exemplos conforme disponíveis | Confirmar interface atual, login, região, período e dados expostos; não extrapolar catálogo ou ranking |
-| YouTube Studio / Trends | Explorar buscas, conteúdos e lacunas pertinentes ao público | Requer conta; recursos variam por país, idioma e dispositivo; acesso deve ser realmente exercitado |
-| Exemplos públicos em TikTok, Instagram e YouTube | Observar formatos, áudio exato, comentários e adaptação ao nicho | Feed e busca são amostras; registrar recência, origem e métricas visíveis |
-| Dados próprios disponíveis | Aprender quais formatos funcionaram para a nossa personagem | Registrar fonte, janela e denominadores; não atribuir causalidade automaticamente |
+| Ferramentas de interesse de busca | Interesse relativo, consultas relacionadas e persistência | Região, período, termos comparados e definição do índice; interesse de busca não é demanda por um perfil |
+| Ferramentas de tendências/catálogos de plataforma | Temas, formatos, áudios e rankings disponíveis | Acesso real à conta, filtros, região, período e campos expostos |
+| Conteúdo público e comentários | Mecanismos criativos, exemplos e perguntas recorrentes | Datas, amostragem, métricas visíveis e se a mídia foi realmente vista/ouvida |
+| Resultados próprios do estúdio | Resposta ao trabalho publicado da personagem | IDs reais dos posts, definições de métricas, janela de coleta e denominadores |
+| Documentação oficial de uso | Condições pertinentes a áudio, identificação ou publicação | Data da fonte, conta/uso pretendido e verificações abertas |
 
-Fontes oficiais consultadas nesta preparação: [Google Trends: interpretação dos dados](https://support.google.com/trends/answer/4365533?hl=en), [TikTok: uso de Trends](https://ads.us.tiktok.com/resources/help/article/how-to-use-trends?lang=en&redirected=2), [Creative Center](https://ads.tiktok.com/business/creativecenter/pc/en) e [YouTube: explorar tendências](https://support.google.com/youtube/answer/11962757?hl=en).
+Consulte a orientação atual da fonte ao usar uma ferramenta, como [interpretação de dados do Google Trends](https://support.google.com/trends/answer/4365533?hl=en), [TikTok Creative Center](https://ads.tiktok.com/business/creativecenter/pc/en) ou [pesquisa de tendências do YouTube](https://support.google.com/youtube/answer/11962757?hl=en). São pontos de partida; documentação vinculada não demonstra que o estúdio acessou um ranking ou conta ao vivo.
 
-Na consulta de 7 de outubro, a URL antiga da página de músicas do TikTok redirecionou para a nova área de Trends, cujo conteúdo acessível à ferramenta mostrou menu/login. Não foi confirmado um ranking atual para o Brasil. Isso registra um limite desta consulta, não ausência de tendências ou impossibilidade de acesso por outro meio autorizado. Nenhuma lista de músicas em alta foi produzida nesta preparação.
+Quando faltar acesso, entregue os achados sustentados e lacunas explícitas, com fontes alternativas. Trechos de busca não provam observação de vídeo nem escuta de áudio. Um pedido de pesquisa não autoriza, sozinho, compras ou monitoramento recorrente. Guarde evidências criativas úteis nos registros privados do estúdio sem coletar dados pessoais desnecessários do público.
 
-Quando faltar acesso, entregar pesquisa parcial com lacunas explícitas e alternativas de fontes. Não inventar números nem declarar observação de vídeo/áudio que não ocorreu. Não contratar acesso ou iniciar monitoramento recorrente como consequência automática de um pedido de pesquisa.
+## Gaia: compare oportunidades
 
-## Gaia: encontrar uma oportunidade para uma nova personagem
+Use o [template de oportunidades](../../../templates/locales/pt-BR/opportunity-research.md). Receba objetivo do portfólio, mercado/idioma, preferências, personagens existentes e capacidade de produção. Para cada oportunidade, entregue:
 
-**Entradas:** objetivo do portfólio, mercado/idioma, preferências e restrições, personagens existentes, capacidade de produção e resultados prévios quando disponíveis.
+- Necessidade concreta do público e sinais favoráveis/contrários.
+- Exemplos existentes, persistência ou sazonalidade quando observadas e possível diferenciação.
+- Proposta editorial e três hipóteses de séries.
+- Viabilidade de produção, risco de repetição, lacunas de evidência e próximo teste.
+- Recomendação de explorar, testar, deixar passar ou manter dados insuficientes.
 
-Pesquisar temas e necessidades do público, perguntas recorrentes, sinais de interesse e soluções já existentes. Comparar oportunidades de longo prazo com movimentos passageiros. Analisar viabilidade de conteúdo original, dificuldade de produção e diferenciação em relação ao nosso portfólio.
+Compare criar uma personagem com melhorar uma existente. Atena consolida a recomendação, o usuário seleciona a direção e Psiquê desenvolve a persona. Pesquisa não escolhe rosto, aprova canon ou prova potencial financeiro.
 
-**Entrega:** até três oportunidades comparáveis, usando [template de oportunidades](../../../templates/locales/pt-BR/opportunity-research.md). Cada uma inclui:
+## Aurora: adapte um sinal à personagem
 
-- Público e necessidade concreta.
-- Sinais observados e fontes, com limites e sinais contrários.
-- Espaço de diferenciação e exemplos do que já existe.
-- Proposta editorial e três séries possíveis, ainda como hipóteses.
-- Viabilidade de produção, risco de repetição e dados faltantes.
-- Recomendação fundamentada: explorar, testar ou deixar passar.
+Use o [template de pesquisa de conteúdo](../../../templates/locales/pt-BR/content-research.md). Receba personagem/canon e narrativa exatos, canal/região, objetivo, peças recentes e resultados disponíveis. Cada proposta precisa do sinal datado, mecanismo criativo original, compatibilidade com a personagem, abertura, desfecho e sequência de cenas. Inclua formato, duração aproximada, ritmo, esforço, dependências de mídia, motivo para assistir/salvar/compartilhar e condição de nova conferência.
 
-Gaia pode concluir que não há evidência suficiente ou que melhorar uma persona existente faz mais sentido do que criar outra. Não inventar novidade em nicho conhecido nem transformar pico de buscas em potencial financeiro comprovado.
+Adapte o mecanismo em vez de copiar roteiro, gravação, atuação ou identidade de outro criador. Uma tendência pode ser dispensada quando não combina com a persona. O canon permanece preservado. Saraswati desenvolve a escrita final, Íris/Selene preparam a execução, Têmis inspeciona e Fortuna planeja a medição.
 
-**Passagem:** Atena consolida as oportunidades; o usuário escolhe a direção relevante; Psiquê desenvolve posicionamento, personalidade e voz. Gaia não define silenciosamente rosto, nome ou cânone.
+## Resolva o áudio para seu uso real
 
-## Aurora: transformar tendências em conteúdo para a persona certa
+Registre título exato, artista/criador, URL/ID da versão, canal, região e uso pretendido. Acrescente trecho/momento de entrada apenas quando inspecionado. Remixes e uploads diferentes são ativos diferentes.
 
-**Entradas:** personagem e versão, narrativa e voz editorial, canal/região, objetivo, séries/peças recentes, capacidades de produção e resultados disponíveis. Em uma análise de portfólio, manter contexto e entregas separados por personagem.
+Confira a disponibilidade no catálogo para a conta real separadamente da elegibilidade para o uso pretendido. Distinga publicação orgânica, publicidade e áudio embutido na exportação; uma colaboração orgânica ainda pode ser comercial. Consulte as regras atuais do canal, incluindo a [orientação do TikTok sobre música comercial](https://support.tiktok.com/en/business-and-creator/creator-and-business-accounts/commercial-use-of-music-on-tiktok?lang=en), quando pertinente. Acesso em um canal não resolve uso em outro.
 
-Pesquisar temas, formatos, aberturas, ritmo de edição, músicas/áudios e exemplos recentes. Identificar o mecanismo criativo: surpresa, contraste, demonstração, descoberta, identificação ou continuação de história. Avaliar relevância para o público e novidade em relação ao que a personagem já publicou.
-
-**Entrega:** conjunto pequeno e priorizado de propostas, usando [template de tendências e conteúdo](../../../templates/locales/pt-BR/content-research.md). Cada ideia deve incluir:
-
-- Sinal externo com fonte, data, recorte e limitações.
-- Influencer recomendada e motivo de compatibilidade; se não combina, descartar.
-- Conceito original, abertura, entrega e sequência de cenas.
-- Formato, duração aproximada como proposta, ritmo e necessidades de geração.
-- Música/áudio exato quando confirmado, função da trilha e alternativa se pendente.
-- Motivo pelo qual alguém assistiria, salvaria ou compartilharia; hipótese a testar.
-- Esforço previsto, dependências e momento de reconferir a tendência.
-
-Uma faixa popular não obriga a personagem a dançar; pode fazer sentido como trilha, transição ou referência de ritmo, ou não ser utilizada. Não copiar roteiro, gravação, performance ou identidade de outro criador. Não mudar o cânone para caber numa tendência.
-
-**Passagem:** Saraswati desenvolve os roteiros e legendas finais; Íris/Selene resolvem direção e execução; Têmis inspeciona; Fortuna acompanha o experimento e os resultados. Aurora entrega criação de conceitos fundada em pesquisa, sem prometer alcance ou publicar automaticamente.
-
-## Música e contexto de uso
-
-Quando recomendar áudio, registrar título, artista/criador, URL/ID da versão exata, canal, região, trecho/entrada quando inspecionado, finalidade editorial/comercial e fonte da verificação de disponibilidade. Diferentes remixes ou uploads não são o mesmo ativo.
-
-Registrar separadamente disponibilidade no catálogo da conta/tipo de conta e elegibilidade para o uso pretendido. Identificar se a peça será publicação orgânica, anúncio ou exportação com o áudio incorporado; uma colaboração comercial pode ser orgânica. Um campo confirmado não confirma automaticamente o outro.
-
-A indicação de música em alta não comprova elegibilidade para o uso pretendido. Conferir na conta/catálogo pertinente antes de finalizar a peça; acesso em um canal não demonstra permissão para reutilizar o áudio em outro. A [orientação oficial do TikTok sobre uso comercial](https://support.tiktok.com/en/business-and-creator/creator-and-business-accounts/commercial-use-of-music-on-tiktok?lang=en) recomenda a Commercial Music Library para conteúdo que promove marcas, produtos ou serviços e distingue esse uso das músicas fora dela.
-
-Se o uso estiver pendente, a ideia pode avançar com trilha aberta ou alternativa própria/autorizada, claramente identificada. Não baixar faixas ou presumir autorização para incorporar um áudio por ele estar acessível na web. Não registrar um trecho como ouvido quando só foram consultados metadados.
-
-## Aprender e reconferir
-
-Escolher uma hipótese e variável principal por experimento, conforme [estratégia](strategy.md). Comparar resultados com peças semelhantes, quando possível, e registrar dados brutos, fonte e janela. Aurora aprende com a execução; Fortuna mantém a análise dos resultados próprios.
-
-Antes de geração custosa ou publicação, reconferir sinais efêmeros e a música escolhida. O prazo de reconferência é uma decisão de pesquisa ajustada à velocidade do sinal, não uma validade certificada. Falta de dados mantém a hipótese aberta.
-
-O objetivo é produzir conteúdo relevante com potencial de alcance e compartilhamento, sustentando a identidade. Viralização é um resultado observado depois da distribuição, não uma propriedade garantida do roteiro.
+Áudio pendente pode deixar a trilha aberta ou usar uma alternativa original/autorizada. Não trate uma faixa acessível na web como permissão para baixar ou incorporar. Confira novamente sinais passageiros e áudio selecionado antes de produção cara ou publicação e depois meça uma hipótese concreta conforme [estratégia](strategy.md). A resposta real do público decide o que repetir; pesquisa, sozinha, não promete alcance.

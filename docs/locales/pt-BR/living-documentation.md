@@ -1,51 +1,56 @@
-# Uma documentação que acompanha o framework.
+# Gere e mantenha o manual
 
-O manual usa os próprios arquivos do projeto como fonte. Nomes e papéis vêm do registry; contratos e sequências vêm dos JSONs; a sintaxe dos comandos vem da ajuda escrita na CLI. Os guias são os documentos Markdown selecionados em `docs-site/config.json`.
+O manual navegável é gerado a partir das fontes reutilizáveis do framework. Os guias fornecem explicações; registro, contratos, workflows e ajuda da CLI fornecem catálogos de referência. O gerador detecta mudanças nas fontes, mas não interpreta código nem reescreve textos.
 
-## Abrir e acompanhar alterações
+## Leia localmente
 
-Na pasta do projeto, execute:
+Na raiz do estúdio ou do framework:
 
-```powershell
-npm.cmd run docs:dev
+```sh
+npm run docs:dev
 ```
 
-Abra o endereço mostrado no terminal. Enquanto esse processo estiver aberto, alterações nas fontes são detectadas e o site é regenerado. O navegador atualiza a página mantendo a seção selecionada. Se uma fonte estiver temporariamente inválida durante a edição, a última versão válida permanece visível, com a pendência sinalizada. A atualização volta quando a fonte for corrigida.
+Abra o endereço informado pelo comando, normalmente `http://127.0.0.1:4321`. Escolha outra porta com `npm run docs:dev -- 4322`. O servidor acompanha fontes e o navegador segue builds válidos, mantendo seção e idioma.
 
-## Gerar uma versão portátil
+Se uma edição deixar uma fonte temporariamente inválida, o último build válido permanece visível com um aviso. Corrija a fonte para retomar atualizações. Só os assets selecionados do manual são servidos; arquivos privados do estúdio ficam fora dessa árvore.
 
-```powershell
-npm.cmd run docs:build
-npm.cmd run docs:check
+## Gere e verifique
+
+```sh
+npm run docs:build
+npm run docs:check
 ```
 
-O resultado fica em `docs-site/dist/`. Você pode abrir `index.html` diretamente; essa cópia funciona sem servidor, mas acompanha mudanças somente depois de outra geração. `docs:check` detecta conteúdo ausente, alterado ou desatualizado sem modificar os arquivos.
+O build escreve em `docs-site/dist/`. Abra `docs-site/dist/index.html` diretamente para um manual portátil; outro build é necessário para incorporar edições futuras. A verificação compara a saída esperada com os bytes salvos e informa saída ausente, alterada ou desatualizada sem escrever.
 
-`npm.cmd run verify` gera o manual antes dos testes e depois confere sua integridade. Assim, a verificação normal do projeto também mantém o site atualizado.
+`npm run verify` gera primeiro o manual, depois executa as verificações do framework e confere a integridade da documentação.
 
-## O que se atualiza sozinho
+## Atualize uma página ou catálogo
 
-| Mudança na fonte | Efeito no manual |
-| --- | --- |
-| Nome ou perfil no registry | Nome da coordenadora, catálogo da equipe, contagens e relações com tarefas. |
-| Contrato de tarefa | Responsável, critérios, requisitos, capacidade e entregável. |
-| Etapas de um fluxo | Sequência, responsáveis e etapas opcionais. |
-| Ajuda da CLI | Sintaxe dos comandos; descrição editorial tem cobertura obrigatória. |
-| Guia Markdown selecionado | Texto, exemplos, tabelas e navegação interna. |
-| Código ou instruções do projeto | Nova revisão das fontes; o texto sobre comportamento deve ser revisado junto da mudança. |
+1. Identifique o comportamento alterado em código, ajuda e contratos.
+2. Atualize o guia canônico em inglês e sua tradução pt-BR. Explique comportamento e procedimento executável na página responsável.
+3. Para um guia novo, adicione caminho, título, grupo de navegação e tradução em `docs-site/config.json`, além do título pt-BR no recurso de idioma.
+4. Para um comando novo, adicione sintaxe à ajuda da CLI e descrições à configuração e ao recurso de idioma.
+5. Gere, revise os dois idiomas, verifique links e execute `npm run verify`.
 
-## Como manter as explicações corretas
+O manual agrupa início, desenvolvimento de personagens, produção, registros, referências do framework e manutenção. Mantenha cada guia focado. Use links para procedimentos compartilhados em vez de repetir parágrafos de política.
 
-Ao mudar comportamento do framework, a pessoa ou assistente responsável deve atualizar o guia correspondente na mesma tarefa. Essa responsabilidade está registrada em `AGENTS.md`. O gerador sincroniza informações estruturadas; ele não interpreta código para inventar explicações ou prometer capacidades novas.
+Páginas de perfis usam as responsabilidades documentadas no guia da equipe; os perfis registrados permanecem suas fontes de instruções. Páginas de contratos e workflows derivam do JSON registrado. A sintaxe dos comandos deriva da ajuda da CLI.
 
-Um comando novo precisa de sintaxe na ajuda da CLI e descrição em `commandDescriptions` no config. Um guia novo entra na lista `guides`. Os arquivos permitidos são explícitos: informações de personagens, mídia, prompts, runs, backups, credenciais e estado operacional não são incorporados.
+## Fontes, versões e privacidade
 
-## Evolução e compartilhamento
+O manifest registra caminhos de fontes, hashes e a versão do framework no registro. Revisões de componentes nos contratos podem diferir da release do framework. O fingerprint detecta fontes alteradas; não comprova precisão, qualidade da tradução nem release publicada.
 
-O manifesto inclui hashes das fontes e a versão do framework, permitindo conferir de onde veio cada geração. O manual público está em `https://olympox.linkia.ai/doc/`. O servidor local não envia conteúdo para a internet.
+A seleção pública exclui registros de personagens, mídia gerada, prompts pessoais, execuções, backups, credenciais e estado de manutenção. Preserve essa seleção ao adicionar material. Não inclua sessões locais, saldos privados, recibos ou exemplos de personagens privados nos guias públicos.
 
-`npm.cmd run docs:export` regenera o manual e prepara somente os arquivos permitidos em `out/doc/`. O projeto de hospedagem está registrado em `.openai/hosting.json`. Publique essa geração completa pelo Sites sempre que uma mudança no framework atualizar a documentação. Exportar sozinho não publica. Arquivos inesperados em `out/` interrompem a exportação para evitar divulgação acidental.
+## Prepare uma publicação
 
-A raiz em `https://olympox.linkia.ai/` apresenta o framework em uma landing page bilíngue. Contagens, equipe e etapas dos fluxos vêm das mesmas fontes canônicas do manual. As fontes da landing participam do fingerprint da documentação. A entrada antiga `/docs/` encaminha para `/doc/`, mantendo idioma e seção; seu manifesto de compatibilidade permite que páginas já abertas detectem a migração.
+```sh
+npm run docs:export
+```
 
-A página pública consulta seu manifesto publicado uma vez por minuto. Quando chega uma nova publicação, ela atualiza mantendo idioma e seção. Isso detecta alterações já publicadas; não lê os arquivos locais de quem está desenvolvendo nem consulta o servidor de desenvolvimento.
+A exportação gera novamente o manual e prepara arquivos públicos permitidos em `out/`: landing page, manual em `doc/`, assets e redirecionamentos antigos. Arquivos inesperados na saída interrompem a exportação antes da escrita. Exportar não publica.
+
+Um deploy deve usar a exportação completa revisada e a autorização aplicável de publicação. A entrada do manual público é `/doc/`; links antigos de `/docs/` preservam idioma e seção pelo redirecionamento. Páginas públicas consultam o manifest publicado a cada minuto e recarregam ao detectar nova revisão publicada. Edições locais chegam ao manual hospedado apenas por nova exportação e deploy.
+
+Consulte [estrutura das fontes do manual](docs-site/README.md) e [localização](localization.md) para detalhes de contribuição.

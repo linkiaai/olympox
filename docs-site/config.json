@@ -3,146 +3,206 @@
   "guides": [
     {
       "path": "docs/framework-manual.md",
-      "section": "overview",
+      "group": "start",
       "label": "Overview",
+      "section": "overview",
       "translations": {
         "pt-BR": "docs/locales/pt-BR/framework-manual.md"
       }
     },
     {
       "path": "docs/quick-start.md",
+      "group": "start",
+      "label": "Quick start",
       "section": "start",
-      "label": "Get started",
       "translations": {
         "pt-BR": "docs/locales/pt-BR/quick-start.md"
       }
     },
     {
-      "path": "docs/living-documentation.md",
-      "section": "sync",
-      "label": "Living documentation",
-      "translations": {
-        "pt-BR": "docs/locales/pt-BR/living-documentation.md"
-      }
-    },
-    {
       "path": "docs/installation.md",
-      "label": "Installation",
+      "group": "start",
+      "label": "Installation and upgrades",
       "translations": {
         "pt-BR": "docs/locales/pt-BR/installation.md"
       }
     },
     {
-      "path": "docs/release-notes.md",
-      "label": "Release notes",
-      "translations": {
-        "pt-BR": "docs/locales/pt-BR/release-notes.md"
-      }
-    },
-    {
-      "path": "docs/framework-02.md",
-      "label": "Operate the core",
-      "translations": {
-        "pt-BR": "docs/locales/pt-BR/framework-02.md"
-      }
-    },
-    {
-      "path": "docs/framework-architecture.md",
-      "label": "Architecture",
-      "translations": {
-        "pt-BR": "docs/locales/pt-BR/framework-architecture.md"
-      }
-    },
-    {
-      "path": "docs/studio-team.md",
-      "label": "Team and responsibilities",
-      "translations": {
-        "pt-BR": "docs/locales/pt-BR/studio-team.md"
-      }
-    },
-    {
       "path": "docs/strategy.md",
-      "label": "Strategy and persona",
+      "group": "create",
+      "label": "Character development",
       "translations": {
         "pt-BR": "docs/locales/pt-BR/strategy.md"
       }
     },
     {
       "path": "docs/trend-research.md",
-      "label": "Research and trends",
+      "group": "create",
+      "label": "Opportunity and trend research",
       "translations": {
         "pt-BR": "docs/locales/pt-BR/trend-research.md"
       }
     },
     {
+      "path": "docs/studio-team.md",
+      "group": "create",
+      "label": "Team responsibilities",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/studio-team.md"
+      }
+    },
+    {
+      "path": "docs/tools.md",
+      "group": "produce",
+      "label": "Tools and capabilities",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/tools.md"
+      }
+    },
+    {
+      "path": "docs/higgsfield-influencer-method.md",
+      "group": "produce",
+      "label": "Production method",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/higgsfield-influencer-method.md"
+      }
+    },
+    {
       "path": "docs/production.md",
-      "label": "Production",
+      "group": "produce",
+      "label": "Production lifecycle",
       "translations": {
         "pt-BR": "docs/locales/pt-BR/production.md"
       }
     },
     {
+      "path": "docs/production-handoff.md",
+      "group": "produce",
+      "label": "Video pilot handoff",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/production-handoff.md"
+      }
+    },
+    {
       "path": "docs/quality.md",
+      "group": "produce",
       "label": "Quality and continuity",
       "translations": {
         "pt-BR": "docs/locales/pt-BR/quality.md"
       }
     },
     {
-      "path": "docs/operations.md",
-      "label": "Identity, records and backup",
-      "translations": {
-        "pt-BR": "docs/locales/pt-BR/operations.md"
-      }
-    },
-    {
-      "path": "docs/tools.md",
-      "label": "Tools",
-      "translations": {
-        "pt-BR": "docs/locales/pt-BR/tools.md"
-      }
-    },
-    {
-      "path": "docs/integrated-images.md",
-      "label": "Explicit integrated image alternative",
-      "translations": {
-        "pt-BR": "docs/locales/pt-BR/integrated-images.md"
-      }
-    },
-    {
-      "path": "docs/production-handoff.md",
-      "label": "Assistant-to-Higgsfield pilot",
-      "translations": {
-        "pt-BR": "docs/locales/pt-BR/production-handoff.md"
-      }
-    },
-    {
       "path": "docs/higgsfield-plugin.md",
+      "group": "produce",
       "label": "Higgsfield plugin",
       "translations": {
         "pt-BR": "docs/locales/pt-BR/higgsfield-plugin.md"
       }
     },
     {
-      "path": "docs/higgsfield-influencer-method.md",
-      "label": "Higgsfield reference media pipeline",
+      "path": "docs/higgsfield-setup.md",
+      "group": "produce",
+      "label": "Local Higgsfield CLI",
       "translations": {
-        "pt-BR": "docs/locales/pt-BR/higgsfield-influencer-method.md"
+        "pt-BR": "docs/locales/pt-BR/higgsfield-setup.md"
+      }
+    },
+    {
+      "path": "docs/integrated-images.md",
+      "group": "produce",
+      "label": "Alternative image generation",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/integrated-images.md"
+      }
+    },
+    {
+      "path": "docs/operations.md",
+      "group": "records",
+      "label": "Identity, assets and backups",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/operations.md"
+      }
+    },
+    {
+      "path": "docs/framework-02.md",
+      "group": "records",
+      "label": "Workflow operation",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/framework-02.md"
+      }
+    },
+    {
+      "path": "docs/framework-architecture.md",
+      "group": "reference",
+      "label": "Architecture",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/framework-architecture.md"
       }
     },
     {
       "path": "framework/README.md",
-      "label": "Core API and contracts",
+      "group": "reference",
+      "label": "Core interfaces",
       "translations": {
         "pt-BR": "docs/locales/pt-BR/framework/README.md"
       }
     },
     {
+      "path": "docs/studio-status.md",
+      "group": "reference",
+      "label": "Supported capabilities",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/studio-status.md"
+      }
+    },
+    {
       "path": "CONSTITUTION.md",
-      "section": "constitution",
+      "group": "reference",
       "label": "Constitution",
+      "section": "constitution",
       "translations": {
         "pt-BR": "docs/locales/pt-BR/CONSTITUTION.md"
+      }
+    },
+    {
+      "path": "docs/release-notes.md",
+      "group": "reference",
+      "label": "Release notes",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/release-notes.md"
+      }
+    },
+    {
+      "path": "docs/video-reference.md",
+      "group": "reference",
+      "label": "Method provenance",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/video-reference.md"
+      }
+    },
+    {
+      "path": "docs/living-documentation.md",
+      "group": "maintain",
+      "label": "Build and maintain the manual",
+      "section": "sync",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/living-documentation.md"
+      }
+    },
+    {
+      "path": "docs/localization.md",
+      "group": "maintain",
+      "label": "Localization",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/localization.md"
+      }
+    },
+    {
+      "path": "docs-site/README.md",
+      "group": "maintain",
+      "label": "Manual source layout",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/docs-site/README.md"
       }
     }
   ],

@@ -1,33 +1,47 @@
-# OLYMPOX — English source and Brazilian Portuguese translation
+# Localization
 
-English (`en`) is the canonical language of the framework. Governance, guides, commands, contract names and criteria, identifiers, default messages, generated scaffolding, prompts, comments, tests and active skills are maintained in English. Brazilian Portuguese (`pt-BR`) is a secondary translation. Character content and conversation language can use the audience's or user's chosen language independently.
+English (`en`) is canonical for framework sources, commands, contracts, identifiers, default messages, templates, tests and active skills. Brazilian Portuguese (`pt-BR`) is the secondary documentation and presentation translation.
 
-## Source layout and maintenance
+Conversation language and a character's editorial language are independent user choices.
 
-The English guides live in `docs/`, with English filenames. `README.md`, `CONSTITUTION.md`, `AGENTS.md`, `framework/README.md` and `docs-site/README.md` are also English sources. Their translated editions live under `docs/locales/pt-BR/`, mirroring the source layout where applicable. Role and catalog translations live in `docs-site/locales/pt-BR.json`; English contracts remain in `framework/`.
+## Source layout
 
-Canonical skills live in `skills/` and their active copies in `.agents/skills/` for Codex or `.claude/skills/` for Claude Code. Translated reading copies live in `docs/locales/pt-BR/skills/`; they are not a second active installation. Canonical templates live in `templates/`; translated templates live in `templates/locales/pt-BR/`. Both editions use the same English field names and machine values. A Portuguese persona or narrative template explicitly selects `pt-BR` for its editorial voice.
+| Content | English source | pt-BR edition |
+| --- | --- | --- |
+| Guides | `docs/*.md` | `docs/locales/pt-BR/*.md` |
+| Root documents | Root Markdown files | Matching files under `docs/locales/pt-BR/` |
+| Core and manual READMEs | `framework/`, `docs-site/` | Matching subdirectories under `docs/locales/pt-BR/` |
+| Manual interface and catalogs | Sources and `docs-site/locales/en.json` | `docs-site/locales/pt-BR.json` |
+| Templates | `templates/` | `templates/locales/pt-BR/` |
+| Skills | `skills/` | Reading copies under `docs/locales/pt-BR/skills/` |
+| Setup presentation | `scripts/onboarding-locales/en.json` | `scripts/onboarding-locales/pt-BR.json` |
 
-The source root's `AGENTS.md` governs framework development. The installer uses `templates/studio-AGENTS.md` as an independent studio's creative `AGENTS.md`, with the matching secondary translation for the installed manual. Maintain these instructions separately so development scope and creative studio scope remain clear.
+The installer projects canonical skill bytes into `.agents/skills/` for Codex or `.claude/skills/` for Claude Code. Translated skill copies are reading material, not a second active installation. The source root's `AGENTS.md` governs development; installed studios receive the creative studio template and its matching translated reading copy.
 
-Change the English source first, then update the affected translation in the same task. Keep the same authority, preservation and quality requirements in both editions. Build with `npm.cmd run docs:build`; check source integrity with `npm.cmd run docs:check`; finish framework work with `npm.cmd run verify`. Hash and coverage checks detect missing or stale sources, but do not prove translation accuracy. Review the wording and behavior too.
+## What changes with a language choice
 
-The navigable manual defaults to English. Its language selector provides Brazilian Portuguese; the explicit choice can persist for later visits. Both languages are bundled in the portable manual and served by the local development server. CLI commands and persisted identifiers remain English regardless of the selected documentation language.
+The manual starts in English and offers pt-BR through its selector or `?lang=pt-BR`. An explicit choice can persist. Both editions are included in portable builds.
 
-## Setup presentation language
+```sh
+node bin/olympox.mjs setup ../my-studio --assistant codex --locale pt-BR --yes
+```
 
-Guided installation accepts `node bin/olympox.mjs setup [directory] --locale en|pt-BR`. English is its default presentation language; an interactive session can select Brazilian Portuguese. This choice translates the setup prompts and summaries only. Canonical installed sources and skills, machine tokens, command syntax and persisted records remain English. The manual's language selector and the user's conversation or character editorial language are independent choices. Setup does not migrate historical bytes or store a character language preference. Direct `install` does not accept `--locale`.
+`setup --locale` translates setup prompts and summaries. It does not change canonical installed sources, persisted tokens or character language. Direct `install` has no `--locale` option.
 
-## Compatibility and history
+Translate explanatory text while keeping command syntax, JSON keys, states, capability IDs, file paths and role IDs in English. Keep established proper names such as Atena, Psiquê, Íris and Têmis. Translate neither reference filenames nor imported vendor sources.
 
-New workflow IDs are `create-character`, `produce-piece` and `review-correct`. Existing `criar-personagem`, `produzir-peca` and `revisar-corrigir` IDs remain accepted as compatibility inputs. New records use English states and decisions, including `draft`, `canon-approved`, `production`, `candidate`, `approved`, `rejected`, `ready-for-production`, `approve`, `correct`, `reject` and `pending`. Legacy Portuguese equivalents are interpreted without rewriting their stored bytes.
+## Compatibility with historical records
 
-Existing character files, canon snapshots, approvals, execution seals, editorial versions and saved runs retain their original language and hashes. A language migration is not an identity approval, new production or user review. Governance changes can make an old run require context review; resuming after such drift requires the existing explicit new-attempt procedure. Historical contracts and prior attempts remain preserved.
+New workflows use `create-character`, `produce-piece` and `review-correct`. The historical inputs `criar-personagem`, `produzir-peca` and `revisar-corrigir` remain accepted. Historical Portuguese states and decisions are interpreted through the compatibility layer.
 
-Both documentation languages use the name OLYMPOX and the signature `OLYMPOX - AI Influencer framework`. The active skill is `olympox`, with canonical source in `skills/olympox/` and host-selected installation in `.agents/skills/olympox/` or `.claude/skills/olympox/`. Historical records, snapshots, approvals and backups retain their original bytes, names, and hashes under the existing preservation and resumption rules.
+Preserve the original bytes, language and hashes of existing characters, approvals, snapshots, seals, editorial versions, runs and backups. Translation is not an identity approval or migration. Governance edits can trigger context review in an older run; follow the explicit [new-attempt procedure](framework-02.md) without rewriting its history.
 
-Goddess names such as Atena, Psiquê, Íris and Têmis are established project proper names and remain unchanged, as do technical role IDs. Character names, reference filenames and fictional voices are not automatically translated. Imported vendor material retains its original provenance and integrity hashes.
+## Contributor checklist
 
-## Development practice
+1. Update the canonical English source first and the affected pt-BR edition in the same task.
+2. Preserve the same requirements, boundaries, examples and authority in both languages.
+3. Update labels and catalog translations when navigation or contracts change. UI placeholders must match.
+4. Check links from each translated file's actual location.
+5. Build the manual, inspect both rendered editions and run `npm run verify`.
 
-Write new source files, comments, errors, help text, examples and test descriptions in English. Place translated presentation text in the locale resources instead of making Portuguese the default branch. Keep JSON keys, command syntax, capability IDs and machine tokens identical across translations. Tests should exercise both canonical English output and read-only compatibility with historical Portuguese values; translation must not weaken validation or recreate approvals.
+Build and coverage checks detect missing sources and mismatched catalogs. They do not establish translation accuracy; review the meaning as well as the structure. See [manual maintenance](living-documentation.md).

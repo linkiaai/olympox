@@ -1,50 +1,55 @@
-# Optional local Higgsfield CLI setup
+# Optional local Higgsfield CLI
 
-This guide covers a separately prepared local CLI transport for the [default Higgsfield media pipeline](higgsfield-influencer-method.md). The [plugin](higgsfield-plugin.md) can execute supported stages without it; the official CLI can complement the plugin for exact local-file transfer. Codex or Claude can operate the available tools. Both routes share canon, traceability, authorization, preservation and review requirements; check account/workspace, commands, features and billing for the selected route.
+Use this guide to prepare the CLI route in an installed studio. A connected [plugin](higgsfield-plugin.md) can execute supported stages without it; the CLI can provide separately verified operations and local-file transfer. Framework installation includes the wrapper and provider provenance, but does not install the CLI or connect an account.
 
-Framework installation supplies a skill, wrapper, guides, and provider-source provenance; each studio choosing the CLI installs it and connects its own account separately. Installation does not install or authenticate the plugin or CLI, send media, or require paid generation. The documented wrapper baseline is CLI **1.1.26** on Windows x64. Sources and baseline installer were reviewed on **October 7, 2026**; recheck provider terms and capabilities before use. This is conversational support operated by the available coordinator, not an automatic core adapter.
+## Supported wrapper baseline
 
-## Supported baseline and studio requirements
+`scripts/higgsfield-local.mjs` expects `@higgsfield/cli` **1.1.26** in `tools/higgsfield`, on **Windows x64**. It verifies package/version and the executable SHA-256 before native execution. The baseline package, installer and binary hashes are recorded in `vendor/higgsfield-skills/provenance.json`.
 
-| Item | Baseline or requirement |
+| Wrapper command | Behavior |
 | --- | --- |
-| Official CLI | `@higgsfield/cli` **1.1.26** expected by the wrapper; install separately in `tools/higgsfield` |
-| Binary | Windows amd64, build `69f3a33c3325d8fdde3a1ecb0b8e7cc5ebc7e8a3`; archive SHA-256 checked by the inspected installer |
-| Studio wrapper | `scripts/higgsfield-local.mjs`; help, version, integrity, and limited queries |
-| Skill source | Generation `0.13.0` preserved in `vendor/higgsfield-skills`, with revision and hashes recorded; original not activated in `.agents` |
-| Account and provider access | Your own account, connected after CLI preparation |
-| Balance and cost per model | Query for your account before authorized production |
-| Video, voice, and Soul ID | Requires separately authorized execution, exact references, and complete review |
+| `doctor` | Check package/version and executable integrity locally |
+| `version` | Run the pinned executable's version command |
+| `help [command [subcommand]]` | Show wrapper help or an accepted native help topic |
+| `login` | Start interactive account login |
+| `inspect` | Run allowed account/workspace/model/workflow/voice/job queries and scalar-only estimates |
 
-Prepare the pinned CLI through the installation steps below before wrapper checks. Local preparation does not prove model availability, character consistency, audiovisual quality, skill discovery or a connected provider. Default candidates/references use verified Higgsfield modules; integrated assistant images require an explicit alternative-method choice.
+The wrapper does not install/update, submit generation, upload files, train identity, publish or print tokens. A valid local binary does not establish account access or audiovisual capability. Other operating systems or CLI versions require deliberate inspection and wrapper adaptation.
 
-## Preparation commands
+## Prepare the pinned package
 
-Run from the project root:
+Run from the installed studio root. Keep this optional dependency in `tools/higgsfield`, outside the studio's main package manifest.
 
 ```powershell
+New-Item -ItemType Directory -Path tools/higgsfield -Force
+npm.cmd view @higgsfield/cli@1.1.26 version bin scripts repository dist --json
+npm.cmd pack @higgsfield/cli@1.1.26 --ignore-scripts --pack-destination tools/higgsfield
+```
+
+Inspect the package and installer against the preserved provenance. The inspected installer obtains the official platform archive, verifies its expected hash and writes the executable inside the package. After that inspection:
+
+```powershell
+npm.cmd install --prefix tools/higgsfield --save-exact @higgsfield/cli@1.1.26 --ignore-scripts --no-audit --no-fund
+```
+
+Before running the installed `install.js`, compare its SHA-256 with `cli.installerSha256` in `vendor/higgsfield-skills/provenance.json`. This baseline's expected value is `67aa95c60484400e813099affce5a65d374de50ba7efbe2780a4ae9184062261`:
+
+```powershell
+Get-FileHash tools/higgsfield/node_modules/@higgsfield/cli/install.js -Algorithm SHA256
+node tools/higgsfield/node_modules/@higgsfield/cli/install.js
 node scripts/higgsfield-local.mjs doctor
 node scripts/higgsfield-local.mjs version
 node scripts/higgsfield-local.mjs help
-node scripts/higgsfield-local.mjs help auth login
-node scripts/higgsfield-local.mjs help generate cost
 ```
 
-`doctor` checks the executable's presence, version, and SHA-256. It does not access credentials, prove authentication, or query the balance. The wrapper rejects versions/binaries different from those inspected. It does not install, update, generate, upload, train, publish, or print tokens. A query error or timeout does not prove an account problem; interpret the CLI's actual message.
+`doctor`, `version` and help do not require login. Keep binaries and account state outside Git and the framework export. Review a new package/archive/binary before changing the pin; installing a newer package alone will not make this wrapper accept it.
 
-## Connect your account
+## Connect and inspect
 
-When the user requests connection, run in an interactive terminal:
+When connection is authorized, run login in an interactive terminal. The user completes the provider's browser flow; keep credentials outside the studio and its backups.
 
 ```powershell
 node scripts/higgsfield-local.mjs login
-```
-
-The CLI uses browser login through OAuth PKCE with a local callback, according to its help. The user completes the interaction. Do not collect a password in chat, run `auth token`, copy credentials into `.env`, character files, runs, or commits, or change HOME/APPDATA to store the session in the project. The consulted public help does not expose the exact credential-file path; confirm the actual storage location before considering the connection complete, keeping it outside the workspace and backups. Framework installation contains no account session.
-
-Then query only what is necessary:
-
-```powershell
 node scripts/higgsfield-local.mjs inspect account status
 node scripts/higgsfield-local.mjs inspect workspace status
 node scripts/higgsfield-local.mjs inspect model list --json
@@ -52,93 +57,53 @@ node scripts/higgsfield-local.mjs inspect workflow list --json
 node scripts/higgsfield-local.mjs inspect voices list --json
 ```
 
-Confirm the correct account and workspace, plan, credits, and capabilities. Account output may contain email; record only data needed for production and do not copy private identifiers into public documentation. Selecting another workspace changes billing for future requests and needs an applicable decision; the wrapper does not offer that change.
+Confirm the intended account/workspace, balance and required capabilities. Use an actual returned model ID to inspect its schema with `inspect model get <model-id> --json`; the placeholder is not a model name. Read help for the selected operation before setting parameters. Store only necessary account evidence locally, without credentials.
 
-Inspect the exact candidate model schema before promising parameters or duration:
+## Estimates and billing
 
-```powershell
-node scripts/higgsfield-local.mjs inspect model get seedance_2_5 --json
-node scripts/higgsfield-local.mjs inspect model get kling3_0 --json
-```
+Inspect `help generate cost` and the current model schema. Native estimates with media inputs can upload those files even when no generation job is created. The preparation wrapper rejects media flags, file reads, URLs and unsupported estimate flags; it permits simple scalar parameters only.
 
-These IDs are documentation candidates, not models already confirmed for the account. Final selection considers accepted references, language/speech, movement, resolution, time, and cost, followed by a pilot with approved identity.
+An estimate without required media can fail or differ from the final request. Keep that limitation explicit. Reference-bearing estimates require applicable transfer authorization and the native CLI's supported inputs. A path inside ordinary prompt text remains text.
 
-## Credits and estimates
-
-[CLI and skills](https://higgsfield.ai/creator-hub/help-center/integrations/how-do-i-access-higgsfield-via-cli) use the Higgsfield account and credits without an API key. Unlimited and free website generations do not apply to CLI/MCP; subscription and API are distinct products. Check these terms again when subscribing and before production.
-
-The official `generate cost` command estimates without creating a job but **automatically sends local files supplied as media input**. Do not treat an estimate with `--image`, `--video`, or other media as read-only. The wrapper accepts only simple parameters and rejects media flags, file reading through `@file`, URLs, and flags outside its safe selection. A path passed as ordinary `--prompt` text stays text; it does not attach the file. Example query after login, without submission or file upload:
-
-```powershell
-node scripts/higgsfield-local.mjs inspect generate cost kling3_0 --prompt "Cost query for a short shot" --duration 5 --mode pro --sound off --json
-```
-
-Check the current schema before this query. An estimate omitting required media can fail or differ from the final request; do not invent a value or treat it as an exact price. When an estimate needs references, use the native CLI only after applicable authorization to send them and with the exact files already approved.
-
-The pilot budget must record initial balance, queried cost per attempt, total credit limit, and maximum attempts. The preparation wrapper neither controls nor guarantees this budget in the service. Without queryable cost, record "unknown" and obtain authorization covering that uncertainty before the job; do not confuse subscription price with cost per approved asset.
+Check billing for this route rather than assuming website, API or plugin allowances apply. Save stage quotes with their units and source, available balance, total pilot/attempt limits and unknown charges. The wrapper does not impose a service spending cap. Keep credits separate from monetary asset `cost`, which stays `null` when unknown.
 
 ## Transfer local files for plugin use
 
-When the connected plugin cannot read a local studio file, check the pinned official CLI and `upload create --help`. With the exact source file, applicable upload authorization, confirmed account/workspace and preserved intent, the coordinator can invoke the native CLI’s `upload create <local-file> --json`. This transmits media externally; it is not a read-only preparation command or an authorized generation/training job. The limited preparation wrapper does not expose this upload.
+Check the current native upload help and confirm both routes use the intended account/workspace:
 
-Record source path, SHA-256 and size, actual returned media ID/URL and the upload response. Verify that ID through the plugin’s actual library/read tool in the correct workspace. Where downloadable original bytes are available, compare their SHA-256/size; if the service transforms the file or verification is unavailable, record that limitation and inspect fidelity before use. Use only confirmed mapped IDs/URLs in generation. An independent studio exercised this bridge with unchanged bytes; that evidence does not establish every host/account’s availability or an automatic runtime upload feature. Keep private URLs and records local. Do not request manual dragging first or paste binary/base64 content into prompts/logs. Missing login, transport or verification remains pending.
+```powershell
+node scripts/higgsfield-local.mjs help upload create
+```
+
+With the exact file/hash and applicable upload authorization, use the pinned native executable's `upload create <local-file> --json`. This is an external media transfer; the preparation wrapper does not expose it as an `inspect` operation.
+
+Record source path, SHA-256/size, upload response and returned media ID/URL. Verify its availability through the plugin's actual library/read tools before use. Compare downloadable original bytes where supported; document transformations or unavailable byte verification and inspect fidelity. Use confirmed mapped inputs in their accepted roles. The framework supplies this procedure, not an automatic bridge or proof of cross-route access in every account.
 
 ## Authorized production later
 
-1. Choose the persona; approve exact references and create a canon snapshot. Prepare narrative, script, scenes, and voice without confusing draft with approval.
-2. Check the current schema, input rights/consent, balance, and applicable budget. Local references attached to the CLI can be sent automatically to the service.
-3. Before submission, persist actual intent in the run: tool/model, parameters, inputs and hashes, objective, and limit. The local core records context but does not directly block the service. Use only generation authorization valid for this scope.
-4. Invoke the local native executable with separate arguments or a reviewed parameter file. Windows x64 location:
+Prepare approved canon, script and inspected scene/audio inputs following the [production method](higgsfield-influencer-method.md) and [video handoff](production-handoff.md). Before a paid submission, verify actual schemas, transfer, export/review support, price/budget and applicable authorization, then persist external intent in the local run.
 
-   ```powershell
-   & .\tools\higgsfield\node_modules\@higgsfield\cli\vendor\hf.exe generate create <confirmed-model> <reviewed-parameters>
-   ```
+Production uses the pinned native executable with separate arguments or a reviewed parameter file. On this baseline its path is:
 
-   Substitute the confirmed model and reviewed parameters only for authorized execution. Do not use `npx @higgsfield/cli` for a production call because it can download another version. `--wait` can wait several minutes; retain IDs as soon as they are exposed and track actual execution.
-5. Record known job/request, receipt, and exposed cost. If the response becomes uncertain, preserve the pending issue and query the job before resubmitting. Queries allowed by the wrapper:
-
-   ```powershell
-   node scripts/higgsfield-local.mjs inspect generate list --json
-   node scripts/higgsfield-local.mjs inspect generate get <actual-job-id> --json
-   ```
-
-   Switching to the plugin does not reconcile an uncertain CLI submission or authorize another charge. Use a real status tool that can inspect the original job and record reconciliation before any new attempt.
-
-6. Save media as a new persona version, register it, and seal execution. Perform a complete video/audio review using a method actually available; record failures and real approvals. A completed URL, hash, or local test proves neither quality nor publication.
-
-Soul ID is not a prerequisite for the first pilot. Consider training only when reference-based testing demonstrates a need; authorization for a subscription or generation does not imply authorization to train/clone identity.
-
-## Prepare the pinned CLI
-
-The wrapper baseline uses a pinned official npm package installed without automatic lifecycle scripts. The inspected `postinstall` downloads an archive from the official release, verifies SHA-256 included in the package, extracts only `hf.exe`, and writes metadata inside the package itself. It does not alter PATH or global configuration. Source metadata and hashes: [provenance](../vendor/higgsfield-skills/provenance.json).
-
-To prepare your studio, check the Windows x64 environment and package before installation:
-
-```powershell
-npm.cmd view @higgsfield/cli@1.1.26 version bin scripts repository dist --json
-npm.cmd pack @higgsfield/cli@1.1.26 --ignore-scripts --pack-destination tools/higgsfield
+```text
+tools/higgsfield/node_modules/@higgsfield/cli/vendor/hf.exe
 ```
 
-Create the local folder if absent; inspect the package and installer against hashes/provenance. Do not automatically follow `curl | sh`, `setup`, a global installation, or a provider's paid test. After inspection, install **only the pinned package** in the local prefix with `--ignore-scripts` and explicitly run the inspected `install.js` from `tools/higgsfield/node_modules/@higgsfield/cli`. Check `doctor`, version, and help. Local `tools/higgsfield/package.json` must contain the `@higgsfield/cli: 1.1.26` pin; do not add this dependency to the studio's package.json.
+Use its current help and verified inputs for generation, upload or optional training. The wrapper's help topics do not mean its `inspect` route permits submissions.
 
-Commands after that inspection, without global installation:
+Preserve returned job IDs and inspect the original jobs through allowed queries:
 
 ```powershell
-npm.cmd install --prefix tools/higgsfield --save-exact @higgsfield/cli@1.1.26 --ignore-scripts --no-audit --no-fund
-node .\tools\higgsfield\node_modules\@higgsfield\cli\install.js
-node scripts/higgsfield-local.mjs doctor
-node scripts/higgsfield-local.mjs version
+node scripts/higgsfield-local.mjs inspect generate list --json
+node scripts/higgsfield-local.mjs inspect generate get <job-id> --json
 ```
 
-Run the installer explicitly only after checking that installed `install.js` matches the inspected script. The inspected baseline installer has SHA-256 `67aa95c60484400e813099affce5a65d374de50ba7efbe2780a4ae9184062261`. Version and help do not require login; finish preparatory installation here.
+Replace `<job-id>` with a real accepted identifier. Reconcile uncertain outcomes before another attempt; switching to the plugin does not resolve a CLI job. Save actual outputs as new local versions, register/seal their provenance and complete [quality review](quality.md) before delivery. Optional identity training has its own justification and authorization.
 
-When updating, repeat inspection, check the new archive/binary, and change the pin deliberately. The tools folder is ignored by Git; preserve studio sources and provenance files, not credentials or large binaries.
+## Source references
 
-## Official sources consulted
+- [Official CLI baseline source](https://github.com/higgsfield-ai/cli/blob/v1.1.26/README.md).
+- [Preserved vendor skill revision](https://github.com/higgsfield-ai/skills/tree/f83af0bc1d937c8119099a11f8ebbf5e6fb99819).
+- [Local provider source inventory and license](../vendor/higgsfield-skills/README.md).
 
-- [CLI: Windows installation through npm and commands](https://github.com/higgsfield-ai/cli/blob/v1.1.26/README.md).
-- [Release 1.1.26](https://github.com/higgsfield-ai/cli/releases/tag/v1.1.26) and npm package `@higgsfield/cli@1.1.26`.
-- [Skill installation](https://github.com/higgsfield-ai/skills/blob/f83af0bc1d937c8119099a11f8ebbf5e6fb99819/INSTALL.md).
-- [Generate skill and inspected references](https://github.com/higgsfield-ai/skills/tree/f83af0bc1d937c8119099a11f8ebbf5e6fb99819/higgsfield-generate).
-- [CLI + Skills integration and credit rules](https://higgsfield.ai/creator-hub/help-center/integrations/how-do-i-access-higgsfield-via-cli).
-- Local executable 1.1.26 help for `auth`, `auth login`, `account`, `workspace`, `model`, and `generate cost`.
+The source baseline is reproducible preparation evidence. Current accounts, schemas, prices and successful production must be checked in the studio.

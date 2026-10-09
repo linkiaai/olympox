@@ -1,92 +1,85 @@
 # Qualidade de identidade e mídia
 
-O objetivo é um personagem reconhecível, com presença e comportamento próprios. Qualidade combina alinhamento ao conceito criativo escolhido, coerência com o canon, o estilo visual pretendido e ausência de defeitos que interrompam a experiência. Aparência naturalista pode expressar uma personagem incomum ou uma pessoa realista com presença forte; pele lisa ou simetria perfeita não estabelecem qualidade.
+Use este guia para avaliar candidatos, referências e mídia final reais em relação ao conceito escolhido, canon exato e uso pretendido. Têmis registra a avaliação; Atena encaminha correções e decisões do usuário. Geração bem-sucedida, hashes, resolução e registros válidos não estabelecem fidelidade nem aprovação.
 
-## Regra de aprovação
+## Separe seleção, inspeção e estado do ativo
 
-Todo arquivo gerado começa em `draft`. Metadados válidos, resolução alta, similaridade calculada ou um prompt correto não demonstram fidelidade de identidade. A aprovação exige uma pessoa inspecionando a mídia real e registrando o resultado. O coordenador pode apontar defeitos e organizar evidências; não deve apresentar validação automática como prova de que o personagem foi preservado.
+| Registro | Estados e significado |
+| --- | --- |
+| Persona | `draft` durante descoberta; `canon-approved` após decisão explícita de identidade |
+| Referência | `candidate`, `approved` ou `rejected`; arquivos exatos selecionados sustentam o canon |
+| Ativo no manifesto | `draft` antes da aprovação, `production` para uso revisado e aprovado, ou `rejected` |
+| Decisão de revisão | `approve`, `correct`, `reject` ou `pending`, vinculada a arquivos e escopo exatos |
 
-| Estado | Significado | Evidência necessária |
+`production` não significa publicado. O usuário seleciona a identidade e aprova o canon completo; a inspeção fornece evidências para essa decisão. Registre quem realmente revisou e o método, sem inventar inspeção humana ou consenso de especialistas. Novas edições criam uma nova versão para revisão; preserve arquivos, decisões e snapshots anteriores.
+
+## Confira conceito e referências antes do canon
+
+Leia o conceito selecionado e compare os arquivos reais com seus critérios concretos. Para direção aberta, [estratégia](strategy.md) exige pelo menos três propostas distintas de conceito antes dos retratos. Revise candidatos para a direção escolhida pelo usuário, sem adicionar traços de identidade para satisfazer uma preferência nova.
+
+| Verificação | Evidência necessária |
+| --- | --- |
+| Conceito e presença | Vista neutra de identidade mais cena expressiva ou capa no tamanho final; postura, expressão, estilo e comportamento devem comunicar a premissa escolhida |
+| Anatomia e identidade | Ângulos legíveis de referência e vistas pertinentes do corpo; proporções plausíveis e reconhecimento entre cenas, além de um acessório |
+| Originalidade | Personagem adulta original, sem reproduzir rosto, voz ou biografia de pessoa identificável |
+| Voz criativa | Amostras de falas e séries com perspectiva reconhecível, abertura concreta e desfecho cumprido |
+| Continuidade de referências | Arquivos/hashes exatos selecionados pelo usuário e evidência de anexo real nas chamadas seguintes |
+| Conclusão do método | [Plano do método](../../../templates/locales/pt-BR/production-method.md) salvo, etapas selecionadas verificadas, arquivos reais de saída, custos conhecidos ou incerteza autorizada e limitações abertas |
+
+Um conceito deliberadamente discreto pode passar se sua presença específica estiver visível. Um retrato neutro sem defeitos, sozinho, não estabelece a premissa, e um conceito memorável não prova potencial de viralização. Para personagens existentes, avalie a variação permitida conforme o canon aprovado; novos critérios criativos não revogam aprovação histórica nem autorizam substituir a identidade.
+
+Para uma personagem falante, mantenha a persona `draft` durante seleção visual e exploração vocal. Gere uma amostra vocal de rascunho/referência, ouça o áudio exato e registre arquivo/configurações selecionados pelo usuário antes da aprovação do canon visual/vocal completo. Em escopo silencioso, registre voz como não aplicável. Crie o snapshot aprovado por [operações](operations.md); nunca acrescente novas configurações vocais a uma versão congelada nem substitua referência de canon por uma saída não aprovada.
+
+Higgsfield é o pipeline padrão de mídia. Verifique os módulos escolhidos no plano do método de referência; um recurso separado de Builder só é necessário quando o plano realmente o seleciona. Imagens integradas ao assistente precisam de escolha explícita de alternativa. Uma etapa obrigatória ausente permanece pendente; vídeo posterior ou especificação preparada não a conclui.
+
+## Inspecione imagens em duas escalas
+
+Abra o resultado real junto das referências exatas. Compare primeiro ângulos/expressões semelhantes, inspecione a composição completa e detalhes críticos na resolução original, depois confira o tamanho/recorte que o público verá.
+
+| Área | Verificações práticas |
+| --- | --- |
+| Rosto e corpo | Estrutura facial, distância entre olhos, nariz, mandíbula, orelhas, marcas distintivas, idade aparente, proporções e características aprovadas |
+| Olhos e boca | Olhar, pupilas, pálpebras, alinhamento dos lábios, dentes e língua; expressões plausíveis sem traços fundidos ou duplicados |
+| Mãos e contato | Dedos conectados, articulações, pegada, contato com objetos e anatomia parcialmente escondida |
+| Cena e luz | Perspectiva, sombras, reflexos, escala e fontes de luz coerentes com pose e ambiente |
+| Estilo e objetos | Regras visuais escolhidas, detalhes de pele/cabelo quando naturalistas, costuras, estampas, acessórios, logos e texto |
+| Enquadramento final | Recorte, margens de segurança, legibilidade, foco e adequação ao canal |
+
+Preserve assimetria intencional e regras de estilo selecionadas. Não troque os traços da personagem por um padrão genérico de beleza nem invente novas imperfeições em cada imagem. Identifique regiões defeituosas concretamente em vez de informar apenas “parece errado”.
+
+## Ouça o áudio e revise o vídeo completo
+
+Ouça o arquivo vocal exato. Para vídeo, assista ao arquivo inteiro com áudio em velocidade normal, depois reveja tempos suspeitos e encontros entre planos. Quadros estáticos ajudam a investigação, mas não substituem revisão de movimento. Confira novamente a exportação editada após aplicar música, legendas ou cortes.
+
+| Área | Verificações práticas |
+| --- | --- |
+| Identidade vocal | Timbre, sotaque, pronúncia, ritmo, emoção aprovados e continuidade entre takes |
+| Fala | Sentido exato, palavras completas, inteligibilidade, respiração, ruído e clipping; legendas não provam precisão da fala |
+| Identidade em movimento | Estabilidade de rosto/corpo ao virar, expressar e ficar oculto; cabelo, roupa e acessórios estáveis |
+| Movimento e cena | Anatomia, gestos, contato, inércia, movimento de câmera, reflexos, cintilação e fundos plausíveis ao longo do tempo |
+| Lip-sync | Palavras audíveis, movimento da boca, pausas, dentes/língua e expressões alinhados |
+| Entrega editada | Fala compreensível com música, legendas sincronizadas, cortes coerentes, duração e enquadramento final pretendidos |
+| Atuação | Abertura/desfecho e interpretação entregam a premissa da peça e a atitude selecionada |
+
+Um piloto curto no meio pretendido é revisado e exportado antes dos lotes. Uma imagem estática aprovada cobre apenas seu uso visual delimitado; não aprova movimento, fala ou lip-sync. Se áudio ou vídeo não puder ser acessado, deixe essa revisão pendente e identifique a inspeção necessária.
+
+## Decida e encaminhe o resultado
+
+| Decisão | Quando usar | Próxima etapa |
 | --- | --- | --- |
-| `draft` | Exploração ou ativo ainda não aprovado. | Arquivo disponível e origem identificada. |
-| `canon-approved` | Estado da persona cuja identidade foi escolhida e registrada. | Inspeção das referências e aprovação explícita do responsável pelo personagem. |
-| `production` | Ativo aprovado para o uso indicado no brief. | Inspeção visual; escuta quando houver áudio; revisão de continuidade quando houver vídeo; registro da decisão. |
+| `approve` | Verificações aplicáveis concluídas sem defeito crítico ou limitação pendente | Entregar os bytes exatos revisados para o uso declarado |
+| `correct` | A direção continua útil, mas precisa de reparo concreto | Salvar nova versão e repetir verificações afetadas e revisão completa |
+| `reject` | Identidade errada, anatomia impossível, falha grave de continuidade ou fala/lip-sync inutilizável comprometem o resultado | Preservar a tentativa e preparar outra abordagem dentro do canon |
+| `pending` | Faltam referências, acesso à inspeção, autorização ou evidência de uso para decidir | Identificar entrada/verificação exata ausente e responsável pela próxima etapa |
 
-O estado `production` não significa publicado. Trocar rosto, corpo, voz ou características essenciais exige uma nova revisão de cânone. Alterações posteriores em um arquivo aprovado devolvem essa versão a `draft`.
+Falhas críticas impedem aprovação independentemente de média de pontuação: desvio de identidade, anatomia ou reflexos impossíveis, deformação ao longo do tempo, fala que muda o sentido pretendido, áudio incompreensível ou lip-sync perceptivelmente errado. Direitos de uso sabidamente inadequados impedem entrega; direitos ou permissão de referências incertos permanecem pendentes. Composição, roupa, expressão ou duração podem exigir correção quando a identidade permanece íntegra.
 
-Na ficha, cada referência usa `candidate`, `approved` ou `rejected`; o conjunto aprovado sustenta o estado `canon-approved` da persona. No manifesto, ativos usam `draft`, `production` ou `rejected`.
+Faça o menor reparo útil e compare versões. Confira regiões vizinhas e o resultado completo depois: corrigir uma mão pode mudar o rosto; reparar lip-sync pode danificar dentes. Nunca resolva uma falha reescrevendo canon aprovado ou evidência histórica.
 
-## Revisar o conceito e os candidatos
+## Registre uma revisão que permita agir
 
-Antes de escolher uma nova identidade, ler o conceito selecionado e comparar os candidatos reais com seus critérios concretos. Quando a direção estiver aberta, comparar pelo menos três fichas de conceito de fato distintas conforme [estratégia](strategy.md). Não aprovar um retrato comum e genérico para um brief que exige presença memorável apenas porque anatomia e acabamento estão corretos.
+Salve arquivo/versão e SHA-256 exatos, versão/hash do canon, uso/recorte pretendido, responsável pela revisão, data, método, decisão, regiões/tempos concretos e verificações abertas. Os métodos são `visual`, `listening` e `visual-and-audio`; registros históricos preservam seus bytes originais.
 
-| Área | Evidência a inspecionar |
-| --- | --- |
-| Execução do conceito | Que idade, silhueta/postura, estilo, expressão ou detalhes recorrentes escolhidos estão visíveis? Identificar o que falta ou contradiz o brief. |
-| Diferença entre direções | As propostas podem ser descritas de forma distinta por premissa, atitude e contraste editorial, além de nomes, cabelo, roupa ou rostos atraentes? |
-| Presença em contexto | Inspecionar uma referência neutra de identidade e uma cena da personagem ou capa no tamanho/recorte de uso. A segunda expressa a premissa e a atitude escolhidas? Uma referência neutra não precisa comunicar toda a premissa. |
-| Voz e conteúdo | As amostras de fala e três séries têm perspectiva reconhecível, aberturas concretas, entregas cumpridas e motivos declarados para assistir/salvar/compartilhar? Poderiam ser atribuídas sem alterações a qualquer candidata? |
-| Continuidade e originalidade | A personagem permanece reconhecível em uma variação permitida sem depender apenas de um acessório? O conceito preserva identidade original em vez de reproduzir aparência, voz ou biografia de uma pessoa identificável? |
-| Método escolhido | O plano versionado identifica método/ferramenta por etapa, prompts reais, referências anexadas, arquivos/hashes, modelo exposto, custo conhecido e limitações? Higgsfield é o padrão de mídia; verifique módulos da referência escolhidos, transporte/exportação/orçamento do piloto completo e evidência real do fornecedor. Builder exige evidência quando selecionado; imagens integradas precisam de escolha explícita de alternativa. Etapas obrigatórias ausentes continuam pendentes; vídeo direto ou especificação preparada não conclui uma etapa anterior. |
+> `pilot-v002.mp4`, [hash do arquivo], canon 1 [hash do canon], vídeo vertical; revisão completa de movimento/áudio por [responsável real], [data], `visual-and-audio`; `correct`: o colar desaparece em 00:04 e a palavra final é cortada. Nova versão necessária antes da aprovação.
 
-Registrar observações, arquivos exatos e a correção solicitada. Se o conceito selecionado estiver ausente, manter a mídia candidata em `draft` e devolvê-la para correção de arte/persona antes de propor aprovação do canon; registros de referência continuam em `candidate` até serem aprovados. Uma direção intencionalmente contida pode passar quando sua presença e seu comportamento específicos forem visíveis. Não acrescentar excentricidade, fantasia, um novo padrão de beleza ou novos traços de identidade apenas para passar na revisão.
-
-Esta revisão avalia execução criativa, não resposta do público. Uma hipótese de compartilhamento permanece não comprovada até existirem resultados reais de publicação; não dar uma pontuação preditiva de viralização nem afirmar que um conceito visualmente distinto garante alcance. Para uma personagem já aprovada, avaliar a peça solicitada dentro do canon e das variações permitidas. Critérios novos não revogam aprovações históricas nem autorizam substituir a identidade.
-
-Para uma personagem nova, inspecionar a candidata real de exploração e os arquivos de referência, incluindo vistas individuais legíveis e uma cena da personagem, independentemente da ferramenta escolhida. Verificar que as referências de identidade escolhidas foram realmente anexadas às gerações seguintes; caminho ou descrição no prompt não é evidência de anexo. Revisar anatomia, presença e reconhecimento entre ângulos e cenas. Para personagens falantes, geração, escuta e seleção pelo usuário da referência vocal exata precedem a aprovação do canon visual/vocal completo. Manter escuta vocal e revisão completa de vídeo separadas da seleção visual. Para uma personagem existente, comparar cada nova saída com o canon aprovado exato; nunca aprovar traços substitutos para fazer a passagem entre ferramentas funcionar. Rastrear essas observações no [plano do método de produção](../../../templates/locales/pt-BR/production-method.md); contratos locais validam declarações, não cumprimento semântico do método. O fornecedor nunca substitui aprovação nem inspeção.
-
-## Como revisar uma imagem
-
-1. Abra o resultado junto às referências aprovadas. Compare primeiro uma referência com ângulo e expressão próximos; use as demais para resolver dúvidas. Não julgue identidade apenas pela cor do cabelo ou pelo figurino.
-2. Veja a composição inteira para conferir proporções, pose, escala, perspectiva e relação com a cena.
-3. Inspecione rosto, mãos e detalhes na resolução original. Depois confira a mídia no tamanho e no recorte em que o público a verá.
-4. Decida `approve`, `correct` ou `reject`. Registre defeitos concretos e as regiões afetadas. Se não houver referência suficiente, registre `pending`, mantendo `draft`.
-
-| Área | O que conferir |
-| --- | --- |
-| Identidade facial | Formato do crânio e rosto, distância dos olhos, sobrancelhas, nariz, mandíbula, queixo, orelhas e marcas distintivas. Expressão e perspectiva podem mudar a aparência; a estrutura deve continuar compatível. |
-| Corpo e proporções | Comprimento dos membros, tamanho relativo da cabeça, ombros, pescoço, postura e características corporais aprovadas. Evite mudanças involuntárias de idade aparente ou constituição. |
-| Estilo visual pretendido | Para trabalho naturalista, textura de pele, poros, fios, assimetrias suaves e transições de luz plausíveis. Para uma direção estilizada escolhida, avaliar suas regras visuais intencionais. Preservar traços reais do personagem; não inventar imperfeições novas a cada imagem. |
-| Olhos e boca | Direção do olhar, pupilas, pálpebras, encaixe dos lábios, continuidade da língua e dentes. Sorrisos devem ter anatomia plausível sem dentes fundidos, duplicados ou brilhantes demais. |
-| Mãos e contato | Quantidade e conexão dos dedos, unhas, articulações, pegada e contato com objetos. Verifique onde a mão está escondida ou parcialmente visível. |
-| Cena e óptica | Sombras, reflexos em espelhos e óculos, geometria, profundidade, desfoque e fontes de luz. O reflexo deve corresponder à pessoa, pose e cena. |
-| Roupa e objetos | Costuras, estampas, joias, acessórios, texto e logotipos. Confira deformações e elementos que surgem ou desaparecem. |
-| Enquadramento final | Cortes, margem segura, legibilidade, foco e adequação ao canal. Uma imagem íntegra pode falhar depois do recorte. |
-
-## Como revisar vídeo e voz
-
-Assista ao arquivo completo com áudio na velocidade normal. Revise novamente os trechos suspeitos, incluindo quadros próximos ao começo e ao fim. Uma seleção de frames não substitui a revisão temporal.
-
-- **Identidade e continuidade:** o rosto, cabelo, corpo, roupa e acessórios devem permanecer estáveis quando a pessoa vira a cabeça, pisca, sorri ou é parcialmente ocultada. Procure deriva de identidade, fusões e mudanças de idade aparente.
-- **Movimento:** gestos devem ter intenção, anatomia e inércia plausíveis. Confira pescoço, ombros, dedos, caminhada, contato com objetos e movimentos da câmera.
-- **Cena ao longo do tempo:** confira flicker de pele e luz, fundo que se reconstrói, reflexos incoerentes, objetos que saltam e costuras entre planos. Câmera em movimento exige atenção adicional às bordas e à paralaxe.
-- **Lip-sync:** compare a fala audível com abertura e fechamento da boca, pausas e expressões. Inspecione dentes e língua durante a fala. Não aceite atraso perceptível nem movimentos de boca quando o áudio está em silêncio.
-- **Voz:** escute identidade vocal, pronúncia, sotaque aprovado, ritmo, emoção, respiração e continuidade entre takes. Procure palavras trocadas, sílabas cortadas, ruídos, clipping e mudanças de timbre. Legenda correta não prova que a fala está correta.
-- **Entrega final:** assista também à versão editada e exportada, com música e legendas. Confira sincronização, compreensão da fala, cortes e duração no dispositivo alvo.
-- **Entrega criativa:** verificar se a abertura e a entrega cumprem a ideia declarada da peça e se a atuação expressa a atitude escolhida da personagem. Atuação genérica ou abertura não cumprida exige correção; não estabelece fracasso da hipótese de público.
-
-Se o coordenador ou a ferramenta disponível não puder acessar áudio ou movimento, registre essa limitação e mantenha a aprovação correspondente pendente.
-
-## Falhas críticas
-
-Qualquer item abaixo reprova o ativo, mesmo que outras dimensões estejam boas ou uma média numérica seja alta:
-
-- A pessoa parece outro personagem, ou rosto, corpo e voz divergem do cânone.
-- Há anatomia impossível, reflexo incompatível ou deformação visível no uso final.
-- A identidade ou a anatomia se altera durante o vídeo.
-- A fala muda o sentido do roteiro, fica incompreensível ou apresenta lip-sync perceptivelmente incorreto.
-- A mídia depende de uma referência, autorização ou direito de uso que ainda não foi confirmado.
-
-Problemas de composição, expressão, figurino, duração ou texto podem justificar correção sem descartar a abordagem. Descreva a correção e mantenha o ativo em `draft` até rever a nova versão. Não use uma pontuação geral para diluir uma falha crítica.
-
-## Registro mínimo de revisão
-
-Registre junto ao ativo: versão/arquivo exato, versão do cânone, uso e recorte previstos, revisor, data, método de revisão, decisão e problemas encontrados. Para vídeo, indique os trechos afetados; para imagem, as regiões. Registre também quais itens não puderam ser verificados. A aprovação do cânone e de mudanças de identidade pertence ao responsável pelo personagem.
-
-Exemplo: “`take-03-v2.mp4`, cânone 1, Reel vertical; revisão completa com áudio por [revisor], [data]; corrigir: o colar desaparece aos 00:04 e a palavra final é cortada; permanece em rascunho.”
-
-## Corrigir sem perder a identidade
-
-Faça a menor mudança necessária. Prefira corrigir cenário, enquadramento ou um detalhe local preservando as referências aprovadas. Mude uma variável por tentativa e compare as versões. Após um reparo, inspecione também as regiões vizinhas e a mídia inteira: corrigir a mão pode alterar o rosto; melhorar o lip-sync pode introduzir dentes defeituosos. Preserve o original e nunca substitua uma referência do cânone por um resultado ainda não aprovado.
-
-Os métodos de revisão são `visual`, `listening` e `visual-and-audio`. Valores históricos continuam aceitos sem reescrever arquivos ou aprovações anteriores.
+Os contratos locais verificam declarações estruturadas e integridade dos arquivos. Não comprovam que visualização/escuta ocorreu, que quem revisou é humano ou que um processo criativo funcionou. Siga [produção](production.md) para contexto selado e exportações reais; use autorização aplicável do usuário e registre evidência real separadamente para publicação.

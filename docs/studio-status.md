@@ -1,54 +1,64 @@
-# OLYMPOX capabilities and limits
+# Capabilities and limits
 
-OLYMPOX is a reusable local AI influencer framework. Its core maintains guidance, character records, task state, versions, and evidence. Each studio supplies its own original influencers, production files, provider access, and decisions. See [installation](installation.md) to create a studio from the public package.
+OLYMPOX combines assistant instructions with a local Node runtime for original AI influencer studios. The framework supplies reusable methods and records; each installed studio supplies its own character choices, media, provider access, and execution evidence. See [installation](installation.md) and [quick start](quick-start.md).
 
-## Included in the framework
+## Included local capabilities
 
-| Area | Local capability |
-| --- | --- |
-| Governance and skills | Constitution, selected local-assistant instructions, `olympox`, and `higgsfield-studio` skills |
-| Coordination | Nine goddess-named profiles, task contracts, and three resumable workflows |
-| Research and direction | On-demand opportunity and trend methods, with sources, scope, and limitations |
-| Character records | Brief, identity anchors, references, narrative, content pieces, and generation specifications |
-| Continuity | Approved canon snapshots, execution seals, exact-file review links, and preserved attempts |
-| Recovery | Context change detection, uncertain-result handling, inventoried backups, and restore testing |
-| Documentation | Local navigable manual |
-| Higgsfield media access | Plugin workflow guidance and local CLI wrapper, using the same canon, run, and review records |
-| Installation | Fresh studio creation and preflight merge that retains identical files and refuses conflicting framework files |
+| Area | Included behavior | Evidence still needed in the studio |
+| --- | --- | --- |
+| Installation | Guided setup, Codex/Claude/both targets, full-file conflict preflight, and local checks | Live skill discovery in the selected assistant |
+| Coordination | Nine profiles, fifteen task contracts, and three persistent workflows | Real execution and real subagent dispatch when reported |
+| Character identity | Drafts, reference hashes, approval declarations, frozen canon snapshots | User selection, visual fidelity, vocal listening/selection when speaking |
+| Production records | Shot/prompt generation, draft media registration, execution seals, linked reviews | Actual references submitted, actual generation, complete inspection |
+| Editorial history | Versioned narrative and content, sources, canon/narrative links | Sound writing, factual verification, and applicable audio eligibility |
+| Resumption | Context change detection, preserved attempts, unresolved-job blocking | Provider reconciliation through actual tools |
+| Recovery | Character and linked-run inventory, verification, restore testing | Independent copies and separately preserved shared context |
+| Documentation | English source, pt-BR edition, source-derived catalogs, local manual | Wording/translation review and any remote publication |
+| Higgsfield route | Workflow guidance, local wrapper, and permitted source provenance | Account, exact modules, accepted inputs, export, inspection, and budget |
 
-The workflows are `create-character`, `produce-piece`, and `review-correct`. Atena coordinates requests in the selected assistant. Registered profiles guide work; real specialist delegation occurs only when a subagent is actually dispatched.
+The workflows are `create-character`, `produce-piece`, and `review-correct`. Profiles guide the coordinating assistant; they are not persistent workers. Commands do not automatically dispatch specialists, generate media, query providers, retry paid work, publish, schedule research, or collect channel analytics.
 
-## What verification demonstrates
+## Assistant and provider support
 
-From the studio root, run:
+The installer creates local project instructions and skill projections for Codex, Claude Code, or both. This is a supported file layout and locally tested installation path. It does not establish that a particular running assistant discovered the skill or that Claude web or another environment has been configured.
 
-```powershell
-npm.cmd run verify
-npm.cmd run studio -- help
+Higgsfield is the default media method for new work. Concepts, personality, narrative, scripts, and planning remain with the coordinating assistant. [Integrated image generation](integrated-images.md) is an explicit alternative for images. A missing Higgsfield stage remains pending until the required capability or an explicit method decision is available.
+
+The [plugin route](higgsfield-plugin.md) and [local CLI route](higgsfield-setup.md) must be checked independently in the actual session. Available website features, a connected plugin, or a logged-in CLI do not establish access to every required module, voice, identity training, reference upload, export, or an equivalent billing balance. Check the [complete pilot path](production-handoff.md) before the first paid stage and apply the existing applicable authorization.
+
+The reference method requires coherent selected visual identity, exact visual/vocal canon, listened-to voice for speech, inspected scene inputs, and one fully inspected pilot before batches. Actual final bytes must be exported and reviewed; publication has its own authorization and evidence. Tests cannot substitute for those production steps.
+
+## What local verification checks
+
+From the installed studio:
+
+```sh
+npm run verify
+npm run studio -- help
 ```
 
-Verification builds the manual, runs local tests, validates available records, checks source/skill installation consistency, and checks the resulting manual. Tests exercise records, paths, preservation, state transitions, and local command behavior. Results belong to the version and environment in which those commands ran; copied historical counts do not establish a new installation's health.
+`verify` builds the manual, runs local tests, validates available character/editorial records, runs `doctor`, and checks manual integrity. An empty studio can pass without any character or generated media. A draft can pass structural validation while still having unfinished fields reported as warnings.
 
-Structural checks do not inspect pixels, listen to voices, view motion, confirm provider execution, or authenticate a named reviewer. A completed contract or a successful restore test does not prove audiovisual quality or publication. Hashes detect changes; they do not prove authorship or approval.
+| Result | What it establishes |
+| --- | --- |
+| Passing tests | Covered local behavior worked in that version/environment |
+| Passing character validation | Structured records, reference/media hashes, and declared review links are consistent |
+| Passing `doctor` | Required foundation, registered contracts, and installed skill projections are consistent |
+| Passing documentation check | Selected sources and generated manual agree |
+| Passing backup restore test | Inventoried records can be restored and validated locally |
 
-## Tools and production
+None authenticates a named reviewer, inspects pixels, listens to audio, reviews motion, proves reference conditioning, or establishes publication. Hashes detect changes; someone with write access can edit and recalculate them. Test counts from an earlier release do not establish a current studio's health.
 
-The coordinator uses generation, inspection, browsing and subagent tools actually available in its session. Installed files do not create tool access or demonstrate fresh skill discovery in Codex or Claude Code. Reload or reopen the project as needed. Local Claude Code instruction/skill installation is distinct from verified Claude web/cloud support, live provider connection and end-to-end creative execution.
+## When work remains pending
 
-New influencer creation defaults to the [Higgsfield reference method](higgsfield-influencer-method.md), coordinated by Codex or Claude without integrated image-generation dependency. Discovery and distinct concepts precede identity/reference work; explicit visual selection, inspected coherent references, generated/listened-to/selected voice when speaking, complete canon approval, inspected scenes, a representative video pilot, full QA, actual-byte export and authorized publication remain required. Check full-pilot connection, reference transport, export and scoped budget early. Integrated images are an [explicit alternative](integrated-images.md); selected modules are not silently replaced. Current website features do not prove equivalent callable tools or source quality. Existing canon and historical bytes stay preserved.
+| Condition | Next action |
+| --- | --- |
+| Required generation/inspection capability missing | Keep the stage pending and verify the exact route/module |
+| Reference transport or export unsupported | Resolve that stage before committing to the complete pilot |
+| Canon/observed context changed | Review the change and use an explicit new attempt; preserve old history |
+| External submission unresolved | Query/reconcile the original job before continuation or another attempt |
+| Media has critical failure or incomplete inspection | Preserve the attempt, correct in a new version, then inspect again |
+| Installer finds different framework files | Compare/reconcile explicitly; `--merge` does not overwrite |
+| Historical data fails validation | Preserve originals and diagnose without rewriting approval evidence |
 
-Provider access remains separately prepared: the [host plugin](higgsfield-plugin.md) needs no local CLI; the [local CLI and wrapper](higgsfield-setup.md) are a separate route whose required capabilities must be checked. The package includes guidance, the wrapper and permitted provider-source provenance. Installation never installs/connects external providers. The core remains usable without them; missing required production capabilities stay pending rather than silently switching methods.
-
-Account sessions, credentials, tool/model availability, and balances must be checked for the selected route in the user's environment. Plugin discovery alone does not demonstrate account access, voice, Soul ID, reference handling, media download/export, or equivalent CLI billing. Local verification covers the framework's records and guidance; it does not exercise the plugin service. Follow [tools](tools.md) and the selected route's guide. Both routes require actual execution evidence, local records, and complete media inspection.
-
-The core does not automatically submit or query external jobs, retry uncertain submissions, schedule a trend radar, publish content, or collect channel analytics. Paid generation, identity training, and publication require applicable authorization. A prepared script or production package remains preparation until execution and review actually occur.
-
-## Your first creative cycle
-
-1. Define the audience, editorial proposition, and original adult persona.
-2. Explore real candidate references and choose the identity explicitly.
-3. For speaking characters, generate, listen to, and select the exact vocal reference before approving complete visual/vocal canon; record exact files and hashes, then preserve canon. For silent content, record why voice is not applicable.
-4. Prepare narrative and a concrete piece; run a small pilot with available tools.
-5. Inspect the complete media and correct critical failures in new versions before batches.
-
-Keep character records, media, runs, and backups local. The distributed framework contains no real character files. Use verifiable backup and keep an independent copy outside the working disk; shared framework context needs its own preservation.
+Follow [operations](operations.md) for files, media, and backups, and [runs and resumption](framework-02.md) for task state. A prepared package, a sealed execution, a completed run, and published content describe different outcomes; record only the outcome that actually occurred.

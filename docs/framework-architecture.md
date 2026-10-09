@@ -1,104 +1,89 @@
-# OLYMPOX — architecture 0.2
+# Framework architecture
 
-Version **0.2.0**. Local core implemented; each studio chooses its own influencers, approves canon, and demonstrates consistency through an inspected pilot.
+OLYMPOX separates assistant direction, local records and external media execution. The current framework source is **0.5.0**; individual contracts and workflows retain their own component revisions, including `0.2.0`.
 
-## Adopted direction
+This guide describes the implementation boundary. Use [workflow operation](framework-02.md) for commands and [identity and records](operations.md) for file procedures.
 
-OLYMPOX is a local AI influencer framework, operated through Codex or Claude Code and dedicated to original virtual influencers, production, and learning. It organizes work through specialists, tasks, workflows, and completion criteria. The nine agents have goddess names and female profiles; their role IDs remain stable. The implementation uses Node and local files, with no external operational dependencies.
+## Three layers
 
-The coordinating assistant interprets the request, loads the next task's package, uses available capabilities, and records work that occurred. The core maintains contracts, context, and state; it does not dispatch agents, generate media, query providers, or publish. Profiles are not permanent workers. Delegation exists only when a real subagent is used.
+| Layer | Sources and responsibilities |
+| --- | --- |
+| Assistant direction | Constitution, host instructions, skills, specialist profiles and guides tell the assistant how to organize work |
+| Local core | Node scripts validate contracts, persist runs, preserve canon and editorial versions, seal reported execution context and manage backups |
+| Session tools | Available assistant and provider tools perform research, delegation, media generation, transport, inspection and publication |
 
-## What is implemented
+The core uses Node 22+ and local files with no external runtime dependencies. It returns the next task package to the coordinating assistant. The assistant executes the task with available tools and records the result; the core does not automatically dispatch agents or call providers.
 
-| Area | Local core 0.2 | Current limitation |
-| --- | --- | --- |
-| Direction | Constitution, skill, nine profiles, and task contracts | Profiles guide the assistant; they do not execute independently |
-| Identity | Approved canon snapshots, version/hash, and preserved reference bytes | Approval and inspection must have occurred; missing historical data is not reconstructed |
-| Editorial | Versioned narrative and pieces, chronology, written voice, sources, and context links | Campaign is an optional ID; there is no complete campaign management |
-| Coordination | Three workflows, owners, inputs, outputs, and persisted state | External tool submission happens outside the runtime |
-| Production | Sealed generation context and review linked to applicable hashes | A record proves neither provider execution nor audiovisual fidelity |
-| Recovery | Preserved attempts, detected changes, and uncertain-result blocking | Reconciliation requires real querying; there is no automatic retry |
-| Continuity | Transactional creation, inventoried backup, and restoration without overwrites | Shared context outside the persona is not copied |
-| Results | Documented experiment, cost, and metrics method | Publication and analytics have no installed integration |
-
-Earlier fixes remain in place: the exact prompt is linked to review, duplicate files through equivalent paths are rejected, references match the media type, known costs are valid, and persona, reference, asset, and task states are separate. The core adds historical preservation and recovery without deleting earlier records.
-
-New runs store `mediaProviders` per attempt, defaulting image/video/audio to `higgsfield`. Generation requires the generic media capability and the selected provider-scoped capability; generated evidence and external intent must match that provider. New character workflows default to a video pilot, with image candidates and candidate review. Provider changes need an explicit new attempt and reason. Historical runs without this policy retain their saved semantics and bytes. Declarations constrain local completion; they do not connect or execute a provider.
-
-## Layers and storage
-
-1. **Knowledge and direction:** constitution, skill, guides, profiles, and contracts loaded according to the task.
-2. **Verifiable local state:** canons, narratives, pieces, sealed executions, reviews, tasks, and backups.
-3. **Session execution:** the assistant uses tools actually available and records outputs and limitations. External adapters require their own need and validation.
+## Reusable sources and private state
 
 ```text
 framework/
-  registry.json
-  roles/                       # Specialist instructions and boundaries
-  tasks/                       # Contracts and completion criteria
-  workflows/                   # Create, produce, review/correct
+  registry.json                 # Names, roles and registered paths
+  roles/                        # Specialist instruction profiles
+  tasks/                        # Completion contracts
+  workflows/                    # Registered task sequences
+skills/                         # Canonical skills
+templates/                      # Scaffolding and studio instructions
+scripts/                        # Local operations and validation
+docs/, docs-site/               # Guides and manual sources
+
+# Private state created in an installed studio:
 influencers/<slug>/
-  persona.json                 # Working record and current identity
-  assets.json                  # Asset manifest and reviews
-  canon/v000001/               # Approved snapshot and reference copies
-  narrative/v000001.json       # Story and editorial language
-  content/<id>/v000001.json     # Content pieces and context links
-  executions/<hash>/           # Generation context and copied prompt
+  persona.json
+  assets.json
+  canon/v000001/
+  narrative/v000001.json
+  content/<id>/v000001.json
+  executions/<hash>/
   references/, media/, prompts/, exports/
-work/runs/run-<UUID>.json       # State, attempts, and next task
-backups/<slug>/<backup-id>/     # Inventory, character, and linked runs
+work/runs/run-<UUID>.json
+backups/<backup-id>/
 ```
 
-History folders are populated when their records are created. Creating the character record does not approve narrative or identity and does not produce media. See [core contracts](../framework/README.md), [operations](operations.md), and the [framework 0.2 guide](framework-02.md).
+History folders appear when their records are created. Templates are starting structures; they do not establish an approved identity.
 
-## Team and workflows
+The installer uses explicit source selection. It writes the creative `AGENTS.md` from the studio template, adds `CLAUDE.md` for Claude Code, and projects canonical skills into the selected host's skill directory. Development instructions remain in this repository. Installation does not copy private records or connect provider accounts.
 
-**Atena** coordinates and consolidates decisions. **Gaia** researches opportunities; **Psiquê** develops persona/narrative; **Íris** directs identity and scenes; **Aurora** researches trends and proposes concepts; **Saraswati** writes the piece; **Selene** prepares and executes production; **Têmis** inspects quality; **Fortuna** learns from first-party data and formulates commercial hypotheses. IDs, deliverables, and boundaries are in the [studio team](studio-team.md).
+## Workflows and task contracts
 
-The three registered workflows are:
+The registry defines nine profiles, fifteen task contracts and three workflows:
 
-- `create-character`: optional research → proposal → direction decision when needed → candidate planning, generation, and review → canon decision → pilot planning, generation, review, and delivery.
-- `produce-piece`: optional research → script → direction → generation → review → optional distribution planning → delivery.
-- `review-correct`: correction plan → new generation → review → delivery of reviewed bytes.
+| Workflow | Purpose |
+| --- | --- |
+| `create-character` | Explore a persona, select and review identity, approve canon, produce and deliver a pilot |
+| `produce-piece` | Prepare content for an existing approved character, generate, review and deliver |
+| `review-correct` | Plan a correction, produce a new version, review and deliver it |
 
-Gaia and Aurora follow [trend research](trend-research.md), with scope, dated sources, a window, and gaps. No continuous trend radar is installed. Optional stages can be omitted with a reason when the workflow permits; generation, review, delivery, and required canon decisions cannot be skipped.
+Each contract defines its owner, prerequisites, output count, evidence type, capabilities and completion criteria. The generated catalogs show the actual registered definitions. Optional steps can be skipped with a reason when permitted.
 
-Each package identifies the character when applicable, owner, contract, inputs/hashes, deliverables, and prerequisites. Pieces can identify canon/narrative snapshots and serve as exact run inputs; the runtime does not automatically create these editorial records. Atena retains user choices and authorizations and preserves important disagreements. All exercise independent judgment.
+A run binds inputs and applicable governance, captures the character context and stores attempts, results and events. Status reports the next owner, missing capabilities and detected changes.
 
-## Resumption and evidence
+## Media-provider policy
 
-Runs use these states: `planned`, `in-progress`, `awaiting-input`, `awaiting-tool`, `uncertain-result`, `in-review`, `completed`, `failed`, and `cancelled`. Historical state values remain readable for compatibility. Changes to inputs, completed outputs, canon, or governance require a new attempt and a reason to resume. The workflow restarts, preserving the previous attempt without silently reusing its approvals.
+New attempts preserve a `mediaProviders` map for `image`, `video` and `audio`, defaulting to `higgsfield`. Generation requires both the medium capability and the provider-scoped capability. Recorded generation evidence and external intent must identify the selected provider.
 
-Before external submission, persist intent and known identifiers. Resuming an unresolved job enters `uncertain-result`, including after interruption before recording the response. The assistant queries the provider with a real tool and records reconciliation before completing or trying again. The runtime neither queries nor resubmits jobs; without recorded intent, it cannot discover calls made outside it. Interruption neither demonstrates failure nor authorizes another charge.
+New character runs default to a video pilot; candidate generation and review use image capabilities. An explicitly selected scope can use another medium. Changing the provider map requires a new attempt with a reason. Historical runs without the map keep their stored semantics.
 
-Completion of non-decision tasks requires existing files, hashes, and an evidence declaration appropriate to the stage. Human decision gates instead require explicit `approval`; they can have zero outputs when their contract permits and do not require the normal `evidence` object. Review identifies media bytes, method, and decision, with no outstanding critical failures or limitations. Delivery accepts reviewed bytes; an altered export needs another review. A reviewer name, file extension, and recorded declaration do not prove humanity, pixels, listening, or real execution. The assistant must connect declarations to actual events. `completed` means local contracts are fulfilled; publication remains a separate action.
+These declarations constrain recorded completion. They do not authenticate, discover, price or execute provider tools. [Tools and capabilities](tools.md) explains the operational checks.
 
-## Canon, editorial work, and execution
+## Identity and editorial history
 
-Snapshots are created only for approved canon, through an explicit command or a registration, sealing, or migration operation that requires that context. Approving the record alone does not create a snapshot. Persona validation, workflow start, binding, task acceptance, and a new attempt compare an approved current record with any existing frozen snapshot for the same `identityVersion`; these checks do not create missing snapshots. Status and ordinary resumption report conflicts with a bound canon as drift and block continuation, while uncertain external jobs can still be reconciled without accepting that canon. The same version cannot accept a different canon, even with a replacement approval hash: identity evolution requires a new version and explicit approval. An old asset can be validated against historical canon; reuse requires assessing current identity and use. Migration preserves legacy records but does not invent historical snapshots, execution, or missing files/approvals.
+An approved canon version binds the persona's visual/vocal identity and exact reference bytes. When a frozen snapshot exists, identity operations reject a different canon under the same `identityVersion`. Evolving the identity requires a new version and approval.
 
-Narrative maintains desire, values, contradiction, habits, boundaries, writing examples, and fictional chronology in its own versions. Saving without an explicit decision leaves a draft. Editorial evolution does not change the canon hash; changes to visual anchors or vocal voice follow the identity process.
+Narrative and content have separate version histories. A narrative edit does not automatically change the identity. A content piece can link exact canon/narrative context; selected editorial files become explicit run inputs.
 
-A piece relates the character, canon/narrative versions and hashes, objective, pillar, message, script, caption, scenes, assets, and factual sources. Music eligibility is separate from popularity, with platform, region, account type, and use. `ready-for-production` requires approved context and recorded editorial review; it neither approves media nor publishes the piece. Earlier reviews remain preserved.
+An execution seal preserves reported generation context and a copy of the prompt. Asset review binds the media bytes and applicable context. Changes to exported media require another review.
 
-A sealed execution fixes the recorded generation context, canon, references, copied prompt, tool/model and exposed parameters, purpose, and known cost. Asset review is linked to that context and exact media. Narrative and script remain in editorial records and selected run inputs; do not assume they are automatically included in the generation snapshot. Unavailable data stays identified as unavailable.
+## Recovery and integrity
 
-## Preservation and limitations
+Runs detect changes to observed inputs, outputs, canon and governance. Continuation after changed context requires an explicit new attempt with a reason; previous attempts remain preserved. Rewriting this framework's guidance can therefore make an older run require context review.
 
-Creation and restoration use a temporary area, lock, and publication by rename, without overwriting an existing character. Records use writer exclusion and preservation operations. After an interruption, check the process and contents before removing a lock.
+Persist external intent before submission. An unresolved submission blocks continuation in `uncertain-result` until the assistant queries the real provider and records reconciliation. The core does not query or automatically resubmit jobs. Calls made without recorded intent cannot be discovered by the runtime.
 
-Backup copies the character's files and empty folders, with a size/hash inventory and runs linked to its ID. It checks historical records and copied bytes; restoration rejects conflicts. Restore testing checks structure, integrity, and local validation without demonstrating reproduction or audiovisual fidelity.
+Creation and restoration stage files and refuse to overwrite existing characters. Backups inventory character files, empty directories and linked runs. They exclude shared framework files, credentials, tools and inputs outside the character directory. Preserve those dependencies separately.
 
-Governance, framework, credentials, tools, and shared inputs outside the persona are excluded from this backup. Also preserve the project foundation and continuity dependencies. A restored character still needs that context to resume a run. A local copy on the same machine does not protect against device loss.
+## Limits and extension points
 
-Hashes detect changes but are neither signatures nor authentication against someone able to edit and recalculate records. The core validates integrity and declarations; creative judgment, genuine approval, and final inspection remain operational responsibilities.
+Hashes establish byte consistency, not reviewer identity or creative fidelity. A completed contract represents accepted local evidence; it does not establish publication or successful real-world results.
 
-## Next evidence and evolution
-
-Preservation, coordination, editorial continuity, and recovery are implemented locally. Run `npm.cmd run verify` after changes to check tests, validation, and diagnosis. Fixtures do not replace the first pilot.
-
-The next milestone is **one persona**, with a chosen audience/direction, inspected references, and a small set of pieces. Check consistency between angles, expressions, objects, and speech/movement when applicable. Record failures, corrections, time, and known cost. Also exercise missing tools, changed inputs, character switching, and uncertain results. No average compensates for a critical failure.
-
-After the pilot, structure actual publications and experiments with a hypothesis, variable, cohort, window, counts, denominators, source, and decision. Costs of rejected attempts count; different currencies and missing data are not treated as equivalent. Complete campaigns, portfolio comparison, analytics, adapters, a dashboard, and a database are introduced according to observed need.
-
-Scale and automation depend on pilot evidence; the number of profiles does not demonstrate quality.
+Provider adapters, dashboards, campaign management, analytics integrations and databases are not included. Add them only for a concrete need with verified behavior, export boundaries and preservation. Consult [supported capabilities](studio-status.md) and [core interfaces](../framework/README.md) before extending the runtime.

@@ -1,48 +1,58 @@
-# OLYMPOX - AI Influencer framework
+# OLYMPOX framework manual
 
-OLYMPOX is a local framework for creating memorable original AI influencers with testable viral potential. You work with Codex or Claude as conversational coordinator; Atena organizes the request and specialists contribute as needed. Higgsfield is the default media platform. The framework preserves versions, decisions and evidence between sessions.
+OLYMPOX is a local framework for developing original AI influencers with consistent identity, versioned content and a production history you can resume. Your assistant coordinates the work; Higgsfield provides the default media pipeline.
 
-For new characters, start with [adaptive onboarding](strategy.md) and distinct concepts connecting appearance, personality, audience and recurring content. Follow the [Higgsfield reference method](higgsfield-influencer-method.md) for identity/references, selected and listened-to voice before complete canon approval, inspected scenes and a video pilot before batches. Check full-pilot connection, transport, export and budget early. Review complete real media and export actual bytes before authorized publication. The coordinator need not generate images; [integrated images](integrated-images.md) require an explicit alternative choice. Preserve selected modules, keep missing capabilities pending with alternatives, and record materially changed methods and applicable paid authorization. Existing canon stays intact. Viral potential requires real content and results to test.
+## Choose your starting point
 
-## Install your studio
-
-In version 0.5.0, `npx --yes github:linkiaai/olympox#v0.5.0 setup` runs the published installer; `node bin/olympox.mjs setup` uses a reviewed checkout or extracted package. The guide covers language, assistant and destination choices, checks the actual installation plan and asks to proceed before writing. Choose Codex, Claude Code or both; assistant selection installs the appropriate local instructions and skills while keeping Higgsfield as the default media platform. The guide runs local manual and structural checks and presents a first prompt. Provider access, required modules and live skill discovery remain separate checks. See [installation](installation.md) for cancellation, plan refresh, noninteractive usage and preservation; run `npm run verify` afterward for the complete local suite.
-
-## What the framework does
-
-The [Higgsfield video-pilot procedure](production-handoff.md) gives ordered readiness checkpoints, owners and a concrete [handoff package](../templates/video-handoff.md). The coordinator directs a coherent production library and maps the exact supported inputs to each provider call. Higgsfield produces default references/scenes and voice when speaking, then a representative pilot validates the process before batches.
-
-| Area | What you gain |
+| You want to… | Read |
 | --- | --- |
-| Strategy and identity | An audience, editorial proposition, personality, and approved references for each character. |
-| Content | Versioned narrative, scripts, scenes, and content pieces linked to the context used. |
-| Coordination | Tasks with an owner, inputs, deliverables, and clear criteria; resumable workflows. |
-| Continuity | Preserved canon, sealed generation context, and review linked to exact files. |
-| Recovery | Attempt history, change detection, and verifiable backups. |
+| Install a studio or preserve an existing one | [Installation](installation.md) |
+| Make your first request | [Quick start](quick-start.md) |
+| Develop a character and choose its identity | [Character development](strategy.md) |
+| Produce a pilot or a content piece | [Production](production.md) |
+| Inspect media and request corrections | [Quality and continuity](quality.md) |
+| Maintain records, canon and backups | [Identity and records](operations.md) |
+| Start, complete or resume workflow tasks | [Workflow operation](framework-02.md) |
+| Understand the implementation or contribute | [Architecture](framework-architecture.md) and [manual maintenance](living-documentation.md) |
 
-## How the parts connect
+## How work moves through OLYMPOX
 
-**Atena** understands the objective and chooses the sequence. **Profiles** guide each specialty. **Contracts** define the deliverable and how to record completion. **Workflows** connect the stages. A **run** stores the real state of that execution.
+1. Define the audience and objective. Explore distinct concepts and select a direction.
+2. Build the persona, narrative and visual references. For a speaking character, listen to and select its voice before approving the complete canon.
+3. Prepare scripts and scenes with the exact approved references. Check tools, transport, export and the pilot budget.
+4. Generate and inspect a representative pilot. Correct failures in new versions and review the exported bytes.
+5. Expand into batches after the pilot passes. Publish with applicable authorization and learn from actual results.
 
-The constitution establishes shared principles. The guides explain the method. The local core maintains records and hashes. The coordinator performs direction and work with tools actually available in the session; media generation uses the recorded provider.
+[The team](studio-team.md) assigns responsibilities to Atena and eight specialists. The workflow catalog connects their tasks; each run preserves inputs, outputs, attempts and the next owner. Profiles guide your assistant, and actual delegation uses subagents available in the session.
 
-## Studio terminology
+## What is included
+
+| Component | Purpose |
+| --- | --- |
+| Instructions and skills | Guide the assistant's work in an independent local studio |
+| Registry, contracts and workflows | Define owners, required deliverables and completion criteria |
+| Character and editorial records | Keep persona, narrative, scripts and assets linked to their context |
+| Canon snapshots and execution seals | Preserve approved references and reported generation inputs |
+| Runs and backups | Support continuation, integrity checks and recovery |
+| Navigable manual | Provide guides and source-derived reference catalogs |
+
+The local commands maintain files and validate records. Provider connection, generation, listening, video viewing and publication use tools available to your session. Local validation does not establish creative quality or external execution.
+
+## Terms used in this manual
 
 | Term | Meaning |
 | --- | --- |
-| Persona | The character record: audience, personality, appearance, voice, and boundaries. |
-| Canon | Approved visual and vocal identity, with a version, references, and hashes. |
-| Narrative | Versioned story, habits, values, contradictions, and editorial language. |
-| Content piece | A unit of content: script, caption, scenes, sources, and context links. |
-| Asset | An image, audio, or video file and its provenance and review record. |
-| Run | A persisted workflow execution, with tasks, attempts, and a next step. |
-| Execution seal | A local record of the prompt and declared generation context. |
-| Production-method plan | A versioned record of the selected process, source evidence, modules, stages, costs and pending work, observed as a run input/output; not a new runtime schema or automatic provider dispatcher. |
+| Persona | Working character record: audience, personality, appearance, voice and boundaries |
+| Canon | Approved visual and vocal identity with a version, exact references and hashes |
+| Narrative | Versioned fictional history, behavior and editorial voice |
+| Content piece | Script, caption, scenes, factual sources and context links for one item |
+| Asset | A media file with provenance and review records |
+| Run | A workflow execution containing tasks and preserved attempts |
+| Execution seal | A preserved record of declared generation context and prompt |
+| Production-method plan | The selected stages, tools, inputs, cost scope and outstanding work |
 
-## Real capabilities and limitations
+## Scope and version
 
-The core organizes the process and validates its structure. Subagent execution depends on real delegation in the current host. Registered profiles are not permanently active. Generation, provider queries, listening, video viewing, and publication depend on available tools and applicable authorizations.
+Use an installed studio for your own characters. This source repository contains the reusable framework and its development documentation. Private characters, media, runs and credentials remain outside the distribution.
 
-Structural validation does not prove visual fidelity, voice quality, or a declaration's authenticity. Generated media needs inspection. The user chooses the identity; publication and paid external generation require applicable authorization. `production` and `completed` do not mean published.
-
-To begin, read [Quick start](quick-start.md). For the mechanisms, see [architecture](framework-architecture.md) and [core operation](framework-02.md).
+The current source is **0.5.0**. See [release notes](release-notes.md) for changes and release status, and [supported capabilities](studio-status.md) for the boundary between local features and external services. A speaking video pilot is the default creation scope; an explicit brief can choose an image-only or silent scope. Viral potential is tested through content and results.

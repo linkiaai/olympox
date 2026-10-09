@@ -1,107 +1,72 @@
 # Opportunity and trend research
 
-Date: **October 7, 2026**. This guide defines on-demand research conducted by the conversational coordinator. There is no continuous collection, connected social accounts, or installed automatic trend radar.
+Use research to resolve a creative decision: which audience deserves a new character, or which current signal suits an existing one. Gaia handles opportunities; Aurora handles trend adaptations. They work on demand through the assistant's available tools. OLYMPOX does not install continuous collection, connected social accounts or an automatic trend radar.
 
-## Two decisions, two roles
+## Set a useful scope
 
-**Gaia — opportunities for new personas** researches which audience, need, and editorial space deserve a new character. An opportunity must sustain identity and content series beyond a passing trend.
+Record the decision, platform, region/language, audience, period and production constraints. Reuse the brief and prior research. For open fields, state an exploratory assumption and continue useful work; ask only when the missing answer materially changes the result.
 
-**Aurora — trends and content ideas** researches topics, formats, music, openings, and visual language for existing characters. Delivers original adaptations with a reason for each character to participate or let the trend pass.
-
-These roles are activated according to the request. Gaia is not mandatory when the user has already defined direction. Aurora does not need to participate in every piece: evergreen content, series episodes, and direct requests can go to Saraswati.
-
-## Shared scope and evidence
-
-Before research, record the objective, platform, region, language, audience, period, and production constraints. When something is open, adopt an explicit exploratory assumption; it does not become an approved decision. If the request does not depend on the answer, proceed without a lengthy interview.
-
-Research current sources. Trends, audio availability, and usage rules require live consultation, not model recall. For each signal, record:
-
-| Field | Record |
+| Research question | Role and output |
 | --- | --- |
-| Identification | Signal ID and observed topic/format/audio |
-| Source | Direct URL, platform, author/origin, and source type |
-| Dates | Publication when exposed, collection, and the period the data covers |
-| Scope | Region, language, audience, and filters actually used |
-| Observation | What was seen and which metrics are accessible |
-| Sample | How many examples/independent creators were observed and how they were selected |
-| Interpretation | Researcher's inference, alternatives, and limitations |
-| Freshness | When to recheck the signal before investing in production |
+| Is there an editorial opportunity for another character? | Gaia: up to three comparable opportunities with evidence and recommendation |
+| How should this character adapt a current topic, format or audio? | Aurora: a small prioritized set of original content ideas |
 
-Separate observed signals, promising hypotheses, and insufficient data. An indexed search result does not demonstrate a current ranking. A highly viewed post does not prove a growing trend; growth requires a comparable series or evidence of change over time. Multiple posts from the same creator are not independent confirmations.
+Evergreen content and direct script requests can go to Saraswati without trend research. In the registered workflows, `research-opportunity` does not require a persona; `research-trends` requires an approved character/canon. Exploratory research during discovery remains preparation and does not satisfy that workflow gate.
 
-As a starting point, Gaia can compare 30/90 days and Aurora 7/30 days when sources allow. These windows are studio operational choices, adjustable to the topic; they are neither platform requirements nor evidence by themselves. Also look for persistence, seasonality, and contrary signals.
+## Collect evidence, then interpret it
 
-Describe saturation only within the observed sample: repetition, concentration in large accounts, and apparent room for differentiation. Do not claim complete market coverage. If scoring is used, make criteria and judgment explicit; do not present the score as a probability of virality.
+Current trends, audio availability and usage rules need live consultation. For each signal, record enough context for someone else to assess it:
 
-## Sources and access limitations
+| Field | What belongs in the record |
+| --- | --- |
+| Source | Direct URL or source ID, author/origin and source type |
+| Time | Publication date when exposed, collection date and period covered |
+| Scope | Region, language, audience, search terms and filters actually used |
+| Observation | Exact topic/format/audio observed and accessible metrics |
+| Sample | Examples and independent creators consulted; how they were selected |
+| Interpretation | Proposed mechanism, alternative explanations and contrary evidence |
+| Freshness | What to recheck and when it affects production |
 
-| Source | Use | Limitation to record |
+Keep observation, inference and recommendation separate. For example, observing the same question in five independent creators' comments supports a recurring-question hypothesis within that sample. It does not establish population-wide demand or willingness to pay.
+
+A high-view post is an example of reach; growth needs comparable observations over time. Multiple posts from one creator are not independent confirmation. Describe repetition and saturation within the observed sample, and explain selection limits. A score can summarize stated criteria, but is not a probability of virality.
+
+## Choose sources for the question
+
+| Source type | Useful evidence | Limits to retain |
 | --- | --- | --- |
-| Google Trends | Compare search interest, related queries, and persistence | Relative index, region, interval, and compared terms; neither absolute volume nor proof of demand for a profile |
-| TikTok Creative Center / Trends | Consult hashtags, music, formats, and examples as available | Confirm current interface, login, region, period, and exposed data; do not extrapolate the catalog or ranking |
-| YouTube Studio / Trends | Explore searches, content, and gaps relevant to the audience | Requires an account; features vary by country, language, and device; access must actually be exercised |
-| Public TikTok, Instagram, and YouTube examples | Observe formats, exact audio, comments, and niche adaptation | Feed and search are samples; record recency, origin, and visible metrics |
-| Available first-party data | Learn which formats worked for our character | Record source, window, and denominators; do not automatically attribute causality |
+| Search-interest tools | Relative interest, related queries and persistence | Region, time range, compared terms and index definition; search interest is not demand for a profile |
+| Platform trend/catalog tools | Topics, formats, audio and available rankings | Actual account access, filters, region, period and exposed fields |
+| Public content and comments | Creative mechanisms, examples and recurring questions | Publication dates, sampling, visible metrics and whether media was actually viewed/heard |
+| First-party studio results | Response to the character's published work | Actual post IDs, metric definitions, collection window and denominators |
+| Official usage documentation | Conditions relevant to audio, disclosure or publication | Source date, intended account/use and outstanding checks |
 
-Official sources consulted during this preparation: [Google Trends: interpreting data](https://support.google.com/trends/answer/4365533?hl=en), [TikTok: using Trends](https://ads.us.tiktok.com/resources/help/article/how-to-use-trends?lang=en&redirected=2), [Creative Center](https://ads.tiktok.com/business/creativecenter/pc/en), and [YouTube: exploring trends](https://support.google.com/youtube/answer/11962757?hl=en).
+Consult current source guidance when using a tool, such as [Google Trends data interpretation](https://support.google.com/trends/answer/4365533?hl=en), [TikTok Creative Center](https://ads.tiktok.com/business/creativecenter/pc/en) or [YouTube trend research](https://support.google.com/youtube/answer/11962757?hl=en). These are research entry points; linked documentation does not demonstrate that the studio accessed a live ranking or account.
 
-During the October 7 consultation, the old TikTok songs-page URL redirected to the new Trends area; content accessible to the tool showed a menu/login. A current ranking for Brazil was not confirmed. This records the limitation of that consultation, not an absence of trends or an inability to access them through another authorized route. No trending music list was produced during this preparation.
+When access is missing, deliver the supported findings and explicit gaps, with alternative sources. Search snippets do not prove video observation or audio listening. A research request does not itself authorize purchases or recurring monitoring. Store useful creative evidence in the private studio records without collecting unnecessary audience personal data.
 
-When access is missing, deliver partial research with explicit gaps and alternative sources. Do not invent numbers or declare video/audio observation that did not occur. Do not purchase access or start recurring monitoring as an automatic consequence of a research request.
+## Gaia: compare opportunities
 
-## Gaia: find an opportunity for a new character
+Use the [opportunity template](../templates/opportunity-research.md). Receive the portfolio objective, market/language, preferences, existing characters and production capacity. For each opportunity, deliver:
 
-**Inputs:** portfolio objective, market/language, preferences and constraints, existing characters, production capacity, and prior results when available.
+- A concrete audience need and supporting/contrary signals.
+- Existing examples, persistence or seasonality when observed, and possible differentiation.
+- An editorial proposition and three series hypotheses.
+- Production feasibility, repetition risk, evidence gaps and a next test.
+- A recommendation to explore, test, pass or retain insufficient data.
 
-Research audience topics and needs, recurring questions, interest signals, and existing solutions. Compare long-term opportunities with passing movements. Analyze original-content feasibility, production difficulty, and differentiation from our portfolio.
+Compare creating a character with improving an existing one. Atena consolidates the recommendation, the user selects a direction and Psiquê develops the persona. Research does not select a face, approve canon or prove financial potential.
 
-**Deliverable:** up to three comparable opportunities using the [opportunity template](../templates/opportunity-research.md). Each includes:
+## Aurora: adapt a signal to the character
 
-- Audience and a concrete need.
-- Observed signals and sources, with limitations and contrary signals.
-- Differentiation space and examples of existing work.
-- Editorial proposition and three possible series, still as hypotheses.
-- Production feasibility, repetition risk, and missing data.
-- A reasoned recommendation: explore, test, or let pass.
+Use the [content research template](../templates/content-research.md). Receive the exact character/canon and narrative, channel/region, objective, recent pieces and available results. Each proposal needs the dated signal, original creative mechanism, character fit, opening, payoff and scene sequence. Include format, approximate duration, pacing, effort, media dependencies, reason to watch/save/share and a recheck condition.
 
-Gaia can conclude that evidence is insufficient or that improving an existing persona makes more sense than creating another. Do not invent novelty in a known niche or turn a search spike into proven financial potential.
+Adapt the mechanism rather than copying another creator's script, recording, performance or identity. A trend can be declined when it does not fit the persona. Canon stays preserved. Saraswati develops final writing, Íris/Selene prepare execution, Têmis inspects and Fortuna plans measurement.
 
-**Handoff:** Atena consolidates opportunities; the user chooses the relevant direction; Psiquê develops positioning, personality, and voice. Gaia does not silently define the face, name, or canon.
+## Resolve audio for its actual use
 
-## Aurora: turn trends into content for the right persona
+Record the exact title, artist/creator, version URL/ID, channel, region and intended use. Add the segment/cue only when inspected. Different remixes and uploads are different assets.
 
-**Inputs:** character and version, narrative and editorial voice, channel/region, objective, recent series/pieces, production capabilities, and available results. In a portfolio analysis, keep context and deliverables separate for each character.
+Check catalog availability for the actual account separately from eligibility for the intended use. Distinguish organic publication, advertising and audio embedded in an export; an organic collaboration may still be commercial. Consult the channel's current rules, including [TikTok's commercial music guidance](https://support.tiktok.com/en/business-and-creator/creator-and-business-accounts/commercial-use-of-music-on-tiktok?lang=en), where relevant. Access on one channel does not settle use on another.
 
-Research topics, formats, openings, editing rhythm, music/audio, and recent examples. Identify the creative mechanism: surprise, contrast, demonstration, discovery, identification, or story continuation. Assess relevance to the audience and novelty compared with what the character has already published.
-
-**Deliverable:** a small prioritized set of proposals using the [trend and content template](../templates/content-research.md). Each idea must include:
-
-- An external signal with its source, date, scope, and limitations.
-- Recommended influencer and reason for compatibility; discard if it does not fit.
-- An original concept, opening, deliverable, and scene sequence.
-- Format, proposed approximate duration, pacing, and generation needs.
-- Exact music/audio when confirmed, soundtrack purpose, and an alternative if pending.
-- Why someone would watch, save, or share; a hypothesis to test.
-- Expected effort, dependencies, and when to recheck the trend.
-
-A popular track does not force the character to dance; it may fit as a soundtrack, transition, or rhythm reference, or remain unused. Do not copy another creator's script, recording, performance, or identity. Do not change canon to fit a trend.
-
-**Handoff:** Saraswati develops final scripts and captions; Íris/Selene resolve direction and execution; Têmis inspects; Fortuna tracks the experiment and results. Aurora delivers research-grounded concepts without promising reach or automatically publishing.
-
-## Music and usage context
-
-When recommending audio, record the title, artist/creator, URL/ID of the exact version, channel, region, segment/cue when inspected, editorial/commercial purpose, and source verifying availability. Different remixes or uploads are not the same asset.
-
-Record availability in the account/account-type catalog separately from eligibility for intended use. Identify whether the piece is an organic publication, an ad, or an export with embedded audio; a commercial collaboration can be organic. Confirmation of one field does not automatically confirm the other.
-
-Trending music does not prove eligibility for intended use. Check the relevant account/catalog before finalizing a piece; access on one channel does not demonstrate permission to reuse audio on another. The [official TikTok commercial-use guidance](https://support.tiktok.com/en/business-and-creator/creator-and-business-accounts/commercial-use-of-music-on-tiktok?lang=en) recommends the Commercial Music Library for content promoting brands, products, or services, and distinguishes that use from music outside it.
-
-If usage remains pending, the idea can proceed with an open soundtrack or an original/authorized alternative, clearly identified. Do not download tracks or presume permission to embed audio merely because it is accessible on the web. Do not record a segment as heard when only metadata was consulted.
-
-## Learn and recheck
-
-Choose one hypothesis and main variable per experiment according to [strategy](strategy.md). Compare results with similar pieces when possible, and record raw data, source, and window. Aurora learns from execution; Fortuna maintains analysis of first-party results.
-
-Before costly generation or publication, recheck short-lived signals and chosen music. The recheck interval is a research decision adjusted to signal speed, not certified validity. Missing data leaves the hypothesis open.
-
-The objective is relevant content with potential for reach and sharing while sustaining identity. Virality is an outcome observed after distribution, not a guaranteed property of a script.
+Pending audio can leave the soundtrack open or use an original/authorized alternative. Do not treat an accessible web track as permission to download or embed it. Recheck short-lived signals and selected audio before costly production or publication, then measure one concrete hypothesis under [strategy](strategy.md). Actual audience response decides what to repeat; research alone cannot promise reach.

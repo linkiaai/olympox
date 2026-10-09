@@ -1,153 +1,162 @@
-# OLYMPOX local operation and traceability
+# Character records, media, and recovery
 
-Install an independent studio from release `v0.5.0` or a reviewed package/source, with `--assistant codex`, `--assistant claude` or `--assistant both` as described in [installation](installation.md). Open it in the selected local assistant. The installer preflights merge destinations and preserves unrelated/private studio files. This checkout develops reusable sources; personal records and production belong to independent studios.
+Run these commands from an [independently installed studio](installation.md) using Node 22+. They maintain local records; the assistant performs generation and inspection through available tools. Personal creative production belongs in the studio, outside the framework development checkout.
 
-Run commands from the studio root with Node 22+. `npm.cmd run verify` runs tests, validates existing characters, and checks the foundation. `npm.cmd run studio -- help` lists local operations. No local record command generates media, calls a provider, or publishes.
+## Create a draft
 
-## Create and fill in records
-
-```powershell
+```sh
 node scripts/studio.mjs new my-persona
 node scripts/studio.mjs list
 node scripts/studio.mjs validate my-persona
 ```
 
-`new` prepares the record in a temporary folder and publishes only the complete folder. It rejects an existing destination or concurrent creation. A persona starts as `draft`; empty fields are warnings of outstanding work. `validate` fails on structural errors, missing/changed references, inconsistent approval records, or an approved canon that differs from its existing frozen snapshot. Complete `brief.md` and `persona.json` with real choices. Keep chronology, decisions, and results in `decisions.md`. There is no fictitiously approved initial persona.
+`new` stages a complete character folder before making it available and refuses an existing destination or concurrent creation. Fill in `brief.md` and `persona.json`, then record choices and chronology in `decisions.md`. Draft fields can remain pending; validation reports structural errors separately from unfinished draft fields.
 
-| Character file/folder | Purpose |
+| File or directory | Purpose |
 | --- | --- |
-| `persona.json` | Identity, voice, editorial information, references, and canon approval |
-| `brief.md` | Objective, choices, and assumptions |
-| `decisions.md` | Decisions, chronology, and results |
-| `assets.json` | Manifest of generated files and their reviews |
-| `references/candidates/` | Possible references |
-| `references/canon/` | Approved identity files |
-| `media/candidates/` | Production attempts |
-| `media/approved/` | New approved final versions |
-| `prompts/` | Shots and exact prompts used |
-| `exports/` | Final deliverables that require review after editing |
-| `canon/` | Approved identity snapshots and reference copies |
-| `executions/` | Preserved context and prompt for each sealed execution |
-| `narrative/` | Versions of personality, written voice, and narrative arc |
-| `content/` | Versions of pieces, sources, audio, and context links |
+| `persona.json` | Identity anchors, voice, editorial context, references, and canon approval |
+| `brief.md`, `decisions.md` | Objective, assumptions, decisions, and chronology |
+| `assets.json` | Media manifest, origin, hashes, and reviews |
+| `references/candidates/`, `references/canon/` | Candidate and approved reference files |
+| `media/candidates/`, `media/approved/`, `exports/` | Attempts, approved versions, and final deliverables |
+| `prompts/` | Shot specifications and exact prompts |
+| `canon/`, `executions/` | Frozen identity and execution context |
+| `narrative/`, `content/` | Versioned editorial records |
 
-All paths within the record/manifest are relative to the character folder, with `/`. References outside that folder or traversing `..` are rejected. Copy a permitted source into the character folder, preserving authorship/origin. The utility checks content using SHA256; it does not inspect pixels or audio.
+These live under `influencers/my-persona/`. Paths inside persona, shot, manifest, and editorial records are relative to that character folder, with `/`. Run inputs/outputs instead use studio-root-relative paths. Paths that traverse `..` or escape the applicable folder are rejected. Copy permitted references into the character folder and retain their origin.
 
-## Register references and approve canon
+## References and canon approval
 
-After visual inspection and selection by the responsible person, register each file in `persona.references`:
+The assistant edits `persona.references`; there is no separate reference-registration or canon-approval CLI command. Each reference requires:
 
-```json
-{
-  "id": "face-front-v1",
-  "path": "references/canon/front-v1.png",
-  "role": "front",
-  "status": "approved",
-  "origin": "Tool and creation context; permission when an external source is involved",
-  "sha256": "REPLACE_WITH_REAL_HASH",
-  "review": {
-    "reviewer": "The person who actually inspected the reference",
-    "at": "2026-10-07T15:00:00-03:00",
-    "notes": "Actual decision and observations"
-  }
-}
-```
+| Field | Value |
+| --- | --- |
+| `id`, `path` | Unique reference ID and actual character-relative file |
+| `role` | `front`, `three-quarter`, `profile`, `full-body`, `expression`, or `voice` |
+| `status` | `candidate`, `approved`, or `rejected` |
+| `origin` | Actual tool/source context and applicable permission |
+| `sha256` | Hash of the exact file |
+| `review` | Approved references require actual `reviewer`, ISO timestamp `at`, and `notes` |
 
-Roles: `front`, `three-quarter`, `profile`, `full-body`, `expression`, `voice`. Status: `candidate`, `approved`, `rejected`. Candidates/rejected references also need provenance and a hash, but not approval. Calculate the file hash:
+Calculate hashes with:
 
-```powershell
+```sh
 node scripts/studio.mjs file-hash my-persona references/canon/front-v1.png
 node scripts/studio.mjs canon-hash my-persona
 ```
 
-The structural canon minimum is an approved front view and another angle; this does not equal a sufficient pack for all production. Complete the required framing according to [production](production.md). After an explicit decision, record `approval` with `reviewer`, `at`, `notes`, and the real `canonHash`, and change status to `canon-approved`. The hash covers name/age, anchors, voice, approved references, and version. Editorial fields can evolve without redefining identity.
+Visual selection belongs to the user and follows [quality inspection](quality.md). The structural canon minimum is an approved front view and approved three-quarter or profile view; production may need a broader coherent reference pack. A speaking character also needs a generated, listened-to, selected voice reference. Set `voice.referenceId` to that approved `voice` entry. A description alone does not establish voice.
 
-A change to an anchor or approved reference requires incrementing `identityVersion`, returning to `draft`, reviewing references, and recording new approval. Do not silently update hashes to hide an error. Voice uses `voice.referenceId` pointing to an approved `voice` reference; spoken production needs it. A voice description does not replace an inspected sample.
+After the actual complete-canon decision, write persona `approval` with `reviewer`, `at`, `notes`, and the returned `canonHash`; set status to `canon-approved`. The hash covers character ID, identity version, name/age, identity anchors, voice, and approved reference data. Editorial evolution does not automatically change that canon. Validate, then preserve it:
 
-Before evolving an approved identity, preserve its snapshot:
-
-```powershell
+```sh
+node scripts/studio.mjs validate my-persona
 node scripts/studio.mjs canon-snapshot my-persona
 ```
 
-Core 0.2 checks old assets against the snapshot of the version used, including reference copies. `register` also freezes approved canon. Each `identityVersion` accepts a single canon; changes require a new version and explicit approval. Persona validation, workflow start, binding, task acceptance, and a new attempt compare an approved current record with any existing frozen snapshot for that version. A changed identity cannot reuse the version by replacing its approval hash. Status and ordinary resumption report conflicts with a bound canon as drift and block continuation; reconciling an uncertain external job remains possible without accepting that canon. These checks do not create snapshots: an approved record without one can remain valid, while a missing historical snapshot is never invented to validate an old context. Preserve originals and reviews.
+Approval itself does not create the snapshot. `canon-snapshot` requires approved canon and preserves the persona plus reference copies. Registration of an asset under approved canon also creates/reuses that snapshot. Each `identityVersion` can have only one frozen canon. To change identity, preserve the old version, increment `identityVersion`, return to `draft`, inspect/select new references, and obtain new approval.
 
-For core 0.1 manifests, use `migrate-assets my-persona` while the current canon is still approved. Migration freezes that canon and preserves legacy reviews without inventing new inspection. Legacy productions remain identified as such; the full seal applies only after returning the asset to draft, completing its context, and performing a new review.
+Validation and workflow operations compare approved current canon with any existing snapshot of the same version. Replacing an approval hash cannot legitimize a changed same-version identity. Missing historical snapshots are not reconstructed as evidence; an approved current record without a snapshot can still be structurally valid.
 
-Example dates/reviewers are not real evidence: replace them with the approval event that actually occurred.
+## Shot specification and exact prompt
 
-## Assemble a piece specification
+Copy `templates/shot.json` into the character's `prompts/` and fill the intended framing, scene, medium, speech, and references. `purpose: reference` permits draft identity exploration; `purpose: production` requires approved canon. Video/audio define target duration; spoken production requires canonical voice. Silent video may use an empty script.
 
-Copy `templates/shot.json` into `prompts/` and fill it in. `purpose: reference` allows exploration of an identity still in draft; `purpose: production` requires approved canon. For video/audio, define `script`, voice, and target duration. A video without speech can have an empty script. Empty `referenceIds` selects approved visual references for image/video and the approved canonical voice reference for audio. Spoken video also includes its approved voice reference. For control, explicitly select only references useful to the piece.
-
-The generated prompt carries nonempty `profile.audience`, `profile.valueProposition`, `profile.personality` and `profile.backstory` as creative context, alongside identity anchors and shot direction. Fictional background is explicitly identified as creative context, not evidence of real experience. Exact speech and reference paths/hashes remain part of the specification. This command writes text only: it neither selects a provider nor submits files. Follow the saved method and [production guide](production.md) when executing it.
-
-```powershell
+```sh
 node scripts/studio.mjs prompt my-persona influencers/my-persona/prompts/shot-v1.json
 ```
 
-The output is text for review. Save it as UTF-8 using a writing tool; avoid legacy PowerShell redirection that can produce UTF-16. Actually attach references to generation in the indicated order. The specification is not an API, does not add parameters unsupported by the tool, and does not supply a seed automatically.
+The command returns text. Save it as UTF-8 with a writing tool; legacy PowerShell redirection can produce UTF-16. It includes identity and nonempty creative profile context, exact speech, and selected reference paths/hashes. Fictional background remains fictional context.
 
-## Register and review the result
+Empty `referenceIds` selects approved visual references for image/video or canonical voice for audio; spoken video also includes approved voice. Prefer an explicit relevant subset supported by the selected module. Actually attach those exact references during generation and record transfer evidence. Prompt text neither transfers files nor establishes supported API parameters. It does not select a provider or call a model. Follow the saved [production method](production.md).
 
-```powershell
+## Record generation and seal its context
+
+Save actual output bytes under a new filename, then register the file:
+
+```sh
 node scripts/studio.mjs register my-persona media/candidates/portrait-v1.png image
-node scripts/studio.mjs check-assets my-persona
 ```
 
-Accepted types: `image`, `video`, `audio`. `register` records the hash and version as `draft`; nothing is promoted. Then complete `provider`, `model` (or an honest description when not exposed), `referenceIds`, `promptPath`, `promptSha256`, and known `cost`. Calculate the prompt hash with `file-hash`, using its path relative to the character folder. For video, specify `hasSpeech: true/false`; speech requires the approved vocal reference, audio uses only vocal references, and image/video require a visual reference. `cost: null` means unknown, never free. A known cost uses `{ "amount": 1.25, "currency": "BRL" }`, with a nonnegative value and a three-letter uppercase currency; do not mix currencies when totaling costs. Do not register the same version twice or overwrite it. A lock rejects concurrent writes; wait and retry. If interruption leaves `.assets.lock`, check that no process is active before removing it.
+Types are `image`, `video`, and `audio`. Registration adds a `draft` asset with a UUID, file hash, identity version, and canon hash. It refuses a file already registered; edited outputs need a new version.
 
-After completing the real context, seal execution using the ID returned in the manifest:
+In `assets.json`, complete the real `provider`, `model`, `referenceIds`, `promptPath`, `promptSha256`, and `cost`. If the tool does not expose a model, record that honestly. For video set `hasSpeech: true` or `false`. Image/video require visual references; audio uses vocal references only; audio and spoken video require the approved canonical voice. Save the actual prompt and hash it with `file-hash`.
 
-```powershell
+`cost: null` means unknown. A known cost uses `{ "amount": 1.25, "currency": "BRL" }`, with a nonnegative amount and a three-letter uppercase currency. Preserve currencies separately when totaling costs. Before paid generation, use [run submission intent and reconciliation](framework-02.md#external-submissions-and-uncertain-outcomes) and the applicable budget authorization.
+
+```sh
 node scripts/studio.mjs execution-seal my-persona ASSET_ID
 ```
 
-The seal preserves the generation prompt and context, including the declared provider/model, references, cost, and additional fields. It neither calls a tool nor confirms generation occurred. If the model was not exposed, use an explicit description of that limitation instead of inventing a name. Changing a sealed draft's context requires a new seal; the previous seal remains in history. Approved productions cannot be silently sealed.
+Sealing requires approved canon matching the asset's recorded version/hash. It uses a valid historical snapshot or preserves the matching current approved canon as part of sealing. During draft identity exploration, keep candidate/reference bytes, hashes, prompts, origin and inspection records; unapproved identity cannot be sealed. Preserve earlier context rather than rewriting its hashes to force a seal.
 
-To promote a 0.2 record to `production`, inspect the final file and complete `review`:
+Replace `ASSET_ID` with the registered UUID. The seal preserves declared generation context and the prompt, binds the canon, and records `executionPath`/`executionSha256`. It detects later changes to provider, references, prompt, cost, and other sealed fields. It does not prove that generation occurred or that the result was inspected.
 
-```json
-{
-  "reviewer": "Actual reviewer",
-  "at": "2026-10-07T15:00:00-03:00",
-  "method": "visual",
-  "decision": "approve",
-  "mediaSha256": "REAL_HASH_OF_REVIEWED_FILE",
-  "promptSha256": "REAL_HASH_OF_PROMPT_USED",
-  "canonHash": "REAL_HASH_OF_CANON_USED",
-  "identityVersion": 1,
-  "executionSha256": "REAL_HASH_OF_EXECUTION_SEAL",
-  "criticalIssues": [],
-  "limitations": [],
-  "notes": "Final use checked; identity and regions inspected"
-}
+## Review exact media and approve use
+
+Inspect the complete asset against its references and intended use. Save its review in the manifest; there is no CLI that automatically inspects or promotes it. Required production review fields are:
+
+| Field | Requirement |
+| --- | --- |
+| `reviewer`, `at`, `notes` | Actual reviewer, ISO timestamp, and inspection account |
+| `method` | Image: `visual`; audio: `listening`; video: `visual-and-audio` |
+| `decision` | `approve` for production; otherwise `correct`, `reject`, or `pending` |
+| `mediaSha256`, `promptSha256` | Exact inspected media and executed prompt |
+| `canonHash`, `identityVersion` | Canon used in that production |
+| `executionSha256` | Matching execution seal for current v2 records |
+| `criticalIssues`, `limitations` | Both empty before approval for production |
+
+For a silent video, document absence of audio and inspect all motion. Missing listening/viewing access remains a limitation. Only after real approval, complete matching fields, and no critical issues or pending inspection, set asset status to `production` and check:
+
+```sh
+node scripts/studio.mjs check-assets my-persona
 ```
 
-Methods: image `visual`, video `visual-and-audio`, audio `listening`. For video without an audio track, record that fact in notes and inspect the complete motion. Possible decisions: `approve`, `correct`, `reject`, `pending`; only `approve`, without critical failures or pending inspections, allows `production`. If sound or motion access was missing, record the limitation and retain draft status. Review fixes the media hash, prompt hash, canon hash, version, and execution seal; replacing any file while retaining the earlier review is rejected. Also check that the prompt corresponds to real execution.
+`production` means eligible reviewed media in the local manifest, not publication. Hash checks do not replace inspection or authenticate the reviewer. Cropping, captions, editing, or recompression create different bytes: save a new file, register it as draft, record context, and review the final export before delivery.
 
-When editing, cropping, captioning, or recompressing, save a new version and register it again as a draft. The utility detects changed bytes in a registered file; it does not demonstrate that the declared review occurred or that content is faithful. Every final export needs its own review.
+## Version narrative and content
 
-## Framework name and historical records
+Copy `templates/narrative.json` and `templates/content.json` into working files. Set `characterId` to the slug and give each content piece its own `id`.
 
-The framework's name is OLYMPOX, with the signature `OLYMPOX - AI Influencer framework`. Its source skill is `skills/olympox/`, its active local copy is `.agents/skills/olympox/`, and the conversational invocation is `$olympox`. Commands run from the project root regardless of that folder's label.
+```sh
+node scripts/studio.mjs narrative-save my-persona influencers/my-persona/prompts/narrative-v1.json
+node scripts/studio.mjs narrative-show my-persona
+node scripts/studio.mjs content-save my-persona influencers/my-persona/prompts/piece-v1.json
+```
 
-Historical character records, snapshots, approvals, execution seals, editorial versions, saved runs, and backups retain their original bytes, names, and hashes. Saved runs follow the existing [context review and resumption rules](framework-02.md) when observed governance has changed.
+Each save appends a version; old versions remain intact. For narrative approval, wrap narrative fields in `data` and supply `review` with actual `decision: approve`, `reviewer`, `at`, and `notes`. Without that separate decision, the saved narrative remains draft, including when copied input contained an old approval.
 
-## Skill and backup
+A piece links canon/narrative versions and hashes, scripts, shots, assets, consulted sources, factual claims, and disclosure. `ready-for-production` requires approved context, explicit editorial review, shot hashes, and defined virtual/commercial disclosure. It means editorial preparation, not generated or published media. Validators check source structure/links, not factual truth.
 
-`node scripts/install-skill.mjs` installs `olympox` in `.agents/skills` without changing personal configuration; pass `higgsfield-studio` to select that skill instead and `--assistant codex|claude|both` to choose the target (`codex` remains the default). Claude Code targets `.claude/skills`; the framework installer also supplies its `CLAUDE.md`. It validates and reads both source files, `SKILL.md` and `agents/openai.yaml`, and preflights both destinations and their parent paths before writing. Missing sources, links or junctions, invalid file/directory types, and differing installed bytes fail before changes. Identical files are retained; missing files are installed only after the complete preflight. Review a differing installation before replacing it. The selected skill folder may require write permission in the current host session. `doctor` checks source/installation equality.
+Music marked `useInProduction: true` needs consulted evidence of catalog availability and eligibility for platform, region, account type, and intended use before a ready piece can depend on it. Record a usable alternative while this is pending; reassess when the usage window changes.
 
-Character records, media, and tasks are ignored by Git by default. Use verifiable backup after an important cycle:
+## Backups and recovery
 
-```powershell
+Private records and media are ignored by Git by default. Back up important cycles and keep an independent copy outside the working disk:
+
+```sh
 node scripts/studio.mjs backup my-persona
 node scripts/studio.mjs backup-verify BACKUP_ID
 node scripts/studio.mjs backup-test BACKUP_ID
 ```
 
-The returned ID has the form `character/name`. `restore BACKUP_ID` restores only when the original folder is absent; it does not overwrite characters or differing tasks. The test restores into a temporary copy and removes it. The archive includes the full persona folder and linked task records, with a byte and directory inventory. The constitution, framework, tools, and shared inputs outside the persona need separate preservation; resumption checks that context again. Keep another backup copy outside the working disk. A hash detects corruption but neither authenticates authorship nor proves media quality.
+Replace `BACKUP_ID` with the returned `my-persona/<timestamp-and-UUID>`. The backup is a local directory with a byte/directory inventory, the complete character folder, and linked run records. It includes empty folders, canon, seals, editorial versions, and media inside that folder. Backup refuses invalid records, pending operation files, active locks, or detected concurrent changes. Preserve an independent original copy before diagnosing invalid historical data.
 
-See [core 0.2](framework-02.md) for narrative, pieces, and coordination. Credentials do not belong in the project.
+`backup-verify` validates inventory and records. `backup-test` restores into a temporary copy, checks structure, then removes that copy without touching the current character. For actual recovery:
 
-Historical records remain readable without rewriting their bytes or approvals. Character prose and voice keep their own editorial language.
+```sh
+node scripts/studio.mjs restore BACKUP_ID
+```
+
+Restoration requires the original character destination to be absent. It retains identical linked runs, refuses differing ones, and does not overwrite existing characters. Shared governance, framework, tools, credentials, and inputs outside the character are excluded; preserve shared context separately. Restore testing demonstrates integrity, not reproducible provider generation or media quality.
+
+## Legacy records and routine checks
+
+`migrate-assets my-persona` explicitly adopts legacy manifests while preserving legacy production evidence. It freezes the approved current canon, not an invented historical identity. A legacy review does not acquire a current execution seal or a new inspection. New approval requires a draft v2 record with complete context and actual review. Do not rewrite old media, snapshots, approvals, or runs to satisfy current checks.
+
+```sh
+npm run verify
+node scripts/studio.mjs doctor
+```
+
+Verification checks local tests, records, installed skill consistency, and manual integrity. Skills use `.agents/skills/` in Codex and `.claude/skills/` in Claude Code; maintain them through the [installation guide](installation.md#maintain-skills-and-provider-access). For workflow state and interrupted provider work, read [runs and resumption](framework-02.md).

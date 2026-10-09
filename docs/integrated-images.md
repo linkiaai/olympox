@@ -1,27 +1,47 @@
-# Integrated visual creation: explicit alternative
+# Assistant-integrated images
 
-Integrated ChatGPT/Codex image generation is an explicit opt-in alternative to the [default Higgsfield production method](higgsfield-influencer-method.md). OLYMPOX does not require its conversational coordinator to generate images: Codex or Claude can direct the same external media pipeline using available tools. Use integrated images only when the user selects this route, and record the affected stages and deviation from the reference method. Availability and account limits apply; do not describe it as free or unlimited. A missing Higgsfield capability is not authorization to substitute this route silently.
+Use this procedure when the user explicitly selects image generation or editing inside the conversational assistant. Higgsfield remains the [default media pipeline](higgsfield-influencer-method.md). The alternative applies to the selected image stages; it does not establish voice, animation, video or lip-sync support.
 
-## From concept to references
+## Select and record the alternative
 
-1. Follow [adaptive discovery](strategy.md), reusing supplied answers. When direction is open, propose three distinct concepts with visual signatures, personality, recurring stories, and a recommendation. A complete brief skips resolved discovery.
-2. Save a versioned [production-method plan](../templates/production-method.md). Select the method separately for each stage and check actual generation, attachment, inspection, and export capabilities in the session. Prepare prompts and record missing stages if a capability is unavailable; propose alternatives. A switch to paid external generation needs applicable authorization.
-3. Generate an expressive candidate in a scene that communicates the selected personality and premise. Specify age, silhouette, styling, expression, performance, setting, and narrative action. A neutral portrait alone does not demonstrate presence or the concept. Inspect the result and retain rejected attempts with useful evidence.
-4. Let the user select the visual candidate. Develop neutral front, three-quarter, profile, and full-body references as needed, with readable individual files for usable views, plus a scene showing the character in action. Inspect anatomy, presence, recognition, proportions, and continuity between angles/scenes; correction produces new versions.
-5. Inspect selected reference images before reuse and attach their actual bytes through the tool's supported reference mechanism. A filename/path mentioned in a prompt is not an attachment. When the tool supports local reference paths, use the inspected files in its reference input; otherwise use supported conversation attachments or transfers. Record which files/hashes were attached and any exposed input IDs. If exact references cannot be attached, leave that generation pending instead of claiming continuity.
+Check that the host provides image generation/editing, exact reference attachment, output export and visual inspection. Account limits and tool restrictions apply. Save the affected stages, tools and reason in the [production-method plan](../templates/production-method.md).
 
-## Voice, canon, and pilot
+For a new local run, declare the image exception in the run specification:
 
-For the transition to video, follow [From direction to a Higgsfield video pilot](production-handoff.md). The coordinator prepares concepts, scripts, shot direction and the submission map; the explicitly selected image tool creates the scene images. Save a coherent library and map only supported exact inputs to each video call. Voice needs a verified tool earlier when speech is intended. Prepared work and work ready for submission are distinct checkpoints.
+```json
+{
+  "mediaProviders": {
+    "image": "integrated-images",
+    "video": "higgsfield",
+    "audio": "higgsfield"
+  }
+}
+```
 
-Early visual selection is not approval of complete canon. For a speaking character, prepare a vocal sample while the persona remains `draft` with `purpose: reference`, then generate, listen to, and let the user select the exact vocal reference before final visual/vocal canon approval. Voice, animation, video, lip-sync, and specialized stages use verified tools according to need, quality, and cost; [Higgsfield](higgsfield-plugin.md) remains the default media platform unless the user selects another route. Image-tool availability does not establish those capabilities. Reuse approved voice/canon, or record why voice is not applicable for silent content.
+This fragment belongs in a complete run specification; it is not a tool invocation. Declare the actual capabilities required by the workflow, including `integrated-images:image-generation` for image generation. The core checks the selected provider declaration but does not call the tool or verify its quality. See [core operation](framework-02.md).
 
-Approve the exact complete references and voice settings, record their hashes, and preserve canon through [existing operations](operations.md). Use those real attached references in subsequent generations. Run a small pilot before batches, inspect complete media against the intended use, export its actual bytes, and publish only with applicable authorization. Inaccessible inspection or export remains pending; successful generation does not approve identity or quality.
+Changing a tracked provider or method uses `run-resume` with `newAttempt: true` and a reason. Preserve earlier attempts and resolve any outstanding external job first. Existing canon, references and approvals remain unchanged.
 
-## Traceability and preserved context
+## Create candidates and references
 
-Save outputs in new character-local versions without overwriting references. Record method per stage, tool, model when exposed (otherwise unknown), exact prompts, actual reference inputs, result paths/hashes, known costs, account/tool limitations, and who inspected what. Unknown monetary cost stays `null`; do not equate an account allowance with zero cost. Preserve exposed job identifiers and reconcile uncertain submissions through the original tool/job before retrying or changing providers. Register assets and seal the declared execution context; [quality review](quality.md) remains bound to the exact files.
+1. Start from the selected concept or approved character. Use [strategy](strategy.md) for unresolved discovery. When direction is open, compare three distinct concepts and recommend one before visual exploration.
+2. Direct an expressive candidate and an in-character scene that communicate personality and the recurring premise. Specify age, silhouette, styling, expression, setting and action.
+3. Inspect actual outputs and record the user's visual selection. Develop coherent views from that candidate: front, three-quarter, profile, body and expressions as needed by the intended content.
+4. Save usable individual references, preserve originals and compare anatomy, proportions, recognition and presence across views/scenes. A grid helps selection but does not replace readable exact reference files.
+5. Before later generation or editing, inspect selected references and attach their actual files through the tool's supported reference inputs. Record file hashes, input roles/order and exposed IDs. A filename in prompt text does not attach its bytes.
 
-The local core records capabilities such as `image-generation` and `image-inspection` without requiring a provider. It does not call the integrated tool, attach files, enforce a plan's semantic completeness, inspect pixels, or approve canon automatically. Synthetic tests demonstrate local coordination only. Each studio must verify actual attachments, generation, identity/voice quality, and exports with real tools and media.
+Candidates remain draft material until the applicable selection and review. For an existing character, compare each derivative with approved canon and keep new outputs separate from the reference pack until reviewed.
 
-Existing approved characters, media, approvals, snapshots, backups, and historical runs remain intact. A new default does not migrate them or rewrite prior evidence. A tracked plan, input, or governance change follows the existing explicit new-attempt procedure with a reason; prior attempts and approvals remain preserved.
+## Complete canon and the pilot
+
+Early visual selection does not approve complete canon. A new speaking character needs a generated vocal sample during draft/reference work, using `purpose: reference`; listen to the exact audio and record the user's selection, reference file/hash and settings before final visual/vocal canon approval. A silent scope records why voice is not applicable. Reuse compatible existing approved voice and canon.
+
+Approve and preserve the complete canon through [local operations](operations.md), then prepare production scenes from its exact references. For video, use the [handoff procedure](production-handoff.md) with separately verified voice/motion/lip-sync tools. Higgsfield remains the default for those stages unless explicitly changed.
+
+Generate one representative pilot before batches. Export actual bytes, register and seal their context, then complete the required [quality review](quality.md). Missing reference attachment, export or inspection keeps the affected stage pending.
+
+## Preserve provenance
+
+Save each output as a new character-local version. Record tool and exposed model, exact prompt, actually attached files/hashes, known cost and limitations, result IDs and actual review. Unknown monetary cost stays `null`; an account allowance does not prove zero cost. Reconcile uncertain submissions through their original jobs before another attempt.
+
+The local core preserves declarations and file integrity. It does not inspect pixels, select identity, approve canon or establish that the assistant's generated images preserve fidelity. Publication remains a separate authorized action using reviewed final bytes.

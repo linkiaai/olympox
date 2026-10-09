@@ -1,89 +1,114 @@
-# Núcleo 0.2 — uso na conversa e operação
+# Fluxos, runs e retomada
 
-O estúdio tem nove perfis, quinze contratos de tarefa e três fluxos persistentes. Atena organiza o pedido e chama a especialidade necessária. Você pode conversar normalmente; os comandos servem para preservar o trabalho entre sessões. O guia de [operação](operations.md) cobre identidade e revisão de mídia; [framework/README](framework/README.md) descreve as APIs e declarações de cada etapa.
+OLYMPOX mantém um registro local do objetivo, sequência de tarefas, responsáveis, arquivos, decisões e tentativas. Atena coordena no Codex ou Claude Code; o runtime entrega a próxima tarefa para o assistente executar com ferramentas reais. A conversa é a interface principal. Use os comandos abaixo para registrar ou retomar trabalho.
 
-## Primeiro ciclo recomendado
+## Escolher um fluxo
 
-1. Quando a direção exigir pesquisa, Gaia investiga até três oportunidades para um mercado/canal, com fontes, hipóteses, concorrência e razões para descartar uma direção. Com um objetivo já definido, essa pesquisa pode ser dispensada com motivo.
-2. Atena recomenda uma oportunidade e transforma a escolha em brief. Psiquê define valor, personalidade e limites; Íris dirige candidatos visuais.
-3. Você escolhe identidade visual nos arquivos reais. Com fala planejada, gere, ouça e selecione amostra vocal exata antes do canon completo. Aprovação fixa referências/configurações completas e hashes. Preserve o cânone aprovado com `canon-snapshot` antes de evoluir a identidade; a aprovação sozinha não cria um snapshot.
-4. Saraswati prepara conteúdo coerente com a personagem; Aurora pesquisa tendências quando necessário. Selene prepara e executa a produção com as ferramentas disponíveis; Têmis inspeciona o resultado completo.
-5. Atena entrega a peça revisada. Fortuna prepara distribuição e coleta de resultados quando houver publicação autorizada.
+| ID do fluxo | Contexto inicial | Escopo |
+| --- | --- | --- |
+| `create-character` | Uma direção a explorar; `personaId` pode ser `null` | Oportunidade, conceito, candidatas, decisão de canon e primeiro piloto |
+| `produce-piece` | Personagem existente com canon aprovado | Preparar, gerar, inspecionar, planejar distribuição quando necessário e entregar uma peça |
+| `review-correct` | Personagem existente com canon aprovado | Planejar correção, gerar nova versão, inspecionar e entregar |
 
-O piloto precede lotes. Fontes e desempenho real orientam melhorias; volume de personagens, número de agentes e uma promessa de viralização não demonstram qualidade.
+O registry liga nove perfis e quinze contratos de tarefas aos fluxos. Consulte [equipe](studio-team.md) para responsabilidades, [operações](operations.md) para registros de personagem/mídia e [referência dos contratos do runtime](framework/README.md) para todos os campos das transições.
 
-## Responsáveis e estado persistente
+Para personagem novo, selecione conceito distinto, explore candidatas visuais reais e deixe o usuário escolher a identidade. Uma personagem falante precisa de amostra vocal gerada, ouvida e selecionada antes da aprovação do canon visual/vocal completo. Preserve referências exatas aprovadas, depois prepare um piloto representativo no meio pretendido antes dos lotes. Vídeo é o padrão e é necessário para testar fala, atuação ou movimento planejados. Pesquisa e planejamento de distribuição são opcionais onde o fluxo salvo permitir; geração, revisão, entrega e aprovação do canon não podem ser puladas.
 
-O registry em `framework/registry.json` liga perfis, tarefas e fluxos. IDs dos fluxos: `create-character`, `produce-piece`, `review-correct`. O primeiro pode começar sem personagem; os dois últimos exigem cânone aprovado. Os IDs históricos dos fluxos continuam compatíveis sem reescrever runs anteriores.
+## Iniciar e consultar um run
 
-Crie um arquivo JSON de especificação dentro do projeto, por exemplo `tmp/first-cycle.json`:
+Salve esta especificação em `tmp/first-cycle.json` dentro do estúdio instalado:
 
 ```json
 {
   "personaId": null,
-  "objective": "Pesquisar três oportunidades e recomendar uma direção original para o primeiro piloto",
+  "objective": "Explorar três conceitos originais e preparar o primeiro piloto em vídeo",
   "inputs": [],
   "medium": "video",
   "capabilities": [],
-  "mediaProviders": { "image": "higgsfield", "video": "higgsfield", "audio": "higgsfield" }
+  "mediaProviders": {
+    "image": "higgsfield",
+    "video": "higgsfield",
+    "audio": "higgsfield"
+  }
 }
 ```
 
-```powershell
+```sh
 node scripts/studio.mjs run-start create-character tmp/first-cycle.json
-node scripts/studio.mjs run-status RETURNED_RUN_ID
+node scripts/studio.mjs run-status RUN_ID
 ```
 
-O pacote retorna próxima tarefa, responsável, entregável, critérios, contexto observado e pendências. Inputs/outputs usam caminhos relativos à raiz com `/`. Arquivos de outra persona e caminhos fora do projeto são recusados. O registro fica em `work/runs/`; ele não despacha uma agente nem consulta serviços. O coordenador conversacional executa pelas ferramentas reais e registra eventos verdadeiros. Delegações reais devem identificar o evento e a agente que foi despachada.
+Substitua `RUN_ID` pelo `run-<UUID>` retornado. A resposta contém estado, tentativa, próxima tarefa, perfil responsável, critérios, contexto observado, mudanças e capacidades ausentes. O registro fica em `work/runs/`. Iniciar ou consultar não despacha agentes nem submete mídia.
 
-`run-step RUN_ID transition.json` aplica uma transição declarada. Para iniciar a etapa local, o JSON mínimo é `{"action":"start"}`. Concluir exige arquivos existentes e evidência apropriada: documento preparado, mídia gerada, mídia inspecionada ou entrega realizada. Tipos e campos completos estão em [framework/README](framework/README.md). Registre ator, data, evento e notas do que realmente ocorreu. Não preencher nomes e datas hipotéticos como prova de execução.
+`inputs` do run e `outputs` da transição são arquivos existentes relativos à raiz com `/`. Um run vinculado não aceita arquivos de outra personagem nem que escapem do projeto. Entradas observadas e saídas concluídas recebem hashes; use entradas estáveis em vez de uma ficha draft ainda em edição. O canon é vinculado separadamente.
 
-Quando a persona existir, a transição `bind-persona` vincula seu slug. Etapas opcionais podem ser puladas com motivo; inspeção e aprovação do cânone não podem ser puladas. O gate de aprovação registra uma decisão explícita real e exige correspondência com a aprovação já registrada na ficha; ele não aprova a identidade sozinho.
+## Registrar progresso
 
-Runs novos `create-character` usam `medium: video` por padrão, conforme piloto audiovisual representativo; escopo explícito somente de imagens pode usar `medium: image`. Geração/revisão de candidatas de identidade ainda usa capacidades de imagem em runs novos com política de fornecedor; o piloto usa seu meio escolhido. Runs novos registram `mediaProviders` para `image`, `video` e `audio`; etapas omitidas usam `higgsfield`. Geração exige capacidade genérica, como `image-generation`, e a do fornecedor escolhido, como `higgsfield:image-generation`. Evidência de conclusão gerada e intenção de job externo registram `provider` correspondente. Disponibilidade genérica de imagens integradas não avança etapa Higgsfield. Inspeção permanece genérica por usar ferramentas reais disponíveis. Declarações não instalam ferramentas, enviam mídia nem comprovam execução; requisitos ausentes deixam a tarefa `awaiting-tool`.
+Salve uma transição JSON e aplique:
 
-Alternativa explícita registra fornecedor real em `mediaProviders` e decisão de método e etapas afetadas no plano. Mudar o mapa de fornecedores em run existente exige `run-resume` com `newAttempt: true`, motivo e `mediaProviders` atualizado; `run-step` comum não o altera. Política de fornecedor não comprova uso de módulo Builder/Soul Cinema exigido; conserve operação/modelo/entradas na proveniência e inspecione resultados. Runs anteriores à política mantêm semântica histórica e meio armazenado, sem reescrever bytes ou aprovações; não comprovam o novo padrão. Contexto observado alterado continua exigindo procedimento existente de tentativa nova explícita.
+```json
+{ "action": "start" }
+```
 
-## Interrupções e retomada
+```sh
+node scripts/studio.mjs run-step RUN_ID tmp/start.json
+```
 
-```powershell
+Quando a persona existir, vincule-a antes das tarefas que a exigem:
+
+```json
+{ "action": "bind-persona", "personaId": "my-persona" }
+```
+
+`complete` exige as saídas existentes da tarefa e evidência real de execução. Documentos usam `prepared`; geração usa `generated`; revisão usa `reviewed`; entrega usa `delivered`. Gates humanos usam `approval`. O gate de canon corresponde à versão/hash já aprovados em `persona.json`; não escreve essa aprovação. Consulte a [referência dos campos](framework/README.md#registros-de-conclusao).
+
+Registre atores, datas, eventos de ferramentas e arquivos reais. Use `execution.mode: delegated` somente quando um subagente realmente executou; carregar um perfil é uso de instrução.
+
+## Declarar capacidades e método de mídia
+
+Runs novos selecionam Higgsfield para `image`, `video` e `audio`, salvo escolha explícita de fornecedor para o meio afetado. `integrated-images` é alternativa explícita de imagem e é recusada para áudio/vídeo. Salve a decisão e os módulos exatos no [plano de método](../../../templates/locales/pt-BR/production-method.md).
+
+A geração exige capacidade genérica e do fornecedor, como `image-generation` e `higgsfield:image-generation`. Revisão exige `image-inspection`, `video-inspection` ou `audio-inspection`. Informe capacidades verificadas na especificação ou numa transição `start`/`complete`; ausentes deixam a etapa `awaiting-tool`. São declarações, não descoberta de ferramentas ou teste de conexão.
+
+Novos runs `create-character` usam piloto em vídeo por padrão; geração/revisão de candidatas usa imagem. Produção/correção usa imagem por padrão, portanto informe `medium: video` ou `audio` quando necessário. `nextTask.medium` identifica a etapa. Uma string de capacidade não demonstra disponibilidade de Builder, Soul Cinema, voz, treinamento ou outro módulo exato. Evidência de geração e intenção externa devem identificar o fornecedor selecionado.
+
+Tentativas históricas sem `mediaProviders` conservam capacidades e comportamento de meio único salvos. Bytes de identidade, aprovação, mídia e tentativas existentes não são migrados.
+
+## Retomar trabalho e revisar mudanças de contexto
+
+```sh
 node scripts/studio.mjs run-resume RUN_ID
 ```
 
-Entradas, saídas concluídas e arquivos de governança têm hashes observados. Uma alteração exige revisão do contexto. Uma nova tentativa precisa de JSON com `newAttempt: true` e motivo; ela recomeça o fluxo preservando a anterior e não reutiliza aprovações silenciosamente.
+A retomada normal confere entradas observadas, saídas concluídas, canon e governança. Contexto alterado exige revisão e nova tentativa explícita. Salve, por exemplo, `tmp/resume.json`:
 
-Antes de enviar um trabalho externo, a transição `start` pode registrar `job` com fornecedor e identificador disponível, preservando a intenção antes do envio. Todo job registrado começa não resolvido e exige `resolve` com evidência real de reconciliação antes da conclusão local, inclusive em sucesso normal e respostas conclusivas sem submissão. Use `succeeded`, `failed` ou `not-submitted` como estado reconciliado. Se o processo interromper sem resposta conclusiva, a retomada trata esse trabalho como resultado incerto e bloqueia repetição. Consulte o fornecedor e registre `resolve` com evidência de reconciliação. Resolver o job não conclui a etapa; seus arquivos locais e evidências ainda são necessários. O runtime não descobre chamadas feitas sem esse registro prévio.
-
-Locks recusam gravações concorrentes. Uma interrupção pode deixar lock ou pasta temporária: confira os processos e preserve os dados antes de qualquer limpeza. Não há expiração automática que possa disparar trabalho cobrado novamente.
-
-## Identidade e execução da geração
-
-`persona.json` conserva o estado atual. `canon-snapshot` preserva uma versão aprovada e cópias dos arquivos de referência. A validação da persona, o início do fluxo, o vínculo, a aceitação de tarefas e uma nova tentativa conferem o cânone atual aprovado contra qualquer snapshot já congelado para a mesma `identityVersion`. A consulta de estado e a retomada comum relatam conflitos com o cânone vinculado como drift e bloqueiam a continuação; um job externo incerto ainda pode ser reconciliado sem aceitar esse cânone. Substituir um hash de aprovação não torna válida uma identidade diferente naquela versão. A evolução da identidade exige nova `identityVersion` e aprovação explícita; produções antigas continuam ligadas ao seu snapshot. Essas verificações nunca criam um snapshot ausente. `migrate-assets` preserva registros legados, sem inventar snapshots históricos ou revisões que nunca ocorreram.
-
-Depois de gerar, registrar o arquivo e completar sua origem, `execution-seal` preserva o prompt e contexto informado. O novo registro de produção precisa de revisão vinculada a esse selo, à mídia e ao cânone. Isso detecta mudança posterior em fornecedor/modelo, referências, custo e outros parâmetros informados. O selo é um registro local; não comprova que a execução ou inspeção ocorreu.
-
-## Narrativa e peças
-
-Copie `templates/narrative.json` e `templates/content.json` para arquivos de trabalho da personagem. Preencha `characterId` com o slug e, na peça, um `id` próprio. Salve com:
-
-```powershell
-node scripts/studio.mjs narrative-save my-persona influencers/my-persona/prompts/narrative-v1.json
-node scripts/studio.mjs narrative-show my-persona
-node scripts/studio.mjs content-save my-persona influencers/my-persona/prompts/piece-v1.json
+```json
+{
+  "newAttempt": true,
+  "reason": "Revisei as instruções alteradas do framework antes de continuar"
+}
 ```
 
-Cada salvamento cria outra versão; não sobrescreve snapshots anteriores. Narrativa descreve desejo, valores, contradição, hábitos, limites e voz escrita. Mudanças editoriais não redefinem automaticamente rosto ou voz canônica. Para aprovar a narrativa, o arquivo de entrada usa `data` com os campos narrativos e `review` com decisão `approve`, responsável, data e notas do evento real. Sem decisão explícita, o salvamento é rascunho, mesmo que tenha uma aprovação copiada de outra versão.
-
-Peças mantêm roteiro, legenda, shots, fontes, afirmações factuais, referências ao cânone e narrativa, ativos vinculados e áudio. `ready-for-production` exige contexto aprovado, hashes dos shots, revisão explícita e identificação virtual/comercial definida. Não significa mídia gerada nem publicada. Alegações factuais precisam de fontes consultadas; a validação verifica vínculos, não a verdade das alegações.
-
-Uma música proposta não é automaticamente utilizável. Quando `useInProduction` for verdadeiro, a peça pronta exige evidência consultada de disponibilidade e elegibilidade para plataforma, região, tipo de conta e uso. Registrar uma alternativa evita depender de áudio ainda pendente. A pesquisa precisa ser refeita quando a janela de uso mudar.
-
-## Preservação e limites da verificação
-
-`backup` inventaria a pasta inteira da persona e os registros das tarefas vinculadas. `backup-verify` confere bytes e estrutura. `backup-test` restaura em uma cópia temporária sem tocar na persona atual. `restore` recusa destino existente e tarefas com versões divergentes. Os arquivos compartilhados do framework, ferramentas e inputs fora da persona precisam ser preservados separadamente; a retomada confere o contexto atual.
-
-```powershell
-npm.cmd run verify
+```sh
+node scripts/studio.mjs run-resume RUN_ID tmp/resume.json
 ```
 
-Os testes verificam caminhos, histórico, estados, integridade e comandos locais. Não inspecionam pixels, escutam áudio, assistem vídeos nem autenticam uma declaração humana. Cada estúdio precisa de um piloto inspecionado para demonstrar consistência visual, movimento, voz e utilidade do conteúdo com ferramentas reais.
+Nova tentativa começa na primeira etapa do fluxo salvo, observa o contexto atual e preserva tentativas anteriores e o contrato salvo no run. Não carrega outro contrato de fluxo, reenvia jobs nem reutiliza aprovações concluídas. Inicie um run separado quando o trabalho precisar da definição atual em vez da salva.
+
+Mudar fornecedor exige `newAttempt: true`, motivo e `mediaProviders` atualizado. Fornecedores omitidos mantêm escolhas da tentativa anterior; numa tentativa histórica sem mapa, os padrões atuais são introduzidos. `run-step` normal não pode alterar o mapa.
+
+## Submissões externas e resultados incertos
+
+Antes de chamar fornecedor pago, use `start` na geração com `job: {provider, jobId?, requestId?}` para persistir intenção. Isso cria job local `planned` ainda não resolvido, não submissão externa. Preserve identificadores disponíveis.
+
+Todo job registrado exige `resolve` com evidência real de reconciliação antes de concluir a tarefa, incluindo uma resposta normal de sucesso. Resultados são `succeeded`, `failed` ou `not-submitted`; fornecedor/job/request conhecidos devem corresponder. Em interrupção ou resposta ambígua, consulte o fornecedor real antes de decidir. `uncertain` registra o problema; `run-resume` também mantém job não resolvido em `uncertain-result`.
+
+Trabalho não resolvido bloqueia continuação, cancelamento e novas tentativas. Resolver não conclui geração: arquivos locais e evidência de geração ainda são exigidos. O runtime não descobre chamadas sem intenção registrada nem consulta, repete ou cancela trabalho do fornecedor automaticamente. Campos completos estão em [registros de jobs externos](framework/README.md#registros-de-jobs-externos).
+
+## Integridade, preservação e limites
+
+Locks recusam escritas concorrentes. Confira processos ativos antes de recuperar lock interrompido; preserve registro e temporários antes de limpar. Não existe repetição automática paga.
+
+Canon aprovado é comparado com snapshot existente da mesma `identityVersion`. Identidade alterada não pode reutilizar versão substituindo hash de aprovação. Evolua em nova versão com aprovação explícita e preserve snapshots históricos. Job incerto ainda pode ser reconciliado quando o canon mudou.
+
+Use [backups](operations.md#backups-e-recuperacao) para personagens e runs vinculados, preservando contexto compartilhado separadamente. `npm run verify` confere estrutura e integridade locais. Fluxo `completed` registra contratos e declarações aceitos; inspeção real e publicação exigem suas próprias evidências. Consulte [capacidades e limites](studio-status.md).

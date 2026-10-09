@@ -1,153 +1,162 @@
-# Operação local e rastreabilidade do OLYMPOX
+# Registros de personagens, mídia e recuperação
 
-Instale estúdio independente pela release `v0.5.0` ou pacote/fonte revisados, com `--assistant codex`, `--assistant claude` ou `--assistant both`, conforme [instalação](installation.md). Abra no assistente local escolhido. O instalador verifica destinos de merge e preserva arquivos privados/não relacionados. Este checkout desenvolve fontes reutilizáveis; fichas pessoais e produção ficam em estúdios independentes.
+Execute os comandos em [estúdio instalado independente](installation.md), com Node 22+. Eles mantêm registros locais; o assistente gera e inspeciona pelas ferramentas disponíveis. Produção criativa pessoal pertence ao estúdio, fora da cópia de desenvolvimento.
 
-Execute comandos na raiz do estúdio com Node 22+. `npm.cmd run verify` executa testes, valida personagens existentes e verifica a base. `npm.cmd run studio -- help` lista as operações locais. Nenhum comando local de registros gera mídia, chama fornecedor ou publica.
+## Criar um draft
 
-## Criar e preencher
-
-```powershell
+```sh
 node scripts/studio.mjs new my-persona
 node scripts/studio.mjs list
 node scripts/studio.mjs validate my-persona
 ```
 
-`new` prepara a ficha em uma pasta temporária e só publica a pasta completa. Recusa destino existente e criação concorrente. A persona nasce em `draft`; campos vazios são avisos de trabalho pendente. `validate` falha em erro estrutural, referência ausente/alterada, registro de aprovação incoerente ou cânone aprovado divergente do snapshot já congelado. Complete `brief.md` e `persona.json` com escolhas reais. Guarde cronologia, decisões e resultados em `decisions.md`. Não há uma persona inicial ficticiamente aprovada.
+`new` prepara a pasta completa antes de disponibilizá-la e recusa destino existente ou criação concorrente. Preencha `brief.md` e `persona.json`, depois registre escolhas e cronologia em `decisions.md`. Campos draft podem ficar pendentes; validação distingue erros estruturais de campos ainda não definidos.
 
-| Arquivo/pasta no personagem | Uso |
+| Arquivo ou diretório | Finalidade |
 | --- | --- |
-| `persona.json` | Identidade, voz, editorial, referências e aprovação do cânone |
-| `brief.md` | Objetivo, escolhas e hipóteses |
-| `decisions.md` | Decisões, cronologia e resultados |
-| `assets.json` | Manifesto dos arquivos gerados e suas revisões |
-| `references/candidates/` | Possíveis referências |
-| `references/canon/` | Arquivos de identidade aprovados |
-| `media/candidates/` | Tentativas de produção |
-| `media/approved/` | Novas versões finais aprovadas |
-| `prompts/` | Shots e prompts exatos utilizados |
-| `exports/` | Entregas finais que exigem revisão após edição |
-| `canon/` | Snapshots de identidade aprovada e cópias das referências |
-| `executions/` | Contexto e prompt preservados de cada execução selada |
-| `narrative/` | Versões da personalidade, voz escrita e arco narrativo |
-| `content/` | Versões das peças, fontes, áudio e vínculos ao contexto |
+| `persona.json` | Âncoras de identidade, voz, contexto editorial, referências e aprovação do canon |
+| `brief.md`, `decisions.md` | Objetivo, hipóteses, decisões e cronologia |
+| `assets.json` | Manifesto de mídia, origem, hashes e revisões |
+| `references/candidates/`, `references/canon/` | Arquivos candidatos e aprovados de referência |
+| `media/candidates/`, `media/approved/`, `exports/` | Tentativas, versões aprovadas e entregáveis finais |
+| `prompts/` | Especificações de shots e prompts exatos |
+| `canon/`, `executions/` | Identidade congelada e contexto de execução |
+| `narrative/`, `content/` | Registros editoriais versionados |
 
-Todos os caminhos dentro da ficha/manifesto são relativos à pasta do personagem, com `/`. Referências fora dessa pasta ou passando por `..` são recusadas. Copie a fonte permitida para dentro do personagem, preservando autoria/origem. O utilitário verifica conteúdo por SHA256; ele não inspeciona pixels nem áudio.
+Ficam em `influencers/my-persona/`. Caminhos em persona, shot, manifesto e registros editoriais são relativos à pasta da personagem, com `/`. Entradas/saídas de runs usam caminhos relativos à raiz do estúdio. Caminhos com `..` ou que escapam da pasta aplicável são recusados. Copie referências permitidas para a personagem e conserve a origem.
 
-## Registrar referências e aprovar o cânone
+## Referências e aprovação do canon
 
-Depois da inspeção visual e escolha do responsável, registre cada arquivo em `persona.references`:
+O assistente edita `persona.references`; não existe comando CLI separado para cadastrar referência ou aprovar canon. Cada referência exige:
 
-```json
-{
-  "id": "face-front-v1",
-  "path": "references/canon/front-v1.png",
-  "role": "front",
-  "status": "approved",
-  "origin": "Ferramenta e contexto de criação; permissão quando houver fonte externa",
-  "sha256": "REPLACE_WITH_REAL_HASH",
-  "review": {
-    "reviewer": "Responsável que realmente inspecionou",
-    "at": "2026-10-07T15:00:00-03:00",
-    "notes": "Decisão e observações reais"
-  }
-}
-```
+| Campo | Valor |
+| --- | --- |
+| `id`, `path` | ID único e arquivo real relativo à personagem |
+| `role` | `front`, `three-quarter`, `profile`, `full-body`, `expression` ou `voice` |
+| `status` | `candidate`, `approved` ou `rejected` |
+| `origin` | Contexto real de ferramenta/origem e permissão aplicável |
+| `sha256` | Hash do arquivo exato |
+| `review` | Referências aprovadas exigem `reviewer`, data ISO `at` e `notes` reais |
 
-Papéis: `front`, `three-quarter`, `profile`, `full-body`, `expression`, `voice`. Status: `candidate`, `approved`, `rejected`. Candidatos/rejeitados também precisam de origem e hash, mas não de aprovação. Calcule o hash do arquivo:
+Calcule hashes com:
 
-```powershell
+```sh
 node scripts/studio.mjs file-hash my-persona references/canon/front-v1.png
 node scripts/studio.mjs canon-hash my-persona
 ```
 
-O mínimo estrutural do cânone é frente e outro ângulo aprovados; isso não equivale a pack suficiente para toda produção. Complete os enquadramentos necessários conforme [produção](production.md). Após decisão explícita, registre `approval` com `reviewer`, `at`, `notes`, `canonHash` real e altere o status para `canon-approved`. O hash cobre nome/idade, âncoras, voz, referências aprovadas e versão. Campos editoriais podem evoluir sem redefinir a identidade.
+Seleção visual pertence ao usuário e segue [inspeção de qualidade](quality.md). O mínimo estrutural é vista frontal aprovada e vista three-quarter ou profile aprovada; produção pode precisar de conjunto coerente mais amplo. Personagem falante também precisa de referência vocal gerada, ouvida e selecionada. Aponte `voice.referenceId` para essa entrada `voice` aprovada. Descrição sozinha não estabelece voz.
 
-Uma mudança de âncora ou referência aprovada exige incrementar `identityVersion`, voltar a `draft`, revisar as referências e registrar nova aprovação. Não atualizar hashes silenciosamente para fazer um erro desaparecer. A voz usa `voice.referenceId` apontando para uma referência `voice` aprovada; produção falada precisa dela. Descrição de voz não substitui uma amostra inspecionada.
+Após decisão real sobre canon completo, escreva `approval` na persona com `reviewer`, `at`, `notes` e `canonHash` retornado; defina status `canon-approved`. O hash cobre ID, versão da identidade, nome/idade, âncoras, voz e dados das referências aprovadas. Evolução editorial não muda esse canon automaticamente. Valide e preserve:
 
-Antes de evoluir uma identidade aprovada, preserve seu snapshot:
-
-```powershell
+```sh
+node scripts/studio.mjs validate my-persona
 node scripts/studio.mjs canon-snapshot my-persona
 ```
 
-O núcleo 0.2 confere ativos antigos contra o snapshot da versão usada, incluindo as cópias das referências. `register` também congela o cânone aprovado. Uma mesma `identityVersion` aceita um único cânone; mudanças exigem nova versão e aprovação explícita. A validação da persona, o início do fluxo, o vínculo, a aceitação de tarefas e uma nova tentativa comparam a ficha atual aprovada com qualquer snapshot já congelado daquela versão. Uma identidade alterada não pode reutilizar a versão pela substituição do hash de aprovação. A consulta de estado e a retomada comum relatam conflitos com o cânone vinculado como drift e bloqueiam a continuação; ainda é possível reconciliar um job externo incerto sem aceitar esse cânone. Essas verificações não criam snapshots: uma ficha aprovada sem snapshot pode continuar válida, enquanto um snapshot histórico ausente nunca é inventado para validar um contexto antigo. Preserve originais e revisões.
+Aprovação sozinha não cria snapshot. `canon-snapshot` exige canon aprovado e preserva persona e cópias de referências. Cadastrar ativo sob canon aprovado também cria/reutiliza snapshot. Cada `identityVersion` aceita um único canon congelado. Para mudar identidade, preserve a versão antiga, incremente `identityVersion`, volte a `draft`, inspecione/selecione novas referências e obtenha nova aprovação.
 
-Para manifestos da base 0.1, use `migrate-assets my-persona` enquanto o cânone atual ainda estiver aprovado. A migração congela esse cânone e preserva revisões legadas sem inventar uma nova inspeção. Produções legadas continuam identificadas como tal; o selo completo só se aplica depois de voltar o ativo a rascunho, completar o contexto e realizar uma nova revisão.
+Validação e operações dos fluxos comparam canon aprovado atual com snapshot existente da mesma versão. Trocar hash de aprovação não legitima identidade diferente na mesma versão. Snapshots históricos ausentes não são reconstruídos como evidência; registro aprovado atual sem snapshot ainda pode ser estruturalmente válido.
 
-Datas/revisores dos exemplos não são evidência real: substitua-os pelo evento de aprovação ocorrido.
+## Especificação de shot e prompt exato
 
-## Montar a especificação da peça
+Copie `templates/shot.json` para `prompts/` da personagem e preencha enquadramento, cena, meio, fala e referências. `purpose: reference` permite explorar identidade draft; `purpose: production` exige canon aprovado. Vídeo/áudio definem duração; produção com fala exige voz canônica. Vídeo silencioso pode ter script vazio.
 
-Copie `templates/shot.json` para `prompts/` e preencha. `purpose: reference` permite explorar uma identidade ainda em rascunho; `purpose: production` exige cânone aprovado. Para vídeo/áudio, defina `script`, voz e duração alvo. Um vídeo sem fala pode ter script vazio. `referenceIds` vazio seleciona as referências visuais aprovadas para imagem/vídeo e a referência vocal canônica aprovada para áudio. Vídeo falado também inclui a referência vocal aprovada. Para controle, prefira indicar apenas as referências úteis à peça.
-
-O prompt gerado leva `profile.audience`, `profile.valueProposition`, `profile.personality` e `profile.backstory` quando preenchidos como contexto criativo, junto das âncoras de identidade e direção do shot. História fictícia é identificada explicitamente como contexto criativo, não evidência de experiência real. Fala exata e caminhos/hashes de referências continuam na especificação. O comando escreve apenas texto: não escolhe fornecedor nem envia arquivos. Siga o método salvo e o [guia de produção](production.md) ao executá-lo.
-
-```powershell
+```sh
 node scripts/studio.mjs prompt my-persona influencers/my-persona/prompts/shot-v1.json
 ```
 
-A saída é texto para revisão. Salve em UTF-8 por ferramenta de escrita; evite redirecionamento do PowerShell legado que pode produzir UTF-16. Anexe as referências à geração de fato, na ordem indicada. A especificação não é API, não adiciona parâmetros que a ferramenta não suporta e não fornece seed automaticamente.
+O comando retorna texto. Salve UTF-8 com ferramenta de escrita; redirecionamento antigo do PowerShell pode gerar UTF-16. Inclui identidade, contexto criativo preenchido do perfil, fala exata e caminhos/hashes das referências. História fictícia permanece contexto fictício.
 
-## Registrar e revisar o resultado
+`referenceIds` vazio seleciona referências visuais aprovadas para imagem/vídeo ou voz canônica para áudio; vídeo com fala também inclui voz aprovada. Prefira subconjunto relevante explícito e aceito pelo módulo. Anexe realmente essas referências na geração e registre evidência de transferência. Prompt não transfere arquivos nem comprova parâmetros de API suportados. Não seleciona fornecedor nem chama modelo. Siga o [método de produção](production.md) salvo.
 
-```powershell
+## Registrar geração e selar o contexto
+
+Salve bytes reais em novo arquivo, depois cadastre:
+
+```sh
 node scripts/studio.mjs register my-persona media/candidates/portrait-v1.png image
-node scripts/studio.mjs check-assets my-persona
 ```
 
-Tipos aceitos: `image`, `video`, `audio`. `register` registra hash e versão como `draft`; nada é promovido. Depois complete `provider`, `model` (ou descrição honesta quando não exposto), `referenceIds`, `promptPath`, `promptSha256` e `cost` conhecido. Calcule o hash do prompt com `file-hash`, usando seu caminho relativo à pasta do personagem. Para vídeo, informe `hasSpeech: true/false`; fala exige incluir a referência vocal aprovada, áudio usa apenas referências vocais e imagem/vídeo precisam de referência visual. `cost: null` significa não informado, nunca grátis. Custo informado usa `{ "amount": 1.25, "currency": "BRL" }`, com valor não negativo e moeda em três letras maiúsculas; não misturar moedas ao somar custos. Não registrar mesma versão duas vezes nem sobrescrevê-la. Um lock recusa gravação concorrente; aguarde e tente novamente. Se uma interrupção deixar `.assets.lock`, confira se não há processo ativo antes de removê-lo.
+Tipos: `image`, `video` e `audio`. Cadastro acrescenta ativo `draft` com UUID, hash do arquivo, versão e hash do canon. Recusa arquivo já cadastrado; edição exige nova versão.
 
-Depois de completar o contexto real, sele a execução pelo ID retornado no manifesto:
+Em `assets.json`, preencha `provider`, `model`, `referenceIds`, `promptPath`, `promptSha256` e `cost` reais. Se modelo não for exposto, registre isso honestamente. Para vídeo, defina `hasSpeech: true` ou `false`. Imagem/vídeo exige referências visuais; áudio usa apenas vocais; áudio e vídeo falado exigem voz canônica aprovada. Salve o prompt real e calcule hash com `file-hash`.
 
-```powershell
+`cost: null` significa desconhecido. Custo conhecido usa `{ "amount": 1.25, "currency": "BRL" }`, com valor não negativo e moeda de três letras maiúsculas. Separe moedas nos totais. Antes da geração paga, use [intenção de submissão e reconciliação](framework-02.md#submissoes-externas-e-resultados-incertos) e autorização de orçamento aplicável.
+
+```sh
 node scripts/studio.mjs execution-seal my-persona ASSET_ID
 ```
 
-O selo preserva prompt e contexto da geração, inclusive fornecedor/modelo informado, referências, custo e campos adicionais. Ele não chama ferramenta nem confirma que uma geração ocorreu. Se o modelo não foi exposto, use uma descrição explícita dessa limitação em vez de inventar um nome. Alterar o contexto de um rascunho selado exige novo selo; o anterior permanece no histórico. Produções aprovadas não podem ser seladas silenciosamente.
+Selar exige cânone aprovado que corresponda à versão e ao hash registrados no asset. A operação usa um snapshot histórico válido ou preserva o cânone atual aprovado correspondente como parte do selo. Durante exploração de identidade em rascunho, mantenha bytes de candidatos/referências, hashes, prompts, origem e registros de inspeção; identidade não aprovada não pode ser selada. Preserve o contexto anterior em vez de reescrever seus hashes para forçar um selo.
 
-Para promover um registro 0.2 a `production`, inspecione o arquivo final e preencha `review`:
+Substitua `ASSET_ID` pelo UUID cadastrado. O selo preserva contexto declarado e prompt, vincula canon e registra `executionPath`/`executionSha256`. Detecta alterações posteriores em fornecedor, referências, prompt, custo e outros campos selados. Não prova geração nem inspeção.
 
-```json
-{
-  "reviewer": "Revisor real",
-  "at": "2026-10-07T15:00:00-03:00",
-  "method": "visual",
-  "decision": "approve",
-  "mediaSha256": "REAL_HASH_OF_REVIEWED_FILE",
-  "promptSha256": "REAL_HASH_OF_PROMPT_USED",
-  "canonHash": "REAL_HASH_OF_CANON_USED",
-  "identityVersion": 1,
-  "executionSha256": "REAL_HASH_OF_EXECUTION_SEAL",
-  "criticalIssues": [],
-  "limitations": [],
-  "notes": "Uso final conferido, identidade e regiões inspecionadas"
-}
+## Revisar mídia exata e aprovar uso
+
+Inspecione o ativo completo contra referências e uso pretendido. Salve revisão no manifesto; não existe CLI que inspecione ou promova automaticamente. Campos exigidos para produção:
+
+| Campo | Requisito |
+| --- | --- |
+| `reviewer`, `at`, `notes` | Responsável real, data ISO e relato da inspeção |
+| `method` | Imagem: `visual`; áudio: `listening`; vídeo: `visual-and-audio` |
+| `decision` | `approve` para produção; caso contrário `correct`, `reject` ou `pending` |
+| `mediaSha256`, `promptSha256` | Mídia inspecionada e prompt executado exatos |
+| `canonHash`, `identityVersion` | Canon usado nessa produção |
+| `executionSha256` | Selo correspondente em registros atuais v2 |
+| `criticalIssues`, `limitations` | Ambas vazias antes de aprovação para produção |
+
+Em vídeo silencioso, documente ausência de áudio e inspecione todo movimento. Falta de acesso a escuta/visualização permanece limitação. Somente após aprovação real, campos correspondentes e ausência de falhas críticas ou inspeções pendentes, defina status `production` e confira:
+
+```sh
+node scripts/studio.mjs check-assets my-persona
 ```
 
-Métodos: imagem `visual`, vídeo `visual-and-audio`, áudio `listening`. Para vídeo sem faixa de áudio, registre esse fato nas notas e faça a inspeção completa do movimento. Decisões possíveis: `approve`, `correct`, `reject`, `pending`; apenas `approve`, sem falhas críticas/inspeções pendentes, permite `production`. Faltou acesso a som ou movimento: registre a limitação e mantenha rascunho. A revisão fixa hash da mídia, do prompt, do cânone, versão e selo da execução; trocar qualquer arquivo mantendo a revisão anterior é recusado. Confira também se o prompt corresponde à execução real.
+`production` significa mídia revisada elegível no manifesto local, não publicação. Hashes não substituem inspeção nem autenticam responsável. Cortes, legendas, edição e recompressão mudam bytes: salve novo arquivo, cadastre draft, registre contexto e revise exportação final antes da entrega.
 
-Quando editar, recortar, legendar ou recomprimir, salve versão nova e registre-a novamente em rascunho. O utilitário detecta mudança de bytes em um arquivo já registrado; não demonstra se a revisão descrita ocorreu, nem se o conteúdo é fiel. Toda exportação final precisa de revisão própria.
+## Versionar narrativa e conteúdo
 
-## Nome do framework e registros históricos
+Copie `templates/narrative.json` e `templates/content.json` para arquivos de trabalho. Preencha `characterId` com o slug e dê `id` próprio a cada peça.
 
-OLYMPOX é o nome atual do framework. Sua skill de origem fica em `skills/olympox/`, sua cópia local ativa fica em `.agents/skills/olympox/` e a invocação na conversa é `$olympox`. A pasta do projeto pode conservar seu nome atual; os comandos são executados a partir da raiz do projeto, independentemente do nome dessa pasta.
+```sh
+node scripts/studio.mjs narrative-save my-persona influencers/my-persona/prompts/narrative-v1.json
+node scripts/studio.mjs narrative-show my-persona
+node scripts/studio.mjs content-save my-persona influencers/my-persona/prompts/piece-v1.json
+```
 
-Renomear o framework atualiza o código, as orientações e a apresentação atuais. Registros históricos de personagens, snapshots, aprovações, selos de execução, versões editoriais, runs salvos e bytes de backup preservam seus nomes e hashes originais. Não os reescreva para corresponder ao nome atual. Mudanças na governança observada podem exigir revisão do contexto; a retomada segue o procedimento de nova tentativa explícita em [operação do núcleo](framework-02.md), preservando a tentativa anterior e suas evidências.
+Cada salvamento acrescenta versão; versões antigas permanecem intactas. Para aprovar narrativa, envolva os campos em `data` e forneça `review` com `decision: approve`, `reviewer`, `at` e `notes` reais. Sem decisão separada, a narrativa salva fica draft, inclusive se entrada copiada continha aprovação antiga.
 
-## Skill e backup
+Peça vincula versões/hashes de canon/narrativa, scripts, shots, ativos, fontes consultadas, fatos e disclosure. `ready-for-production` exige contexto aprovado, revisão editorial explícita, hashes dos shots e disclosure virtual/comercial definido. Significa preparação editorial, não mídia gerada ou publicada. Validadores conferem estrutura/vínculos de fontes, não verdade dos fatos.
 
-`node scripts/install-skill.mjs` instala `olympox` em `.agents/skills`, sem alterar a configuração pessoal; passe `higgsfield-studio` para escolher essa skill e `--assistant codex|claude|both` para o destino (`codex` continua padrão). Claude Code usa `.claude/skills`; o instalador também fornece seu `CLAUDE.md`. Valida e lê os dois arquivos de origem, `SKILL.md` e `agents/openai.yaml`, e verifica previamente ambos os destinos e seus caminhos superiores antes de gravar. Origens ausentes, links ou junctions, tipos inválidos de arquivo/pasta e bytes divergentes na instalação causam falha antes de qualquer mudança. Arquivos idênticos são mantidos; arquivos ausentes só são instalados após a verificação prévia completa. Revise uma instalação divergente antes de substituí-la. A pasta da skill escolhida pode exigir permissão de escrita na sessão atual. `doctor` verifica a igualdade entre origem e instalação.
+Música com `useInProduction: true` exige evidência consultada de disponibilidade no catálogo e elegibilidade para plataforma, região, tipo de conta e uso antes que peça pronta dependa dela. Registre alternativa viável enquanto pendente; reavalie quando a janela de uso mudar.
 
-Fichas, mídia e tarefas são ignoradas pelo Git por padrão. Use o backup verificável depois de um ciclo importante:
+## Backups e recuperação
 
-```powershell
+Registros privados e mídia são ignorados pelo Git por padrão. Faça backup de ciclos importantes e mantenha cópia independente fora do disco de trabalho:
+
+```sh
 node scripts/studio.mjs backup my-persona
 node scripts/studio.mjs backup-verify BACKUP_ID
 node scripts/studio.mjs backup-test BACKUP_ID
 ```
 
-O ID retornado tem formato `character/name`. `restore BACKUP_ID` restaura apenas se a pasta original estiver ausente; não sobrescreve personagens nem tarefas divergentes. O teste restaura em uma cópia temporária e a remove. O arquivo inclui toda a pasta da persona e registros das tarefas vinculadas, com inventário de bytes e diretórios. Constituição, framework, ferramentas e entradas compartilhadas fora da persona precisam de preservação própria; uma retomada verifica novamente esse contexto. Mantenha outra cópia do backup fora do disco de trabalho. Hash detecta corrupção, mas não autentica autoria nem prova qualidade da mídia.
+Substitua `BACKUP_ID` pelo `my-persona/<timestamp-and-UUID>` retornado. Backup é diretório local com inventário de bytes/diretórios, pasta completa da personagem e runs vinculados. Inclui pastas vazias, canon, selos, versões editoriais e mídia nessa pasta. Recusa registros inválidos, arquivos de operações pendentes, locks ativos ou mudanças concorrentes detectadas. Preserve cópia independente dos originais antes de diagnosticar dados históricos inválidos.
 
-Consulte [núcleo 0.2](framework-02.md) para narrativa, peças e coordenação. Credenciais não pertencem ao projeto.
+`backup-verify` valida inventário e registros. `backup-test` restaura cópia temporária, verifica estrutura e remove a cópia sem tocar a personagem atual. Para recuperação real:
 
-Registros históricos continuam legíveis sem reescrever seus bytes ou aprovações. O texto e a voz das personagens conservam seu próprio idioma editorial.
+```sh
+node scripts/studio.mjs restore BACKUP_ID
+```
+
+Restauração exige que destino original da personagem esteja ausente. Mantém runs idênticos, recusa diferentes e não sobrescreve personagens. Governança compartilhada, framework, ferramentas, credenciais e entradas fora da personagem são excluídos; preserve contexto compartilhado separadamente. Testar restauração demonstra integridade, não reprodução da geração nem qualidade de mídia.
+
+## Registros legados e verificações rotineiras
+
+`migrate-assets my-persona` adota explicitamente manifestos legados, preservando evidência antiga de produção. Congela canon aprovado atual, não identidade histórica inventada. Revisão legada não ganha selo atual nem nova inspeção. Nova aprovação exige registro draft v2 com contexto completo e revisão real. Não reescreva mídia, snapshots, aprovações ou runs antigos para satisfazer verificações atuais.
+
+```sh
+npm run verify
+node scripts/studio.mjs doctor
+```
+
+Verificação confere testes locais, registros, consistência das skills instaladas e integridade do manual. Skills usam `.agents/skills/` no Codex e `.claude/skills/` no Claude Code; mantenha conforme [instalação](installation.md#manter-skills-e-acesso-ao-fornecedor). Para estado dos fluxos e trabalho externo interrompido, leia [runs e retomada](framework-02.md).

@@ -1,104 +1,89 @@
-# OLYMPOX — arquitetura 0.2
+# Arquitetura do framework
 
-Versão **0.2.0**. Núcleo local implementado; cada estúdio escolhe seus próprios influenciadores, aprova o cânone e demonstra consistência com um piloto inspecionado.
+OLYMPOX separa direção do assistente, registros locais e execução externa de mídia. O código atual do framework é **0.5.0**; contratos e workflows mantêm revisões próprias de componente, incluindo `0.2.0`.
 
-## Direção adotada
+Este guia descreve os limites da implementação. Use [operação dos workflows](framework-02.md) para comandos e [identidade e registros](operations.md) para procedimentos de arquivos.
 
-O OLYMPOX é um framework local de influenciadores de IA, operado por Codex ou Claude Code e dedicado a influenciadores virtuais originais, produção e aprendizado. Organiza o trabalho por especialistas, tarefas, fluxos e critérios de conclusão. As nove agentes têm nomes de deusas e perfis femininos; seus IDs de papel permanecem estáveis. A implementação usa Node e arquivos locais, sem dependências operacionais externas.
+## Três camadas
 
-O assistente coordenador interpreta o pedido, carrega o pacote da próxima tarefa, usa capacidades disponíveis e registra o trabalho ocorrido. O núcleo mantém contratos, contexto e estado; não despacha agentes, gera mídia, consulta fornecedores nem publica. Perfis não são workers permanentes. Delegação existe somente quando uma subagente real é utilizado.
+| Camada | Fontes e responsabilidades |
+| --- | --- |
+| Direção do assistente | Constituição, instruções do assistente, skills, perfis especialistas e guias orientam a organização do trabalho |
+| Núcleo local | Scripts Node validam contratos, persistem execuções, preservam versões do cânone e editoriais, selam o contexto declarado de geração e gerenciam backups |
+| Ferramentas da sessão | Ferramentas disponíveis do assistente e do provedor fazem pesquisa, delegação, geração de mídia, transferência, inspeção e publicação |
 
-## O que está implementado
+O núcleo usa Node 22+ e arquivos locais, sem dependências externas de execução. Ele entrega o pacote da próxima tarefa ao assistente coordenador. O assistente executa a tarefa com ferramentas disponíveis e registra o resultado; o núcleo não despacha agentes nem chama provedores automaticamente.
 
-| Área | Núcleo local 0.2 | Limite atual |
-| --- | --- | --- |
-| Direção | Constituição, skill, nove perfis e contratos de tarefa | Perfis orientam o assistente; não executam sozinhos |
-| Identidade | Snapshots de cânone aprovado, versão/hash e bytes de referências preservados | Aprovação e inspeção precisam ter ocorrido; dados históricos ausentes não são reconstruídos |
-| Editorial | Narrativa e peças versionadas, cronologia, voz escrita, fontes e vínculos de contexto | Campanha é um ID opcional; não há gestão completa de campanhas |
-| Coordenação | Três fluxos, responsável, entradas, saídas e estado persistido | Submissão a ferramentas externas acontece fora do runtime |
-| Produção | Contexto de geração selado e revisão vinculada aos hashes aplicáveis | Registro não comprova execução do fornecedor nem fidelidade audiovisual |
-| Recuperação | Tentativas preservadas, mudanças detectadas e bloqueio de resultado incerto | Reconciliação exige consulta real; não há retry automático |
-| Continuidade | Criação transacional, backup com inventário e restauração sem sobrescrita | Contexto compartilhado fora da persona não é copiado |
-| Resultados | Método de experimentos, custos e métricas documentado | Publicação e analytics não têm integração instalada |
-
-As correções anteriores continuam aplicadas: prompt exato vinculado à revisão, recusa de arquivos duplicados por caminhos equivalentes, referências adequadas ao tipo de mídia, custo válido quando conhecido e estados de persona, referência, ativo e tarefa separados. O núcleo adiciona preservação histórica e recuperação sem apagar registros anteriores.
-
-Novos runs guardam `mediaProviders` por tentativa, com image/video/audio em `higgsfield` por padrão. Geração exige capacidade genérica da mídia e capacidade do fornecedor escolhido; evidência gerada e intenção externa devem corresponder ao fornecedor. Novos fluxos de personagem têm piloto em vídeo por padrão, com candidatas e revisão em imagem. Mudanças de fornecedor exigem nova tentativa explícita e motivo. Runs históricos sem essa política conservam semântica e bytes salvos. Declarações limitam a conclusão local; não conectam nem executam fornecedor.
-
-## Camadas e armazenamento
-
-1. **Conhecimento e direção:** constituição, skill, guias, perfis e contratos carregados conforme a tarefa.
-2. **Estado local verificável:** cânones, narrativas, peças, execuções seladas, revisões, tarefas e backups.
-3. **Execução na sessão:** o assistente usa ferramentas realmente disponíveis e registra saídas e limitações. Adaptadores externos dependem de necessidade e validação próprias.
+## Fontes reutilizáveis e estado privado
 
 ```text
 framework/
-  registry.json
-  roles/                       # Instruções e limites das especialistas
-  tasks/                       # Contratos e critérios de conclusão
-  workflows/                   # Criar, produzir, revisar/correct
+  registry.json                 # Names, roles and registered paths
+  roles/                        # Specialist instruction profiles
+  tasks/                        # Completion contracts
+  workflows/                    # Registered task sequences
+skills/                         # Canonical skills
+templates/                      # Scaffolding and studio instructions
+scripts/                        # Local operations and validation
+docs/, docs-site/               # Guides and manual sources
+
+# Private state created in an installed studio:
 influencers/<slug>/
-  persona.json                 # Ficha de trabalho e identidade atual
-  assets.json                  # Manifesto e revisões dos ativos
-  canon/v000001/               # Snapshot approved e cópias das referências
-  narrative/v000001.json       # História e linguagem editorial
-  content/<id>/v000001.json    # Peças e vínculos de contexto
-  executions/<hash>/           # Contexto de geração e prompt copiado
+  persona.json
+  assets.json
+  canon/v000001/
+  narrative/v000001.json
+  content/<id>/v000001.json
+  executions/<hash>/
   references/, media/, prompts/, exports/
-work/runs/run-<UUID>.json       # Estado, tentativas e próxima tarefa
-backups/<slug>/<backup-id>/    # Inventário, personagem e runs vinculados
+work/runs/run-<UUID>.json
+backups/<backup-id>/
 ```
 
-Pastas de histórico são preenchidas quando seus registros são criados. Criar a ficha não aprova narrativa ou identidade e não produz mídia. Ver [contratos do núcleo](framework/README.md), [operação](operations.md) e [guia do framework 0.2](framework-02.md).
+Pastas de histórico aparecem quando seus registros são criados. Templates são estruturas iniciais; não estabelecem uma identidade aprovada.
 
-## Equipe e fluxos
+O instalador usa seleção explícita de fontes. Ele escreve o `AGENTS.md` criativo a partir do template do estúdio, adiciona `CLAUDE.md` para Claude Code e projeta skills canônicas na pasta do assistente escolhido. As instruções de desenvolvimento permanecem neste repositório. A instalação não copia registros privados nem conecta contas de provedores.
 
-**Atena** coordena e consolida decisões. **Gaia** pesquisa oportunidades; **Psiquê** constrói persona/narrativa; **Íris** dirige identidade e cenas; **Aurora** pesquisa tendências e propõe conceitos; **Saraswati** escreve a peça; **Selene** prepara e executa produção; **Têmis** inspeciona qualidade; **Fortuna** aprende com dados próprios e formula hipóteses comerciais. IDs, entregas e limites estão em [equipe do estúdio](studio-team.md).
+## Workflows e contratos de tarefas
 
-Os três fluxos registrados são:
+O registro define nove perfis, quinze contratos de tarefas e três workflows:
 
-- `create-character`: pesquisa opcional → proposta → decisão de direção quando necessária → planejamento, geração e revisão de candidatos → decisão de cânone → planejamento, geração, revisão e entrega do piloto.
-- `produce-piece`: pesquisa opcional → roteiro → direção → geração → revisão → planejamento de distribuição opcional → entrega.
-- `review-correct`: plano de correção → nova geração → revisão → entrega dos bytes revisados.
+| Workflow | Finalidade |
+| --- | --- |
+| `create-character` | Explorar uma persona, selecionar e revisar identidade, aprovar cânone, produzir e entregar um piloto |
+| `produce-piece` | Preparar conteúdo para personagem aprovado existente, gerar, revisar e entregar |
+| `review-correct` | Planejar correção, produzir nova versão, revisar e entregar |
 
-Gaia e Aurora seguem [pesquisa de tendências](trend-research.md), com recorte, fontes datadas, janela e lacunas. Não há radar contínuo instalado. Etapas opcionais podem ser dispensadas com motivo quando o fluxo permitir; geração, revisão, entrega e decisão de cânone exigida não podem ser puladas.
+Cada contrato define responsável, pré-requisitos, quantidade de saídas, tipo de evidência, capacidades e critérios de conclusão. Os catálogos gerados mostram as definições registradas reais. Etapas opcionais podem ser omitidas com motivo quando permitido.
 
-Cada pacote identifica personagem quando aplicável, responsável, contrato, entradas/hashes, entregas e pré-requisitos. Peças podem informar os snapshots de cânone/narrativa e ser usadas como entradas exatas do run; o runtime não cria esses registros editoriais automaticamente. Atena mantém as escolhas e autorizações do usuário e conserva divergências importantes. Todas exercem julgamento independente.
+Uma execução vincula entradas e governança aplicável, captura o contexto do personagem e salva tentativas, resultados e eventos. O status informa próxima responsável, capacidades ausentes e mudanças detectadas.
 
-## Retomada e evidências
+## Política de provedores de mídia
 
-Runs usam os estados `planned`, `in-progress`, `awaiting-input`, `awaiting-tool`, `uncertain-result`, `in-review`, `completed`, `failed` e `cancelled`. Valores históricos dos estados continuam legíveis por compatibilidade. Mudanças de entradas, saídas concluídas, cânone ou governança exigem nova tentativa e motivo para retomar. O fluxo recomeça, preservando a tentativa anterior e sem reaproveitar silenciosamente suas aprovações.
+Novas tentativas preservam um mapa `mediaProviders` para `image`, `video` e `audio`, com padrão `higgsfield`. A geração exige tanto a capacidade do meio quanto a capacidade específica do provedor. Evidência de geração e intenção externa registradas devem identificar o provedor escolhido.
 
-Antes de um envio externo, persistir intenção e identificadores conhecidos. Uma retomada com job não esclarecido fica `uncertain-result`, inclusive após interrupção antes de registrar a resposta. O assistente consulta o fornecedor com uma ferramenta real e registra a reconciliação antes de completar ou tentar novamente. O runtime não consulta nem reenvia jobs; sem intenção registrada, não descobre chamadas feitas fora dele. Interrupção não demonstra falha nem autoriza nova cobrança.
+Novas execuções de criação usam um piloto de vídeo por padrão; geração e revisão de candidatos usam capacidades de imagem. Um escopo explicitamente escolhido pode usar outro meio. Alterar o mapa exige nova tentativa com motivo. Execuções históricas sem o mapa mantêm a semântica salva.
 
-Conclusão de tarefas que não são gates de decisão exige arquivos existentes, hashes e declaração de evidência adequada à etapa. Gates de decisão humana exigem `approval` explícita; podem ter zero outputs quando o contrato permitir e não exigem o objeto `evidence` habitual. Revisão identifica os bytes da mídia, método e decisão, sem falhas críticas ou limitações pendentes. Entrega aceita os bytes revisados; exportação alterada precisa de outra revisão. Nome de revisor, extensão de arquivo e declaração registrada não comprovam humanidade, pixels, escuta ou execução real. O assistente deve vincular as declarações aos eventos ocorridos. `completed` significa contratos locais preenchidos; publicação continua uma ação separada.
+Essas declarações restringem a conclusão registrada. Elas não autenticam, descobrem, precificam nem executam ferramentas do provedor. [Ferramentas e capacidades](tools.md) explica as verificações operacionais.
 
-## Cânone, editorial e execução
+## Histórico de identidade e editorial
 
-Snapshots só são criados para um cânone aprovado, por comando explícito ou pela operação de registro, selagem ou migração que exigir esse contexto. Aprovar a ficha, sozinho, não cria o snapshot. A validação da persona, o início do fluxo, o vínculo, a aceitação de tarefas e uma nova tentativa comparam a ficha atual aprovada com qualquer snapshot já congelado para a mesma `identityVersion`; essas verificações não criam snapshots ausentes. A consulta de estado e a retomada comum relatam conflitos com o cânone vinculado como drift e bloqueiam a continuação, enquanto jobs externos incertos ainda podem ser reconciliados sem aceitar esse cânone. A mesma versão não aceita outro cânone, mesmo com um hash de aprovação substituído: a evolução da identidade exige nova versão e aprovação explícita. Um ativo antigo pode ser validado contra o cânone histórico; sua reutilização exige avaliar identidade e uso atuais. Migração preserva registros legados, mas não inventa snapshots históricos, execução ou arquivos/aprovações ausentes.
+Uma versão aprovada do cânone vincula identidade visual/vocal da persona e bytes exatos das referências. Quando existe snapshot congelado, operações de identidade rejeitam outro cânone sob a mesma `identityVersion`. Evoluir a identidade exige nova versão e aprovação.
 
-A narrativa mantém desejo, valores, contradição, hábitos, limites, exemplos de escrita e cronologia ficcional em versões próprias. Salvar sem decisão explícita mantém rascunho. Evolução editorial não altera o hash canônico; mudanças de âncoras visuais ou voz vocal seguem o processo de identidade.
+Narrativa e conteúdo têm históricos de versões separados. Uma edição de narrativa não altera automaticamente a identidade. Uma peça pode vincular contexto exato do cânone/narrativa; arquivos editoriais selecionados viram entradas explícitas da execução.
 
-A peça relaciona personagem, versões/hashes de cânone/narrativa, objetivo, pilar, mensagem, roteiro, legenda, cenas, ativos e fontes factuais. Música tem elegibilidade separada de popularidade, com plataforma, região, tipo de conta e uso. `ready-for-production` exige contexto aprovado e revisão editorial registrada; não aprova mídia nem publica a peça. Revisões anteriores permanecem preservadas.
+Um selo de execução preserva o contexto declarado de geração e uma cópia do prompt. A revisão do asset vincula bytes da mídia e contexto aplicável. Alterações na mídia exportada exigem nova revisão.
 
-A execução selada fixa o contexto de geração registrado, cânone, referências, prompt copiado, ferramenta/modelo e parâmetros expostos, finalidade e custo conhecido. A revisão do ativo se vincula a esse contexto e à mídia exata. Narrativa e roteiro permanecem nos registros editoriais e nos inputs escolhidos para o run; não presumir que estejam incorporados automaticamente ao snapshot de geração. Dados indisponíveis continuam identificados assim.
+## Recuperação e integridade
 
-## Preservação e limites
+Execuções detectam mudanças nas entradas observadas, saídas, cânone e governança. Continuar após mudança de contexto exige nova tentativa explícita com motivo; tentativas anteriores permanecem preservadas. Reformular orientações do framework pode, portanto, exigir revisão de contexto em uma execução antiga.
 
-Criação e restauração usam área temporária, lock e publicação por renomeação, sem sobrescrever personagem existente. Registros usam exclusão entre escritores e operações de preservação. Após interrupção, conferir processo e conteúdo antes de remover um lock.
+Persista a intenção externa antes do envio. Um envio não resolvido bloqueia continuidade em `uncertain-result` até o assistente consultar o provedor real e registrar a reconciliação. O núcleo não consulta nem reenvia jobs automaticamente. Chamadas sem intenção registrada não podem ser descobertas pelo runtime.
 
-O backup copia arquivos e pastas vazias do personagem, com inventário de tamanho/hash, além dos runs vinculados ao seu ID. Confere registros históricos e bytes copiados; restauração recusa conflitos. O teste de restauração confere estrutura, integridade e validação local, sem demonstrar reprodução ou fidelidade audiovisual.
+Criação e restauração preparam arquivos em área temporária e recusam sobrescrever personagens existentes. Backups inventariam arquivos do personagem, pastas vazias e execuções vinculadas. Excluem framework compartilhado, credenciais, ferramentas e entradas fora da pasta do personagem. Preserve essas dependências separadamente.
 
-Governança, framework, credenciais, ferramentas e inputs compartilhados fora da persona não acompanham esse backup. Preservar também a base do projeto e dependências da continuidade. Um personagem restaurado ainda precisa desse contexto para retomar um run. Cópia local na mesma máquina não protege contra perda do dispositivo.
+## Limites e pontos de extensão
 
-Hashes detectam alterações, mas não são assinaturas nem autenticação contra alguém capaz de editar e recalcular registros. O núcleo valida integridade e declarações; julgamento criativo, aprovação verdadeira e inspeção final continuam responsabilidades da operação.
+Hashes comprovam consistência de bytes, não identidade de revisores nem fidelidade criativa. Um contrato concluído representa evidência local aceita; não comprova publicação nem resultados no mundo real.
 
-## Próximas evidências e evolução
-
-Preservação, coordenação, continuidade editorial e recuperação estão implementadas localmente. Executar `npm.cmd run verify` após alterações para conferir testes, validação e diagnóstico. Fixtures não substituem o primeiro piloto.
-
-O próximo marco é **uma persona**, com público/direção escolhidos, referências inspecionadas e um conjunto pequeno de peças. Conferir consistência entre ângulos, expressões, objetos e, quando aplicável, fala/movimento. Registrar falhas, correções, tempo e custo conhecidos. Exercitar também ferramenta ausente, mudança de entrada, troca de personagem e resultado incerto. Nenhuma média compensa falha crítica.
-
-Depois do piloto, estruturar publicações efetivamente realizadas e experimentos com hipótese, variável, coorte, janela, contagens, denominadores, fonte e decisão. Custos de tentativas rejeitadas contam; moedas diferentes e dados ausentes não são tratados como equivalentes. Campanhas completas, comparação de portfólio, analytics, adaptadores, dashboard e banco de dados entram conforme necessidade observada.
-
-Escala e automação dependem das evidências do piloto; quantidade de perfis não demonstra qualidade.
+Adaptadores de provedores, dashboards, gestão de campanhas, integrações analíticas e bancos de dados não estão incluídos. Adicione-os apenas para necessidade concreta com comportamento verificado, limites de exportação e preservação. Consulte [capacidades suportadas](studio-status.md) e [interfaces do núcleo](framework/README.md) antes de estender o runtime.

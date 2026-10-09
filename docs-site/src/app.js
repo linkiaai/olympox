@@ -19,6 +19,13 @@
   const codeBlock = (text, language = 'json') => `<div class="code-block"><div class="code-header"><span>${e(language)}</span><button type="button" class="copy-code">${e(t('copy'))}</button></div><pre><code>${e(text)}</code></pre></div>`;
   const sourceNote = item => `<div class="source-note">${e(t('source'))} <code>${e(item.sourcePath ?? item.path)}</code></div>`;
 
+  function roleGuide(role) {
+    const teamGuide = data.guides.find(item => item.path === 'docs/studio-team.md');
+    const section = teamGuide?.markdown.split(/\r?\n(?=#{2,3} )/).find(part => part.split(/\r?\n/, 1)[0] === `### ${role.name}`);
+    const detail = section?.replace(/^### [^\r\n]+\r?\n/, '').trim();
+    return detail ? { markdown: detail, path: teamGuide.sourcePath ?? teamGuide.path } : { markdown: role.markdown.replace(/^# .+\r?\n/, ''), path: role.path };
+  }
+
   function activateLocale(next) {
     locale = next;
     data = locale === 'en' ? canonical : { ...canonical, ...canonical.locales[locale] };
@@ -35,12 +42,14 @@
     document.querySelector('#locale-select').value = locale;
     document.querySelector('#version-label').textContent = t('core', { version: data.version });
     document.querySelector('#revision').textContent = t('revision', { revision: data.fingerprint.slice(0, 12) });
-    document.querySelector('#navigation').innerHTML = `<div class="nav-heading">${e(t('navStudio'))}</div>${[
-      ['overview', '01'], ['start', '02'], ['team', data.roles.length], ['workflows', data.workflows.length], ['tasks', data.tasks.length], ['commands', data.commands.length]
-    ].map(([route, count]) => `<a href="#${route}" data-route="${route}"><span>${e(t(route))}</span><small>${count}</small></a>`).join('')}<div class="nav-heading">${e(t('navGuides'))}</div>${data.guides.filter(item => !item.section).map(item => `<a href="#${routes[item.path]}" data-route="${routes[item.path]}">${e(item.label)}</a>`).join('')}<div class="nav-heading">${e(t('navPrinciples'))}</div><a href="#constitution" data-route="constitution">${e(t('constitution'))}</a><a href="#sync" data-route="sync">${e(t('sync'))}</a>`;
+    const guideLinks = group => data.guides.filter(item => (item.group ?? 'reference') === group).map(item => `<a href="#${routes[item.path]}" data-route="${routes[item.path]}">${e(item.label)}</a>`).join('');
+    const catalogLinks = `<div class="nav-heading">${e(t('navCatalog'))}</div>${['team', 'workflows', 'tasks', 'commands'].map(route => `<a href="#${route}" data-route="${route}">${e(t(route))}</a>`).join('')}`;
+    document.querySelector('#navigation').innerHTML = [
+      ['start', 'navStart'], ['create', 'navCreate'], ['produce', 'navProduction'], ['records', 'navRecords'], ['reference', 'navFramework'], ['maintain', 'navMaintenance']
+    ].map(([group, heading]) => `<div class="nav-heading">${e(t(heading))}</div>${guideLinks(group)}${group === 'records' ? catalogLinks : ''}`).join('');
     searchable = [
       ...data.guides.map(item => ({ title: item.label, text: item.markdown, route: routes[item.path], kind: t('guideKind') })),
-      ...data.roles.map(item => ({ title: item.name, text: `${item.title} ${item.markdown}`, route: `agent/${item.id}`, kind: t('teamKind') })),
+      ...data.roles.map(item => ({ title: item.name, text: `${item.title} ${roleGuide(item).markdown}`, route: `agent/${item.id}`, kind: t('teamKind') })),
       ...data.tasks.map(item => ({ title: item.name, text: `${item.id} ${item.criteria.join(' ')} ${roles[item.owner].name}`, route: `task/${item.id}`, kind: t('contractKind') })),
       ...data.workflows.map(item => ({ title: item.name, text: `${item.id} ${item.steps.map(step => tasks[step.task].name).join(' ')}`, route: `workflow/${item.id}`, kind: t('workflowKind') })),
       ...data.commands.map(item => ({ title: item.id, text: item.description, route: `commands~command-${item.id}`, kind: t('commandKind') }))
@@ -74,10 +83,9 @@
   function agentPage(id) {
     const role = roles[id]; if (!role) return missing();
     const assigned = data.tasks.filter(task => task.owner === id);
-    const teamGuide = data.guides.find(item => item.path === 'docs/studio-team.md');
-    const section = teamGuide?.markdown.split(/\r?\n(?=#{2,3} )/).find(part => part.split(/\r?\n/, 1)[0] === `### ${role.name}`);
-    const detail = id === 'master' ? null : section?.replace(/^### [^\r\n]+\r?\n/, '').trim();
-    return pageHeader(role.name, role.title, t(id === 'master' ? 'directionEyebrow' : 'specialist')) + `<div class="article-layout"><article class="prose">${detail ? render(detail, teamGuide.sourcePath ?? teamGuide.path, routes).html : ''}${render(role.markdown.replace(/^# .+\r?\n/, ''), role.path, routes).html}<h2>${e(t('assignedContracts'))}</h2><div class="related-list">${assigned.map(task => `<a href="#task/${task.id}"><strong>${e(task.name)}</strong><code>${e(task.id)}</code></a>`).join('')}</div><div class="source-note">${e(t('profile'))} <code>${e(locale === 'en' ? role.path : 'docs-site/locales/pt-BR.json')}</code></div></article><aside class="toc"><div class="nav-heading">${e(t('context'))}</div>${routeLink('team', t('viewTeam'))}${routeLink(routes['docs/studio-team.md'], t('inputsOutputsLimits'))}${routeLink('tasks', t('viewContracts'))}</aside></div>`;
+    const detail = roleGuide(role);
+    const profileContent = render(detail.markdown, detail.path, routes).html;
+    return pageHeader(role.name, role.title, t(id === 'master' ? 'directionEyebrow' : 'specialist')) + `<div class="article-layout"><article class="prose">${profileContent}<h2>${e(t('assignedContracts'))}</h2><div class="related-list">${assigned.map(task => `<a href="#task/${task.id}"><strong>${e(task.name)}</strong><code>${e(task.id)}</code></a>`).join('')}</div><div class="source-note">${e(t('source'))} <code>${e(detail.path)}</code> · ${e(t('profile'))} <code>${e(role.path)}</code></div></article><aside class="toc"><div class="nav-heading">${e(t('context'))}</div>${routeLink('team', t('viewTeam'))}${routeLink(routes['docs/studio-team.md'], t('inputsOutputsLimits'))}${routeLink('tasks', t('viewContracts'))}</aside></div>`;
   }
   function flowCard(workflow) {
     return `<section class="flow-panel" id="flow-${e(workflow.id)}"><div class="flow-heading"><div><div class="eyebrow">${e(workflow.id)}</div><h2>${routeLink(`workflow/${workflow.id}`, workflow.name)}</h2></div><span class="chip">${e(t(workflow.requiresPersona ? 'requiresCharacter' : 'noCharacterStart'))}</span></div><ol class="timeline">${workflow.steps.map((step, index) => {

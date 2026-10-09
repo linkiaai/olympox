@@ -1,27 +1,47 @@
-# Criação visual integrada: alternativa explícita
+# Imagens integradas ao assistente
 
-A geração integrada de imagens do ChatGPT/Codex é uma alternativa escolhida explicitamente ao [método padrão de produção Higgsfield](higgsfield-influencer-method.md). O OLYMPOX não exige que seu coordenador conversacional gere imagens: Codex ou Claude podem dirigir o mesmo caminho externo de mídia usando ferramentas disponíveis. Use imagens integradas somente quando o usuário escolher essa rota e registre etapas afetadas e desvio do método de referência. Aplicam-se disponibilidade e limites da conta; não descreva como gratuito ou ilimitado. A ausência de um recurso Higgsfield não autoriza substituir silenciosamente essa rota.
+Use este procedimento quando o usuário escolher explicitamente geração ou edição de imagens dentro do assistente conversacional. Higgsfield continua como [caminho padrão de mídia](higgsfield-influencer-method.md). A alternativa vale para etapas de imagem selecionadas; não estabelece suporte a voz, animação, vídeo ou sincronização labial.
 
-## Do conceito às referências
+## Escolher e registrar a alternativa
 
-1. Siga a [descoberta adaptativa](strategy.md), reutilizando respostas fornecidas. Quando a direção estiver aberta, proponha três conceitos distintos com assinaturas visuais, personalidade, histórias recorrentes e uma recomendação. Um brief completo dispensa descoberta já resolvida.
-2. Salve um [plano versionado do método de produção](../../../templates/locales/pt-BR/production-method.md). Selecione o método por etapa e confira capacidades reais de geração, anexo, inspeção e exportação na sessão. Prepare prompts e registre etapas ausentes quando um recurso estiver indisponível; proponha alternativas. Uma troca para geração externa paga exige autorização aplicável.
-3. Gere uma candidata expressiva em uma cena que comunique a personalidade e a premissa escolhidas. Especifique idade, silhueta, estilo, expressão, atuação, cenário e ação narrativa. Um retrato neutro sozinho não demonstra presença nem o conceito. Inspecione o resultado e preserve tentativas rejeitadas com evidências úteis.
-4. O usuário seleciona a candidata visual. Desenvolva referências neutras de frente, três quartos, perfil e corpo inteiro conforme necessário, com arquivos individuais legíveis para ângulos utilizáveis, além de uma cena da personagem em ação. Inspecione anatomia, presença, reconhecimento, proporções e continuidade entre ângulos/cenas; correções produzem novas versões.
-5. Inspecione imagens de referência selecionadas antes de reutilizar e anexe seus bytes reais pelo mecanismo de referência suportado pela ferramenta. Nome/caminho citado no prompt não é anexo. Se a ferramenta aceita caminhos locais de referência, use os arquivos inspecionados na entrada de referência; caso contrário, use anexos da conversa ou transferências suportadas. Registre arquivos/hashes realmente anexados e IDs de entrada expostos. Se as referências exatas não puderem ser anexadas, mantenha aquela geração pendente sem afirmar continuidade.
+Confira se o aplicativo oferece geração/edição de imagens, anexação de referências exatas, exportação e inspeção visual. Limites da conta e restrições das ferramentas se aplicam. Salve etapas afetadas, ferramentas e motivo no [plano de método de produção](../../../templates/locales/pt-BR/production-method.md).
 
-## Voz, canon e piloto
+Para um novo run local, declare a exceção de imagem na especificação:
 
-Na transição para vídeo, siga [Da direção ao piloto de vídeo Higgsfield](production-handoff.md). O coordenador prepara conceitos, roteiros, direção dos planos e mapa de submissão; a ferramenta de imagem escolhida explicitamente cria as imagens de cena. Salve biblioteca coerente e mapeie somente entradas exatas suportadas por chamada de vídeo. Voz precisa de ferramenta verificada antes quando houver fala. Trabalho preparado e trabalho pronto para submissão são pontos de verificação distintos.
+```json
+{
+  "mediaProviders": {
+    "image": "integrated-images",
+    "video": "higgsfield",
+    "audio": "higgsfield"
+  }
+}
+```
 
-Seleção visual preliminar não aprova o canon completo. Para uma personagem que fala, prepare uma amostra vocal enquanto a persona permanece `draft` com `purpose: reference`; gere, ouça e deixe o usuário selecionar a referência vocal exata antes da aprovação final do canon visual/vocal. Voz, animação, vídeo, sincronização labial e etapas especializadas usam ferramentas verificadas conforme necessidade, qualidade e custo; [Higgsfield](higgsfield-plugin.md) continua a plataforma padrão de mídia, salvo escolha de outra rota pelo usuário. Disponibilidade da ferramenta de imagem não comprova esses recursos. Reutilize voz/canon aprovados ou registre por que voz não se aplica a conteúdo silencioso.
+Este fragmento integra uma especificação completa de run; não é chamada de ferramenta. Declare capacidades reais exigidas pelo fluxo, incluindo `integrated-images:image-generation` para geração de imagens. O núcleo verifica a declaração do fornecedor escolhido, mas não chama a ferramenta nem verifica sua qualidade. Veja [operação do núcleo](framework-02.md).
 
-Aprove as referências completas exatas e configurações de voz, registre hashes e preserve o canon pelas [operações existentes](operations.md). Use essas referências realmente anexadas nas gerações seguintes. Execute um pequeno piloto antes de lotes, inspecione mídias completas contra o uso pretendido, exporte bytes reais e publique somente com autorização aplicável. Inspeção ou exportação inacessível continua pendente; geração bem-sucedida não aprova identidade nem qualidade.
+Mudança de fornecedor ou método observado usa `run-resume` com `newAttempt: true` e motivo. Preserve tentativas anteriores e resolva primeiro qualquer job externo pendente. Canon, referências e aprovações existentes permanecem intactos.
 
-## Rastreabilidade e contexto preservado
+## Criar candidatas e referências
 
-Salve saídas em novas versões locais da personagem, sem sobrescrever referências. Registre método por etapa, ferramenta, modelo quando exposto (caso contrário, desconhecido), prompts exatos, referências realmente usadas, caminhos/hashes dos resultados, custos conhecidos, limites da conta/ferramenta e quem inspecionou o quê. Custo monetário desconhecido permanece `null`; não equipare franquia da conta a custo zero. Preserve IDs de jobs expostos e reconcilie submissões incertas pela ferramenta/job original antes de repetir ou trocar fornecedor. Registre ativos e sele o contexto declarado de execução; a [revisão de qualidade](quality.md) continua vinculada aos arquivos exatos.
+1. Comece pelo conceito selecionado ou personagem aprovada. Use [estratégia](strategy.md) para descoberta pendente. Quando a direção estiver aberta, compare três conceitos distintos e recomende um antes da exploração visual.
+2. Dirija uma candidata expressiva e uma cena em personagem que comuniquem personalidade e premissa recorrente. Especifique idade, silhueta, estilo, expressão, cenário e ação.
+3. Inspecione saídas reais e registre a seleção visual do usuário. Desenvolva vistas coerentes dessa candidata: frente, três quartos, perfil, corpo e expressões conforme o conteúdo pretendido.
+4. Salve referências individuais utilizáveis, preserve originais e compare anatomia, proporções, reconhecimento e presença entre vistas/cenas. Grade ajuda na seleção, mas não substitui arquivos exatos legíveis.
+5. Antes de nova geração ou edição, inspecione referências selecionadas e anexe arquivos reais pelos campos de referência suportados. Registre hashes, papéis/ordem e IDs expostos. Nome de arquivo no texto do prompt não anexa bytes.
 
-O núcleo local registra capacidades como `image-generation` e `image-inspection` sem exigir fornecedor. Ele não chama a ferramenta integrada, anexa arquivos, impõe completude semântica do plano, inspeciona pixels nem aprova canon automaticamente. Testes sintéticos demonstram apenas coordenação local. Cada estúdio precisa verificar anexos reais, geração, qualidade de identidade/voz e exportação com ferramentas e mídia reais.
+Candidatas continuam como material em rascunho até seleção e revisão aplicáveis. Para uma personagem existente, compare cada derivada com canon aprovado e mantenha novas saídas separadas do pacote de referências até revisão.
 
-Personagens aprovadas, mídias, aprovações, snapshots, backups e runs históricos continuam intactos. O novo padrão não os migra nem reescreve evidências anteriores. Mudança em plano rastreado, entrada ou governança segue o procedimento existente de nova tentativa explícita com motivo; tentativas e aprovações anteriores ficam preservadas.
+## Concluir canon e piloto
+
+Seleção visual inicial não aprova canon completo. Uma nova personagem com fala precisa de amostra vocal gerada durante trabalho de rascunho/referência, com `purpose: reference`; escute o áudio exato e registre seleção do usuário, arquivo/hash e configurações antes da aprovação visual/vocal final. Escopo silencioso registra por que voz não se aplica. Reutilize voz e canon aprovados compatíveis.
+
+Aprove e preserve canon completo por [operações locais](operations.md), depois prepare cenas de produção a partir de suas referências exatas. Para vídeo, use o [procedimento de passagem](production-handoff.md) com ferramentas de voz/movimento/sincronização verificadas separadamente. Higgsfield continua padrão nessas etapas, salvo mudança explícita.
+
+Gere um piloto representativo antes de lotes. Exporte bytes reais, registre e sele o contexto, depois conclua a [revisão de qualidade](quality.md). Ausência de anexação de referências, exportação ou inspeção mantém a etapa afetada pendente.
+
+## Preservar proveniência
+
+Salve cada saída como nova versão local da personagem. Registre ferramenta/modelo exposto, prompt exato, arquivos/hashes realmente anexados, custo conhecido, limitações, IDs de resultados e revisão real. Custo monetário desconhecido continua `null`; franquia da conta não comprova custo zero. Reconcilie submissões incertas pelos jobs originais antes de nova tentativa.
+
+O núcleo local preserva declarações e integridade dos arquivos. Ele não inspeciona pixels, escolhe identidade, aprova canon nem estabelece fidelidade das imagens geradas pelo assistente. Publicação continua ação autorizada separadamente com bytes finais revisados.

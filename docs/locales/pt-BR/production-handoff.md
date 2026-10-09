@@ -1,41 +1,54 @@
-# Da direção ao piloto de vídeo Higgsfield
+# Da direção a um piloto de vídeo
 
-O procedimento recomendado mantém conceito, personalidade, narrativa, roteiros e direção dos planos com o coordenador conversacional, Codex ou Claude, e produz imagens da personagem, referências, imagens de cena, voz e vídeo por recursos Higgsfield verificados. Siga o [método de referência](higgsfield-influencer-method.md) e seus módulos observados; imagens integradas são uma [alternativa explícita](integrated-images.md). Respeite fornecedor e processo escolhidos. Evidências coerentes e pontos de verificação apoiam fidelidade; nome de fornecedor/modelo ou adesão nominal a uma referência não garantem qualidade equivalente.
+Use esta passagem quando uma personagem e um roteiro selecionados serão transformados em vídeo. O coordenador desenvolve direção; Íris prepara entradas visuais, Saraswati desenvolve o roteiro, Selene mapeia/executa operações suportadas e Têmis revisa o resultado. Essas responsabilidades orientam o assistente disponível e trabalhos realmente delegados.
 
-Antes da primeira etapa externa, Selene confere conta/conexão, módulos escolhidos, transporte das referências exatas, saída/exportação e custos delimitados do piloto completo, incluindo identidade, referências, voz, imagens de cena, vídeo e correções. Identifique custos desconhecidos e limite total de orçamento/tentativas cedo. Autorização de uma etapa não cobre outra; um piloto delimitado já autorizado pode cobrir suas etapas expressamente incluídas. Login do usuário pode ser necessário; seleção e envio de arquivos devem ocorrer por ferramentas verificadas, sem usar arrastar manualmente como padrão. A amostra vocal de personagem falante precisa ser gerada, ouvida e selecionada antes da aprovação do canon visual/vocal completo.
+Higgsfield é o caminho padrão de mídia. Siga o [método de produção selecionado](higgsfield-influencer-method.md); uma [alternativa de imagens integradas](integrated-images.md) deve ser explícita. Salve um [pacote de passagem de vídeo](../../../templates/locales/pt-BR/video-handoff.md) versionado e registre seus arquivos exatos como entradas do run ou saídas de planejamento.
 
-## Siga estes pontos de verificação em ordem
+## Pontos de prontidão
 
-| Etapa | Trabalho e responsável | Pronta para avançar quando |
-| --- | --- | --- |
-| 1. Direção da personagem | Atena, Psiquê e Íris desenvolvem conceito, personalidade, universo narrativo e premissa recorrente com o coordenador conversacional disponível. Use descoberta adaptativa e conceitos distintos quando a direção estiver aberta. | O usuário escolheu direção concreta; hipóteses e limites estão salvos. |
-| 2. Exploração visual | Íris dirige candidata Higgsfield expressiva e cena que comunique a premissa; o usuário seleciona a identidade visual. Desenvolva vistas neutras coerentes, expressões pertinentes e referências corporais/de proporção a partir dessa candidata usando anexos reais. | Referências inspecionadas preservam reconhecimento, anatomia, personalidade/presença e continuidade entre vistas/cenas. Tentativas rejeitadas ficam preservadas. |
-| 3. Canon completo | Selene usa ferramenta de voz verificada se houver fala. Têmis apoia inspeção visual/vocal; Atena registra decisões exatas do usuário. | A amostra vocal foi gerada, ouvida e selecionada quando exigida; referências/configurações completas exatas estão aprovadas, com hashes e preservadas. Escopo silencioso registra por que voz não se aplica. |
-| 4. Preparação de episódio e cenas | Saraswati escreve roteiro com o coordenador. Íris prepara direção dos planos e imagens Higgsfield de cena/início a partir do canon aprovado. Selene salva o [pacote de passagem](../../../templates/locales/pt-BR/video-handoff.md). | Cada plano tem propósito, fala exata ou escopo silencioso, atuação, câmera/movimento, notas de continuidade e entradas inspecionadas. |
-| 5. Confirmar mapa de submissão e um piloto | Selene verifica operação especializada, transferência de referências exatas, parâmetros suportados, áudio/lip-sync, saída/exportação, custos e autorização aplicável. Higgsfield usa seus procedimentos preservados de [plugin](higgsfield-plugin.md), [método](higgsfield-influencer-method.md) ou [CLI](higgsfield-setup.md). | Um piloto representativo é gerado com entradas realmente aceitas e intenção/IDs registrados. Seus bytes reais exportados estão registrados e com hashes, incluindo o `execution-seal` aplicável. A revisão completa desses arquivos exatos registra `approve`, sem questões bloqueantes ou mídia exigida ainda não inspecionada. Correções usam novas versões revisadas e aprovadas novamente antes de lotes. |
-| 6. Planos restantes e entrega | Selene amplia o caminho validado; Têmis revisa clipes completos, áudio e edição final; Atena consolida exportação e decisões aplicáveis de publicação. | Bytes finais revisados estão salvos e registrados/selados com contexto exato. Publicação só ocorre com autorização aplicável e evidência real. |
+Confira o caminho e orçamento completos do piloto antes da primeira etapa paga: identidade/referências, voz quando necessária, cenas, vídeo, correções, exportação e inspeção completa. Autorização de piloto delimitado pode cobrir etapas e limites incluídos; reutilize-a quando aplicável.
 
-Se uma etapa estiver incompleta, registre o que falta, próximo responsável/ação e alternativas. Mantenha a etapa afetada pendente sem afirmar prontidão. Substituições externas pagas exigem autorização aplicável. Personagens já aprovadas começam na primeira etapa inacabada; não recrie canon nem migre seus registros automaticamente.
+| Ponto | Pronto para avançar quando |
+| --- | --- |
+| Direção | Conceito, personalidade, premissa recorrente e conteúdo pretendido selecionados estão salvos |
+| Seleção visual | O usuário selecionou a nova identidade; referências coerentes inspecionadas preservam anatomia, reconhecimento e presença entre vistas/cenas |
+| Canon completo | Referências visuais exatas e, para personagens com fala, referências vocais geradas/escutadas/selecionadas e configurações estão aprovadas e preservadas |
+| Roteiro e cenas | Cada plano tem propósito, fala exata ou escopo silencioso, direção de atuação/movimento, continuidade e entradas de cena inspecionadas |
+| Submissão | A operação aceita entradas exatas transferidas; parâmetros, custo, rota de exportação/revisão e autorização aplicável estão confirmados |
+| Piloto | Bytes reais estão exportados, registrados e com hash e `execution-seal` aplicável; revisão completa registra `approve` sem bloqueios ou mídia obrigatória não inspecionada |
+| Entrega | Planos restantes e edição/exportação final têm revisão completa e registros de arquivos exatos |
 
-## Prepare biblioteca rica, submeta um plano preciso
+Uma personagem já aprovada começa no primeiro ponto ainda incompleto. A amostra vocal de nova personagem com fala é preparada enquanto ela permanece `draft`, com `purpose: reference`, antes do canon completo. Adicionar voz alterada a canon congelado exige evolução normal do canon.
 
-Mantenha duas partes distintas do pacote. A **biblioteca de produção** contém referências aprovadas úteis da personagem, vistas de expressão/corpo, detalhes de figurino/objetos, referências de cenário, imagens de cena inspecionadas, roteiros e notas de continuidade. Produza somente material necessário aos planos previstos; inspecione referências novas antes de promovê-las. Storyboard ou grade ajuda no planejamento, mas não substitui arquivos individuais utilizáveis.
+Para ponto incompleto, registre requisito ausente, próximo responsável/ação e alternativa proposta. Transferência, escuta, geração, exportação ou inspeção essenciais ausentes continuam pendentes.
 
-O **mapa de submissão de cada plano** lista somente entradas que a operação escolhida realmente aceita: arquivos/hashes exatos, papéis e ordem, IDs/URLs de mídia do fornecedor suportados quando aplicáveis, prompt e parâmetros suportados. Por exemplo, uma ferramenta que aceita uma imagem inicial recebe um quadro de cena cuidadosamente composto e inspecionado. Outras vistas da biblioteca apoiam preparação e QA; não afirme que todas foram anexadas nem que campo não suportado condiciona identidade. Quadros finais, múltiplas referências de identidade, áudio separado, controles de câmera e lip-sync só entram quando verificados naquela operação. Se uma entrada essencial não puder ser transferida ou usada, mantenha o plano pendente e proponha rota compatível.
+## Montar a biblioteca de produção
 
-Compare cada derivação com o canon aprovado exato, além da derivação anterior. Não deixe imagem de cena não aprovada virar a única fonte de identidade dos planos seguintes. Escolha referências suportadas para o ângulo e papel de entrada; um campo de estilo não é campo de identidade. Inspecione contatos/geometria da cena, mãos e dentes em resolução legível e no recorte pretendido; confira reconhecimento sob mudanças permitidas de expressão, luz e figurino.
+Mantenha material necessário ao roteiro: referências aprovadas de identidade/corpo/expressão, detalhes de figurino/objetos, cenário, imagens de cena, áudio, roteiro e continuidade. Inspecione material derivado novo contra canon exato antes do uso. Storyboard ou grade ajudam a planejar; arquivos utilizáveis de referência continuam identificados individualmente.
 
-Para cada cena, prepare:
+A biblioteca apoia preparação e QA. Cada chamada recebe somente entradas aceitas pelo schema real. Operação com uma imagem inicial usa quadro de cena composto; outras vistas continuam como material de preparação/revisão salvo aceitação explícita. Entradas de estilo, identidade e áudio têm papéis diferentes.
 
-- ID do plano, propósito editorial, duração/formato dentro dos limites verificados da ferramenta, texto falado exato ou escopo silencioso e links para versões da personagem/canon/conteúdo.
-- Direção de atuação ligada à personalidade: intenção, expressão, olhar, gesto e ritmo. Especifique movimento do sujeito separado do movimento de câmera e evite ações contraditórias.
-- Imagem inspecionada composta para aquela cena, usando identidade, figurino, cenário, objetos e luz aprovados; estados inicial/final relevantes somente se suportados. Inspecione rosto, corpo, mãos, boca, anatomia e premissa/presença antes de animar.
-- Referência/configurações vocais aprovadas e entradas reais de áudio quando houver fala; registre escuta, pronúncia, ritmo e tempo pretendido. Mudança de áudio que altere identidade congelada usa evolução de canon, sem substituição silenciosa.
-- Continuidade entre planos: âncoras de identidade, variações permitidas, figurino, objetos, direção espacial, luz e estado narrativo. Registre o que deve se mover e o que precisa permanecer estável.
-- Plano de revisão de identidade durante movimento, anatomia, artefatos temporais, fala/áudio/lip-sync quando presentes, duração, composição e exportação. Quadros estáticos não comprovam fidelidade temporal.
+## Mapear cada plano para entradas aceitas
 
-## Execute e aprenda com o piloto
+Para cada plano, salve:
 
-Escolha plano curto representativo que exercite riscos importantes para aquela personagem, incluindo fala ou gesto difícil quando pertinente. Leia instruções/schema atuais e teste a operação escolhida, sem inferir suporte pelo catálogo da plataforma. Não submeta lotes até os bytes reais exportados do piloto estarem registrados e com hashes e o `execution-seal` aplicável, e a revisão completa desses arquivos exatos registrar `approve` sem questões bloqueantes ou mídia exigida ainda não inspecionada. Preserve no registro as limitações declaradas que não bloqueiam a aprovação. Após falha, diagnostique entrada, prompt, movimento, capacidade da ferramenta ou exportação; altere variável útil, salve nova versão e repita revisão completa e aprovação antes de lotes. Troca de ferramenta/modelo exige outro piloto aplicável.
+- ID, propósito, versões de personagem/canon/conteúdo e fala exata ou escopo silencioso.
+- Intenção de atuação, expressão, olhar, gesto e ritmo; movimento da personagem separado da câmera.
+- Duração, formato e continuidade de entrada/saída do plano.
+- Imagem de cena/início inspecionada; imagens finais, múltiplas referências ou áudio separado somente quando suportados.
+- Ferramenta/rota, modelo exposto, parâmetros suportados e prompt exato.
+- Arquivos/SHA-256 submetidos, papéis/ordem, IDs/URLs confirmados e evidência real de transferência.
+- Cotação/unidade, orçamento e autorização aplicáveis, intenção registrada e IDs retornados.
+- Arquivos/hashes de saída, selo, revisor/método/decisão, bloqueios e limitações não impeditivas declaradas.
 
-Rastreie plano de método, documento de passagem e entradas exatas dos planos como entradas/saídas de planejamento existentes do run para observar caminhos/hashes. Registre método/ferramenta/modelo quando exposto, prompts, bytes/IDs anexados, parâmetros reais, cotações/custos conhecidos, autorização aplicável, intenção do job e IDs retornados, arquivos/hashes de saída e limites de inspeção. Submissão incerta é reconciliada pelo job original antes de repetir ou trocar rota. Pacote preparado, prévia remota, job concluído ou teste local não demonstram fidelidade final, exportação nem aprovação. Contexto observado alterado segue nova tentativa explícita existente, preservando evidências anteriores.
+Compare cenas novas com canon aprovado, não apenas com a derivada anterior. Inspecione mãos, boca, corpo, contato entre elementos e composição antes de animar. Para fala, use referência/configurações vocais aprovadas e confira pronúncia, ritmo e timing.
+
+A amostra do canon identifica a voz aprovada. Se a operação exigir áudio externo para conduzir a fala, gere uma nova tomada do texto exato do plano com essa voz, escute e meça a duração antes de anexar arquivo/hash exatos; amostra com outras palavras não é o áudio desse plano. Para fala gerada internamente, envie as entradas suportadas de roteiro/voz exatos e revise a fala resultante.
+
+## Gerar e revisar o piloto
+
+Escolha um plano curto e representativo que exercite riscos reais: identidade em movimento, fala/sincronização quando necessária ou gesto importante. Registre intenção antes de submeter e reconcilie job original se o resultado for incerto. Siga [execução pelo plugin](higgsfield-plugin.md) ou [procedimento de CLI](higgsfield-setup.md).
+
+Revise movimento e áudio completos contra referências exatas, roteiro e corte pretendido. Imagem estática não estabelece fidelidade temporal. Exporte/registre bytes reais do piloto, crie o selo aplicável e registre revisão completa `approve` antes de lotes. Após correção, salve nova versão e repita revisão e aprovação completas. Mudança de ferramenta/modelo precisa de piloto aplicável às novas condições.
+
+Expanda somente configurações sustentadas pela evidência do piloto. Revise edição final novamente após legendas, música, corte ou compressão. Entregue bytes revisados; publicação exige autorização aplicável e evidência real. Mudanças em entradas/método/governança observados usam o procedimento explícito de nova tentativa, preservando evidências anteriores.

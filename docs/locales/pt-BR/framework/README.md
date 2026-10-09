@@ -1,46 +1,107 @@
-# Núcleo de coordenação 0.2
+# Referência dos contratos do runtime
 
-O registry aponta para nove perfis, contratos de tarefa e três fluxos. Os perfis orientam o assistente de coordenação disponível ao usuário, como Codex ou Claude. A geração de mídia usa ferramentas verificadas do Higgsfield por padrão, independentemente das capacidades de imagem do assistente. O módulo `scripts/framework-core.mjs` registra pacotes e estado local; não despacha agentes, gera mídia, consulta serviços ou publica. Contratos independentes do assistente não comprovam uma sessão exercitada no Claude nem execução de fornecedor.
+`scripts/framework-core.mjs` implementa registros locais de fluxos no OLYMPOX. O registry seleciona perfis, contratos de tarefas e definições de fluxos; um run salva essas definições com seu contexto observado. O assistente coordenador realiza o trabalho e fornece declarações e arquivos existentes. O módulo não tem dispatcher de agentes nem adaptador de fornecedor.
 
-Os caminhos de inputs e outputs são relativos à raiz do projeto, com `/`. Arquivos de outro personagem e caminhos que saem da raiz são recusados. O estado fica em `work/runs/run-<UUID>.json`; um lock impede escritores simultâneos e a substituição usa um arquivo temporário completo. Interrupções podem deixar lock: conferir processos antes de remover.
+Pacote e registry usam versão **0.5.0**. Contratos JSON de tarefas/fluxos mantêm revisão de componente **0.2.0** e `schemaVersion: 1`; são identificadores de compatibilidade, não a versão atual do produto. Esta referência descreve a implementação atual, incluindo política aditiva de fornecedor para novas tentativas.
 
-## API
+Para fluxo conversacional e sequência CLI, leia [fluxos e retomada](../framework-02.md). Para comandos de persona, manifesto e backup, leia [operações](../operations.md).
 
-- `validateFramework(root)` retorna `valid`, erros, registry e contratos resolvidos.
-- `startRun(root, {workflowId, personaId, objective, inputs, medium, capabilities, mediaProviders})` cria uma execução e retorna o pacote. Novos runs `create-character` usam piloto `video` por padrão; outros fluxos usam `image`. Um `medium` explícito pode selecionar outro escopo. `personaId` pode ser `null` no início de `create-character`; antes das referências, usar a transição `bind-persona`. Produção/correção exigem cânone aprovado.
-- `readRun(root, runId)` retorna estado, próxima tarefa/responsável, pré-requisitos, entradas/hashes, governança e mudanças detectadas. Não altera o registro.
-- `validateRunRecord(run)` verifica estrutura e hashes do JSON histórico, sem depender dos arquivos atuais. Retorna `true` ou lança erro; inventários de backup podem usar essa API.
-- `transitionRun(root, runId, options)` registra `start`, `complete`, `skip`, `bind-persona`, `wait`, `uncertain`, `resolve`, `fail` ou `cancel`.
-- `resumeRun(root, runId, {newAttempt, reason, mediaProviders})` retoma o pacote. Mudanças nas entradas/cânone/governança ou no fornecedor de mídia selecionado exigem `newAttempt: true` e motivo. A nova tentativa começa o fluxo desde a primeira etapa, preservando a anterior. Não reenvia trabalho externo nem consome aprovações anteriores.
+## API do módulo
 
-Novos runs registram `mediaProviders: {image: "higgsfield", video: "higgsfield", audio: "higgsfield"}` na tentativa por padrão. Uma especificação explícita pode selecionar outro fornecedor por mídia, por exemplo `mediaProviders: {image: "integrated-images"}`; mídias omitidas continuam no padrão Higgsfield. `integrated-images` vale apenas para imagens. Alterar o fornecedor selecionado exige nova tentativa explícita e motivo. Método, saídas, aprovações e eventos anteriores permanecem na tentativa salva. Tentativas históricas sem esse campo mantêm o comportamento registrado; uma nova tentativa adota o padrão atual, salvo escolha de outro fornecedor.
+| Função | Comportamento |
+| --- | --- |
+| `validateFramework(root)` | Resolve e valida registry, perfis, tarefas e fluxos; retorna `valid`, erros, avisos e definições resolvidas |
+| `startRun(root, options)` | Cria run do fluxo selecionado e retorna o pacote da tarefa |
+| `readRun(root, runId)` | Retorna registro salvo, próxima tarefa, mudanças de contexto e requisitos sem alterar |
+| `validateRunRecord(run)` | Valida estrutura e hashes históricos independentemente dos arquivos atuais; retorna `true` ou lança erro |
+| `transitionRun(root, runId, options)` | Aplica transição declarada sob lock do run |
+| `resumeRun(root, runId, options = {})` | Confere continuação ou cria nova tentativa explícita preservando histórico |
 
-Capacidades são declarações da sessão, por exemplo `image-generation`, `image-inspection`, `video-generation` e `video-inspection`. Em novos runs, geração também exige a declaração do fornecedor selecionado, como `higgsfield:image-generation` ou a alternativa explícita `integrated-images:image-generation`. Disponibilidade genérica de imagens não substitui silenciosamente uma ferramenta Higgsfield ausente. O shell não comprova conexão, suporte do módulo/modelo, transferência de entradas, orçamento ou exportação. Ausência da capacidade requerida deixa a etapa `awaiting-tool`. Perfis e pacotes carregam as limitações; não há adaptadores externos neste módulo.
+Opções de `startRun`: `workflowId`, `personaId`, `objective`, `inputs`, `medium`, `capabilities` e `mediaProviders`. `objective` deve ser preenchido. `create-character` permite `personaId: null` e usa `medium: video` por padrão; produção/correção exige canon aprovado e usa imagem por padrão. Meios aceitos: `image`, `video` e `audio`.
 
-Geração e revisão de candidatos de uma nova personagem usam mídia `image`; o piloto usa o `medium` selecionado no run, por exemplo `video`. `nextTask.medium` informa a mídia dessa etapa. Tentativas históricas sem o mapa de fornecedores mantêm a interpretação original de mídia única. O planejamento também precisa verificar os módulos exatos solicitados: fichas do Builder, imagens do Soul Cinema, voz, treinamento de identidade e vídeo Seedance são capacidades separadas. Uma declaração genérica não estabelece equivalência com o método de referência.
+Entradas/saídas são listas de caminhos existentes relativos à raiz com `/`. Caminhos que escapam da raiz, arquivos equivalentes repetidos e arquivos de outra personagem são recusados. Registros: `work/runs/run-<UUID>.json`. O pacote informa `nextTask`, `responsible`, `state`, `attemptId`, `inputs`, `canonBinding`, `drift`, `missingCapabilities` e `canContinue`, junto do run salvo. `automaticallyDispatched` é sempre `false`.
 
-A validação da persona com a pasta do personagem, o início do fluxo, o vínculo, a aceitação de tarefas e uma nova tentativa comparam o cânone atual aprovado com qualquer snapshot já congelado para sua `identityVersion`, incluindo ID do personagem e hash canônico. Uma mudança de identidade na mesma versão é recusada mesmo que o hash de aprovação tenha sido substituído. Para um cânone vinculado, `readRun` relata o conflito como drift e `resumeRun` comum bloqueia a continuação; um job externo incerto ainda pode ser reconciliado sem aceitar esse cânone. Use nova `identityVersion` e aprovação explícita para evoluir a identidade. Essas verificações não criam snapshots nem inventam contexto histórico ausente; uma ficha aprovada sem snapshot existente pode continuar válida.
+## Política de fornecedor e capacidades
 
-O contrato e o registro inteiro têm hashes; constituição, registry, perfis e contratos têm seus arquivos observados para detectar drift. Esses hashes detectam alterações, mas não são assinaturas nem autenticação contra alguém que tenha acesso e possa recalculá-los. Só o contexto da próxima tarefa precisa ser lido pelo assistente de coordenação; a lista de hashes não exige carregar todos os perfis no contexto.
+Novas tentativas salvam um mapa completo:
 
-## Declarações de conclusão
+```json
+{
+  "image": "higgsfield",
+  "video": "higgsfield",
+  "audio": "higgsfield"
+}
+```
 
-Para tarefas que não são gates de decisão, `complete` exige outputs existentes, hashes calculados e evidência com `type`, `performed: true`, `actor`, `at`, `eventId` e `notes`. Tipos: `prepared` para documento, `generated` para geração, `reviewed` para revisão e `delivered` para entrega. Geração também exige `tool` e extensão compatível com a mídia da etapa; novos runs exigem `provider` correspondente ao fornecedor de mídia selecionado. Extensão ou fornecedor declarado não comprova MIME, pixels ou execução real. Gates de decisão humana exigem a `approval` explícita descrita abaixo e podem ter zero outputs quando o contrato permitir; não exigem o objeto `evidence` habitual.
+Opções explícitas podem substituir fornecedor por meio; valores omitidos usam padrões. IDs são tokens ingleses. `integrated-images` é alternativa explícita de imagem e é recusada para vídeo/áudio. Salve a decisão e operações exatas no plano de produção.
 
-Revisão também exige `reviewer`, `method` (`visual`, `listening` ou `visual-and-audio`), `decision: approve`, listas vazias `criticalIssues` e `limitations`, além de `media: [{path, sha256}]` correspondendo à última geração. Saída da revisão é um relatório. A entrega aceita somente os bytes já revisados; exportação alterada precisa de outra revisão.
+Geração exige `<medium>-generation` e `<provider>:<medium>-generation`; inspeção exige `<medium>-inspection`. Imagens Higgsfield, portanto, precisam de `image-generation` e `higgsfield:image-generation`. Capacidades podem ser atualizadas nas opções da transição. Uma capacidade ausente define `awaiting-tool` sem chamar ferramenta.
 
-Um gate de decisão exige `approval: {explicit: true, decision: approve, reviewer, at, eventId, source, notes}`. A tarefa `approve-canon` também exige `canonHash` e `identityVersion` do cânone aprovado registrado na persona. Informar o nome de um revisor não comprova humanidade, autenticidade de uma mensagem ou inspeção: o módulo valida e registra declarações; o assistente de coordenação deve ligá-las ao evento realmente ocorrido. O módulo não altera a aprovação da persona.
+Em tentativas com política de fornecedor, `generate-candidates` e `review-candidates` usam imagem mesmo com piloto em vídeo. Outras tarefas usam o meio do run; `nextTask.medium` informa a escolha. Tentativas históricas sem mapa conservam comportamento salvo de meio único e capacidades genéricas.
 
-`execution: {mode: delegated, agentId, eventId, actor, at}` registra uma delegação declarada. O módulo não a dispara. O modo normal é `instruction`, em que o assistente de coordenação usa o perfil apropriado. Não apresentar perfis carregados como agentes despachadas.
+Declarações não provam acesso à conta, suporte exato a Builder/Soul Cinema/voz/vídeo, referências aceitas, custo, exportação ou execução. Confira pelas ferramentas reais antes de prometer produção.
 
-## Retomada e resultado incerto
+## Campos das transições
 
-Entradas fornecidas e saídas de etapas concluídas tornam-se snapshots observados. Evite colocar a ficha de persona ainda em edição entre inputs imutáveis; o contexto de um cânone aprovado é vinculado separadamente. Na criação, a persona em rascunho pode evoluir até o gate; a decisão fixa o cânone para o piloto.
+Toda transição contém `action`. Ações disponíveis:
 
-Antes de um envio externo, registre a intenção com `start` e `job: {provider, jobId?, requestId?}`. Em novos runs, o fornecedor deve corresponder ao fornecedor de mídia selecionado para a etapa. O estado do job começa `planned`; o módulo não efetua o envio. Qualquer retomada desse job ainda sem esclarecimento fica `uncertain-result`, inclusive quando o processo foi interrompido antes de registrar a resposta. Após o trabalho real, `resolve` registra o resultado esclarecido; apenas depois complete a etapa.
+| Ação | Campos adicionais e restrições |
+| --- | --- |
+| `start` | Confere requisitos/capacidades; `execution` e `capabilities` opcionais; `job` somente na geração |
+| `complete` | Confere requisitos/capacidades e valida saídas com `evidence` ou `approval` humana |
+| `bind-persona` | `personaId`; somente sem vínculo existente, antes das etapas que exigem personagem |
+| `skip` | `reason`; somente etapa marcada opcional no fluxo salvo |
+| `wait` | `state: awaiting-input|awaiting-tool|in-review` e `reason` |
+| `uncertain` | `job` com fornecedor/IDs conhecidos e `reason`; preserva identificadores não resolvidos |
+| `resolve` | Status/IDs reconciliados de `job` e `evidence` de tipo `reconciled` |
+| `fail` | `reason`; termina tentativa local após reconciliação de jobs |
+| `cancel` | `reason`; termina tentativa local após reconciliação de jobs |
 
-A transição `uncertain` recebe `job: {provider, jobId?, requestId?}` e motivo; preserva identificadores já conhecidos e bloqueia continuar, retry ou nova tentativa. `resolve` exige status `succeeded`, `failed` ou `not-submitted`, IDs correspondentes quando conhecidos e evidência `type: reconciled`. A consulta ao fornecedor ocorre fora deste módulo e precisa ser real. Resolver um job não conclui geração: ainda faltam arquivo e evidência da etapa. Se não houve envio, registre o esclarecimento `not-submitted` antes de uma nova tentativa. Sem o registro prévio de intenção, o runtime não consegue descobrir uma chamada feita fora dele.
+Geração, revisão, entrega e decisões de canon não podem ser puladas. Tentativas encerradas exigem nova tentativa para continuar. `mediaProviders` é recusado na transição; altere por retomada explícita.
 
-Pesquisas de Gaia/Aurora e planejamento de distribuição são opcionais conforme cada fluxo. `skip` exige justificativa e não pode pular geração, revisão, entrega ou decisão do cânone. Estado `completed` significa que contratos locais foram preenchidos; não significa publicação nem qualidade comprovada pelo runtime.
+`execution` usa `{ "mode": "instruction" }` por padrão. Delegação declarada usa `mode: delegated`, `agentId`, `eventId`, `actor` e data ISO `at`. Registre somente após dispatch real de subagente. O runtime não cria esse dispatch.
 
-Valores históricos dos fluxos e estados continuam aceitos sem reescrever registros ou aprovações.
+## Registros de conclusão
+
+Para tarefas sem decisão humana, informe `outputs` e `evidence` com estes campos básicos:
+
+| Campo | Significado |
+| --- | --- |
+| `type` | `prepared`, `generated`, `reviewed` ou `delivered`, conforme contrato |
+| `performed` | Deve ser `true`, descrevendo trabalho real |
+| `actor` | Responsável real |
+| `at` | Data ISO real |
+| `eventId` | Identificador rastreável do evento |
+| `notes` | Descrição preenchida do trabalho e evidência |
+
+Saídas devem atender ao mínimo do contrato. Preparação exige documentos. Geração exige extensões compatíveis com o meio da etapa, `tool` e, nas tentativas com política, `provider` correspondente ao mapa. Conferir extensão e declaração não inspeciona MIME/conteúdo.
+
+Revisão também exige `reviewer`, `method`, `decision: approve`, listas vazias `criticalIssues` e `limitations`, e `media: [{path, sha256}]` correspondente a todos os arquivos da última geração concluída. Métodos: `visual` para imagem, `listening` para áudio e `visual-and-audio` para vídeo. Saídas são relatórios em documentos. Entrega deve corresponder aos caminhos revisados e bytes exatos; exportações editadas exigem sua própria revisão aplicável.
+
+Gates humanos usam `approval: {explicit: true, decision: approve, reviewer, at, eventId, source, notes}`. O contrato pode permitir zero saídas. `approve-canon` também exige `identityVersion` e `canonHash` correspondentes à aprovação já registrada na persona. Vincula canon ao run; não aprova nem edita a ficha.
+
+Declarações validam campos rastreáveis, não identidade humana, autenticidade de mensagem ou inspeção concluída. Vincule-as a eventos reais; não copie nomes ou datas de exemplos como evidência.
+
+## Registros de jobs externos
+
+Antes de submeter na geração, use `start` com `job: {provider, jobId?, requestId?}`. Fornecedor deve corresponder à etapa nas novas tentativas. O runtime guarda `status: planned` e intenção antes da submissão; não chama fornecedor.
+
+Todo job permanece não resolvido até `resolve`, incluindo sucesso normal. Uma resposta interrompida pode ser registrada com `uncertain`; retomar job não resolvido define `uncertain-result`. Identificadores conhecidos não podem ser substituídos ao registrar incerteza.
+
+`resolve` exige mesmo fornecedor e IDs conhecidos, status `succeeded`, `failed` ou `not-submitted`, e campos básicos de evidência com `type: reconciled`. Consulte o fornecedor real quando necessário e registre a conclusão real. A transição guarda reconciliação e volta ao estado local `planned`. Geração ainda exige arquivos e evidência em `complete`.
+
+Job não resolvido bloqueia progresso, cancelamento e nova tentativa. Cancelamento local não cancela trabalho do fornecedor nem recupera cobrança. O runtime não descobre chamadas sem intenção e nunca consulta ou repete automaticamente.
+
+## Mudanças de contexto e novas tentativas
+
+Entradas observadas, saídas concluídas, governança, contratos e canon vinculado têm hashes. Transição/retomada comum detecta mudanças e bloqueia continuação. Use `resumeRun(root, runId, {newAttempt: true, reason, mediaProviders?})` somente após revisar mudança e reconciliar jobs externos.
+
+Nova tentativa reinicia o fluxo salvo na primeira etapa, preserva tentativas anteriores e `run.contract`, e observa arquivos atuais de entrada/governança/canon. Não troca definições de fluxos nem reutiliza aprovações anteriores. Inicie run separado quando precisar do contrato atual. Fornecedores omitidos mantêm o mapa anterior; tentativas históricas sem mapa adotam padrões atuais.
+
+Canon aprovado é comparado com snapshot existente da mesma `identityVersion`. Mudança na mesma versão falha mesmo com hash de aprovação substituído. Essas verificações não criam snapshots nem reconstroem história ausente; persona aprovada sem snapshot existente pode continuar válida. Reconciliação de job externo continua possível com outros contextos alterados.
+
+## Armazenamento e limites da verificação
+
+Locks exclusivos impedem escritores simultâneos; arquivos temporários completos são usados para substituição. Interrupção pode deixar lock: confira processos ativos e preserve evidência antes de recuperar. Hashes detectam alterações; não são assinaturas nem autenticam quem pode editar e recalcular registros.
+
+Entradas históricas de fluxos/estados continuam compatíveis sem reescrever bytes. Conclusão local significa que contratos salvos aceitaram arquivos e declarações. Não comprova qualidade, sucesso do fornecedor além da evidência registrada nem publicação. Consulte [capacidades e limites](../studio-status.md).

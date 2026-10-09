@@ -21,10 +21,10 @@ export function sourceFile(root, relative) {
 function assertPublicGuide(relative, locale = 'en') {
   if (typeof relative !== 'string') throw new Error(`Missing ${locale} guide source in the public selection.`);
   const allowed = locale === 'en'
-    ? relative === 'CONSTITUTION.md' || relative === 'framework/README.md' || /^docs\/[a-z0-9-]+\.md$/.test(relative)
-    : relative === 'docs/locales/pt-BR/framework/README.md' || /^docs\/locales\/pt-BR\/(?:[a-z0-9-]+|CONSTITUTION|README)\.md$/.test(relative);
+    ? relative === 'CONSTITUTION.md' || relative === 'framework/README.md' || relative === 'docs-site/README.md' || /^docs\/[a-z0-9-]+\.md$/.test(relative)
+    : ['docs/locales/pt-BR/framework/README.md', 'docs/locales/pt-BR/docs-site/README.md'].includes(relative) || /^docs\/locales\/pt-BR\/(?:[a-z0-9-]+|CONSTITUTION|README)\.md$/.test(relative);
   const filename = path.posix.basename(relative);
-  if (!allowed || ['studio-status.md', 'video-reference.md', 'higgsfield-setup.md', 'estado-do-estudio.md', 'referencia-video.md', 'preparacao-higgsfield.md'].includes(filename)) throw new Error(`Guide outside the public selection: ${relative}`);
+  if (!allowed || ['estado-do-estudio.md', 'referencia-video.md', 'preparacao-higgsfield.md'].includes(filename)) throw new Error(`Guide outside the public selection: ${relative}`);
 }
 
 export function commandCatalog(source, descriptions) {
@@ -69,6 +69,7 @@ export function collectDocumentation(root) {
   const guides = config.guides.map(guide => {
     if (!guide || typeof guide.path !== 'string' || typeof guide.label !== 'string' || !guide.label.trim() || (guide.section && !requiredSections.includes(guide.section))) throw new Error('Guide without path/label or with an unknown section.');
     assertPublicGuide(guide.path);
+    if (guide.group && !['start', 'create', 'produce', 'records', 'reference', 'maintain'].includes(guide.group)) throw new Error(`Unknown guide navigation group: ${guide.group}`);
     if (seen.has(guide.path)) throw new Error(`Duplicate guide: ${guide.path}`);
     seen.add(guide.path);
     return { ...guide, markdown: read(guide.path) };

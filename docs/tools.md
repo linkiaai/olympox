@@ -1,42 +1,45 @@
-# Tools and integration
+# Tools and provider readiness
 
-CLI sources consulted: **October 7, 2026**; plugin metadata checked: **October 8, 2026**; current AI Influencer documentation checked: **October 9, 2026**. Check tools, schemas, plans and billing again before production because they can change.
+Use this guide to select the execution route and check whether a studio can complete its planned media. OLYMPOX supplies local records and instructions; Codex or Claude Code uses the tools available in its session. Framework installation does not connect a provider or generate media.
 
-## Images
+## Responsibilities
 
-For new influencers and later media, default to [Higgsfield’s reference method](higgsfield-influencer-method.md). Codex or Claude coordinates concept, personality, narrative, scripts, prompts and records. Higgsfield’s verified modules produce identity images, references, scenes, voice, animation, video and lip-sync. Integrated coordinator image generation is not required and is an [explicit opt-in alternative](integrated-images.md). Preserve the selected process, verify actual capabilities and costs, and save real output bytes in the character folder.
-
-For consistency, open and compare the approved set, describe anchors, and attach images to the request. A prompt containing a path does not send that file. A grid is useful for selection, but the final reference for each angle must have its own readable file. Copy results belonging to the project into the character folder, preserving the original version.
-
-Distinguish visual inspiration from a request to follow the demonstrated process. The [reference study](video-reference.md) establishes Soul Cinema image/references, separate Claude voice direction and Seedance 2.5 video; it does not prove exclusive Builder use. The current [AI Influencer documentation](https://higgsfield.ai/blog/new-ai-influencer) distinguishes Builder and Motion/Genjutsu with Cinema Studio reuse. Save the selected module/order and any accepted adaptation in the [production-method plan](../templates/production-method.md). Check full-pilot connection, transport, inspection/export and scoped budget early. Missing capabilities remain pending with concrete alternatives, and materially changed methods or costs require the user’s decision and applicable authorization. A workflow preference is not a controlled quality comparison or a guarantee of source results. Soul ID remains optional training with demonstrated need and separate authorization.
-
-## Higgsfield — plugin or local CLI
-
-OLYMPOX supports complementary plugin and local CLI transports for the default Higgsfield media pipeline. The coordinator uses actual tools and the local core preserves context, attempts and reviews. There is no automatic core provider-submission adapter. A plugin can execute without CLI where it handles the exact inputs; an authorized official CLI upload can bridge local studio files to confirmed plugin media IDs, following [reference transfer](higgsfield-plugin.md#transfer-exact-studio-references). Resolve supported operational transport autonomously; do not default to manual photo dragging.
-
-| Route | Preparation | Actual execution |
+| Work | Default route | Check before use |
 | --- | --- | --- |
-| Higgsfield plugin | Discover and install the plugin in the host, connect the user's account, and check its exposed tools and schemas; no local CLI required | Available plugin tools for the requested media, references, and supported creative workflows |
-| Local CLI | Install the inspected, pinned CLI separately, then connect the user's account | The local native executable with confirmed model parameters; the preparation wrapper permits only its documented operations |
+| Research, concept, personality, narrative, scripts and planning | Conversational coordinator | Sources, character context and requested deliverable |
+| Candidates, reference packs, scenes and image edits | Higgsfield | Selected module, exact reference inputs, export and visual inspection |
+| Voice, animation, video and lip-sync | Higgsfield | Required audio/motion inputs, supported operation, listening and complete video review |
+| Local runs, canon history, asset records and backups | OLYMPOX commands | Exact files, versions and recorded decisions |
+| Assistant-integrated images | Explicit user-selected alternative | Image generation, attachment, export and inspection tools in the host |
 
-The plugin catalog describes image/video generation, reference inputs, creative presets, and UGC workflows. A catalog entry or installed skill does not establish callable tools, account access, model availability, or CLI feature parity. Follow the [plugin guide](higgsfield-plugin.md) for discovery, connection, capability checks, and traceable production. Use `higgsfield-studio` to select the route; do not require the CLI when the plugin provides the needed capability.
+Higgsfield is the default media provider. The [production method](higgsfield-influencer-method.md) separates its modules and the [source study](video-reference.md) explains the reference behind that method. A website feature or installed skill does not establish callable access in your assistant.
 
-For the CLI route, the framework supplies a local wrapper and inspected provider-source provenance in `vendor/higgsfield-skills`. Its baseline expects official CLI **1.1.26** in `tools/higgsfield`, installed and checked separately. `doctor`, `version`, and `help` check local preparation without login. Follow [local CLI setup](higgsfield-setup.md) before using interactive `login` or querying account, workspace, credits, and model schemas. **A native `generate cost` estimate with local media can upload those files**; the preparation wrapper rejects these inputs and permits simple parameters only. The wrapper does not submit production jobs or impose a server-side spending cap.
+## Choose a Higgsfield route
 
-The [official CLI guide](https://higgsfield.ai/creator-hub/help-center/integrations/how-do-i-access-higgsfield-via-cli) describes account login and credits without an API key, and distinguishes CLI/MCP from free or unlimited website generations and the separate API product. Verify the actual billing terms for the chosen plugin or CLI route before production; do not assume their terms or account sessions are shared. The [official skills](https://higgsfield.ai/skills) and [provider repository](https://github.com/higgsfield-ai/skills) are source material whose current capabilities still need checking.
+Use the [plugin](higgsfield-plugin.md) when its connected tools accept the required inputs. It does not require a local CLI. The [optional local CLI](higgsfield-setup.md) can supply separately verified operations or transfer local references where supported. Their account sessions, models, input mechanisms and billing can differ; verify the chosen route independently.
 
-Both routes use the same production rules: approved canon where required, exact attached inputs and hashes, recorded external intent before submission, exposed identifiers/model/cost, preserved local media versions, execution seals, and complete inspection. A path written in a prompt does not attach a file. Unknown cost remains unknown. An uncertain submission requires real querying and reconciliation before another attempt; switching to the CLI or plugin does not justify a duplicate submission. Keep unavailable generation, export, or inspection pending. Never store passwords, tokens, or keys in character files, runs, manifests, or commits.
+The framework's CLI wrapper supports local integrity checks, interactive login and limited queries. It does not submit generation, upload media or train identity. Neither route has an automatic submission adapter in the local core.
 
-Framework installation supplies reusable instructions and local records; it does not install or authenticate either provider route, send media, or require a paid generation test. Each studio supplies its own provider access and applicable authorization.
+For local references, check supported tool transfer before proposing manual attachment. Reuse confirmed provider media IDs where suitable. A path written in a prompt does not attach a file; record which exact files/hashes reached the provider and their input roles.
 
-## Video delivery
+## Check the whole pilot before the first paid stage
 
-Follow the [Higgsfield pilot procedure](production-handoff.md) and [handoff template](../templates/video-handoff.md). The coordinator prepares script/shot direction; verified Higgsfield modules create identity/reference and scene images and voice when speaking. Approve complete canon, map exact supported inputs and validate a representative video pilot before batches. The observed modules and current Builder/Motion operations are distinct; required stages cannot be completed by simply choosing a video model.
+Save a [production-method plan](../templates/production-method.md) covering:
 
-Vertical briefs can start at 9:16 with a target resolution of 1080 × 1920, adjusted to the model's and channel's real capabilities. Upscaling does not recover lost identity. Confirm duration, speech, reference support, audio, lip-sync, and export before promising a deliverable. Do not replace temporal review with isolated captures.
+1. The selected modules and callable operations for identity, references, voice when needed, scenes and the pilot.
+2. Account/workspace access, supported reference transfer and reuse, and current parameter schemas.
+3. How actual outputs will be exported and inspected: images visually, audio by listening, and video with complete motion/audio review.
+4. Stage estimates, units, available balance, attempt/correction limits and unknown charges. Keep credits separate from monetary cost.
+5. Applicable authorization for uploads, paid generation and any optional training. Reuse authorization already covering the scope.
 
-Without connected execution, the coordinator can still prepare the complete package: exact script, shots, performance, references, voice, captions, publication text, and review criteria. Identify the deliverable as a **production package**, without claiming a rendered video exists.
+If a required stage is unavailable, identify the missing capability, next action and a proposed alternative. Keep that stage pending. [Integrated images](integrated-images.md) require an explicit alternative choice; missing Higgsfield access does not select them automatically.
 
-## Conversational coordinator
+## Record execution and delivery
 
-Install the selected local assistant target as described in [installation](installation.md): Codex uses `AGENTS.md` and `.agents/skills`; Claude Code uses `CLAUDE.md` and `.claude/skills`. The [Codex skill documentation](https://developers.openai.com/codex/skills) explains Codex discovery. Installed files do not prove runtime loading, available subagents, provider access or Claude web/cloud support. Reopen/reload the host and inspect actual tools. The standard method requires available local file/Node operations, generation tools and full media inspection, rather than assistant-native image generation.
+Persist external intent before submission, retain returned job IDs, and reconcile uncertain results through the original job before retrying. Save outputs as new local versions, register them, seal their declared context and inspect the exact final files. See [plugin execution](higgsfield-plugin.md), [local operations](operations.md) and [quality](quality.md).
+
+For video, prepare the [shot handoff](production-handoff.md) and approve an inspected pilot before batches. A provider preview, completed job or local test does not establish final fidelity. Delivery uses reviewed bytes; publication requires its own applicable authorization and actual evidence.
+
+## Provider source material
+
+The preserved CLI/skill baseline and license are inventoried in [vendor provenance](../vendor/higgsfield-skills/provenance.json). Imported references guide schema and prompt research; they do not activate a provider, authorize charges or demonstrate quality. Check the current provider catalog and the session's real tools rather than relying on model lists or prices copied into documentation.
