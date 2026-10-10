@@ -29,3 +29,17 @@ influencers/**/.editorial-*.tmp
 influencers/**/.*.lock
 influencers/*/
 !influencers/README.md
+
+# Local engineering tooling and state
+.aiox-core/
+.codex/
+.agents/skills/aiox-*/
+.aiox/
+.ai/
+.development/state/
+.development/logs/
+.antigravity/
+.claude/
+.cursor/
+.gemini/
+.kimi/

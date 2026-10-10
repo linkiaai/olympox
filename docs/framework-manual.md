@@ -55,4 +55,4 @@ The local commands maintain files and validate records. Provider connection, gen
 
 Use an installed studio for your own characters. This source repository contains the reusable framework and its development documentation. Private characters, media, runs and credentials remain outside the distribution.
 
-The current source is **0.5.0**. See [release notes](release-notes.md) for changes and release status, and [supported capabilities](studio-status.md) for the boundary between local features and external services. A speaking video pilot is the default creation scope; an explicit brief can choose an image-only or silent scope. Viral potential is tested through content and results.
+The current source is the **0.6.0-rc.1** release candidate for community testing. See [release notes](release-notes.md) for changes, testing instructions and pending live acceptance, and [supported capabilities](studio-status.md) for the boundary between local features and external services. A speaking video pilot is the default creation scope; an explicit brief can choose an image-only or silent scope. Viral potential is tested through content and results.

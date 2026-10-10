@@ -6,10 +6,10 @@ O framework oferece skills locais, contratos de tarefas, workflows retomáveis, 
 
 ## Instale um estúdio independente
 
-Instale a release publicada **0.5.0**:
+Instale a versão candidata **0.6.0-rc.1** para testes:
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.5.0 setup
+npx --yes github:linkiaai/olympox#v0.6.0-rc.1 setup
 ```
 
 A partir de checkout revisado ou pacote extraído, use `node bin/olympox.mjs setup`.
@@ -26,7 +26,9 @@ Use `--locale pt-BR` para mensagens do setup em português. No Windows, use `npm
 
 Consulte [instalação](installation.md) para seleção de fontes, conflitos de merge e preservação de um estúdio existente. Atualizar estes guias localmente não altera o pacote já publicado nem o manual hospedado.
 
-Este repositório é o checkout de desenvolvimento do framework. Crie personagens pessoais e mídia no estúdio instalado separadamente.
+Este repositório é o checkout de desenvolvimento do framework, usando AIOX para engenharia de software. As ferramentas e dependências do AIOX ficam fora do pacote do produto. Crie personagens pessoais e mídia no estúdio instalado separadamente.
+
+A candidata acrescenta transferência local delimitada de imagens, verificações explícitas de cânone com/sem fala e prontidão de mídia por etapa. Comece pela preparação local; descoberta real no assistente e produção de mídia ainda precisam de testes no seu ambiente. Leia as [notas da versão e instruções de teste](release-notes.md) para conhecer os limites e relatar um problema reproduzível. A release histórica 0.5.0 permanece intacta.
 
 ## Crie seu primeiro personagem
 

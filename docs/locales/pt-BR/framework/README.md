@@ -2,7 +2,7 @@
 
 `scripts/framework-core.mjs` implementa registros locais de fluxos no OLYMPOX. O registry seleciona perfis, contratos de tarefas e definições de fluxos; um run salva essas definições com seu contexto observado. O assistente coordenador realiza o trabalho e fornece declarações e arquivos existentes. O módulo não tem dispatcher de agentes nem adaptador de fornecedor.
 
-Pacote e registry usam versão **0.5.0**. Contratos JSON de tarefas/fluxos mantêm revisão de componente **0.2.0** e `schemaVersion: 1`; são identificadores de compatibilidade, não a versão atual do produto. Esta referência descreve a implementação atual, incluindo política aditiva de fornecedor para novas tentativas.
+Pacote e registry usam a versão candidata **0.6.0-rc.1**. Contratos JSON de tarefas/fluxos mantêm revisões individuais de componente, incluindo **0.2.0** e **0.3.0**, e `schemaVersion: 1`; são identificadores de compatibilidade, não a versão atual do produto. Esta referência descreve a implementação atual, incluindo políticas aditivas de fornecedor, voz e prontidão por etapa. Consulte [notas da versão](../release-notes.md) para testes e aceitação real pendente.
 
 Para fluxo conversacional e sequência CLI, leia [fluxos e retomada](../framework-02.md). Para comandos de persona, manifesto e backup, leia [operações](../operations.md).
 
@@ -105,3 +105,59 @@ Canon aprovado é comparado com snapshot existente da mesma `identityVersion`. M
 Locks exclusivos impedem escritores simultâneos; arquivos temporários completos são usados para substituição. Interrupção pode deixar lock: confira processos ativos e preserve evidência antes de recuperar. Hashes detectam alterações; não são assinaturas nem autenticam quem pode editar e recalcular registros.
 
 Entradas históricas de fluxos/estados continuam compatíveis sem reescrever bytes. Conclusão local significa que contratos salvos aceitaram arquivos e declarações. Não comprova qualidade, sucesso do fornecedor além da evidência registrada nem publicação. Consulte [capacidades e limites](../studio-status.md).
+
+## Prontidão estruturada de mídia
+
+O assistente coordenador prepara `templates/media-readiness.json` a partir de escolhas e observações reais no estúdio instalado; a pessoa continua pela conversa. Os placeholders null estão incompletos e não são evidência. Salve uma versão do método e vincule seu caminho/SHA-256. Um `plan` independente pode ser informado em `readinessPlanPath` no run-start ou na nova tentativa explícita; planejamento offline não chama o provedor. A primeira importação também pode vincular o plano. A decisão de cada requisito necessário registra o evento real de escolha do método já aplicável; decisões null e módulos desconhecidos ficam pendentes.
+
+Nos contratos atuais `generate-candidates` e `generate-piece` `0.3.0`, o assistente importa `{action:"record-media-readiness",readinessPath:"work/readiness-v001.json"}` por `run-step`. O envelope schema-1 tem exatamente `{schemaVersion,policy,runId,attemptId,plan,feasibility,stages,provenance}` e `policy:"stage-readiness-v1"`. Uma etapa executável necessária corresponde a cada passo de geração capturado: `candidates`/`pilot`, `generation` ou `correction`. Etapas auxiliares usam `stepId:null`; seus resultados separados não são execução dessas tarefas. A criação cobre `visual-exploration,premise-scene,reference-pack,voice,pilot`; produção/correção cobre `scene-inputs,voice,final-media`.
+
+A viabilidade do piloto inteiro verifica acesso de cada módulo, esquemas de entrada aceitos, exposição de modelo/destino, preço ou incerteza autorizada, exportação e inspeção completa. Ela não exige arquivos futuros de voz ou cena inexistentes. A execução atual vincula separadamente arquivos de prompt/parâmetros, papéis e ordem das referências, tamanho/hash dos bytes originais e IDs reais de entrada aceita. Modelo/destino registra `{exposed,value,reason,provenance}`; desconhecido fica pendente e ausência de exposição observada é explícita. `native-cli` exige fingerprint real da conta e workspace. Preços vinculam `{status,amount,unit,scopeHash,source,at,expiresAt,reason}`; credits/currency/free são unidades distintas. Desconhecido nunca vira zero. Autorizações do piloto e da etapa atual vinculam separadamente `{approved,scopeHash,quoteHashes,stageIds,limits,acceptUnknownCost,provenance}`. Custos conhecidos de etapas concluídas, execução atual e estimativas restantes devem caber em cada limite comparável do piloto; a autorização da etapa não amplia esse teto. Declarações não autenticam consentimento nem impõem teto no provedor.
+
+Cada provenance é exatamente `{actor,at,eventId,source,notes}`, com data UTC real; escolhas e decisões acrescentam `explicit:true`. Metadados recusam chaves desconhecidas, limitam JSON a 1 MiB, 32 etapas e 64 slots por etapa e excluem corpo de prompts, saída bruta, credenciais, URLs e emails. Prompts completos ficam nos arquivos locais versionados; o registro carrega hashes. Fontes ficam em `work/` seguro ou no personagem vinculado; links/junctions, configuração protegida e outros personagens são recusados antes de gravar. Hashes de mídia são lidos em blocos sem impor limite de upload.
+
+Use `start` com `stageId` exato somente quando viabilidade e prontidão atual passam. O núcleo captura plano/escopo/entradas/preços/autorizações imutáveis antes da intenção opcional de job. `complete` exige esse início e arquivos de mídia existentes. A evidência generated contém somente `type,performed,actor,at,eventId,notes,tool,provider,stageId,planHash,scopeHash,readinessSnapshotId,module,route,modelExposed,model`, correspondendo à captura e ao método selecionado. Capacidade genérica, acknowledgement, instruction mode ou conclusão direta não burlam a regra. Preço válido no início capturado pode expirar antes da conclusão correspondente. Inspeção completa e entrega continuam necessárias.
+
+Status mostra `pipelineReady` (viabilidade), pendências exatas/resultados por etapa, `currentStageReady`, `canStartStage` e identidade da captura ativa sem gravação ou consulta ao provedor. Entradas futuras podem ficar pendentes enquanto candidatos podem começar. Escopo silencioso explícito pode dispensar voz; ausência histórica compatível de campos vocais permite uma peça estática/silenciosa explicitamente escolhida sem alterar o personagem. Reutilização falada vincula o áudio aprovado selecionado como entrada/resultado exatos e o anexa à execução falada. Isso não burla a seleção vocal do canon atual completo.
+
+Atualização de observações/preços/autorizações no mesmo plano acrescenta snapshots imutáveis; o JSON importado não vira entrada mutável monitorada. Mudar entradas/modelo/destino já vinculados ou plano/método exige `run-resume` com `newAttempt:true`, motivo e, opcionalmente, novo `readinessPlanPath`. A nova tentativa limpa evidências/captura atuais, preserva tentativas anteriores e mantém contratos salvos. Job original não resolvido bloqueia atualização/repetição; `resolve` correspondente segue disponível apesar de drift. Geração capturada `0.1.0`/`0.2.0` mantém semântica legada sem defaults novos; um run atual novo adota a política. Consistência local não prova execução do provedor, escuta, lip-sync, qualidade ou paridade dos hosts. Observações/preços/autorizações privados ficam fora do export do framework.
+
+Objetos internos usam estas chaves exatas. Observações ausentes/null ficam pendentes; objetos fornecidos malformados são recusados. Omissão/reutilização exige decisão aplicável explícita e motivo. Etapas executáveis necessárias não podem ser reutilizadas ou removidas. `inputs` segue ordem dos slots, com papel/ordem exatos das referências; `fromStageId` indica uma etapa anterior e seus bytes reais de saída. Treinamento opcional entra no método apenas quando justificado.
+
+| Objeto | Campos exatos |
+| --- | --- |
+| Plan | `schemaVersion,methodSource,choice,requirements,stages` |
+| Fonte do método | `path,sha256` |
+| Requisito | `id,applicability,reason,decision,stageIds`; applicability `required|reuse|not-required` |
+| Etapa do plano | `id,stepId,purpose,medium,provider,method,module,route,tool,requestedModel,inputSlots` |
+| Slot | `id,kind,role,order,fromStageId`; kind `prompt|parameters|reference`; role/order null fora de referência |
+| Feasibility | `stages,authorization` |
+| Etapa de viabilidade | `stageId,access,acceptedInputSlots,destination,model,quote,export,inspection,limitations,provenance` |
+| Access / slot aceito | `available,provenance` / `slotId,supported,provenance` |
+| Valor do destino / unidade do preço | `accountFingerprint,workspaceId` / `kind,code` (token do provedor para credits, moeda em maiúsculas, free com code null) |
+| Observação de execução | `stageId,inputs,acceptedInputs,model,destination,quote,authorization,export,inspection,limitations,outcome,provenance` |
+| Entrada exata | `slotId,path,sha256,bytes,referenceId,role,order`; referenceId/role/order null fora de referência |
+| Entrada aceita | `slotId,sha256,bytes,inputId,scopeHash,provenance` |
+| Export / inspection | `available,tool,route,format,originalBytes,limitations,provenance` / `available,tool,method,limitations,provenance` |
+| Limite da autorização | `unit,maximum`; `acceptUnknownCost` é lista explícita de IDs, nunca boolean genérico |
+| Outcome opcional | `status,files,evidence,review`; completed/reused com arquivos existentes `{path,sha256,bytes}` |
+| Evidência / revisão do resultado | `type,performed,provenance` / `performed,method,decision,criticalIssues,limitations,provenance` |
+
+Evidência do resultado é generated/reused e performed true. Revisão completa do meio é approve sem criticalIssues/limitations. Suporte anterior à execução não declara essa revisão concluída. Modelo/destino `exposed:false` exige valor null e motivo real de não exposição. Preço desconhecido exige amount null e reason; zero/free conhecido ainda precisa fonte/data reais. Hashes de preços e IDs autorizados formam conjuntos únicos exatos.
+
+Resultado auxiliar completed/reused sem preço real mantém a continuação pendente; a estimativa anterior de viabilidade não substitui esse custo real ausente. Uma importação explícita pode vincular o primeiro preço real conhecido ou uma declaração real de custo desconhecido com aceitação específica no piloto. Depois de vinculado ao resultado concluído, o preço é imutável; observações posteriores não o trocam por estimativa mais barata.
+
+`readinessHash` calcula SHA-256 do JSON com chaves ordenadas recursivamente (`H`). `binding` projeta exposição em `{exposed,value}`. `mediaReadinessHashes(run,plan,stageId,observation,phase)` fornece hashes offline para preparação; hash de plano fornecido pelo chamador não substitui validação:
+
+```text
+planHash = H(plan)
+feasibilityScopeHash = H({policy,runId,attemptId,planHash,stageId,
+  phase:"feasibility",model:binding(model),destination:binding(destination)})
+stageScopeHash = H({policy,runId,attemptId,planHash,stageId,
+  phase:"execution",canonBinding,currentStage:planStage,
+  model:binding(model),destination:binding(destination),inputs:orderedExactInputs})
+pilotScopeHash = H({policy,runId,attemptId,planHash,phase:"pilot"})
+quoteHash = H(validatedQuote)
+```
+
+Preços de viabilidade vinculam feasibilityScopeHash; preços/entradas aceitas/autorizações de execução vinculam stageScopeHash. Autorização do piloto vincula pilotScopeHash e cada preço/etapa de viabilidade necessário; autorização da etapa vincula o preço/etapa atual exatos. Aprovar canon pode mudar o escopo do piloto futuro: vincule entradas/contexto reais após a decisão, preservando evidência das etapas concluídas. Hashes verificam consistência local e não são assinaturas.

@@ -4,10 +4,10 @@ Instale um estúdio independente, abra-o no Codex ou Claude Code e descreva o qu
 
 ## 1. Instale e abra o estúdio
 
-Requer Node 22+ e um ambiente local de Codex ou Claude Code. Instale a release publicada:
+Requer Node 22+ e um ambiente local de Codex ou Claude Code. Instale a versão candidata 0.6.0-rc.1 para testes:
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.5.0 setup
+npx --yes github:linkiaai/olympox#v0.6.0-rc.1 setup
 ```
 
 A partir de checkout revisado ou pacote extraído, use `node bin/olympox.mjs setup`.
@@ -23,6 +23,8 @@ O setup verifica arquivos locais e manual. Conecte o Higgsfield separadamente e 
 Se a direção estiver aberta, o assistente faz poucas perguntas pendentes sobre objetivo, presença e público. “Pode propor” é uma resposta válida. Compare premissa, personalidade, assinatura visual, exemplo de voz, ganchos recorrentes e dificuldade de produção antes de escolher.
 
 A direção selecionada vira uma persona em rascunho e um brief. [Desenvolvimento de personagens](strategy.md) explica essa etapa.
+
+Para um primeiro teste apenas de preparação, acrescente: “Prepare somente conceitos agora. Não gere mídia, envie arquivos, autentique serviços, gaste créditos nem publique.” Isso não exige um provedor de mídia conectado. Consulte as [instruções de teste da candidata](release-notes.md) para conhecer os limites observados e relatar seu resultado.
 
 ## 3. Selecione identidade e voz
 

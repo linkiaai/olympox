@@ -24,6 +24,8 @@
     "allowedChanges": []
   },
   "voice": {
+    "applicability": "unspecified",
+    "selection": null,
     "language": "pt-BR",
     "accent": "",
     "tone": "",

@@ -1,6 +1,6 @@
 # Framework architecture
 
-OLYMPOX separates assistant direction, local records and external media execution. The current framework source is **0.5.0**; individual contracts and workflows retain their own component revisions, including `0.2.0`.
+OLYMPOX separates assistant direction, local records and external media execution. The current framework source is the **0.6.0-rc.1** release candidate; individual contracts and workflows retain their own component revisions, including `0.2.0` and `0.3.0`. See [release notes](release-notes.md) for testing and pending live acceptance.
 
 This guide describes the implementation boundary. Use [workflow operation](framework-02.md) for commands and [identity and records](operations.md) for file procedures.
 
@@ -70,6 +70,8 @@ These declarations constrain recorded completion. They do not authenticate, disc
 
 An approved canon version binds the persona's visual/vocal identity and exact reference bytes. When a frozen snapshot exists, identity operations reject a different canon under the same `identityVersion`. Evolving the identity requires a new version and approval.
 
+New templates declare vocal applicability and exact listening selection. Updated canon tasks require resolved `speaking` or `silent` scope; declared silent identity refuses speech. The raw voice hash stays unchanged, so absent historical fields and older saved task policies retain their stored meaning. [Operations](operations.md) documents the additive compatibility boundary and evidence limits.
+
 Narrative and content have separate version histories. A narrative edit does not automatically change the identity. A content piece can link exact canon/narrative context; selected editorial files become explicit run inputs.
 
 An execution seal preserves reported generation context and a copy of the prompt. Asset review binds the media bytes and applicable context. Changes to exported media require another review.
@@ -87,3 +89,11 @@ Creation and restoration stage files and refuse to overwrite existing characters
 Hashes establish byte consistency, not reviewer identity or creative fidelity. A completed contract represents accepted local evidence; it does not establish publication or successful real-world results.
 
 Provider adapters, dashboards, campaign management, analytics integrations and databases are not included. Add them only for a concrete need with verified behavior, export boundaries and preservation. Consult [supported capabilities](studio-status.md) and [core interfaces](../framework/README.md) before extending the runtime.
+
+The separate optional `reference-transfer.mjs` operation provides authorized exact local image transfer through the pinned native Higgsfield CLI; the workflow core and preparation wrapper still do not automatically upload or generate. It records a controlled byte snapshot and one submission, refuses automatic retry of uncertain outcomes, and requires later checks for provider bytes and plugin access. See [Higgsfield setup](higgsfield-setup.md).
+
+## Per-stage readiness
+
+Current generation contracts `0.3.0` require structured `stage-readiness-v1` before start and matching completion. The assistant prepares/imports `templates/media-readiness.json` from actual observations using `run-step` action `record-media-readiness`; the creator does not author JSON. Optional `readinessPlanPath` binds an offline plan on start/new-attempt. Whole-pilot feasibility is distinct from exact current inputs and completed outcome: future voice/scene bytes can remain pending. Each required stage needs its actual method-choice decision, access/schema, destination/model exposure, quote/scoped cost uncertainty, applicable pilot/current grants, original-byte export and full inspection support. Unknown is pending, never free. Stage limits cannot override the comparable pilot envelope, which includes captured known completed-stage costs.
+
+Start names `stageId` and captures exact scope/input/quote/grant context; completion requires that capture and matching generated stage/provider/tool/module/route/model evidence. Expiry after valid start does not block matching completion. Status exposes `pipelineReady`, stage pending reasons/outcomes, `currentStageReady`, `canStartStage` and capture identity. Same-plan refresh appends evidence; bound context changes require an explicit new attempt. Unresolved original jobs must be reconciled first. Historical captured `0.1.0`/`0.2.0` retain original semantics/bytes. These private declarations do not authenticate provider access/consent, enforce actual spend caps or prove listening/media quality. See [the exact readiness contract](../framework/README.md) for fields, scope hashes and transition evidence.

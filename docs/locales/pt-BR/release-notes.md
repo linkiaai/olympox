@@ -1,6 +1,37 @@
 # Notas das versões
 
-Estas notas explicam comportamento por versão. Os guias atuais descrevem o código da 0.5.0. Padrões históricos abaixo pertencem às suas revisões e não substituem orientação atual. Leia [instalação e atualização](installation.md) antes de mudar estúdio existente.
+Estas notas explicam comportamento por versão. Os guias atuais descrevem a versão candidata 0.6.0-rc.1. Padrões históricos abaixo pertencem às suas revisões e não substituem orientação atual. Leia [instalação e atualização](installation.md) antes de mudar estúdio existente.
+
+## 0.6.0-rc.1 — 9 de outubro de 2026
+
+Esta versão candidata se destina a testes da comunidade no framework local atualizado. Ela não certifica produção completa de mídia, onboarding de iniciantes nem paridade Codex/Claude. A release histórica `v0.5.0` permanece intacta.
+
+### O que mudou
+
+- **Transferência de imagens locais exatas:** uma operação separada prepara um snapshot local imutável da referência, verifica a conta/workspace pretendidos e uma autorização exata de transferência, depois permite um upload pela base opcional oficial `@higgsfield/cli@1.1.26` no Windows x64. A instalação não instala nem autentica essa CLI. Este incremento aceita apenas recibos de imagens; transferência de áudio/vídeo, outras plataformas e aceitação real das entradas pelo provedor permanecem pendentes. Transferências incertas preservam sua intenção e exigem reconciliação antes de outro envio. O reconhecimento nativo não comprova bytes originais no provedor nem acesso por um plugin/módulo. Consulte [transferência local](higgsfield-setup.md#transferir-arquivos-locais-para-o-plugin).
+- **Cânone com e sem fala:** o novo escopo vocal declarado diferencia `speaking`, `silent` e aplicabilidade não resolvida. Cânone com fala exige referência de áudio revisada exata e seleção de escuta registrada; cânone sem fala declara explicitamente que voz não se aplica. Escopo não resolvido permanece em rascunho. Campos historicamente ausentes, contratos salvos, aprovações e hashes mantêm suas semânticas originais. As verificações locais validam declarações e bytes; não comprovam que uma pessoa ouviu nem que a voz tem qualidade. Consulte [identidade e registros](operations.md).
+- **Prontidão de mídia por etapa:** contratos atuais de geração vinculam método escolhido, viabilidade do piloto completo, entradas exatas atuais, identificadores de entradas aceitas, cotações, autorizações delimitadas e contexto de execução. Módulos ausentes, entradas não verificadas ou incerteza de custo não aceita continuam como pendências acionáveis. Planejamento e status offline não chamam o provedor; os gates locais verificam consistência das observações registradas, sem autenticar consentimento, comprovar aceitação pelo provedor nem impor teto de gastos no serviço. Tentativas antigas retêm seus contratos capturados. Consulte [operação dos workflows](framework-02.md) e [referência do runtime](framework/README.md).
+- **Separação entre desenvolvimento e estúdio:** o checkout de fontes usa AIOX para engenharia de software e recusa gravações do runtime criativo quando marcado como desenvolvimento do framework. Estúdios instalados independentes recebem instruções criativas e skills OLYMPOX. Runtime, projeções e dependências do AIOX ficam fora do pacote do produto e do instalador.
+
+### Teste a candidata
+
+1. Comece em um diretório independente novo, usando a candidata identificada pela tag:
+
+   ```sh
+   npx --yes github:linkiaai/olympox#v0.6.0-rc.1 setup
+   ```
+
+   Escolha seu assistente e revise o destino. Para um estúdio existente, siga o [procedimento de atualização com preservação](installation.md#atualizar-um-estudio-existente). `--merge` mantém arquivos idênticos e recusa conflitos; não é um atualizador automático.
+2. Execute `npm run verify` no estúdio instalado, abra-o em seu ambiente real do Codex ou Claude Code e invoque `$olympox` ou `/olympox`. No Windows, use `npm.cmd` ou `npx.cmd` quando necessário. Comece com: “Use OLYMPOX para propor três conceitos diferentes de influenciadores adultos originais para vídeos curtos de comédia. Recomende um. Prepare somente conceitos agora; não gere mídia, envie arquivos, autentique serviços, gaste créditos nem publique.” Um provedor de mídia conectado não é necessário para essa preparação.
+3. Relate um resultado reproduzível por [issues no GitHub](https://github.com/linkiaai/olympox/issues), incluindo versão `0.6.0-rc.1` do framework, sistema operacional, versão do Node, assistente/versão, comando ou pedido, resultado esperado e erro real. Diferencie instalação, carregamento da skill e execução do provedor. Remova credenciais, identificadores de conta e detalhes criativos privados; não anexe registros privados de personagens, arquivos de referência, saída bruta completa do provedor nem backups.
+
+A preparação local basta para começar a testar esta candidata. Um teste real de mídia exige separadamente módulos e transferência verificados, orçamento viável do piloto completo, autorização aplicável, bytes efetivamente exportados, seleção vocal ouvida e reprodução completa do vídeo. A instalação não autoriza essas operações externas.
+
+### Limites conhecidos da aceitação
+
+As verificações de preparação anteriores à release rodaram no Windows com Node 24.18.0, antes da atualização dos metadados de versão. Node 22+ continua sendo o mínimo declarado; execução no Node 22 e nos demais sistemas operacionais permanece pendente. As projeções de instalação Codex e Claude passaram nas verificações locais. Uma sessão do Codex CLI 0.135.0 preparou três conceitos após duas falhas de configuração preservadas: esforço `ultra` não aceito, depois rejeição do modelo configurado `gpt-6.1-sol` naquela rota ChatGPT da CLI. Uma tentativa com `--ignore-user-config` apenas no processo teve sucesso sem alterar configurações pessoais. Sua transcrição não comprovou de forma independente o carregamento completo da skill. Nenhuma sessão real do Claude Code estava disponível, e a rota do provedor em uma nova sessão da CLI/Claude permanece não verificada.
+
+Upload e aceitação reais das referências, voz gerada/ouvida, vídeo completo com fala inspecionado, observação de iniciante humano e paridade de mídia permanecem pendentes. Catálogos e cotações consultados são evidências de preparação, não de produção bem-sucedida. O `EPERM` histórico intermitente no Windows durante rename atômico segue como investigação separada, com causa não comprovada; esta candidata não afirma corrigir o problema. Preserve o erro original e o ambiente ao relatá-lo.
 
 ## 0.5.0 — 9 de outubro de 2026
 

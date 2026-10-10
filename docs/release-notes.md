@@ -1,6 +1,37 @@
 # Release notes
 
-These notes explain framework behavior by version. The current guides describe the 0.5.0 source. Historical defaults below apply to their own revisions and do not override current guidance. Read [installation and upgrade](installation.md) before changing an existing studio.
+These notes explain framework behavior by version. The current guides describe the 0.6.0-rc.1 release candidate. Historical defaults below apply to their own revisions and do not override current guidance. Read [installation and upgrade](installation.md) before changing an existing studio.
+
+## 0.6.0-rc.1 — October 9, 2026
+
+This release candidate is intended for community testing of the updated local framework. It is not a certification of complete media production, novice onboarding or Codex/Claude parity. The historical `v0.5.0` release remains unchanged.
+
+### What changed
+
+- **Exact local image transfer:** a separate operation plans an immutable local reference snapshot, checks the intended account/workspace and an exact transfer grant, then supports one upload through the optional official `@higgsfield/cli@1.1.26` Windows x64 baseline. Installation does not install or authenticate that CLI. This increment supports image receipts only; audio/video transfer, other platforms and real provider input acceptance remain pending. Uncertain transfers retain their intent and require reconciliation before another dispatch. Native acknowledgement does not prove provider-original bytes or access in a plugin/module. See [local transfer](higgsfield-setup.md#transfer-local-files-for-plugin-use).
+- **Speaking and silent canon:** new declared vocal scope distinguishes `speaking`, `silent` and unresolved applicability. Speaking canon requires an exact reviewed audio reference and a recorded listening selection; silent canon explicitly marks voice not applicable. Unresolved scope remains draft. Historical absent fields, saved contracts, approvals and hashes retain their original semantics. Local checks validate the declarations and bytes; they do not prove that a person listened or that a voice is good. See [identity and records](operations.md).
+- **Media readiness per stage:** current generation contracts bind the chosen method, whole-pilot feasibility, exact current inputs, accepted input identifiers, quotes, scoped authorizations and execution context. Missing modules, unverified inputs or unaccepted cost uncertainty remain actionable pending states. Offline planning and status make no provider call; the local gates check consistency of recorded observations, without authenticating consent, proving provider acceptance or enforcing a service spending cap. Old attempts retain their captured contracts. See [workflow operation](framework-02.md) and [the runtime reference](../framework/README.md).
+- **Development and studio separation:** the source checkout uses AIOX for software engineering and refuses creative runtime writes when marked as framework development. Independent installed studios receive creative instructions and OLYMPOX skills. AIOX runtime, projections and dependencies stay outside the product package and installer.
+
+### Test the candidate
+
+1. Start in a fresh independent directory using the tagged candidate:
+
+   ```sh
+   npx --yes github:linkiaai/olympox#v0.6.0-rc.1 setup
+   ```
+
+   Choose your assistant and review the destination. For an existing studio, follow the [preservation-first upgrade procedure](installation.md#upgrade-an-existing-studio). `--merge` retains identical files and refuses conflicts; it is not an automatic updater.
+2. Run `npm run verify` from the installed studio, open it in your actual Codex or Claude Code environment and invoke `$olympox` or `/olympox`. On Windows, use `npm.cmd` or `npx.cmd` if needed. Begin with: “Use OLYMPOX to propose three distinct original adult influencer concepts for short comedy videos. Recommend one. Only prepare concepts now; do not generate media, send files, authenticate services, spend credits or publish.” A connected media provider is not required for this preparation.
+3. Report a reproducible result through [GitHub issues](https://github.com/linkiaai/olympox/issues), including framework version `0.6.0-rc.1`, operating system, Node version, assistant/version, command or request, expected result and the actual error. Distinguish installation, skill loading and provider execution. Redact credentials, account identifiers and private creative details; do not attach private character records, reference files, complete raw provider output or backups.
+
+Local preparation is sufficient to start testing this candidate. A real media test separately needs verified modules and transport, a complete feasible pilot budget, applicable authorization, actual exported bytes, listened-to voice selection and complete video playback. Installation grants none of those external operations.
+
+### Known acceptance limits
+
+Pre-release preparation checks ran on Windows with Node 24.18.0, before the release-version metadata was updated. Node 22+ remains the declared minimum; execution on Node 22 and the other operating systems is still pending. Codex and Claude installation projections passed local checks. A Codex CLI 0.135.0 session prepared three concepts after two preserved configuration failures: unsupported `ultra` effort, then the configured `gpt-6.1-sol` model rejected on that CLI ChatGPT route. A process-only `--ignore-user-config` attempt succeeded without changing personal settings. Its transcript did not independently establish complete skill loading. No real Claude Code session was available, and a provider route in a fresh CLI/Claude session remains unverified.
+
+Real reference upload and acceptance, generated/listened-to voice, complete inspected speaking video, human novice observation and media parity remain pending. Read-only catalogs and quotes are preparation evidence, not successful production. Historical intermittent Windows `EPERM` during atomic rename remains a separate investigation with an unproven cause; this candidate makes no claim that it fixes that issue. Preserve the original error and environment when reporting it.
 
 ## 0.5.0 — October 9, 2026
 

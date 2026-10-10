@@ -22,7 +22,7 @@ function fixture() {
   for (const file of ['references/front.png', 'references/angle.png', 'references/voice.wav', 'media/v1.png', 'media/v2.png', 'media/v1.wav', 'media/v1.mp4', 'prompts/v1.md']) {
     fs.writeFileSync(path.join(dir, file), `structural-fixture-v1-${file}`);
   }
-  const persona = readJson(path.join(root, 'templates/persona.json'));
+  const persona = readJson(path.join(root, 'tests/fixtures/legacy-persona-v1.json'));
   Object.assign(persona, { id: 'canon-test', status: 'canon-approved' });
   Object.assign(persona.profile, { name: 'Fixture', age: 30, audience: 'Test', valueProposition: 'Structural test' });
   Object.assign(persona.identity, { face: 'Oval', eyes: 'Brown', hair: 'Short', skin: 'Natural', body: 'Adult', invariants: ['Structure'] });

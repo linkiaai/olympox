@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 1,
+  "policy": "stage-readiness-v1",
+  "runId": null,
+  "attemptId": null,
+  "plan": {
+    "schemaVersion": 1,
+    "methodSource": {
+      "path": "work/production-method-v001.md",
+      "sha256": null
+    },
+    "choice": {
+      "actor": null,
+      "at": null,
+      "eventId": null,
+      "source": null,
+      "notes": null,
+      "explicit": true
+    },
+    "requirements": [
+      {
+        "id": "visual-exploration",
+        "applicability": "required",
+        "reason": null,
+        "decision": null,
+        "stageIds": [
+          "candidates"
+        ]
+      },
+      {
+        "id": "premise-scene",
+        "applicability": "required",
+        "reason": null,
+        "decision": null,
+        "stageIds": [
+          "candidates"
+        ]
+      },
+      {
+        "id": "reference-pack",
+        "applicability": "required",
+        "reason": null,
+        "decision": null,
+        "stageIds": [
+          "candidates"
+        ]
+      },
+      {
+        "id": "voice",
+        "applicability": "required",
+        "reason": null,
+        "decision": null,
+        "stageIds": [
+          "voice-reference"
+        ]
+      },
+      {
+        "id": "pilot",
+        "applicability": "required",
+        "reason": null,
+        "decision": null,
+        "stageIds": [
+          "pilot"
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "id": "candidates",
+        "stepId": "candidates",
+        "purpose": "Etapa necessária: candidates",
+        "medium": "image",
+        "provider": "higgsfield",
+        "method": "Pipeline de referência selecionado",
+        "module": null,
+        "route": null,
+        "tool": null,
+        "requestedModel": null,
+        "inputSlots": [
+          {
+            "id": "prompt",
+            "kind": "prompt",
+            "role": null,
+            "order": null,
+            "fromStageId": null
+          },
+          {
+            "id": "parameters",
+            "kind": "parameters",
+            "role": null,
+            "order": null,
+            "fromStageId": null
+          }
+        ]
+      },
+      {
+        "id": "voice-reference",
+        "stepId": null,
+        "purpose": "Etapa necessária: voice-reference",
+        "medium": "audio",
+        "provider": "higgsfield",
+        "method": "Pipeline de referência selecionado",
+        "module": null,
+        "route": null,
+        "tool": null,
+        "requestedModel": null,
+        "inputSlots": [
+          {
+            "id": "prompt",
+            "kind": "prompt",
+            "role": null,
+            "order": null,
+            "fromStageId": null
+          },
+          {
+            "id": "parameters",
+            "kind": "parameters",
+            "role": null,
+            "order": null,
+            "fromStageId": null
+          }
+        ]
+      },
+      {
+        "id": "pilot",
+        "stepId": "pilot",
+        "purpose": "Etapa necessária: pilot",
+        "medium": "video",
+        "provider": "higgsfield",
+        "method": "Pipeline de referência selecionado",
+        "module": null,
+        "route": null,
+        "tool": null,
+        "requestedModel": null,
+        "inputSlots": [
+          {
+            "id": "prompt",
+            "kind": "prompt",
+            "role": null,
+            "order": null,
+            "fromStageId": null
+          },
+          {
+            "id": "parameters",
+            "kind": "parameters",
+            "role": null,
+            "order": null,
+            "fromStageId": null
+          },
+          {
+            "id": "visual-reference",
+            "kind": "reference",
+            "role": "front",
+            "order": 0,
+            "fromStageId": "candidates"
+          },
+          {
+            "id": "voice",
+            "kind": "reference",
+            "role": "voice",
+            "order": 1,
+            "fromStageId": "voice-reference"
+          }
+        ]
+      }
+    ]
+  },
+  "feasibility": {
+    "stages": [],
+    "authorization": null
+  },
+  "stages": [],
+  "provenance": {
+    "actor": null,
+    "at": null,
+    "eventId": null,
+    "source": null,
+    "notes": null
+  }
+}

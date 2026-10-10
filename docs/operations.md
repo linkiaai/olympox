@@ -47,6 +47,34 @@ node scripts/studio.mjs canon-hash my-persona
 
 Visual selection belongs to the user and follows [quality inspection](quality.md). The structural canon minimum is an approved front view and approved three-quarter or profile view; production may need a broader coherent reference pack. A speaking character also needs a generated, listened-to, selected voice reference. Set `voice.referenceId` to that approved `voice` entry. A description alone does not establish voice.
 
+New drafts start with `voice.applicability: "unspecified"` and `voice.selection: null`. Keep preparation in `draft` until choosing `speaking` or `silent`; unspecified scope cannot complete canon. For `silent`, leave both `voice.referenceId` and `voice.selection` null and explain the scope in the existing approval/decision notes. Silent canon supports images and video without speech; speech requires the identity-version and approval procedure.
+
+For `speaking`, select an approved `voice` audio reference (`.wav`, `.mp3`, `.m4a`, `.ogg`, or `.flac`) with a valid reference review. Record the actual listening/selection event in `voice.selection`, replacing the example values with observed evidence:
+
+```json
+{
+  "referenceId": "voice-v1",
+  "path": "references/canon/voice-v1.wav",
+  "sha256": "<exact registered SHA-256>",
+  "method": "listening",
+  "performed": true,
+  "generated": true,
+  "listened": true,
+  "selected": true,
+  "reviewer": "<responsible listener>",
+  "at": "<ISO timestamp>",
+  "eventId": "<actual selection event>",
+  "source": "<actual tool or decision source>",
+  "notes": "<actual listening and selection notes>",
+  "criticalIssues": [],
+  "limitations": []
+}
+```
+
+The selection must bind the same ID, path and SHA-256 as `voice.referenceId` and its approved reference; changed bytes, incomplete evidence or pending issues block complete canon. Its listening event may differ from the reference approval event. Declarations establish local consistency, not actual listening, provider execution, reviewer identity or quality.
+
+Historical personas without applicability fields and saved older task contracts retain their original validation and hashes; no defaults or migrations are inserted. The updated `approve-canon` task requires explicit scope even when the generic validator accepts an absent historical field. Field/version presence is a compatibility boundary, not authentication: deliberately forged legacy records or modified source cannot be identified by this guard.
+
 After the actual complete-canon decision, write persona `approval` with `reviewer`, `at`, `notes`, and the returned `canonHash`; set status to `canon-approved`. The hash covers character ID, identity version, name/age, identity anchors, voice, and approved reference data. Editorial evolution does not automatically change that canon. Validate, then preserve it:
 
 ```sh
@@ -160,3 +188,9 @@ node scripts/studio.mjs doctor
 ```
 
 Verification checks local tests, records, installed skill consistency, and manual integrity. Skills use `.agents/skills/` in Codex and `.claude/skills/` in Claude Code; maintain them through the [installation guide](installation.md#maintain-skills-and-provider-access). For workflow state and interrupted provider work, read [runs and resumption](framework-02.md).
+
+## Per-stage readiness
+
+Current generation contracts `0.3.0` require structured `stage-readiness-v1` before start and matching completion. The assistant prepares/imports `templates/media-readiness.json` from actual observations using `run-step` action `record-media-readiness`; the creator does not author JSON. Optional `readinessPlanPath` binds an offline plan on start/new-attempt. Whole-pilot feasibility is distinct from exact current inputs and completed outcome: future voice/scene bytes can remain pending. Each required stage needs its actual method-choice decision, access/schema, destination/model exposure, quote/scoped cost uncertainty, applicable pilot/current grants, original-byte export and full inspection support. Unknown is pending, never free. Stage limits cannot override the comparable pilot envelope, which includes captured known completed-stage costs.
+
+Start names `stageId` and captures exact scope/input/quote/grant context; completion requires that capture and matching generated stage/provider/tool/module/route/model evidence. Expiry after valid start does not block matching completion. Status exposes `pipelineReady`, stage pending reasons/outcomes, `currentStageReady`, `canStartStage` and capture identity. Same-plan refresh appends evidence; bound context changes require an explicit new attempt. Unresolved original jobs must be reconciled first. Historical captured `0.1.0`/`0.2.0` retain original semantics/bytes. These private declarations do not authenticate provider access/consent, enforce actual spend caps or prove listening/media quality. See [the exact readiness contract](../framework/README.md) for fields, scope hashes and transition evidence.

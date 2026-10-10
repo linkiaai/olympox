@@ -1,6 +1,7 @@
 {
   "schemaVersion": 1,
-  "version": "0.2.0",
+  "version": "0.3.0",
+  "vocalPolicy": "explicit-applicability-v1",
   "id": "approve-canon",
   "name": "Record the human canon decision",
   "owner": "master",
@@ -13,7 +14,7 @@
   "criteria": [
     "Explicit decision with reviewer, date, and event",
     "User decision identifies the exact selected visual references, files and hashes after anatomy, presence, and continuity review",
-    "For speaking characters, the draft/reference vocal sample has been generated, listened to, and selected before complete visual/vocal canon approval; silent scope records voice as not applicable",
+    "Declare voice.applicability as speaking with an exact approved audio voice.selection and complete listening evidence, or silent with null voice.referenceId and voice.selection; unspecified or absent scope cannot complete canon",
     "Preserve the approved canon version and snapshot; changed identity or voice requires the existing version and approval procedure",
     "The runtime records the declaration; it does not prove the reviewer is human"
   ]

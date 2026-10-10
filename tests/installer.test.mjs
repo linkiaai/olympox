@@ -135,6 +135,22 @@ test('identical merge is idempotent and preserves local characters and unrelated
   } finally { instance.close(); }
 });
 
+test('studio Git templates do not import development configuration from the source', () => {
+  const instance = temporary();
+  try {
+    const source = sourceFixture(instance.root), target = path.join(instance.root, 'independent-studio');
+    write(source, '.gitignore', 'PRIVATE-DEVELOPMENT-CONFIG\n');
+    write(source, '.gitattributes', 'PRIVATE-DEVELOPMENT-CONFIG\n');
+    write(source, '.development/project.json', JSON.stringify({ schemaVersion: 1, kind: 'framework-development' }));
+    installFramework(source, target, { assistant: 'both' });
+    assert.deepEqual(fs.readFileSync(path.join(target, '.gitignore')), fs.readFileSync(path.join(source, 'templates/project.gitignore')));
+    assert.deepEqual(fs.readFileSync(path.join(target, '.gitattributes')), fs.readFileSync(path.join(source, 'templates/project.gitattributes')));
+    assert.equal(fs.existsSync(path.join(target, '.development')), false);
+    assert.equal(fs.existsSync(path.join(target, '.aiox-core')), false);
+    assert.equal(fs.existsSync(path.join(target, '.codex')), false);
+  } finally { instance.close(); }
+});
+
 test('installation permits an existing Git directory and uses the packed gitignore fallback', () => {
   const instance = temporary();
   try {

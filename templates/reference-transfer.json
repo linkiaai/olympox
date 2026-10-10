@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "reference-001",
+  "source": {
+    "referenceId": "canonical-front",
+    "path": "references/canonical-front.png",
+    "sha256": "replace-with-exact-file-sha256",
+    "bytes": 0,
+    "mediaType": "image",
+    "role": "identity",
+    "order": 0
+  },
+  "destination": {
+    "provider": "higgsfield",
+    "route": "native-cli",
+    "accountFingerprint": "replace-with-checked-account-fingerprint",
+    "workspaceId": "replace-with-checked-workspace-id"
+  },
+  "native": {
+    "version": "1.1.26",
+    "binarySha256": "0e973c9cf072ec27af8be61e374c8aba5842766bd21654e28dfa758605ca76da"
+  }
+}

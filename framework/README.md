@@ -2,7 +2,7 @@
 
 `scripts/framework-core.mjs` implements local workflow records for OLYMPOX. The registry selects profiles, task contracts, and workflow definitions; a run saves those definitions with its observed context. The coordinating assistant performs the work and supplies declarations and existing files. The module has no agent dispatcher or provider adapter.
 
-The framework package and registry use version **0.5.0**. Task/workflow JSON contracts retain component revision **0.2.0** and `schemaVersion: 1`; these are compatibility identifiers, not the current product release number. This reference describes the current implementation, including additive provider policy for new attempts.
+The framework package and registry use the release-candidate version **0.6.0-rc.1**. Task/workflow JSON contracts retain individual component revisions, including **0.2.0** and **0.3.0**, and `schemaVersion: 1`; these are compatibility identifiers, not the current product release number. This reference describes the current implementation, including additive provider, vocal and stage-readiness policies. See [release notes](../docs/release-notes.md) for testing and pending live acceptance.
 
 For the conversational workflow and CLI sequence, read [workflows and resumption](../docs/framework-02.md). For persona, manifest, and backup commands, read [operations](../docs/operations.md).
 
@@ -105,3 +105,59 @@ Approved canon is compared with any existing frozen snapshot for the same `ident
 Exclusive locks prevent simultaneous record writers; complete temporary files are used for replacement. An interruption may leave a lock: check active processes and preserve evidence before recovery. Hashes detect changes; they are not signatures and cannot authenticate someone able to edit and recalculate records.
 
 Historical workflow/state inputs remain compatible without rewriting stored bytes. Local completion means the saved contracts accepted files and declarations. It does not establish media quality, provider success beyond recorded evidence, or publication. See [capabilities and limits](../docs/studio-status.md).
+
+## Structured media readiness
+
+The coordinating assistant prepares `templates/media-readiness.json` from actual choices and tool observations in the installed studio; the creator continues through conversation. Its null placeholders are unfinished, not evidence. Save a versioned method document and bind its exact path/SHA-256. Prepare a standalone `plan` with optional `readinessPlanPath` on run-start or explicit new-attempt; offline planning makes no provider call. Otherwise the first readiness import binds the plan. Every required requirement's decision records the applicable actual method-choice event; null decisions and unknown modules remain pending.
+
+For current `generate-candidates` and `generate-piece` contracts `0.3.0`, the assistant imports `{action:"record-media-readiness",readinessPath:"work/readiness-v001.json"}` through `run-step`. The exact schema-1 envelope is `{schemaVersion,policy,runId,attemptId,plan,feasibility,stages,provenance}`, with `policy:"stage-readiness-v1"`. One required execution stage maps to each captured generation step: `candidates`/`pilot`, `generation` or `correction`. Auxiliary stages use `stepId:null`; their separately recorded outcomes are not execution of those tasks. Creation coverage is `visual-exploration,premise-scene,reference-pack,voice,pilot`; production/correction is `scene-inputs,voice,final-media`.
+
+Whole-pilot feasibility checks each required module's access, accepted input schemas, model/destination exposure, quote or scoped cost uncertainty, export and complete inspection support. It does not require nonexistent future voice or scene files. Exact current execution separately binds prompt/parameter files, ordered reference roles, original byte counts/hashes and actual accepted input IDs. Each model/destination records `{exposed,value,reason,provenance}`; unknown is pending and observed non-exposure is explicit. `native-cli` requires actual account fingerprint/workspace. Quotes bind `{status,amount,unit,scopeHash,source,at,expiresAt,reason}`; units are separate credits/currency/free. Unknown costs never become zero. The pilot grant and current-stage grant separately bind `{approved,scopeHash,quoteHashes,stageIds,limits,acceptUnknownCost,provenance}`. Known costs of completed stages, current execution and remaining estimates must fit each exact comparable-unit pilot limit; a looser stage grant cannot override it. These declarations do not authenticate consent or impose a provider spending cap.
+
+Each provenance is exactly `{actor,at,eventId,source,notes}`, with a real UTC timestamp; choices/requirement decisions add `explicit:true`. All metadata rejects unknown keys, is bounded to 1 MiB, 32 stages and 64 slots per stage, and excludes prompt bodies, raw output, credentials, URLs and emails. Full creative prompts stay in their versioned local source files; this record carries hashes. Sources must stay in safe studio `work/` or the bound character; links/junctions, protected configuration and other characters are rejected before record writes. Media hashes are read in chunks without an upload-size limit.
+
+Use `start` with the exact `stageId` only when whole-path feasibility and current exact readiness pass. The core captures immutable plan/scope/input/quote/grant context before any optional job intent. `complete` requires that captured start and existing media outputs. Its generated evidence has only `type,performed,actor,at,eventId,notes,tool,provider,stageId,planHash,scopeHash,readinessSnapshotId,module,route,modelExposed,model`, matching the capture and selected method. Generic capability, acknowledgement, instruction mode or direct completion cannot bypass this gate. A quote valid at captured start can expire before matching completion. Existing full media review and delivery checks still apply.
+
+Status reports `pipelineReady` (feasibility), per-stage exact pending reasons/outcomes, `currentStageReady`, `canStartStage` and active capture identity without writing or querying a provider. Future exact slots can remain pending while candidates can start. Explicit silent scope may make voice not-required; compatible historical absent vocal fields can support an explicitly selected static/silent piece without changing the character. Speaking reuse binds selected approved audio as exact input/outcome and attaches that audio to speaking execution. It never bypasses current complete-canon vocal selection.
+
+Same-plan observation/quote/grant refresh appends immutable snapshots; imported JSON itself is not a tracked mutable input. Already bound input/model/destination or plan/method changes use `run-resume` with `newAttempt:true` and a reason, optionally a fresh `readinessPlanPath`. New attempts clear current readiness evidence and capture, preserve old attempts and retain the saved task contracts. Unresolved original jobs block refresh and retry; matching `resolve` remains usable despite drift. Captured generation `0.1.0`/`0.2.0` remains legacy with original semantics and no new defaults; a fresh current run adopts the new policy. Local consistency proves neither provider execution nor listening, lip-sync, media quality or host parity. Private observations/quotes/grants stay outside framework export.
+
+The nested objects use these exact keys. Missing/null observations remain pending; malformed supplied objects are refused. Omission/reuse requires an explicit applicable decision and reason. Required execution stages cannot be reused or removed. `inputs` follow plan slot order, with exact reference role/order; `fromStageId` names an earlier stage and its actual output bytes. Optional training belongs in the selected method only when justified.
+
+| Object | Exact fields |
+| --- | --- |
+| Plan | `schemaVersion,methodSource,choice,requirements,stages` |
+| Method source | `path,sha256` |
+| Requirement | `id,applicability,reason,decision,stageIds`; applicability `required|reuse|not-required` |
+| Plan stage | `id,stepId,purpose,medium,provider,method,module,route,tool,requestedModel,inputSlots` |
+| Input slot | `id,kind,role,order,fromStageId`; kind `prompt|parameters|reference`; non-reference role/order null |
+| Feasibility | `stages,authorization` |
+| Feasibility stage | `stageId,access,acceptedInputSlots,destination,model,quote,export,inspection,limitations,provenance` |
+| Access / accepted slot | `available,provenance` / `slotId,supported,provenance` |
+| Destination value / quote unit | `accountFingerprint,workspaceId` / `kind,code` (credits provider token, uppercase currency code, or free with null code) |
+| Execution observation | `stageId,inputs,acceptedInputs,model,destination,quote,authorization,export,inspection,limitations,outcome,provenance` |
+| Exact input | `slotId,path,sha256,bytes,referenceId,role,order`; non-reference referenceId/role/order null |
+| Accepted input | `slotId,sha256,bytes,inputId,scopeHash,provenance` |
+| Export / inspection | `available,tool,route,format,originalBytes,limitations,provenance` / `available,tool,method,limitations,provenance` |
+| Grant limit | `unit,maximum`; `acceptUnknownCost` is an explicit list of stage IDs, never a blanket boolean |
+| Optional outcome | `status,files,evidence,review`; completed/reused with actual existing `{path,sha256,bytes}` files |
+| Outcome evidence / review | `type,performed,provenance` / `performed,method,decision,criticalIssues,limitations,provenance` |
+
+Outcome evidence is generated/reused and performed true. Its full-medium review is approve with no critical issues/limitations. Support before execution does not declare this finished review. Model/destination `exposed:false` requires null value and an actual non-exposure reason. Unknown quotes require null amount and reason; known zero/free still needs an actual quote source/date. Quote hashes and authorized stage IDs are unique exact sets.
+
+A completed/reused auxiliary outcome with no actual quote keeps continuation pending; its earlier feasibility estimate cannot substitute for that missing actual cost. An explicit append may bind the first actual known quote or an actual unknown-cost declaration with scoped pilot acceptance. Once bound to the completed outcome, that quote is immutable; later observations cannot replace it with a cheaper estimate.
+
+`readinessHash` computes SHA-256 of recursively key-sorted JSON (`H`). `binding` projects exposure to `{exposed,value}`. `mediaReadinessHashes(run,plan,stageId,observation,phase)` exports the computed offline hashes for preparation; no caller-supplied plan hash replaces validation:
+
+```text
+planHash = H(plan)
+feasibilityScopeHash = H({policy,runId,attemptId,planHash,stageId,
+  phase:"feasibility",model:binding(model),destination:binding(destination)})
+stageScopeHash = H({policy,runId,attemptId,planHash,stageId,
+  phase:"execution",canonBinding,currentStage:planStage,
+  model:binding(model),destination:binding(destination),inputs:orderedExactInputs})
+pilotScopeHash = H({policy,runId,attemptId,planHash,phase:"pilot"})
+quoteHash = H(validatedQuote)
+```
+
+Feasibility quotes bind feasibilityScopeHash; execution quotes, accepted inputs and stage grants bind stageScopeHash. The pilot grant binds pilotScopeHash and every required feasibility quote/stage; the stage grant binds the exact current quote/stage. Canon approval can change a future pilot's scope, so bind its real inputs/context after that decision without replacing completed-stage evidence. These are local consistency hashes, not signatures.

@@ -31,7 +31,7 @@ function fixture(approved = false) {
   // Fictional bytes: these tests verify records, never pixels, voice, or fidelity.
   for (const name of ['front.png', 'angle.png', 'voice.wav', 'output.png', 'output.wav', 'output.mp4', 'prompt.md']) fs.writeFileSync(path.join(dir, name), `fixture-${name}`);
   fs.writeFileSync(path.join(dir, 'assets.json'), JSON.stringify({ schemaVersion: 1, assets: [] }));
-  const persona = readJson(path.join(root, 'templates/persona.json'));
+  const persona = readJson(path.join(root, 'tests/fixtures/legacy-persona-v1.json'));
   Object.assign(persona, { id: 'test-persona', status: approved ? 'canon-approved' : 'draft' });
   Object.assign(persona.profile, { name: 'Test persona', age: 30, audience: 'Internal test', valueProposition: 'Verify records without generating media' });
   Object.assign(persona.identity, { face: 'Oval', eyes: 'Brown', hair: 'Short', skin: 'Natural texture', body: 'Adult proportions', invariants: ['Facial structure', 'Proportions'] });

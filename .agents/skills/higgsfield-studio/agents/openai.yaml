@@ -1,4 +1,0 @@
-interface:
-  display_name: "Higgsfield Studio"
-  short_description: "Verified Higgsfield media and reference-method production"
-  default_prompt: "Use $higgsfield-studio to prepare and execute the default reference media pipeline, checking current modules, exact inputs, automatic transfer, whole-pilot estimates, export, full inspection and applicable authorization."

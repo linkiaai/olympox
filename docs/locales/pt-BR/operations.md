@@ -47,6 +47,34 @@ node scripts/studio.mjs canon-hash my-persona
 
 Seleção visual pertence ao usuário e segue [inspeção de qualidade](quality.md). O mínimo estrutural é vista frontal aprovada e vista three-quarter ou profile aprovada; produção pode precisar de conjunto coerente mais amplo. Personagem falante também precisa de referência vocal gerada, ouvida e selecionada. Aponte `voice.referenceId` para essa entrada `voice` aprovada. Descrição sozinha não estabelece voz.
 
+Novos rascunhos começam com `voice.applicability: "unspecified"` e `voice.selection: null`. Mantenha a preparação em `draft` até escolher `speaking` ou `silent`; escopo unspecified não conclui o cânone. Para `silent`, deixe `voice.referenceId` e `voice.selection` null e explique o escopo nas notas existentes de aprovação/decisão. Cânone silent permite imagens e vídeo sem fala; fala exige o procedimento de versão de identidade e aprovação.
+
+Para `speaking`, selecione uma referência `voice` de áudio aprovada (`.wav`, `.mp3`, `.m4a`, `.ogg` ou `.flac`) com revisão válida. Registre o evento real de escuta/seleção em `voice.selection`, substituindo os valores do exemplo por evidência observada:
+
+```json
+{
+  "referenceId": "voice-v1",
+  "path": "references/canon/voice-v1.wav",
+  "sha256": "<SHA-256 exato registrado>",
+  "method": "listening",
+  "performed": true,
+  "generated": true,
+  "listened": true,
+  "selected": true,
+  "reviewer": "<responsável pela escuta>",
+  "at": "<timestamp ISO>",
+  "eventId": "<evento real de seleção>",
+  "source": "<ferramenta ou fonte real da decisão>",
+  "notes": "<notas reais de escuta e seleção>",
+  "criticalIssues": [],
+  "limitations": []
+}
+```
+
+A seleção deve vincular o mesmo ID, caminho e SHA-256 de `voice.referenceId` e sua referência aprovada; bytes alterados, evidência incompleta ou pendências impedem o cânone completo. O evento de escuta pode diferir do evento de aprovação da referência. Declarações comprovam consistência local, não escuta real, execução do fornecedor, identidade do revisor ou qualidade.
+
+Personas históricas sem campos de aplicabilidade e contratos antigos salvos mantêm validação e hashes originais; sem inserção de defaults ou migrações. A task `approve-canon` atualizada exige escopo explícito mesmo se o validador genérico aceitar a ausência histórica. Presença de campo/versão é fronteira de compatibilidade, não autenticação: o guard não identifica registros legados forjados deliberadamente nem fonte modificada.
+
 Após decisão real sobre canon completo, escreva `approval` na persona com `reviewer`, `at`, `notes` e `canonHash` retornado; defina status `canon-approved`. O hash cobre ID, versão da identidade, nome/idade, âncoras, voz e dados das referências aprovadas. Evolução editorial não muda esse canon automaticamente. Valide e preserve:
 
 ```sh
@@ -160,3 +188,9 @@ node scripts/studio.mjs doctor
 ```
 
 Verificação confere testes locais, registros, consistência das skills instaladas e integridade do manual. Skills usam `.agents/skills/` no Codex e `.claude/skills/` no Claude Code; mantenha conforme [instalação](installation.md#manter-skills-e-acesso-ao-fornecedor). Para estado dos fluxos e trabalho externo interrompido, leia [runs e retomada](framework-02.md).
+
+## Prontidão por etapa
+
+Contratos atuais de geração `0.3.0` exigem `stage-readiness-v1` estruturado antes do início e da conclusão correspondente. O assistente prepara/importa `templates/media-readiness.json` com observações reais por `run-step`, ação `record-media-readiness`; a pessoa não escreve JSON. `readinessPlanPath` opcional vincula um plano offline no início/nova tentativa. Viabilidade do piloto, entradas atuais exatas e resultado concluído são distintos: bytes futuros de voz/cena podem ficar pendentes. Cada etapa necessária exige sua decisão real de método, acesso/esquema, exposição de destino/modelo, preço/incerteza autorizada, autorizações do piloto/etapa, export original e inspeção completa. Desconhecido é pendente, nunca gratuito. Limite da etapa não amplia o teto comparável do piloto, que inclui custos conhecidos capturados de etapas concluídas.
+
+Start informa `stageId` e captura escopo/entradas/preços/autorizações; complete exige captura e evidência correspondente da etapa/provedor/ferramenta/módulo/rota/modelo. Expirar após início válido não impede conclusão correspondente. Status expõe `pipelineReady`, pendências/resultados por etapa, `currentStageReady`, `canStartStage` e identidade da captura. Atualização no mesmo plano acrescenta evidências; mudanças vinculadas exigem nova tentativa explícita. Reconcilie jobs originais não resolvidos antes. Contratos históricos capturados `0.1.0`/`0.2.0` preservam semântica/bytes. Declarações privadas não autenticam acesso/consentimento, impõem teto real de gasto ou provam escuta/qualidade. Veja [o contrato exato de prontidão](framework/README.md) para campos, hashes e evidência de transição.

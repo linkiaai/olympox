@@ -1,6 +1,6 @@
 # Arquitetura do framework
 
-OLYMPOX separa direção do assistente, registros locais e execução externa de mídia. O código atual do framework é **0.5.0**; contratos e workflows mantêm revisões próprias de componente, incluindo `0.2.0`.
+OLYMPOX separa direção do assistente, registros locais e execução externa de mídia. O código atual do framework é a versão candidata **0.6.0-rc.1**; contratos e workflows mantêm revisões próprias de componente, incluindo `0.2.0` e `0.3.0`. Consulte [notas da versão](release-notes.md) para testes e aceitação real pendente.
 
 Este guia descreve os limites da implementação. Use [operação dos workflows](framework-02.md) para comandos e [identidade e registros](operations.md) para procedimentos de arquivos.
 
@@ -70,6 +70,8 @@ Essas declarações restringem a conclusão registrada. Elas não autenticam, de
 
 Uma versão aprovada do cânone vincula identidade visual/vocal da persona e bytes exatos das referências. Quando existe snapshot congelado, operações de identidade rejeitam outro cânone sob a mesma `identityVersion`. Evoluir a identidade exige nova versão e aprovação.
 
+Novos templates declaram aplicabilidade vocal e seleção exata de escuta. Tasks atualizadas de cânone exigem escopo `speaking` ou `silent` resolvido; identidade silent declarada recusa fala. O hash de voice cru permanece igual, portanto campos históricos ausentes e policies antigas salvas mantêm o significado registrado. [Operações](operations.md) documenta fronteira aditiva de compatibilidade e limites da evidência.
+
 Narrativa e conteúdo têm históricos de versões separados. Uma edição de narrativa não altera automaticamente a identidade. Uma peça pode vincular contexto exato do cânone/narrativa; arquivos editoriais selecionados viram entradas explícitas da execução.
 
 Um selo de execução preserva o contexto declarado de geração e uma cópia do prompt. A revisão do asset vincula bytes da mídia e contexto aplicável. Alterações na mídia exportada exigem nova revisão.
@@ -87,3 +89,11 @@ Criação e restauração preparam arquivos em área temporária e recusam sobre
 Hashes comprovam consistência de bytes, não identidade de revisores nem fidelidade criativa. Um contrato concluído representa evidência local aceita; não comprova publicação nem resultados no mundo real.
 
 Adaptadores de provedores, dashboards, gestão de campanhas, integrações analíticas e bancos de dados não estão incluídos. Adicione-os apenas para necessidade concreta com comportamento verificado, limites de exportação e preservação. Consulte [capacidades suportadas](studio-status.md) e [interfaces do núcleo](framework/README.md) antes de estender o runtime.
+
+A operação opcional separada `reference-transfer.mjs` oferece transferência autorizada de imagem local exata pela CLI nativa Higgsfield fixada; núcleo de workflows e wrapper de preparação continuam sem upload ou geração automáticos. Ela registra snapshot controlado dos bytes e uma submissão, recusa repetição automática de resultados incertos e exige verificações posteriores de bytes no fornecedor e acesso pelo plugin. Veja [preparação Higgsfield](higgsfield-setup.md).
+
+## Prontidão por etapa
+
+Contratos atuais de geração `0.3.0` exigem `stage-readiness-v1` estruturado antes do início e da conclusão correspondente. O assistente prepara/importa `templates/media-readiness.json` com observações reais por `run-step`, ação `record-media-readiness`; a pessoa não escreve JSON. `readinessPlanPath` opcional vincula um plano offline no início/nova tentativa. Viabilidade do piloto, entradas atuais exatas e resultado concluído são distintos: bytes futuros de voz/cena podem ficar pendentes. Cada etapa necessária exige sua decisão real de método, acesso/esquema, exposição de destino/modelo, preço/incerteza autorizada, autorizações do piloto/etapa, export original e inspeção completa. Desconhecido é pendente, nunca gratuito. Limite da etapa não amplia o teto comparável do piloto, que inclui custos conhecidos capturados de etapas concluídas.
+
+Start informa `stageId` e captura escopo/entradas/preços/autorizações; complete exige captura e evidência correspondente da etapa/provedor/ferramenta/módulo/rota/modelo. Expirar após início válido não impede conclusão correspondente. Status expõe `pipelineReady`, pendências/resultados por etapa, `currentStageReady`, `canStartStage` e identidade da captura. Atualização no mesmo plano acrescenta evidências; mudanças vinculadas exigem nova tentativa explícita. Reconcilie jobs originais não resolvidos antes. Contratos históricos capturados `0.1.0`/`0.2.0` preservam semântica/bytes. Declarações privadas não autenticam acesso/consentimento, impõem teto real de gasto ou provam escuta/qualidade. Veja [o contrato exato de prontidão](framework/README.md) para campos, hashes e evidência de transição.

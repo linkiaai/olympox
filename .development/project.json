@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "kind": "framework-development",
+  "product": "OLYMPOX",
+  "engineeringFramework": "AIOX",
+  "engineeringVersion": "5.4.1",
+  "assistant": "codex"
+}

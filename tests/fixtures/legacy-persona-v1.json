@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "replace-slug",
+  "identityVersion": 1,
+  "status": "draft",
+  "profile": {
+    "name": "",
+    "age": null,
+    "virtual": true,
+    "audience": "",
+    "valueProposition": "",
+    "backstory": "",
+    "personality": [],
+    "boundaries": []
+  },
+  "identity": {
+    "face": "",
+    "eyes": "",
+    "hair": "",
+    "skin": "",
+    "body": "",
+    "distinctiveMarks": [],
+    "invariants": [],
+    "allowedChanges": []
+  },
+  "voice": {
+    "language": "en",
+    "accent": "",
+    "tone": "",
+    "pace": "",
+    "referenceId": null
+  },
+  "editorial": {
+    "pillars": [],
+    "avoid": [],
+    "disclosure": "AI-created virtual character."
+  },
+  "references": [],
+  "approval": null
+}

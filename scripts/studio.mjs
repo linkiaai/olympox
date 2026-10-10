@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { assistantTargets } from './assistant-targets.mjs';
+import { isFrameworkDevelopment } from './development-context.mjs';
 import { assertSlug, readJson, localFile, fileHash, canonHash, validatePersona, validateAssets, buildPrompt, registerAsset, snapshotCanon, sealExecution, migrateAssets } from './studio-core.mjs';
 import { createPersona } from './storage-core.mjs';
 import { backupPersona, verifyBackup, restoreBackup, testRestore } from './backup-core.mjs';
@@ -14,6 +15,8 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const people = path.join(root, 'influencers');
 const args = process.argv.slice(2);
 const [command = 'help', slug, value, type] = args;
+
+const developmentInspectionCommands = new Set(['help', 'list', 'validate', 'doctor', 'canon-hash', 'file-hash', 'narrative-show', 'run-status', 'backup-verify', 'backup-test', 'check-assets']);
 
 function folder(id) {
   assertSlug(id);
@@ -51,6 +54,10 @@ function validate(id) {
 }
 
 try {
+  const development = command === 'help' ? false : isFrameworkDevelopment(root);
+  if (development && !developmentInspectionCommands.has(command)) {
+    throw new Error('Creative commands are unavailable in the framework development checkout. Install an independent OLYMPOX studio to create or produce influencers.');
+  }
   if (command === 'new') {
     const { dir } = createPersona(root, slug);
     console.log(`Created as a draft: ${dir}\nFill in brief.md and persona.json before generating references.`);
@@ -120,9 +127,19 @@ try {
     console.log(`Registered as a draft: ${value}. Fill in origin, prompt, and references; review before approval.`);
   } else if (command === 'doctor') {
     const required = ['AGENTS.md', 'CONSTITUTION.md', 'README.md', 'framework/registry.json', 'templates/brief.md', 'templates/persona.json', 'templates/shot.json', 'templates/narrative.json', 'templates/content.json', 'templates/opportunity-research.md', 'templates/content-research.md', 'docs/studio-team.md', 'docs/trend-research.md', 'docs/framework-02.md', 'docs/strategy.md', 'docs/production.md', 'docs/quality.md', 'docs/tools.md', 'docs/integrated-images.md', 'docs/higgsfield-plugin.md', 'docs/operations.md', 'docs/video-reference.md'];
+    if (development) {
+      required.push('templates/studio-AGENTS.md', 'templates/studio-CLAUDE.md', 'templates/locales/pt-BR/studio-AGENTS.md', 'templates/project.gitignore', 'templates/project.gitattributes');
+      for (const skill of ['olympox', 'higgsfield-studio']) {
+        for (const file of assistantTargets('codex')[0].files) required.push('skills/' + skill + '/' + file);
+      }
+    }
     const missing = required.filter(file => !fs.existsSync(path.join(root, file)));
     if (missing.length) { console.error(`Missing files: ${missing.join(', ')}`); process.exitCode = 1; }
-    else {
+    else if (development) {
+      const framework = validateFramework(root);
+      for (const error of framework.errors) { console.error('Framework: ' + error); process.exitCode = 1; }
+      if (!process.exitCode) console.log('OK framework development: canonical skills, templates, guides and local contracts are present. Creative skills are source files under development.');
+    } else {
       const hosts = assistantTargets('both').filter(target => ['olympox', 'higgsfield-studio'].some(skill => fs.existsSync(path.join(root, target.skillRoot, skill))));
       if (!hosts.length) { console.error('No active olympox skill: install a Codex or Claude Code projection from canonical skills.'); process.exitCode = 1; }
       const verified = [];
@@ -150,14 +167,22 @@ try {
       for (const error of framework.errors) { console.error(`Framework: ${error}`); process.exitCode = 1; }
       if (!process.exitCode) console.log(`OK local base: instructions, templates, and guides present; skills match: ${verified.join(', ')}.`);
     }
-    console.log(`Node ${process.version}; no external dependencies required to operate records.`);
-    console.log('New influencers: default to the Higgsfield media workflow; follow docs/higgsfield-influencer-method.md. Codex or Claude Code coordinates concept, writing and records. Respect explicit method/provider choices; missing capabilities leave stages pending.');
-    console.log('Media providers: new runs default image, video and audio to higgsfield. Explicit exceptions belong in the run specification; changed methods on resumption require a new attempt and reason.');
-    console.log('Higgsfield plugin/MCP: verify the required modules, reference upload, export, account and cost in the current host. This diagnostic does not test a connection or provider tools.');
-    console.log('Higgsfield CLI: another verified connection route; check installation/integrity with node scripts/higgsfield-local.mjs doctor. This diagnostic does not query account, credits, or generation.');
-    console.log('Assistant images: an explicit alternative only; never replace a missing Higgsfield stage silently. Follow docs/integrated-images.md when selected.');
-    console.log('QA: structural verification does not demonstrate identity, audio, or movement.');
+    if (development) {
+      console.log('Node ' + process.version + '; framework source validation needs no external runtime dependencies.');
+      console.log('Create and produce influencers in an independent installed studio.');
+    } else {
+      console.log(`Node ${process.version}; no external dependencies required to operate records.`);
+      console.log('New influencers: default to the Higgsfield media workflow; follow docs/higgsfield-influencer-method.md. Codex or Claude Code coordinates concept, writing and records. Respect explicit method/provider choices; missing capabilities leave stages pending.');
+      console.log('Media providers: new runs default image, video and audio to higgsfield. Explicit exceptions belong in the run specification; changed methods on resumption require a new attempt and reason.');
+      console.log('Higgsfield plugin/MCP: verify the required modules, reference upload, export, account and cost in the current host. This diagnostic does not test a connection or provider tools.');
+      console.log('Higgsfield CLI: another verified connection route; check installation/integrity with node scripts/higgsfield-local.mjs doctor. This diagnostic does not query account, credits, or generation.');
+      console.log('Assistant images: an explicit alternative only; never replace a missing Higgsfield stage silently. Follow docs/integrated-images.md when selected.');
+      console.log('QA: structural verification does not demonstrate identity, audio, or movement.');
+    }
   } else if (command === 'help') {
+    if (development) console.log('Framework development checkout: the commands below describe the product API. Creative commands require an independent installed studio.');
     console.log(`OLYMPOX ${JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8')).version} - AI Influencer framework. Local coordination by Codex or Claude Code; default media production in Higgsfield.\n\nnode scripts/studio.mjs new <slug>\nnode scripts/studio.mjs list\nnode scripts/studio.mjs validate [slug]\nnode scripts/studio.mjs prompt <slug> <shot.json>\nnode scripts/studio.mjs canon-hash <slug>\nnode scripts/studio.mjs canon-snapshot <slug>\nnode scripts/studio.mjs file-hash <slug> <relative-file>\nnode scripts/studio.mjs register <slug> <relative-file> <image|video|audio>\nnode scripts/studio.mjs execution-seal <slug> <asset-id>\nnode scripts/studio.mjs migrate-assets <slug>\nnode scripts/studio.mjs narrative-save <slug> <input.json>\nnode scripts/studio.mjs narrative-show <slug> [version]\nnode scripts/studio.mjs content-save <slug> <input.json>\nnode scripts/studio.mjs run-start <workflow-id> <spec.json>\nnode scripts/studio.mjs run-status <run-id>\nnode scripts/studio.mjs run-step <run-id> <transition.json>\nnode scripts/studio.mjs run-resume <run-id> [resume.json]\nnode scripts/studio.mjs backup <slug>\nnode scripts/studio.mjs backup-verify <backup-id>\nnode scripts/studio.mjs backup-test <backup-id>\nnode scripts/studio.mjs restore <backup-id>\nnode scripts/studio.mjs check-assets <slug>\nnode scripts/studio.mjs doctor\n\nRun specifications default mediaProviders.image, video and audio to higgsfield. Explicit exceptions must be declared in the specification. A changed route requires run-resume with newAttempt: true and a reason. Read docs/operations.md and docs/framework-02.md. No paid calls or automatic publication.\n`);
+    console.log('New canon: resolve voice.applicability as speaking with exact approved audio voice.selection and complete listening evidence, or silent with null voice reference/selection. Unspecified remains pending; historical absent fields are preserved. See docs/operations.md.');
+    console.log('Current generation contracts: run-step accepts {action:"record-media-readiness",readinessPath:"work/readiness-v001.json"}. Optional readinessPlanPath on run-start or explicit newAttempt binds an offline plan. Start and complete name stageId; completion matches the captured plan/scope/input/quote/grant snapshot. Status separates pipelineReady, currentStageReady and canStartStage. The assistant prepares these records from actual observations; no provider is called.');
   } else throw new Error(`Unknown command: ${command}. Use help.`);
 } catch (error) { console.error(error.message); process.exitCode = 1; }

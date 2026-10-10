@@ -43,9 +43,9 @@
     "narrative-save": "Salvar uma nova versão da narrativa e sua revisão quando fornecida.",
     "narrative-show": "Consultar a narrativa atual ou uma versão anterior.",
     "content-save": "Salvar uma nova versão da peça, com roteiro e vínculos de contexto.",
-    "run-start": "Iniciar um fluxo e retornar o pacote da próxima tarefa.",
-    "run-status": "Consultar estado, responsável, pré-requisitos e mudanças do run.",
-    "run-step": "Registrar uma transição e a evidência do trabalho ocorrido.",
+    "run-start": "Iniciar fluxo; readinessPlanPath opcional vincula plano estruturado offline.",
+    "run-status": "Consultar estado, pré-requisitos, viabilidade/pendências exatas por etapa e captura de início.",
+    "run-step": "Registrar trabalho ou record-media-readiness; geração atual exige start/complete com stageId correspondente.",
     "run-resume": "Retomar o trabalho; mudanças de contexto exigem nova tentativa explícita.",
     "backup": "Criar um backup da personagem com inventário e runs vinculados.",
     "backup-verify": "Conferir os bytes e a estrutura de um backup.",
@@ -54,7 +54,12 @@
     "check-assets": "Verificar a coerência dos registros da personagem e de seus ativos.",
     "doctor": "Verificar instruções, templates, guias, framework e instalação das skills.",
     "setup": "Guiar a escolha do assistente e destino, revisar o plano de instalação e verificar o estúdio local.",
-    "install": "Instalar arquivos reutilizáveis do framework com escolha explícita de assistente e merge que recusa conflitos."
+    "install": "Instalar arquivos reutilizáveis do framework com escolha explícita de assistente e merge que recusa conflitos.",
+    "reference-plan": "Preservar offline um snapshot privado da referência exata.",
+    "reference-send": "Enviar um snapshot de imagem exatamente autorizado pela CLI nativa fixada.",
+    "reference-reconcile": "Consultar biblioteca original e registrar reconciliação vinculada à fonte sem upload.",
+    "reference-destination": "Ler impressão da conta nativa e workspace selecionado sem autenticar.",
+    "reference-status": "Ler recibo local ocultando dados sensíveis e resultado não resolvido."
   },
   "roles": {
     "master": {
@@ -145,7 +150,8 @@
         "Verificar o módulo selecionado separadamente: fichas do Builder não estabelecem capacidades de Soul Cinema, treinamento de identidade, voz, vídeo ou exportação; limites da conta e autorização aplicável para geração cobrada se aplicam",
         "Etapas exigidas de identidade/referências têm evidências reais; etapas indisponíveis permanecem pendentes sem substituição ou omissão silenciosa",
         "Preservar qualquer identidade e referências já aprovadas; alterar um método solicitado exige decisão explícita do usuário e novo planejamento registrado",
-        "Não aprova identidade nem publica"
+        "Não aprova identidade nem publica",
+        "O stage-readiness-v1 atual exige viabilidade das etapas necessárias do método, anexos/custo/autorização/exportação/inspeção exatos da etapa atual, início capturado correspondente e evidência de conclusão delimitada e correspondente; declarações não executam ferramentas nem certificam o provedor"
       ]
     },
     "review-candidates": {
@@ -163,7 +169,7 @@
       "criteria": [
         "Decisão explícita com revisor, data e evento",
         "Decisão do usuário identifica referências visuais, arquivos e hashes exatos selecionados após revisão de anatomia, presença e continuidade",
-        "Para personagens falantes, a amostra vocal em rascunho/referência foi gerada, escutada e selecionada antes da aprovação completa do canon visual/vocal; escopo sem fala registra voz como não aplicável",
+        "Declare voice.applicability como speaking com voice.selection de áudio aprovado exato e evidência completa de escuta, ou silent com voice.referenceId e voice.selection null; escopo unspecified ou ausente não conclui o cânone",
         "Preservar versão e snapshot do canon aprovado; identidade ou voz alterada exige o procedimento existente de versão e aprovação",
         "O runtime registra a declaração; não comprova que o revisor é humano"
       ]
@@ -210,7 +216,8 @@
         "Etapas exigidas de personagem, referências, voz e vídeo têm evidências reais; etapas indisponíveis permanecem pendentes sem substituição ou omissão silenciosa",
         "Preservar identidade e referências aprovadas; alterar um método solicitado exige decisão explícita do usuário e novo planejamento registrado",
         "Um piloto com canon visual/vocal exato aprovado precede lotes; preservar mídias e tentativas históricas quando o contexto mudar",
-        "Não aprova identidade nem publica"
+        "Não aprova identidade nem publica",
+        "O stage-readiness-v1 atual exige viabilidade das etapas necessárias do método, anexos/custo/autorização/exportação/inspeção exatos da etapa atual, início capturado correspondente e evidência de conclusão delimitada e correspondente; declarações não executam ferramentas nem certificam o provedor"
       ]
     },
     "review-media": {

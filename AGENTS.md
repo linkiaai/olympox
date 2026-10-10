@@ -1,6 +1,13 @@
 # OLYMPOX — framework development instructions
 
-This framework development project, operated in Codex or Claude Code, develops and maintains **OLYMPOX - AI Influencer framework**. The reusable framework, installer, contracts, skills, tests, and documentation are its deliverables. Create and produce personal influencers in a separate studio installed from the framework; do not run personal creative production in this checkout.
+This Codex project uses AIOX for software engineering to develop and maintain **OLYMPOX - AI Influencer framework**. The reusable framework, installer, contracts, skills, tests, and documentation are its deliverables. Create and produce personal influencers in a separate studio installed from the framework; do not run personal creative production in this checkout.
+
+## Development boundary
+
+- This checkout builds the OLYMPOX product; it is not an installed influencer studio. The explicit context is `.development/project.json`. Creative runtime commands are refused here; use independent installed studios or synthetic test fixtures.
+- Use AIOX from `.aiox-core/` for engineering, with repository skills in `.agents/skills/aiox-*`. Its generated Codex projection also lives in `.codex/`. Canonical OLYMPOX product skills remain in `skills/`; the installer activates them only in destination studios.
+- Engineering guides, stories, QA and local verification live in `.development/`. AIOX runtime, generated projections, dependencies and local state must stay out of the product package and installer. Do not add AIOX scripts or dependencies to the product `package.json`.
+- Read `.development/README.md` and its referenced engineering guides before configuring development tooling. The product constitution remains a domain contract; AIOX engineering rules do not turn this checkout into a creative studio.
 
 ## Language policy
 
@@ -12,7 +19,7 @@ This framework development project, operated in Codex or Claude Code, develops a
 
 - Read `CONSTITUTION.md`, `docs/studio-team.md`, and `README.md`. Shared principles and specialist contracts guide framework design; they do not demonstrate running agents or creative production.
 - Read only the guides and source files relevant to the change. Architecture is in `docs/framework-architecture.md`, runtime behavior in `docs/framework-02.md` and `framework/README.md`, installation in `docs/installation.md`, and manual maintenance in `docs/living-documentation.md`.
-- Atena coordinates framework work and can consult relevant specialists. All specialist profiles use goddess names. Report delegation only when a real subagent ran; source profiles and local packages do not dispatch workers.
+- AIOX engineering roles coordinate architecture, implementation, QA and release work. OLYMPOX goddess profiles are product source for installed creative studios; do not activate them to develop this repository. Review their contracts as domain requirements when needed. Report delegation only when a real subagent ran.
 - Look for a relevant maintenance record before creating another. Use `work/maintenance/` for actual objectives, decisions, files, checks, and events. Maintenance is separate from creative runs.
 - Inspect current changes before editing and preserve unrelated work. Resolve reversible implementation details autonomously; ask only for decisions that materially change the result. Previously granted authorizations remain valid.
 
@@ -25,11 +32,11 @@ This framework development project, operated in Codex or Claude Code, develops a
 
 ## Installer, export, and privacy
 
-Develop concepts, personality, narrative, scripts and planning with the coordinating assistant, Codex or Claude Code. Higgsfield is the default media pipeline for appearance, candidates, reference packs, scenes, image edits, voice, animation, video and lip-sync. Follow the observed reference method through verified Higgsfield modules, preserving source observations separately from current adaptations. Assistant-integrated image generation is an explicit alternative only; do not use it automatically or silently replace a missing Higgsfield stage. Each required module needs checked access, accepted exact inputs, known cost or an authorized uncertainty, export and inspection support. Missing capabilities leave the affected stage pending. The local core remains usable for preparation without a connected provider; installation never authenticates or generates.
+The installed studio instructions must keep concepts, personality, narrative, scripts and planning with the coordinating assistant, Codex or Claude Code. Higgsfield is the default media pipeline for appearance, candidates, reference packs, scenes, image edits, voice, animation, video and lip-sync. Follow the observed reference method through verified Higgsfield modules, preserving source observations separately from current adaptations. Assistant-integrated image generation is an explicit alternative only; do not use it automatically or silently replace a missing Higgsfield stage. Each required module needs checked access, accepted exact inputs, known cost or an authorized uncertainty, export and inspection support. Missing capabilities leave the affected stage pending. The local core remains usable for preparation without a connected provider; installation never authenticates or generates.
 
-Respect explicit user-selected methods/providers. Images, references, voice, animation, video, lip-sync and specialized work use the verified Higgsfield reference pipeline by default. Assistant image generation is an explicit alternative only. Preserve discovery, distinct concepts, expressive premise scenes, real reference attachments, anatomy/presence/continuity inspection, user visual selection, listened-to vocal selection before complete speaking-character canon approval, exact-reference approval, canon preservation, and a pilot before batches.
+The product must respect explicit user-selected methods/providers. Images, references, voice, animation, video, lip-sync and specialized work use the verified Higgsfield reference pipeline by default. Assistant image generation is an explicit alternative only. Preserve discovery, distinct concepts, expressive premise scenes, real reference attachments, anatomy/presence/continuity inspection, user visual selection, listened-to vocal selection before complete speaking-character canon approval, exact-reference approval, canon preservation, and a pilot before batches.
 
-Record method per stage, tool, exposed model, prompts, actual references, files/hashes, known costs, and limitations. Missing capabilities leave a pending stage with proposed alternatives; paid external generation requires applicable authorization. Review complete media and export actual bytes before authorized publication. Context changes use the existing explicit new-attempt procedure without migrating approved characters or rewriting old evidence.
+Studio instructions must require records of method per stage, tool, exposed model, prompts, actual references, files/hashes, known costs, and limitations. Missing capabilities leave a pending stage with proposed alternatives; paid external generation requires applicable authorization. Review complete media and export actual bytes before authorized publication. Context changes use the existing explicit new-attempt procedure without migrating approved characters or rewriting old evidence.
 
 - Distribute only reusable framework sources, templates, skills, tests, permitted provider-source provenance, and documentation. Keep personal character records, media, prompts, runs, maintenance state, backups, credentials, provider binaries, temporary files, and generated manual output out of Git and the installation package.
 - Maintain explicit package and installer source selection. Check both the export list and installed tree; `.gitignore` alone does not prove package privacy.
@@ -48,3 +55,9 @@ Record method per stage, tool, exposed model, prompts, actual references, files/
 ## Git and release work
 
 Review the concrete framework diff and export contents before committing or publishing. Keep personal production outside this repository and preserve existing ignored history locally. Use the user's applicable Git or release authorization; do not invent a remote publication or claim an installation command was exercised until it actually was.
+
+## AIOX engineering workflow
+
+Use `aiox-architect` for design, `aiox-dev` for implementation, `aiox-qa` for verification and `aiox-devops` for authorized release work. Load the selected canonical profile from `.aiox-core/development/agents/`; a profile file does not itself start a worker. Keep repository safeguards, user authorization and preservation rules in force.
+
+Run `node .development/verify-aiox.mjs` for the local engineering installation and `npm.cmd run verify` for the product. There are no root lint or typecheck scripts; do not report nonexistent gates as passing. The product tests exercise synthetic or independent installed studios.

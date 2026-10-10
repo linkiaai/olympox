@@ -69,15 +69,32 @@ Check billing for this route rather than assuming website, API or plugin allowan
 
 ## Transfer local files for plugin use
 
-Check the current native upload help and confirm both routes use the intended account/workspace:
+The assistant uses the separate exact-reference operation when the user's applicable authorization covers the selected file and destination. It need not ask the user to drag that file into the website. Keep the preparation wrapper's read scope unchanged.
 
 ```powershell
-node scripts/higgsfield-local.mjs help upload create
+node scripts/reference-transfer.mjs help
+node scripts/reference-transfer.mjs destination
+node scripts/reference-transfer.mjs plan <character-id> work/transfer-spec.json
+node scripts/reference-transfer.mjs status <character-id> <transfer-id>
+node scripts/reference-transfer.mjs send <character-id> <transfer-id> work/transfer-grant.json
+node scripts/reference-transfer.mjs reconcile <character-id> <transfer-id> [work/transfer-observation.json]
 ```
 
-With the exact file/hash and applicable upload authorization, use the pinned native executable's `upload create <local-file> --json`. This is an external media transfer; the preparation wrapper does not expose it as an `inspect` operation.
+Prepare `work/transfer-spec.json` from [the specification template](../templates/reference-transfer.json), replacing every placeholder with the actual selected reference, digest and byte count. `source.path` is relative to the character and starts with `references/` or `media/`; record the exact reference ID, intended role and order. The local snapshot limit is 64 MiB. Recognized image extensions are PNG, JPG/JPEG, WebP and GIF; MP4/MOV/WebM and MP3/WAV/M4A/OGG can be planned but remain `awaiting-verified-media-type`. Extension recognition does not prove decoding, quality or service input support. Only the observed native `image` receipt is accepted for send in this increment.
 
-Record source path, SHA-256/size, upload response and returned media ID/URL. Verify its availability through the plugin's actual library/read tools before use. Compare downloadable original bytes where supported; document transformations or unavailable byte verification and inspect fidelity. Use confirmed mapped inputs in their accepted roles. The framework supplies this procedure, not an automatic bridge or proof of cross-route access in every account.
+`plan` and `status` work offline. Planning preserves the exact bytes in ignored `influencers/<character-id>/.reference-transfers/<transfer-id>/`, with no provider call. `destination` reads the installed pinned native CLI's account/workspace and prints only a derived account fingerprint and workspace ID. It never authenticates or selects a workspace. The fingerprint is SHA-256 of the native email trimmed and lowercased; email and provider output remain in memory. Confirm plugin ownership separately.
+
+The native workspace-status ID is compared exactly with the intended destination. Its observed `is_selected` field must be boolean; the operation does not infer context validity from true/false or change a default/personal context. Unsupported or changed response shapes remain pending.
+
+The separate grant contains `schemaVersion: 1`, `transferId`, exact copies of the specification's `source`, `destination` and `native`, `approved: true`, and `provenance` with `actor`, UTC `at`, `event`, `source` and `notes` describing the actual user authorization. Keep credentials, email and URLs out of this declaration. Existing applicable session authorization can supply it without asking again; concept/canon approval alone cannot. The declaration records provenance, not authenticated human identity. Private JSON inputs use safe studio-relative paths.
+
+`send` refuses development checkouts, links/junctions, drifted originals/snapshots, wrong native version/hash/platform, missing/mismatched authorization and changed account/workspace before upload. It uses the pinned 1.1.26 Windows x64 executable with separate `upload create <controlled-snapshot> --json` arguments, a 30-second timeout and a 1-MiB combined output limit. It persists `submitting` before the single dispatch and stores only an allowlisted source/destination declaration and returned media ID/type; no raw provider output, email or URL is printed or persisted. It does not generate, train or publish.
+
+An acknowledged `uploaded` receipt binds local bytes and native acknowledgement. It leaves `providerBytes`, `pluginAccess` and `generationReadiness` unverified. Confirm the returned ID through the plugin's actual library and exact module input schema. Compare downloadable original bytes where supported; document unavailable verification or transformations and inspect fidelity before use. Upload success does not demonstrate that AI Influencer Builder or another required module accepts that ID.
+
+Timeout, interruption, malformed output, unknown schema or receipt persistence failure leaves `uncertain`, or the preserved `submitting` state after a crash. Exit code 2 signals an unresolved outcome. Do not retry, switch routes or create another intent. `reconcile` checks the original library through read-only paginated `upload list`; a known matching ID establishes existence only. A missing row, recent timestamp or empty page never proves source association or non-submission. A lock owned by a live/uninspectable process is refused; reconciliation may release only a demonstrably dead local owner, retaining the unresolved intent.
+
+To resolve an externally confirmed outcome, supply an observation containing `schemaVersion: 1`, `transferId`, the exact `source`, `destination`, `native` and actual tool/event `provenance` as above, plus `outcome: accepted` and the confirmed `mediaId`, or `outcome: not-submitted` with `mediaId: null` only when the service explicitly proves no transfer. An accepted observation must also match the native library ID. Do not derive that evidence from absence or fabricate it from a timeout. A known accepted ID conflicts with a non-submission declaration. A resolved/terminal intent never sends again; a genuinely changed source/destination uses a new intent and grant after prior uncertainty is resolved. Preserve the old intent and staged bytes.
 
 ## Authorized production later
 

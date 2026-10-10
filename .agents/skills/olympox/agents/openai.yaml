@@ -1,4 +1,0 @@
-interface:
-  display_name: "OLYMPOX"
-  short_description: "Create influencers with a Higgsfield media pipeline"
-  default_prompt: "Use $olympox to explore memorable original AI influencers and follow the Higgsfield reference media pipeline. Coordinate concepts and scripts here, verify exact inputs, whole-pilot budget and capabilities, and preserve identity, listened-to voice, approvals and full quality review."

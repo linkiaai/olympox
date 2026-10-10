@@ -69,15 +69,32 @@ Confira cobrança dessa rota sem presumir franquias do site/API/plugin. Salve co
 
 ## Transferir arquivos locais para o plugin
 
-Confira ajuda nativa atual de upload e confirme conta/workspace pretendidos nas duas rotas:
+O assistente usa a operação separada de referência exata quando a autorização aplicável do usuário cobre arquivo e destino selecionados. Não precisa pedir que o usuário arraste esse arquivo ao site. Preserve o escopo de leitura do wrapper preparatório.
 
 ```powershell
-node scripts/higgsfield-local.mjs help upload create
+node scripts/reference-transfer.mjs help
+node scripts/reference-transfer.mjs destination
+node scripts/reference-transfer.mjs plan <character-id> work/transfer-spec.json
+node scripts/reference-transfer.mjs status <character-id> <transfer-id>
+node scripts/reference-transfer.mjs send <character-id> <transfer-id> work/transfer-grant.json
+node scripts/reference-transfer.mjs reconcile <character-id> <transfer-id> [work/transfer-observation.json]
 ```
 
-Com arquivo/hash exatos e autorização aplicável, use `upload create <local-file> --json` no executável nativo fixado. É transferência externa; o wrapper preparatório não a oferece como `inspect`.
+Prepare `work/transfer-spec.json` pelo [template da especificação](../../../templates/locales/pt-BR/reference-transfer.json), substituindo todos os marcadores pela referência escolhida, digest e tamanho reais. `source.path` é relativo ao personagem e começa com `references/` ou `media/`; registre ID exato, papel e ordem pretendidos. O limite local do snapshot é 64 MiB. Extensões de imagem reconhecidas: PNG, JPG/JPEG, WebP e GIF; MP4/MOV/WebM e MP3/WAV/M4A/OGG podem ser planejados, mas ficam `awaiting-verified-media-type`. Extensão não comprova decodificação, qualidade ou suporte da entrada no serviço. Esta etapa aceita somente o recibo nativo `image` observado para envio.
 
-Registre caminho, SHA-256/tamanho, resposta e ID/URL retornados. Confira disponibilidade pelo plugin antes do uso. Compare bytes originais baixáveis quando suportado; documente transformações ou verificação indisponível e inspecione fidelidade. Use entradas mapeadas confirmadas nos papéis aceitos. O framework fornece procedimento, não ponte automática ou prova de acesso entre rotas em toda conta.
+`plan` e `status` funcionam offline. O planejamento preserva bytes exatos em `influencers/<character-id>/.reference-transfers/<transfer-id>/`, privado e ignorado, sem chamada ao fornecedor. `destination` lê conta/workspace da CLI nativa instalada e fixada, exibindo somente impressão derivada da conta e ID do workspace. Não autentica nem seleciona workspace. A impressão é SHA-256 do email nativo sem espaços nas pontas e em minúsculas; email e resposta permanecem em memória. Confirme propriedade no plugin separadamente.
+
+ID retornado pelo workspace status nativo é comparado exatamente ao destino pretendido. Campo observado `is_selected` precisa ser boolean; operação não infere validade do contexto por true/false nem altera contexto padrão/pessoal. Shapes diferentes/desconhecidos permanecem pendentes.
+
+A autorização separada contém `schemaVersion: 1`, `transferId`, cópias exatas de `source`, `destination` e `native` da especificação, `approved: true` e `provenance` com `actor`, `at` UTC, `event`, `source` e `notes` descrevendo autorização real do usuário. Não inclua credenciais, email ou URLs. Autorização aplicável já existente na sessão pode fundamentar a declaração sem nova pergunta; aprovação conceitual/do canon sozinha não autoriza transferência. A declaração registra proveniência, não autentica uma pessoa. JSONs privados usam caminhos relativos seguros do estúdio.
+
+`send` recusa checkout de desenvolvimento, links/junctions, originais/snapshots alterados, versão/hash/plataforma nativa incorretos, autorização ausente/divergente e conta/workspace trocados antes do upload. Usa executável 1.1.26 Windows x64 fixado com argumentos separados `upload create <controlled-snapshot> --json`, timeout de 30 segundos e limite combinado de saída de 1 MiB. Persiste `submitting` antes da chamada única e salva somente declaração permitida de fonte/destino e ID/tipo retornados; não imprime nem persiste resposta bruta, email ou URL. Não gera, treina nem publica.
+
+Recibo `uploaded` vincula bytes locais e reconhecimento nativo. `providerBytes`, `pluginAccess` e `generationReadiness` continuam não verificados. Confirme ID pela biblioteca real do plugin e schema da entrada do módulo exato. Compare bytes originais baixáveis quando suportado; documente verificação indisponível/transformações e inspecione fidelidade antes de usar. Upload aceito não comprova que AI Influencer Builder ou outro módulo necessário aceite aquele ID.
+
+Timeout, interrupção, saída malformada, schema desconhecido ou falha de persistência deixam `uncertain`, ou `submitting` preservado após crash. Código de saída 2 indica resultado não resolvido. Não repita, troque rota nem crie outra intenção. `reconcile` consulta biblioteca original por `upload list` paginado e somente leitura; ID conhecido encontrado comprova existência apenas. Linha ausente, timestamp recente ou página vazia nunca comprovam associação à fonte ou não envio. Lock de processo ativo/não inspecionável é recusado; reconciliação pode liberar somente dono local comprovadamente encerrado, mantendo intenção não resolvida.
+
+Para resolver resultado confirmado externamente, forneça observação com `schemaVersion: 1`, `transferId`, `source`, `destination`, `native` exatos e `provenance` real de ferramenta/evento como acima, mais `outcome: accepted` e `mediaId` confirmado, ou `outcome: not-submitted` com `mediaId: null` somente quando o serviço comprovar explicitamente ausência de transferência. Observação aceita também precisa corresponder ao ID na biblioteca nativa. Não derive evidência de ausência nem fabrique declaração pelo timeout. ID conhecido aceito conflita com declaração de não envio. Intenção resolvida/terminal nunca envia novamente; fonte/destino realmente novos usam nova intenção/autorização depois de resolver incertezas. Preserve intenção antiga e bytes preparados.
 
 ## Produção autorizada posterior
 

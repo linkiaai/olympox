@@ -90,6 +90,8 @@ Mantenha créditos do fornecedor separados do `cost` monetário do ativo; custo 
 
 ## Revisão e próximo repasse
 
+- Escopo vocal da nova persona: `voice.applicability` resolvido (`speaking`/`silent`), seleção de escuta exata vinculada ou referência/seleção null com motivo silent; preservar campos históricos ausentes:
+
 - Teste do conceito: idade, silhueta, estilo, atitude, voz e premissa de conteúdo desejados permanecem:
 - Inspeção de fidelidade/mídia: arquivos exatos, revisor, método, regiões/trechos e limitações:
 - Aprendizado do piloto: abertura, entrega, motivo para compartilhar, série repetível e métrica/fonte:
@@ -97,3 +99,9 @@ Mantenha créditos do fornecedor separados do `cost` monetário do ativo; custo 
 - Próximo responsável, versões exatas de entrada e etapa restante:
 
 Preparado, submetido, gerado, revisado e publicado são observações distintas. Contratos locais e hashes preservam declarações; não comprovam cumprimento conversacional, qualidade audiovisual ou alcance viral.
+
+## Prontidão por etapa
+
+Contratos atuais de geração `0.3.0` exigem `stage-readiness-v1` estruturado antes do início e da conclusão correspondente. O assistente prepara/importa `templates/media-readiness.json` com observações reais por `run-step`, ação `record-media-readiness`; a pessoa não escreve JSON. `readinessPlanPath` opcional vincula um plano offline no início/nova tentativa. Viabilidade do piloto, entradas atuais exatas e resultado concluído são distintos: bytes futuros de voz/cena podem ficar pendentes. Cada etapa necessária exige sua decisão real de método, acesso/esquema, exposição de destino/modelo, preço/incerteza autorizada, autorizações do piloto/etapa, export original e inspeção completa. Desconhecido é pendente, nunca gratuito. Limite da etapa não amplia o teto comparável do piloto, que inclui custos conhecidos capturados de etapas concluídas.
+
+Start informa `stageId` e captura escopo/entradas/preços/autorizações; complete exige captura e evidência correspondente da etapa/provedor/ferramenta/módulo/rota/modelo. Expirar após início válido não impede conclusão correspondente. Status expõe `pipelineReady`, pendências/resultados por etapa, `currentStageReady`, `canStartStage` e identidade da captura. Atualização no mesmo plano acrescenta evidências; mudanças vinculadas exigem nova tentativa explícita. Reconcilie jobs originais não resolvidos antes. Contratos históricos capturados `0.1.0`/`0.2.0` preservam semântica/bytes. Declarações privadas não autenticam acesso/consentimento, impõem teto real de gasto ou provam escuta/qualidade. Veja [o contrato exato de prontidão](../../../docs/locales/pt-BR/framework/README.md) para campos, hashes e evidência de transição.

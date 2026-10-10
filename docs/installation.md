@@ -10,7 +10,7 @@ Install **OLYMPOX - AI Influencer framework** into an independent studio for Cod
 
 The local core has no external runtime dependencies; these commands need no `npm install`. Higgsfield access is prepared separately. You can install, plan characters, and maintain records before connecting a provider.
 
-This guide describes **0.5.0**. Install the published tag with `npx --yes github:linkiaai/olympox#v0.5.0 setup`. Use the local commands below for a reviewed checkout or extracted package. A later local edit does not update the published tag or hosted manual. See [release notes](release-notes.md).
+This guide describes the **0.6.0-rc.1** release candidate. Install its tag with `npx --yes github:linkiaai/olympox#v0.6.0-rc.1 setup`. Use the local commands below for a reviewed checkout or extracted package. A later local edit does not update a published tag or hosted manual. The historical 0.5.0 release remains unchanged. See [release notes and candidate testing](release-notes.md).
 
 ## Guided setup
 
@@ -79,6 +79,8 @@ Check the complete Higgsfield pilot path, references, export and budget first.
 
 Installed files and successful local checks do not establish live skill discovery. The Claude target configures local Claude Code project files, not Claude web or other environments.
 
+Pre-release preparation was exercised on Windows with Node 24.18.0, before the release-version metadata was updated. Both assistant projections passed local installation checks; a Codex CLI session prepared concepts after process-only configuration adjustments, while full skill loading and a real Claude session remain unverified. Node 22 and other operating systems still need execution checks. Test your actual host and report its exact version and error through the [candidate testing procedure](release-notes.md), without changing personal settings just to hide a failure.
+
 ## Merge into an existing project
 
 ```sh
@@ -111,6 +113,8 @@ node scripts/install-skill.mjs higgsfield-studio --assistant both
 ```
 
 It preflights all selected files, retains identical copies, and refuses differences. It does not create the Claude instruction bridge by itself. Review changed active copies as part of an explicit update; the installer does not overwrite them.
+
+Run these commands in an independent installed studio. A checkout marked by `.development/project.json` as `framework-development` refuses creative skill activation before writing; invalid or linked development markers also fail. Read-only CLI help remains available. Product engineering uses AIOX in the development checkout.
 
 Connect Higgsfield in the actual assistant session using the [plugin route](higgsfield-plugin.md) or [local CLI route](higgsfield-setup.md). Check each required module, accepted references, submission/status operations, export, inspection, known cost, and applicable authorization. Access in one assistant does not establish access in another. Missing stages remain pending; an alternative method needs an explicit decision. Installation does not authenticate, install provider binaries, generate, train, or publish.
 

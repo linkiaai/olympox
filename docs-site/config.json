@@ -221,9 +221,9 @@
     "narrative-save": "Save a new narrative version and its review when supplied.",
     "narrative-show": "Read the current narrative or an earlier version.",
     "content-save": "Save a new content piece version with script and context links.",
-    "run-start": "Start a workflow and return the next task package.",
-    "run-status": "Read run state, owner, prerequisites and changes.",
-    "run-step": "Record a transition and evidence of work that actually occurred.",
+    "run-start": "Start a workflow; optionally bind a structured offline readinessPlanPath.",
+    "run-status": "Read state, prerequisites, per-stage feasibility/exact pending reasons and captured start identity.",
+    "run-step": "Record actual work or record-media-readiness; current generation requires matching stageId start/completion.",
     "run-resume": "Resume work; context changes require an explicit new attempt.",
     "backup": "Create a character backup with inventory and linked runs.",
     "backup-verify": "Check backup bytes and structure.",
@@ -232,7 +232,12 @@
     "check-assets": "Check character and asset record consistency.",
     "doctor": "Check instructions, templates, guides, framework and skill installation.",
     "setup": "Guide assistant and destination selection, review the installation plan and verify the local studio.",
-    "install": "Install reusable framework files with explicit assistant selection and conflict-safe merge."
+    "install": "Install reusable framework files with explicit assistant selection and conflict-safe merge.",
+    "reference-plan": "Preserve an exact private reference snapshot offline.",
+    "reference-send": "Send one exactly authorized image snapshot through the pinned native CLI.",
+    "reference-reconcile": "Inspect the original library and record source-bound reconciliation without uploading.",
+    "reference-destination": "Read the native account fingerprint and selected workspace without authentication.",
+    "reference-status": "Read a redacted local transfer receipt and unresolved outcome."
   },
   "defaultLocale": "en",
   "locales": {

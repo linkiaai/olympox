@@ -6,10 +6,10 @@ The framework provides local skills, task contracts, resumable workflows, charac
 
 ## Set up an independent studio
 
-Install the published **0.5.0** release:
+Install the **0.6.0-rc.1** release candidate for testing:
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.5.0 setup
+npx --yes github:linkiaai/olympox#v0.6.0-rc.1 setup
 ```
 
 From a reviewed checkout or extracted package, use `node bin/olympox.mjs setup`.
@@ -26,7 +26,9 @@ Use `--locale pt-BR` for Portuguese setup prompts. On Windows, use `npm.cmd` whe
 
 See [installation](docs/installation.md) for source selection, merge conflicts and preserving an existing studio. Updating these guides locally does not change the already published package or hosted manual.
 
-This repository is the framework development checkout. Create personal characters and media in the independently installed studio.
+This repository is the framework development checkout, using AIOX for software engineering. AIOX tooling and dependencies are excluded from the product package. Create personal characters and media in the independently installed studio.
+
+The candidate adds bounded local image transfer, explicit speaking/silent canon checks and media readiness per stage. Start with local preparation; actual host discovery and media production still need testing in your environment. Read the [release notes and testing instructions](docs/release-notes.md) for known limits and reporting a reproducible issue. The historical 0.5.0 release remains unchanged.
 
 ## Create your first character
 

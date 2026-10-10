@@ -1,6 +1,7 @@
 {
   "schemaVersion": 1,
-  "version": "0.2.0",
+  "version": "0.3.0",
+  "mediaReadinessPolicy": "stage-readiness-v1",
   "id": "generate-candidates",
   "name": "Generate identity candidates",
   "owner": "production",
@@ -21,6 +22,7 @@
     "Verify the selected module separately: Builder character sheets do not establish Soul Cinema, identity training, voice, video, or export capability; account limits and applicable paid-generation authorization apply",
     "Required identity/reference stages have actual evidence; unavailable stages remain pending without silent substitution or omission",
     "Preserve any existing approved identity and references; changing a requested method requires an explicit user decision and recorded replanning",
-    "Does not approve identity or publish"
+    "Does not approve identity or publish",
+    "Current stage-readiness-v1 requires feasible required method stages, exact current attachments/cost/authorization/export/inspection, captured matching start and bounded matching completion evidence; declarations do not dispatch or certify a provider"
   ]
 }

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "version": "0.2.0",
+  "id": "generate-candidates",
+  "name": "Generate identity candidates",
+  "owner": "production",
+  "deliverable": "media",
+  "evidenceType": "generated",
+  "requiresPersona": true,
+  "requiresApprovedCanon": false,
+  "capability": "generation",
+  "minimumOutputs": 1,
+  "criteria": [
+    "Existing media file with its type and SHA-256 recorded",
+    "Generation event declared with tool, responsible actor, and date",
+    "Preserve the selected original concept, personality, recognition anchors, and chosen level of realism or stylization",
+    "Use verified Higgsfield character/image capabilities by default, independently of the coordinating assistant; integrated assistant images require an explicit user choice, and unavailable capability remains pending with alternatives proposed",
+    "Execution follows the observed method plan for each stage and records method, actual tool, provider/module/access route where applicable, exposed model, prompts, exact input/output files and hashes, known costs, and limitations",
+    "Candidates and an in-character scene express the selected personality and premise; coherent reference development follows the user's visual selection",
+    "Reference files are actually attached to later generation/editing calls and recorded with their hashes; mentioning paths in a prompt does not attach them",
+    "Verify the selected module separately: Builder character sheets do not establish Soul Cinema, identity training, voice, video, or export capability; account limits and applicable paid-generation authorization apply",
+    "Required identity/reference stages have actual evidence; unavailable stages remain pending without silent substitution or omission",
+    "Preserve any existing approved identity and references; changing a requested method requires an explicit user decision and recorded replanning",
+    "Does not approve identity or publish"
+  ]
+}

@@ -16,7 +16,7 @@ function fixture({ sources = true, cli = false } = {}) {
   if (sources) for (const name of ['olympox', 'higgsfield-studio']) {
     for (const relative of skillFiles) write(root, `skills/${name}/${relative}`, `${name}: ${relative}\n`);
   }
-  if (cli) for (const name of ['install-skill.mjs', 'skill-install-core.mjs', 'assistant-targets.mjs']) {
+  if (cli) for (const name of ['install-skill.mjs', 'skill-install-core.mjs', 'assistant-targets.mjs', 'development-context.mjs']) {
     write(root, `scripts/${name}`, fs.readFileSync(path.join(project, 'scripts', name)));
   }
   return { root, close() {
@@ -279,4 +279,96 @@ test('Claude skill destination junctions cannot redirect either host projection'
     assert.deepEqual(snapshot(external.root), outsideBefore);
     assert.equal(fs.existsSync(path.join(instance.root, '.agents')), false);
   } finally { instance.close(); external.close(); }
+});
+
+test('public skill activation refuses both creative skills and every host in a marked development checkout without writes', () => {
+  const instance = fixture({ cli: true });
+  try {
+    write(instance.root, '.development/project.json', JSON.stringify({ schemaVersion: 1, kind: 'framework-development' }));
+    write(instance.root, '.git/config', 'Preserved Git metadata');
+    write(instance.root, '.agents/skills/local-note.md', 'Preserved local projection note');
+    write(instance.root, '.claude/settings.local.json', '{"local":true}');
+    const before = snapshot(instance.root);
+    for (const skill of ['olympox', 'higgsfield-studio']) for (const assistant of ['codex', 'claude', 'both']) {
+      const result = spawnSync(process.execPath, [path.join(instance.root, 'scripts/install-skill.mjs'), skill, '--assistant', assistant], { cwd: project, encoding: 'utf8' });
+      assert.equal(result.status, 1, `${skill}/${assistant}`);
+      assert.match(result.stderr, /framework development checkout.*independent OLYMPOX studio/);
+      assert.deepEqual(snapshot(instance.root), before);
+    }
+    const defaultSkill = spawnSync(process.execPath, [path.join(instance.root, 'scripts/install-skill.mjs')], { cwd: project, encoding: 'utf8' });
+    assert.equal(defaultSkill.status, 1);
+    assert.deepEqual(snapshot(instance.root), before);
+  } finally { instance.close(); }
+});
+
+test('invalid development markers refuse public activation while read-only help remains usable', () => {
+  for (const bytes of ['{broken JSON', 'null', '{"schemaVersion":2,"kind":"framework-development"}', '{"schemaVersion":1,"kind":"studio"}']) {
+    const instance = fixture({ cli: true });
+    try {
+      write(instance.root, '.development/project.json', bytes);
+      const before = snapshot(instance.root);
+      const script = path.join(instance.root, 'scripts/install-skill.mjs');
+      const result = spawnSync(process.execPath, [script, '--assistant', 'both'], { encoding: 'utf8' });
+      assert.equal(result.status, 1);
+      assert.match(result.stderr, /Invalid framework development marker/);
+      const help = spawnSync(process.execPath, [script, '--help'], { encoding: 'utf8' });
+      assert.equal(help.status, 0, help.stderr);
+      assert.match(help.stdout, /framework development checkouts refuse activation/);
+      assert.deepEqual(snapshot(instance.root), before);
+    } finally { instance.close(); }
+  }
+});
+
+test('development directory and marker links or non-file markers cannot bypass public activation', () => {
+  for (const scenario of ['directory-link', 'marker-link', 'marker-directory', 'directory-file']) {
+    const instance = fixture({ cli: true }), external = fixture({ sources: false });
+    try {
+      write(external.root, 'project.json', '{"schemaVersion":1,"kind":"framework-development"}');
+      if (scenario === 'directory-link') junction(external.root, path.join(instance.root, '.development'));
+      else if (scenario === 'marker-link') junction(external.root, path.join(instance.root, '.development/project.json'));
+      else if (scenario === 'marker-directory') fs.mkdirSync(path.join(instance.root, '.development/project.json'), { recursive: true });
+      else write(instance.root, '.development', 'A file is not a development directory');
+      const before = snapshot(instance.root), outsideBefore = snapshot(external.root);
+      const result = spawnSync(process.execPath, [path.join(instance.root, 'scripts/install-skill.mjs'), '--assistant', 'both'], { encoding: 'utf8' });
+      assert.equal(result.status, 1, scenario);
+      assert.match(result.stderr, /Invalid framework development (directory|marker)/);
+      assert.deepEqual(snapshot(instance.root), before);
+      assert.deepEqual(snapshot(external.root), outsideBefore);
+    } finally { instance.close(); external.close(); }
+  }
+});
+
+test('unmarked studio activation retains all host selections, unrelated notes and Git metadata', () => {
+  for (const skill of ['olympox', 'higgsfield-studio']) for (const assistant of ['codex', 'claude', 'both']) {
+    const instance = fixture({ cli: true });
+    try {
+      write(instance.root, '.development/unrelated.md', 'A studio note is not a development marker');
+      write(instance.root, '.git/config', 'Preserved Git metadata');
+      const args = [path.join(instance.root, 'scripts/install-skill.mjs'), skill, '--assistant', assistant];
+      const result = spawnSync(process.execPath, args, { encoding: 'utf8' });
+      assert.equal(result.status, 0, result.stderr);
+      for (const [host, directory] of [['codex', '.agents'], ['claude', '.claude']]) {
+        const target = path.join(instance.root, directory, 'skills', skill, 'SKILL.md');
+        assert.equal(fs.existsSync(target), assistant === host || assistant === 'both');
+        if (fs.existsSync(target)) assert.deepEqual(fs.readFileSync(target), fs.readFileSync(path.join(instance.root, 'skills', skill, 'SKILL.md')));
+      }
+      const before = snapshot(instance.root);
+      assert.equal(spawnSync(process.execPath, args, { encoding: 'utf8' }).status, 0);
+      assert.deepEqual(snapshot(instance.root), before);
+      assert.equal(fs.readFileSync(path.join(instance.root, '.git/config'), 'utf8'), 'Preserved Git metadata');
+    } finally { instance.close(); }
+  }
+});
+
+test('public both-host activation refuses a destination conflict before writing either projection', () => {
+  const instance = fixture({ cli: true });
+  try {
+    write(instance.root, '.claude/skills/olympox/SKILL.md', 'Preserved customization');
+    const before = snapshot(instance.root);
+    const result = spawnSync(process.execPath, [path.join(instance.root, 'scripts/install-skill.mjs'), '--assistant', 'both'], { encoding: 'utf8' });
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /Installed skill differs/);
+    assert.deepEqual(snapshot(instance.root), before);
+    assert.equal(fs.existsSync(path.join(instance.root, '.agents')), false);
+  } finally { instance.close(); }
 });

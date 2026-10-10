@@ -90,6 +90,8 @@ Keep provider credits separate from monetary asset `cost`; unknown monetary cost
 
 ## Review and next handoff
 
+- New persona vocal scope: resolved `voice.applicability` (`speaking`/`silent`), exact bound listening selection or null reference/selection with silent rationale; preserve historical absent fields:
+
 - Concept test: intended age, silhouette, styling, attitude, voice and content premise survive:
 - Fidelity/media inspection: exact files, reviewer, method, regions/segments and limitations:
 - Pilot learning: opening, payoff, reason to share, repeatable series and metric/source:
@@ -97,3 +99,9 @@ Keep provider credits separate from monetary asset `cost`; unknown monetary cost
 - Next owner, exact input versions and remaining stage:
 
 Prepared, submitted, generated, reviewed and published are distinct observations. Local contracts and hashes preserve declarations; they do not prove conversational compliance, audiovisual quality or viral reach.
+
+## Per-stage readiness
+
+Current generation contracts `0.3.0` require structured `stage-readiness-v1` before start and matching completion. The assistant prepares/imports `templates/media-readiness.json` from actual observations using `run-step` action `record-media-readiness`; the creator does not author JSON. Optional `readinessPlanPath` binds an offline plan on start/new-attempt. Whole-pilot feasibility is distinct from exact current inputs and completed outcome: future voice/scene bytes can remain pending. Each required stage needs its actual method-choice decision, access/schema, destination/model exposure, quote/scoped cost uncertainty, applicable pilot/current grants, original-byte export and full inspection support. Unknown is pending, never free. Stage limits cannot override the comparable pilot envelope, which includes captured known completed-stage costs.
+
+Start names `stageId` and captures exact scope/input/quote/grant context; completion requires that capture and matching generated stage/provider/tool/module/route/model evidence. Expiry after valid start does not block matching completion. Status exposes `pipelineReady`, stage pending reasons/outcomes, `currentStageReady`, `canStartStage` and capture identity. Same-plan refresh appends evidence; bound context changes require an explicit new attempt. Unresolved original jobs must be reconciled first. Historical captured `0.1.0`/`0.2.0` retain original semantics/bytes. These private declarations do not authenticate provider access/consent, enforce actual spend caps or prove listening/media quality. See [the exact readiness contract](../framework/README.md) for fields, scope hashes and transition evidence.

@@ -26,7 +26,7 @@ function fixture(approved = false) {
   fs.mkdirSync(testRoot, { recursive: true });
   const base = fs.mkdtempSync(path.join(testRoot, 'editorial-test-'));
   scratch.push(base);
-  const persona = core.readJson(path.join(root, 'templates/persona.json'));
+  const persona = core.readJson(path.join(root, 'tests/fixtures/legacy-persona-v1.json'));
   persona.id = 'editorial-test';
   if (approved) {
     Object.assign(persona.profile, { name: 'Adult fixture', age: 30, audience: 'Fixture readers', valueProposition: 'Verify record continuity' });

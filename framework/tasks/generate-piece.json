@@ -1,6 +1,7 @@
 {
   "schemaVersion": 1,
-  "version": "0.2.0",
+  "version": "0.3.0",
+  "mediaReadinessPolicy": "stage-readiness-v1",
   "id": "generate-piece",
   "name": "Generate the actual piece",
   "owner": "production",
@@ -20,6 +21,7 @@
     "Required character, reference, voice, and video stages have actual evidence; unavailable stages remain pending without silent substitution or omission",
     "Preserve approved identity and references; changing a requested method requires an explicit user decision and recorded replanning",
     "A pilot using approved exact visual/vocal canon precedes batches; preserve historical media and attempts when context changes",
-    "Does not approve identity or publish"
+    "Does not approve identity or publish",
+    "Current stage-readiness-v1 requires feasible required method stages, exact current attachments/cost/authorization/export/inspection, captured matching start and bounded matching completion evidence; declarations do not dispatch or certify a provider"
   ]
 }

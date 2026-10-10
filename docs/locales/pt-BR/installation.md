@@ -10,7 +10,7 @@ Instale **OLYMPOX - AI Influencer framework** em um estúdio independente para C
 
 O núcleo local não tem dependências externas de execução; os comandos dispensam `npm install`. O acesso ao Higgsfield é preparado separadamente. É possível instalar, planejar personagens e manter registros antes de conectar um fornecedor.
 
-Este guia descreve a **0.5.0**. Instale a tag publicada com `npx --yes github:linkiaai/olympox#v0.5.0 setup`. Use os comandos locais abaixo para uma cópia revisada ou um pacote extraído. Uma edição local posterior não atualiza a tag publicada nem o manual hospedado. Consulte [notas das versões](release-notes.md).
+Este guia descreve a versão candidata **0.6.0-rc.1**. Instale sua tag com `npx --yes github:linkiaai/olympox#v0.6.0-rc.1 setup`. Use os comandos locais abaixo para uma cópia revisada ou um pacote extraído. Uma edição local posterior não atualiza uma tag publicada nem o manual hospedado. A release histórica 0.5.0 permanece intacta. Consulte [notas da versão e teste da candidata](release-notes.md).
 
 ## Preparação guiada
 
@@ -79,6 +79,8 @@ Confira primeiro o caminho completo do piloto Higgsfield, referências, exporta�
 
 Arquivos instalados e verificações locais aprovadas não demonstram descoberta real das skills. O destino Claude configura arquivos locais do projeto no Claude Code, não Claude web nem outros ambientes.
 
+A preparação anterior à release foi exercitada no Windows com Node 24.18.0, antes da atualização dos metadados de versão. As projeções dos dois assistentes passaram nas verificações locais de instalação; uma sessão do Codex CLI preparou conceitos após ajustes de configuração apenas naquele processo, enquanto o carregamento completo da skill e uma sessão real do Claude permanecem não verificados. Node 22 e outros sistemas operacionais ainda precisam de execução. Teste seu assistente real e relate a versão exata e o erro pelo [procedimento de teste da candidata](release-notes.md), sem alterar configurações pessoais apenas para esconder uma falha.
+
 ## Mesclar em um projeto existente
 
 ```sh
@@ -111,6 +113,8 @@ node scripts/install-skill.mjs higgsfield-studio --assistant both
 ```
 
 Pré-verifica todos os arquivos selecionados, mantém cópias idênticas e recusa diferenças. Não cria a ponte de instruções Claude sozinho. Revise cópias ativas alteradas durante uma atualização explícita; o instalador não as sobrescreve.
+
+Execute esses comandos em um estúdio instalado independente. Um checkout marcado por `.development/project.json` como `framework-development` recusa a ativação de skills criativas antes de escrever; marcadores inválidos ou ligados por links também falham. A ajuda do CLI continua disponível somente para leitura. A engenharia do produto usa AIOX no checkout de desenvolvimento.
 
 Conecte Higgsfield na sessão real do assistente pela [rota de plugin](higgsfield-plugin.md) ou [CLI local](higgsfield-setup.md). Confira cada módulo necessário, referências aceitas, submissão/consulta, exportação, inspeção, custo conhecido e autorização aplicável. Acesso em um assistente não comprova acesso em outro. Etapas ausentes ficam pendentes; método alternativo exige decisão explícita. Instalar não autentica, instala binários de fornecedores, gera, treina ou publica.
 

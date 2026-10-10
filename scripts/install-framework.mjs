@@ -93,8 +93,8 @@ function inventory(sourceRoot, targets) {
   add('templates/studio-AGENTS.md', 'AGENTS.md');
   if (targets.some(target => target.name === 'claude')) add('templates/studio-CLAUDE.md', 'CLAUDE.md');
   add('templates/locales/pt-BR/studio-AGENTS.md', 'docs/locales/pt-BR/AGENTS.md');
-  add(statIfPresent(path.join(sourceRoot, '.gitignore')) ? '.gitignore' : 'templates/project.gitignore', '.gitignore');
-  add(statIfPresent(path.join(sourceRoot, ".gitattributes")) ? ".gitattributes" : "templates/project.gitattributes", ".gitattributes");
+  add('templates/project.gitignore', '.gitignore');
+  add('templates/project.gitattributes', '.gitattributes');
   for (const relative of sourceDirectories) walk(relative);
   for (const relative of manualFiles) add(relative);
   for (const relative of manualDirectories) walk(relative);

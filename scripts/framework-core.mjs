@@ -2,7 +2,8 @@ import { canonicalToken, isToken, oneOfTokens, RUN_STATES } from './language-com
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import { assertSlug, validatePersona, canonHash } from './studio-core.mjs';
+import { assertSlug, validatePersona, canonHash, vocalReadiness, assertVocalScope, VOCAL_POLICY } from './studio-core.mjs';
+import { mediaReadinessPolicy, readinessEnabled, readReadinessJson, preflightReadinessRun, validateReadinessPlan, validateReadinessRecord, validateSavedReadiness, assertReadinessRefresh, evaluateMediaReadiness, captureMediaReadiness, assertMediaReadinessCompletion, readinessHash, hashFileChunks } from './stage-readiness-core.mjs';
 
 const STATES = new Set(RUN_STATES);
 const KINDS = new Set(['document', 'media', 'review', 'human-decision', 'delivery']);
@@ -61,7 +62,7 @@ function records(root, paths, personaId) {
     const target = file(root, relative), key = process.platform === 'win32' ? target.toLowerCase() : target;
     scoped(path.relative(fs.realpathSync(root), target).split(path.sep).join('/'), personaId);
     ensure(!seen.has(key), 'File repeated through equivalent paths.'); seen.add(key);
-    return { path: relative, sha256: hash(fs.readFileSync(target)) };
+    return { path: relative, sha256: hashFileChunks(target).sha256 };
   });
 }
 function runDirectory(root) {
@@ -100,6 +101,8 @@ function atomicSave(target, value, exclusive = false) {
   }
 }
 function locked(root, runId, operation) {
+  const preview = loadRun(root, runId);
+  if (readinessEnabled(preview)) preflightReadinessRun(root, runId);
   const target = runPath(root, runId), lockPath = path.join(path.dirname(target), `${runId}.lock`);
   let lock;
   try { lock = fs.openSync(lockPath, 'wx'); }
@@ -116,6 +119,13 @@ function reference(root, entry, expectedExtension) {
   ensure(obj(entry) && id(entry.id) && text(entry.path), 'Invalid registry reference.');
   ensure(entry.path.startsWith('framework/') && path.extname(entry.path) === expectedExtension, 'Reference must point to the expected type inside framework/.');
   return file(root, entry.path);
+}
+
+function vocalTaskPolicy(task) {
+  if (task.id !== 'approve-canon') return false;
+  const legacy = ['0.1.0', '0.2.0'].includes(task.version);
+  ensure(task.vocalPolicy === VOCAL_POLICY || legacy && task.vocalPolicy === undefined, 'approve-canon vocalPolicy must be explicit-applicability-v1 for the updated task version.');
+  return task.vocalPolicy === VOCAL_POLICY;
 }
 
 export function validateFramework(root) {
@@ -137,6 +147,8 @@ export function validateFramework(root) {
     for (const entry of registry.tasks) {
       const task = readJson(reference(root, entry, '.json'));
       ensure(obj(task) && task.id === entry.id && task.schemaVersion === 1 && text(task.version) && text(task.name), 'Invalid task contract.');
+      vocalTaskPolicy(task);
+      mediaReadinessPolicy(task);
       ensure(!tasks.has(task.id) && roles.has(task.owner), 'Duplicate task or unknown owner.');
       ensure(KINDS.has(task.deliverable) && EVIDENCE.has(task.evidenceType), 'Invalid deliverable/evidence.');
       ensure(({ document: 'prepared', media: 'generated', review: 'reviewed', 'human-decision': 'human-approved', delivery: 'delivered' })[task.deliverable] === task.evidenceType, 'Deliverable and evidence are incompatible.');
@@ -194,6 +206,8 @@ function validateRun(run) {
   ensure(list(run.constitutionPaths) && run.constitutionPaths.includes('CONSTITUTION.md'), 'Invalid constitutional paths.');
   if (run.personaId !== null) assertSlug(run.personaId);
   ensure(obj(run.contract.tasks) && obj(run.contract.roles) && obj(run.contract.workflow) && Array.isArray(run.contract.workflow.steps), 'Invalid contract snapshot.');
+  if (run.contract.tasks['approve-canon']) vocalTaskPolicy(run.contract.tasks['approve-canon']);
+  for (const task of Object.values(run.contract.tasks)) mediaReadinessPolicy(task);
   const ids = new Set();
   for (const a of run.attempts) {
     ensure(obj(a) && /^attempt-[a-f0-9-]{36}$/.test(a.id) && !ids.has(a.id) && STATES.has(canonicalToken(a.state)) && Array.isArray(a.inputs) && Array.isArray(a.results) && Array.isArray(a.events), 'Invalid attempt.'); ids.add(a.id);
@@ -211,6 +225,7 @@ function validateRun(run) {
 // Independent of current workspace state: suitable for historical inventory/backup.
 export function validateRunRecord(run) {
   validateRun(run);
+  validateSavedReadiness(run);
   for (const a of run.attempts) {
     for (const input of a.inputs) scoped(input.path, run.personaId);
     for (const result of a.results) {
@@ -236,7 +251,7 @@ function changes(root, run) {
     try {
       const target = file(root, expected.path);
       scoped(path.relative(fs.realpathSync(root), target).split(path.sep).join('/'), run.personaId);
-      actual = hash(fs.readFileSync(target));
+      actual = hashFileChunks(target).sha256;
     }
     catch (error) {
       if (!['ENOENT', 'ENOTDIR'].includes(error.code)) throw error;
@@ -265,21 +280,54 @@ function missingTaskCapabilities(run, task) {
 function packageRun(root, run, detail) {
   const a = attempt(run), next = current(run), drift = changes(root, run);
   const missingCapabilities = missingTaskCapabilities(run, next?.task);
+  const media = readinessEnabled(run) ? evaluateMediaReadiness(root, run) : null;
+  let vocal;
+  if (next && vocalTaskPolicy(next.task)) {
+    if (!run.personaId) vocal = { ready: false, applicability: null, reasons: ['Bind a persona and declare voice.applicability before complete canon approval.'] };
+    else {
+      try {
+        const base = path.dirname(file(root, `influencers/${run.personaId}/persona.json`));
+        vocal = vocalReadiness(readJson(path.join(base, 'persona.json')), base, { requireExplicit: true });
+      } catch (error) { vocal = { ready: false, applicability: null, reasons: [error.message] }; }
+    }
+  }
   return {
     run: clone(run), runId: run.id, attemptId: a.id, state: canonicalToken(a.state),
-    nextTask: next ? { stepId: next.step.id, taskId: next.task.id, name: next.task.name, optional: next.step.optional, criteria: next.task.criteria, expectedDelivery: next.task.deliverable, evidenceType: next.task.evidenceType, requiresPersona: next.task.requiresPersona, requiresApprovedCanon: next.task.requiresApprovedCanon, medium: taskMedium(run, next.task) } : null,
+    nextTask: next ? { stepId: next.step.id, taskId: next.task.id, name: next.task.name, optional: next.step.optional, criteria: next.task.criteria, expectedDelivery: next.task.deliverable, evidenceType: next.task.evidenceType, requiresPersona: next.task.requiresPersona, requiresApprovedCanon: next.task.requiresApprovedCanon, medium: taskMedium(run, next.task), ...(vocal ? { vocalReadiness: vocal } : {}) } : null,
     responsible: next ? clone(run.contract.roles[next.task.owner]) : null,
     constitutionPaths: clone(run.constitutionPaths), governanceFiles: clone(run.governanceFiles),
     inputs: clone(a.inputs), canonBinding: clone(run.canonBinding), drift, missingCapabilities,
     mediaProviders: a.mediaProviders ? clone(a.mediaProviders) : null,
     executionMode: a.execution?.mode ?? 'instruction', automaticallyDispatched: false,
-    canContinue: !drift.length && !unresolvedJob(a) && !missingCapabilities.length && !oneOfTokens(a.state, ['completed', 'failed', 'cancelled', 'uncertain-result']),
+    ...(media ? { mediaReadiness: media } : {}),
+    canContinue: !drift.length && !unresolvedJob(a) && !missingCapabilities.length && !(next && mediaReadinessPolicy(next.task) && !media?.canStartStage) && !oneOfTokens(a.state, ['completed', 'failed', 'cancelled', 'uncertain-result']),
     limitation: 'Instruction package and recorded declarations. This module does not dispatch agents, generate media, query providers, publish, or prove a reviewer is human.',
     ...(detail === undefined ? {} : { detail })
   };
 }
 function newAttempt(inputs, reason, selectedProviders) {
   return { id: `attempt-${crypto.randomUUID()}`, startedAt: now(), finishedAt: null, state: 'planned', stepIndex: 0, inputs, results: [], events: [], job: null, execution: null, reason, ...(selectedProviders ? { mediaProviders: clone(selectedProviders) } : {}) };
+}
+
+function trackReadinessInputs(a, inputs) {
+  for (const input of inputs) {
+    const prior = a.inputs.find(i => i.path === input.path);
+    ensure(!prior || prior.sha256 === input.sha256, 'A tracked readiness source changed; use an explicit new attempt.');
+    if (!prior) a.inputs.push({ path: input.path, sha256: input.sha256 });
+  }
+}
+function initializeReadiness(root, run, relative) {
+  if (relative === undefined) return;
+  ensure(readinessEnabled(run), 'A legacy captured contract cannot acquire the current readiness policy. Start a new current run.');
+  const plan = readReadinessJson(root, relative, run.personaId).value, a = attempt(run);
+  a.mediaReadiness = { plan: clone(plan), planHash: validateReadinessPlan(plan, run, root), records: [] };
+  trackReadinessInputs(a, [plan.methodSource]);
+}
+function preflightReadinessAppend(root, run, relative) {
+  ensure(readinessEnabled(run), 'A legacy captured contract cannot acquire the current readiness action.');
+  const source = readReadinessJson(root, relative, run.personaId);
+  validateReadinessRecord(source.value, run, root); assertReadinessRefresh(attempt(run), source.value);
+  return source;
 }
 
 export function startRun(root, options) {
@@ -304,6 +352,8 @@ export function startRun(root, options) {
     governanceFiles: records(root, [...new Set([...framework.registry.constitutionPaths, 'framework/registry.json', ...framework.registry.roles.map(role => role.path), ...framework.registry.tasks.map(task => task.path), ...framework.registry.workflows.map(flow => flow.path)])], null), attempts: [newAttempt(inputs, 'Explicit start', selectedProviders)]
   };
   run.contractHash = objectHash(run.contract);
+  if (readinessEnabled(run)) preflightReadinessRun(root);
+  initializeReadiness(root, run, options.readinessPlanPath);
   event(run, 'created', { note: 'Local run created; no agent or service was called.' });
   const dir = runDirectory(root), target = path.join(dir, `${run.id}.json`);
   atomicSave(target, run, true);
@@ -331,6 +381,7 @@ function approval(root, run, task, value) {
   ensure(obj(value) && value.explicit === true && isToken(value.decision, 'approve') && text(value.reviewer) && date(value.at) && text(value.eventId) && text(value.source) && text(value.notes), 'Human decision requires an explicit declaration, reviewer, at, eventId, source, and notes; the runtime does not prove humanity.');
   if (task.id === 'approve-canon') {
     const p = persona(root, run.personaId), bound = binding(p);
+    if (vocalTaskPolicy(task)) assertVocalScope(p, path.dirname(file(root, `influencers/${run.personaId}/persona.json`)), { requireExplicit: true });
     ensure(!isToken(p.status, 'draft') && value.canonHash === bound.canonHash && value.identityVersion === bound.identityVersion, 'Decision must refer to the version/hash of the already recorded and approved canon.');
     run.canonBinding = bound;
   }
@@ -370,6 +421,7 @@ export function transitionRun(root, runId, options) {
       if (item[key] !== undefined) item[key] = canonicalToken(item[key]);
     }
   }
+  if (options.action === 'record-media-readiness') preflightReadinessAppend(root, loadRun(root, runId), options.readinessPath);
   return locked(root, runId, run => {
     const a = attempt(run), next = current(run);
     ensure(!oneOfTokens(a.state, ['completed', 'cancelled', 'failed']), 'Attempt is finished; start an explicit new attempt when appropriate.');
@@ -395,6 +447,16 @@ export function transitionRun(root, runId, options) {
     }
     ensure(!unresolvedJob(a) && !isToken(a.state, 'uncertain-result'), 'External result is uncertain: query and reconcile the job before continuing; no automatic retry.');
     const drift = changes(root, run); ensure(!drift.length, 'Inputs/canon/governance changed; use resume with newAttempt:true and a reason, without silently reusing approvals.');
+    if (options.action === 'record-media-readiness') {
+      const source = preflightReadinessAppend(root, run, options.readinessPath), record = source.value;
+      a.mediaReadiness ??= { plan: clone(record.plan), planHash: readinessHash(record.plan), records: [] };
+      ensure(a.mediaReadiness.records.length < 256 && !a.mediaReadiness.records.some(s => s.record.provenance.eventId === record.provenance.eventId), 'Readiness event is already imported or the bounded snapshot limit was reached.');
+      trackReadinessInputs(a, [record.plan.methodSource, ...record.stages.flatMap(s => [...s.inputs, ...(s.outcome?.files ?? [])])]);
+      const payload = { sourcePath: options.readinessPath, sourceSha256: source.sha256, importedAt: now(), canonBinding: clone(run.canonBinding), record: clone(record) };
+      const snapshot = { ...payload, id: readinessHash(payload) }; a.mediaReadiness.records.push(snapshot);
+      event(run, 'media-readiness-recorded', { snapshotId: snapshot.id, sourceSha256: source.sha256, provenance: clone(record.provenance) });
+      return { snapshotId: snapshot.id, note: 'Readiness declarations imported; no provider was called.' };
+    }
     ensure(next, 'No pending step.');
     if (options.action === 'bind-persona') {
       ensure(run.personaId === null && a.stepIndex <= 3, 'Character binding is only allowed before production when no binding exists.');
@@ -415,12 +477,21 @@ export function transitionRun(root, runId, options) {
       if (missingCapabilities.length) {
         a.state = 'awaiting-tool'; event(run, 'capability-missing', { capability: missingCapabilities[0], capabilities: missingCapabilities, stepId: next.step.id }); return { pending: missingCapabilities[0], missingCapabilities, note: 'No tool was called.' };
       }
+      const marked = mediaReadinessPolicy(next.task);
+      if (marked) {
+        const checked = evaluateMediaReadiness(root, run, { captured: options.action === 'complete' ? a.execution?.mediaReadiness : null });
+        if (!checked.canStartStage) { a.state = 'awaiting-tool'; event(run, 'media-readiness-pending', { stepId: next.step.id, reasons: checked.reasons }); return { mediaReadiness: checked, note: 'Stage readiness remains pending; no external intent, provider call or generation completion was recorded.' }; }
+        ensure(options.stageId === checked.currentStageId, 'stageId must identify the exact current captured execution stage.');
+        if (options.action === 'complete') assertMediaReadinessCompletion(run, options);
+        else ensure(!a.execution?.mediaReadiness, 'This stage already has a captured start; complete/reconcile it or use an explicit new attempt.');
+      }
       if (options.action === 'start') {
         if (options.execution !== undefined) {
           ensure(obj(options.execution) && ['instruction', 'delegated'].includes(options.execution.mode), 'Invalid execution mode.');
           if (options.execution.mode === 'delegated') ensure(text(options.execution.agentId) && text(options.execution.eventId) && text(options.execution.actor) && date(options.execution.at), 'Delegation requires an agent identifier and a declared actual event.');
           a.execution = clone(options.execution);
         } else a.execution = { mode: 'instruction' };
+        if (marked) a.execution.mediaReadiness = captureMediaReadiness(run, options.stageId, now());
         if (options.job !== undefined) {
           ensure(obj(options.job) && text(options.job.provider) && next.task.deliverable === 'media', 'External planning requires a provider and generation step.');
           if (a.mediaProviders) ensure(options.job.provider === a.mediaProviders[taskMedium(run, next.task)], 'External intent must identify the selected media provider; changing a method requires an explicit new attempt.');
@@ -442,6 +513,8 @@ export function transitionRun(root, runId, options) {
 export function resumeRun(root, runId, options = {}) {
   ensure(obj(options), 'Invalid resume options.');
   ensure(options.mediaProviders === undefined || options.newAttempt === true, 'Changing mediaProviders requires newAttempt:true and a reason.');
+  ensure(options.readinessPlanPath === undefined || options.newAttempt === true, 'Changing readiness plan requires newAttempt:true and a reason.');
+  if (options.readinessPlanPath !== undefined) { const preview = loadRun(root, runId); readReadinessJson(root, options.readinessPlanPath, preview.personaId); }
   return locked(root, runId, run => {
     const a = attempt(run), drift = changes(root, run);
     if (unresolvedJob(a) || isToken(a.state, 'uncertain-result')) { a.state = 'uncertain-result'; event(run, 'resume-held', { reason: 'Reconcile submission before repeating or creating an attempt.' }); ensure(!options.newAttempt, 'Cannot create an attempt while the external result is uncertain.'); return { needsReconciliation: true }; }
@@ -462,6 +535,7 @@ export function resumeRun(root, runId, options = {}) {
       run.constitutionPaths = clone(framework.registry.constitutionPaths);
       if (run.personaId) { const p = persona(root, run.personaId); run.canonBinding = isToken(p.status, 'draft') ? null : binding(p); }
       run.attempts.push(newAttempt(inputs, options.reason, selectedProviders)); event(run, 'new-attempt', { previousAttempt: a.id, drift });
+      initializeReadiness(root, run, options.readinessPlanPath);
       return { note: 'An explicit new attempt starts the workflow from the first step; no job was resubmitted or approval consumed.' };
     }
     if (oneOfTokens(a.state, ['completed', 'failed', 'cancelled'])) return { note: 'Finished attempt preserved; a new run requires newAttempt:true and a reason.', drift };

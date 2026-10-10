@@ -8,6 +8,7 @@ import { createPersona, stableHash } from '../scripts/storage-core.mjs';
 import { canonHash, fileHash, validatePersona, snapshotCanon, readCanon, registerAsset, validateAssets } from '../scripts/studio-core.mjs';
 import { startRun, readRun, validateRunRecord, resumeRun, transitionRun } from '../scripts/framework-core.mjs';
 import { narrativeDraft, saveNarrative, readNarrative, saveContent, validateEditorial } from '../scripts/editorial-core.mjs';
+import { usePreReadinessContracts } from './fixtures/pre-stage-readiness/activate.mjs';
 
 const sourceRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const parent = path.join(sourceRoot, 'tmp', 'language-tests');
@@ -24,6 +25,7 @@ function fixture() {
   const root = fs.mkdtempSync(path.join(parent, 'language-'));
   scratch.push(root);
   for (const folder of ['templates', 'framework']) fs.cpSync(path.join(sourceRoot, folder), path.join(root, folder), { recursive: true });
+  usePreReadinessContracts(root);
   for (const file of ['CONSTITUTION.md', 'AGENTS.md', 'docs/studio-team.md']) {
     write(root, file, fs.readFileSync(path.join(sourceRoot, file), 'utf8'));
   }
@@ -39,6 +41,8 @@ test.after(() => {
 });
 function legacyPersona(base, draft) {
   const persona = structuredClone(draft);
+  // Historical absence is independent of the current template's new defaults.
+  delete persona.voice.applicability; delete persona.voice.selection;
   persona.status = 'canon_aprovado';
   Object.assign(persona.profile, { name: 'Structural fixture', age: 30, audience: 'Internal testing', valueProposition: 'Verify historical integrity' });
   Object.assign(persona.identity, { face: 'Oval', eyes: 'Brown', hair: 'Short', skin: 'Natural', body: 'Adult', invariants: ['Face structure'] });
@@ -59,6 +63,8 @@ function legacyRun(root, personaId, state = 'pronta') {
   const run = startRun(root, { workflowId: 'create-character', personaId, objective: 'Historical compatibility fixture' }).run;
   run.workflowId = 'criar-personagem';
   Object.assign(run.contract.workflow, { id: 'criar-personagem', path: 'framework/workflows/criar-personagem.json', name: 'Criar personagem' });
+  Object.assign(run.contract.tasks['approve-canon'], { version: '0.2.0' });
+  delete run.contract.tasks['approve-canon'].vocalPolicy;
   run.contractHash = stableHash(run.contract);
   run.attempts[0].state = state;
   const governance = run.governanceFiles.find(item => item.path === 'framework/workflows/create-character.json');

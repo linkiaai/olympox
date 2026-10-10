@@ -5,7 +5,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { once } from 'node:events';
-import { buildDocumentation, checkDocumentation, collectDocumentation, commandCatalog, installationCommandCatalog, sourceFile, DOCS_ASSETS } from '../scripts/docs-core.mjs';
+import { buildDocumentation, checkDocumentation, collectDocumentation, commandCatalog, installationCommandCatalog, referenceCommandCatalog, sourceFile, DOCS_ASSETS } from '../scripts/docs-core.mjs';
 import { exportDocumentation } from '../scripts/docs-export.mjs';
 import '../docs-site/src/markdown.js';
 import '../docs-site/src/localization.js';
@@ -13,6 +13,14 @@ import vm from 'node:vm';
 
 const source = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const parent = path.join(source, 'tmp', 'docs-tests');
+test('manual checks actual reference-transfer help and refuses omitted, duplicate or undescribed operations', () => {
+  const cli = fs.readFileSync(path.join(source, 'scripts/reference-transfer.mjs'), 'utf8');
+  const config = JSON.parse(fs.readFileSync(path.join(source, 'docs-site/config.json'), 'utf8'));
+  assert.deepEqual(referenceCommandCatalog(cli, config.commandDescriptions).map(item => item.id), ['reference-plan', 'reference-status', 'reference-destination', 'reference-send', 'reference-reconcile']);
+  assert.throws(() => referenceCommandCatalog(cli, {}), /without description/);
+  assert.throws(() => referenceCommandCatalog(cli.replace('node scripts/reference-transfer.mjs destination', 'node scripts/reference-transfer.mjs status'), config.commandDescriptions), /unique implemented/);
+  assert.throws(() => referenceCommandCatalog(cli.replace("command === 'destination'", "command === 'unsupported'"), config.commandDescriptions), /unsupported command/);
+});
 function fixture() {
   fs.mkdirSync(parent, { recursive: true });
   const root = fs.mkdtempSync(path.join(parent, 'manual-'));
@@ -29,7 +37,8 @@ test('manual derives catalogs, is deterministic and checks staleness without wri
     assert.equal(fs.existsSync(path.join(root, 'docs-site/dist')), false);
     const built = buildDocumentation(root);
     assert.equal(built.data.roles.length, 9); assert.equal(built.data.tasks.length, 15); assert.equal(built.data.workflows.length, 3);
-    assert.equal(built.data.commands.length, 26);
+    assert.equal(built.data.commands.length, 31);
+    assert.match(built.data.commands.find(command => command.id === 'reference-send').syntax, /send <character-id> <transfer-id> <grant.json>/);
     assert.match(built.data.commands.find(command => command.id === 'setup').syntax, /--assistant codex\|claude\|both.*--locale en\|pt-BR.*--yes/);
     const repeated = buildDocumentation(root);
     assert.equal(repeated.manifest.fingerprint, built.manifest.fingerprint);

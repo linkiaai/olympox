@@ -1,6 +1,6 @@
 {
   "name": "olympox",
-  "version": "0.5.0",
+  "version": "0.6.0-rc.1",
   "private": false,
   "type": "module",
   "description": "OLYMPOX - AI Influencer framework",
@@ -38,7 +38,6 @@
     "docs-site/locales/",
     "docs-site/src/",
     "influencers/README.md",
-    "AGENTS.md",
     "CONSTITUTION.md",
     "README.md",
     "LICENSE"

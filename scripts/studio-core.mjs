@@ -70,6 +70,51 @@ const digest = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value
 const date = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T/.test(value) && Number.isFinite(Date.parse(value));
 const obj = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 
+export const VOCAL_POLICY = 'explicit-applicability-v1';
+const audioExtensions = new Set(['.wav', '.mp3', '.m4a', '.ogg', '.flac']);
+
+// Inspect declared fields without inserting defaults into historical voice objects.
+export function vocalReadiness(persona, base, { requireExplicit = false } = {}) {
+  const voice = persona?.voice, errors = [], pending = [];
+  const declared = obj(voice) && Object.hasOwn(voice, 'applicability');
+  if (!declared) {
+    if (requireExplicit) pending.push('Declare voice.applicability as speaking or silent before complete canon approval.');
+    return { ready: !pending.length, applicability: null, errors, pending, reasons: [...pending] };
+  }
+  if (!['unspecified', 'speaking', 'silent'].includes(voice.applicability)) errors.push('voice.applicability must be unspecified, speaking, or silent.');
+  else if (voice.applicability === 'unspecified') pending.push('Resolve voice.applicability: choose speaking with an exact listened-to selection, or silent with null referenceId and selection.');
+  else if (voice.applicability === 'silent') {
+    if (voice.referenceId !== null || voice.selection !== null) errors.push('Silent voice.applicability requires voice.referenceId and voice.selection to be null.');
+  } else {
+    const ref = Array.isArray(persona.references) ? persona.references.find(ref => obj(ref) && ref.id === voice.referenceId) : null;
+    if (!ref) pending.push('Speaking canon requires voice.referenceId bound to an approved audio voice reference.');
+    else {
+      if (ref.role !== 'voice' || !isToken(ref.status, 'approved') || !nonempty(ref.path) || !audioExtensions.has(path.extname(ref.path).toLowerCase()) || !digest(ref.sha256)) errors.push('Speaking canon requires the selected approved voice reference to be an audio file with its registered SHA-256.');
+      if (!obj(ref.review) || !nonempty(ref.review.reviewer) || !date(ref.review.at) || !nonempty(ref.review.notes)) errors.push('Speaking canon requires the selected reference approval review.');
+      if (base) {
+        try { if (fileHash(base, ref.path) !== ref.sha256) errors.push('Selected voice reference bytes no longer match the registered SHA-256.'); }
+        catch (error) { errors.push(`Selected voice reference: ${error.message}`); }
+      }
+    }
+    const selection = voice.selection;
+    if (selection === null || selection === undefined) pending.push('Record voice.selection after generation, actual listening, and selection of the exact approved audio.');
+    else if (!obj(selection)) errors.push('voice.selection must be a listening declaration or null in a draft.');
+    else {
+      if (!ref || selection.referenceId !== ref.id || selection.path !== ref.path || selection.sha256 !== ref.sha256) errors.push('voice.selection must match the exact selected voice reference ID, path, and SHA-256.');
+      if (selection.method !== 'listening' || ['performed', 'generated', 'listened', 'selected'].some(key => selection[key] !== true)) errors.push('voice.selection requires method listening and performed/generated/listened/selected true.');
+      if (['reviewer', 'eventId', 'source', 'notes'].some(key => !nonempty(selection[key])) || !date(selection.at)) errors.push('voice.selection requires reviewer, ISO timestamp at, eventId, source, and notes.');
+      if (!Array.isArray(selection.criticalIssues) || selection.criticalIssues.length || !Array.isArray(selection.limitations) || selection.limitations.length) errors.push('voice.selection requires no critical issues or pending limitations.');
+    }
+  }
+  return { ready: !errors.length && !pending.length, applicability: voice.applicability, errors, pending, reasons: [...errors, ...pending] };
+}
+
+export function assertVocalScope(persona, base, options) {
+  const result = vocalReadiness(persona, base, options);
+  if (!result.ready) throw new Error(result.reasons.join('\n'));
+  return result;
+}
+
 const clone = value => JSON.parse(JSON.stringify(value));
 const jsonHash = value => hash(JSON.stringify(stable(value)));
 const versionKey = value => {
@@ -225,6 +270,9 @@ export function validatePersona(p, base) {
   if (!nonempty(p.voice.language)) complete.push('voice.language');
   if (!nonempty(p.editorial.disclosure)) complete.push('editorial.disclosure');
   const approved = !isToken(p.status, 'draft');
+  const vocal = vocalReadiness(p, base);
+  errors.push(...vocal.errors);
+  (approved ? errors : warnings).push(...vocal.pending);
   if (complete.length) (approved ? errors : warnings).push(`Fields to define: ${complete.join(', ')}.`);
   const ids = new Set();
   for (const ref of p.references) {
@@ -362,6 +410,7 @@ export function buildPrompt(p, shot, base) {
   if (!nonempty(p.profile.name) || p.profile.age === null || ['face', 'eyes', 'hair', 'skin', 'body'].some(key => !nonempty(p.identity[key])) || !p.identity.invariants.length) throw new Error('Define name, adult age, appearance, and anchors before building the prompt.');
   const hasSpeech = shot.medium === 'audio' || (shot.medium === 'video' && shot.script.trim().length > 0);
   if (hasSpeech) {
+    if (p.voice.applicability === 'silent') throw new Error('Silent voice.applicability does not permit speech. Use the identity-version and approval procedure to change vocal scope.');
     if (['language', 'accent', 'tone', 'pace'].some(key => !nonempty(p.voice[key]))) throw new Error('Define language, accent, timbre, and pace for speech.');
     if (!shot.script.trim()) throw new Error('Audio requires a spoken script.');
     if (shot.purpose === 'production' && p.voice.referenceId === null) throw new Error('Production with speech requires an approved voice reference.');
@@ -406,6 +455,7 @@ export function buildPrompt(p, shot, base) {
 }
 
 function executionReferences(asset, context) {
+  if ((asset.type === 'audio' || asset.hasSpeech === true) && context.voice.applicability === 'silent') throw new Error('Silent voice.applicability does not permit speech execution.');
   if (!strings(asset.referenceIds) || !asset.referenceIds.length || new Set(asset.referenceIds).size !== asset.referenceIds.length) {
     throw new Error('Execution requires unique, nonempty reference IDs.');
   }
@@ -586,6 +636,7 @@ export function validateAssets(manifest, persona, base) {
       if (asset.type === 'image' && references.some(ref => ref.role === 'voice')) errors.push(`Reference incompatible with image: ${asset.id}.`);
       if (asset.type === 'audio' && references.some(ref => ref.role !== 'voice')) errors.push(`Reference incompatible with audio: ${asset.id}.`);
       if (asset.type === 'video' && typeof asset.hasSpeech !== 'boolean') errors.push(`Provide video hasSpeech: ${asset.id}.`);
+      if ((asset.type === 'audio' || asset.hasSpeech === true) && context?.voice.applicability === 'silent') errors.push(`Silent voice.applicability does not permit speech production: ${asset.id}.`);
       if ((asset.type === 'audio' || asset.hasSpeech === true) && (!context?.voice.referenceId || !references.some(ref => ref.id === context.voice.referenceId && ref.role === 'voice'))) errors.push(`Missing voice reference: ${asset.id}.`);
       if (!nonempty(asset.promptPath)) errors.push(`Missing production prompt: ${asset.id}.`);
       else {

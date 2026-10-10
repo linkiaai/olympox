@@ -55,4 +55,4 @@ Os comandos locais mantêm arquivos e validam registros. Conexão com o provedor
 
 Use um estúdio instalado para seus próprios personagens. Este repositório contém o framework reutilizável e sua documentação de desenvolvimento. Personagens privados, mídia, execuções e credenciais ficam fora da distribuição.
 
-O código atual é **0.5.0**. Consulte [notas de versão](release-notes.md) para mudanças e situação da release e [capacidades suportadas](studio-status.md) para o limite entre recursos locais e serviços externos. Um piloto de vídeo com fala é o escopo padrão de criação; um brief explícito pode escolher apenas imagens ou um personagem sem fala. Potencial viral é testado por conteúdo e resultados.
+O código atual é a versão candidata **0.6.0-rc.1** para testes da comunidade. Consulte [notas de versão](release-notes.md) para mudanças, instruções de teste e aceitação real pendente e [capacidades suportadas](studio-status.md) para o limite entre recursos locais e serviços externos. Um piloto de vídeo com fala é o escopo padrão de criação; um brief explícito pode escolher apenas imagens ou um personagem sem fala. Potencial viral é testado por conteúdo e resultados.

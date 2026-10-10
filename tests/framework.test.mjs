@@ -6,6 +6,7 @@ import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { canonHash, snapshotCanon, validatePersona, validateAssets } from '../scripts/studio-core.mjs';
 import { validateFramework, startRun, readRun, validateRunRecord, transitionRun, resumeRun } from '../scripts/framework-core.mjs';
+import { usePreReadinessContracts } from './fixtures/pre-stage-readiness/activate.mjs';
 
 const sourceRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const scratchRoot = path.join(sourceRoot, 'tmp', 'framework-tests');
@@ -24,7 +25,7 @@ function person(root, id = 'alpha', approved = true) {
   Object.assign(p, { id, status: approved ? 'canon-approved' : 'draft' });
   Object.assign(p.profile, { name: `Persona ${id}`, age: 29, audience: 'Internal test', valueProposition: 'Validate state without generating media' });
   Object.assign(p.identity, { face: 'Oval', eyes: 'Brown', hair: 'Short', skin: 'Natural texture', body: 'Adult proportions', invariants: ['Facial structure'] });
-  Object.assign(p.voice, { accent: 'Brazilian', tone: 'Calm', pace: 'Moderate' });
+  Object.assign(p.voice, { applicability: 'silent', selection: null, accent: 'Brazilian', tone: 'Calm', pace: 'Moderate' });
   p.references = ['front', 'three-quarter'].map(role => {
     const relative = `references/${role}.png`;
     save(root, `influencers/${id}/${relative}`, `Structural fixture ${id} ${role}, without actual pixels`);
@@ -39,6 +40,7 @@ function fixture() {
   const root = fs.mkdtempSync(path.join(scratchRoot, 'studio-'));
   scratch.push(root);
   fs.cpSync(path.join(sourceRoot, 'framework'), path.join(root, 'framework'), { recursive: true });
+  usePreReadinessContracts(root);
   for (const file of ['CONSTITUTION.md', 'AGENTS.md', 'docs/studio-team.md']) {
     fs.mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
     fs.copyFileSync(path.join(sourceRoot, file), path.join(root, file));
