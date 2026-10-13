@@ -65,6 +65,18 @@ export function referenceCommandCatalog(source, descriptions) {
   return commands;
 }
 
+export function providerCommandCatalog(source, descriptions) {
+  const commands = [...source.matchAll(/^node scripts\/provider-execution\.mjs ([a-z]+)([^\r\n]*)/gm)].map(match => ({ id: `provider-${match[1]}`, syntax: `node scripts/provider-execution.mjs ${match[1]}${match[2]}` }));
+  const implemented = [...source.matchAll(/command === '([^']+)'/g)].map(match => match[1]).filter(id => id !== 'help');
+  if (commands.length !== implemented.length || new Set(commands.map(item => item.id)).size !== commands.length) throw new Error('Provider commands require unique implemented syntax in CLI help.');
+  for (const command of commands) {
+    if (!implemented.includes(command.id.slice('provider-'.length))) throw new Error('Provider syntax advertises an unsupported command.');
+    if (!descriptions[command.id]?.trim()) throw new Error(`Provider command without description: ${command.id}`);
+    command.description = descriptions[command.id];
+  }
+  return commands;
+}
+
 export function collectDocumentation(root) {
   const files = new Map();
   const read = relative => {
@@ -100,7 +112,7 @@ export function collectDocumentation(root) {
   const roles = registry.roles.map(role => ({ ...role, markdown: read(role.path) }));
   const tasks = registry.tasks.map(item => ({ ...JSON.parse(read(item.path)), path: item.path }));
   const workflows = registry.workflows.map(item => ({ ...JSON.parse(read(item.path)), path: item.path }));
-  const commands = [...installationCommandCatalog(read('bin/olympox.mjs'), config.commandDescriptions ?? {}), ...commandCatalog(read('scripts/studio.mjs'), config.commandDescriptions ?? {}), ...referenceCommandCatalog(read('scripts/reference-transfer.mjs'), config.commandDescriptions ?? {})];
+  const commands = [...installationCommandCatalog(read('bin/olympox.mjs'), config.commandDescriptions ?? {}), ...commandCatalog(read('scripts/studio.mjs'), config.commandDescriptions ?? {}), ...referenceCommandCatalog(read('scripts/reference-transfer.mjs'), config.commandDescriptions ?? {}), ...providerCommandCatalog(read('scripts/provider-execution.mjs'), config.commandDescriptions ?? {})];
   for (const [locale, settings] of Object.entries(config.locales)) if (!new RegExp(`^docs-site/locales/${locale}\\.json$`).test(settings.resource)) throw new Error(`Locale resource outside the public selection: ${settings.resource}`);
   const ui = JSON.parse(read(config.locales.en.resource)).ui;
   if (!ui || !Object.keys(ui).length || Object.values(ui).some(value => typeof value !== 'string' || !value.trim())) throw new Error('English UI messages must be nonempty strings.');
@@ -150,6 +162,7 @@ export function collectDocumentation(root) {
   });
   // Observe implementation hashes without incorporating source code into the site.
   for (const name of fs.readdirSync(path.join(root, 'scripts')).filter(name => name.endsWith('.mjs')).sort()) read(`scripts/${name}`);
+  read('scripts/providers/byteplus.mjs');
   for (const locale of ['en', 'pt-BR']) read(`scripts/onboarding-locales/${locale}.json`);
   for (const name of ['AGENTS.md', 'CONSTITUTION.md', 'package.json']) read(name);
   for (const item of registry.constitutionPaths ?? []) read(item);

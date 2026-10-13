@@ -4,10 +4,10 @@ Instale um estúdio independente, abra-o no Codex ou Claude Code e descreva o qu
 
 ## 1. Instale e abra o estúdio
 
-Requer Node 22+ e um ambiente local de Codex ou Claude Code. Instale a versão candidata 0.6.0-rc.1 para testes:
+Requer Node 22+ e um ambiente local de Codex ou Claude Code. Instale a versão candidata 0.6.0-rc.2 para testes:
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.6.0-rc.1 setup
+npx --yes github:linkiaai/olympox#v0.6.0-rc.2 setup
 ```
 
 A partir de checkout revisado ou pacote extraído, use `node bin/olympox.mjs setup`.

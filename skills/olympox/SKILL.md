@@ -1,6 +1,6 @@
 ---
 name: olympox
-description: Create, direct, produce or review memorable AI influencers with a Higgsfield media pipeline, assistant-independent coordination, preserved identity and quality control.
+description: Create, direct, produce or review memorable AI influencers with a default Higgsfield media pipeline, explicitly selected optional providers, preserved identity and quality control.
 ---
 
 # OLYMPOX - AI Influencer framework
@@ -19,6 +19,7 @@ Load only the references needed:
 
 - Brief and persona: `templates/brief.md` and `docs/strategy.md`.
 - Images, video and voice: `docs/production.md` and `docs/tools.md`.
+- Explicit optional BytePlus execution: `docs/provider-execution.md`.
 - Review and approval: `docs/quality.md`.
 - Structure, commands and versioning: `docs/operations.md`.
 
@@ -39,6 +40,16 @@ Recover the user's selected production method from the request, brief, decisions
 Prepare a versioned plan using `templates/production-method.md`. Map the requested stages to their actual provider, module, connection route and model; record source coverage, exact approved inputs, verified capabilities, dependencies and pending work. Do not claim a transcript establishes unseen screens or a particular module. For the default Higgsfield pipeline, a requested reference method or AI Influencer Builder, apply `higgsfield-studio` and read `docs/higgsfield-influencer-method.md` before planning images or video. A direct Kling video is not evidence of a completed Builder stage.
 
 Save the method plan as a planning output or an input to the applicable local run so its bytes are hashed and observed. Carry it through specialist handoffs. Higgsfield installation and connection are separate production-readiness steps: the framework installer does not perform them, authenticate, or generate. A missing capability leaves that stage pending; prepare the package, identify what is missing and propose alternatives. A switch to paid external generation needs applicable authorization; honor explicit method choices and preserve prior authorizations and approvals. Missing a required Higgsfield module blocks that production stage; an explicit alternative changes the versioned method and attempt. Existing approved canon remains unchanged; new outputs are candidates until inspected, and a provider change does not itself require a new identity approval. Do not migrate approved characters or rewrite historical records, media, approvals, backups or runs. Changes to tracked context follow the existing explicit new-attempt procedure.
+
+## Explicit optional provider execution
+
+When the user explicitly selects BytePlus for a supported stage, follow `docs/provider-execution.md` and use the independent `scripts/provider-execution.mjs` executor. Higgsfield remains the default. Map the actual selected model, accepted inputs and remaining stages into the versioned method plan; an API image or video does not establish Builder, training, canonical voice, lip-sync or an equivalent complete method. Unsupported stages stay pending without silently changing providers or recreating the character.
+
+Each consumer runs the framework in an independent installed studio with their own account, model entitlement, process credentials and applicable numerical budget. `ARK_API_KEY` and the separate `BYTEPLUS_SPEECH_API_KEY` are private process secrets, never request fields, prompts, canon, job evidence or backup contents. Installation and offline preparation do not authenticate or generate. A configured key/account label does not prove access or ownership.
+
+The assistant fills `templates/provider-request.json`, `provider-budget.json`, `provider-authorization.json`, `provider-reconciliation.json` and `provider-event.json` from actual context and applicable user decisions; unfilled templates grant nothing. Preserve exact prompt, parameters, reference roles/order and bytes, canon/version and listened-to voice when applicable. Prepare before submitting; submit only the matching authorized job and preserve its intent, receipts, reservations and results. Local budgets reserve comparable USD amounts and retain uncertain charges; they do not guarantee an external invoice ceiling. Reconcile the original uncertain job before any replacement; never replay its generation automatically.
+
+The initial route accepts exact local image/audio inputs where supported; local video-reference transfer stays pending. Preset TTS is only `purpose: reference` draft voice preparation and does not condition on a canonical audio file or clone an existing voice; TTS production stays pending. Export actual new media bytes, register/seal them and inspect the full result through existing procedures. A successful API response, export or paid request never approves canon, completes a review or authorizes publication. A provider change preserves existing identity and uses a new explicit job/attempt when bound context changes. Prove the consumer's authorized full pilot before adopting a primary route or batches.
 
 ## Working modes
 

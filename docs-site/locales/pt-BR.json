@@ -16,6 +16,7 @@
     "docs/higgsfield-plugin.md": "Plugin Higgsfield",
     "docs/higgsfield-setup.md": "CLI local do Higgsfield",
     "docs/integrated-images.md": "Geração alternativa de imagens",
+    "docs/provider-execution.md": "Execução opcional por provedores",
     "docs/operations.md": "Identidade, assets e backups",
     "docs/framework-02.md": "Operação dos workflows",
     "docs/framework-architecture.md": "Arquitetura",
@@ -59,7 +60,17 @@
     "reference-send": "Enviar um snapshot de imagem exatamente autorizado pela CLI nativa fixada.",
     "reference-reconcile": "Consultar biblioteca original e registrar reconciliação vinculada à fonte sem upload.",
     "reference-destination": "Ler impressão da conta nativa e workspace selecionado sem autenticar.",
-    "reference-status": "Ler recibo local ocultando dados sensíveis e resultado não resolvido."
+    "reference-status": "Ler recibo local ocultando dados sensíveis e resultado não resolvido.",
+    "provider-capabilities": "Consultar capacidades implementadas e pré-requisitos configurados sem descoberta real de conta.",
+    "provider-prepare": "Preservar request privado exato e estimativa offline sem submeter geração.",
+    "provider-submit": "Submeter um request preparado com autorização explícita correspondente e reserva local de orçamento.",
+    "provider-status": "Inspecionar ou consultar job original do provedor sem submeter nova geração.",
+    "provider-export": "Exportar mídia exata bem-sucedida como novos arquivos draft para registro e revisão.",
+    "provider-jobs": "Listar jobs privados do provedor, resultados, reservas e custos pendentes.",
+    "provider-budget": "Consultar ou configurar orçamento local em USD e limites de personagem/concorrência.",
+    "provider-reconcile": "Reconciliar resultado original e cobrança real com evidência vinculada ao request exato.",
+    "provider-cancel": "Cancelar trabalho local não submetido com proveniência, sem declarar cancelamento remoto.",
+    "provider-dispatch": "Despachar explicitamente quantidade delimitada de jobs autorizados na fila sem repetir trabalho incerto."
   },
   "roles": {
     "master": {
@@ -394,7 +405,7 @@
     "codeText": "texto",
     "table": "Tabela",
     "localReference": "Referência local fora deste manual",
-    "metadataDescription": "OLYMPOX - AI Influencer framework: personagens originais, mídia Higgsfield e coordenação por Codex ou Claude Code.",
+    "metadataDescription": "OLYMPOX - AI Influencer framework: personagens originais, identidade preservada, provedores opcionais de mídia e coordenação por Codex ou Claude Code.",
     "navStart": "COMECE AQUI",
     "navCreate": "CRIE PERSONAGENS",
     "navProduction": "PRODUZA E REVISE",

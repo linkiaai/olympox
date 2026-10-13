@@ -10,7 +10,7 @@ Install **OLYMPOX - AI Influencer framework** into an independent studio for Cod
 
 The local core has no external runtime dependencies; these commands need no `npm install`. Higgsfield access is prepared separately. You can install, plan characters, and maintain records before connecting a provider.
 
-This guide describes the **0.6.0-rc.1** release candidate. Install its tag with `npx --yes github:linkiaai/olympox#v0.6.0-rc.1 setup`. Use the local commands below for a reviewed checkout or extracted package. A later local edit does not update a published tag or hosted manual. The historical 0.5.0 release remains unchanged. See [release notes and candidate testing](release-notes.md).
+This guide describes the **0.6.0-rc.2** release candidate. Install its tag with `npx --yes github:linkiaai/olympox#v0.6.0-rc.2 setup`. Use the local commands below for a reviewed checkout or extracted package. A later local edit does not update a published tag or hosted manual. The historical 0.5.0 release remains unchanged. See [release notes and candidate testing](release-notes.md).
 
 ## Guided setup
 

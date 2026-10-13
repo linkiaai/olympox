@@ -116,6 +116,14 @@
       }
     },
     {
+      "path": "docs/provider-execution.md",
+      "group": "produce",
+      "label": "Optional provider execution",
+      "translations": {
+        "pt-BR": "docs/locales/pt-BR/provider-execution.md"
+      }
+    },
+    {
       "path": "docs/operations.md",
       "group": "records",
       "label": "Identity, assets and backups",
@@ -237,7 +245,17 @@
     "reference-send": "Send one exactly authorized image snapshot through the pinned native CLI.",
     "reference-reconcile": "Inspect the original library and record source-bound reconciliation without uploading.",
     "reference-destination": "Read the native account fingerprint and selected workspace without authentication.",
-    "reference-status": "Read a redacted local transfer receipt and unresolved outcome."
+    "reference-status": "Read a redacted local transfer receipt and unresolved outcome.",
+    "provider-capabilities": "Read implemented provider capabilities and configured prerequisites without live account discovery.",
+    "provider-prepare": "Preserve a private exact request and offline estimate without submitting generation.",
+    "provider-submit": "Submit one prepared request with matching explicit authorization and local budget reservation.",
+    "provider-status": "Inspect or query the original provider job without submitting another generation.",
+    "provider-export": "Export exact successful media as new draft files for registration and review.",
+    "provider-jobs": "List private provider jobs, outcomes, reservations and unresolved costs.",
+    "provider-budget": "Read or configure the local USD budget and character/concurrency limits.",
+    "provider-reconcile": "Reconcile an original job outcome and actual charge with exact request-bound evidence.",
+    "provider-cancel": "Cancel unsubmitted local work with provenance, without claiming remote cancellation.",
+    "provider-dispatch": "Explicitly dispatch a bounded number of authorized queued jobs without replaying uncertain work."
   },
   "defaultLocale": "en",
   "locales": {

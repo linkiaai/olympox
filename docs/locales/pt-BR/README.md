@@ -4,12 +4,14 @@ OLYMPOX ajuda a desenvolver influenciadores originais de IA e manter sua identid
 
 O framework oferece skills locais, contratos de tarefas, workflows retomáveis, registros de personagens, snapshots do cânone, versões editoriais e backups. Funciona com **Node 22+**, sem dependências externas de execução.
 
+O desenvolvimento atual também inclui [execução opcional por provedores](provider-execution.md), com rota experimental direta BytePlus. Cada estúdio instalado usa conta, chaves e orçamento próprios. Etapas suportadas escolhidas explicitamente podem executar sem Higgsfield; o padrão continua intacto até aceitação de referências reais e mídia. Essa adição local não republica a versão candidata.
+
 ## Instale um estúdio independente
 
-Instale a versão candidata **0.6.0-rc.1** para testes:
+Instale a versão candidata **0.6.0-rc.2** para testes:
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.6.0-rc.1 setup
+npx --yes github:linkiaai/olympox#v0.6.0-rc.2 setup
 ```
 
 A partir de checkout revisado ou pacote extraído, use `node bin/olympox.mjs setup`.
@@ -36,7 +38,7 @@ No estúdio, diga:
 
 > Use OLYMPOX para criar um influenciador original para [público/tema]. Proponha três conceitos diferentes e recomende um.
 
-O assistente desenvolve conceito, persona, narrativa e roteiros. A sequência de produção é exploração visual, referências selecionadas, amostra vocal ouvida quando o personagem fala, aprovação do cânone exato e um piloto inspecionado antes dos lotes. Verifique acesso ao Higgsfield, referências aceitas, exportação e orçamento do piloto completo antes da produção paga. Imagens integradas ao assistente são uma alternativa explícita.
+O assistente desenvolve conceito, persona, narrativa e roteiros. A sequência de produção é exploração visual, referências selecionadas, amostra vocal ouvida quando o personagem fala, aprovação do cânone exato e um piloto inspecionado antes dos lotes. Verifique acesso ao provedor escolhido, referências aceitas, exportação e orçamento do piloto completo antes da produção paga. Imagens integradas ao assistente são uma alternativa explícita.
 
 Comece pelo [início rápido](quick-start.md), depois siga [desenvolvimento de personagens](strategy.md) e [produção](production.md).
 

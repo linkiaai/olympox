@@ -1,6 +1,40 @@
 # Release notes
 
-These notes explain framework behavior by version. The current guides describe the 0.6.0-rc.1 release candidate. Historical defaults below apply to their own revisions and do not override current guidance. Read [installation and upgrade](installation.md) before changing an existing studio.
+These notes explain framework behavior by version. The current guides describe the experimental 0.6.0-rc.2 release candidate. Historical defaults below apply to their own revisions and do not override current guidance. Read [installation and upgrade](installation.md) before changing an existing studio.
+
+## 0.6.0-rc.2 — October 13, 2026
+
+This experimental candidate adds an optional direct BytePlus executor for consumers using their own accounts, credentials and budgets. Selecting this alternative is explicit; Higgsfield remains the default media pipeline. Existing character identity, canon, approved voice, references and historical attempts remain preserved. No personal creative production or live paid provider pilot was performed in the development checkout.
+
+### What changed
+
+- **Optional provider execution:** a separate dependency-free CLI supports explicit AP-region Seedream image, Seedance 2.5 video and preset SeedSpeech TTS requests. Each consumer supplies private environment credentials. Installation and offline preparation neither authenticate nor generate media. Configured credentials do not prove model entitlement. See [provider execution](provider-execution.md).
+- **Exact approved inputs:** jobs capture immutable prompt and reference bytes, hashes, roles, ordering, parameters, canon and framework contracts. Dispatch refuses input, credential or contract drift. Production references must match approved canon; supported historical vocal reuse requires a current exact listening declaration without rewriting the old canon.
+- **Queue, scoped grants and reservations:** a durable local ledger coordinates jobs and concurrent budget reservations across characters. Submission requires a matching unexpired explicit grant. Quotes, authorized uncertainty, reserved amounts and reconciled actual charges remain distinct. A local USD ceiling does not enforce a provider spending cap, and unknown actual charges retain their reservation until explicit billing reconciliation.
+- **Original-job recovery:** uncertain submissions retain their intent and are never automatically repeated. Known asynchronous jobs are queried by their original identifier with the bound credential. Encrypted output locators keep signed URLs out of plain persisted records and backups. Changing credentials does not silently retarget an existing job.
+- **Draft export and workflow evidence:** bounded export verifies actual media bytes, records hashes and preserves existing files through an export journal. Captured workflow bindings can record submission, recovery and export evidence. A completed provider job does not approve an asset, change canon, complete a workflow task or authorize publication.
+
+### Test the candidate
+
+Install into a fresh independent directory:
+
+```sh
+npx --yes github:linkiaai/olympox#v0.6.0-rc.2 setup
+```
+
+For an existing studio, follow the [preservation-first upgrade procedure](installation.md#upgrade-an-existing-studio). Run `npm run verify` in the installed studio; on Windows use `npm.cmd` or `npx.cmd` if needed. Start with offline preparation and review [provider execution](provider-execution.md) before connecting an account. A real media pilot separately requires model access, eligible exact inputs, a feasible full-pilot budget, applicable authorization, exported bytes and complete media inspection.
+
+Report reproducible results through [GitHub issues](https://github.com/linkiaai/olympox/issues), including framework version, operating system, Node and assistant versions, the command, expected behavior and sanitized actual error. Separate installation, local execution, host skill discovery and live provider behavior. Keep credentials, account identifiers, private creative records, signed URLs, media and backups out of reports.
+
+### Verification and experimental limits
+
+The implementation passed 282 tests with zero failures or skips on Windows with Node 24.18.0, both in the source checkout and in an independent studio installed from an actual package archive. Controlled HTTP fixtures exercised the public CLI, exact reference bytes, concurrent reservations, uncertain outcomes, credential binding, export recovery and preservation. Package and installed-tree checks covered reusable-source selection, private-data exclusion, preserved Git metadata and conflict refusal. These are local checks using synthetic media and credentials.
+
+Live authentication, model availability, accepted portrait/reference origins, identity continuity, listened-to voice fidelity, complete audiovisual output, actual billing and original-provider recovery remain unverified. BytePlus portrait rules restrict eligible real-person inputs; the API catalog does not establish acceptance of an existing external fictional character. Confirm eligibility in the consumer's own account before spending. Local video-reference transfer remains pending. Preset TTS produces draft vocal samples and does not clone or condition on an existing canonical voice file; that route leaves existing-voice production pending.
+
+Synchronous image/TTS responses have a crash window between receiving a successful result and staging its first media bytes. If those bytes were not saved, the job can retain its accepted outcome and reservation without a recoverable local output. Export remains pending and may need original-provider or manual recovery; the executor does not regenerate automatically. This candidate does not promise complete crash recovery.
+
+Node 22+ remains the declared minimum; Node 22 execution, other operating systems, actual Codex/Claude skill discovery, human novice observation and assistant/media parity still need independent validation. The historical Windows atomic-rename `EPERM` investigation remains open. A consumer pilot is required before batches or publication.
 
 ## 0.6.0-rc.1 — October 9, 2026
 

@@ -1,6 +1,6 @@
 ---
 name: olympox
-description: Criar, dirigir, produzir ou revisar influenciadores memoráveis com pipeline de mídia Higgsfield, coordenação independente do assistente, identidade preservada e qualidade.
+description: Criar, dirigir, produzir ou revisar influenciadores memoráveis com pipeline padrão Higgsfield, fornecedores opcionais explicitamente escolhidos, identidade preservada e qualidade.
 ---
 
 # OLYMPOX - AI Influencer framework
@@ -19,6 +19,7 @@ Carregue apenas as referências necessárias:
 
 - Briefing e persona: `templates/brief.md` e `docs/strategy.md`.
 - Imagens, vídeo e voz: `docs/production.md` e `docs/tools.md`.
+- Execução BytePlus opcional explícita: `docs/provider-execution.md`.
 - Revisão e aprovação: `docs/quality.md`.
 - Estrutura, comandos e versionamento: `docs/operations.md`.
 
@@ -39,6 +40,16 @@ Recupere o método de produção escolhido pelo usuário no pedido, brief, decis
 Prepare um plano versionado com `templates/production-method.md`. Mapeie as etapas solicitadas para fornecedor, módulo, rota de conexão e modelo reais; registre cobertura da fonte, entradas aprovadas exatas, recursos verificados, dependências e pendências. Não afirme que uma transcrição comprova telas não vistas ou um módulo específico. Para o pipeline Higgsfield padrão, um método de referência solicitado ou AI Influencer Builder, aplique `higgsfield-studio` e leia `docs/higgsfield-influencer-method.md` antes de planejar imagens ou vídeo. Um vídeo direto no Kling não comprova uma etapa concluída no Builder.
 
 Salve o plano do método como saída de planejamento ou entrada da execução local aplicável, para que seus bytes tenham hash e sejam observados. Leve-o nos repasses entre especialistas. Instalação e conexão do Higgsfield são etapas separadas de prontidão para produção: o instalador do framework não as executa, autentica ou gera. Um recurso ausente mantém a etapa pendente; prepare o pacote, identifique o que falta e proponha alternativas. A troca para geração externa paga precisa de autorização aplicável; respeite escolhas explícitas de método e preserve autorizações e aprovações anteriores. A ausência de um módulo Higgsfield necessário bloqueia essa etapa de produção; uma alternativa explícita altera o método versionado e a tentativa. O cânone já aprovado continua intacto; novos resultados são candidatos até inspeção, e mudar de fornecedor não exige, por si só, nova aprovação de identidade. Não migre personagens aprovadas nem reescreva registros, mídias, aprovações, backups ou runs históricos. Mudanças no contexto rastreado seguem o procedimento existente de nova tentativa explícita.
+
+## Execução opcional explícita de fornecedor
+
+Quando o usuário escolher BytePlus explicitamente para etapa suportada, siga `docs/provider-execution.md` e use o executor independente `scripts/provider-execution.mjs`. Higgsfield continua padrão. Mapeie modelo real, entradas aceitas e etapas restantes no plano versionado; imagem/vídeo API não comprova Builder, treino, voz canônica, lip-sync ou método completo equivalente. Etapas sem suporte ficam pendentes, sem trocar fornecedor ou recriar personagem silenciosamente.
+
+Cada consumidor usa estúdio instalado independente com conta, acesso a modelo, credenciais de processo e orçamento numérico próprios. `ARK_API_KEY` e `BYTEPLUS_SPEECH_API_KEY` separado são segredos privados de processo, nunca campos de request, prompts, cânone, evidência de job ou backup. Instalação/preparação offline não autentica nem gera. Chave/account label configurado não comprova acesso ou titularidade.
+
+O assistente preenche `templates/provider-request.json`, `provider-budget.json`, `provider-authorization.json`, `provider-reconciliation.json` e `provider-event.json` com contexto real e decisões aplicáveis; templates vazios não autorizam nada. Preserve prompt/parâmetros, papéis/ordem/bytes das referências, cânone/versão e voz escolhida após escuta quando aplicável. Prepare antes de enviar; submeta apenas job correspondente autorizado e preserve intenção, recibos, reservas/resultados. Orçamentos locais reservam USD comparáveis e retêm cobranças incertas, sem garantir teto da fatura externa. Reconcilie job original incerto antes de substituir; não repita geração automaticamente.
+
+A rota inicial aceita entradas locais exatas de imagem/áudio onde suportado; transferência de vídeo local permanece pendente. TTS preset serve apenas a `purpose: reference` para voz draft, sem condicionar por áudio canônico nem clonar voz existente; produção TTS fica pendente. Exporte bytes novos reais, registre, gere o selo e inspecione o resultado completo pelos procedimentos existentes. Resposta API, exportação ou pagamento não aprova cânone, conclui revisão nem autoriza publicação. Trocar fornecedor preserva identidade e usa job/tentativa explícito novo quando contexto vinculado muda. Comprove piloto completo autorizado do consumidor antes de rota principal/lotes.
 
 ## Modos de trabalho
 

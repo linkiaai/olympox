@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "requestHash": null,
+  "explicit": false,
+  "maximumUSD": 0,
+  "acceptEstimatedCost": false,
+  "acceptUnknownCost": false,
+  "expiresAt": null,
+  "provenance": {
+    "actor": null,
+    "at": null,
+    "eventId": null,
+    "source": null,
+    "notes": "Preencha com autorização real aplicável para este request exato; template incompleto não autoriza nada."
+  }
+}

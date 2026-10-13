@@ -10,7 +10,7 @@ Instale **OLYMPOX - AI Influencer framework** em um estúdio independente para C
 
 O núcleo local não tem dependências externas de execução; os comandos dispensam `npm install`. O acesso ao Higgsfield é preparado separadamente. É possível instalar, planejar personagens e manter registros antes de conectar um fornecedor.
 
-Este guia descreve a versão candidata **0.6.0-rc.1**. Instale sua tag com `npx --yes github:linkiaai/olympox#v0.6.0-rc.1 setup`. Use os comandos locais abaixo para uma cópia revisada ou um pacote extraído. Uma edição local posterior não atualiza uma tag publicada nem o manual hospedado. A release histórica 0.5.0 permanece intacta. Consulte [notas da versão e teste da candidata](release-notes.md).
+Este guia descreve a versão candidata **0.6.0-rc.2**. Instale sua tag com `npx --yes github:linkiaai/olympox#v0.6.0-rc.2 setup`. Use os comandos locais abaixo para uma cópia revisada ou um pacote extraído. Uma edição local posterior não atualiza uma tag publicada nem o manual hospedado. A release histórica 0.5.0 permanece intacta. Consulte [notas da versão e teste da candidata](release-notes.md).
 
 ## Preparação guiada
 

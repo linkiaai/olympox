@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "requestHash": null,
+  "providerJobId": null,
+  "status": null,
+  "actualCostUSD": null,
+  "provenance": {
+    "actor": null,
+    "at": null,
+    "eventId": null,
+    "source": null,
+    "notes": "Preencha só com resultado do job original coincidente e cobrança real; falta de evidência nunca significa zero ou não enviado."
+  }
+}

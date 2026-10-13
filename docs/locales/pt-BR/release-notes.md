@@ -1,6 +1,40 @@
 # Notas das versões
 
-Estas notas explicam comportamento por versão. Os guias atuais descrevem a versão candidata 0.6.0-rc.1. Padrões históricos abaixo pertencem às suas revisões e não substituem orientação atual. Leia [instalação e atualização](installation.md) antes de mudar estúdio existente.
+Estas notas explicam comportamento por versão. Os guias atuais descrevem a versão candidata experimental 0.6.0-rc.2. Padrões históricos abaixo pertencem às suas revisões e não substituem orientação atual. Leia [instalação e atualização](installation.md) antes de mudar estúdio existente.
+
+## 0.6.0-rc.2 — 13 de outubro de 2026
+
+Esta candidata experimental acrescenta um executor direto opcional da BytePlus para consumidores com contas, credenciais e orçamentos próprios. A escolha dessa alternativa é explícita; Higgsfield continua sendo o pipeline padrão de mídia. Identidade, cânone, voz aprovada, referências e tentativas históricas dos personagens existentes permanecem preservados. Não houve produção criativa pessoal nem piloto pago real de provedor no checkout de desenvolvimento.
+
+### O que mudou
+
+- **Execução opcional de provedor:** uma CLI separada, sem dependências, aceita pedidos explícitos de imagens Seedream, vídeos Seedance 2.5 e TTS SeedSpeech com voz predefinida na região AP. Cada consumidor fornece credenciais privadas por variáveis de ambiente. Instalação e preparação offline não autenticam nem geram mídia. Credenciais configuradas não comprovam acesso ao modelo. Consulte [execução de provedores](provider-execution.md).
+- **Entradas aprovadas exatas:** jobs capturam bytes imutáveis de prompts e referências, hashes, papéis, ordem, parâmetros, cânone e contratos do framework. O envio recusa alterações de entrada, credenciais ou contrato. Referências de produção devem corresponder ao cânone aprovado; a reutilização vocal histórica suportada exige declaração atual de escuta da referência exata, sem reescrever o cânone antigo.
+- **Fila, autorizações delimitadas e reservas:** um registro local durável coordena jobs e reservas concorrentes de orçamento entre personagens. A submissão exige autorização explícita correspondente e não expirada. Cotações, incerteza autorizada, valores reservados e cobranças reais reconciliadas permanecem distintos. Um teto local em USD não impõe limite de gastos no provedor, e cobranças reais desconhecidas mantêm a reserva até reconciliação explícita do faturamento.
+- **Recuperação do job original:** submissões incertas conservam sua intenção e nunca são repetidas automaticamente. Jobs assíncronos conhecidos são consultados pelo identificador original com a credencial vinculada. Localizadores de saída criptografados mantêm URLs assinadas fora dos registros e backups persistidos em texto simples. A mudança de credenciais não redireciona silenciosamente um job existente.
+- **Exportação em rascunho e evidências do workflow:** a exportação delimitada verifica os bytes reais da mídia, registra hashes e preserva arquivos existentes por meio de um diário de exportação. Vínculos capturados com o workflow podem registrar evidências de submissão, recuperação e exportação. A conclusão de um job do provedor não aprova um asset, altera o cânone, conclui uma tarefa do workflow nem autoriza publicação.
+
+### Teste a candidata
+
+Instale em um diretório independente novo:
+
+```sh
+npx --yes github:linkiaai/olympox#v0.6.0-rc.2 setup
+```
+
+Para um estúdio existente, siga o [procedimento de atualização com preservação](installation.md#atualizar-um-estudio-existente). Execute `npm run verify` no estúdio instalado; no Windows, use `npm.cmd` ou `npx.cmd` quando necessário. Comece pela preparação offline e consulte [execução de provedores](provider-execution.md) antes de conectar uma conta. Um piloto real de mídia exige separadamente acesso ao modelo, entradas exatas elegíveis, orçamento viável do piloto completo, autorização aplicável, bytes exportados e inspeção completa da mídia.
+
+Relate resultados reproduzíveis por [issues no GitHub](https://github.com/linkiaai/olympox/issues), incluindo versão do framework, sistema operacional, versões do Node e assistente, comando, comportamento esperado e erro real sem dados sensíveis. Diferencie instalação, execução local, descoberta de skills no assistente e comportamento real do provedor. Não inclua credenciais, identificadores de conta, registros criativos privados, URLs assinadas, mídia ou backups nos relatos.
+
+### Verificação e limites experimentais
+
+A implementação passou em 282 testes, sem falhas ou skips, no Windows com Node 24.18.0, tanto no checkout de fontes quanto em um estúdio independente instalado a partir de um pacote real. Fixtures de HTTP controlado exercitaram a CLI pública, bytes exatos de referências, reservas concorrentes, resultados incertos, vínculo de credenciais, recuperação de exportação e preservação. Verificações do pacote e da árvore instalada cobriram seleção das fontes reutilizáveis, exclusão de dados privados, preservação dos metadados Git e recusa de conflitos. São verificações locais com mídia e credenciais sintéticas.
+
+Autenticação real, disponibilidade dos modelos, origem aceita de retratos/referências, continuidade de identidade, fidelidade vocal verificada por escuta, saída audiovisual completa, faturamento real e recuperação no provedor original permanecem não verificados. As regras de retratos da BytePlus restringem entradas elegíveis de pessoas reais; o catálogo da API não comprova aceitação de um personagem fictício externo existente. Confirme a elegibilidade na conta do próprio consumidor antes de gastar. A transferência local de referência em vídeo permanece pendente. TTS com voz predefinida produz amostras vocais em rascunho e não clona nem condiciona a geração por um arquivo vocal canônico existente; nessa rota, produção com voz existente permanece pendente.
+
+Respostas síncronas de imagem/TTS têm uma janela de falha entre receber um resultado bem-sucedido e gravar seus primeiros bytes de mídia na área temporária. Se esses bytes não forem salvos, o job pode manter o resultado aceito e a reserva sem uma saída local recuperável. A exportação permanece pendente e pode exigir recuperação no provedor original ou manual; o executor não regenera automaticamente. Esta candidata não promete recuperação completa de falhas.
+
+Node 22+ continua sendo o mínimo declarado; execução no Node 22, outros sistemas operacionais, descoberta real de skills no Codex/Claude, observação de iniciante humano e paridade entre assistentes/mídia ainda exigem validação independente. A investigação histórica de `EPERM` no rename atômico do Windows continua aberta. Um piloto do consumidor é necessário antes de lotes ou publicação.
 
 ## 0.6.0-rc.1 — 9 de outubro de 2026
 
