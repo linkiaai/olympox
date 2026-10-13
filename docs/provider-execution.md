@@ -6,11 +6,29 @@ BytePlus is an experimental direct API route. Local implementation and synthetic
 
 The local core remains usable offline on Node 22+ with no external runtime dependencies. Installing or preparing a studio does not authenticate, submit generation, train identities or publish.
 
+## Configure credentials without editing files
+
+Release candidate 0.6.0-rc.3 includes guided provider choice and private credential configuration. Setup saves the nonsecret choice in `work/studio-settings.json` and offers separate configuration after installation and checks. `--yes` stays offline and never requests or stores secrets.
+
+From the installed studio root:
+
+```sh
+node scripts/provider-connect.mjs byteplus --locale en
+node scripts/provider-connect.mjs status
+node scripts/provider-connect.mjs help
+```
+
+Sign in to the [official BytePlus console and create/copy an API key](https://docs.byteplus.com/en/docs/modelark/api-key?redirect=1), then paste it only into hidden terminal input. This web login prepares a key; it is not inference API OAuth login or proof of model access. Check region/project and access compatible with the supported AP route. The speech key is separate and optional for draft-sample TTS; it does not imply cloning or use of an existing canonical voice.
+
+On Windows, the command writes a DPAPI CurrentUser protected vault under `%LOCALAPPDATA%/OLYMPOX/credentials` outside the studio. Do not edit credential files, use keys as arguments or paste secrets in chat. On systems without this protected storage, hidden input can apply only to the current operation in memory; there is no plaintext persistence. You can configure later or use the private process environment.
+
+The `ARK_API_KEY` environment value overrides the saved ModelArk key; `BYTEPLUS_SPEECH_API_KEY` separately overrides the speech key. `status` reports local choice/configuration without revealing secrets or calling the API. Configuration does not establish accepted authentication, model/reference access, charges or media fidelity. The assistant prepares request, budget and authorization records; you do not need to write JSON. Configuration does not authorize paid generation.
+
 ## Use your studio's account
 
 Consumers run this reusable code in their independently installed studios. Each studio supplies its own BytePlus account, model access, credentials and applicable spending authorization; OLYMPOX supplies no shared account, API key, credits or centrally operated service.
 
-The supported BytePlus routes use `ARK_API_KEY` for ModelArk and `BYTEPLUS_SPEECH_API_KEY` for speech where implemented. Supply these secrets through the private process environment. Keys are not request JSON fields and must not be written to job records or public examples. A configured key does not establish account entitlement or a selected model's availability.
+The supported BytePlus routes use `ARK_API_KEY` for ModelArk and `BYTEPLUS_SPEECH_API_KEY` for speech. The executor receives secrets in memory from the private environment or protected local vault. Keys are never request JSON fields, prompts, canon, jobs, logs, public examples or studio backups. A configured value does not establish account entitlement or model availability.
 
 Private remote output locators are encrypted for recovery with the original consumer credential. The CLI derives the protection key in memory; consumers do not create or paste an extra key into receipts. Keep access to the original credential when recovering an existing job. A changed credential cannot silently retarget an old job or unlock its recorded locators, and character backups do not contain those credentials.
 

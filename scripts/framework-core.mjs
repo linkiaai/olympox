@@ -1,5 +1,6 @@
 import { canonicalToken, isToken, oneOfTokens, RUN_STATES } from './language-compat.mjs';
 import fs from 'node:fs';
+import { preferredMediaProviders } from './studio-settings.mjs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { assertSlug, validatePersona, canonHash, vocalReadiness, assertVocalScope, VOCAL_POLICY } from './studio-core.mjs';
@@ -342,7 +343,7 @@ export function startRun(root, options) {
   if (workflow.requiresPersona) ensure(!isToken(p.status, 'draft'), 'Production/correction requires an approved canon.');
   const inputs = records(root, options.inputs ?? [], personaId);
   const capabilities = options.capabilities ?? []; ensure(list(capabilities), 'capabilities must be a list of strings.');
-  const selectedProviders = mediaProviders(options.mediaProviders, mediaProviders(framework.registry.defaultMediaProviders));
+  const selectedProviders = mediaProviders(options.mediaProviders, preferredMediaProviders(root, mediaProviders(framework.registry.defaultMediaProviders)));
   const run = {
     schemaVersion: 1, id: `run-${crypto.randomUUID()}`, frameworkVersion: framework.registry.version,
     workflowId: workflow.id, personaId, medium, objective: options.objective.trim(), createdAt: now(), updatedAt: now(), capabilities,

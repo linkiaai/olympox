@@ -1,6 +1,6 @@
 # Arquitetura do framework
 
-OLYMPOX separa direção do assistente, registros locais e execução externa de mídia. O código atual do framework é a versão candidata **0.6.0-rc.2**; contratos e workflows mantêm revisões próprias de componente, incluindo `0.2.0` e `0.3.0`. Consulte [notas da versão](release-notes.md) para testes e aceitação real pendente.
+OLYMPOX separa direção do assistente, registros locais e execução externa de mídia. O código atual do framework é a versão candidata **0.6.0-rc.3**; contratos e workflows mantêm revisões próprias de componente, incluindo `0.2.0` e `0.3.0`. Consulte [notas da versão](release-notes.md) para testes e aceitação real pendente.
 
 Este guia descreve os limites da implementação. Use [operação dos workflows](framework-02.md) para comandos e [identidade e registros](operations.md) para procedimentos de arquivos.
 

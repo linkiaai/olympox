@@ -4,21 +4,21 @@ Instale um estúdio independente, abra-o no Codex ou Claude Code e descreva o qu
 
 ## 1. Instale e abra o estúdio
 
-Requer Node 22+ e um ambiente local de Codex ou Claude Code. Instale a versão candidata 0.6.0-rc.2 para testes:
+Requer Node 22+ e um ambiente local de Codex ou Claude Code. Instale a versão candidata 0.6.0-rc.3 para testes:
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.6.0-rc.2 setup
+npx --yes github:linkiaai/olympox#v0.6.0-rc.3 setup
 ```
 
-A partir de checkout revisado ou pacote extraído, use `node bin/olympox.mjs setup`.
+A partir de checkout revisado ou pacote extraído, use `node bin/olympox.mjs setup`. A versão candidata 0.6.0-rc.3 inclui a escolha guiada de provedor e a configuração privada de credenciais abaixo.
 
-Escolha assistente e destino, revise o plano de instalação e abra a pasta instalada. Invoque `$olympox` no Codex ou `/olympox` no Claude Code. Recarregue o assistente se as novas skills ainda não forem descobertas. Consulte [instalação](installation.md) para setup por script, merge e atualizações.
+Escolha assistente, provedor e destino, revise o plano e abra a pasta instalada. Higgsfield é a opção padrão; BytePlus é experimental e usa sua própria conta. A escolha fica salva para trabalhos novos. Invoque `$olympox` no Codex ou `/olympox` no Claude Code. Recarregue o assistente se as skills ainda não forem descobertas. Consulte [instalação](installation.md) para setup por script, merge e atualizações.
 
-O setup verifica arquivos locais e manual. Conecte o Higgsfield separadamente e verifique os módulos necessários para o piloto pretendido.
+O setup verifica arquivos locais e manual, depois oferece configurar o provedor agora ou depois. Para BytePlus, execute `node scripts/provider-connect.mjs byteplus --locale pt-BR` na raiz do estúdio e cole a chave apenas no campo oculto do terminal; não edite arquivos nem envie chaves ao assistente. Para Higgsfield, siga a [rota de conexão escolhida](tools.md#escolher-uma-rota-higgsfield). Você pode preparar conceitos sem conexão. Uma chave configurada não comprova acesso real nem qualidade do piloto.
 
 ## 2. Peça um personagem
 
-> Use OLYMPOX para criar um influenciador para [público/tema]. Proponha três conceitos diferentes, mostre como cada um sustentaria uma série recorrente e recomende um.
+> Use OLYMPOX para criar um influenciador para [público/tema]. Leia a escolha de provedor salva neste estúdio. Proponha três conceitos diferentes, mostre como cada um sustentaria uma série recorrente e recomende um.
 
 Se a direção estiver aberta, o assistente faz poucas perguntas pendentes sobre objetivo, presença e público. “Pode propor” é uma resposta válida. Compare premissa, personalidade, assinatura visual, exemplo de voz, ganchos recorrentes e dificuldade de produção antes de escolher.
 
@@ -38,7 +38,7 @@ Suas escolhas ficam explícitas no registro. Aprovar a persona, por si só, não
 
 > Prepare um piloto curto com a identidade e voz aprovadas. Mostre roteiro, cenas, entradas exatas e escopo de custo antes da geração.
 
-O assistente escreve e dirige; ferramentas verificadas do Higgsfield geram a mídia. Inspecione o piloto completo e os bytes efetivamente exportados. Corrija falhas em novas versões. Amplie para lotes após a aprovação do piloto.
+O assistente escreve e dirige; ferramentas verificadas do provedor escolhido executam as etapas suportadas. A rota BytePlus experimental precisa de [verificação específica de referências, voz e acesso](provider-execution.md); uma etapa não suportada permanece pendente. Inspecione o piloto completo e os bytes efetivamente exportados. Corrija falhas em novas versões. Amplie para lotes após a aprovação do piloto.
 
 Siga [produção](production.md), [handoff do piloto](production-handoff.md) e [qualidade](quality.md). A publicação usa a autorização aplicável.
 
@@ -46,7 +46,7 @@ Siga [produção](production.md), [handoff do piloto](production-handoff.md) e [
 
 > Prepare uma peça em [formato] para [personagem] sobre [tema], usando o cânone aprovado e a narrativa atual.
 
-O assistente reutiliza decisões, idioma e referências aprovadas. Mudanças dentro da variação permitida mantêm a identidade; mudanças na identidade congelada exigem nova versão do cânone e aprovação. Use [operação dos workflows](framework-02.md) para retomar uma execução salva.
+O assistente reutiliza decisões, idioma, referências aprovadas e método registrado na tentativa existente. Mudar a preferência do estúdio não migra esse trabalho; uma mudança de provedor exige nova tentativa explícita. Mudanças dentro da variação permitida mantêm a identidade; alterações na identidade congelada exigem nova versão do cânone e aprovação. Use [operação dos workflows](framework-02.md) para retomar uma execução salva.
 
 ## Verifique os registros locais
 

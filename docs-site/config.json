@@ -118,7 +118,7 @@
     {
       "path": "docs/provider-execution.md",
       "group": "produce",
-      "label": "Optional provider execution",
+      "label": "Provider connection and execution",
       "translations": {
         "pt-BR": "docs/locales/pt-BR/provider-execution.md"
       }
@@ -229,7 +229,7 @@
     "narrative-save": "Save a new narrative version and its review when supplied.",
     "narrative-show": "Read the current narrative or an earlier version.",
     "content-save": "Save a new content piece version with script and context links.",
-    "run-start": "Start a workflow; optionally bind a structured offline readinessPlanPath.",
+    "run-start": "Start a workflow using registry defaults, saved studio provider choice and explicit media overrides; optionally bind an offline readiness plan.",
     "run-status": "Read state, prerequisites, per-stage feasibility/exact pending reasons and captured start identity.",
     "run-step": "Record actual work or record-media-readiness; current generation requires matching stageId start/completion.",
     "run-resume": "Resume work; context changes require an explicit new attempt.",
@@ -239,7 +239,7 @@
     "restore": "Restore a backup without overwriting an existing character.",
     "check-assets": "Check character and asset record consistency.",
     "doctor": "Check instructions, templates, guides, framework and skill installation.",
-    "setup": "Guide assistant and destination selection, review the installation plan and verify the local studio.",
+    "setup": "Guide assistant, media-provider and destination selection, verify the offline installation, then offer separate local credential configuration.",
     "install": "Install reusable framework files with explicit assistant selection and conflict-safe merge.",
     "reference-plan": "Preserve an exact private reference snapshot offline.",
     "reference-send": "Send one exactly authorized image snapshot through the pinned native CLI.",
@@ -255,7 +255,10 @@
     "provider-budget": "Read or configure the local USD budget and character/concurrency limits.",
     "provider-reconcile": "Reconcile an original job outcome and actual charge with exact request-bound evidence.",
     "provider-cancel": "Cancel unsubmitted local work with provenance, without claiming remote cancellation.",
-    "provider-dispatch": "Explicitly dispatch a bounded number of authorized queued jobs without replaying uncertain work."
+    "provider-dispatch": "Explicitly dispatch a bounded number of authorized queued jobs without replaying uncertain work.",
+    "provider-connect-byteplus": "Configure private BytePlus credentials with hidden terminal input and protected local storage where supported; no API call or generation.",
+    "provider-connect-status": "Read redacted local provider choice and credential configuration without proving live access.",
+    "provider-connect-help": "Show provider configuration syntax and local credential boundaries."
   },
   "defaultLocale": "en",
   "locales": {

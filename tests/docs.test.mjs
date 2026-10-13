@@ -5,7 +5,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { once } from 'node:events';
-import { buildDocumentation, checkDocumentation, collectDocumentation, commandCatalog, installationCommandCatalog, referenceCommandCatalog, providerCommandCatalog, sourceFile, DOCS_ASSETS } from '../scripts/docs-core.mjs';
+import { buildDocumentation, checkDocumentation, collectDocumentation, commandCatalog, installationCommandCatalog, referenceCommandCatalog, providerCommandCatalog, connectionCommandCatalog, sourceFile, DOCS_ASSETS } from '../scripts/docs-core.mjs';
 import { exportDocumentation } from '../scripts/docs-export.mjs';
 import '../docs-site/src/markdown.js';
 import '../docs-site/src/localization.js';
@@ -44,6 +44,17 @@ function fixture() {
   return { root, close() { assert.equal(path.dirname(root), parent); assert.match(path.basename(root), /^manual-/); fs.rmSync(root, { recursive: true, force: true }); } };
 }
 
+test('manual includes only implemented private connection commands with descriptions and safe syntax', () => {
+  const cli = fs.readFileSync(path.join(source, 'scripts/provider-connect.mjs'), 'utf8');
+  const config = JSON.parse(fs.readFileSync(path.join(source, 'docs-site/config.json'), 'utf8'));
+  const catalog = connectionCommandCatalog(cli, config.commandDescriptions);
+  assert.deepEqual(catalog.map(item => item.id), ['provider-connect-byteplus', 'provider-connect-status', 'provider-connect-help']);
+  assert(catalog.every(item => !item.syntax.includes('<key>') && item.syntax.includes('--locale en|pt-BR')));
+  assert.throws(() => connectionCommandCatalog(cli, {}), /without description/);
+  assert.throws(() => connectionCommandCatalog(cli.replace('node scripts/provider-connect.mjs status', 'node scripts/provider-connect.mjs byteplus'), config.commandDescriptions), /unique/);
+  assert.throws(() => connectionCommandCatalog(cli.replace("options.operation === 'status'", "options.operation === 'unsupported'"), config.commandDescriptions), /unsupported/);
+});
+
 test('manual derives catalogs, is deterministic and checks staleness without writing', () => {
   const instance = fixture();
   try {
@@ -52,7 +63,7 @@ test('manual derives catalogs, is deterministic and checks staleness without wri
     assert.equal(fs.existsSync(path.join(root, 'docs-site/dist')), false);
     const built = buildDocumentation(root);
     assert.equal(built.data.roles.length, 9); assert.equal(built.data.tasks.length, 15); assert.equal(built.data.workflows.length, 3);
-    assert.equal(built.data.commands.length, 41);
+    assert.equal(built.data.commands.length, 44);
     assert.match(built.data.commands.find(command => command.id === 'reference-send').syntax, /send <character-id> <transfer-id> <grant.json>/);
     assert.match(built.data.commands.find(command => command.id === 'setup').syntax, /--assistant codex\|claude\|both.*--locale en\|pt-BR.*--yes/);
     const repeated = buildDocumentation(root);

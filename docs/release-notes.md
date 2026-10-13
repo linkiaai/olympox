@@ -1,6 +1,33 @@
 # Release notes
 
-These notes explain framework behavior by version. The current guides describe the experimental 0.6.0-rc.2 release candidate. Historical defaults below apply to their own revisions and do not override current guidance. Read [installation and upgrade](installation.md) before changing an existing studio.
+These notes explain framework behavior by version. The current guides describe the experimental 0.6.0-rc.3 release candidate. Historical defaults below apply to their own revisions and do not override current guidance. Read [installation and upgrade](installation.md) before changing an existing studio.
+
+## 0.6.0-rc.3 — October 13, 2026
+
+This experimental candidate adds guided provider choice and private BytePlus credential configuration to the independent-studio onboarding. Each consumer uses their own account. The historical rc.2 tag and archive, and stable 0.5.0 release, remain unchanged.
+
+### What changed
+
+- **Provider choice during setup:** choose Higgsfield (default) or BytePlus (experimental), or supply `--provider higgsfield|byteplus`. New runs honor the saved studio preference before explicit per-medium overrides. Existing attempts retain their captured choices, identity, canon, approvals and history. Unattended setup preserves a saved choice or falls back to Higgsfield.
+- **Configure now or later:** after successful offline installation checks, BytePlus setup offers protected API-key paste. The separate `node scripts/provider-connect.mjs byteplus` command supports later connection. Console login is used to create/copy a key; no inference OAuth flow is implemented. Installation never authenticates, submits paid generation or publishes.
+- **Protected consumer credentials:** Windows CurrentUser DPAPI stores encrypted per-studio, per-medium key versions outside the studio. Hidden input prevents terminal echo; keys do not enter studio records, arguments or backups. Optional Speech credentials are separate. Other platforms use protected per-operation memory input without plaintext persistence. Environment overrides remain supported.
+- **Original-job recovery:** queued jobs can select their original protected credential version individually. Local help, status and staged exports avoid unnecessary secret reads. Configuration does not prove account/model access, reference eligibility or billing and does not authorize spending.
+
+### Test the candidate
+
+Install into a fresh independent directory and follow the provider question:
+
+```sh
+npx --yes github:linkiaai/olympox#v0.6.0-rc.3 setup
+```
+
+Use `--locale pt-BR` for Portuguese prompts. Follow [installation and upgrades](installation.md) and [private connection](provider-execution.md#configure-credentials-without-editing-files). Run `npm run verify` in the installed studio; Windows can use `npm.cmd` or `npx.cmd`. Keep keys out of conversations and sanitized issue reports.
+
+### Verification and experimental limits
+
+Synthetic checks cover preference precedence, original-attempt preservation, protected input, Windows DPAPI history, credential recovery, offline inspection, package privacy, fresh installation and conflict refusal. Native Windows terminal acceptance uses synthetic keys and no provider calls. Existing rc.2 media-driver limits still apply: live authentication, actual costs, reference acceptance and audiovisual continuity require a consumer pilot; preset TTS does not clone a canonical voice.
+
+The primary-checkout Windows atomic-rename `EPERM` investigation remains open with an unproved cause. Independent identical development sources and archive-derived installed studios provide separate verification; their results do not claim that the primary-path issue is fixed. Node 22, other operating systems, actual host skill discovery and human novice acceptance remain separate checks.
 
 ## 0.6.0-rc.2 — October 13, 2026
 

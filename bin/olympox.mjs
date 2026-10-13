@@ -23,10 +23,11 @@ function help() {
   console.log(`OLYMPOX - AI Influencer framework
 
 Usage:
-  olympox setup [directory] [--assistant codex|claude|both] [--locale en|pt-BR] [--merge] [--yes]
+  olympox setup [directory] [--assistant codex|claude|both] [--locale en|pt-BR] [--provider higgsfield|byteplus] [--merge] [--yes]
   olympox install [directory] [--merge] [--assistant codex|claude|both]
   olympox <studio-command> [arguments]
   olympox --version
+  olympox connect [byteplus|status|help] [--locale en|pt-BR]
 
 Install a new studio:
   npx --yes github:linkiaai/olympox#v0.5.0 setup
@@ -34,7 +35,7 @@ Install a new studio:
 From a reviewed source checkout or extracted package:
   node bin/olympox.mjs setup
 
-Setup guides language, assistant, destination, a reviewed installation plan and
+Setup guides language, assistant, destination, media provider, a reviewed plan and
 local verification. English is the default presentation language.
 Noninteractive setup requires --yes, an explicit directory and --assistant.
 An interactive install without --assistant opens the same guide.
@@ -45,6 +46,9 @@ characters, media, work, backups and credentials are never included.
 --merge keeps identical files and rejects conflicting files before writing.
 Direct install defaults to codex. Claude Code uses CLAUDE.md and .claude/skills.
 The assistant target changes local instructions and skills, not the media method.
+Provider choice is saved privately for new work. Existing attempts keep their method.
+After local checks, interactive BytePlus setup offers protected key paste or later.
+connect configures local credentials; it does not authenticate or generate media.
 
 Run studio commands from the installed project's root. To list them:
   node bin/olympox.mjs studio-help
@@ -84,11 +88,11 @@ try {
   } else {
     const targetRoot = process.cwd();
     const metadataPath = path.join(targetRoot, 'package.json');
-    const studio = path.join(targetRoot, 'scripts', 'studio.mjs');
+    const studio = path.join(targetRoot, 'scripts', command === 'connect' ? 'provider-connect.mjs' : 'studio.mjs');
     if (!fs.existsSync(metadataPath) || JSON.parse(fs.readFileSync(metadataPath, 'utf8')).name !== 'olympox' || !fs.existsSync(studio)) {
       throw new Error('Run studio commands from an installed OLYMPOX project. Use olympox install <directory> to create one.');
     }
-    const result = spawnSync(process.execPath, [studio, command === 'studio-help' ? 'help' : command, ...options], { cwd: targetRoot, stdio: 'inherit' });
+    const result = spawnSync(process.execPath, [studio, ...(command === 'connect' ? options : [command === 'studio-help' ? 'help' : command, ...options])], { cwd: targetRoot, stdio: 'inherit' });
     if (result.error) throw result.error;
     process.exitCode = result.status ?? 1;
   }

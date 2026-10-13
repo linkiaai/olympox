@@ -77,6 +77,18 @@ export function providerCommandCatalog(source, descriptions) {
   return commands;
 }
 
+export function connectionCommandCatalog(source, descriptions) {
+  const commands = [...source.matchAll(/^node scripts\/provider-connect\.mjs (byteplus|status|help)([^\r\n]*)/gm)].map(match => ({ id: `provider-connect-${match[1]}`, syntax: `node scripts/provider-connect.mjs ${match[1]}${match[2]}` }));
+  if (commands.length !== 3 || new Set(commands.map(item => item.id)).size !== 3) throw new Error('Connection commands require unique byteplus, status and help syntax.');
+  for (const command of commands) {
+    const operation = command.id.slice('provider-connect-'.length);
+    if (!source.includes(`options.operation === '${operation}'`)) throw new Error('Connection syntax advertises an unsupported command.');
+    if (!descriptions[command.id]?.trim()) throw new Error(`Connection command without description: ${command.id}`);
+    command.description = descriptions[command.id];
+  }
+  return commands;
+}
+
 export function collectDocumentation(root) {
   const files = new Map();
   const read = relative => {
@@ -112,7 +124,7 @@ export function collectDocumentation(root) {
   const roles = registry.roles.map(role => ({ ...role, markdown: read(role.path) }));
   const tasks = registry.tasks.map(item => ({ ...JSON.parse(read(item.path)), path: item.path }));
   const workflows = registry.workflows.map(item => ({ ...JSON.parse(read(item.path)), path: item.path }));
-  const commands = [...installationCommandCatalog(read('bin/olympox.mjs'), config.commandDescriptions ?? {}), ...commandCatalog(read('scripts/studio.mjs'), config.commandDescriptions ?? {}), ...referenceCommandCatalog(read('scripts/reference-transfer.mjs'), config.commandDescriptions ?? {}), ...providerCommandCatalog(read('scripts/provider-execution.mjs'), config.commandDescriptions ?? {})];
+  const commands = [...installationCommandCatalog(read('bin/olympox.mjs'), config.commandDescriptions ?? {}), ...commandCatalog(read('scripts/studio.mjs'), config.commandDescriptions ?? {}), ...referenceCommandCatalog(read('scripts/reference-transfer.mjs'), config.commandDescriptions ?? {}), ...providerCommandCatalog(read('scripts/provider-execution.mjs'), config.commandDescriptions ?? {}), ...connectionCommandCatalog(read('scripts/provider-connect.mjs'), config.commandDescriptions ?? {})];
   for (const [locale, settings] of Object.entries(config.locales)) if (!new RegExp(`^docs-site/locales/${locale}\\.json$`).test(settings.resource)) throw new Error(`Locale resource outside the public selection: ${settings.resource}`);
   const ui = JSON.parse(read(config.locales.en.resource)).ui;
   if (!ui || !Object.keys(ui).length || Object.values(ui).some(value => typeof value !== 'string' || !value.trim())) throw new Error('English UI messages must be nonempty strings.');

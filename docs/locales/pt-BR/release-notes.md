@@ -1,6 +1,33 @@
 # Notas das versões
 
-Estas notas explicam comportamento por versão. Os guias atuais descrevem a versão candidata experimental 0.6.0-rc.2. Padrões históricos abaixo pertencem às suas revisões e não substituem orientação atual. Leia [instalação e atualização](installation.md) antes de mudar estúdio existente.
+Estas notas explicam comportamento por versão. Os guias atuais descrevem a versão candidata experimental 0.6.0-rc.3. Padrões históricos abaixo pertencem às suas revisões e não substituem orientação atual. Leia [instalação e atualização](installation.md) antes de mudar estúdio existente.
+
+## 0.6.0-rc.3 — 13 de outubro de 2026
+
+Esta candidata experimental acrescenta escolha guiada de provedor e configuração privada de credenciais BytePlus ao onboarding de estúdios independentes. Cada consumidor usa sua própria conta. Tag e arquivo históricos rc.2 e release estável 0.5.0 permanecem intactos.
+
+### O que mudou
+
+- **Escolha de provedor no setup:** escolha Higgsfield (padrão) ou BytePlus (experimental), ou informe `--provider higgsfield|byteplus`. Runs novos respeitam a preferência salva antes de overrides explícitos por mídia. Tentativas existentes conservam escolhas capturadas, identidade, cânone, aprovações e histórico. Setup não interativo preserva escolha salva ou usa Higgsfield.
+- **Configurar agora ou depois:** após verificações offline bem-sucedidas, o setup BytePlus oferece colagem protegida da chave de API. O comando separado `node scripts/provider-connect.mjs byteplus` permite conectar depois. Login no console serve para criar/copiar a chave; não há fluxo OAuth de inferência implementado. Instalar nunca autentica, submete geração paga ou publica.
+- **Credenciais próprias protegidas:** Windows CurrentUser DPAPI guarda versões criptografadas por estúdio/mídia fora do estúdio. Entrada oculta evita eco no terminal; chaves não entram em registros, argumentos ou backups do estúdio. Credenciais Speech opcionais são separadas. Outros sistemas usam entrada protegida em memória por operação, sem persistência em texto puro. Overrides pelo ambiente continuam suportados.
+- **Recuperação de jobs originais:** jobs em fila podem selecionar individualmente sua versão original da credencial protegida. Ajuda, status local e exportações já preparadas evitam leituras desnecessárias de segredos. Configurar não comprova acesso à conta/modelos, elegibilidade de referências ou cobrança e não autoriza gastos.
+
+### Testar a candidata
+
+Instale em diretório independente novo e responda à pergunta de provedor:
+
+```sh
+npx --yes github:linkiaai/olympox#v0.6.0-rc.3 setup
+```
+
+Use `--locale pt-BR` para mensagens em português. Siga [instalação e atualização](installation.md) e [conexão privada](provider-execution.md#configurar-credenciais-sem-editar-arquivos). Execute `npm run verify` no estúdio instalado; Windows pode usar `npm.cmd` ou `npx.cmd`. Mantenha chaves fora de conversas e relatos sanitizados de problemas.
+
+### Verificação e limites experimentais
+
+Verificações sintéticas cobrem precedência, preservação de tentativas originais, entrada protegida, histórico DPAPI no Windows, recuperação de credenciais, inspeção offline, privacidade do pacote, instalação nova e recusa de conflitos. Aceitação nativa no terminal Windows usa chaves sintéticas e nenhuma chamada ao provedor. Limites de mídia da rc.2 continuam aplicáveis: autenticação real, custos, aceitação de referências e continuidade audiovisual exigem piloto do consumidor; TTS predefinido não clona voz canônica.
+
+A investigação de `EPERM` em rename atômico no checkout principal Windows permanece aberta, sem causa comprovada. Fontes de desenvolvimento independentes idênticas e estúdios instalados a partir do arquivo fornecem verificação separada; seus resultados não declaram corrigido o problema do caminho principal. Node 22, outros sistemas, descoberta real de skills e aceitação humana por iniciantes permanecem verificações separadas.
 
 ## 0.6.0-rc.2 — 13 de outubro de 2026
 

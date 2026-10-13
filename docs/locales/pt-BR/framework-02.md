@@ -66,7 +66,7 @@ Registre atores, datas, eventos de ferramentas e arquivos reais. Use `execution.
 
 ## Declarar capacidades e método de mídia
 
-Runs novos selecionam Higgsfield para `image`, `video` e `audio`, salvo escolha explícita de fornecedor para o meio afetado. `integrated-images` é alternativa explícita de imagem e é recusada para áudio/vídeo. Salve a decisão e os módulos exatos no [plano de método](../../../templates/locales/pt-BR/production-method.md).
+Para novos runs, os padrões de `framework/registry.json` são aplicados primeiro; a preferência salva em `work/studio-settings.json` substitui o provedor de `image`, `video` e `audio`; escolhas explícitas em `mediaProviders` substituem somente os meios informados. Sem preferência, Higgsfield permanece padrão. O setup escolhe `higgsfield` ou `byteplus` experimental com `--provider` ou pela seleção guiada. `integrated-images` continua alternativa explícita somente para imagem. Salve a decisão e os módulos exatos no [plano de método](../../../templates/locales/pt-BR/production-method.md).
 
 Um provedor `byteplus` escolhido explicitamente pode usar o [executor experimental de API direta](provider-execution.md) para etapas suportadas sem Higgsfield. Cada estúdio independente fornece conta, credenciais e orçamento próprios. Selecionar provedor em `mediaProviders` não configura nem chama sua API, demonstra aceitação real de referências, muda cânone aprovado ou aprova piloto.
 
@@ -78,7 +78,7 @@ A task `approve-canon` atualizada, versão `0.3.0`, declara `vocalPolicy: explic
 
 Retomar um run antigo, inclusive com nova tentativa explícita, preserva seu contrato capturado. Para adotar a policy atualizada, comece um novo run `create-character` atual e conserve o registro histórico. Campos novos declarados na persona ainda recebem a validação aplicável em ambos os contextos.
 
-Tentativas históricas sem `mediaProviders` conservam capacidades e comportamento de meio único salvos. Bytes de identidade, aprovação, mídia e tentativas existentes não são migrados.
+A preferência do estúdio só inicia escolhas de novos runs. Retomadas e tentativas existentes conservam seus fornecedores capturados, mesmo quando essa preferência muda. Tentativas históricas sem `mediaProviders` mantêm capacidades e comportamento de meio único salvos. Identidade, aprovação, mídia e bytes históricos não são migrados.
 
 ## Retomar trabalho e revisar mudanças de contexto
 

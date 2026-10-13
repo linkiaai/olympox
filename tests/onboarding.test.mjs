@@ -49,7 +49,7 @@ function inventory(root) {
   return files;
 }
 function scripted(answers, extra = {}) {
-  const output = [], asked = [], queues = Object.fromEntries(Object.entries(answers).map(([id, values]) => [id, Array.isArray(values) ? [...values] : [values]]));
+  const output = [], asked = [], queues = Object.fromEntries(Object.entries({ provider: 'higgsfield', ...answers }).map(([id, values]) => [id, Array.isArray(values) ? [...values] : [values]]));
   const io = {
     isTTY: true,
     output: value => output.push(value),
@@ -73,8 +73,8 @@ test.after(() => {
 });
 
 test('setup parsing preserves exact paths and rejects ambiguous or missing options', () => {
-  assert.deepEqual(parseSetupOptions(['C:\\Example Studio', '--assistant', 'both', '--locale', 'pt-BR', '--merge', '--yes']), { directory: 'C:\\Example Studio', assistant: 'both', locale: 'pt-BR', merge: true, yes: true });
-  assert.deepEqual(parseSetupOptions([]), { directory: null, assistant: null, locale: null, merge: false, yes: false });
+  assert.deepEqual(parseSetupOptions(['C:\\Example Studio', '--assistant', 'both', '--locale', 'pt-BR', '--merge', '--yes']), { directory: 'C:\\Example Studio', assistant: 'both', locale: 'pt-BR', provider: null, merge: true, yes: true });
+  assert.deepEqual(parseSetupOptions([]), { directory: null, assistant: null, locale: null, provider: null, merge: false, yes: false });
   for (const args of [
     ['one', 'two'], ['--assistant'], ['--assistant', '--yes'], ['--assistant', 'other'], ['--locale'], ['--locale', 'pt-br'],
     ['--yes', '--yes'], ['--merge', '--merge'], ['--assistant', 'codex', '--assistant', 'claude'], ['--locale', 'en', '--locale', 'pt-BR'], ['--unknown'], ['']
@@ -116,7 +116,7 @@ test('number choices and Enter defaults create a sibling studio outside the fram
 });
 
 test('cancellation at every guided choice and declined summary write no studio files', async () => {
-  for (const step of ['locale', 'assistant', 'directory', 'confirm']) {
+  for (const step of ['locale', 'assistant', 'directory', 'provider', 'confirm']) {
     const { base, source, target } = fixture();
     const answers = { locale: 'en', assistant: 'codex', directory: target, confirm: 'yes', [step]: null };
     const session = scripted(answers, { cwd: base, verify: async () => assert.fail('Cancelled setup cannot verify or execute provider work.') });
@@ -224,7 +224,7 @@ test('raw terminal Ctrl-C at confirmation cancels without writing files', async 
   input.isTTY = true; input.setRawMode = () => input;
   outputStream.isTTY = true; outputStream.columns = 80;
   let interrupted = false;
-  const resultPromise = runOnboarding(source, parseSetupOptions([target, '--assistant', 'codex', '--locale', 'en']), {
+  const resultPromise = runOnboarding(source, parseSetupOptions([target, '--assistant', 'codex', '--locale', 'en', '--provider', 'higgsfield']), {
     cwd: base, isTTY: true, input, outputStream,
     output(value) { if (value === 'Install this studio?') { interrupted = true; setImmediate(() => input.write('\u0003')); } },
     verify: async () => assert.fail('Ctrl-C cannot approve installation.')
@@ -266,7 +266,7 @@ test('raw terminal Ctrl-C during real local verification waits for the child to 
     }
   }, 10);
   try {
-    const result = await runOnboarding(source, parseSetupOptions([target, '--assistant', 'codex', '--locale', 'en']), {
+    const result = await runOnboarding(source, parseSetupOptions([target, '--assistant', 'codex', '--locale', 'en', '--provider', 'higgsfield']), {
       cwd: base, isTTY: true, input, outputStream,
       output(value) { if (value === 'Install this studio?') setImmediate(() => input.write('\r')); }
     });
@@ -299,7 +299,7 @@ test('verification children use pipes, forward actual output, and leave embeddin
     outputStream.on('data', bytes => actualOutput.push(bytes.toString()));
     errorStream.on('data', bytes => actualErrors.push(bytes.toString()));
     try {
-      const result = await runOnboarding(source, parseSetupOptions([target, '--assistant', 'codex', '--locale', 'en']), {
+      const result = await runOnboarding(source, parseSetupOptions([target, '--assistant', 'codex', '--locale', 'en', '--provider', 'higgsfield']), {
         cwd: base, isTTY: true, input, outputStream, errorStream,
         output(value) { if (value === 'Install this studio?') setImmediate(() => input.write('\r')); }
       });
@@ -326,7 +326,7 @@ Object.defineProperty(process.stdout,'isTTY',{value:true});
 process.stdout.columns=80; process.stdin.isRaw=false;
 process.stdin.setRawMode=mode=>{if(!mode)throw Object.assign(new Error('fixture console cleanup'),{code:${JSON.stringify(code)},syscall:'setRawMode'});process.stdin.isRaw=mode;return process.stdin;};
 try {
-  const result=await runOnboarding(${JSON.stringify(source)},parseSetupOptions([${JSON.stringify(target)},'--assistant','codex','--locale','en']),{
+  const result=await runOnboarding(${JSON.stringify(source)},parseSetupOptions([${JSON.stringify(target)},'--assistant','codex','--locale','en','--provider','higgsfield']),{
     cliConsoleCleanup:${allow},output:value=>{if(value==='Install this studio?')setImmediate(()=>process.stdin.emit('keypress','\\r',{name:'return'}));},
     verify:async()=>({ok:${verified},checks:[{synthetic:true}]})
   }); console.log(JSON.stringify({status:result.status,checks:result.verification.checks.length}));

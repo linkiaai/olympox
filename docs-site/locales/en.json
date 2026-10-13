@@ -89,7 +89,7 @@
     "contractsDescription": "Contracts make the owner, prerequisites and evidence needed to complete a step explicit.",
     "contractsEyebrow": "FRAMEWORK CONTRACTS",
     "commandsTitle": "Local command reference",
-    "commandsDescription": "Setup creates an independent studio. Run record operations from that studio root; commands maintain local state and integrity.",
+    "commandsDescription": "Setup saves the studio provider choice and verifies local files offline. Separate configuration uses hidden terminal input; credential status does not establish live access or authorize generation.",
     "commandsEyebrow": "COMMAND REFERENCE",
     "sourceInventory": "Sources in this revision · {count} files",
     "hashNote": "Hashes detect changes. They do not authenticate people or replace inspection.",

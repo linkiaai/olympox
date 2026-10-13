@@ -4,6 +4,7 @@ import readline from 'node:readline';
 import { fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
 import { planFrameworkInstall, installFramework } from './install-framework.mjs';
+import { MEDIA_PROVIDER_CHOICES, readStudioSettings, planStudioSettings, saveStudioSettings } from './studio-settings.mjs';
 
 const messagesRoot = path.join(path.dirname(fileURLToPath(import.meta.url)), 'onboarding-locales');
 const hosts = ['codex', 'claude', 'both'];
@@ -12,7 +13,7 @@ const meaningful = value => typeof value === 'string' && value.trim().length > 0
 
 export function parseSetupOptions(args) {
   if (!Array.isArray(args) || !args.every(meaningful)) throw new Error('Setup arguments must be nonempty strings.');
-  const options = { directory: null, assistant: null, locale: null, merge: false, yes: false };
+  const options = { directory: null, assistant: null, locale: null, provider: null, merge: false, yes: false };
   const seen = new Set();
   for (let index = 0; index < args.length; index++) {
     const value = args[index];
@@ -20,7 +21,7 @@ export function parseSetupOptions(args) {
       if (options.directory !== null) throw new Error('Choose one independent studio directory.');
       options.directory = value;
     } else {
-      if (!['--assistant', '--locale', '--merge', '--yes'].includes(value)) throw new Error(`Unknown setup option: ${value}.`);
+      if (!['--assistant', '--locale', '--provider', '--merge', '--yes'].includes(value)) throw new Error(`Unknown setup option: ${value}.`);
       if (seen.has(value)) throw new Error(`Setup option repeated: ${value}.`);
       seen.add(value);
       if (value === '--merge') options.merge = true;
@@ -31,6 +32,9 @@ export function parseSetupOptions(args) {
         if (value === '--assistant') {
           if (!hosts.includes(selected)) throw new Error('Choose --assistant codex, claude, or both.');
           options.assistant = selected;
+        } else if (value === '--provider') {
+          if (!MEDIA_PROVIDER_CHOICES.includes(selected)) throw new Error('Choose --provider higgsfield or byteplus.');
+          options.provider = selected;
         } else {
           if (!languages.includes(selected)) throw new Error('Choose --locale en or pt-BR.');
           options.locale = selected;
@@ -54,7 +58,12 @@ function textFor(locale) {
 function terminalReader(input, output, cliConsoleCleanup) {
   const controller = new AbortController();
   const originalRawMode = input.isRaw;
+  const previousListeners = new Map(input.eventNames().map(event => [event, input.rawListeners(event)]));
   const interface_ = readline.createInterface({ input, output, terminal: Boolean(input.isTTY && output.isTTY) });
+  // readline can leave its keypress decoder attached after close. Track only
+  // listeners introduced by this interface so protected input has no old echo.
+  const ownedInputListeners = input.eventNames().flatMap(event => input.rawListeners(event)
+    .filter(listener => !(previousListeners.get(event) ?? []).includes(listener)).map(listener => ({ event, listener })));
   const lines = [];
   let closed = false, pending = null, interrupted = false;
   const deliver = line => {
@@ -94,6 +103,8 @@ function terminalReader(input, output, cliConsoleCleanup) {
         interface_.terminal = false;
         interface_.close();
         input.pause();
+      } finally {
+        for (const { event, listener } of ownedInputListeners) input.removeListener(event, listener);
       }
     }
   };
@@ -133,7 +144,7 @@ async function verifyInstallation(targetRoot, { signal, output, t, stdout, stder
 /** Guided local setup. Provider authentication and creative production are separate. */
 export async function runOnboarding(sourceRoot, parsedOptions, ioOverrides = {}) {
   const options = parsedOptions;
-  if (!options || ![null, ...hosts].includes(options.assistant) || ![null, ...languages].includes(options.locale) || typeof options.merge !== 'boolean' || typeof options.yes !== 'boolean' || (options.directory !== null && !meaningful(options.directory))) throw new Error('Invalid parsed setup options. Use parseSetupOptions first.');
+  if (!options || ![null, ...hosts].includes(options.assistant) || ![null, ...languages].includes(options.locale) || ![null, ...MEDIA_PROVIDER_CHOICES].includes(options.provider) || typeof options.merge !== 'boolean' || typeof options.yes !== 'boolean' || (options.directory !== null && !meaningful(options.directory))) throw new Error('Invalid parsed setup options. Use parseSetupOptions first.');
   const cwd = path.resolve(ioOverrides.cwd ?? process.cwd());
   const input = ioOverrides.input ?? process.stdin;
   const outputStream = ioOverrides.outputStream ?? process.stdout;
@@ -212,6 +223,14 @@ export async function runOnboarding(sourceRoot, parsedOptions, ioOverrides = {})
         directory = null; merge = false;
       }
     }
+    const previousSettings = readStudioSettings(plan.targetRoot);
+    let provider = options.provider ?? previousSettings?.mediaProvider ?? 'higgsfield';
+    if (!options.yes && options.provider === null) {
+      output(t('providerPreparation'));
+      provider = await question('provider', t('provider'), MEDIA_PROVIDER_CHOICES.map(value => ({ value, label: t(value) })), provider);
+      if (!provider) return cancel();
+    }
+    const settingsPlan = planStudioSettings(plan.targetRoot, provider);
     output(t('summary'));
     output(t('summaryDirectory', { directory: plan.targetRoot }));
     output(t('summaryAssistant', { assistant: t(assistant) }));
@@ -220,11 +239,14 @@ export async function runOnboarding(sourceRoot, parsedOptions, ioOverrides = {})
     output(t('summaryFiles', { copied: plan.copied.length, retained: plan.retained.length, total: plan.fileCount }));
     output(t('summaryVerification'));
     output(t('summaryProvider'));
+    output(t('selectedProvider', { provider: t(provider) }));
     if (!options.yes) {
       const decision = await question('confirm', t('confirm'), [{ value: 'yes', label: t('yes') }, { value: 'no', label: t('no') }], 'yes');
       if (decision !== 'yes' || reader?.interrupted) return cancel();
     }
+    if (planStudioSettings(plan.targetRoot, provider).previousHash !== settingsPlan.previousHash) throw new Error('Studio settings changed after review; installation was not written.');
     const installation = installFramework(plan.sourceRoot, plan.targetRoot, { assistant: plan.assistant, merge: plan.merge, expectedPlanHash: plan.planHash });
+    saveStudioSettings(installation.targetRoot, provider, { expectedPreviousHash: settingsPlan.previousHash, studioId: settingsPlan.settings.studioId });
     output(t('installed', { directory: installation.targetRoot }));
     output(t('verificationStart'));
     let verification;
@@ -233,6 +255,21 @@ export async function runOnboarding(sourceRoot, parsedOptions, ioOverrides = {})
       if (!verification || typeof verification.ok !== 'boolean') throw new Error('Verification must return an ok boolean and its actual check results.');
     } catch (error) { verification = { ok: false, checks: [], error: error.message, interrupted: reader?.interrupted ?? false }; }
     output(t(verification.ok ? 'verified' : 'verificationFailed'));
+    let connection = null;
+    if (provider === 'byteplus') {
+      output(t('connectLater', { locale }));
+      if (verification.ok && !options.yes && !reader?.interrupted) {
+        const decision = await question('configure-provider', t('configureProvider'), [{ value: 'now', label: t('configureNow') }, { value: 'later', label: t('configureLater') }], 'later');
+        if (decision === 'now') {
+          // Close the ordinary echoing reader before protected credential input.
+          await reader?.close(); reader = null;
+          try {
+            const connect = ioOverrides.connect ?? (async (targetRoot, io) => (await import('./provider-connect.mjs')).runProviderConnect(targetRoot, io));
+            connection = await connect(installation.targetRoot, { locale, input, outputStream, output, cliConsoleCleanup: ioOverrides.cliConsoleCleanup });
+          } catch { connection = { status: 'configuration-failed' }; output(t('connectionFailed')); }
+        } else connection = { status: decision === null ? 'cancelled' : 'deferred' };
+      }
+    } else output(t('higgsfieldConnection'));
     const verifyCommand = process.platform === 'win32' ? 'npm.cmd run verify' : 'npm run verify';
     output(t('fullVerify', { directory: installation.targetRoot }));
     output(`  ${verifyCommand}`);
@@ -241,6 +278,6 @@ export async function runOnboarding(sourceRoot, parsedOptions, ioOverrides = {})
     output(t('hostNote'));
     output(t('firstPrompt'));
     output(t('prompt'));
-    return { status: verification.ok ? 'installed' : 'verification-failed', ...installation, locale, verification, providerReadiness: 'pending', firstPrompt: t('prompt'), nextInvocations: assistant === 'both' ? ['$olympox', '/olympox'] : [assistant === 'codex' ? '$olympox' : '/olympox'] };
+    return { status: verification.ok ? 'installed' : 'verification-failed', ...installation, locale, provider, connection, verification, providerReadiness: 'pending', firstPrompt: t('prompt'), nextInvocations: assistant === 'both' ? ['$olympox', '/olympox'] : [assistant === 'codex' ? '$olympox' : '/olympox'] };
   } finally { await reader?.close(); }
 }

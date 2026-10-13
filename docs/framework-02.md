@@ -66,7 +66,7 @@ Record real actors, timestamps, tool events, and files. Only record `execution.m
 
 ## Declare media capabilities and method
 
-New runs select Higgsfield for `image`, `video`, and `audio` unless the specification explicitly selects a provider for an affected medium. `integrated-images` is an explicit image alternative and is rejected for audio/video. Save the method decision and exact modules in the [production-method plan](../templates/production-method.md).
+For new runs, `framework/registry.json` defaults apply first; the preference saved in `work/studio-settings.json` then selects the provider for `image`, `video` and `audio`; explicit `mediaProviders` overrides only the specified media. Without a preference, Higgsfield remains the default. Setup selects `higgsfield` or experimental `byteplus` through `--provider` or the guided choice. `integrated-images` remains an explicit image-only alternative. Save the decision and exact modules in the [production-method plan](../templates/production-method.md).
 
 An explicitly selected `byteplus` provider can use the [experimental direct API executor](provider-execution.md) for supported stages without Higgsfield. Each independent studio supplies its own account, credentials and budget. Selecting a provider in `mediaProviders` does not configure or call its API, establish real reference acceptance, change approved canon or approve a pilot.
 
@@ -78,7 +78,7 @@ The updated `approve-canon` task version `0.3.0` declares `vocalPolicy: explicit
 
 Resuming an old run, including an explicit new attempt, preserves that run's captured contract. To adopt the updated task policy, start a new current `create-character` run and retain the historical record. Newly declared persona fields still receive their applicable validation in either context.
 
-Historical attempts without `mediaProviders` retain their saved capability and single-medium behavior. Existing identity, approval, media, and attempt bytes are not migrated.
+The studio preference only seeds new runs. Resumed and existing attempts retain their captured providers even when that preference changes. Historical attempts without `mediaProviders` retain saved capability and single-medium behavior. Identity, approval, media and historical bytes are not migrated.
 
 ## Resume work and review context changes
 

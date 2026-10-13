@@ -117,7 +117,7 @@ function getJob(state, id) { need(jobId(id) && state.jobs[id], 'Unknown provider
 function event(job, name, detail = {}) { job.events.push({ at: new Date().toISOString(), name, ...detail }); }
 function summary(job) {
   const request = job.scope.request;
-  return { id: job.id, requestHash: job.requestHash, characterId: request.characterId, purpose: request.purpose, provider: request.provider, medium: request.medium, model: request.model, destination: request.destination, execution: clone(job.scope.execution), canonBinding: clone(job.scope.canonBinding), state: job.state, providerJobId: job.providerJobId, estimate: job.estimate, reservedUSD: job.reservationMicros === null ? null : usd(job.reservationMicros), actualCostUSD: job.actualCostMicros === null ? null : usd(job.actualCostMicros), usage: job.usage, outputs: job.exported, receiptPath: `${jobDirectory(job)}/receipt.json`, reason: job.reason, request: clone(request) };
+  return { id: job.id, requestHash: job.requestHash, characterId: request.characterId, purpose: request.purpose, provider: request.provider, medium: request.medium, model: request.model, destination: request.destination, execution: clone(job.scope.execution), canonBinding: clone(job.scope.canonBinding), state: job.state, providerJobId: job.providerJobId, credentialFingerprint: job.credentialFingerprint, requiresExportCredential: job.state === 'succeeded' && !job.exported.length && Boolean(job.protectedOutputs), estimate: job.estimate, reservedUSD: job.reservationMicros === null ? null : usd(job.reservationMicros), actualCostUSD: job.actualCostMicros === null ? null : usd(job.actualCostMicros), usage: job.usage, outputs: job.exported, receiptPath: `${jobDirectory(job)}/receipt.json`, reason: job.reason, request: clone(request) };
 }
 export function readJob(root, id) { return summary(getJob(loadState(root), id)); }
 export function listJobs(root) { return Object.values(loadState(root).jobs).map(summary); }
@@ -245,7 +245,7 @@ function checkContext(root, job) {
 }
 function governance(root) {
   const registry = JSON.parse(fileBytes(root, 'framework/registry.json', 1024 * 1024));
-  const names = [...new Set(['CONSTITUTION.md', 'framework/registry.json', 'scripts/providers/byteplus.mjs', 'scripts/provider-execution-core.mjs', ...registry.constitutionPaths, ...registry.roles.map(item => item.path), ...registry.tasks.map(item => item.path), ...registry.workflows.map(item => item.path)])].sort();
+  const names = [...new Set(['CONSTITUTION.md', 'framework/registry.json', 'scripts/providers/byteplus.mjs', 'scripts/provider-execution-core.mjs', 'scripts/provider-credentials.mjs', 'scripts/secret-input.mjs', ...registry.constitutionPaths, ...registry.roles.map(item => item.path), ...registry.tasks.map(item => item.path), ...registry.workflows.map(item => item.path)])].sort();
   return names.map(relative => ({ path: relative, sha256: digest(fileBytes(root, relative)) }));
 }
 function contract(driver, request) { return stableHash(driver.validate(request)); }
@@ -446,10 +446,13 @@ export async function submitJob(root, id, grant, options) {
 }
 export async function dispatchQueue(root, options = {}) {
   const maxJobs = options.maxJobs ?? 1; need(Number.isInteger(maxJobs) && maxJobs >= 1 && maxJobs <= 64, 'Use a bounded dispatch count.');
+  need(options.resolveJobOptions === undefined || typeof options.resolveJobOptions === 'function', 'Invalid per-job credential resolver.');
   const results = [];
   for (const job of Object.values(loadState(root).jobs).filter(item => item.state === 'queued').slice(0, maxJobs)) {
     if (!capacity(loadState(root))) break;
-    results.push(await dispatchJob(root, job.id, options));
+    const scoped = options.resolveJobOptions ? await options.resolveJobOptions(summary(job)) : options;
+    need(scoped?.driver, 'Select an implemented driver for the queued job.');
+    results.push(await dispatchJob(root, job.id, { ...options, ...scoped }));
   }
   return results;
 }

@@ -6,11 +6,29 @@ BytePlus é uma rota experimental de API direta. Implementação local e verific
 
 O núcleo local continua utilizável offline com Node 22+, sem dependências externas de execução. Instalar ou preparar um estúdio não autentica, submete geração, treina identidades nem publica.
 
+## Configurar credenciais sem editar arquivos
+
+A versão candidata 0.6.0-rc.3 inclui escolha guiada de provedor e configuração privada de credenciais. O setup salva a escolha não secreta em `work/studio-settings.json` e oferece configuração separada depois de instalar e verificar. `--yes` permanece offline e não solicita nem salva segredos.
+
+Na raiz do estúdio instalado:
+
+```sh
+node scripts/provider-connect.mjs byteplus --locale pt-BR
+node scripts/provider-connect.mjs status
+node scripts/provider-connect.mjs help
+```
+
+Entre no [console oficial BytePlus e crie/copie uma chave de API](https://docs.byteplus.com/en/docs/modelark/api-key?redirect=1), depois cole-a somente no campo oculto do terminal. Esse login web prepara a chave; não é login OAuth da API de inferência nem comprovação de acesso ao modelo. Confira região/projeto e acesso compatíveis com a rota AP suportada. A chave de voz é separada e opcional para TTS de amostras em rascunho; não implica clonagem nem uso de voz canônica existente.
+
+No Windows, o comando grava um cofre protegido por DPAPI CurrentUser em `%LOCALAPPDATA%/OLYMPOX/credentials`, fora do estúdio. Não edite arquivos de credenciais, use argumentos com chaves ou cole segredos na conversa. Em sistemas sem esse armazenamento protegido, a entrada oculta pode valer somente para a operação atual em memória; não há persistência em texto simples. Você pode configurar depois ou usar o ambiente privado do processo.
+
+O ambiente `ARK_API_KEY` substitui a chave ModelArk salva; `BYTEPLUS_SPEECH_API_KEY` substitui separadamente a chave de voz. `status` informa escolha e configuração locais sem revelar segredos ou chamar a API. Configuração não comprova autenticação aceita, acesso a modelo/referências, cobranças nem fidelidade de mídia. O assistente prepara os registros de request, orçamento e autorização; você não precisa escrever JSON. Configurar não autoriza geração paga.
+
 ## Usar a conta do seu estúdio
 
 Consumidores executam esse código reutilizável em seus estúdios instalados independentes. Cada estúdio fornece conta BytePlus, acesso a modelos, credenciais e autorização de gasto aplicável próprios; OLYMPOX não oferece conta compartilhada, chave de API, créditos ou serviço central operado.
 
-As rotas BytePlus suportadas usam `ARK_API_KEY` para ModelArk e `BYTEPLUS_SPEECH_API_KEY` para fala quando implementada. Forneça esses segredos pelo ambiente privado do processo. Chaves não são campos de request JSON e não devem ser escritas em jobs ou exemplos públicos. Configurar uma chave não demonstra elegibilidade da conta nem disponibilidade do modelo escolhido.
+As rotas BytePlus suportadas usam `ARK_API_KEY` para ModelArk e `BYTEPLUS_SPEECH_API_KEY` para voz. O executor recebe esses segredos em memória do ambiente privado ou cofre local protegido. Chaves nunca são campos de request JSON, prompts, cânone, jobs, logs, exemplos públicos ou backups do estúdio. Um valor configurado não demonstra elegibilidade da conta nem disponibilidade do modelo.
 
 Localizadores privados de saídas remotas são criptografados para recuperação com a credencial original do consumidor. A CLI deriva a chave de proteção em memória; consumidores não criam nem colam chave adicional nos recibos. Mantenha acesso à credencial original ao recuperar job existente. Outra credencial não muda silenciosamente o destino do job antigo nem abre localizadores registrados, e backups da personagem não contêm essas credenciais.
 
