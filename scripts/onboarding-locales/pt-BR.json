@@ -9,17 +9,6 @@
   "codex": "Codex",
   "claude": "Claude Code",
   "both": "Codex e Claude Code",
-  "provider": "Qual provedor de mídia este estúdio deve usar?",
-  "higgsfield": "Higgsfield (padrão) — Pipeline guiado; conecte o plugin ou a CLI oficial",
-  "byteplus": "BytePlus (experimental) — API direta com sua conta; acesso a modelos, referências e voz exigem verificação",
-  "providerPreparation": "Você pode preparar conceitos sem conectar um provedor. A escolha vale para trabalhos novos; tentativas existentes mantêm o método escolhido.",
-  "selectedProvider": "Provedor de mídia: {provider}",
-  "configureProvider": "Configurar BytePlus agora?",
-  "configureNow": "Configurar agora por colagem protegida da chave API",
-  "configureLater": "Configurar depois",
-  "connectLater": "Escolha do provedor salva. Para configurar depois, execute node scripts/provider-connect.mjs byteplus --locale {locale} neste estúdio. Cole chaves somente na entrada protegida do terminal, nunca no chat.",
-  "connectionFailed": "A configuração privada de credenciais não foi concluída. O estúdio continua instalado; execute novamente o conector indicado acima.",
-  "higgsfieldConnection": "No assistente, conecte o plugin Higgsfield ou siga docs/higgsfield-setup.md para a CLI oficial. A instalação não faz login por você.",
   "directory": "Diretório do estúdio independente",
   "outsideSource": "Escolha um diretório independente fora do checkout de desenvolvimento do framework.",
   "sourceFailed": "O pacote do framework está incompleto ou inseguro: {reason} Execute a preparação novamente a partir de um pacote corrigido ou extraído novamente.",
@@ -38,7 +27,7 @@
   "mergeMode": "Mesclagem segura",
   "summaryFiles": "Arquivos: {copied} para instalar, {retained} idênticos para conservar, {total} no total.",
   "summaryVerification": "Após copiar: gerar o manual, conferir instruções e skills instaladas, validar registros locais e conferir atualização do manual.",
-  "summaryProvider": "Acesso ao provedor ainda não verificado. A instalação é offline e não autentica, transfere referências, gera mídia, treina identidades nem publica. A configuração local opcional de chaves vem após as verificações da instalação.",
+  "summaryProvider": "A prontidão de mídia Higgsfield continua pendente. A instalação não conecta contas, envia referências, gera mídia, treina identidades nem publica.",
   "confirm": "Instalar este estúdio?",
   "yes": "Instalar",
   "no": "Cancelar",
@@ -59,5 +48,5 @@
   "openClaude": "Abra este diretório no Claude Code e invoque /olympox.",
   "hostNote": "Instalação do assistente e descoberta real das skills são etapas separadas. Se o assistente escolhido não estiver instalado aqui, instale ou abra depois; os arquivos locais continuam preparados.",
   "firstPrompt": "Primeiro pedido na conversa:",
-  "prompt": "Atena, vamos criar meu primeiro influenciador original. Leia a escolha de provedor de mídia salva neste estúdio. Proponha três conceitos distintos e recomende um. Prepare conceitos primeiro; antes da produção paga, confira o método escolhido, transferência das referências exatas, voz, vídeo, exportação, inspeção e orçamento do piloto completo."
+  "prompt": "Atena, vamos criar meu primeiro influenciador original. Proponha três conceitos distintos e recomende um. Confira acesso Higgsfield e transferência de referências, voz, vídeo, exportação, inspeção e orçamento do piloto completo antes da produção."
 }

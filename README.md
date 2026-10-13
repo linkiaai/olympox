@@ -4,27 +4,27 @@ OLYMPOX helps you develop original AI influencers and carry their identity, stor
 
 The framework provides local skills, task contracts, resumable workflows, character records, canon snapshots, editorial versions and backups. It runs on **Node 22+**, with no external runtime dependencies.
 
-[Optional provider execution](docs/provider-execution.md) includes an experimental direct BytePlus route with each consumer's own account, keys and budget. Release candidate 0.6.0-rc.3 includes guided provider choice and private local credential configuration.
+Release candidate **0.6.0-rc.4** removes the experimental BytePlus executor and provider-choice onboarding. Setup again selects the assistant and independent studio. See [release notes](docs/release-notes.md).
 
 ## Set up an independent studio
 
-Install the **0.6.0-rc.3** release candidate for testing:
+Install the **0.6.0-rc.4** release candidate for testing:
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.6.0-rc.3 setup
+npx --yes github:linkiaai/olympox#v0.6.0-rc.4 setup
 ```
 
 From a reviewed checkout or extracted package, use `node bin/olympox.mjs setup`.
 
-Choose Codex, Claude Code or both, a media provider and an independent destination. Higgsfield is the default choice; BytePlus is an explicit experimental alternative. Setup saves the studio preference, reviews the plan, installs instructions and skills, and checks local files. It then offers provider configuration now or later. Open the destination in your assistant and invoke `$olympox` in Codex or `/olympox` in Claude Code.
+Choose Codex, Claude Code or both, then an independent destination. Setup summarizes the installation plan and copy/retain counts, installs the selected host instructions and skills, and checks the local studio. Open the destination in your assistant and invoke `$olympox` in Codex or `/olympox` in Claude Code.
 
 For an unattended installation, provide all required choices:
 
 ```sh
-node bin/olympox.mjs setup ../my-studio --assistant codex --provider byteplus --yes
+node bin/olympox.mjs setup ../my-studio --assistant codex --yes
 ```
 
-Use `--locale pt-BR` for Portuguese setup prompts and `--provider higgsfield|byteplus` to supply the choice in advance. `--yes` keeps installation offline and never requests or stores keys. To configure BytePlus later, run `node scripts/provider-connect.mjs byteplus --locale en` from the studio root and paste the key only into the terminal's hidden input. No manual file editing or credentials in chat are needed. Local configuration does not prove model access, charges or media quality. On Windows, use `npm.cmd` if needed.
+Use `--locale pt-BR` for Portuguese setup prompts. On Windows, use `npm.cmd` when PowerShell blocks the npm launcher.
 
 See [installation](docs/installation.md) for source selection, merge conflicts and preserving an existing studio. Updating these guides locally does not change the already published package or hosted manual.
 
@@ -36,9 +36,9 @@ The candidate adds bounded local image transfer, explicit speaking/silent canon 
 
 In your studio, say:
 
-> Use OLYMPOX to create an original influencer for [audience/topic]. Read this studio's saved provider choice, propose three distinct concepts and recommend one. Prepare concepts first; check the selected method and full-pilot budget before paid production.
+> Use OLYMPOX to create an original influencer for [audience/topic]. Propose three distinct concepts and recommend one.
 
-The assistant develops the concept, persona, narrative and scripts. The production sequence is visual exploration, selected references, a listened-to voice sample when the character speaks, approval of the exact canon, and one inspected pilot before batches. Check the selected provider's access, accepted references, export and the whole pilot budget before paid production. Assistant-integrated images are an explicit alternative.
+The assistant develops the concept, persona, narrative and scripts. The production sequence is visual exploration, selected references, a listened-to voice sample when the character speaks, approval of the exact canon, and one inspected pilot before batches. Check Higgsfield access, accepted references, export and the whole pilot budget before paid production. Assistant-integrated images are an explicit alternative.
 
 Start with [the quick start](docs/quick-start.md), then follow [character development](docs/strategy.md) and [production](docs/production.md).
 

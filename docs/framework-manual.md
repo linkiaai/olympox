@@ -10,7 +10,6 @@ OLYMPOX is a local framework for developing original AI influencers with consist
 | Make your first request | [Quick start](quick-start.md) |
 | Develop a character and choose its identity | [Character development](strategy.md) |
 | Produce a pilot or a content piece | [Production](production.md) |
-| Use a directly selected API with your own account and budget | [Optional provider execution](provider-execution.md) |
 | Inspect media and request corrections | [Quality and continuity](quality.md) |
 | Maintain records, canon and backups | [Identity and records](operations.md) |
 | Start, complete or resume workflow tasks | [Workflow operation](framework-02.md) |
@@ -35,10 +34,9 @@ OLYMPOX is a local framework for developing original AI influencers with consist
 | Character and editorial records | Keep persona, narrative, scripts and assets linked to their context |
 | Canon snapshots and execution seals | Preserve approved references and reported generation inputs |
 | Runs and backups | Support continuation, integrity checks and recovery |
-| Optional provider executor | Execute explicitly selected supported stages and preserve local jobs/budget; BytePlus is experimental |
 | Navigable manual | Provide guides and source-derived reference catalogs |
 
-The local commands maintain files and validate records. Provider connection and media execution use tools available to your session or the explicitly selected optional executor with each studio's own credentials. Listening, video viewing and publication remain separate operations. Local validation and synthetic provider fixtures do not establish creative quality or live external execution.
+The local commands maintain files and validate records. Provider connection, generation, listening, video viewing and publication use tools available to your session. Local validation does not establish creative quality or external execution.
 
 ## Terms used in this manual
 
@@ -57,4 +55,4 @@ The local commands maintain files and validate records. Provider connection and 
 
 Use an installed studio for your own characters. This source repository contains the reusable framework and its development documentation. Private characters, media, runs and credentials remain outside the distribution.
 
-The current source is the **0.6.0-rc.3** release candidate for community testing. See [release notes](release-notes.md) for changes, testing instructions and pending live acceptance, and [supported capabilities](studio-status.md) for the boundary between local features and external services. A speaking video pilot is the default creation scope; an explicit brief can choose an image-only or silent scope. Viral potential is tested through content and results.
+The current source is release candidate **0.6.0-rc.4**. It removes the experimental BytePlus route and provider-choice onboarding. See [release notes](release-notes.md) for changes, testing instructions and pending live acceptance, and [supported capabilities](studio-status.md) for the boundary between local features and external services. A speaking video pilot is the default creation scope; an explicit brief can choose an image-only or silent scope. Viral potential is tested through content and results.

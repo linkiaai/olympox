@@ -1,6 +1,14 @@
 # Release notes
 
-These notes explain framework behavior by version. The current guides describe the experimental 0.6.0-rc.3 release candidate. Historical defaults below apply to their own revisions and do not override current guidance. Read [installation and upgrade](installation.md) before changing an existing studio.
+These notes explain framework behavior by version. The current guides describe release candidate 0.6.0-rc.4, which removes the BytePlus experiment. Historical defaults below apply to their own revisions and do not override current guidance. Read [installation and upgrade](installation.md) before changing an existing studio.
+
+## 0.6.0-rc.4 — October 13, 2026
+
+The optional BytePlus executor, protected credential connector, saved provider preference and provider-choice onboarding have been removed at the user's request. Setup again selects the assistant and independent studio only. Higgsfield remains the default media pipeline; assistant-integrated images remain an explicit alternative. No replacement provider has been connected.
+
+Existing character canon, media, runs, provider jobs, studio settings and external credential vaults are preserved. Published rc.2/rc.3 tags and archives remain historical artifacts; those releases still contain the removed feature. Their provider guides and commands belong to their tagged sources, not this release. The general terminal-reader listener cleanup remains.
+
+Install into a fresh independent studio with `npx --yes github:linkiaai/olympox#v0.6.0-rc.4 setup`. Existing studios require the explicit preservation-first [upgrade procedure](installation.md#upgrade-an-existing-studio); merge is not an automatic updater or uninstaller. This release does not delete historical provider jobs, settings or external credential vaults and does not authenticate or connect a replacement provider.
 
 ## 0.6.0-rc.3 — October 13, 2026
 
@@ -21,7 +29,7 @@ Install into a fresh independent directory and follow the provider question:
 npx --yes github:linkiaai/olympox#v0.6.0-rc.3 setup
 ```
 
-Use `--locale pt-BR` for Portuguese prompts. Follow [installation and upgrades](installation.md) and [private connection](provider-execution.md#configure-credentials-without-editing-files). Run `npm run verify` in the installed studio; Windows can use `npm.cmd` or `npx.cmd`. Keep keys out of conversations and sanitized issue reports.
+Use `--locale pt-BR` for Portuguese prompts. Follow [installation and upgrades](installation.md) and private connection (historical guide in the corresponding release tag). Run `npm run verify` in the installed studio; Windows can use `npm.cmd` or `npx.cmd`. Keep keys out of conversations and sanitized issue reports.
 
 ### Verification and experimental limits
 
@@ -35,7 +43,7 @@ This experimental candidate adds an optional direct BytePlus executor for consum
 
 ### What changed
 
-- **Optional provider execution:** a separate dependency-free CLI supports explicit AP-region Seedream image, Seedance 2.5 video and preset SeedSpeech TTS requests. Each consumer supplies private environment credentials. Installation and offline preparation neither authenticate nor generate media. Configured credentials do not prove model entitlement. See [provider execution](provider-execution.md).
+- **Optional provider execution:** a separate dependency-free CLI supports explicit AP-region Seedream image, Seedance 2.5 video and preset SeedSpeech TTS requests. Each consumer supplies private environment credentials. Installation and offline preparation neither authenticate nor generate media. Configured credentials do not prove model entitlement. See provider execution (historical guide in the corresponding release tag).
 - **Exact approved inputs:** jobs capture immutable prompt and reference bytes, hashes, roles, ordering, parameters, canon and framework contracts. Dispatch refuses input, credential or contract drift. Production references must match approved canon; supported historical vocal reuse requires a current exact listening declaration without rewriting the old canon.
 - **Queue, scoped grants and reservations:** a durable local ledger coordinates jobs and concurrent budget reservations across characters. Submission requires a matching unexpired explicit grant. Quotes, authorized uncertainty, reserved amounts and reconciled actual charges remain distinct. A local USD ceiling does not enforce a provider spending cap, and unknown actual charges retain their reservation until explicit billing reconciliation.
 - **Original-job recovery:** uncertain submissions retain their intent and are never automatically repeated. Known asynchronous jobs are queried by their original identifier with the bound credential. Encrypted output locators keep signed URLs out of plain persisted records and backups. Changing credentials does not silently retarget an existing job.
@@ -49,7 +57,7 @@ Install into a fresh independent directory:
 npx --yes github:linkiaai/olympox#v0.6.0-rc.2 setup
 ```
 
-For an existing studio, follow the [preservation-first upgrade procedure](installation.md#upgrade-an-existing-studio). Run `npm run verify` in the installed studio; on Windows use `npm.cmd` or `npx.cmd` if needed. Start with offline preparation and review [provider execution](provider-execution.md) before connecting an account. A real media pilot separately requires model access, eligible exact inputs, a feasible full-pilot budget, applicable authorization, exported bytes and complete media inspection.
+For an existing studio, follow the [preservation-first upgrade procedure](installation.md#upgrade-an-existing-studio). Run `npm run verify` in the installed studio; on Windows use `npm.cmd` or `npx.cmd` if needed. Start with offline preparation and review provider execution (historical guide in the corresponding release tag) before connecting an account. A real media pilot separately requires model access, eligible exact inputs, a feasible full-pilot budget, applicable authorization, exported bytes and complete media inspection.
 
 Report reproducible results through [GitHub issues](https://github.com/linkiaai/olympox/issues), including framework version, operating system, Node and assistant versions, the command, expected behavior and sanitized actual error. Separate installation, local execution, host skill discovery and live provider behavior. Keep credentials, account identifiers, private creative records, signed URLs, media and backups out of reports.
 

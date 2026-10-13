@@ -1,6 +1,6 @@
 # Character and media production
 
-Use this guide to move from a selected concept to an approved, repeatable character and its first media. Work in an installed studio. Higgsfield is the default media provider; the conversational assistant develops direction and uses verified tools. Explicitly selected [optional providers](provider-execution.md), including experimental BytePlus execution, can supply verified stages without Higgsfield. The [method guide](higgsfield-influencer-method.md) covers provider stages and [tools](tools.md) covers readiness.
+Use this guide to move from a selected concept to an approved, repeatable character and its first media. Work in an installed studio. Higgsfield is the default media provider; the conversational assistant develops direction and uses verified tools. The [method guide](higgsfield-influencer-method.md) covers provider stages and [tools](tools.md) covers readiness.
 
 ## Define what must remain recognizable
 
@@ -30,8 +30,6 @@ A sheet or grid helps comparison, but the selected usable references need readab
 
 For later generation/editing, attach actual selected references through supported inputs and record their roles/order and provider IDs. A filename, descriptive prompt or seed does not transmit a reference or prove fidelity. Check [reference transfer](higgsfield-plugin.md#transfer-exact-studio-references) before proposing manual attachment. Missing exact transport keeps generation pending.
 
-A provider change preserves the original canon and reference bytes. Check the new route's acceptance rules for those actual files, including any origin/account/age restrictions. Do not recreate the face inside the new provider or replace references silently to gain access. See [BytePlus reference restrictions](provider-execution.md#byteplus-portrait-restrictions).
-
 ## Complete visual and vocal canon
 
 Initial visual selection is a checkpoint, not complete canon approval. For a new speaking character, generate a short vocal sample while it remains `draft`, with `purpose: reference`. Listen to the exact audio, check language/pronunciation/pacing and record the user's selection, settings and reference file/hash. Written voice direction alone is insufficient.
@@ -39,8 +37,6 @@ Initial visual selection is a checkpoint, not complete canon approval. For a new
 Once required visual and vocal references are reviewed and selected, record explicit complete canon approval, mark the persona `canon-approved` and create its snapshot through [operations](operations.md). Silent scope records why voice is not applicable. Reuse existing compatible approved voice and canon.
 
 Voice settings and approved references contribute to the canon hash. A changed face/body/voice or other frozen anchor requires a new canon version and approval. New provider sheets remain derivative candidates; preserve historical bytes, snapshots and decisions.
-
-For a new route, verify reuse of the approved exact audio and assess actual voice continuity, language and lip-sync. Native speech or textual timbre direction alone does not demonstrate the selected vocal identity. Unsupported vocal input or inaccessible listening keeps the speaking stage pending; a silent video does not prove that scope.
 
 ## Prepare a piece
 

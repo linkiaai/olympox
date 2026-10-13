@@ -2,7 +2,7 @@
 
 `scripts/framework-core.mjs` implements local workflow records for OLYMPOX. The registry selects profiles, task contracts, and workflow definitions; a run saves those definitions with its observed context. The coordinating assistant performs the work and supplies declarations and existing files. The module has no agent dispatcher or provider adapter.
 
-The framework package and registry use the release-candidate version **0.6.0-rc.3**. Task/workflow JSON contracts retain individual component revisions, including **0.2.0** and **0.3.0**, and `schemaVersion: 1`; these are compatibility identifiers, not the current product release number. This reference describes the current implementation, including additive provider, vocal and stage-readiness policies. See [release notes](../docs/release-notes.md) for testing and pending live acceptance.
+The framework package and registry use the release-candidate version **0.6.0-rc.4**. Task/workflow JSON contracts retain individual component revisions, including **0.2.0** and **0.3.0**, and `schemaVersion: 1`; these are compatibility identifiers, not the current product release number. This reference describes the current implementation, including additive provider, vocal and stage-readiness policies. See [release notes](../docs/release-notes.md) for testing and pending live acceptance.
 
 For the conversational workflow and CLI sequence, read [workflows and resumption](../docs/framework-02.md). For persona, manifest, and backup commands, read [operations](../docs/operations.md).
 

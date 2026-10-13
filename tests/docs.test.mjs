@@ -5,7 +5,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { once } from 'node:events';
-import { buildDocumentation, checkDocumentation, collectDocumentation, commandCatalog, installationCommandCatalog, referenceCommandCatalog, providerCommandCatalog, connectionCommandCatalog, sourceFile, DOCS_ASSETS } from '../scripts/docs-core.mjs';
+import { buildDocumentation, checkDocumentation, collectDocumentation, commandCatalog, installationCommandCatalog, referenceCommandCatalog, sourceFile, DOCS_ASSETS } from '../scripts/docs-core.mjs';
 import { exportDocumentation } from '../scripts/docs-export.mjs';
 import '../docs-site/src/markdown.js';
 import '../docs-site/src/localization.js';
@@ -21,21 +21,6 @@ test('manual checks actual reference-transfer help and refuses omitted, duplicat
   assert.throws(() => referenceCommandCatalog(cli.replace('node scripts/reference-transfer.mjs destination', 'node scripts/reference-transfer.mjs status'), config.commandDescriptions), /unique implemented/);
   assert.throws(() => referenceCommandCatalog(cli.replace("command === 'destination'", "command === 'unsupported'"), config.commandDescriptions), /unsupported command/);
 });
-test('manual catalogs actual provider CLI operations without advertising help or accepting missing implementation/description', () => {
-  const cli = fs.readFileSync(path.join(source, 'scripts/provider-execution.mjs'), 'utf8');
-  const config = JSON.parse(fs.readFileSync(path.join(source, 'docs-site/config.json'), 'utf8'));
-  const catalog = providerCommandCatalog(cli, config.commandDescriptions);
-  assert.deepEqual(catalog.map(item => item.id), ['provider-capabilities', 'provider-prepare', 'provider-submit', 'provider-status', 'provider-export', 'provider-jobs', 'provider-budget', 'provider-reconcile', 'provider-cancel', 'provider-dispatch']);
-  assert.equal(catalog.some(item => item.id === 'provider-help'), false);
-  assert.equal(catalog.find(item => item.id === 'provider-submit').syntax, 'node scripts/provider-execution.mjs submit <job-id> <authorization.json>');
-  assert.equal(catalog.find(item => item.id === 'provider-cancel').syntax, 'node scripts/provider-execution.mjs cancel <job-id> <event.json>');
-  assert.equal(catalog.find(item => item.id === 'provider-budget').syntax, 'node scripts/provider-execution.mjs budget [budget.json]');
-  const incomplete = { ...config.commandDescriptions }; delete incomplete['provider-submit'];
-  assert.throws(() => providerCommandCatalog(cli, incomplete), /without description/);
-  assert.throws(() => providerCommandCatalog(cli.replace('node scripts/provider-execution.mjs capabilities', 'node scripts/provider-execution.mjs jobs'), config.commandDescriptions), /unique implemented/);
-  assert.throws(() => providerCommandCatalog(cli.replace('node scripts/provider-execution.mjs dispatch [maximum-jobs]\n', ''), config.commandDescriptions), /unique implemented/);
-  assert.throws(() => providerCommandCatalog(cli.replace("command === 'dispatch'", "command === 'unsupported'"), config.commandDescriptions), /unsupported command/);
-});
 function fixture() {
   fs.mkdirSync(parent, { recursive: true });
   const root = fs.mkdtempSync(path.join(parent, 'manual-'));
@@ -43,17 +28,6 @@ function fixture() {
   for (const name of ['AGENTS.md', 'CONSTITUTION.md', 'package.json']) fs.copyFileSync(path.join(source, name), path.join(root, name));
   return { root, close() { assert.equal(path.dirname(root), parent); assert.match(path.basename(root), /^manual-/); fs.rmSync(root, { recursive: true, force: true }); } };
 }
-
-test('manual includes only implemented private connection commands with descriptions and safe syntax', () => {
-  const cli = fs.readFileSync(path.join(source, 'scripts/provider-connect.mjs'), 'utf8');
-  const config = JSON.parse(fs.readFileSync(path.join(source, 'docs-site/config.json'), 'utf8'));
-  const catalog = connectionCommandCatalog(cli, config.commandDescriptions);
-  assert.deepEqual(catalog.map(item => item.id), ['provider-connect-byteplus', 'provider-connect-status', 'provider-connect-help']);
-  assert(catalog.every(item => !item.syntax.includes('<key>') && item.syntax.includes('--locale en|pt-BR')));
-  assert.throws(() => connectionCommandCatalog(cli, {}), /without description/);
-  assert.throws(() => connectionCommandCatalog(cli.replace('node scripts/provider-connect.mjs status', 'node scripts/provider-connect.mjs byteplus'), config.commandDescriptions), /unique/);
-  assert.throws(() => connectionCommandCatalog(cli.replace("options.operation === 'status'", "options.operation === 'unsupported'"), config.commandDescriptions), /unsupported/);
-});
 
 test('manual derives catalogs, is deterministic and checks staleness without writing', () => {
   const instance = fixture();
@@ -63,7 +37,7 @@ test('manual derives catalogs, is deterministic and checks staleness without wri
     assert.equal(fs.existsSync(path.join(root, 'docs-site/dist')), false);
     const built = buildDocumentation(root);
     assert.equal(built.data.roles.length, 9); assert.equal(built.data.tasks.length, 15); assert.equal(built.data.workflows.length, 3);
-    assert.equal(built.data.commands.length, 44);
+    assert.equal(built.data.commands.length, 31);
     assert.match(built.data.commands.find(command => command.id === 'reference-send').syntax, /send <character-id> <transfer-id> <grant.json>/);
     assert.match(built.data.commands.find(command => command.id === 'setup').syntax, /--assistant codex\|claude\|both.*--locale en\|pt-BR.*--yes/);
     const repeated = buildDocumentation(root);
@@ -100,28 +74,6 @@ test('manual derives catalogs, is deterministic and checks staleness without wri
     fs.writeFileSync(registryFile, JSON.stringify(registry));
     assert.equal(buildDocumentation(root).data.roles[1].name, 'Updated Gaia');
     checkDocumentation(root);
-  } finally { instance.close(); }
-});
-
-test('manual fingerprints the nested provider driver and checks its stale output without rewriting it', () => {
-  const instance = fixture();
-  try {
-    const built = buildDocumentation(instance.root);
-    const relative = 'scripts/providers/byteplus.mjs';
-    const originalSource = built.manifest.sources.find(item => item.path === relative);
-    assert.ok(originalSource, 'The actual nested driver must belong to the manual source fingerprint.');
-    const contentPath = path.join(instance.root, 'docs-site/dist/content.js');
-    const priorContent = fs.readFileSync(contentPath);
-    const manifestPath = path.join(instance.root, 'docs-site/dist/manifest.json');
-    const priorManifest = fs.readFileSync(manifestPath);
-    fs.appendFileSync(path.join(instance.root, relative), '\n// Independent driver-source mutation fixture.\n');
-    assert.throws(() => checkDocumentation(instance.root), /Manual is stale/);
-    assert.deepEqual(fs.readFileSync(contentPath), priorContent);
-    assert.deepEqual(fs.readFileSync(manifestPath), priorManifest);
-    const updated = buildDocumentation(instance.root);
-    assert.notEqual(updated.manifest.fingerprint, built.manifest.fingerprint);
-    assert.notEqual(updated.manifest.sources.find(item => item.path === relative).sha256, originalSource.sha256);
-    checkDocumentation(instance.root);
   } finally { instance.close(); }
 });
 

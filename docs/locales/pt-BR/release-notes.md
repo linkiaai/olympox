@@ -1,6 +1,14 @@
 # Notas das versões
 
-Estas notas explicam comportamento por versão. Os guias atuais descrevem a versão candidata experimental 0.6.0-rc.3. Padrões históricos abaixo pertencem às suas revisões e não substituem orientação atual. Leia [instalação e atualização](installation.md) antes de mudar estúdio existente.
+Estas notas explicam comportamento por versão. Os guias atuais descrevem a candidata 0.6.0-rc.4, que retira o experimento BytePlus. Padrões históricos abaixo pertencem às suas revisões e não substituem a orientação atual. Leia [instalação e atualização](installation.md) antes de mudar um estúdio existente.
+
+## 0.6.0-rc.4 — 13 de outubro de 2026
+
+O executor opcional BytePlus, o conector protegido de credenciais, a preferência salva de provedor e a escolha de provedor no onboarding foram retirados a pedido do usuário. O setup volta a escolher apenas o assistente e o estúdio independente. Higgsfield permanece o pipeline padrão; imagens integradas ao assistente continuam uma alternativa explícita. Nenhum provedor substituto foi conectado.
+
+Cânone dos personagens, mídia, runs, jobs de provedor, configurações do estúdio e cofres externos de credenciais existentes são preservados. Tags e arquivos publicados rc.2/rc.3 permanecem como artefatos históricos; essas releases ainda contêm o recurso retirado. Seus guias e comandos de provedor pertencem às respectivas fontes da tag, não a esta release. A correção geral de remoção dos listeners do terminal foi mantida.
+
+Instale em um estúdio independente novo com `npx --yes github:linkiaai/olympox#v0.6.0-rc.4 setup`. Estúdios existentes exigem o [procedimento de atualização com preservação](installation.md#atualizar-um-estudio-existente); merge não atualiza nem desinstala automaticamente. Esta release não apaga jobs históricos de provedor, configurações nem cofres externos de credenciais, e não autentica nem conecta um provedor substituto.
 
 ## 0.6.0-rc.3 — 13 de outubro de 2026
 
@@ -21,7 +29,7 @@ Instale em diretório independente novo e responda à pergunta de provedor:
 npx --yes github:linkiaai/olympox#v0.6.0-rc.3 setup
 ```
 
-Use `--locale pt-BR` para mensagens em português. Siga [instalação e atualização](installation.md) e [conexão privada](provider-execution.md#configurar-credenciais-sem-editar-arquivos). Execute `npm run verify` no estúdio instalado; Windows pode usar `npm.cmd` ou `npx.cmd`. Mantenha chaves fora de conversas e relatos sanitizados de problemas.
+Use `--locale pt-BR` para mensagens em português. Siga [instalação e atualização](installation.md) e conexão privada (guia histórico na tag da respectiva release). Execute `npm run verify` no estúdio instalado; Windows pode usar `npm.cmd` ou `npx.cmd`. Mantenha chaves fora de conversas e relatos sanitizados de problemas.
 
 ### Verificação e limites experimentais
 
@@ -35,7 +43,7 @@ Esta candidata experimental acrescenta um executor direto opcional da BytePlus p
 
 ### O que mudou
 
-- **Execução opcional de provedor:** uma CLI separada, sem dependências, aceita pedidos explícitos de imagens Seedream, vídeos Seedance 2.5 e TTS SeedSpeech com voz predefinida na região AP. Cada consumidor fornece credenciais privadas por variáveis de ambiente. Instalação e preparação offline não autenticam nem geram mídia. Credenciais configuradas não comprovam acesso ao modelo. Consulte [execução de provedores](provider-execution.md).
+- **Execução opcional de provedor:** uma CLI separada, sem dependências, aceita pedidos explícitos de imagens Seedream, vídeos Seedance 2.5 e TTS SeedSpeech com voz predefinida na região AP. Cada consumidor fornece credenciais privadas por variáveis de ambiente. Instalação e preparação offline não autenticam nem geram mídia. Credenciais configuradas não comprovam acesso ao modelo. Consulte execução de provedores (guia histórico na tag da respectiva release).
 - **Entradas aprovadas exatas:** jobs capturam bytes imutáveis de prompts e referências, hashes, papéis, ordem, parâmetros, cânone e contratos do framework. O envio recusa alterações de entrada, credenciais ou contrato. Referências de produção devem corresponder ao cânone aprovado; a reutilização vocal histórica suportada exige declaração atual de escuta da referência exata, sem reescrever o cânone antigo.
 - **Fila, autorizações delimitadas e reservas:** um registro local durável coordena jobs e reservas concorrentes de orçamento entre personagens. A submissão exige autorização explícita correspondente e não expirada. Cotações, incerteza autorizada, valores reservados e cobranças reais reconciliadas permanecem distintos. Um teto local em USD não impõe limite de gastos no provedor, e cobranças reais desconhecidas mantêm a reserva até reconciliação explícita do faturamento.
 - **Recuperação do job original:** submissões incertas conservam sua intenção e nunca são repetidas automaticamente. Jobs assíncronos conhecidos são consultados pelo identificador original com a credencial vinculada. Localizadores de saída criptografados mantêm URLs assinadas fora dos registros e backups persistidos em texto simples. A mudança de credenciais não redireciona silenciosamente um job existente.
@@ -49,7 +57,7 @@ Instale em um diretório independente novo:
 npx --yes github:linkiaai/olympox#v0.6.0-rc.2 setup
 ```
 
-Para um estúdio existente, siga o [procedimento de atualização com preservação](installation.md#atualizar-um-estudio-existente). Execute `npm run verify` no estúdio instalado; no Windows, use `npm.cmd` ou `npx.cmd` quando necessário. Comece pela preparação offline e consulte [execução de provedores](provider-execution.md) antes de conectar uma conta. Um piloto real de mídia exige separadamente acesso ao modelo, entradas exatas elegíveis, orçamento viável do piloto completo, autorização aplicável, bytes exportados e inspeção completa da mídia.
+Para um estúdio existente, siga o [procedimento de atualização com preservação](installation.md#atualizar-um-estudio-existente). Execute `npm run verify` no estúdio instalado; no Windows, use `npm.cmd` ou `npx.cmd` quando necessário. Comece pela preparação offline e consulte execução de provedores (guia histórico na tag da respectiva release) antes de conectar uma conta. Um piloto real de mídia exige separadamente acesso ao modelo, entradas exatas elegíveis, orçamento viável do piloto completo, autorização aplicável, bytes exportados e inspeção completa da mídia.
 
 Relate resultados reproduzíveis por [issues no GitHub](https://github.com/linkiaai/olympox/issues), incluindo versão do framework, sistema operacional, versões do Node e assistente, comando, comportamento esperado e erro real sem dados sensíveis. Diferencie instalação, execução local, descoberta de skills no assistente e comportamento real do provedor. Não inclua credenciais, identificadores de conta, registros criativos privados, URLs assinadas, mídia ou backups nos relatos.
 

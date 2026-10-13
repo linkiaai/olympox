@@ -9,17 +9,6 @@
   "codex": "Codex",
   "claude": "Claude Code",
   "both": "Codex and Claude Code",
-  "provider": "Which media provider should this studio use?",
-  "higgsfield": "Higgsfield (default) — Guided media workflow; connect the plugin or official CLI",
-  "byteplus": "BytePlus (experimental) — Direct API with your own account; model access, references and voice require checks",
-  "providerPreparation": "You can prepare concepts without connecting a provider. Your choice applies to new work; existing attempts retain their selected method.",
-  "selectedProvider": "Media provider: {provider}",
-  "configureProvider": "Configure BytePlus now?",
-  "configureNow": "Configure now using protected API-key paste",
-  "configureLater": "Configure later",
-  "connectLater": "Provider choice saved. To configure later, run node scripts/provider-connect.mjs byteplus --locale {locale} from this studio. Paste keys only in its protected terminal prompt, never in chat.",
-  "connectionFailed": "Private credential configuration was not completed. The studio remains installed; rerun the connector shown above.",
-  "higgsfieldConnection": "In your assistant, connect the Higgsfield plugin or follow docs/higgsfield-setup.md for the official CLI. Installation does not log in for you.",
   "directory": "Independent studio directory",
   "outsideSource": "Choose an independent directory outside the framework source checkout.",
   "sourceFailed": "The framework source is incomplete or unsafe: {reason} Retry setup from a repaired or freshly extracted framework package.",
@@ -38,7 +27,7 @@
   "mergeMode": "Safe merge",
   "summaryFiles": "Files: {copied} to install, {retained} identical files to retain, {total} total.",
   "summaryVerification": "After copying: build the manual, check installed instructions and skills, validate local records, and check manual freshness.",
-  "summaryProvider": "Provider access remains unverified. Installation stays offline and does not authenticate, upload references, generate media, train identities, or publish. Optional local key configuration follows installation checks.",
+  "summaryProvider": "Higgsfield media readiness remains pending. Installation does not connect accounts, upload references, generate media, train identities, or publish.",
   "confirm": "Install this studio?",
   "yes": "Install",
   "no": "Cancel",
@@ -59,5 +48,5 @@
   "openClaude": "Open this directory in Claude Code and invoke /olympox.",
   "hostNote": "Host installation and live skill discovery are separate. If the chosen assistant is not installed here, install or open it later; these local files remain ready.",
   "firstPrompt": "First conversation prompt:",
-  "prompt": "Atena, let's create my first original influencer. Read this studio's saved media-provider choice. Propose three distinct concepts and recommend one. Prepare concepts first; before paid production, check the selected method, exact reference transfer, voice, video, export, inspection and complete pilot budget."
+  "prompt": "Atena, let's create my first original influencer. Propose three distinct concepts and recommend one. Check Higgsfield access and the complete pilot's reference transfer, voice, video, export, inspection and budget before production."
 }

@@ -2,7 +2,7 @@
 
 `scripts/framework-core.mjs` implementa registros locais de fluxos no OLYMPOX. O registry seleciona perfis, contratos de tarefas e definições de fluxos; um run salva essas definições com seu contexto observado. O assistente coordenador realiza o trabalho e fornece declarações e arquivos existentes. O módulo não tem dispatcher de agentes nem adaptador de fornecedor.
 
-Pacote e registry usam a versão candidata **0.6.0-rc.3**. Contratos JSON de tarefas/fluxos mantêm revisões individuais de componente, incluindo **0.2.0** e **0.3.0**, e `schemaVersion: 1`; são identificadores de compatibilidade, não a versão atual do produto. Esta referência descreve a implementação atual, incluindo políticas aditivas de fornecedor, voz e prontidão por etapa. Consulte [notas da versão](../release-notes.md) para testes e aceitação real pendente.
+Pacote e registry usam a versão candidata **0.6.0-rc.4**. Contratos JSON de tarefas/fluxos mantêm revisões individuais de componente, incluindo **0.2.0** e **0.3.0**, e `schemaVersion: 1`; são identificadores de compatibilidade, não a versão atual do produto. Esta referência descreve a implementação atual, incluindo políticas aditivas de fornecedor, voz e prontidão por etapa. Consulte [notas da versão](../release-notes.md) para testes e aceitação real pendente.
 
 Para fluxo conversacional e sequência CLI, leia [fluxos e retomada](../framework-02.md). Para comandos de persona, manifesto e backup, leia [operações](../operations.md).
 

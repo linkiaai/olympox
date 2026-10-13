@@ -1,6 +1,6 @@
 # Framework architecture
 
-OLYMPOX separates assistant direction, local records and external media execution. The current framework source is the **0.6.0-rc.3** release candidate; individual contracts and workflows retain their own component revisions, including `0.2.0` and `0.3.0`. See [release notes](release-notes.md) for testing and pending live acceptance.
+OLYMPOX separates assistant direction, local records and external media execution. The current framework source is the **0.6.0-rc.4** release candidate; individual contracts and workflows retain their own component revisions, including `0.2.0` and `0.3.0`. See [release notes](release-notes.md) for testing and pending live acceptance.
 
 This guide describes the implementation boundary. Use [workflow operation](framework-02.md) for commands and [identity and records](operations.md) for file procedures.
 
@@ -12,7 +12,7 @@ This guide describes the implementation boundary. Use [workflow operation](frame
 | Local core | Node scripts validate contracts, persist runs, preserve canon and editorial versions, seal reported execution context and manage backups |
 | Session tools | Available assistant and provider tools perform research, delegation, media generation, transport, inspection and publication |
 
-The core uses Node 22+ and local files with no external runtime dependencies. It returns the next task package to the coordinating assistant. The assistant executes the task with available tools and records the result; the workflow core does not automatically dispatch agents or call providers. The separate [optional provider executor](provider-execution.md) supports explicitly requested execution through a selected driver.
+The core uses Node 22+ and local files with no external runtime dependencies. It returns the next task package to the coordinating assistant. The assistant executes the task with available tools and records the result; the core does not automatically dispatch agents or call providers.
 
 ## Reusable sources and private state
 
@@ -66,8 +66,6 @@ New character runs default to a video pilot; candidate generation and review use
 
 These declarations constrain recorded completion. They do not authenticate, discover, price or execute provider tools. [Tools and capabilities](tools.md) explains the operational checks.
 
-BytePlus is an experimental direct API alternative selected explicitly for supported stages; using it does not require Higgsfield. Each installed studio supplies its own account, credentials, authorization and budget. The reusable framework is not a central generation service. Changing the selected motor preserves canon, narrative and history, and remains subject to exact-reference and pilot acceptance.
-
 ## Identity and editorial history
 
 An approved canon version binds the persona's visual/vocal identity and exact reference bytes. When a frozen snapshot exists, identity operations reject a different canon under the same `identityVersion`. Evolving the identity requires a new version and approval.
@@ -90,7 +88,7 @@ Creation and restoration stage files and refuse to overwrite existing characters
 
 Hashes establish byte consistency, not reviewer identity or creative fidelity. A completed contract represents accepted local evidence; it does not establish publication or successful real-world results.
 
-Optional provider execution separates driver-specific API requests from local job/budget records and the existing workflow contracts. The BytePlus driver is experimental; it does not establish production fidelity or replace every image, voice, training or editing module. Dashboards, campaign management, analytics integrations and databases are not included. Add them only for a concrete need with verified behavior, export boundaries and preservation. Consult [supported capabilities](studio-status.md), [provider execution](provider-execution.md) and [core interfaces](../framework/README.md) before extending the runtime.
+Provider adapters, dashboards, campaign management, analytics integrations and databases are not included. Add them only for a concrete need with verified behavior, export boundaries and preservation. Consult [supported capabilities](studio-status.md) and [core interfaces](../framework/README.md) before extending the runtime.
 
 The separate optional `reference-transfer.mjs` operation provides authorized exact local image transfer through the pinned native Higgsfield CLI; the workflow core and preparation wrapper still do not automatically upload or generate. It records a controlled byte snapshot and one submission, refuses automatic retry of uncertain outcomes, and requires later checks for provider bytes and plugin access. See [Higgsfield setup](higgsfield-setup.md).
 
@@ -98,4 +96,4 @@ The separate optional `reference-transfer.mjs` operation provides authorized exa
 
 Current generation contracts `0.3.0` require structured `stage-readiness-v1` before start and matching completion. The assistant prepares/imports `templates/media-readiness.json` from actual observations using `run-step` action `record-media-readiness`; the creator does not author JSON. Optional `readinessPlanPath` binds an offline plan on start/new-attempt. Whole-pilot feasibility is distinct from exact current inputs and completed outcome: future voice/scene bytes can remain pending. Each required stage needs its actual method-choice decision, access/schema, destination/model exposure, quote/scoped cost uncertainty, applicable pilot/current grants, original-byte export and full inspection support. Unknown is pending, never free. Stage limits cannot override the comparable pilot envelope, which includes captured known completed-stage costs.
 
-Start names `stageId` and captures exact scope/input/quote/grant context; completion requires that capture and matching generated stage/provider/tool/module/route/model evidence. Expiry after valid start does not block matching completion. Status exposes `pipelineReady`, stage pending reasons/outcomes, `currentStageReady`, `canStartStage` and capture identity. Same-plan refresh appends evidence; bound context changes require an explicit new attempt. Unresolved original jobs must be reconciled first. Historical captured `0.1.0`/`0.2.0` retain original semantics/bytes. These private declarations do not authenticate provider access/consent, enforce actual spend caps or prove listening/media quality. The optional executor adds local accounting for calls through its execution path; it cannot discover out-of-band spending or replace provider billing. See [the exact readiness contract](../framework/README.md) for fields, scope hashes and transition evidence.
+Start names `stageId` and captures exact scope/input/quote/grant context; completion requires that capture and matching generated stage/provider/tool/module/route/model evidence. Expiry after valid start does not block matching completion. Status exposes `pipelineReady`, stage pending reasons/outcomes, `currentStageReady`, `canStartStage` and capture identity. Same-plan refresh appends evidence; bound context changes require an explicit new attempt. Unresolved original jobs must be reconciled first. Historical captured `0.1.0`/`0.2.0` retain original semantics/bytes. These private declarations do not authenticate provider access/consent, enforce actual spend caps or prove listening/media quality. See [the exact readiness contract](../framework/README.md) for fields, scope hashes and transition evidence.

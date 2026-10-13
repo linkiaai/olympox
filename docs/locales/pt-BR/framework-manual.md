@@ -10,7 +10,6 @@ OLYMPOX é um framework local para desenvolver influenciadores originais de IA c
 | Fazer seu primeiro pedido | [Início rápido](quick-start.md) |
 | Desenvolver um personagem e escolher sua identidade | [Desenvolvimento de personagens](strategy.md) |
 | Produzir um piloto ou uma peça de conteúdo | [Produção](production.md) |
-| Usar API escolhida diretamente com conta e orçamento próprios | [Execução opcional por provedores](provider-execution.md) |
 | Inspecionar mídia e pedir correções | [Qualidade e continuidade](quality.md) |
 | Manter registros, cânone e backups | [Identidade e registros](operations.md) |
 | Iniciar, concluir ou retomar tarefas de workflow | [Operação dos workflows](framework-02.md) |
@@ -35,10 +34,9 @@ OLYMPOX é um framework local para desenvolver influenciadores originais de IA c
 | Registros de personagens e editoriais | Vincular persona, narrativa, roteiros e assets ao seu contexto |
 | Snapshots do cânone e selos de execução | Preservar referências aprovadas e entradas declaradas de geração |
 | Execuções e backups | Permitir continuidade, verificação de integridade e recuperação |
-| Executor opcional de provedores | Executar etapas suportadas escolhidas explicitamente e preservar jobs/orçamento locais; BytePlus é experimental |
 | Manual navegável | Oferecer guias e catálogos de referência derivados das fontes |
 
-Os comandos locais mantêm arquivos e validam registros. Conexão com o provedor e execução de mídia usam ferramentas disponíveis na sessão ou o executor opcional escolhido explicitamente com credenciais próprias de cada estúdio. Escuta, visualização de vídeo e publicação continuam como operações separadas. Validação local e fixtures sintéticas de provedores não comprovam qualidade criativa nem execução externa real.
+Os comandos locais mantêm arquivos e validam registros. Conexão com o provedor, geração, escuta, visualização de vídeo e publicação usam ferramentas disponíveis na sessão. A validação local não comprova qualidade criativa nem execução externa.
 
 ## Termos usados neste manual
 
@@ -57,4 +55,4 @@ Os comandos locais mantêm arquivos e validam registros. Conexão com o provedor
 
 Use um estúdio instalado para seus próprios personagens. Este repositório contém o framework reutilizável e sua documentação de desenvolvimento. Personagens privados, mídia, execuções e credenciais ficam fora da distribuição.
 
-O código atual é a versão candidata **0.6.0-rc.3** para testes da comunidade. Consulte [notas de versão](release-notes.md) para mudanças, instruções de teste e aceitação real pendente e [capacidades suportadas](studio-status.md) para o limite entre recursos locais e serviços externos. Um piloto de vídeo com fala é o escopo padrão de criação; um brief explícito pode escolher apenas imagens ou um personagem sem fala. Potencial viral é testado por conteúdo e resultados.
+O código atual é a versão candidata **0.6.0-rc.4**. Ela retira a rota experimental BytePlus e a escolha de provedor no onboarding. Consulte [notas de versão](release-notes.md) para mudanças, instruções de teste e aceitação real pendente e [capacidades suportadas](studio-status.md) para o limite entre recursos locais e serviços externos. Um piloto de vídeo com fala é o escopo padrão de criação; um brief explícito pode escolher apenas imagens ou um personagem sem fala. Potencial viral é testado por conteúdo e resultados.

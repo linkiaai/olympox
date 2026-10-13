@@ -7,32 +7,20 @@ Use este guia para escolher a rota de execução e verificar se o estúdio conse
 | Trabalho | Rota padrão | Conferir antes do uso |
 | --- | --- | --- |
 | Pesquisa, conceito, personalidade, narrativa, roteiros e planejamento | Coordenador conversacional | Fontes, contexto da personagem e entrega solicitada |
-| Candidatas, pacotes de referência, cenas e edições de imagens | Escolha salva do estúdio; Higgsfield sem preferência | Módulo escolhido, referências exatas, exportação e inspeção visual |
-| Voz, animação, vídeo e sincronização labial | Escolha salva do estúdio; Higgsfield sem preferência | Entradas de áudio/movimento, operação suportada, escuta e revisão completa do vídeo |
+| Candidatas, pacotes de referência, cenas e edições de imagens | Higgsfield | Módulo escolhido, referências exatas, exportação e inspeção visual |
+| Voz, animação, vídeo e sincronização labial | Higgsfield | Entradas de áudio/movimento, operação suportada, escuta e revisão completa do vídeo |
 | Runs locais, histórico de canon, registros de ativos e backups | Comandos OLYMPOX | Arquivos exatos, versões e decisões registradas |
 | Imagens integradas ao assistente | Alternativa escolhida explicitamente pelo usuário | Geração de imagens, anexos, exportação e inspeção no aplicativo |
 
-Higgsfield é o fornecedor padrão de mídia. O [método de produção](higgsfield-influencer-method.md) separa seus módulos; o [estudo da fonte](video-reference.md) explica a referência desse método. Um recurso do site ou uma skill instalada não comprova acesso executável no assistente. Uma [rota opcional de provedor](provider-execution.md) escolhida explicitamente, incluindo execução experimental BytePlus, pode atender etapas verificadas sem Higgsfield.
-
-## Ler a escolha e configurar depois
-
-O assistente lê `work/studio-settings.json` antes de escolher ferramentas para novos trabalhos e respeita escolhas explícitas por etapa. Tentativas existentes mantêm o método e fornecedores capturados; mudar a preferência não altera cânone ou histórico. O setup guiado oferece Higgsfield por padrão ou BytePlus experimental, salva a escolha e, depois das verificações offline, oferece configurar agora ou depois. Essas etapas de onboarding e conexão estão incluídas na versão candidata 0.6.0-rc.3.
-
-Para BytePlus, execute `node scripts/provider-connect.mjs byteplus --locale pt-BR` na raiz do estúdio. Cole chaves apenas no campo oculto do terminal, nunca na conversa, em argumentos ou por edição manual de arquivos. O cofre Windows fica fora do estúdio e usa DPAPI CurrentUser; sistemas sem suporte não persistem segredos em texto simples. `node scripts/provider-connect.mjs status` informa configuração local, sem provar acesso real, cobrança ou fidelidade. O assistente prepara os registros necessários e confere o piloto completo. Veja [credenciais e limites](provider-execution.md#configurar-credenciais-sem-editar-arquivos).
+Higgsfield é o fornecedor padrão de mídia. O [método de produção](higgsfield-influencer-method.md) separa seus módulos; o [estudo da fonte](video-reference.md) explica a referência desse método. Um recurso do site ou uma skill instalada não comprova acesso executável no assistente.
 
 ## Escolher uma rota Higgsfield
 
 Use o [plugin](higgsfield-plugin.md) quando suas ferramentas conectadas aceitam as entradas necessárias. Ele dispensa CLI local. A [CLI local opcional](higgsfield-setup.md) pode oferecer operações verificadas separadamente ou transferir referências locais quando suportado. Sessões de conta, modelos, mecanismos de entrada e cobrança podem diferir; verifique a rota escolhida de forma independente.
 
-O wrapper de CLI Higgsfield do framework oferece verificações locais de integridade, login interativo e consultas limitadas. Ele não submete geração, envia mídia nem treina identidade. Nenhuma rota Higgsfield possui adaptador automático de submissão no núcleo de workflows; o executor opcional separado não transforma chamadas de plugin/CLI em uma sessão compartilhada Higgsfield.
+O wrapper de CLI do framework oferece verificações locais de integridade, login interativo e consultas limitadas. Ele não submete geração, envia mídia nem treina identidade. Nenhuma rota possui adaptador automático de submissão no núcleo local.
 
 Para referências locais, confira transferência suportada por ferramentas antes de propor anexos manuais. Reutilize IDs confirmados do fornecedor quando adequado. Um caminho escrito no prompt não anexa arquivo; registre quais arquivos/hashes exatos chegaram ao fornecedor e seus papéis de entrada.
-
-## Escolher uma rota opcional de API direta
-
-Cada estúdio independente usa conta, chaves e orçamento próprios de provedor; o framework oferece código e registros reutilizáveis, sem serviço central. BytePlus é alternativa experimental explícita para operações suportadas. Confira acesso real ao modelo, referências exatas aceitas, dependências de voz, restrições de conta/região, exportação e custos antes de trabalho pago. Configuração e strings de capacidades declaradas não comprovam essas observações.
-
-Consulte [execução por provedores](provider-execution.md) para limites, credenciais, restrições de referências e critérios do piloto. Etapa necessária ausente continua pendente. Uma escolha explícita de BytePlus apenas para vídeo não altera outros meios; a preferência do estúdio inicia todos os meios de runs novos, sujeita a overrides e capacidades suportadas. Nenhuma escolha migra cânone, treina identidade ou aprova mídia.
 
 ## Conferir o piloto completo antes da primeira etapa paga
 

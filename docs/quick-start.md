@@ -4,21 +4,21 @@ Install an independent studio, open it in Codex or Claude Code, and describe wha
 
 ## 1. Install and open the studio
 
-Requires Node 22+ and a local Codex or Claude Code environment. Install the 0.6.0-rc.3 release candidate for testing:
+Requires Node 22+ and a local Codex or Claude Code environment. Install the 0.6.0-rc.4 release candidate for testing:
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.6.0-rc.3 setup
+npx --yes github:linkiaai/olympox#v0.6.0-rc.4 setup
 ```
 
-From a reviewed source checkout or extracted package, use `node bin/olympox.mjs setup`. Release candidate 0.6.0-rc.3 includes the guided provider choice and private credential configuration below.
+From a reviewed source checkout or extracted package, use `node bin/olympox.mjs setup`.
 
-Choose the assistant, provider and destination, review the plan, and open the installed folder. Higgsfield is the default choice; experimental BytePlus uses your own account. The choice is saved for new work. Invoke `$olympox` in Codex or `/olympox` in Claude Code. Reload the host if skills are not discovered. See [installation](installation.md) for scripted setup, merge and upgrades.
+Choose the assistant and destination, review the installation plan, and open the installed folder. Invoke `$olympox` in Codex or `/olympox` in Claude Code. Reload the host if it has not discovered the new skills. See [installation](installation.md) for scripted setup, merge and upgrades.
 
-Setup checks local files and the manual, then offers provider configuration now or later. For BytePlus, run `node scripts/provider-connect.mjs byteplus --locale en` from the studio root and paste the key only into hidden terminal input; do not edit files or send keys to the assistant. For Higgsfield, follow the [selected connection route](tools.md#choose-a-higgsfield-route). You can prepare concepts without a connection. A configured key does not prove live access or pilot quality.
+Setup checks the local files and manual. Connect Higgsfield separately and check the modules needed for your intended pilot.
 
 ## 2. Ask for a character
 
-> Use OLYMPOX to create an influencer for [audience/topic]. Read this studio's saved provider choice. Propose three distinct concepts, show how each could sustain a recurring series, and recommend one.
+> Use OLYMPOX to create an influencer for [audience/topic]. Propose three distinct concepts, show how each could sustain a recurring series, and recommend one.
 
 If the direction is open, the assistant asks a short set of unresolved questions about objective, presence and audience. “Please propose” is a valid answer. Compare the premise, personality, visual signature, sample voice, recurring hooks and production difficulty before choosing.
 
@@ -38,7 +38,7 @@ Your choices stay explicit in the record. An approved persona alone does not cre
 
 > Prepare one short pilot with the approved identity and voice. Show the script, scenes, exact inputs and cost scope before generation.
 
-The assistant writes and directs; verified tools from the selected provider execute supported stages. Experimental BytePlus needs [specific reference, voice and access checks](provider-execution.md); an unsupported stage remains pending. Inspect the complete pilot and actual exported bytes. Correct failures in new versions. Expand into batches after the pilot passes.
+The assistant writes and directs; verified Higgsfield tools generate the media. Inspect the complete pilot and its actual exported bytes. Correct failures in new versions. Expand into batches after the pilot passes.
 
 Follow [production](production.md), [pilot handoff](production-handoff.md) and [quality](quality.md). Publication uses the applicable authorization.
 
@@ -46,7 +46,7 @@ Follow [production](production.md), [pilot handoff](production-handoff.md) and [
 
 > Prepare a [format] piece for [character] about [topic], using its approved canon and current narrative.
 
-The assistant reuses existing decisions, language, approved references and the saved attempt's method. Changing the studio preference does not migrate that work; a provider change requires an explicit new attempt. Changes within permitted variation keep the identity; frozen identity changes require a new canon version and approval. Use [workflow operation](framework-02.md) to resume a saved run.
+The assistant reuses the existing decisions, language and approved references. Changes within permitted variation keep the identity; changes to frozen identity require a new canon version and approval. Use [workflow operation](framework-02.md) to resume a saved run.
 
 ## Check local records
 

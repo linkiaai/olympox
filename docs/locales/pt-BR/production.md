@@ -1,6 +1,6 @@
 # Produção de personagem e mídia
 
-Use este guia para transformar conceito escolhido em personagem aprovada/repetível e sua primeira mídia. Trabalhe em estúdio instalado. Higgsfield é o fornecedor padrão; o assistente conversacional desenvolve direção e usa ferramentas verificadas. [Provedores opcionais](provider-execution.md) escolhidos explicitamente, incluindo execução experimental BytePlus, podem atender etapas verificadas sem Higgsfield. O [guia de método](higgsfield-influencer-method.md) cobre etapas do fornecedor e [ferramentas](tools.md) cobre prontidão.
+Use este guia para transformar conceito escolhido em personagem aprovada/repetível e sua primeira mídia. Trabalhe em estúdio instalado. Higgsfield é o fornecedor padrão; o assistente conversacional desenvolve direção e usa ferramentas verificadas. O [guia de método](higgsfield-influencer-method.md) cobre etapas do fornecedor e [ferramentas](tools.md) cobre prontidão.
 
 ## Definir o que deve permanecer reconhecível
 
@@ -30,8 +30,6 @@ Ficha/grade ajuda na comparação, mas referências utilizáveis selecionadas pr
 
 Para geração/edição posterior, anexe referências reais selecionadas por entradas suportadas e registre papéis/ordem e IDs. Nome de arquivo, prompt descritivo ou seed não transmite referência nem comprova fidelidade. Confira [transferência de referências](higgsfield-plugin.md#transferir-as-referencias-exatas-do-estudio) antes de propor anexação manual. Transporte exato ausente mantém geração pendente.
 
-Trocar provedor preserva cânone original e bytes das referências. Confira regras da nova rota para esses arquivos reais, incluindo restrições de origem/conta/idade do ativo. Não recrie o rosto dentro do provedor nem substitua referências silenciosamente para obter acesso. Veja [restrições de referências BytePlus](provider-execution.md#restricoes-de-retratos-da-byteplus).
-
 ## Concluir canon visual e vocal
 
 Seleção visual inicial é ponto de controle, não canon completo. Para nova personagem com fala, gere amostra curta enquanto permanece `draft`, com `purpose: reference`. Escute áudio exato, confira idioma/pronúncia/ritmo e registre seleção do usuário, configurações e arquivo/hash. Direção vocal escrita sozinha é insuficiente.
@@ -39,8 +37,6 @@ Seleção visual inicial é ponto de controle, não canon completo. Para nova pe
 Quando referências visuais/vocais obrigatórias estiverem revisadas e selecionadas, registre aprovação explícita do canon completo, marque persona `canon-approved` e crie snapshot por [operações](operations.md). Escopo silencioso registra por que voz não se aplica. Reutilize voz e canon aprovados compatíveis.
 
 Configurações vocais e referências aprovadas contribuem ao hash do canon. Rosto/corpo/voz ou outra âncora congelada alterada exige nova versão e aprovação. Fichas de novo fornecedor continuam candidatas derivadas; preserve bytes, snapshots e decisões históricos.
-
-Para nova rota, verifique reutilização do áudio exato aprovado e avalie continuidade vocal, idioma e lip-sync reais. Fala nativa ou descrição textual de timbre sozinhas não demonstram identidade vocal escolhida. Entrada vocal não suportada ou escuta inacessível mantém etapa falada pendente; vídeo silencioso não comprova esse escopo.
 
 ## Preparar uma peça
 
