@@ -2,9 +2,11 @@
 
 `scripts/framework-core.mjs` implementa registros locais de fluxos no OLYMPOX. O registry seleciona perfis, contratos de tarefas e definições de fluxos; um run salva essas definições com seu contexto observado. O assistente coordenador realiza o trabalho e fornece declarações e arquivos existentes. O módulo não tem dispatcher de agentes nem adaptador de fornecedor.
 
-Pacote e registry usam a versão estável **0.6.0**. Contratos JSON de tarefas/fluxos mantêm revisões individuais de componente, incluindo **0.2.0** e **0.3.0**, e `schemaVersion: 1`; são identificadores de compatibilidade, não a versão atual do produto. Esta referência descreve a implementação atual, incluindo políticas aditivas de fornecedor, voz e prontidão por etapa. Consulte [notas da versão](../release-notes.md) para validação local e aceitação real pendente.
+Pacote e registry usam a versão estável **0.7.0**. Contratos JSON de tarefas/fluxos mantêm revisões individuais de componente, incluindo **0.2.0** e **0.3.0**, e `schemaVersion: 1`; são identificadores de compatibilidade, não a versão atual do produto. Esta referência descreve a implementação atual, incluindo políticas aditivas de fornecedor, voz e prontidão por etapa. Consulte [notas da versão](../release-notes.md) para validação local e aceitação real pendente.
 
 Para fluxo conversacional e sequência CLI, leia [fluxos e retomada](../framework-02.md). Para comandos de persona, manifesto e backup, leia [operações](../operations.md).
+
+O [adaptador opcional de vídeo OpenRouter](../openrouter.md) é um executor separado para etapas Seedance 2.5 selecionadas explicitamente. O núcleo de workflows continua como camada de registro/validação. O adaptador consome prontidão capturada e intenção externa planejada, preserva recibos de envio único junto ao personagem, reconcilia o job original e exporta novos bytes MP4. A versão 2 adiciona referências tipadas de áudio/vídeo HTTPS com URLs no ambiente, bytes locais vinculados e conferência de releitura antes do envio; o transporte de imagens da versão 1 permanece compatível. Não provisiona armazenamento, conclui inspeção visual/escuta nem migra tentativas existentes.
 
 ## API do módulo
 
@@ -27,13 +29,13 @@ Novas tentativas salvam um mapa completo:
 
 ```json
 {
-  "image": "higgsfield",
-  "video": "higgsfield",
-  "audio": "higgsfield"
+  "image": null,
+  "video": null,
+  "audio": null
 }
 ```
 
-Opções explícitas podem substituir fornecedor por meio; valores omitidos usam padrões. IDs são tokens ingleses. `integrated-images` é alternativa explícita de imagem e é recusada para vídeo/áudio. Salve a decisão e operações exatas no plano de produção.
+Não há fornecedor padrão. Opções explícitas escolhem fornecedor por meio; valores omitidos permanecem null e a geração aguarda escolha. O setup registra a escolha em work/provider-choice.json privado; a CLI run-start aplica essa escolha a runs novos, com precedência dos valores explícitos da especificação. A API do núcleo não lê preferências do estúdio. Higgsfield seleciona os três meios; OpenRouter seleciona apenas vídeo e mantém geração de imagem/áudio pendente. IDs são tokens ingleses. `integrated-images` é alternativa explícita de imagem e é recusada para vídeo/áudio. Salve a decisão e operações exatas no plano de produção.
 
 Geração exige `<medium>-generation` e `<provider>:<medium>-generation`; inspeção exige `<medium>-inspection`. Imagens Higgsfield, portanto, precisam de `image-generation` e `higgsfield:image-generation`. Capacidades podem ser atualizadas nas opções da transição. Uma capacidade ausente define `awaiting-tool` sem chamar ferramenta.
 
@@ -96,7 +98,7 @@ Job não resolvido bloqueia progresso, cancelamento e nova tentativa. Cancelamen
 
 Entradas observadas, saídas concluídas, governança, contratos e canon vinculado têm hashes. Transição/retomada comum detecta mudanças e bloqueia continuação. Use `resumeRun(root, runId, {newAttempt: true, reason, mediaProviders?})` somente após revisar mudança e reconciliar jobs externos.
 
-Nova tentativa reinicia o fluxo salvo na primeira etapa, preserva tentativas anteriores e `run.contract`, e observa arquivos atuais de entrada/governança/canon. Não troca definições de fluxos nem reutiliza aprovações anteriores. Inicie run separado quando precisar do contrato atual. Fornecedores omitidos mantêm o mapa anterior; tentativas históricas sem mapa adotam padrões atuais.
+Nova tentativa reinicia o fluxo salvo na primeira etapa, preserva tentativas anteriores e `run.contract`, e observa arquivos atuais de entrada/governança/canon. Não troca definições de fluxos nem reutiliza aprovações anteriores. Inicie run separado quando precisar do contrato atual. Fornecedores omitidos mantêm o mapa anterior; tentativas históricas sem mapa ficam sem fornecedor selecionado na nova tentativa.
 
 Canon aprovado é comparado com snapshot existente da mesma `identityVersion`. Mudança na mesma versão falha mesmo com hash de aprovação substituído. Essas verificações não criam snapshots nem reconstroem história ausente; persona aprovada sem snapshot existente pode continuar válida. Reconciliação de job externo continua possível com outros contextos alterados.
 

@@ -1,6 +1,6 @@
 # Método de produção Higgsfield de referência
 
-Este guia leva um conceito de personagem a um piloto completo de mídia. Codex ou Claude Code coordena pesquisa, personalidade, narrativa, roteiros e direção. Higgsfield é o fornecedor padrão para candidatas, referências, cenas, edições de imagens, voz, animação, vídeo e sincronização labial, por operações verificadas para o estúdio atual.
+Este guia leva um conceito de personagem a um piloto completo de mídia. Codex ou Claude Code coordena pesquisa, personalidade, narrativa, roteiros e direção. Use este método quando Higgsfield for escolhido explicitamente para candidatas, referências, cenas, edições de imagens, voz, animação, vídeo ou sincronização labial, por operações verificadas para o estúdio atual. Vídeo OpenRouter segue seu próprio guia; não há fornecedor padrão nem fallback automático.
 
 O [estudo de referência](video-reference.md) explica a sequência da fonte. Etapas observadas de imagem/referência, direção vocal e vídeo permanecem separadas das ferramentas escolhidas hoje. Salve mapeamento e adaptações em [plano de método de produção](../../../templates/locales/pt-BR/production-method.md) versionado; use o plano como entrada do run ou saída de planejamento.
 

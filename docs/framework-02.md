@@ -26,9 +26,9 @@ Save this specification as `tmp/first-cycle.json` inside the installed studio:
   "medium": "video",
   "capabilities": [],
   "mediaProviders": {
-    "image": "higgsfield",
-    "video": "higgsfield",
-    "audio": "higgsfield"
+    "image": null,
+    "video": null,
+    "audio": null
   }
 }
 ```
@@ -66,7 +66,7 @@ Record real actors, timestamps, tool events, and files. Only record `execution.m
 
 ## Declare media capabilities and method
 
-New runs select Higgsfield for `image`, `video`, and `audio` unless the specification explicitly selects a provider for an affected medium. `integrated-images` is an explicit image alternative and is rejected for audio/video. Save the method decision and exact modules in the [production-method plan](../templates/production-method.md).
+There is no provider default. New runs use the person's saved setup selection unless an explicit `mediaProviders` map overrides it. Without a choice, entries for `image`, `video` and `audio` are `null`: discovery and local preparation remain available, while generation waits for an explicit choice. The OpenRouter setup choice sets only `video: openrouter`; image and standalone audio remain unselected. `integrated-images` is an explicit image alternative and is rejected for audio/video. Save the method decision and exact modules in the [production-method plan](../templates/production-method.md).
 
 A generation stage needs its generic capability and provider capability, such as `image-generation` plus `higgsfield:image-generation`. Review needs `image-inspection`, `video-inspection`, or `audio-inspection`. Supply verified capabilities in the specification or a `start`/`complete` transition; missing ones leave the stage `awaiting-tool`. These are declarations, not tool discovery or connection tests.
 
@@ -99,7 +99,7 @@ node scripts/studio.mjs run-resume RUN_ID tmp/resume.json
 
 A new attempt begins at the first saved workflow stage, observes current context, and preserves previous attempts and the run's saved contract. It does not load a replacement workflow contract, resubmit jobs, or reuse completed approvals. Start a separate run when the work needs the current workflow definition instead of the saved one.
 
-Changing provider requires `newAttempt: true`, a reason, and the updated `mediaProviders`. Unspecified providers retain the previous attempt's choices; for a historical attempt without a provider map, current defaults are introduced. Ordinary `run-step` cannot change the map.
+Changing provider requires `newAttempt: true`, a reason, and the updated `mediaProviders`. Unspecified providers retain the previous attempt's choices; for a historical attempt without a provider map, absent choices remain `null` until explicitly selected. Ordinary `run-step` cannot change the map.
 
 ## External submissions and uncertain outcomes
 

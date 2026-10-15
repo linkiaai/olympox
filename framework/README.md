@@ -2,9 +2,11 @@
 
 `scripts/framework-core.mjs` implements local workflow records for OLYMPOX. The registry selects profiles, task contracts, and workflow definitions; a run saves those definitions with its observed context. The coordinating assistant performs the work and supplies declarations and existing files. The module has no agent dispatcher or provider adapter.
 
-The framework package and registry use stable version **0.6.0**. Task/workflow JSON contracts retain individual component revisions, including **0.2.0** and **0.3.0**, and `schemaVersion: 1`; these are compatibility identifiers, not the current product release number. This reference describes the current implementation, including additive provider, vocal and stage-readiness policies. See [release notes](../docs/release-notes.md) for local validation and pending live acceptance.
+The framework package and registry use stable version **0.7.0**. Task/workflow JSON contracts retain individual component revisions, including **0.2.0** and **0.3.0**, and `schemaVersion: 1`; these are compatibility identifiers, not the current product release number. This reference describes the current implementation, including additive provider, vocal and stage-readiness policies. See [release notes](../docs/release-notes.md) for local validation and pending live acceptance.
 
 For the conversational workflow and CLI sequence, read [workflows and resumption](../docs/framework-02.md). For persona, manifest, and backup commands, read [operations](../docs/operations.md).
+
+The optional [OpenRouter video adapter](../docs/openrouter.md) is a separate executor for explicitly selected Seedance 2.5 stages. The workflow core remains a record/validation layer. The adapter consumes captured readiness and planned external intent, preserves one-dispatch receipts with the character, reconciles the original job and exports new MP4 bytes. Version 2 adds typed HTTPS audio/video references with environment-held URLs, bound local bytes and readback checks before submission; version 1 image transport stays compatible. It does not provision storage, complete visual/listening inspection or migrate existing attempts.
 
 ## Module API
 
@@ -27,13 +29,13 @@ New attempts save a complete provider map:
 
 ```json
 {
-  "image": "higgsfield",
-  "video": "higgsfield",
-  "audio": "higgsfield"
+  "image": null,
+  "video": null,
+  "audio": null
 }
 ```
 
-Explicit run options can replace a provider per medium; omitted values use defaults. Provider IDs are English machine tokens. `integrated-images` is supported as an explicit image alternative and rejected for video/audio. Save the actual method decision and exact operations in the production plan.
+There is no default provider. Explicit run options select a provider per medium; omitted values remain null and generation waits for selection. Setup records the user choice in private work/provider-choice.json; the studio run-start CLI applies that choice to new runs, with explicit specification values taking precedence. The core API does not read studio preferences. Higgsfield selects all three media; OpenRouter selects video only and leaves image/audio generation pending. Provider IDs are English machine tokens. `integrated-images` is supported as an explicit image alternative and rejected for video/audio. Save the actual method decision and exact operations in the production plan.
 
 Generation requires `<medium>-generation` and `<provider>:<medium>-generation`; inspection requires `<medium>-inspection`. Thus Higgsfield images need both `image-generation` and `higgsfield:image-generation`. Capabilities can be updated through transition options. A missing requirement sets `awaiting-tool` without calling a tool.
 
@@ -96,7 +98,7 @@ An unresolved job blocks other progress, cancellation, and a new attempt. Local 
 
 Observed inputs, completed outputs, governance, contracts, and bound canon have hashes. Ordinary transition/resumption detects changed context and holds continuation. Use `resumeRun(root, runId, {newAttempt: true, reason, mediaProviders?})` only after reviewing the change and reconciling external jobs.
 
-A new attempt restarts the saved workflow from its first step, preserves prior attempts and the saved `run.contract`, and observes current input/governance/canon files. It does not replace workflow definitions or reuse prior completion approvals. Start a separate run when the current contract definition is needed. Provider choices omitted from a new attempt retain the prior map; historical attempts without a map adopt current defaults.
+A new attempt restarts the saved workflow from its first step, preserves prior attempts and the saved `run.contract`, and observes current input/governance/canon files. It does not replace workflow definitions or reuse prior completion approvals. Start a separate run when the current contract definition is needed. Provider choices omitted from a new attempt retain the prior map; historical attempts without a map become unselected in the new attempt.
 
 Approved canon is compared with any existing frozen snapshot for the same `identityVersion`. Same-version changes fail even if the approval hash is replaced. These checks do not create snapshots or reconstruct missing history; an approved persona without an existing snapshot can remain valid. Reconciliation of an unresolved external job remains possible while other context has drifted.
 

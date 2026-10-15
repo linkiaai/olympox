@@ -2,7 +2,7 @@
 
 Save a new character-local version, such as `influencers/<slug>/work/video-handoff-v001.md`, and register it with the method plan and exact shot files as run inputs/planning outputs. Follow [the procedure](../docs/production-handoff.md). This document uses existing file/hash records; it is not an automatic submission schema. Never overwrite a tracked version or approved input.
 
-The default media provider is Higgsfield; Codex or Claude Code coordinates the work. Preserve the source-method module mapping, reused exact provider inputs and an early whole-pilot budget. Integrated assistant images require explicit alternative selection.
+The person explicitly chooses Higgsfield or OpenRouter per stage; neither is preselected. Codex or Claude Code coordinates the work. OpenRouter currently supplies video only, so unsupported image or standalone audio work stays pending until a supported method is explicitly selected. Preserve the source-method module mapping, reused exact provider inputs and an early whole-pilot budget. Integrated assistant images require explicit alternative selection.
 
 ## Readiness and next action
 

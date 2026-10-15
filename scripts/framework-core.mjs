@@ -9,7 +9,7 @@ const STATES = new Set(RUN_STATES);
 const KINDS = new Set(['document', 'media', 'review', 'human-decision', 'delivery']);
 const EVIDENCE = new Set(['prepared', 'generated', 'reviewed', 'human-approved', 'delivered']);
 const MEDIA = { image: ['.png', '.jpg', '.jpeg', '.webp', '.avif', '.gif'], video: ['.mp4', '.mov', '.webm', '.mkv'], audio: ['.wav', '.mp3', '.m4a', '.ogg', '.flac'] };
-const DEFAULT_MEDIA_PROVIDERS = { image: 'higgsfield', video: 'higgsfield', audio: 'higgsfield' };
+const UNSELECTED_MEDIA_PROVIDERS = { image: null, video: null, audio: null };
 const DOCUMENTS = ['.md', '.txt', '.json', '.yaml', '.yml', '.csv', '.html', '.pdf'];
 const obj = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const text = value => typeof value === 'string' && value.trim().length > 0;
@@ -25,11 +25,16 @@ const objectHash = value => hash(JSON.stringify(stable(value)));
 function recordDigest(run) { const { recordHash, ...body } = run; return objectHash(body); }
 function ensure(condition, message) { if (!condition) throw new Error(message); }
 function readJson(file) { return JSON.parse(fs.readFileSync(file, 'utf8').replace(/^\uFEFF/, '')); }
-function mediaProviders(value, defaults = DEFAULT_MEDIA_PROVIDERS) {
+function mediaProviders(value, previous = UNSELECTED_MEDIA_PROVIDERS) {
   ensure(value === undefined || obj(value), 'mediaProviders must be an object keyed by image, video, or audio.');
-  const selected = { ...defaults, ...value };
-  ensure(Object.keys(selected).every(medium => Object.hasOwn(MEDIA, medium)) && Object.keys(MEDIA).every(medium => id(selected[medium])), 'Each media provider must be an English machine token for image, video, or audio.');
+  const selected = { ...previous, ...value };
+  ensure(Object.keys(selected).every(medium => Object.hasOwn(MEDIA, medium)) && Object.keys(MEDIA).every(medium => selected[medium] === null || id(selected[medium])), 'Each media provider must be an English machine token or null for an unselected image, video, or audio stage.');
   ensure(selected.video !== 'integrated-images' && selected.audio !== 'integrated-images', 'integrated-images is an explicit image alternative, not a video or voice provider.');
+  return selected;
+}
+function selectedMediaProviders(value, previous) {
+  const selected = mediaProviders(value, previous);
+  ensure(selected.image !== 'openrouter' && selected.audio !== 'openrouter', 'The OpenRouter adapter supports video generation only; choose image and voice generation providers separately. Audio/video references are inputs to the video stage.');
   return selected;
 }
 function inside(root, target) {
@@ -274,12 +279,18 @@ function missingTaskCapabilities(run, task) {
   if (!task?.capability) return [];
   const medium = taskMedium(run, task), capability = `${medium}-${task.capability}`;
   const required = [capability];
-  if (task.capability === 'generation' && attempt(run).mediaProviders) required.push(`${attempt(run).mediaProviders[medium]}:${capability}`);
+  if (task.capability === 'generation' && attempt(run).mediaProviders?.[medium]) required.push(`${attempt(run).mediaProviders[medium]}:${capability}`);
   return required.filter(requiredCapability => !run.capabilities.includes(requiredCapability));
+}
+function missingTaskProviders(run, task) {
+  if (task?.capability !== 'generation' || !attempt(run).mediaProviders) return [];
+  const medium = taskMedium(run, task);
+  return attempt(run).mediaProviders[medium] === null ? [medium] : [];
 }
 function packageRun(root, run, detail) {
   const a = attempt(run), next = current(run), drift = changes(root, run);
   const missingCapabilities = missingTaskCapabilities(run, next?.task);
+  const missingMediaProviders = missingTaskProviders(run, next?.task);
   const media = readinessEnabled(run) ? evaluateMediaReadiness(root, run) : null;
   let vocal;
   if (next && vocalTaskPolicy(next.task)) {
@@ -296,11 +307,11 @@ function packageRun(root, run, detail) {
     nextTask: next ? { stepId: next.step.id, taskId: next.task.id, name: next.task.name, optional: next.step.optional, criteria: next.task.criteria, expectedDelivery: next.task.deliverable, evidenceType: next.task.evidenceType, requiresPersona: next.task.requiresPersona, requiresApprovedCanon: next.task.requiresApprovedCanon, medium: taskMedium(run, next.task), ...(vocal ? { vocalReadiness: vocal } : {}) } : null,
     responsible: next ? clone(run.contract.roles[next.task.owner]) : null,
     constitutionPaths: clone(run.constitutionPaths), governanceFiles: clone(run.governanceFiles),
-    inputs: clone(a.inputs), canonBinding: clone(run.canonBinding), drift, missingCapabilities,
+    inputs: clone(a.inputs), canonBinding: clone(run.canonBinding), drift, missingCapabilities, missingMediaProviders,
     mediaProviders: a.mediaProviders ? clone(a.mediaProviders) : null,
     executionMode: a.execution?.mode ?? 'instruction', automaticallyDispatched: false,
     ...(media ? { mediaReadiness: media } : {}),
-    canContinue: !drift.length && !unresolvedJob(a) && !missingCapabilities.length && !(next && mediaReadinessPolicy(next.task) && !media?.canStartStage) && !oneOfTokens(a.state, ['completed', 'failed', 'cancelled', 'uncertain-result']),
+    canContinue: !drift.length && !unresolvedJob(a) && !missingCapabilities.length && !missingMediaProviders.length && !(next && mediaReadinessPolicy(next.task) && !media?.canStartStage) && !oneOfTokens(a.state, ['completed', 'failed', 'cancelled', 'uncertain-result']),
     limitation: 'Instruction package and recorded declarations. This module does not dispatch agents, generate media, query providers, publish, or prove a reviewer is human.',
     ...(detail === undefined ? {} : { detail })
   };
@@ -342,7 +353,7 @@ export function startRun(root, options) {
   if (workflow.requiresPersona) ensure(!isToken(p.status, 'draft'), 'Production/correction requires an approved canon.');
   const inputs = records(root, options.inputs ?? [], personaId);
   const capabilities = options.capabilities ?? []; ensure(list(capabilities), 'capabilities must be a list of strings.');
-  const selectedProviders = mediaProviders(options.mediaProviders, mediaProviders(framework.registry.defaultMediaProviders));
+  const selectedProviders = selectedMediaProviders(options.mediaProviders);
   const run = {
     schemaVersion: 1, id: `run-${crypto.randomUUID()}`, frameworkVersion: framework.registry.version,
     workflowId: workflow.id, personaId, medium, objective: options.objective.trim(), createdAt: now(), updatedAt: now(), capabilities,
@@ -473,6 +484,11 @@ export function transitionRun(root, runId, options) {
       ensure(text(options.reason), 'Failure requires a reason.'); a.state = 'failed'; a.finishedAt = now(); event(run, 'failed', { reason: options.reason });
     } else if (options.action === 'start' || options.action === 'complete') {
       prerequisites(root, run, next.task);
+      const missingMediaProviders = missingTaskProviders(run, next.task);
+      if (missingMediaProviders.length) {
+        a.state = 'awaiting-input'; event(run, 'media-provider-selection-pending', { media: missingMediaProviders, stepId: next.step.id });
+        return { pending: 'media-provider-selection', missingMediaProviders, note: 'Choose the provider for this stage through an explicit new attempt; no external intent or tool call was recorded.' };
+      }
       const missingCapabilities = missingTaskCapabilities(run, next.task);
       if (missingCapabilities.length) {
         a.state = 'awaiting-tool'; event(run, 'capability-missing', { capability: missingCapabilities[0], capabilities: missingCapabilities, stepId: next.step.id }); return { pending: missingCapabilities[0], missingCapabilities, note: 'No tool was called.' };
@@ -525,7 +541,7 @@ export function resumeRun(root, runId, options = {}) {
       event(run, 'superseded', { reason: options.reason, drift });
       const framework = validateFramework(root);
       ensure(framework.valid, framework.errors.join('\n'));
-      const selectedProviders = mediaProviders(options.mediaProviders, a.mediaProviders ?? mediaProviders(framework.registry.defaultMediaProviders));
+      const selectedProviders = selectedMediaProviders(options.mediaProviders, a.mediaProviders);
       const currentGovernance = [...new Set([...framework.registry.constitutionPaths, 'framework/registry.json',
         ...framework.registry.roles.map(role => role.path), ...framework.registry.tasks.map(task => task.path),
         ...framework.registry.workflows.map(flow => flow.path)])];

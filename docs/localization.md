@@ -23,7 +23,7 @@ The installer projects canonical skill bytes into `.agents/skills/` for Codex or
 The manual starts in English and offers pt-BR through its selector or `?lang=pt-BR`. An explicit choice can persist. Both editions are included in portable builds.
 
 ```sh
-node bin/olympox.mjs setup ../my-studio --assistant codex --locale pt-BR --yes
+node bin/olympox.mjs setup ../my-studio --assistant codex --provider openrouter --locale pt-BR --yes
 ```
 
 `setup --locale` translates setup prompts and summaries. It does not change canonical installed sources, persisted tokens or character language. Direct `install` has no `--locale` option.

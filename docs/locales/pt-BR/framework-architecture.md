@@ -1,6 +1,6 @@
 # Arquitetura do framework
 
-OLYMPOX separa direção do assistente, registros locais e execução externa de mídia. O código atual do framework é a versão estável **0.6.0**; contratos e workflows mantêm revisões próprias de componente, incluindo `0.2.0` e `0.3.0`. Consulte [notas da versão](release-notes.md) para validação local e aceitação real pendente.
+OLYMPOX separa direção do assistente, registros locais e execução externa de mídia. O código atual do framework é a versão estável **0.7.0**; contratos e workflows mantêm revisões próprias de componente, incluindo `0.2.0` e `0.3.0`. Consulte [notas da versão](release-notes.md) para validação local e aceitação real pendente.
 
 Este guia descreve os limites da implementação. Use [operação dos workflows](framework-02.md) para comandos e [identidade e registros](operations.md) para procedimentos de arquivos.
 
@@ -60,7 +60,7 @@ Uma execução vincula entradas e governança aplicável, captura o contexto do 
 
 ## Política de provedores de mídia
 
-Novas tentativas preservam um mapa `mediaProviders` para `image`, `video` e `audio`, com padrão `higgsfield`. A geração exige tanto a capacidade do meio quanto a capacidade específica do provedor. Evidência de geração e intenção externa registradas devem identificar o provedor escolhido.
+Novas tentativas preservam um mapa `mediaProviders` para `image`, `video` e `audio`, sem fornecedor padrão. Escolhas ausentes são `null`; descoberta e preparação locais podem continuar, enquanto a geração espera escolha explícita de fornecedor. A CLI pode aplicar a escolha de setup salva pela pessoa a runs novos, e um mapa explícito no run prevalece. A geração exige tanto a capacidade do meio quanto a capacidade específica do provedor. Evidência de geração e intenção externa registradas devem identificar o provedor escolhido.
 
 Novas execuções de criação usam um piloto de vídeo por padrão; geração e revisão de candidatos usam capacidades de imagem. Um escopo explicitamente escolhido pode usar outro meio. Alterar o mapa exige nova tentativa com motivo. Execuções históricas sem o mapa mantêm a semântica salva.
 
@@ -88,7 +88,9 @@ Criação e restauração preparam arquivos em área temporária e recusam sobre
 
 Hashes comprovam consistência de bytes, não identidade de revisores nem fidelidade criativa. Um contrato concluído representa evidência local aceita; não comprova publicação nem resultados no mundo real.
 
-Adaptadores de provedores, dashboards, gestão de campanhas, integrações analíticas e bancos de dados não estão incluídos. Adicione-os apenas para necessidade concreta com comportamento verificado, limites de exportação e preservação. Consulte [capacidades suportadas](studio-status.md) e [interfaces do núcleo](framework/README.md) antes de estender o runtime.
+Dashboards, gestão de campanhas, integrações analíticas e bancos de dados não estão incluídos. Adicione extensões apenas para necessidade concreta com comportamento verificado, limites de exportação e preservação. Consulte [capacidades suportadas](studio-status.md) e [interfaces do núcleo](framework/README.md) antes de estender o runtime.
+
+O [adaptador opcional de vídeo OpenRouter](openrouter.md) executa uma etapa Seedance 2.5 selecionada explicitamente, fora do núcleo de workflows. Consome um início com prontidão já capturada e intenção externa planejada, vincula credencial e bytes exatos das entradas, persiste uma barreira contra reenvio no histórico `.openrouter/` do personagem, consulta o job original e exporta novos bytes MP4. A versão 1 mantém transporte de imagens embutidas. A versão 2 adiciona referências tipadas de áudio/vídeo por URLs HTTPS no ambiente, vinculadas por impressão digital, com comparação limitada de releitura antes do envio e observações seguras no recibo. Não provisiona armazenamento e preserva escolhas explícitas de fornecedor e registros históricos. Cânone com fala exige anexo do áudio canônico selecionado e piloto ouvido; transporte bem-sucedido não estabelece fidelidade vocal.
 
 A operação opcional separada `reference-transfer.mjs` oferece transferência autorizada de imagem local exata pela CLI nativa Higgsfield fixada; núcleo de workflows e wrapper de preparação continuam sem upload ou geração automáticos. Ela registra snapshot controlado dos bytes e uma submissão, recusa repetição automática de resultados incertos e exige verificações posteriores de bytes no fornecedor e acesso pelo plugin. Veja [preparação Higgsfield](higgsfield-setup.md).
 

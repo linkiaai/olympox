@@ -23,7 +23,7 @@ O instalador projeta os bytes canônicos das skills em `.agents/skills/` para Co
 O manual começa em inglês e oferece pt-BR pelo seletor ou por `?lang=pt-BR`. Uma escolha explícita pode persistir. As duas edições acompanham os builds portáteis.
 
 ```sh
-node bin/olympox.mjs setup ../my-studio --assistant codex --locale pt-BR --yes
+node bin/olympox.mjs setup ../my-studio --assistant codex --provider openrouter --locale pt-BR --yes
 ```
 
 `setup --locale` traduz perguntas e resumos do setup. Não altera fontes canônicas instaladas, tokens persistidos nem idioma do personagem. `install` direto não tem opção `--locale`.

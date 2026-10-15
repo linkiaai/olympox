@@ -456,23 +456,48 @@ test('human gate cannot consume itself and requires an explicit event matching t
   assert.equal(transitionRun(root, run.runId, { action: 'complete', approval }).nextTask.taskId, 'prepare-piece');
 });
 
-test('the Higgsfield default cannot silently consume a generic or integrated image capability', () => {
+test('new runs have no media provider and capabilities cannot bypass the user choice', () => {
   const root = fixture(); person(root, 'alpha', false);
-  let run = startRun(root, { workflowId: 'create-character', personaId: 'alpha', objective: 'Test the default media provider without actual generation', capabilities: ['image-generation', 'image-inspection', 'integrated-images:image-generation'] });
+  let run = startRun(root, { workflowId: 'create-character', personaId: 'alpha', objective: 'Prepare without choosing a media provider', capabilities: ['image-generation', 'image-inspection', 'higgsfield:image-generation', 'integrated-images:image-generation', 'null:image-generation'] });
   assert.equal(run.run.medium, 'video');
-  assert.deepEqual(run.mediaProviders, { image: 'higgsfield', video: 'higgsfield', audio: 'higgsfield' });
+  assert.equal(run.canContinue, true);
+  assert.deepEqual(run.mediaProviders, { image: null, video: null, audio: null });
+  assert.deepEqual(run.missingMediaProviders, []);
   run = transitionRun(root, run.runId, { action: 'skip', reason: 'Synthetic brief defines the opportunity.' });
   run = document(root, run);
   run = transitionRun(root, run.runId, { action: 'skip', reason: 'Synthetic selected concept.' });
   run = document(root, run);
-  assert.deepEqual(run.missingCapabilities, ['higgsfield:image-generation']);
+  assert.deepEqual(run.missingCapabilities, []);
+  assert.deepEqual(run.missingMediaProviders, ['image']);
+  assert.equal(run.canContinue, false);
   assert.equal(run.nextTask.medium, 'image');
   const before = structuredClone(run.run.attempts.at(-1));
-  run = transitionRun(root, run.runId, { action: 'complete', outputs: [], evidence: evidence('generated', { tool: 'synthetic-integrated-tool', provider: 'integrated-images' }) });
-  assert.equal(run.state, 'awaiting-tool');
-  assert.deepEqual(run.run.attempts.at(-1).results, before.results);
-  assert.equal(run.run.attempts.at(-1).job, null);
+  for (const options of [{ action: 'start', job: { provider: 'higgsfield' } }, { action: 'complete', outputs: [], evidence: evidence('generated', { tool: 'synthetic-integrated-tool', provider: 'integrated-images' }) }]) {
+    run = transitionRun(root, run.runId, options);
+    assert.equal(run.state, 'awaiting-input');
+    assert.equal(run.detail.pending, 'media-provider-selection');
+    assert.deepEqual(run.run.attempts.at(-1).results, before.results);
+    assert.equal(run.run.attempts.at(-1).job, null);
+    assert.equal(run.run.attempts.at(-1).execution, null);
+  }
   assert.throws(() => transitionRun(root, run.runId, { action: 'start', mediaProviders: { image: 'integrated-images' } }), /explicit new attempt|newAttempt/);
+});
+
+test('new runs ignore historical registry defaults and OpenRouter selects only the video stage', () => {
+  const root = fixture(), registry = json(path.join(root, 'framework/registry.json'));
+  registry.defaultMediaProviders = { image: 'higgsfield', video: 'higgsfield', audio: 'higgsfield' };
+  save(root, 'framework/registry.json', registry);
+  const offline = startRun(root, { workflowId: 'produce-piece', personaId: 'alpha', objective: 'No implicit route from an older registry' });
+  assert.deepEqual(offline.mediaProviders, { image: null, video: null, audio: null });
+  const video = reachGeneration(root, begin(root, 'produce-piece', { medium: 'video', mediaProviders: { video: 'openrouter' }, capabilities: ['video-generation', 'video-inspection', 'openrouter:video-generation'] }));
+  assert.deepEqual(video.mediaProviders, { image: null, video: 'openrouter', audio: null });
+  assert.deepEqual(video.missingMediaProviders, []);
+  assert.deepEqual(video.missingCapabilities, []);
+  assert.equal(video.canContinue, true);
+  for (const medium of ['image', 'audio']) assert.throws(() => begin(root, 'produce-piece', { mediaProviders: { [medium]: 'openrouter' } }), /video generation only/);
+  const fresh = resumeRun(root, offline.runId, { newAttempt: true, reason: 'Explicit user selection of video route', mediaProviders: { video: 'openrouter' } });
+  assert.deepEqual(fresh.mediaProviders, { image: null, video: 'openrouter', audio: null });
+  assert.deepEqual(fresh.run.attempts[0].mediaProviders, { image: null, video: null, audio: null });
 });
 
 test('a selected provider requires matching intent and generation evidence', () => {
@@ -518,7 +543,7 @@ test('an explicit new attempt changes the media route while preserving prior met
   const previous = structuredClone(run.run.attempts.at(-1)), references = fileInventory(path.join(root, 'influencers/alpha/references'));
   assert.throws(() => resumeRun(root, run.runId, { mediaProviders: { image: 'integrated-images' } }), /newAttempt/);
   const changed = resumeRun(root, run.runId, { newAttempt: true, reason: 'Synthetic explicit user choice to use integrated images', mediaProviders: { image: 'integrated-images' } });
-  assert.deepEqual(changed.mediaProviders, { image: 'integrated-images', video: 'higgsfield', audio: 'higgsfield' });
+  assert.deepEqual(changed.mediaProviders, { image: 'integrated-images', video: null, audio: null });
   assert.deepEqual(changed.run.attempts[0].mediaProviders, previous.mediaProviders);
   assert.deepEqual(changed.run.attempts[0].results, previous.results);
   assert.deepEqual(changed.run.attempts[0].inputs, previous.inputs);
@@ -547,9 +572,24 @@ test('historical attempts without provider selection remain readable and do not 
   const output = save(root, 'influencers/alpha/media/historical.mp4', 'Synthetic legacy video');
   const generated = transitionRun(root, run.runId, { action: 'complete', outputs: [output], evidence: evidence('generated', { tool: 'legacy-tool', provider: 'legacy-provider' }) });
   assert.equal(generated.nextTask.taskId, 'review-media');
-  const changed = resumeRun(root, run.runId, { newAttempt: true, reason: 'Explicit new method using current framework defaults' });
-  assert.deepEqual(changed.mediaProviders, { image: 'higgsfield', video: 'higgsfield', audio: 'higgsfield' });
+  const changed = resumeRun(root, run.runId, { newAttempt: true, reason: 'Explicit new attempt using current provider selection policy' });
+  assert.deepEqual(changed.mediaProviders, { image: null, video: null, audio: null });
   assert.equal(Object.hasOwn(changed.run.attempts[0], 'mediaProviders'), false);
+});
+
+test('saved complete provider selections stay intact during reads, resumes and an explicit new attempt', () => {
+  const root = fixture(), selected = { image: 'higgsfield', video: 'higgsfield', audio: 'higgsfield' };
+  const run = begin(root, 'produce-piece', { mediaProviders: selected });
+  const before = fs.readFileSync(path.join(root, 'work/runs', `${run.runId}.json`));
+  assert.deepEqual(readRun(root, run.runId).mediaProviders, selected);
+  assert.deepEqual(fs.readFileSync(path.join(root, 'work/runs', `${run.runId}.json`)), before);
+  const resumed = resumeRun(root, run.runId);
+  assert.deepEqual(resumed.mediaProviders, selected);
+  const previous = structuredClone(resumed.run.attempts[0]);
+  const changed = resumeRun(root, run.runId, { newAttempt: true, reason: 'Keep the previously recorded provider choice' });
+  assert.deepEqual(changed.mediaProviders, selected);
+  assert.deepEqual(changed.run.attempts[0].mediaProviders, previous.mediaProviders);
+  assert.deepEqual(changed.run.attempts[0].results, previous.results);
 });
 
 test('an explicit integrated image alternative preserves canon selection and pilot review requirements', () => {
@@ -565,7 +605,7 @@ test('an explicit integrated image alternative preserves canon selection and pil
   const hashes = identityFiles.map(file => digest(path.join(root, 'influencers/alpha', file)));
   let run = reachCanonApproval(root, begin(root, 'create-character', { inputs: ['brief.md', method], mediaProviders: { image: 'integrated-images' }, capabilities: ['image-generation', 'image-inspection', 'integrated-images:image-generation'] }), 'synthetic-integrated-image-tool');
   assert.deepEqual(run.run.capabilities, ['image-generation', 'image-inspection', 'integrated-images:image-generation']);
-  assert.deepEqual(run.mediaProviders, { image: 'integrated-images', video: 'higgsfield', audio: 'higgsfield' });
+  assert.deepEqual(run.mediaProviders, { image: 'integrated-images', video: null, audio: null });
   assert.equal(run.canonBinding, null);
   assert.equal(run.nextTask.taskId, 'approve-canon');
   assert.equal(run.inputs.find(input => input.path === method).sha256, digest(path.join(root, method)));

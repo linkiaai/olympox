@@ -15,6 +15,7 @@ OLYMPOX combina instruções para assistentes com runtime Node local para estúd
 | Recuperação | Inventário de personagem/runs, verificação e teste de restauração | Cópias independentes e contexto compartilhado preservado separadamente |
 | Documentação | Fonte inglesa, edição pt-BR, catálogos derivados e manual local | Revisão do texto/tradução e eventual publicação remota |
 | Rota Higgsfield | Orientações, wrapper local e proveniência permitida | Conta, módulos exatos, entradas aceitas, exportação, inspeção e orçamento |
+| Vídeo OpenRouter opcional | Adaptador Seedance 2.5 com autorização capturada, imagens embutidas, referências tipadas HTTPS de áudio/vídeo comparadas aos bytes locais, envio único, consulta do job original e exportação MP4 | Acesso HTTPS autorizado às referências escolhidas, conta/política/entradas aceitas reais e piloto completamente inspecionado e ouvido |
 
 Fluxos: `create-character`, `produce-piece` e `review-correct`. Perfis orientam o assistente; não são trabalhadores persistentes. Comandos não despacham especialistas, geram mídia, consultam fornecedores, repetem trabalho pago, publicam, agendam pesquisa ou coletam métricas automaticamente.
 
@@ -22,7 +23,7 @@ Fluxos: `create-character`, `produce-piece` e `review-correct`. Perfis orientam 
 
 O instalador cria instruções de projeto e projeções de skills locais para Codex, Claude Code ou ambos. É estrutura de arquivos suportada e caminho de instalação testado localmente. Não comprova descoberta por uma sessão específica nem configura Claude web ou outro ambiente.
 
-Higgsfield é o método padrão de mídia para trabalho novo. Conceitos, personalidade, narrativa, roteiros e planejamento ficam com o assistente. [Geração integrada](integrated-images.md) é alternativa explícita para imagens. Etapa Higgsfield ausente fica pendente até existir capacidade necessária ou decisão explícita de método.
+Trabalho novo exige escolha explícita da pessoa por Higgsfield ou OpenRouter; nenhum fornecedor vem pré-selecionado. Conceitos, personalidade, narrativa, roteiros e planejamento ficam com o assistente. [Geração integrada](integrated-images.md) é alternativa explícita para imagens. Etapa Higgsfield ausente fica pendente até existir capacidade necessária ou decisão explícita de método.
 
 [Plugin](higgsfield-plugin.md) e [CLI local](higgsfield-setup.md) precisam ser conferidos independentemente na sessão real. Recursos do site, plugin conectado ou CLI autenticada não comprovam acesso a todo módulo, voz, treinamento, upload de referências, exportação ou saldo de cobrança equivalente. Confira o [piloto completo](production-handoff.md) antes da primeira etapa paga e aplique autorização existente aplicável.
 

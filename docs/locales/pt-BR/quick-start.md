@@ -4,17 +4,17 @@ Instale um estúdio independente, abra-o no Codex ou Claude Code e descreva o qu
 
 ## 1. Instale e abra o estúdio
 
-Requer Node 22+ e um ambiente local de Codex ou Claude Code. Instale a versão estável 0.6.0:
+Requer Node 22+ e um ambiente local de Codex ou Claude Code. Instale a versão estável 0.7.0:
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.6.0 setup
+npx --yes github:linkiaai/olympox#v0.7.0 setup
 ```
 
 A partir de checkout revisado ou pacote extraído, use `node bin/olympox.mjs setup`.
 
-Escolha assistente e destino, revise o plano de instalação e abra a pasta instalada. Invoque `$olympox` no Codex ou `/olympox` no Claude Code. Recarregue o assistente se as novas skills ainda não forem descobertas. Consulte [instalação](installation.md) para setup por script, merge e atualizações.
+Escolha assistente, escolha Higgsfield ou OpenRouter explicitamente e selecione o destino, revise o plano de instalação e abra a pasta instalada. Invoque `$olympox` no Codex ou `/olympox` no Claude Code. Recarregue o assistente se as novas skills ainda não forem descobertas. Consulte [instalação](installation.md) para setup por script, merge e atualizações.
 
-O setup verifica arquivos locais e manual. Conecte o Higgsfield separadamente e verifique os módulos necessários para o piloto pretendido.
+O setup verifica arquivos locais e manual. Conecte o fornecedor escolhido separadamente e confira cada etapa necessária do piloto. OpenRouter oferece somente vídeo atualmente; imagem e áudio independente exigem seleção explícita compatível própria.
 
 ## 2. Peça um personagem
 
@@ -28,7 +28,7 @@ Para um primeiro teste apenas de preparação, acrescente: “Prepare somente co
 
 ## 3. Selecione identidade e voz
 
-Antes da geração paga, verifique o caminho do piloto completo: acesso à conta, módulos necessários, referências aceitas, exportação, inspeção e orçamento. [O método de produção](higgsfield-influencer-method.md) descreve a sequência padrão no Higgsfield.
+Antes da geração paga, verifique o caminho do piloto completo: acesso à conta, módulos necessários, referências aceitas, exportação, inspeção e orçamento. Escolha Higgsfield ou OpenRouter explicitamente, depois siga o [método Higgsfield](higgsfield-influencer-method.md) ou [vídeo OpenRouter](openrouter.md); etapas não suportadas permanecem pendentes.
 
 Gere candidatos expressivos e uma cena da premissa. Selecione a direção visual, construa referências coerentes e inspecione anatomia, presença e continuidade. Se o personagem fala, ouça e selecione uma amostra vocal em rascunho. Aprove o cânone visual/vocal exato quando essas escolhas estiverem prontas.
 

@@ -1,6 +1,25 @@
 # Notas das versões
 
-Estas notas explicam comportamento por versão. Os guias atuais descrevem a versão estável 0.6.0. Padrões históricos abaixo pertencem às suas revisões e não substituem a orientação atual. Leia [instalação e atualização](installation.md) antes de mudar um estúdio existente.
+Estas notas explicam comportamento por versão. Os guias atuais descrevem a versão estável 0.7.0. Padrões históricos abaixo pertencem às suas revisões e não substituem a orientação atual. Leia [instalação e atualização](installation.md) antes de mudar um estúdio existente.
+
+## 0.7.0 — 15 de outubro de 2026
+
+A versão 0.7.0 adiciona escolha explícita entre Higgsfield e OpenRouter e o adaptador de vídeo Seedance 2.5. Nenhum fornecedor vem pré-selecionado e etapas indisponíveis nunca trocam de fornecedor automaticamente. Releases históricas, cânone aprovado, seleções de voz, mídia e tentativas de runs permanecem preservados.
+
+### Comportamento incluído
+
+- **Escolha explícita de fornecedor:** o setup interativo exige resposta Higgsfield ou OpenRouter sem pré-seleção; setup sem interação exige `--provider higgsfield|openrouter`. O arquivo privado `work/provider-choice.json` registra a escolha da pessoa. Runs novos usam esse mapa, salvo override explícito. Higgsfield seleciona rotas de imagem/vídeo/áudio; OpenRouter seleciona somente vídeo, deixando imagem e áudio independente sem seleção. Instalação direta e planejamento local podem permanecer offline; geração sem rota compatível escolhida fica pendente. Merge mantém escolha idêntica e recusa uma diferente antes de escrever o framework.
+- **Vídeo Seedance 2.5:** descoberta pública de modelos, preparação local da requisição, prontidão por etapa e intenção externa capturadas, uma submissão autorizada, reconciliação do job original e exportação de novos bytes MP4. Submissões incertas são preservadas sem repetição automática nem novas cobranças.
+- **Referências de áudio/vídeo:** a versão 2 vincula mídia local tipada, hashes e quantidades de bytes a URLs HTTPS no ambiente, com impressões digitais na especificação. Uma releitura limitada verifica os bytes antes do envio; URLs assinadas e chaves ficam fora dos recibos. Imagens embutidas e contrato da versão 1 continuam aceitos. O adaptador não provisiona armazenamento nem faz upload; ausência de acesso HTTPS autorizado mantém a transferência pendente.
+- **Requisitos de voz e identidade preservados:** cânone com fala exige o áudio canônico exato selecionado com `role: voice`, referências gerais mistas e áudio gerado habilitado. Primeiro/último frame não podem ser combinados com referências gerais. Conferência estrutural de contêineres não substitui escuta, inspeção completa do vídeo nem piloto aprovado antes de lotes. Transporte de áudio/vídeo não garante clonagem de voz nem condicionamento pelo fornecedor.
+
+### Validação e limites restantes
+
+As verificações locais são `node .development/verify-aiox.mjs`, `npm.cmd run verify` e verificações independentes de exportação/instalação cobrindo projeções dos dois assistentes, privacidade, conflitos e preservação. Seus resultados se aplicam à origem e ao arquivo exportado exatos examinados; não comprovam descoberta real no assistente nem piloto pago no fornecedor.
+
+Os limites do adaptador versão 2 são 16 MiB por imagem, 32 MiB por referência de áudio, 64 MiB por vídeo e 64 MiB somados; a versão 1 mantém 16 MiB somados. Os formatos locais aceitos são PNG/JPEG/WebP, áudio WAV/MP3/FLAC/Ogg/M4A e MP4 com faixa de vídeo. São conferências locais de transporte/estrutura, não limites de formato ou duração verificados no fornecedor. A releitura observa os bytes em um instante e não garante leitura posterior pelo fornecedor. Acesso à conta, política aplicável, entradas exatas aceitas, custo real e continuidade visual/vocal ainda exigem piloto. Custos com entrada de vídeo dependem do material real e não são limitados somente pela duração da saída. Instalação e verificação local do framework não incluem geração paga.
+
+Instale com `npx --yes github:linkiaai/olympox#v0.7.0 setup`. Sem interação, informe diretório explícito, assistente, fornecedor e `--yes`, por exemplo `setup ../my-studio --assistant codex --provider openrouter --yes`. Estúdios existentes usam o [procedimento de atualização com preservação](installation.md#atualizar-um-estudio-existente). Publicar esta release não implanta manual hospedado nem altera tags históricas. Relate a versão exata `0.7.0`, ambiente e evidências sanitizadas por [issues no GitHub](https://github.com/linkiaai/olympox/issues), mantendo credenciais, URLs assinadas e registros criativos privados fora dos relatos.
 
 ## 0.6.0 — 15 de outubro de 2026
 

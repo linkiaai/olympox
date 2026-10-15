@@ -1,6 +1,6 @@
 # Produção de personagem e mídia
 
-Use este guia para transformar conceito escolhido em personagem aprovada/repetível e sua primeira mídia. Trabalhe em estúdio instalado. Higgsfield é o fornecedor padrão; o assistente conversacional desenvolve direção e usa ferramentas verificadas. O [guia de método](higgsfield-influencer-method.md) cobre etapas do fornecedor e [ferramentas](tools.md) cobre prontidão.
+Use este guia para transformar conceito escolhido em personagem aprovada/repetível e sua primeira mídia. Trabalhe em estúdio instalado. Escolha Higgsfield ou OpenRouter explicitamente; nenhum vem pré-selecionado, e o assistente conversacional desenvolve direção e usa ferramentas verificadas. O [guia de método](higgsfield-influencer-method.md) cobre etapas do fornecedor e [ferramentas](tools.md) cobre prontidão.
 
 ## Definir o que deve permanecer reconhecível
 

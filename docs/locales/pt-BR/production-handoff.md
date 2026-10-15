@@ -2,7 +2,7 @@
 
 Use esta passagem quando uma personagem e um roteiro selecionados serão transformados em vídeo. O coordenador desenvolve direção; Íris prepara entradas visuais, Saraswati desenvolve o roteiro, Selene mapeia/executa operações suportadas e Têmis revisa o resultado. Essas responsabilidades orientam o assistente disponível e trabalhos realmente delegados.
 
-Higgsfield é o caminho padrão de mídia. Siga o [método de produção selecionado](higgsfield-influencer-method.md); uma [alternativa de imagens integradas](integrated-images.md) deve ser explícita. Salve um [pacote de passagem de vídeo](../../../templates/locales/pt-BR/video-handoff.md) versionado e registre seus arquivos exatos como entradas do run ou saídas de planejamento.
+A pessoa escolhe Higgsfield ou OpenRouter explicitamente, sem fornecedor padrão. Siga o [método Higgsfield](higgsfield-influencer-method.md) ou a [rota de vídeo OpenRouter](openrouter.md) escolhida; uma [alternativa de imagens integradas](integrated-images.md) deve ser explícita. Salve um [pacote de passagem de vídeo](../../../templates/locales/pt-BR/video-handoff.md) versionado e registre seus arquivos exatos como entradas do run ou saídas de planejamento.
 
 ## Pontos de prontidão
 

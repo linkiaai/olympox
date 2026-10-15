@@ -2,7 +2,7 @@
 
 Use this handoff when a selected character and script will become a video. The coordinator develops direction; Íris prepares visual inputs, Saraswati develops the script, Selene maps and executes supported operations, and Têmis reviews the result. These responsibilities guide the available assistant and any actually delegated work.
 
-Higgsfield is the default media pipeline. Follow the [selected production method](higgsfield-influencer-method.md); an [integrated image alternative](integrated-images.md) must be explicit. Save a versioned [video handoff package](../templates/video-handoff.md) and record its exact files as run inputs or planning outputs.
+The person explicitly chooses Higgsfield or OpenRouter; neither is the default. Follow the selected [Higgsfield method](higgsfield-influencer-method.md) or [OpenRouter video route](openrouter.md); an [integrated image alternative](integrated-images.md) must be explicit. Save a versioned [video handoff package](../templates/video-handoff.md) and record its exact files as run inputs or planning outputs.
 
 ## Readiness checkpoints
 

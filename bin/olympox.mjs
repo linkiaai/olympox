@@ -23,20 +23,22 @@ function help() {
   console.log(`OLYMPOX - AI Influencer framework
 
 Usage:
-  olympox setup [directory] [--assistant codex|claude|both] [--locale en|pt-BR] [--merge] [--yes]
+  olympox setup [directory] [--assistant codex|claude|both] [--provider higgsfield|openrouter] [--locale en|pt-BR] [--merge] [--yes]
   olympox install [directory] [--merge] [--assistant codex|claude|both]
   olympox <studio-command> [arguments]
   olympox --version
 
 Install a new studio:
-  npx --yes github:linkiaai/olympox#v0.6.0 setup
+  npx --yes github:linkiaai/olympox#v0.7.0 setup
 
 From a reviewed source checkout or extracted package:
   node bin/olympox.mjs setup
 
-Setup guides language, assistant, destination, a reviewed installation plan and
+Setup guides language, assistant, provider, destination, a reviewed installation plan and
 local verification. English is the default presentation language.
-Noninteractive setup requires --yes, an explicit directory and --assistant.
+Noninteractive setup requires --yes, an explicit directory, --assistant and --provider.
+Choose Higgsfield for its verified media modules or OpenRouter for compatible
+Seedance video stages. No provider is preselected; remaining stages need a choice.
 An interactive install without --assistant opens the same guide.
 Explicit install arguments remain available for scripts.
 
@@ -44,7 +46,8 @@ The installer copies reusable framework files and local skills. Personal
 characters, media, work, backups and credentials are never included.
 --merge keeps identical files and rejects conflicting files before writing.
 Direct install defaults to codex. Claude Code uses CLAUDE.md and .claude/skills.
-The assistant target changes local instructions and skills, not the media method.
+The assistant target changes local instructions and skills. Setup records your
+provider choice locally; account connection and media readiness remain separate.
 
 Run studio commands from the installed project's root. To list them:
   node bin/olympox.mjs studio-help

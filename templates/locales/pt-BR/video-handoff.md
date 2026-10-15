@@ -2,7 +2,7 @@
 
 Salve nova versão local da personagem, como `influencers/<slug>/work/video-handoff-v001.md`, e registre junto ao plano de método e arquivos exatos dos planos como entradas/saídas de planejamento do run. Siga [o procedimento](../../../docs/locales/pt-BR/production-handoff.md). Este documento usa registros existentes de arquivos/hashes; não é schema de submissão automática. Nunca sobrescreva versão rastreada ou entrada aprovada.
 
-O fornecedor padrão de mídia é Higgsfield; Codex ou Claude Code coordena o trabalho. Preserve o mapeamento de módulos do método da fonte, entradas exatas do fornecedor reutilizadas e orçamento antecipado do piloto inteiro. Imagens integradas do assistente exigem escolha explícita por alternativa.
+A pessoa escolhe Higgsfield ou OpenRouter explicitamente por etapa; nenhum vem pré-selecionado. Codex ou Claude Code coordena o trabalho. OpenRouter oferece somente vídeo atualmente, então imagem ou áudio independente não suportados ficam pendentes até seleção explícita de método compatível. Preserve o mapeamento de módulos do método da fonte, entradas exatas do fornecedor reutilizadas e orçamento antecipado do piloto inteiro. Imagens integradas do assistente exigem escolha explícita por alternativa.
 
 ## Prontidão e próxima ação
 

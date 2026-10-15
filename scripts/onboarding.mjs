@@ -4,15 +4,17 @@ import readline from 'node:readline';
 import { fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
 import { planFrameworkInstall, installFramework } from './install-framework.mjs';
+import { planProviderChoice, saveProviderChoice } from './provider-choice.mjs';
 
 const messagesRoot = path.join(path.dirname(fileURLToPath(import.meta.url)), 'onboarding-locales');
 const hosts = ['codex', 'claude', 'both'];
+const providers = ['higgsfield', 'openrouter'];
 const languages = ['en', 'pt-BR'];
 const meaningful = value => typeof value === 'string' && value.trim().length > 0;
 
 export function parseSetupOptions(args) {
   if (!Array.isArray(args) || !args.every(meaningful)) throw new Error('Setup arguments must be nonempty strings.');
-  const options = { directory: null, assistant: null, locale: null, merge: false, yes: false };
+  const options = { directory: null, assistant: null, provider: null, locale: null, merge: false, yes: false };
   const seen = new Set();
   for (let index = 0; index < args.length; index++) {
     const value = args[index];
@@ -20,7 +22,7 @@ export function parseSetupOptions(args) {
       if (options.directory !== null) throw new Error('Choose one independent studio directory.');
       options.directory = value;
     } else {
-      if (!['--assistant', '--locale', '--merge', '--yes'].includes(value)) throw new Error(`Unknown setup option: ${value}.`);
+      if (!['--assistant', '--provider', '--locale', '--merge', '--yes'].includes(value)) throw new Error(`Unknown setup option: ${value}.`);
       if (seen.has(value)) throw new Error(`Setup option repeated: ${value}.`);
       seen.add(value);
       if (value === '--merge') options.merge = true;
@@ -31,6 +33,9 @@ export function parseSetupOptions(args) {
         if (value === '--assistant') {
           if (!hosts.includes(selected)) throw new Error('Choose --assistant codex, claude, or both.');
           options.assistant = selected;
+        } else if (value === '--provider') {
+          if (!providers.includes(selected)) throw new Error('Choose --provider higgsfield or openrouter.');
+          options.provider = selected;
         } else {
           if (!languages.includes(selected)) throw new Error('Choose --locale en or pt-BR.');
           options.locale = selected;
@@ -139,7 +144,7 @@ async function verifyInstallation(targetRoot, { signal, output, t, stdout, stder
 /** Guided local setup. Provider authentication and creative production are separate. */
 export async function runOnboarding(sourceRoot, parsedOptions, ioOverrides = {}) {
   const options = parsedOptions;
-  if (!options || ![null, ...hosts].includes(options.assistant) || ![null, ...languages].includes(options.locale) || typeof options.merge !== 'boolean' || typeof options.yes !== 'boolean' || (options.directory !== null && !meaningful(options.directory))) throw new Error('Invalid parsed setup options. Use parseSetupOptions first.');
+  if (!options || ![null, ...hosts].includes(options.assistant) || ![null, ...providers].includes(options.provider) || ![null, ...languages].includes(options.locale) || typeof options.merge !== 'boolean' || typeof options.yes !== 'boolean' || (options.directory !== null && !meaningful(options.directory))) throw new Error('Invalid parsed setup options. Use parseSetupOptions first.');
   const cwd = path.resolve(ioOverrides.cwd ?? process.cwd());
   const input = ioOverrides.input ?? process.stdin;
   const outputStream = ioOverrides.outputStream ?? process.stdout;
@@ -149,7 +154,7 @@ export async function runOnboarding(sourceRoot, parsedOptions, ioOverrides = {})
   const nodeVersion = ioOverrides.nodeVersion ?? process.version;
   const nodeMajor = typeof nodeVersion === 'string' ? /^v?(\d+)\./.exec(nodeVersion)?.[1] : null;
   if (nodeMajor === null || nodeMajor === undefined || Number(nodeMajor) < 22) throw new Error(t('nodeRequired', { version: nodeVersion }));
-  if (options.yes && (!options.directory || !options.assistant)) throw new Error(t('explicitRequired'));
+  if (options.yes && (!options.directory || !options.assistant || !options.provider)) throw new Error(t('explicitRequired'));
   if (!options.yes && !isTTY) throw new Error(t('nonTTY'));
   const source = path.resolve(sourceRoot);
   if (!options.yes && !ioOverrides.ask) reader = terminalReader(input, outputStream, ioOverrides.cliConsoleCleanup);
@@ -163,7 +168,11 @@ export async function runOnboarding(sourceRoot, parsedOptions, ioOverrides = {})
       const answer = await ask({ id, message, choices, defaultValue });
       if (answer === null || answer === undefined || reader?.interrupted) return null;
       const selected = String(answer).trim();
-      if (!selected) return defaultValue;
+      if (!selected) {
+        if (defaultValue !== null && defaultValue !== undefined) return defaultValue;
+        output(t('explicitChoice'));
+        continue;
+      }
       if (!choices.length) return selected;
       const byValue = choices.find(choice => choice.value.toLowerCase() === selected.toLowerCase());
       const byIndex = /^\d+$/.test(selected) ? choices[Number(selected) - 1] : null;
@@ -188,8 +197,17 @@ export async function runOnboarding(sourceRoot, parsedOptions, ioOverrides = {})
       assistant = await question('assistant', t('assistant'), hosts.map(value => ({ value, label: t(value) })), 'codex');
       if (!assistant) return cancel();
     }
+    let provider = options.provider;
+    if (!provider) {
+      provider = await question('provider', t('provider'), providers.map(value => ({ value, label: t(value + 'Description') })), null);
+      if (!provider) return cancel();
+    }
     const defaultDirectory = inside(source, cwd) ? path.join(path.dirname(source), 'olympox-studio') : path.join(cwd, 'olympox-studio');
-    let directory = options.directory, merge = options.merge, plan;
+    let directory = options.directory, merge = options.merge, plan, providerPlan;
+    const providerChoicePlan = target => {
+      try { return planProviderChoice(target, provider); }
+      catch (error) { error.installationScope ??= 'destination'; throw error; }
+    };
     for (;;) {
       if (!directory) {
         directory = await question('directory', t('directory'), [], defaultDirectory);
@@ -199,6 +217,7 @@ export async function runOnboarding(sourceRoot, parsedOptions, ioOverrides = {})
       try {
         if (inside(source, target)) throw Object.assign(new Error(t('outsideSource')), { installationScope: 'destination' });
         plan = planFrameworkInstall(source, target, { assistant, merge });
+        providerPlan = providerChoicePlan(target);
         break;
       } catch (error) {
         if (error.installationScope !== 'destination') {
@@ -221,16 +240,19 @@ export async function runOnboarding(sourceRoot, parsedOptions, ioOverrides = {})
     output(t('summary'));
     output(t('summaryDirectory', { directory: plan.targetRoot }));
     output(t('summaryAssistant', { assistant: t(assistant) }));
+    output(t('summarySelectedProvider', { provider: t(provider), scope: t(provider + 'Description') }));
     output(t('summaryLanguage', { language: t(locale === 'en' ? 'english' : 'portuguese') }));
     output(t('summaryMode', { mode: t(merge ? 'mergeMode' : 'fresh') }));
     output(t('summaryFiles', { copied: plan.copied.length, retained: plan.retained.length, total: plan.fileCount }));
     output(t('summaryVerification'));
-    output(t('summaryProvider'));
+    output(t('summaryProvider', { provider: t(provider) }));
     if (!options.yes) {
       const decision = await question('confirm', t('confirm'), [{ value: 'yes', label: t('yes') }, { value: 'no', label: t('no') }], 'yes');
       if (decision !== 'yes' || reader?.interrupted) return cancel();
     }
+    if (JSON.stringify(providerChoicePlan(plan.targetRoot)) !== JSON.stringify(providerPlan)) throw Object.assign(new Error('The provider choice changed after review; nothing was written.'), { installationScope: 'destination' });
     const installation = installFramework(plan.sourceRoot, plan.targetRoot, { assistant: plan.assistant, merge: plan.merge, expectedPlanHash: plan.planHash });
+    saveProviderChoice(installation.targetRoot, providerPlan);
     output(t('installed', { directory: installation.targetRoot }));
     output(t('verificationStart'));
     let verification;
@@ -246,7 +268,8 @@ export async function runOnboarding(sourceRoot, parsedOptions, ioOverrides = {})
     if (assistant !== 'codex') output(t('openClaude'));
     output(t('hostNote'));
     output(t('firstPrompt'));
-    output(t('prompt'));
-    return { status: verification.ok ? 'installed' : 'verification-failed', ...installation, locale, verification, providerReadiness: 'pending', firstPrompt: t('prompt'), nextInvocations: assistant === 'both' ? ['$olympox', '/olympox'] : [assistant === 'codex' ? '$olympox' : '/olympox'] };
+    const firstPrompt = t('prompt', { provider: t(provider), scope: t(provider + 'PromptScope') });
+    output(firstPrompt);
+    return { status: verification.ok ? 'installed' : 'verification-failed', ...installation, locale, provider, verification, providerReadiness: 'pending', firstPrompt, nextInvocations: assistant === 'both' ? ['$olympox', '/olympox'] : [assistant === 'codex' ? '$olympox' : '/olympox'] };
   } finally { await reader?.close(); }
 }

@@ -15,6 +15,7 @@ OLYMPOX combines assistant instructions with a local Node runtime for original A
 | Recovery | Character and linked-run inventory, verification, restore testing | Independent copies and separately preserved shared context |
 | Documentation | English source, pt-BR edition, source-derived catalogs, local manual | Wording/translation review and any remote publication |
 | Higgsfield route | Workflow guidance, local wrapper, and permitted source provenance | Account, exact modules, accepted inputs, export, inspection, and budget |
+| Optional OpenRouter video | Seedance 2.5 adapter with captured authorization, inline images, typed HTTPS audio/video references checked against local bytes, single submission, original-job status and MP4 export | Authorized HTTPS access to the selected references, live account/policy/input acceptance and a fully inspected/listened-to pilot |
 
 The workflows are `create-character`, `produce-piece`, and `review-correct`. Profiles guide the coordinating assistant; they are not persistent workers. Commands do not automatically dispatch specialists, generate media, query providers, retry paid work, publish, schedule research, or collect channel analytics.
 
@@ -22,7 +23,7 @@ The workflows are `create-character`, `produce-piece`, and `review-correct`. Pro
 
 The installer creates local project instructions and skill projections for Codex, Claude Code, or both. This is a supported file layout and locally tested installation path. It does not establish that a particular running assistant discovered the skill or that Claude web or another environment has been configured.
 
-Higgsfield is the default media method for new work. Concepts, personality, narrative, scripts, and planning remain with the coordinating assistant. [Integrated image generation](integrated-images.md) is an explicit alternative for images. A missing Higgsfield stage remains pending until the required capability or an explicit method decision is available.
+New work requires the person's explicit Higgsfield or OpenRouter choice; no provider is preselected. Concepts, personality, narrative, scripts, and planning remain with the coordinating assistant. [Integrated image generation](integrated-images.md) is an explicit alternative for images. A missing Higgsfield stage remains pending until the required capability or an explicit method decision is available.
 
 The [plugin route](higgsfield-plugin.md) and [local CLI route](higgsfield-setup.md) must be checked independently in the actual session. Available website features, a connected plugin, or a logged-in CLI do not establish access to every required module, voice, identity training, reference upload, export, or an equivalent billing balance. Check the [complete pilot path](production-handoff.md) before the first paid stage and apply the existing applicable authorization.
 

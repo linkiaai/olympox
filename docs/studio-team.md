@@ -54,7 +54,7 @@ Saraswati receives the brief, exact canon/narrative versions and selected idea. 
 
 ### Selene
 
-Selene receives scripts, scene specifications, exact reference files and the approved execution scope. Higgsfield is the default media pipeline; assistant-integrated images require an explicit alternative choice. She verifies each selected module, supported inputs, reference transfer, whole-pilot budget, export and inspection access before submission. Missing capabilities leave the affected stage pending. Follow [production](production.md) and the [method plan](../templates/production-method.md).
+Selene receives scripts, scene specifications, exact reference files and the approved execution scope. Choose Higgsfield or OpenRouter explicitly; neither is preselected, and assistant-integrated images require an explicit alternative choice. She verifies each selected module, supported inputs, reference transfer, whole-pilot budget, export and inspection access before submission. Missing capabilities leave the affected stage pending. Follow [production](production.md) and the [method plan](../templates/production-method.md).
 
 She records method, tool/module, model when exposed, prompts, actual attachments, files/hashes, known cost and limitations. External intent is recorded before submission; uncertain jobs require real querying and reconciliation before another charge. Generated media is exported as actual bytes and passed to review. A pilot precedes batches.
 

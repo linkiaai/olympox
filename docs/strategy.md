@@ -51,7 +51,7 @@ Define an adult, fictional, original identity. References can guide light, compo
 
 Write an introduction, an opinion and a response to disagreement. Explain which vocabulary, humor, rhythm and intimacy fit the voice, using examples. Keep fictional chronology and real-world claims distinct. Narrative and content have their own versions; editorial evolution does not automatically change visual/vocal canon.
 
-Develop concepts, narrative, scripts and planning with Codex or Claude Code. Higgsfield is the default pipeline for candidates, references, scenes, image edits, voice and video. Save the [production-method plan](../templates/production-method.md) and verify the entire pilot path, inputs, export, inspection and budget early. Preserve requested reference methods and record any adaptations. Assistant-integrated images require an [explicit alternative choice](integrated-images.md). Missing capabilities leave the affected stage pending; paid external generation needs applicable authorization.
+Develop concepts, narrative, scripts and planning with Codex or Claude Code. Choose Higgsfield or OpenRouter explicitly and check each required stage; OpenRouter currently supplies video, so image and standalone voice stages need their own supported selection. Save the [production-method plan](../templates/production-method.md) and verify the entire pilot path, inputs, export, inspection and budget early. Preserve requested reference methods and record any adaptations. Assistant-integrated images require an [explicit alternative choice](integrated-images.md). Missing capabilities leave the affected stage pending; paid external generation needs applicable authorization.
 
 Follow this sequence for a new identity:
 

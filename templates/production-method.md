@@ -2,7 +2,7 @@
 
 Copy this template to a new version in the installed studio, such as `influencers/<slug>/work/production-method-v001.md`. For discovery before a character exists, use a local planning file in `work/`. Register the actual file as a run input or a planning output. Do not overwrite a tracked version; a changed method uses a new version and the existing explicit new-attempt procedure. This is a conversational planning document, not a new runtime schema or provider adapter.
 
-Develop concepts, personality, narrative, scripts and planning with the coordinating assistant, Codex or Claude Code. Higgsfield is the default media pipeline for appearance, candidates, reference packs, scenes, image edits, voice, animation, video and lip-sync. Follow the observed reference method through verified Higgsfield modules, preserving source observations separately from current adaptations. Assistant-integrated image generation is an explicit alternative only; do not use it automatically or silently replace a missing Higgsfield stage. Each required module needs checked access, accepted exact inputs, known cost or an authorized uncertainty, export and inspection support. Missing capabilities leave the affected stage pending. The local core remains usable for preparation without a connected provider; installation never authenticates or generates.
+Develop concepts, personality, narrative, scripts and planning with the coordinating assistant, Codex or Claude Code. Use the person's explicit Higgsfield or OpenRouter choice; neither is preselected. Reuse an applicable saved choice from `work/provider-choice.json` or the current request; ask only if none exists. Record the provider and verified operation per stage. OpenRouter currently supplies video only; image and standalone audio remain pending until a supported method is explicitly selected. When Higgsfield is chosen, follow the observed reference method through verified modules, preserving source observations separately from current adaptations. Assistant-integrated image generation is an explicit alternative only; do not use it automatically or silently replace a missing Higgsfield stage. Each required module needs checked access, accepted exact inputs, known cost or an authorized uncertainty, export and inspection support. Missing capabilities leave the affected stage pending. The local core remains usable for preparation without a connected provider; installation never authenticates or generates.
 
 ## Request and discovery
 
@@ -20,7 +20,7 @@ Develop concepts, personality, narrative, scripts and planning with the coordina
 
 ## Reference method and tool selection
 
-Follow [the Higgsfield reference pipeline](../docs/higgsfield-influencer-method.md) for media production. Use [integrated visual creation](../docs/integrated-images.md) only as an explicit alternative.
+Follow [the Higgsfield reference pipeline](../docs/higgsfield-influencer-method.md) or [OpenRouter video](../docs/openrouter.md) according to the person's explicit stage choice; neither is preselected. Use [integrated visual creation](../docs/integrated-images.md) only as an explicit alternative.
 
 - User's method requirement and its source:
 - Reference URL/file and inspected segments:
@@ -28,7 +28,7 @@ Follow [the Higgsfield reference pipeline](../docs/higgsfield-influencer-method.
 - Stages established by the source / stages still uncertain:
 - Current method mapping of those stages and source of any explicit user choice, distinct from observed source module names:
 - Method and actual tool per stage:
-- Provider/module(s), when applicable; Higgsfield by default, with the actual source-module mapping:
+- Explicit provider/module(s) per stage, with the actual source-module mapping and unsupported stages pending:
 - Access route (integrated tool, plugin, CLI, or supported user interface):
 - Model/preset, when exposed:
 - Material deviations and the actual user decision, if any:
@@ -37,14 +37,14 @@ A method, tool, provider, module, route and model are different choices; record 
 
 ## Stage map
 
-For video, follow [assistant-to-Higgsfield checkpoints](../docs/production-handoff.md) and save a [video handoff package](video-handoff.md) with readiness, owners and a submission map per shot. Keep the rich inspected library separate from each tool's actual supported input subset.
+For video, follow [provider handoff checkpoints](../docs/production-handoff.md) and save a [video handoff package](video-handoff.md) with readiness, owners and a submission map per shot. Keep the rich inspected library separate from each tool's actual supported input subset.
 
 Keep the complete creative/quality sequence for new influencers and identify which media the objective requires. Record any explicit objective/method choice that makes a stage inapplicable; unavailable tools, absent authorization or metrics leave a required stage pending rather than omitted. Training remains optional. Identify dependencies, exact files/hashes or provider IDs, and actual evidence. Reuse a completed stage only when its evidence and inputs fit the selected method. Actually attach selected exact references to later generation/editing calls; paths in a prompt are not attachments.
 
 | Stage | Required / reason | Tool/module and verified capability | Exact inputs and dependencies | Expected output / completion evidence | Actual state / outstanding work |
 | --- | --- | --- | --- | --- | --- |
 | Concept and direction | | | | | |
-| Expressive visual candidates, feedback and character references | Higgsfield image/reference modules by default; preserve the source-method mapping | | | | |
+| Expressive visual candidates, feedback and character references | Explicitly selected supported image/reference method; preserve the source-method mapping | | | | |
 | Reference pack and in-character scene | | | | | |
 | User visual selection and anatomy/presence/continuity review | Inspect coherent references across angles/scenes; new persona stays draft until required vocal references are selected | | | | |
 | Script drafts and vocal sample text | Preparation can occur during draft/reference exploration | | | | |
@@ -67,7 +67,7 @@ For a new speaking character, prepare the vocal sample with `purpose: reference`
 Before the first paid stage, check the complete pilot path: selected modules, account/workspace, exact-reference transport and reuse, voice/listening, motion/lip-sync, output export and full inspection. Present the estimated whole-pilot scope, available balance, bounded attempts/corrections and unknown charges. Reuse applicable authorization covering that scope rather than asking again for each covered stage. Use confirmed provider media IDs for references already generated there; for local originals, verify an authorized supported transfer, including the official local CLI bridge when prepared. User attachment is a fallback after checking supported automatic routes, not the default instruction. Connection/consent may require user action; never bypass a provider or host restriction.
 
 - Assistant host / installed entry point:
-- `mediaProviders` for new runs (default: `image`, `video`, `audio` all `higgsfield`):
+- `mediaProviders` for new runs (explicit choices only; unselected media are `null`; OpenRouter setup selects video only):
 - Source operation / verified equivalent / material adaptation per stage:
 - Whole-pilot estimate / current balance / attempt and correction envelope:
 - Automatic reference route / reused provider media IDs / export and inspection readiness:

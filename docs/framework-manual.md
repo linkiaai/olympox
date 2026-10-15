@@ -1,6 +1,6 @@
 # OLYMPOX framework manual
 
-OLYMPOX is a local framework for developing original AI influencers with consistent identity, versioned content and a production history you can resume. Your assistant coordinates the work; Higgsfield provides the default media pipeline.
+OLYMPOX is a local framework for developing original AI influencers with consistent identity, versioned content and a production history you can resume. Your assistant coordinates the work; the person explicitly selects Higgsfield or OpenRouter for media, with no preselection.
 
 ## Choose your starting point
 
@@ -55,4 +55,4 @@ The local commands maintain files and validate records. Provider connection, gen
 
 Use an installed studio for your own characters. This source repository contains the reusable framework and its development documentation. Private characters, media, runs and credentials remain outside the distribution.
 
-The current source is stable version **0.6.0**. It consolidates the reviewed local framework, excludes the experimental BytePlus route and provider-choice onboarding, and keeps Higgsfield as the default media pipeline. See [release notes](release-notes.md) for changes, local validation and pending live acceptance, and [supported capabilities](studio-status.md) for the boundary between local features and external services. A speaking video pilot is the default creation scope; an explicit brief can choose an image-only or silent scope. Viral potential is tested through content and results.
+The current source is stable version **0.7.0**. It requires an explicit Higgsfield or OpenRouter choice with no preselection and adds Seedance 2.5 video with bound audio/video references. OpenRouter video access does not imply image or standalone audio support. See [release notes](release-notes.md) for changes, local validation and pending live acceptance, and [supported capabilities](studio-status.md) for the boundary between local features and external services. A speaking video pilot is the default creation scope; an explicit brief can choose an image-only or silent scope. Viral potential is tested through content and results.

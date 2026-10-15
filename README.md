@@ -1,27 +1,29 @@
 # OLYMPOX - AI Influencer framework
 
-OLYMPOX helps you develop original AI influencers and carry their identity, story and production history from one session to the next. Codex or Claude Code coordinates the work through Atena and eight specialist profiles. Higgsfield is the default media pipeline.
+OLYMPOX helps you develop original AI influencers and carry their identity, story and production history from one session to the next. Codex or Claude Code coordinates the work through Atena and eight specialist profiles. The person explicitly chooses Higgsfield or OpenRouter; neither is the default.
 
 The framework provides local skills, task contracts, resumable workflows, character records, canon snapshots, editorial versions and backups. It runs on **Node 22+**, with no external runtime dependencies.
 
-Stable version **0.6.0** consolidates the reviewed local framework with Higgsfield as the default media pipeline and assistant-integrated images as an explicit alternative. The BytePlus experiment is excluded; setup selects the assistant and independent studio. See [release notes](docs/release-notes.md).
+For explicitly selected video stages, the optional [OpenRouter route](docs/openrouter.md) supports Seedance 2.5 with exact local images and audio/video references through bound HTTPS URLs, one authorized submission, original-job reconciliation and MP4 export. HTTPS bytes are checked against the local references before submission; a provider pilot still needs visual and listening review for voice and identity continuity. There is no provider default or automatic fallback.
+
+Stable version **0.7.0** adds explicit Higgsfield/OpenRouter selection and Seedance 2.5 video with bound audio/video references. Setup selects the assistant, provider and independent studio with no provider preselection. Assistant-integrated images remain an explicit image-stage choice. See [release notes](docs/release-notes.md).
 
 ## Set up an independent studio
 
-Install stable version **0.6.0**:
+Install stable version **0.7.0**:
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.6.0 setup
+npx --yes github:linkiaai/olympox#v0.7.0 setup
 ```
 
 From a reviewed checkout or extracted package, use `node bin/olympox.mjs setup`.
 
-Choose Codex, Claude Code or both, then an independent destination. Setup summarizes the installation plan and copy/retain counts, installs the selected host instructions and skills, and checks the local studio. Open the destination in your assistant and invoke `$olympox` in Codex or `/olympox` in Claude Code.
+Choose Codex, Claude Code or both, explicitly choose Higgsfield or OpenRouter, then select an independent destination. Setup summarizes the installation plan and copy/retain counts, installs the selected host instructions and skills, and checks the local studio. Open the destination in your assistant and invoke `$olympox` in Codex or `/olympox` in Claude Code.
 
 For an unattended installation, provide all required choices:
 
 ```sh
-node bin/olympox.mjs setup ../my-studio --assistant codex --yes
+node bin/olympox.mjs setup ../my-studio --assistant codex --provider openrouter --yes
 ```
 
 Use `--locale pt-BR` for Portuguese setup prompts. On Windows, use `npm.cmd` when PowerShell blocks the npm launcher.
@@ -30,7 +32,7 @@ See [installation](docs/installation.md) for source selection, merge conflicts a
 
 This repository is the framework development checkout, using AIOX for software engineering. AIOX tooling and dependencies are excluded from the product package. Create personal characters and media in the independently installed studio.
 
-Version 0.6.0 includes bounded local image transfer, explicit speaking/silent canon checks and media readiness per stage. Start with local preparation; actual host discovery and media production still need testing in your environment. Read the [release notes and validation limits](docs/release-notes.md) for the local checks, the open intermittent Windows rename concern and reporting a reproducible issue. Historical release tags remain unchanged.
+The OpenRouter choice configures video only; image and standalone audio generation remain pending until a supported method is explicitly selected and verified. The local core remains usable offline. Start with local preparation; actual host discovery and media production still need testing in your environment. Read the [release notes and validation limits](docs/release-notes.md) for the local checks, the open intermittent Windows rename concern and reporting a reproducible issue. Historical release tags remain unchanged.
 
 ## Create your first character
 

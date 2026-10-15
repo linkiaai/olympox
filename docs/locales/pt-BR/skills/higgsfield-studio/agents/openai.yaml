@@ -1,4 +1,4 @@
 interface:
   display_name: "Higgsfield no Estúdio"
   short_description: "Mídia Higgsfield verificada e produção pelo método de referência"
-  default_prompt: "Use $higgsfield-studio para preparar e executar o pipeline padrão de mídia de referência, verificando módulos atuais, entradas exatas, transferência automática, estimativas do piloto inteiro, exportação, inspeção completa e autorização aplicável."
+  default_prompt: "Use $higgsfield-studio para preparar e executar o pipeline de mídia de referência escolhido explicitamente para Higgsfield, verificando módulos atuais, entradas exatas, transferência automática, estimativas do piloto inteiro, exportação, inspeção completa e autorização aplicável."

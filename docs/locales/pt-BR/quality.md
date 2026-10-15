@@ -30,7 +30,7 @@ Um conceito deliberadamente discreto pode passar se sua presença específica es
 
 Para uma personagem falante, mantenha a persona `draft` durante seleção visual e exploração vocal. Gere uma amostra vocal de rascunho/referência, ouça o áudio exato e registre arquivo/configurações selecionados pelo usuário antes da aprovação do canon visual/vocal completo. Em escopo silencioso, registre voz como não aplicável. Crie o snapshot aprovado por [operações](operations.md); nunca acrescente novas configurações vocais a uma versão congelada nem substitua referência de canon por uma saída não aprovada.
 
-Higgsfield é o pipeline padrão de mídia. Verifique os módulos escolhidos no plano do método de referência; um recurso separado de Builder só é necessário quando o plano realmente o seleciona. Imagens integradas ao assistente precisam de escolha explícita de alternativa. Uma etapa obrigatória ausente permanece pendente; vídeo posterior ou especificação preparada não a conclui.
+A pessoa escolhe Higgsfield ou OpenRouter explicitamente; nenhum é padrão. Verifique os módulos escolhidos no plano do método de referência; um recurso separado de Builder só é necessário quando o plano realmente o seleciona. Imagens integradas ao assistente precisam de escolha explícita de alternativa. Uma etapa obrigatória ausente permanece pendente; vídeo posterior ou especificação preparada não a conclui.
 
 ## Inspecione imagens em duas escalas
 

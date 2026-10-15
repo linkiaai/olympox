@@ -1,6 +1,6 @@
 # Assistant-integrated images
 
-Use this procedure when the user explicitly selects image generation or editing inside the conversational assistant. Higgsfield remains the [default media pipeline](higgsfield-influencer-method.md). The alternative applies to the selected image stages; it does not establish voice, animation, video or lip-sync support.
+Use this procedure when the user explicitly selects image generation or editing inside the conversational assistant. Higgsfield and OpenRouter are explicit provider choices; neither is preselected. The alternative applies to the selected image stages; it does not establish voice, animation, video or lip-sync support.
 
 ## Select and record the alternative
 
@@ -36,7 +36,7 @@ Candidates remain draft material until the applicable selection and review. For 
 
 Early visual selection does not approve complete canon. A new speaking character needs a generated vocal sample during draft/reference work, using `purpose: reference`; listen to the exact audio and record the user's selection, reference file/hash and settings before final visual/vocal canon approval. A silent scope records why voice is not applicable. Reuse compatible existing approved voice and canon.
 
-Approve and preserve the complete canon through [local operations](operations.md), then prepare production scenes from its exact references. For video, use the [handoff procedure](production-handoff.md) with separately verified voice/motion/lip-sync tools. Higgsfield remains the default for those stages unless explicitly changed.
+Approve and preserve the complete canon through [local operations](operations.md), then prepare production scenes from its exact references. For video, use the [handoff procedure](production-handoff.md) with separately verified voice/motion/lip-sync tools. Choose the provider and operation for each of those stages explicitly; missing capability never selects a fallback.
 
 Generate one representative pilot before batches. Export actual bytes, register and seal their context, then complete the required [quality review](quality.md). Missing reference attachment, export or inspection keeps the affected stage pending.
 

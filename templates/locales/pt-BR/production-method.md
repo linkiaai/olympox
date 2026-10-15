@@ -2,7 +2,7 @@
 
 Copie este template para uma nova versão no estúdio instalado, como `influencers/<slug>/work/production-method-v001.md`. Na descoberta antes de existir personagem, use um arquivo local de planejamento em `work/`. Registre o arquivo real como entrada da run ou saída de planejamento. Não sobrescreva uma versão rastreada; um método alterado usa uma nova versão e o procedimento existente de nova tentativa explícita. Este é um documento de planejamento por conversa, não um novo schema do runtime ou adaptador de fornecedor.
 
-Desenvolva conceito, personalidade, narrativa, roteiros e planejamento com o assistente coordenador, Codex ou Claude Code. Higgsfield é o pipeline padrão de mídia para aparência, candidatas, referências, cenas, edições de imagem, voz, animação, vídeo e lip-sync. Siga o método observado na referência por módulos Higgsfield verificados, separando observações da fonte e adaptações atuais. Geração integrada de imagens do assistente é somente uma alternativa explícita; não a use automaticamente nem substitua silenciosamente uma etapa Higgsfield ausente. Cada módulo necessário exige acesso verificado, entradas exatas aceitas, custo conhecido ou incerteza autorizada, exportação e inspeção. Capacidade ausente mantém a etapa pendente. O núcleo local continua utilizável para preparação sem fornecedor conectado; a instalação nunca autentica nem gera.
+Desenvolva conceito, personalidade, narrativa, roteiros e planejamento com o assistente coordenador, Codex ou Claude Code. Use a escolha explícita da pessoa por Higgsfield ou OpenRouter; nenhum vem pré-selecionado. Reutilize escolha aplicável salva em `work/provider-choice.json` ou no pedido atual; pergunte somente se ela não existir. Registre fornecedor e operação verificada por etapa. OpenRouter oferece somente vídeo atualmente; imagem e áudio independente ficam pendentes até seleção explícita de método compatível. Quando Higgsfield for escolhido, siga o método observado na referência por módulos verificados, separando observações da fonte e adaptações atuais. Geração integrada de imagens do assistente é somente uma alternativa explícita; não a use automaticamente nem substitua silenciosamente uma etapa Higgsfield ausente. Cada módulo necessário exige acesso verificado, entradas exatas aceitas, custo conhecido ou incerteza autorizada, exportação e inspeção. Capacidade ausente mantém a etapa pendente. O núcleo local continua utilizável para preparação sem fornecedor conectado; a instalação nunca autentica nem gera.
 
 ## Pedido e descoberta
 
@@ -20,7 +20,7 @@ Desenvolva conceito, personalidade, narrativa, roteiros e planejamento com o ass
 
 ## Método da referência e seleção de ferramentas
 
-Siga [o pipeline de referência Higgsfield](../../../docs/locales/pt-BR/higgsfield-influencer-method.md) para produzir mídia. Use [criação visual integrada](../../../docs/locales/pt-BR/integrated-images.md) somente como alternativa explícita.
+Siga [o pipeline de referência Higgsfield](../../../docs/locales/pt-BR/higgsfield-influencer-method.md) ou [vídeo OpenRouter](../../../docs/locales/pt-BR/openrouter.md) conforme a escolha explícita da pessoa por etapa; nenhum vem pré-selecionado. Use [criação visual integrada](../../../docs/locales/pt-BR/integrated-images.md) somente como alternativa explícita.
 
 - Requisito de método do usuário e sua fonte:
 - URL/arquivo de referência e trechos inspecionados:
@@ -28,7 +28,7 @@ Siga [o pipeline de referência Higgsfield](../../../docs/locales/pt-BR/higgsfie
 - Etapas comprovadas na fonte / etapas ainda incertas:
 - Mapeamento atual do método por etapas e fonte de qualquer escolha explícita do usuário, distinto dos nomes de módulos observados na fonte:
 - Método e ferramenta real por etapa:
-- Fornecedor/módulo(s), quando aplicável; Higgsfield como padrão, com mapeamento real dos módulos da fonte:
+- Fornecedor/módulo(s) escolhidos explicitamente por etapa, com mapeamento real dos módulos da fonte e etapas não suportadas pendentes:
 - Rota de acesso (ferramenta integrada, plugin, CLI ou interface suportada):
 - Modelo/preset, quando exposto:
 - Desvios materiais e decisão real do usuário, se houver:
@@ -37,14 +37,14 @@ Método, ferramenta, fornecedor, módulo, rota e modelo são escolhas distintas;
 
 ## Mapa das etapas
 
-Para vídeo, siga os [pontos de verificação do assistente ao Higgsfield](../../../docs/locales/pt-BR/production-handoff.md) e salve um [pacote de passagem para vídeo](video-handoff.md) com prontidão, responsáveis e mapa de submissão por plano. Separe a biblioteca rica inspecionada do subconjunto de entradas realmente suportado por ferramenta.
+Para vídeo, siga os [pontos de passagem ao fornecedor](../../../docs/locales/pt-BR/production-handoff.md) e salve um [pacote de passagem para vídeo](video-handoff.md) com prontidão, responsáveis e mapa de submissão por plano. Separe a biblioteca rica inspecionada do subconjunto de entradas realmente suportado por ferramenta.
 
 Manter a sequência criativa/de qualidade completa para novos influenciadores e identificar quais mídias o objetivo exige. Registrar qualquer escolha explícita de objetivo/método que torne uma etapa inaplicável; ferramentas indisponíveis, ausência de autorização ou métricas deixam uma etapa exigida pendente em vez de omitida. Treinamento continua opcional. Identificar dependências, arquivos/hashes ou IDs reais do fornecedor e evidência efetiva. Reutilizar uma etapa concluída somente quando suas evidências e entradas forem compatíveis com o método escolhido. Anexar realmente as referências exatas selecionadas às chamadas posteriores de geração/edição; caminhos no prompt não são anexos.
 
 | Etapa | Obrigatória / motivo | Ferramenta/módulo e recurso verificado | Entradas exatas e dependências | Saída esperada / evidência de conclusão | Estado real / pendências |
 | --- | --- | --- | --- | --- | --- |
 | Conceito e direção | | | | | |
-| Candidatas visuais expressivas, retorno e referências da personagem | Módulos Higgsfield de imagem/referência como padrão; preservar o mapeamento do método da fonte | | | | |
+| Candidatas visuais expressivas, retorno e referências da personagem | Método compatível de imagem/referência escolhido explicitamente; preservar o mapeamento do método da fonte | | | | |
 | Pacote de referências e cena em personagem | | | | | |
 | Escolha visual do usuário e revisão de anatomia/presença/continuidade | Inspecionar referências coerentes entre ângulos/cenas; nova persona continua em draft até selecionar as referências vocais necessárias | | | | |
 | Rascunhos de roteiro e texto da amostra vocal | Preparação pode ocorrer durante a exploração em rascunho/referência | | | | |
@@ -67,7 +67,7 @@ Para uma personagem nova com fala, preparar a amostra vocal com `purpose: refere
 Antes da primeira etapa cobrada, confira o caminho completo do piloto: módulos escolhidos, conta/workspace, transporte e reutilização de referências exatas, voz/escuta, movimento/lip-sync, exportação e inspeção completa. Apresente escopo estimado do piloto inteiro, saldo disponível, tentativas/correções limitadas e cobranças desconhecidas. Reutilize autorização aplicável que cubra esse escopo, sem perguntar novamente por cada etapa coberta. Use IDs confirmados de mídia para referências já geradas no fornecedor; para originais locais, verifique uma transferência suportada e autorizada, incluindo a ponte da CLI oficial local quando preparada. Anexo manual é alternativa após verificar rotas automáticas suportadas, não a instrução padrão. Conexão/consentimento pode exigir ação do usuário; nunca contorne restrições do fornecedor ou do host.
 
 - Host do assistente / ponto de entrada instalado:
-- `mediaProviders` para novos runs (padrão: `image`, `video`, `audio` todos `higgsfield`):
+- `mediaProviders` para novos runs (somente escolhas explícitas; meios sem escolha são `null`; setup OpenRouter seleciona somente vídeo):
 - Operação da fonte / equivalente verificado / adaptação material por etapa:
 - Estimativa do piloto inteiro / saldo atual / limite de tentativas e correções:
 - Rota automática de referências / IDs do fornecedor reutilizados / prontidão de exportação e inspeção:

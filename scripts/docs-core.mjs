@@ -65,6 +65,18 @@ export function referenceCommandCatalog(source, descriptions) {
   return commands;
 }
 
+export function openrouterCommandCatalog(source, descriptions) {
+  const commands = [...source.matchAll(/^node scripts\/openrouter-local\.mjs ([a-z]+)([^\r\n]*)/gm)].map(match => ({ id: `openrouter-${match[1]}`, syntax: `node scripts/openrouter-local.mjs ${match[1]}${match[2]}` }));
+  const implemented = [...source.matchAll(/command === '([^']+)'/g)].map(match => match[1]).filter(id => id !== 'help');
+  if (commands.length !== implemented.length || new Set(commands.map(item => item.id)).size !== commands.length) throw new Error('OpenRouter commands require unique implemented syntax in CLI help.');
+  for (const command of commands) {
+    if (!implemented.includes(command.id.slice('openrouter-'.length))) throw new Error('OpenRouter syntax advertises an unsupported command.');
+    if (!descriptions[command.id]?.trim()) throw new Error(`OpenRouter command without description: ${command.id}`);
+    command.description = descriptions[command.id];
+  }
+  return commands;
+}
+
 export function collectDocumentation(root) {
   const files = new Map();
   const read = relative => {
@@ -100,7 +112,7 @@ export function collectDocumentation(root) {
   const roles = registry.roles.map(role => ({ ...role, markdown: read(role.path) }));
   const tasks = registry.tasks.map(item => ({ ...JSON.parse(read(item.path)), path: item.path }));
   const workflows = registry.workflows.map(item => ({ ...JSON.parse(read(item.path)), path: item.path }));
-  const commands = [...installationCommandCatalog(read('bin/olympox.mjs'), config.commandDescriptions ?? {}), ...commandCatalog(read('scripts/studio.mjs'), config.commandDescriptions ?? {}), ...referenceCommandCatalog(read('scripts/reference-transfer.mjs'), config.commandDescriptions ?? {})];
+  const commands = [...installationCommandCatalog(read('bin/olympox.mjs'), config.commandDescriptions ?? {}), ...commandCatalog(read('scripts/studio.mjs'), config.commandDescriptions ?? {}), ...referenceCommandCatalog(read('scripts/reference-transfer.mjs'), config.commandDescriptions ?? {}), ...openrouterCommandCatalog(read('scripts/openrouter-local.mjs'), config.commandDescriptions ?? {})];
   for (const [locale, settings] of Object.entries(config.locales)) if (!new RegExp(`^docs-site/locales/${locale}\\.json$`).test(settings.resource)) throw new Error(`Locale resource outside the public selection: ${settings.resource}`);
   const ui = JSON.parse(read(config.locales.en.resource)).ui;
   if (!ui || !Object.keys(ui).length || Object.values(ui).some(value => typeof value !== 'string' || !value.trim())) throw new Error('English UI messages must be nonempty strings.');

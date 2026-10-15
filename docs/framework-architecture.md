@@ -1,6 +1,6 @@
 # Framework architecture
 
-OLYMPOX separates assistant direction, local records and external media execution. The current framework source is stable version **0.6.0**; individual contracts and workflows retain their own component revisions, including `0.2.0` and `0.3.0`. See [release notes](release-notes.md) for local validation and pending live acceptance.
+OLYMPOX separates assistant direction, local records and external media execution. The current framework source is stable version **0.7.0**; individual contracts and workflows retain their own component revisions, including `0.2.0` and `0.3.0`. See [release notes](release-notes.md) for local validation and pending live acceptance.
 
 This guide describes the implementation boundary. Use [workflow operation](framework-02.md) for commands and [identity and records](operations.md) for file procedures.
 
@@ -60,7 +60,7 @@ A run binds inputs and applicable governance, captures the character context and
 
 ## Media-provider policy
 
-New attempts preserve a `mediaProviders` map for `image`, `video` and `audio`, defaulting to `higgsfield`. Generation requires both the medium capability and the provider-scoped capability. Recorded generation evidence and external intent must identify the selected provider.
+New attempts preserve a `mediaProviders` map for `image`, `video` and `audio` with no provider default. Missing choices are `null`; offline discovery and preparation can continue, while generation waits for an explicit provider choice. The CLI can supply the person's saved setup choice for new runs, and an explicit run map takes precedence. Generation requires both the medium capability and the provider-scoped capability. Recorded generation evidence and external intent must identify the selected provider.
 
 New character runs default to a video pilot; candidate generation and review use image capabilities. An explicitly selected scope can use another medium. Changing the provider map requires a new attempt with a reason. Historical runs without the map keep their stored semantics.
 
@@ -88,7 +88,9 @@ Creation and restoration stage files and refuse to overwrite existing characters
 
 Hashes establish byte consistency, not reviewer identity or creative fidelity. A completed contract represents accepted local evidence; it does not establish publication or successful real-world results.
 
-Provider adapters, dashboards, campaign management, analytics integrations and databases are not included. Add them only for a concrete need with verified behavior, export boundaries and preservation. Consult [supported capabilities](studio-status.md) and [core interfaces](../framework/README.md) before extending the runtime.
+Dashboards, campaign management, analytics integrations and databases are not included. Add extensions only for a concrete need with verified behavior, export boundaries and preservation. Consult [supported capabilities](studio-status.md) and [core interfaces](../framework/README.md) before extending the runtime.
+
+The optional [OpenRouter video adapter](openrouter.md) executes an explicitly selected Seedance 2.5 stage outside the workflow core. It consumes an already captured readiness start and planned external intent, binds credential and exact input bytes, persists a single-dispatch barrier in the character's `.openrouter/` history, queries the original job and exports new MP4 bytes. Version 1 retains inline image transport. Version 2 adds typed audio/video references through environment-held HTTPS URLs bound by fingerprint, with bounded readback comparison before submission and safe receipt observations. It provisions no storage and preserves explicit provider choices and historical records. Speaking canon requires the selected canonical audio attachment and a listened-to pilot; successful transport cannot establish vocal fidelity.
 
 The separate optional `reference-transfer.mjs` operation provides authorized exact local image transfer through the pinned native Higgsfield CLI; the workflow core and preparation wrapper still do not automatically upload or generate. It records a controlled byte snapshot and one submission, refuses automatic retry of uncertain outcomes, and requires later checks for provider bytes and plugin access. See [Higgsfield setup](higgsfield-setup.md).
 

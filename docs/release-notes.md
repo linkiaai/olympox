@@ -1,6 +1,25 @@
 # Release notes
 
-These notes explain framework behavior by version. The current guides describe stable version 0.6.0. Historical defaults below apply to their own revisions and do not override current guidance. Read [installation and upgrade](installation.md) before changing an existing studio.
+These notes explain framework behavior by version. The current guides describe stable version 0.7.0. Historical defaults below apply to their own revisions and do not override current guidance. Read [installation and upgrade](installation.md) before changing an existing studio.
+
+## 0.7.0 — October 15, 2026
+
+Version 0.7.0 adds explicit Higgsfield/OpenRouter selection and the Seedance 2.5 video adapter. Neither provider is preselected and unavailable stages never switch providers automatically. Historical releases, approved canon, voice selections, media and run attempts remain preserved.
+
+### Included behavior
+
+- **Explicit provider choice:** interactive setup requires a Higgsfield or OpenRouter answer without preselection; unattended setup requires `--provider higgsfield|openrouter`. The private `work/provider-choice.json` records the person's choice. New runs use that map unless explicitly overridden. Higgsfield selects image/video/audio routes; OpenRouter selects video only, leaving image and standalone audio unselected. Direct installation and local planning can remain offline; generation without a selected supported route stays pending. Merge retains an identical choice and refuses a different choice before framework writes.
+- **Seedance 2.5 video:** public model discovery, offline request preparation, captured stage readiness and external intent, one authorized submission, original-job reconciliation and new MP4-byte export. Uncertain submissions are preserved without automatic retries or repeat charges.
+- **Audio/video references:** version 2 binds typed local media, hashes and byte counts to HTTPS URLs kept in environment variables and fingerprinted in the specification. A bounded readback verifies bytes before submission; signed URLs and keys stay out of receipts. Inline images and the version 1 contract remain supported. The adapter provisions no storage and uploads no files; missing authorized HTTPS access leaves transfer pending.
+- **Preserved voice and identity requirements:** speaking canon requires the selected exact canonical audio with `role: voice`, mixed general references and generated audio enabled. First/last frames cannot be combined with general references. Structural container checks do not replace listening, full video inspection or an approved pilot before batches. Audio/video transport does not guarantee voice cloning or provider conditioning.
+
+### Validation and remaining limits
+
+The local verification gates are `node .development/verify-aiox.mjs`, `npm.cmd run verify` and independent export/install checks covering both assistant projections, privacy, conflicts and preservation. Their results apply to the exact reviewed source and archive; they do not establish actual host discovery or a paid provider pilot.
+
+Version 2 adapter limits are 16 MiB per image, 32 MiB per audio reference, 64 MiB per video and 64 MiB total; version 1 retains 16 MiB total. The supported local formats are PNG/JPEG/WebP, WAV/MP3/FLAC/Ogg audio/M4A and MP4 with a video track. These are local transport/structural checks, not verified provider format or duration limits. Readback observes bytes at one moment and cannot guarantee a later provider fetch. Account access, applicable policy, exact accepted inputs, actual cost and visual/vocal continuity remain pilot checks. Video-input costs depend on the actual footage and are not bounded by output duration alone. No paid generation is part of framework installation or local verification.
+
+Install with `npx --yes github:linkiaai/olympox#v0.7.0 setup`. For unattended use, supply an explicit directory, assistant, provider and `--yes`, for example `setup ../my-studio --assistant codex --provider openrouter --yes`. Existing studios use the [preservation-first upgrade procedure](installation.md#upgrade-an-existing-studio). Publishing this release does not deploy a hosted manual or alter historical tags. Report the exact `0.7.0` version, environment and sanitized evidence through [GitHub issues](https://github.com/linkiaai/olympox/issues), keeping credentials, signed URLs and private creative records out of reports.
 
 ## 0.6.0 — October 15, 2026
 

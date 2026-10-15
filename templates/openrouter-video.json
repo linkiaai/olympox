@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "model": "bytedance/seedance-2.5",
+  "credentialFingerprint": null,
+  "promptPath": "influencers/replace-character-id/prompts/scene-v001.txt",
+  "parameters": {
+    "duration": 5,
+    "resolution": "480p",
+    "aspect_ratio": "9:16",
+    "generate_audio": true
+  },
+  "references": []
+}

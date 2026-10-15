@@ -26,9 +26,9 @@ Salve esta especificação em `tmp/first-cycle.json` dentro do estúdio instalad
   "medium": "video",
   "capabilities": [],
   "mediaProviders": {
-    "image": "higgsfield",
-    "video": "higgsfield",
-    "audio": "higgsfield"
+    "image": null,
+    "video": null,
+    "audio": null
   }
 }
 ```
@@ -66,7 +66,7 @@ Registre atores, datas, eventos de ferramentas e arquivos reais. Use `execution.
 
 ## Declarar capacidades e método de mídia
 
-Runs novos selecionam Higgsfield para `image`, `video` e `audio`, salvo escolha explícita de fornecedor para o meio afetado. `integrated-images` é alternativa explícita de imagem e é recusada para áudio/vídeo. Salve a decisão e os módulos exatos no [plano de método](../../../templates/locales/pt-BR/production-method.md).
+Não há fornecedor padrão. Runs novos usam a escolha de setup salva pela pessoa, salvo um mapa `mediaProviders` explícito que prevaleça. Sem escolha, as entradas de `image`, `video` e `audio` são `null`: descoberta e preparação locais continuam disponíveis, enquanto a geração espera escolha explícita. A escolha OpenRouter no setup define somente `video: openrouter`; imagem e áudio independente permanecem sem seleção. `integrated-images` é alternativa explícita de imagem e é recusada para áudio/vídeo. Salve a decisão e os módulos exatos no [plano de método](../../../templates/locales/pt-BR/production-method.md).
 
 A geração exige capacidade genérica e do fornecedor, como `image-generation` e `higgsfield:image-generation`. Revisão exige `image-inspection`, `video-inspection` ou `audio-inspection`. Informe capacidades verificadas na especificação ou numa transição `start`/`complete`; ausentes deixam a etapa `awaiting-tool`. São declarações, não descoberta de ferramentas ou teste de conexão.
 
@@ -99,7 +99,7 @@ node scripts/studio.mjs run-resume RUN_ID tmp/resume.json
 
 Nova tentativa começa na primeira etapa do fluxo salvo, observa o contexto atual e preserva tentativas anteriores e o contrato salvo no run. Não carrega outro contrato de fluxo, reenvia jobs nem reutiliza aprovações concluídas. Inicie um run separado quando o trabalho precisar da definição atual em vez da salva.
 
-Mudar fornecedor exige `newAttempt: true`, motivo e `mediaProviders` atualizado. Fornecedores omitidos mantêm escolhas da tentativa anterior; numa tentativa histórica sem mapa, os padrões atuais são introduzidos. `run-step` normal não pode alterar o mapa.
+Mudar fornecedor exige `newAttempt: true`, motivo e `mediaProviders` atualizado. Fornecedores omitidos mantêm escolhas da tentativa anterior; numa tentativa histórica sem mapa, escolhas ausentes permanecem `null` até seleção explícita. `run-step` normal não pode alterar o mapa.
 
 ## Submissões externas e resultados incertos
 

@@ -18,7 +18,7 @@ Essas observações não estabelecem uso exclusivo do AI Influencer Builder, ope
 
 A referência conecta oportunidade/diferenciação, conceitos originais, referências/cenas coerentes, roteiros recorrentes, direção vocal, vídeo, publicação e comparação. Também ilustra por que resultado inicial não deve decidir automaticamente potencial de longo prazo da personagem.
 
-OLYMPOX adota essa sequência pelo [método de produção Higgsfield](higgsfield-influencer-method.md). Higgsfield é o caminho padrão de mídia; Codex ou Claude Code coordena conceito, personalidade, narrativa, roteiro e registros. Operações atuais escolhidas são verificadas no estúdio e documentadas separadamente das observações da fonte.
+OLYMPOX adota essa sequência pelo [método de produção Higgsfield](higgsfield-influencer-method.md). Escolha Higgsfield ou OpenRouter explicitamente; nenhum vem pré-selecionado, e Codex ou Claude Code coordena conceito, personalidade, narrativa, roteiro e registros. Operações atuais escolhidas são verificadas no estúdio e documentadas separadamente das observações da fonte.
 
 Salve fonte, cobertura, etapas demonstradas, módulos selecionados e adaptações no [plano de método de produção](../../../templates/locales/pt-BR/production-method.md). Uma operação atual de Builder, voz ou vídeo não identifica retroativamente a rota da fonte. Se módulo observado obrigatório estiver indisponível, registre adaptação proposta e decisão antes de mudar materialmente o método.
 

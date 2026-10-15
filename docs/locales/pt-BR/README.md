@@ -1,27 +1,29 @@
 # OLYMPOX - AI Influencer framework
 
-OLYMPOX ajuda a desenvolver influenciadores originais de IA e manter sua identidade, história e registros de produção entre sessões. Codex ou Claude Code coordena o trabalho por meio de Atena e oito perfis especialistas. Higgsfield é o fluxo padrão de mídia.
+OLYMPOX ajuda a desenvolver influenciadores originais de IA e manter sua identidade, história e registros de produção entre sessões. Codex ou Claude Code coordena o trabalho por meio de Atena e oito perfis especialistas. A pessoa escolhe Higgsfield ou OpenRouter explicitamente; nenhum é padrão.
 
 O framework oferece skills locais, contratos de tarefas, workflows retomáveis, registros de personagens, snapshots do cânone, versões editoriais e backups. Funciona com **Node 22+**, sem dependências externas de execução.
 
-A versão estável **0.6.0** consolida o framework local revisado com Higgsfield como pipeline padrão de mídia e imagens integradas ao assistente como alternativa explícita. O experimento BytePlus fica excluído; o setup escolhe o assistente e o estúdio independente. Consulte as [notas de versão](release-notes.md).
+Para etapas de vídeo selecionadas explicitamente, a [rota opcional OpenRouter](openrouter.md) oferece Seedance 2.5 com imagens locais exatas e referências de áudio/vídeo por URLs HTTPS vinculadas, envio único autorizado, reconciliação do job original e exportação MP4. Os bytes HTTPS são comparados às referências locais antes do envio; um piloto no fornecedor ainda exige revisão visual e escuta para avaliar continuidade de voz e identidade. Não há fornecedor padrão nem fallback automático.
+
+A versão estável **0.7.0** adiciona escolha explícita entre Higgsfield e OpenRouter e vídeo Seedance 2.5 com referências vinculadas de áudio/vídeo. O setup escolhe assistente, fornecedor e estúdio independente sem pré-selecionar fornecedor. Imagens integradas ao assistente continuam uma escolha explícita por etapa de imagem. Consulte as [notas de versão](release-notes.md).
 
 ## Instale um estúdio independente
 
-Instale a versão estável **0.6.0**:
+Instale a versão estável **0.7.0**:
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.6.0 setup
+npx --yes github:linkiaai/olympox#v0.7.0 setup
 ```
 
 A partir de checkout revisado ou pacote extraído, use `node bin/olympox.mjs setup`.
 
-Escolha Codex, Claude Code ou ambos e um destino independente. O setup resume o plano de instalação e as quantidades a copiar/manter, instala instruções e skills para os assistentes escolhidos e verifica o estúdio local. Abra o destino no assistente e invoque `$olympox` no Codex ou `/olympox` no Claude Code.
+Escolha Codex, Claude Code ou ambos, escolha Higgsfield ou OpenRouter explicitamente e depois selecione um destino independente. O setup resume o plano de instalação e as quantidades a copiar/manter, instala instruções e skills para os assistentes escolhidos e verifica o estúdio local. Abra o destino no assistente e invoque `$olympox` no Codex ou `/olympox` no Claude Code.
 
 Para instalação sem interação, forneça todas as escolhas obrigatórias:
 
 ```sh
-node bin/olympox.mjs setup ../my-studio --assistant codex --yes
+node bin/olympox.mjs setup ../my-studio --assistant codex --provider openrouter --yes
 ```
 
 Use `--locale pt-BR` para mensagens do setup em português. No Windows, use `npm.cmd` se o PowerShell bloquear o inicializador do npm.
@@ -30,7 +32,7 @@ Consulte [instalação](installation.md) para seleção de fontes, conflitos de 
 
 Este repositório é o checkout de desenvolvimento do framework, usando AIOX para engenharia de software. As ferramentas e dependências do AIOX ficam fora do pacote do produto. Crie personagens pessoais e mídia no estúdio instalado separadamente.
 
-A versão 0.6.0 inclui transferência local delimitada de imagens, verificações explícitas de cânone com/sem fala e prontidão de mídia por etapa. Comece pela preparação local; descoberta real no assistente e produção de mídia ainda precisam de testes no seu ambiente. Leia as [notas da versão e limites de validação](release-notes.md) para conhecer as verificações locais, a investigação aberta de rename intermitente no Windows e como relatar um problema reproduzível. As tags históricas permanecem intactas.
+A escolha OpenRouter configura somente vídeo; geração de imagens e áudio independente permanece pendente até que um método compatível seja escolhido explicitamente e verificado. O núcleo local continua utilizável sem conexão. Comece pela preparação local; descoberta real no assistente e produção de mídia ainda precisam de testes no seu ambiente. Leia as [notas da versão e limites de validação](release-notes.md) para conhecer as verificações locais, a investigação aberta de rename intermitente no Windows e como relatar um problema reproduzível. As tags históricas permanecem intactas.
 
 ## Crie seu primeiro personagem
 

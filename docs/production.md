@@ -1,6 +1,6 @@
 # Character and media production
 
-Use this guide to move from a selected concept to an approved, repeatable character and its first media. Work in an installed studio. Higgsfield is the default media provider; the conversational assistant develops direction and uses verified tools. The [method guide](higgsfield-influencer-method.md) covers provider stages and [tools](tools.md) covers readiness.
+Use this guide to move from a selected concept to an approved, repeatable character and its first media. Work in an installed studio. Choose Higgsfield or OpenRouter explicitly; neither is preselected, and the conversational assistant develops direction and uses verified tools. The [method guide](higgsfield-influencer-method.md) covers provider stages and [tools](tools.md) covers readiness.
 
 ## Define what must remain recognizable
 

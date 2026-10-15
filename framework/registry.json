@@ -1,13 +1,8 @@
 {
   "schemaVersion": 1,
-  "version": "0.6.0",
+  "version": "0.7.0",
   "name": "OLYMPOX",
   "executionMode": "instruction-packages",
-  "defaultMediaProviders": {
-    "image": "higgsfield",
-    "video": "higgsfield",
-    "audio": "higgsfield"
-  },
   "constitutionPaths": [
     "CONSTITUTION.md",
     "AGENTS.md",

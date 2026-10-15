@@ -4,15 +4,16 @@ Use este guia para escolher a rota de execução e verificar se o estúdio conse
 
 ## Responsabilidades
 
-| Trabalho | Rota padrão | Conferir antes do uso |
+| Trabalho | Rota explícita ou responsabilidade local | Conferir antes do uso |
 | --- | --- | --- |
 | Pesquisa, conceito, personalidade, narrativa, roteiros e planejamento | Coordenador conversacional | Fontes, contexto da personagem e entrega solicitada |
-| Candidatas, pacotes de referência, cenas e edições de imagens | Higgsfield | Módulo escolhido, referências exatas, exportação e inspeção visual |
-| Voz, animação, vídeo e sincronização labial | Higgsfield | Entradas de áudio/movimento, operação suportada, escuta e revisão completa do vídeo |
+| Candidatas, pacotes de referência, cenas e edições de imagens | Rota verificada de imagem escolhida pela pessoa; Higgsfield quando escolhido | Módulo escolhido, referências exatas, exportação e inspeção visual |
+| Voz, animação, vídeo e sincronização labial | Rota verificada escolhida por etapa; Higgsfield quando escolhido | Entradas de áudio/movimento, operação suportada, escuta e revisão completa do vídeo |
 | Runs locais, histórico de canon, registros de ativos e backups | Comandos OLYMPOX | Arquivos exatos, versões e decisões registradas |
 | Imagens integradas ao assistente | Alternativa escolhida explicitamente pelo usuário | Geração de imagens, anexos, exportação e inspeção no aplicativo |
+| Vídeo Seedance 2.5 pelo OpenRouter | Alternativa escolhida explicitamente pelo usuário | Catálogo atual, prontidão capturada por etapa, referências locais exatas, autorização de gasto aplicável e revisão completa da saída |
 
-Higgsfield é o fornecedor padrão de mídia. O [método de produção](higgsfield-influencer-method.md) separa seus módulos; o [estudo da fonte](video-reference.md) explica a referência desse método. Um recurso do site ou uma skill instalada não comprova acesso executável no assistente.
+Escolha Higgsfield ou OpenRouter explicitamente; nenhum é padrão e suas capacidades por etapa diferem. O setup salva somente essa escolha em `work/provider-choice.json`: Higgsfield seleciona rotas de imagem/vídeo/áudio, enquanto OpenRouter seleciona somente vídeo. Escolhas ausentes deixam a geração pendente sem bloquear preparação local. Um mapa explícito do run pode selecionar métodos verificados por meio. O [método de produção](higgsfield-influencer-method.md) separa seus módulos; o [estudo da fonte](video-reference.md) explica a referência desse método. Um recurso do site ou uma skill instalada não comprova acesso executável no assistente.
 
 ## Escolher uma rota Higgsfield
 
@@ -21,6 +22,12 @@ Use o [plugin](higgsfield-plugin.md) quando suas ferramentas conectadas aceitam 
 O wrapper de CLI do framework oferece verificações locais de integridade, login interativo e consultas limitadas. Ele não submete geração, envia mídia nem treina identidade. Nenhuma rota possui adaptador automático de submissão no núcleo local.
 
 Para referências locais, confira transferência suportada por ferramentas antes de propor anexos manuais. Reutilize IDs confirmados do fornecedor quando adequado. Um caminho escrito no prompt não anexa arquivo; registre quais arquivos/hashes exatos chegaram ao fornecedor e seus papéis de entrada.
+
+## Escolher a rota opcional de vídeo OpenRouter
+
+Siga [vídeo OpenRouter](openrouter.md) para a rota `bytedance/seedance-2.5` escolhida explicitamente. O adaptador sem dependências usa `OPENROUTER_API_KEY` do ambiente e capacidades `video-generation` e `openrouter:video-generation`. Oferece consultas públicas de catálogo, preparação da requisição, uma submissão autorizada, estado do mesmo job e exportação dos bytes originais. A submissão exige prontidão por etapa já capturada e intenção externa registrada; submissões incertas são preservadas sem repetição automática.
+
+A versão 1 mantém referências PNG/JPEG/WebP exatas embutidas. A versão 2 adiciona referências tipadas de áudio/vídeo por URLs HTTPS guardadas em variáveis de ambiente nomeadas e vinculadas por impressão digital da URL. O assistente obtém acesso por ferramentas de mídia/armazenamento existentes e autorizadas; o adaptador não provisiona armazenamento. Antes de uma submissão paga, compara os bytes recuperados ao hash/tamanho local capturado, recusa redirecionamentos/redes privadas e não envia credenciais OpenRouter ao armazenamento. Uma execução com cânone de fala exige o áudio exato selecionado com `role: "voice"` e `generate_audio: true`; a trilha de um vídeo não o substitui. Revise o vídeo exportado completo e escute seu áudio antes de lotes. Ausência de transporte/acesso permanece pendente, e verificações locais não garantem leitura pelo fornecedor nem identidade vocal. As escolhas de fornecedor permanecem explícitas, e cânone aprovado e histórico permanecem intactos.
 
 ## Conferir o piloto completo antes da primeira etapa paga
 

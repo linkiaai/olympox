@@ -73,23 +73,26 @@ test.after(() => {
 });
 
 test('setup parsing preserves exact paths and rejects ambiguous or missing options', () => {
-  assert.deepEqual(parseSetupOptions(['C:\\Example Studio', '--assistant', 'both', '--locale', 'pt-BR', '--merge', '--yes']), { directory: 'C:\\Example Studio', assistant: 'both', locale: 'pt-BR', merge: true, yes: true });
-  assert.deepEqual(parseSetupOptions([]), { directory: null, assistant: null, locale: null, merge: false, yes: false });
+  assert.deepEqual(parseSetupOptions(['C:\\Example Studio', '--assistant', 'both', '--provider', 'openrouter', '--locale', 'pt-BR', '--merge', '--yes']), { directory: 'C:\\Example Studio', assistant: 'both', provider: 'openrouter', locale: 'pt-BR', merge: true, yes: true });
+  assert.deepEqual(parseSetupOptions([]), { directory: null, assistant: null, provider: null, locale: null, merge: false, yes: false });
   for (const args of [
     ['one', 'two'], ['--assistant'], ['--assistant', '--yes'], ['--assistant', 'other'], ['--locale'], ['--locale', 'pt-br'],
-    ['--yes', '--yes'], ['--merge', '--merge'], ['--assistant', 'codex', '--assistant', 'claude'], ['--locale', 'en', '--locale', 'pt-BR'], ['--unknown'], ['']
+    ['--yes', '--yes'], ['--merge', '--merge'], ['--assistant', 'codex', '--assistant', 'claude'], ['--locale', 'en', '--locale', 'pt-BR'],
+    ['--provider'], ['--provider', '--yes'], ['--provider', 'other'], ['--provider', 'higgsfield', '--provider', 'openrouter'], ['--unknown'], ['']
   ]) assert.throws(() => parseSetupOptions(args));
 });
 
 test('new English Codex and Portuguese Claude studios receive exact projections without translating source bytes', async () => {
   for (const [locale, assistant, invocation] of [['en', 'codex', '$olympox'], ['pt-BR', 'claude', '/olympox']]) {
     const { base, source, target } = fixture(), before = inventory(source);
-    const session = scripted({ locale, assistant, directory: target, confirm: 'yes' }, { cwd: base });
+    const session = scripted({ locale, assistant, provider: 'openrouter', directory: target, confirm: 'yes' }, { cwd: base });
     const result = await runOnboarding(source, parseSetupOptions([]), session.io);
     assert.equal(result.status, 'installed');
     assert.equal(result.locale, locale);
     assert.deepEqual(result.nextInvocations, [invocation]);
     assert.equal(result.providerReadiness, 'pending');
+    assert.equal(result.provider, 'openrouter');
+    assert.equal(JSON.parse(fs.readFileSync(path.join(target, 'work/provider-choice.json'), 'utf8')).provider, 'openrouter');
     assert.deepEqual(inventory(source), before);
     const skillRoot = assistant === 'codex' ? '.agents' : '.claude';
     assert.deepEqual(fs.readFileSync(path.join(target, skillRoot, 'skills/olympox/SKILL.md')), fs.readFileSync(path.join(source, 'skills/olympox/SKILL.md')));
@@ -105,10 +108,15 @@ test('new English Codex and Portuguese Claude studios receive exact projections 
 
 test('number choices and Enter defaults create a sibling studio outside the framework checkout', async () => {
   const { source, base } = fixture();
-  const session = scripted({ locale: '', assistant: ['wrong', '3'], directory: '', confirm: '' }, { cwd: source });
+  const session = scripted({ locale: '', assistant: ['wrong', '3'], provider: ['', 'wrong', '2'], directory: '', confirm: '' }, { cwd: source });
   const result = await runOnboarding(source, parseSetupOptions([]), session.io);
   assert.equal(result.targetRoot, path.join(base, 'olympox-studio'));
   assert.equal(result.assistant, 'both');
+  assert.equal(result.provider, 'openrouter');
+  assert.deepEqual(session.asked.slice(0, 6), ['locale', 'assistant', 'assistant', 'provider', 'provider', 'provider']);
+  assert.equal(session.asked.filter(id => id === 'provider').length, 3);
+  assert.ok(session.output.some(line => /no default/.test(line)));
+  assert.ok(session.output.filter(line => /\[(?:higgsfield|openrouter)\]/.test(line)).every(line => !line.includes('*')));
   assert.deepEqual(result.nextInvocations, ['$olympox', '/olympox']);
   assert.equal(fs.existsSync(path.join(result.targetRoot, '.agents/skills/olympox/SKILL.md')), true);
   assert.equal(fs.existsSync(path.join(result.targetRoot, '.claude/skills/olympox/SKILL.md')), true);
@@ -116,9 +124,9 @@ test('number choices and Enter defaults create a sibling studio outside the fram
 });
 
 test('cancellation at every guided choice and declined summary write no studio files', async () => {
-  for (const step of ['locale', 'assistant', 'directory', 'confirm']) {
+  for (const step of ['locale', 'assistant', 'provider', 'directory', 'confirm']) {
     const { base, source, target } = fixture();
-    const answers = { locale: 'en', assistant: 'codex', directory: target, confirm: 'yes', [step]: null };
+    const answers = { locale: 'en', assistant: 'codex', provider: 'higgsfield', directory: target, confirm: 'yes', [step]: null };
     const session = scripted(answers, { cwd: base, verify: async () => assert.fail('Cancelled setup cannot verify or execute provider work.') });
     const before = inventory(base);
     const result = await runOnboarding(source, parseSetupOptions([]), session.io);
@@ -129,20 +137,21 @@ test('cancellation at every guided choice and declined summary write no studio f
   }
   const { base, source, target } = fixture();
   const session = scripted({ confirm: 'no' }, { cwd: base });
-  assert.equal((await runOnboarding(source, parseSetupOptions([target, '--assistant', 'codex', '--locale', 'en']), session.io)).status, 'cancelled');
+  assert.equal((await runOnboarding(source, parseSetupOptions([target, '--provider', 'higgsfield', '--assistant', 'codex', '--locale', 'en']), session.io)).status, 'cancelled');
   assert.equal(fs.existsSync(target), false);
 });
 
-test('nonterminal automation requires an explicit reviewed destination and host, and Node 22 or later', async () => {
+test('nonterminal automation requires an explicit reviewed destination, host and provider, and Node 22 or later', async () => {
   const { base, source, target } = fixture();
   const output = [], io = { cwd: base, isTTY: false, output: value => output.push(value), verify: async () => ({ ok: true, checks: [] }) };
   await assert.rejects(() => runOnboarding(source, parseSetupOptions([]), io), /requires a terminal/);
   await assert.rejects(() => runOnboarding(source, parseSetupOptions(['--yes']), io), /explicit directory/);
   await assert.rejects(() => runOnboarding(source, parseSetupOptions([target, '--yes']), io), /explicit directory/);
-  await assert.rejects(() => runOnboarding(source, parseSetupOptions([target, '--assistant', 'codex', '--yes']), { ...io, nodeVersion: 'v21.8.0' }), /Node 22/);
+  await assert.rejects(() => runOnboarding(source, parseSetupOptions([target, '--assistant', 'codex', '--yes']), io), /--provider higgsfield\|openrouter/);
+  await assert.rejects(() => runOnboarding(source, parseSetupOptions([target, '--provider', 'higgsfield', '--assistant', 'codex', '--yes']), { ...io, nodeVersion: 'v21.8.0' }), /Node 22/);
   assert.equal(fs.existsSync(target), false);
   assert.deepEqual(output, []);
-  const result = await runOnboarding(source, parseSetupOptions([target, '--assistant', 'codex', '--yes']), io);
+  const result = await runOnboarding(source, parseSetupOptions([target, '--provider', 'higgsfield', '--assistant', 'codex', '--yes']), io);
   assert.equal(result.status, 'installed');
   assert.ok(output.findIndex(line => line === 'Review the installation') < output.findIndex(line => line.startsWith('Studio installed:')));
 });
@@ -155,11 +164,66 @@ test('an existing studio can choose safe merge while preserving private files an
   write(target, 'work/runs/preserved.json', { fixture: true });
   const before = inventory(target);
   const session = scripted({ 'existing-directory': 'merge', confirm: 'yes' }, { cwd: base });
-  const result = await runOnboarding(source, parseSetupOptions([target, '--assistant', 'both', '--locale', 'en']), session.io);
+  const result = await runOnboarding(source, parseSetupOptions([target, '--provider', 'higgsfield', '--assistant', 'both', '--locale', 'en']), session.io);
   assert.equal(result.status, 'installed');
   assert.ok(result.retained.length > 0);
   assert.equal(fs.existsSync(path.join(target, '.claude/skills/olympox/SKILL.md')), true);
   for (const [relative, sha] of Object.entries(before)) assert.equal(inventory(target)[relative], sha);
+});
+
+test('explicit provider choice is saved before local verification and never selects another provider for unsupported stages', async () => {
+  for (const [provider, locale] of [['higgsfield', 'en'], ['openrouter', 'pt-BR']]) {
+    const { base, source, target } = fixture();
+    let verified = false;
+    const result = await runOnboarding(source, parseSetupOptions([target, '--assistant', 'codex', '--provider', provider, '--locale', locale, '--yes']), {
+      cwd: base, isTTY: false, output() {},
+      verify: async installed => {
+        assert.equal(installed, target);
+        assert.equal(JSON.parse(fs.readFileSync(path.join(installed, 'work/provider-choice.json'), 'utf8')).provider, provider);
+        verified = true;
+        return { ok: true, checks: [{ synthetic: true }] };
+      }
+    });
+    assert.equal(verified, true);
+    assert.equal(result.provider, provider);
+    assert.match(result.firstPrompt, provider === 'higgsfield' ? /I selected Higgsfield/ : /Escolhi OpenRouter/);
+    if (provider === 'openrouter') {
+      assert.match(result.firstPrompt, /Seedance 2\.5/);
+      assert.match(result.firstPrompt, /escolha de método.*sem suporte/);
+      assert.doesNotMatch(result.firstPrompt, /Higgsfield/);
+    }
+  }
+});
+
+test('safe merge retains an identical provider choice and rejects a changed choice before any framework writes', async () => {
+  const { base, source, target } = fixture();
+  const io = { cwd: base, isTTY: false, output() {}, verify: async () => ({ ok: true, checks: [] }) };
+  const initial = [target, '--assistant', 'codex', '--provider', 'openrouter', '--yes'];
+  await runOnboarding(source, parseSetupOptions(initial), io);
+  write(target, 'influencers/private-character/persona.json', { fixture: true });
+  const before = inventory(target), choice = fs.readFileSync(path.join(target, 'work/provider-choice.json'));
+  await runOnboarding(source, parseSetupOptions([...initial, '--merge']), io);
+  assert.deepEqual(inventory(target), before);
+  assert.deepEqual(fs.readFileSync(path.join(target, 'work/provider-choice.json')), choice);
+  await assert.rejects(() => runOnboarding(source, parseSetupOptions([target, '--assistant', 'both', '--provider', 'higgsfield', '--merge', '--yes']), io), /provider|choice/i);
+  assert.deepEqual(inventory(target), before);
+  assert.equal(fs.existsSync(path.join(target, '.claude')), false);
+});
+
+test('a provider choice changed after the summary is refused before adding framework files', async () => {
+  for (const byteOnly of [false, true]) {
+  const { base, source, target } = fixture();
+  const io = { cwd: base, isTTY: false, output() {}, verify: async () => ({ ok: true, checks: [] }) };
+  await runOnboarding(source, parseSetupOptions([target, '--assistant', 'codex', '--provider', 'higgsfield', '--yes']), io);
+  const session = scripted({ confirm: () => {
+    const file = path.join(target, 'work/provider-choice.json');
+    if (byteOnly) fs.appendFileSync(file, '\n');
+    else { const choice = JSON.parse(fs.readFileSync(file, 'utf8')); write(target, 'work/provider-choice.json', { ...choice, provider: 'openrouter' }); }
+    return 'yes';
+  } }, { cwd: base, verify: async () => assert.fail('Changed provider cannot verify.') });
+  await assert.rejects(() => runOnboarding(source, parseSetupOptions([target, '--assistant', 'both', '--provider', 'higgsfield', '--locale', 'en', '--merge']), session.io), /provider|choice/i);
+  assert.equal(fs.existsSync(path.join(target, '.claude')), false);
+  }
 });
 
 test('a conflict in either host prevents all writes and permits cancellation without changing private history', async () => {
@@ -168,7 +232,7 @@ test('a conflict in either host prevents all writes and permits cancellation wit
   write(target, 'private.txt', 'Preserved private state');
   const before = inventory(target);
   const session = scripted({ 'destination-conflict': 'cancel' }, { cwd: base });
-  const result = await runOnboarding(source, parseSetupOptions([target, '--assistant', 'both', '--locale', 'en', '--merge']), session.io);
+  const result = await runOnboarding(source, parseSetupOptions([target, '--provider', 'higgsfield', '--assistant', 'both', '--locale', 'en', '--merge']), session.io);
   assert.equal(result.status, 'cancelled');
   assert.deepEqual(inventory(target), before);
   assert.equal(fs.existsSync(path.join(target, '.agents')), false);
@@ -179,7 +243,7 @@ test('a broken framework package fails without asking users to change their dest
   const { base, source, target } = fixture();
   fs.unlinkSync(path.join(source, 'README.md'));
   const session = scripted({}, { cwd: base, verify: async () => assert.fail('Broken sources cannot be installed.') });
-  await assert.rejects(() => runOnboarding(source, parseSetupOptions([target, '--assistant', 'codex', '--locale', 'en']), session.io), /framework source is incomplete or unsafe.*repaired or freshly extracted/);
+  await assert.rejects(() => runOnboarding(source, parseSetupOptions([target, '--provider', 'higgsfield', '--assistant', 'codex', '--locale', 'en']), session.io), /framework source is incomplete or unsafe.*repaired or freshly extracted/);
   assert.deepEqual(session.asked, []);
   assert.equal(fs.existsSync(target), false);
 });
@@ -192,7 +256,7 @@ test('source or destination drift after review aborts installation before writes
       else write(target, 'README.md', 'Concurrent local file created after review');
       return 'yes';
     } }, { cwd: base, verify: async () => assert.fail('Changed plan cannot proceed to verification.') });
-    await assert.rejects(() => runOnboarding(source, parseSetupOptions([target, '--assistant', 'both', '--locale', 'en']), session.io), /plan changed|Destination is not empty/);
+    await assert.rejects(() => runOnboarding(source, parseSetupOptions([target, '--provider', 'higgsfield', '--assistant', 'both', '--locale', 'en']), session.io), /plan changed|Destination is not empty/);
     if (drift === 'source') assert.equal(fs.existsSync(target), false);
     else assert.deepEqual(fs.readdirSync(target), ['README.md']);
   }
@@ -202,12 +266,12 @@ test('guided studio directories inside the development source are rejected witho
   const { base, source } = fixture();
   const target = path.join(source, 'personal-studio');
   const before = inventory(source);
-  await assert.rejects(() => runOnboarding(source, parseSetupOptions([target, '--assistant', 'codex', '--yes']), { cwd: base, isTTY: false, output() {} }), /independent directory outside/);
+  await assert.rejects(() => runOnboarding(source, parseSetupOptions([target, '--provider', 'higgsfield', '--assistant', 'codex', '--yes']), { cwd: base, isTTY: false, output() {} }), /independent directory outside/);
   assert.deepEqual(inventory(source), before);
 });
 
 test('the real readline reader treats EOF before confirmation as cancellation', async () => {
-  for (const answers of ['', 'en\ncodex\n../studio\n']) {
+  for (const answers of ['', 'en\ncodex\nhiggsfield\n../studio\n']) {
     const { source } = fixture();
     const input = new PassThrough(), outputStream = new PassThrough();
     const operation = runOnboarding(source, parseSetupOptions([]), { cwd: source, isTTY: true, input, outputStream, output() {}, verify: async () => assert.fail('EOF cannot approve installation.') });
@@ -224,7 +288,7 @@ test('raw terminal Ctrl-C at confirmation cancels without writing files', async 
   input.isTTY = true; input.setRawMode = () => input;
   outputStream.isTTY = true; outputStream.columns = 80;
   let interrupted = false;
-  const resultPromise = runOnboarding(source, parseSetupOptions([target, '--assistant', 'codex', '--locale', 'en']), {
+  const resultPromise = runOnboarding(source, parseSetupOptions([target, '--provider', 'higgsfield', '--assistant', 'codex', '--locale', 'en']), {
     cwd: base, isTTY: true, input, outputStream,
     output(value) { if (value === 'Install this studio?') { interrupted = true; setImmediate(() => input.write('\u0003')); } },
     verify: async () => assert.fail('Ctrl-C cannot approve installation.')
@@ -241,7 +305,7 @@ test('default verification executes four local Node stages in order and preserve
     const { base, source, target } = fixture();
     write(source, 'scripts/docs.mjs', "import fs from 'node:fs'; fs.appendFileSync('fixture-checks.jsonl', JSON.stringify(['docs',process.argv[2]])+'\\n');\n");
     write(source, 'scripts/studio.mjs', `import fs from 'node:fs'; fs.appendFileSync('fixture-checks.jsonl', JSON.stringify(['studio',process.argv[2]])+'\\n'); ${failed ? "if(process.argv[2]==='doctor') process.exitCode=3;" : ''}\n`);
-    const result = await runOnboarding(source, parseSetupOptions([target, '--assistant', 'claude', '--yes']), { cwd: base, isTTY: false, output() {} });
+    const result = await runOnboarding(source, parseSetupOptions([target, '--provider', 'higgsfield', '--assistant', 'claude', '--yes']), { cwd: base, isTTY: false, output() {} });
     assert.equal(result.status, failed ? 'verification-failed' : 'installed');
     assert.equal(fs.existsSync(path.join(target, '.claude/skills/olympox/SKILL.md')), true);
     const checks = fs.readFileSync(path.join(target, 'fixture-checks.jsonl'), 'utf8').trim().split('\n').map(line => JSON.parse(line));
@@ -266,7 +330,7 @@ test('raw terminal Ctrl-C during real local verification waits for the child to 
     }
   }, 10);
   try {
-    const result = await runOnboarding(source, parseSetupOptions([target, '--assistant', 'codex', '--locale', 'en']), {
+    const result = await runOnboarding(source, parseSetupOptions([target, '--provider', 'higgsfield', '--assistant', 'codex', '--locale', 'en']), {
       cwd: base, isTTY: true, input, outputStream,
       output(value) { if (value === 'Install this studio?') setImmediate(() => input.write('\r')); }
     });
@@ -299,7 +363,7 @@ test('verification children use pipes, forward actual output, and leave embeddin
     outputStream.on('data', bytes => actualOutput.push(bytes.toString()));
     errorStream.on('data', bytes => actualErrors.push(bytes.toString()));
     try {
-      const result = await runOnboarding(source, parseSetupOptions([target, '--assistant', 'codex', '--locale', 'en']), {
+      const result = await runOnboarding(source, parseSetupOptions([target, '--provider', 'higgsfield', '--assistant', 'codex', '--locale', 'en']), {
         cwd: base, isTTY: true, input, outputStream, errorStream,
         output(value) { if (value === 'Install this studio?') setImmediate(() => input.write('\r')); }
       });
@@ -326,7 +390,7 @@ Object.defineProperty(process.stdout,'isTTY',{value:true});
 process.stdout.columns=80; process.stdin.isRaw=false;
 process.stdin.setRawMode=mode=>{if(!mode)throw Object.assign(new Error('fixture console cleanup'),{code:${JSON.stringify(code)},syscall:'setRawMode'});process.stdin.isRaw=mode;return process.stdin;};
 try {
-  const result=await runOnboarding(${JSON.stringify(source)},parseSetupOptions([${JSON.stringify(target)},'--assistant','codex','--locale','en']),{
+  const result=await runOnboarding(${JSON.stringify(source)},parseSetupOptions([${JSON.stringify(target)},'--provider','higgsfield','--assistant','codex','--locale','en']),{
     cliConsoleCleanup:${allow},output:value=>{if(value==='Install this studio?')setImmediate(()=>process.stdin.emit('keypress','\\r',{name:'return'}));},
     verify:async()=>({ok:${verified},checks:[{synthetic:true}]})
   }); console.log(JSON.stringify({status:result.status,checks:result.verification.checks.length}));
@@ -352,7 +416,7 @@ await new Promise(resolve=>process.stdout.write('',resolve));process.exit(0);
 
 test('verification exceptions preserve the installed studio and provide a repeatable command', async () => {
   const { base, source, target } = fixture(), output = [];
-  const result = await runOnboarding(source, parseSetupOptions([target, '--assistant', 'both', '--yes', '--locale', 'pt-BR']), {
+  const result = await runOnboarding(source, parseSetupOptions([target, '--provider', 'higgsfield', '--assistant', 'both', '--yes', '--locale', 'pt-BR']), {
     cwd: base, isTTY: false, output: value => output.push(value), verify: async () => { throw new Error('Synthetic interrupted verifier'); }
   });
   assert.equal(result.status, 'verification-failed');

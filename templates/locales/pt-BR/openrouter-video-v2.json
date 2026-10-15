@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 2,
+  "model": "bytedance/seedance-2.5",
+  "credentialFingerprint": null,
+  "promptPath": "influencers/replace-character-id/prompts/scene-v002.txt",
+  "parameters": {
+    "duration": 5,
+    "resolution": "480p",
+    "aspect_ratio": "9:16",
+    "generate_audio": true
+  },
+  "references": [
+    {
+      "path": "influencers/replace-character-id/references/front.png",
+      "sha256": null,
+      "bytes": 0,
+      "referenceId": "replace-visual-reference-id",
+      "role": "front",
+      "usage": "reference",
+      "order": 0,
+      "mediaType": "image",
+      "transport": { "kind": "inline" }
+    },
+    {
+      "path": "influencers/replace-character-id/references/voice.wav",
+      "sha256": null,
+      "bytes": 0,
+      "referenceId": "replace-selected-voice-reference-id",
+      "role": "voice",
+      "usage": "reference",
+      "order": 1,
+      "mediaType": "audio",
+      "transport": {
+        "kind": "https",
+        "urlEnv": "OLYMPOX_OPENROUTER_REFERENCE_VOICE_URL",
+        "urlSha256": null
+      }
+    },
+    {
+      "path": "influencers/replace-character-id/references/expression.mp4",
+      "sha256": null,
+      "bytes": 0,
+      "referenceId": "replace-approved-video-reference-id",
+      "role": "expression",
+      "usage": "reference",
+      "order": 2,
+      "mediaType": "video",
+      "transport": {
+        "kind": "https",
+        "urlEnv": "OLYMPOX_OPENROUTER_REFERENCE_VIDEO_URL",
+        "urlSha256": null
+      }
+    }
+  ]
+}

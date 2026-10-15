@@ -8,9 +8,9 @@ Install **OLYMPOX - AI Influencer framework** into an independent studio for Cod
 - **Codex or Claude Code** able to read and write the studio files.
 - A reviewed framework checkout or extracted package. Git and repository access are needed when obtaining source through GitHub.
 
-The local core has no external runtime dependencies; these commands need no `npm install`. Higgsfield access is prepared separately. You can install, plan characters, and maintain records before connecting a provider.
+The local core has no external runtime dependencies; these commands need no `npm install`. Choose Higgsfield or OpenRouter explicitly and prepare its access separately. You can install, plan characters, and maintain records before connecting a provider.
 
-This guide describes stable version **0.6.0**. Install its tag with `npx --yes github:linkiaai/olympox#v0.6.0 setup`. Use the local commands below for a reviewed checkout or extracted package. A later local edit does not update a published tag or hosted manual. Historical release tags remain unchanged. See [release notes and validation limits](release-notes.md).
+This guide describes stable version **0.7.0**. Install its tag with `npx --yes github:linkiaai/olympox#v0.7.0 setup`. Use the local commands below for a reviewed checkout or extracted package. A later local edit does not update a published tag or hosted manual. Historical release tags remain unchanged. See [release notes and validation limits](release-notes.md).
 
 ## Guided setup
 
@@ -20,21 +20,23 @@ From the framework checkout or extracted package:
 node bin/olympox.mjs setup
 ```
 
-The guide asks for presentation language (`en` or `pt-BR`), assistant (`codex`, `claude`, or `both`), and a studio directory outside the source checkout. It checks all selected source and destination files, then presents the resolved destination, options, copy/retain counts, and planned checks. Cancellation, EOF, or Ctrl+C before installation leaves the destination untouched.
+The guide asks for presentation language (`en` or `pt-BR`), assistant (`codex`, `claude`, or `both`), provider (`higgsfield` or `openrouter`), and a studio directory outside the source checkout. Neither provider is preselected; an empty answer repeats the question. It checks all selected source and destination files, then presents the resolved destination, explicit choices, copy/retain counts, and planned checks. Cancellation, EOF, or Ctrl+C before installation leaves the destination untouched.
 
 To provide choices in advance:
 
 ```sh
-node bin/olympox.mjs setup ../my-studio --assistant both --locale pt-BR
+node bin/olympox.mjs setup ../my-studio --assistant both --provider higgsfield --locale pt-BR
 ```
 
-For a noninteractive terminal, supply an explicit directory, assistant, and `--yes`:
+For a noninteractive terminal, supply an explicit directory, assistant, `--provider higgsfield|openrouter`, and `--yes`:
 
 ```sh
-node bin/olympox.mjs setup ../my-studio --assistant claude --locale en --yes
+node bin/olympox.mjs setup ../my-studio --assistant claude --provider openrouter --locale en --yes
 ```
 
-`--yes` accepts local installation and verification. It does not imply `--merge` or authorize generation, training, or publication. When using npx, its `--yes` accepts npm's package prompt; OLYMPOX's `--yes` comes after `setup` and has a separate purpose. `--locale` changes setup presentation only; canonical installed instructions, skills, commands, and identifiers remain English.
+`--yes` accepts local installation, the supplied explicit provider choice and verification. It requires `--provider`; no provider is inferred. It does not imply `--merge` or authorize authentication, uploads, generation, training, or publication. When using npx, its `--yes` accepts npm's package prompt; OLYMPOX's `--yes` comes after `setup` and has a separate purpose. `--locale` changes setup presentation only; canonical installed instructions, skills, commands, and identifiers remain English.
+
+Setup saves the choice privately in `work/provider-choice.json`. Higgsfield selects `image`, `video` and `audio` routes; OpenRouter selects only `video`, leaving image and standalone audio `null`. This describes intended routes, not verified account access or supported operations. The CLI uses the saved explicit map for new runs unless the run supplies its own map. Without a choice, offline discovery and preparation remain available and generation stays pending. No route falls back automatically. In a merge, an identical saved choice is retained and a different choice is refused before framework writes; review an explicit new-attempt decision instead of overwriting history.
 
 The plan is checked again before writing. A changed planned source, destination, or option aborts installation; review a fresh plan before retrying. After installation, setup runs these installed scripts in order:
 
@@ -57,9 +59,9 @@ cd ../my-studio
 npm run verify
 ```
 
-Syntax: `install [directory] [--merge] [--assistant codex|claude|both]`. Direct installation defaults to `codex` and directory `.`. Choose an independent destination explicitly. Fresh installation accepts an absent or empty directory, including allowed existing `.git` metadata; other contents require `--merge`. The low-level installer is `node scripts/install-framework.mjs` with the same options.
+Syntax: `install [directory] [--merge] [--assistant codex|claude|both]`. Direct installation defaults to `codex` and directory `.`, and can remain offline without choosing a media provider. Choose an independent destination explicitly. Fresh installation accepts an absent or empty directory, including allowed existing `.git` metadata; other contents require `--merge`. The low-level installer is `node scripts/install-framework.mjs` with the same options.
 
-In an interactive terminal, no command or `install` without an explicit `--assistant` opens the guide. With no arguments in a noninteractive terminal, the entrypoint shows help. `--locale` and `--yes` belong to `setup`, not direct `install`.
+In an interactive terminal, no command or `install` without an explicit `--assistant` opens the guide. With no arguments in a noninteractive terminal, the entrypoint shows help. `--provider`, `--locale` and `--yes` belong to `setup`, not direct `install`.
 
 | Assistant | Active skill directory | Project instructions | Invocation |
 | --- | --- | --- | --- |
@@ -74,12 +76,12 @@ Open the installed directory in the selected assistant and invoke the skill. Rel
 ```text
 Atena, help me create an original influencer for [audience/topic].
 Propose three directions and recommend one.
-Check the complete Higgsfield pilot path, references, export and budget first.
+Confirm my explicit Higgsfield or OpenRouter choice and check the complete pilot path, references, export and budget first.
 ```
 
 Installed files and successful local checks do not establish live skill discovery. The Claude target configures local Claude Code project files, not Claude web or other environments.
 
-The local framework review ran on Windows with Node 24.18.0. Both assistant projections passed installation checks, and an actual native terminal exercised guided setup without provider or key prompts. Full skill discovery in the actual host and a complete Codex/Claude media workflow remain unverified. Node 22 and other operating systems still need execution checks. The intermittent Windows atomic-rename `EPERM` concern remains open with an unconfirmed cause. Test your actual host and report its exact version and error through the [release validation and reporting procedure](release-notes.md), without changing personal settings just to hide a failure.
+Review the [version-specific validation and reporting evidence](release-notes.md) for the exact local checks. File installation and provider selection do not establish actual host skill discovery, account access or a complete Codex/Claude media pilot. Node 22 and other operating systems still need execution checks where not reported. Preserve actual errors and environment details when reporting a failure.
 
 ## Merge into an existing project
 

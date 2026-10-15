@@ -1,6 +1,6 @@
 # Higgsfield reference production method
 
-This guide maps a character concept to a complete media pilot. Codex or Claude Code coordinates research, personality, narrative, scripts and direction. Higgsfield is the default provider for candidates, references, scenes, image edits, voice, animation, video and lip-sync, through operations verified for the current studio.
+This guide maps a character concept to a complete media pilot. Codex or Claude Code coordinates research, personality, narrative, scripts and direction. Use this method when Higgsfield is explicitly selected for candidates, references, scenes, image edits, voice, animation, video or lip-sync, through operations verified for the current studio. OpenRouter video follows its own guide; there is no default provider or automatic fallback.
 
 The [reference study](video-reference.md) explains the source sequence. Its observed image/reference, voice-direction and video stages remain separate from today's selected tools. Save the source mapping and any adaptation in a versioned [production-method plan](../templates/production-method.md); use that plan as a run input or planning output.
 

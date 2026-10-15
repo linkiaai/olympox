@@ -1,6 +1,6 @@
 # Imagens integradas ao assistente
 
-Use este procedimento quando o usuário escolher explicitamente geração ou edição de imagens dentro do assistente conversacional. Higgsfield continua como [caminho padrão de mídia](higgsfield-influencer-method.md). A alternativa vale para etapas de imagem selecionadas; não estabelece suporte a voz, animação, vídeo ou sincronização labial.
+Use este procedimento quando o usuário escolher explicitamente geração ou edição de imagens dentro do assistente conversacional. Higgsfield e OpenRouter são escolhas explícitas de fornecedor; nenhum vem pré-selecionado. A alternativa vale para etapas de imagem selecionadas; não estabelece suporte a voz, animação, vídeo ou sincronização labial.
 
 ## Escolher e registrar a alternativa
 
@@ -36,7 +36,7 @@ Candidatas continuam como material em rascunho até seleção e revisão aplicá
 
 Seleção visual inicial não aprova canon completo. Uma nova personagem com fala precisa de amostra vocal gerada durante trabalho de rascunho/referência, com `purpose: reference`; escute o áudio exato e registre seleção do usuário, arquivo/hash e configurações antes da aprovação visual/vocal final. Escopo silencioso registra por que voz não se aplica. Reutilize voz e canon aprovados compatíveis.
 
-Aprove e preserve canon completo por [operações locais](operations.md), depois prepare cenas de produção a partir de suas referências exatas. Para vídeo, use o [procedimento de passagem](production-handoff.md) com ferramentas de voz/movimento/sincronização verificadas separadamente. Higgsfield continua padrão nessas etapas, salvo mudança explícita.
+Aprove e preserve canon completo por [operações locais](operations.md), depois prepare cenas de produção a partir de suas referências exatas. Para vídeo, use o [procedimento de passagem](production-handoff.md) com ferramentas de voz/movimento/sincronização verificadas separadamente. Escolha fornecedor e operação dessas etapas explicitamente; capacidade ausente nunca seleciona um fallback.
 
 Gere um piloto representativo antes de lotes. Exporte bytes reais, registre e sele o contexto, depois conclua a [revisão de qualidade](quality.md). Ausência de anexação de referências, exportação ou inspeção mantém a etapa afetada pendente.
 

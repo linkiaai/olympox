@@ -1,6 +1,6 @@
 # Manual do framework OLYMPOX
 
-OLYMPOX é um framework local para desenvolver influenciadores originais de IA com identidade consistente, conteúdo versionado e histórico de produção retomável. Seu assistente coordena o trabalho; Higgsfield fornece o fluxo padrão de mídia.
+OLYMPOX é um framework local para desenvolver influenciadores originais de IA com identidade consistente, conteúdo versionado e histórico de produção retomável. Seu assistente coordena o trabalho; a pessoa escolhe Higgsfield ou OpenRouter explicitamente para mídia, sem pré-seleção.
 
 ## Escolha por onde começar
 
@@ -55,4 +55,4 @@ Os comandos locais mantêm arquivos e validam registros. Conexão com o provedor
 
 Use um estúdio instalado para seus próprios personagens. Este repositório contém o framework reutilizável e sua documentação de desenvolvimento. Personagens privados, mídia, execuções e credenciais ficam fora da distribuição.
 
-O código atual é a versão estável **0.6.0**. Ela consolida o framework local revisado, exclui a rota experimental BytePlus e a escolha de provedor no onboarding, e mantém Higgsfield como pipeline padrão de mídia. Consulte [notas de versão](release-notes.md) para mudanças, validação local e aceitação real pendente e [capacidades suportadas](studio-status.md) para o limite entre recursos locais e serviços externos. Um piloto de vídeo com fala é o escopo padrão de criação; um brief explícito pode escolher apenas imagens ou um personagem sem fala. Potencial viral é testado por conteúdo e resultados.
+O código atual é a versão estável **0.7.0**. Ela exige escolha explícita entre Higgsfield e OpenRouter sem pré-seleção e adiciona vídeo Seedance 2.5 com referências vinculadas de áudio/vídeo. Acesso a vídeo OpenRouter não implica suporte a imagem nem áudio independente. Consulte [notas de versão](release-notes.md) para mudanças, validação local e aceitação real pendente e [capacidades suportadas](studio-status.md) para o limite entre recursos locais e serviços externos. Um piloto de vídeo com fala é o escopo padrão de criação; um brief explícito pode escolher apenas imagens ou um personagem sem fala. Potencial viral é testado por conteúdo e resultados.

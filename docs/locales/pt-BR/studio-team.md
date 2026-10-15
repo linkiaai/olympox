@@ -54,7 +54,7 @@ Saraswati recebe brief, versões exatas do canon/narrativa e a ideia selecionada
 
 ### Selene
 
-Selene recebe roteiros, especificações de cenas, arquivos exatos de referência e o escopo aprovado de execução. Higgsfield é o pipeline padrão de mídia; imagens integradas ao assistente exigem escolha explícita de alternativa. Verifica cada módulo selecionado, entradas aceitas, transferência de referências, orçamento do piloto completo, exportação e acesso à inspeção antes do envio. Recursos ausentes deixam a etapa afetada pendente. Siga [produção](production.md) e o [plano do método](../../../templates/locales/pt-BR/production-method.md).
+Selene recebe roteiros, especificações de cenas, arquivos exatos de referência e o escopo aprovado de execução. Escolha Higgsfield ou OpenRouter explicitamente; nenhum vem pré-selecionado, e imagens integradas ao assistente exigem escolha explícita de alternativa. Verifica cada módulo selecionado, entradas aceitas, transferência de referências, orçamento do piloto completo, exportação e acesso à inspeção antes do envio. Recursos ausentes deixam a etapa afetada pendente. Siga [produção](production.md) e o [plano do método](../../../templates/locales/pt-BR/production-method.md).
 
 Registra método, ferramenta/módulo, modelo quando exposto, prompts, anexos reais, arquivos/hashes, custo conhecido e limitações. A intenção externa é registrada antes do envio; jobs incertos exigem consulta real e reconciliação antes de outra cobrança. A mídia gerada é exportada como bytes reais e encaminhada à revisão. Um piloto precede os lotes.
 

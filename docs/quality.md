@@ -30,7 +30,7 @@ An intentionally restrained concept can pass if its specific presence is visible
 
 For a speaking character, keep the persona `draft` through visual selection and vocal exploration. Generate a draft/reference vocal sample, listen to the exact audio, and record the user's selected file/settings before complete visual/vocal canon approval. For a silent scope, record voice as not applicable. Create the approved snapshot through [operations](operations.md); never add new voice settings to a frozen version or replace a canon reference with an unapproved output.
 
-Higgsfield is the default media pipeline. Verify the modules chosen in the reference-method plan; a separate Builder capability is required only when the plan actually selects it. Assistant-integrated images need an explicit alternative choice. A missing required stage stays pending; later video output or a prepared specification does not complete it.
+The person explicitly chooses Higgsfield or OpenRouter; neither is the default. Verify the modules chosen in the reference-method plan; a separate Builder capability is required only when the plan actually selects it. Assistant-integrated images need an explicit alternative choice. A missing required stage stays pending; later video output or a prepared specification does not complete it.
 
 ## Inspect images at two scales
 
