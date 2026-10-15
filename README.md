@@ -4,14 +4,14 @@ OLYMPOX helps you develop original AI influencers and carry their identity, stor
 
 The framework provides local skills, task contracts, resumable workflows, character records, canon snapshots, editorial versions and backups. It runs on **Node 22+**, with no external runtime dependencies.
 
-Release candidate **0.6.0-rc.4** removes the experimental BytePlus executor and provider-choice onboarding. Setup again selects the assistant and independent studio. See [release notes](docs/release-notes.md).
+Stable version **0.6.0** consolidates the reviewed local framework with Higgsfield as the default media pipeline and assistant-integrated images as an explicit alternative. The BytePlus experiment is excluded; setup selects the assistant and independent studio. See [release notes](docs/release-notes.md).
 
 ## Set up an independent studio
 
-Install the **0.6.0-rc.4** release candidate for testing:
+Install stable version **0.6.0**:
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.6.0-rc.4 setup
+npx --yes github:linkiaai/olympox#v0.6.0 setup
 ```
 
 From a reviewed checkout or extracted package, use `node bin/olympox.mjs setup`.
@@ -30,7 +30,7 @@ See [installation](docs/installation.md) for source selection, merge conflicts a
 
 This repository is the framework development checkout, using AIOX for software engineering. AIOX tooling and dependencies are excluded from the product package. Create personal characters and media in the independently installed studio.
 
-The candidate adds bounded local image transfer, explicit speaking/silent canon checks and media readiness per stage. Start with local preparation; actual host discovery and media production still need testing in your environment. Read the [release notes and testing instructions](docs/release-notes.md) for known limits and reporting a reproducible issue. The historical 0.5.0 release remains unchanged.
+Version 0.6.0 includes bounded local image transfer, explicit speaking/silent canon checks and media readiness per stage. Start with local preparation; actual host discovery and media production still need testing in your environment. Read the [release notes and validation limits](docs/release-notes.md) for the local checks, the open intermittent Windows rename concern and reporting a reproducible issue. Historical release tags remain unchanged.
 
 ## Create your first character
 

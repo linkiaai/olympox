@@ -4,14 +4,14 @@ OLYMPOX ajuda a desenvolver influenciadores originais de IA e manter sua identid
 
 O framework oferece skills locais, contratos de tarefas, workflows retomáveis, registros de personagens, snapshots do cânone, versões editoriais e backups. Funciona com **Node 22+**, sem dependências externas de execução.
 
-A versão candidata **0.6.0-rc.4** retira o executor experimental BytePlus e a escolha de provedor no onboarding. O setup volta a escolher o assistente e o estúdio independente. Consulte as [notas de versão](release-notes.md).
+A versão estável **0.6.0** consolida o framework local revisado com Higgsfield como pipeline padrão de mídia e imagens integradas ao assistente como alternativa explícita. O experimento BytePlus fica excluído; o setup escolhe o assistente e o estúdio independente. Consulte as [notas de versão](release-notes.md).
 
 ## Instale um estúdio independente
 
-Instale a versão candidata **0.6.0-rc.4** para testes:
+Instale a versão estável **0.6.0**:
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.6.0-rc.4 setup
+npx --yes github:linkiaai/olympox#v0.6.0 setup
 ```
 
 A partir de checkout revisado ou pacote extraído, use `node bin/olympox.mjs setup`.
@@ -30,7 +30,7 @@ Consulte [instalação](installation.md) para seleção de fontes, conflitos de 
 
 Este repositório é o checkout de desenvolvimento do framework, usando AIOX para engenharia de software. As ferramentas e dependências do AIOX ficam fora do pacote do produto. Crie personagens pessoais e mídia no estúdio instalado separadamente.
 
-A candidata acrescenta transferência local delimitada de imagens, verificações explícitas de cânone com/sem fala e prontidão de mídia por etapa. Comece pela preparação local; descoberta real no assistente e produção de mídia ainda precisam de testes no seu ambiente. Leia as [notas da versão e instruções de teste](release-notes.md) para conhecer os limites e relatar um problema reproduzível. A release histórica 0.5.0 permanece intacta.
+A versão 0.6.0 inclui transferência local delimitada de imagens, verificações explícitas de cânone com/sem fala e prontidão de mídia por etapa. Comece pela preparação local; descoberta real no assistente e produção de mídia ainda precisam de testes no seu ambiente. Leia as [notas da versão e limites de validação](release-notes.md) para conhecer as verificações locais, a investigação aberta de rename intermitente no Windows e como relatar um problema reproduzível. As tags históricas permanecem intactas.
 
 ## Crie seu primeiro personagem
 

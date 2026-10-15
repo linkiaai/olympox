@@ -1,6 +1,27 @@
 # Notas das versões
 
-Estas notas explicam comportamento por versão. Os guias atuais descrevem a candidata 0.6.0-rc.4, que retira o experimento BytePlus. Padrões históricos abaixo pertencem às suas revisões e não substituem a orientação atual. Leia [instalação e atualização](installation.md) antes de mudar um estúdio existente.
+Estas notas explicam comportamento por versão. Os guias atuais descrevem a versão estável 0.6.0. Padrões históricos abaixo pertencem às suas revisões e não substituem a orientação atual. Leia [instalação e atualização](installation.md) antes de mudar um estúdio existente.
+
+## 0.6.0 — 15 de outubro de 2026
+
+A versão 0.6.0 promove o framework local revisado à linha estável. Higgsfield permanece o pipeline padrão de mídia; imagens integradas ao assistente continuam alternativa explícita para etapas de imagem. O executor BytePlus, conector de credenciais, preferência salva de provedor e escolha de provedor no onboarding ficam excluídos. Tags e arquivos históricos, incluindo rc.1–rc.4 e 0.5.0, permanecem intactos.
+
+### Comportamento incluído
+
+- **Estúdios independentes offline:** o setup guiado escolhe assistente e destino, revisa o plano de cópia/manutenção e executa verificações locais. Projeções de skills para ambos os assistentes e merge com recusa de conflitos preservam arquivos não relacionados e metadados Git permitidos. Instalar nunca conecta provedor, solicita chave de provedor, gera mídia nem publica.
+- **Referências exatas e identidade preservada:** a transferência delimitada de imagens no Windows x64 usa a CLI Higgsfield opcional fixada, autorização de bytes/destino exatos e intenção recuperável. Confirmação nativa ainda exige verificações separadas de bytes no provedor e acesso pelo plugin/módulo. Seleção visual, seleção vocal ouvida quando há fala, aprovação completa do cânone, snapshots imutáveis, piloto revisado e exportação de bytes reais continuam parte do método de produção.
+- **Correções de prontidão vocal:** cobertura vocal obrigatória permanece pendente quando suas etapas de apoio são apenas de imagem. Ela precisa de etapa de áudio ou vídeo; um run de áudio não pode marcar voz como `not-required`, inclusive com canon legado aprovado. A compatibilidade com imagem estática e vídeo silencioso explícito continua preservada, sem reescrever registros históricos.
+- **Correções documentais:** a referência de contratos lista `readinessPlanPath` opcional; tabelas de transições e prontidão preservam todos os valores permitidos na renderização. Os guias em inglês e pt-BR explicam o mesmo limite vocal.
+
+### Validação e limites restantes
+
+A revisão de 15 de outubro anterior à promoção estável aprovou `npm.cmd run verify` com 248 testes, sem falhas ou skips, além de validação, doctor e verificações do manual no Windows com Node 24.18.0. Verificações independentes de instalação derivada do arquivo cobriram projeções dos dois assistentes, preservação e recusa de conflitos; 32 testes de prontidão no estúdio instalado passaram. Os 25 pares de guias foram auditados, incluindo 346 destinos locais e 28 âncoras, e o manual local foi inspecionado em inglês e pt-BR. São verificações locais com registros sintéticos, não um piloto real de mídia.
+
+A revisão inicial encontrou três falhas `EPERM` no rename de diretório em `createPersona` no Windows. A base inalterada passou nos sete testes afetados em OS TEMP independente, e a revisão completa final passou em 248/248. A causa da condição intermitente continua não confirmada; não foi introduzida correção de armazenamento nem repetição automática. Preserve o erro original e o ambiente ao relatar.
+
+Autenticação real do provedor, disponibilidade de módulos/modelos, entradas de referência aceitas, continuidade vocal verificada por escuta, vídeo completo com fala, lip-sync, faturamento e fidelidade de exportação ainda exigem piloto inspecionado em estúdio independente. Execução no Node 22, outros sistemas operacionais e descoberta real de skills no assistente continuam verificações de aceitação separadas. Atualizar estas fontes ou publicar uma release no GitHub não implanta o manual hospedado.
+
+Instale com `npx --yes github:linkiaai/olympox#v0.6.0 setup`. Estúdios existentes usam o [procedimento de atualização com preservação](installation.md#atualizar-um-estudio-existente); merge não atualiza nem desinstala automaticamente. Relate problemas reproduzíveis por [issues no GitHub](https://github.com/linkiaai/olympox/issues), incluindo versão `0.6.0` do framework, sistema operacional, versões do Node e assistente, comando/pedido, resultado esperado e erro real sanitizado. Mantenha credenciais, identificadores de conta e registros criativos privados fora dos relatos.
 
 ## 0.6.0-rc.4 — 13 de outubro de 2026
 

@@ -10,7 +10,7 @@ Instale **OLYMPOX - AI Influencer framework** em um estúdio independente para C
 
 O núcleo local não tem dependências externas de execução; os comandos dispensam `npm install`. O acesso ao Higgsfield é preparado separadamente. É possível instalar, planejar personagens e manter registros antes de conectar um fornecedor.
 
-Este guia descreve a versão candidata **0.6.0-rc.4**. Instale sua tag com `npx --yes github:linkiaai/olympox#v0.6.0-rc.4 setup`. Use os comandos locais abaixo para uma cópia revisada ou um pacote extraído. Uma edição local posterior não atualiza uma tag publicada nem o manual hospedado. A release histórica 0.5.0 permanece intacta. Consulte [notas da versão e teste da candidata](release-notes.md).
+Este guia descreve a versão estável **0.6.0**. Instale sua tag com `npx --yes github:linkiaai/olympox#v0.6.0 setup`. Use os comandos locais abaixo para uma cópia revisada ou um pacote extraído. Uma edição local posterior não atualiza uma tag publicada nem o manual hospedado. As tags históricas permanecem intactas. Consulte [notas da versão e limites de validação](release-notes.md).
 
 ## Preparação guiada
 
@@ -79,7 +79,7 @@ Confira primeiro o caminho completo do piloto Higgsfield, referências, exporta�
 
 Arquivos instalados e verificações locais aprovadas não demonstram descoberta real das skills. O destino Claude configura arquivos locais do projeto no Claude Code, não Claude web nem outros ambientes.
 
-A preparação anterior à release foi exercitada no Windows com Node 24.18.0, antes da atualização dos metadados de versão. As projeções dos dois assistentes passaram nas verificações locais de instalação; uma sessão do Codex CLI preparou conceitos após ajustes de configuração apenas naquele processo, enquanto o carregamento completo da skill e uma sessão real do Claude permanecem não verificados. Node 22 e outros sistemas operacionais ainda precisam de execução. Teste seu assistente real e relate a versão exata e o erro pelo [procedimento de teste da candidata](release-notes.md), sem alterar configurações pessoais apenas para esconder uma falha.
+A revisão local do framework foi executada no Windows com Node 24.18.0. As projeções dos dois assistentes passaram nas verificações de instalação, e um terminal nativo real exercitou o setup guiado sem perguntas de provedor ou chave. A descoberta completa das skills no assistente real e um fluxo completo de mídia no Codex/Claude permanecem não verificados. Node 22 e outros sistemas operacionais ainda precisam de execução. A investigação de `EPERM` intermitente no rename atômico do Windows permanece aberta, com causa não confirmada. Teste seu assistente real e relate a versão exata e o erro pelo [procedimento de validação da versão e relatos](release-notes.md), sem alterar configurações pessoais apenas para esconder uma falha.
 
 ## Mesclar em um projeto existente
 

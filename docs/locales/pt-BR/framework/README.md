@@ -2,7 +2,7 @@
 
 `scripts/framework-core.mjs` implementa registros locais de fluxos no OLYMPOX. O registry seleciona perfis, contratos de tarefas e definições de fluxos; um run salva essas definições com seu contexto observado. O assistente coordenador realiza o trabalho e fornece declarações e arquivos existentes. O módulo não tem dispatcher de agentes nem adaptador de fornecedor.
 
-Pacote e registry usam a versão candidata **0.6.0-rc.4**. Contratos JSON de tarefas/fluxos mantêm revisões individuais de componente, incluindo **0.2.0** e **0.3.0**, e `schemaVersion: 1`; são identificadores de compatibilidade, não a versão atual do produto. Esta referência descreve a implementação atual, incluindo políticas aditivas de fornecedor, voz e prontidão por etapa. Consulte [notas da versão](../release-notes.md) para testes e aceitação real pendente.
+Pacote e registry usam a versão estável **0.6.0**. Contratos JSON de tarefas/fluxos mantêm revisões individuais de componente, incluindo **0.2.0** e **0.3.0**, e `schemaVersion: 1`; são identificadores de compatibilidade, não a versão atual do produto. Esta referência descreve a implementação atual, incluindo políticas aditivas de fornecedor, voz e prontidão por etapa. Consulte [notas da versão](../release-notes.md) para validação local e aceitação real pendente.
 
 Para fluxo conversacional e sequência CLI, leia [fluxos e retomada](../framework-02.md). Para comandos de persona, manifesto e backup, leia [operações](../operations.md).
 
@@ -17,7 +17,7 @@ Para fluxo conversacional e sequência CLI, leia [fluxos e retomada](../framewor
 | `transitionRun(root, runId, options)` | Aplica transição declarada sob lock do run |
 | `resumeRun(root, runId, options = {})` | Confere continuação ou cria nova tentativa explícita preservando histórico |
 
-Opções de `startRun`: `workflowId`, `personaId`, `objective`, `inputs`, `medium`, `capabilities` e `mediaProviders`. `objective` deve ser preenchido. `create-character` permite `personaId: null` e usa `medium: video` por padrão; produção/correção exige canon aprovado e usa imagem por padrão. Meios aceitos: `image`, `video` e `audio`.
+Opções de `startRun`: `workflowId`, `personaId`, `objective`, `inputs`, `medium`, `capabilities`, `mediaProviders` e `readinessPlanPath` opcional. `objective` deve ser preenchido. `create-character` permite `personaId: null` e usa `medium: video` por padrão; produção/correção exige canon aprovado e usa imagem por padrão. Meios aceitos: `image`, `video` e `audio`.
 
 Entradas/saídas são listas de caminhos existentes relativos à raiz com `/`. Caminhos que escapam da raiz, arquivos equivalentes repetidos e arquivos de outra personagem são recusados. Registros: `work/runs/run-<UUID>.json`. O pacote informa `nextTask`, `responsible`, `state`, `attemptId`, `inputs`, `canonBinding`, `drift`, `missingCapabilities` e `canContinue`, junto do run salvo. `automaticallyDispatched` é sempre `false`.
 
@@ -51,7 +51,7 @@ Toda transição contém `action`. Ações disponíveis:
 | `complete` | Confere requisitos/capacidades e valida saídas com `evidence` ou `approval` humana |
 | `bind-persona` | `personaId`; somente sem vínculo existente, antes das etapas que exigem personagem |
 | `skip` | `reason`; somente etapa marcada opcional no fluxo salvo |
-| `wait` | `state: awaiting-input|awaiting-tool|in-review` e `reason` |
+| `wait` | `state` é `awaiting-input`, `awaiting-tool` ou `in-review`; também exige `reason` |
 | `uncertain` | `job` com fornecedor/IDs conhecidos e `reason`; preserva identificadores não resolvidos |
 | `resolve` | Status/IDs reconciliados de `job` e `evidence` de tipo `reconciled` |
 | `fail` | `reason`; termina tentativa local após reconciliação de jobs |
@@ -118,7 +118,9 @@ Cada provenance é exatamente `{actor,at,eventId,source,notes}`, com data UTC re
 
 Use `start` com `stageId` exato somente quando viabilidade e prontidão atual passam. O núcleo captura plano/escopo/entradas/preços/autorizações imutáveis antes da intenção opcional de job. `complete` exige esse início e arquivos de mídia existentes. A evidência generated contém somente `type,performed,actor,at,eventId,notes,tool,provider,stageId,planHash,scopeHash,readinessSnapshotId,module,route,modelExposed,model`, correspondendo à captura e ao método selecionado. Capacidade genérica, acknowledgement, instruction mode ou conclusão direta não burlam a regra. Preço válido no início capturado pode expirar antes da conclusão correspondente. Inspeção completa e entrega continuam necessárias.
 
-Status mostra `pipelineReady` (viabilidade), pendências exatas/resultados por etapa, `currentStageReady`, `canStartStage` e identidade da captura ativa sem gravação ou consulta ao provedor. Entradas futuras podem ficar pendentes enquanto candidatos podem começar. Escopo silencioso explícito pode dispensar voz; ausência histórica compatível de campos vocais permite uma peça estática/silenciosa explicitamente escolhida sem alterar o personagem. Reutilização falada vincula o áudio aprovado selecionado como entrada/resultado exatos e o anexa à execução falada. Isso não burla a seleção vocal do canon atual completo.
+Status mostra `pipelineReady` (viabilidade), pendências exatas/resultados por etapa, `currentStageReady`, `canStartStage` e identidade da captura ativa sem gravação ou consulta ao provedor. Entradas futuras podem ficar pendentes enquanto candidatos podem começar. Um requisito `voice` obrigatório precisa incluir uma etapa `audio` ou `video`; etapas somente de imagem não fornecem voz e mantêm a cobertura pendente. Etapas de áudio exigem suporte à escuta; etapas de vídeo exigem suporte à inspeção completa visual-and-audio. Essas declarações não comprovam fala audível nem fidelidade vocal.
+
+Escopo silencioso explícito pode marcar voz como `not-required` para imagens ou vídeo silencioso. Um run com `medium: audio` não pode usar `voice` como `not-required`, inclusive com canon legado aprovado. Ausência histórica compatível de campos vocais permite imagem estática ou vídeo silencioso explicitamente escolhidos sem alterar o personagem; não autoriza execução de áudio sem cobertura vocal. Reutilização falada vincula o áudio aprovado selecionado como entrada/resultado exatos e o anexa à execução falada. Isso não burla a seleção vocal do canon atual completo.
 
 Atualização de observações/preços/autorizações no mesmo plano acrescenta snapshots imutáveis; o JSON importado não vira entrada mutável monitorada. Mudar entradas/modelo/destino já vinculados ou plano/método exige `run-resume` com `newAttempt:true`, motivo e, opcionalmente, novo `readinessPlanPath`. A nova tentativa limpa evidências/captura atuais, preserva tentativas anteriores e mantém contratos salvos. Job original não resolvido bloqueia atualização/repetição; `resolve` correspondente segue disponível apesar de drift. Geração capturada `0.1.0`/`0.2.0` mantém semântica legada sem defaults novos; um run atual novo adota a política. Consistência local não prova execução do provedor, escuta, lip-sync, qualidade ou paridade dos hosts. Observações/preços/autorizações privados ficam fora do export do framework.
 
@@ -128,9 +130,9 @@ Objetos internos usam estas chaves exatas. Observações ausentes/null ficam pen
 | --- | --- |
 | Plan | `schemaVersion,methodSource,choice,requirements,stages` |
 | Fonte do método | `path,sha256` |
-| Requisito | `id,applicability,reason,decision,stageIds`; applicability `required|reuse|not-required` |
+| Requisito | `id,applicability,reason,decision,stageIds`; applicability é `required`, `reuse` ou `not-required` |
 | Etapa do plano | `id,stepId,purpose,medium,provider,method,module,route,tool,requestedModel,inputSlots` |
-| Slot | `id,kind,role,order,fromStageId`; kind `prompt|parameters|reference`; role/order null fora de referência |
+| Slot | `id,kind,role,order,fromStageId`; kind é `prompt`, `parameters` ou `reference`; role/order null fora de referência |
 | Feasibility | `stages,authorization` |
 | Etapa de viabilidade | `stageId,access,acceptedInputSlots,destination,model,quote,export,inspection,limitations,provenance` |
 | Access / slot aceito | `available,provenance` / `slotId,supported,provenance` |

@@ -267,7 +267,9 @@ function coverageReasons(plan, run, p, state) {
   for (const r of plan.requirements) {
     if (r.applicability === 'required' && r.decision === null) reasons.push(`Required coverage ${r.id} still needs its actual method-choice decision.`);
     if (r.applicability !== 'not-required' && !r.stageIds.length) reasons.push(`Required coverage ${r.id} has no supporting stage.`);
-    if (r.id === 'voice' && r.applicability === 'not-required' && p?.voice?.applicability !== 'silent' && (isToken(run.workflowId, 'create-character') || Object.hasOwn(p?.voice ?? {}, 'applicability') || !p || isToken(p.status, 'draft'))) reasons.push('Voice N/A requires silent scope or an explicitly chosen static piece under compatible historical canon.');
+    if (r.id === 'voice' && r.applicability === 'required' && r.stageIds.length && !r.stageIds.some(id => ['audio', 'video'].includes(plan.stages.find(stage => stage.id === id)?.medium))) reasons.push('Required voice coverage needs an audio or video stage; image-only stages cannot supply voice.');
+    if (r.id === 'voice' && r.applicability === 'not-required' && run.medium === 'audio') reasons.push('Audio execution requires voice coverage; voice cannot be not-required.');
+    else if (r.id === 'voice' && r.applicability === 'not-required' && p?.voice?.applicability !== 'silent' && (isToken(run.workflowId, 'create-character') || Object.hasOwn(p?.voice ?? {}, 'applicability') || !p || isToken(p.status, 'draft'))) reasons.push('Voice N/A requires silent scope or an explicitly chosen static piece under compatible historical canon.');
     if (r.applicability === 'reuse') for (const id of r.stageIds) {
       const entry = state.stages.get(id);
       if (entry?.outcome?.status !== 'reused') reasons.push(`Reuse ${r.id} requires exact existing outcome and reviewed context.`);

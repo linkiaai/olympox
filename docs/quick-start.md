@@ -4,10 +4,10 @@ Install an independent studio, open it in Codex or Claude Code, and describe wha
 
 ## 1. Install and open the studio
 
-Requires Node 22+ and a local Codex or Claude Code environment. Install the 0.6.0-rc.4 release candidate for testing:
+Requires Node 22+ and a local Codex or Claude Code environment. Install stable version 0.6.0:
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.6.0-rc.4 setup
+npx --yes github:linkiaai/olympox#v0.6.0 setup
 ```
 
 From a reviewed source checkout or extracted package, use `node bin/olympox.mjs setup`.
@@ -24,7 +24,7 @@ If the direction is open, the assistant asks a short set of unresolved questions
 
 The selected direction becomes a draft persona and brief. [Character development](strategy.md) explains this stage.
 
-For a first preparation-only test, add: “Only prepare concepts now. Do not generate media, send files, authenticate services, spend credits or publish.” This needs no connected media provider. See the [candidate testing instructions](release-notes.md) for observed limits and how to report your result.
+For a first preparation-only test, add: “Only prepare concepts now. Do not generate media, send files, authenticate services, spend credits or publish.” This needs no connected media provider. See [release validation and reporting](release-notes.md) for observed limits and how to report your result.
 
 ## 3. Select identity and voice
 

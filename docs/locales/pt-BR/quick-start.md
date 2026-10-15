@@ -4,10 +4,10 @@ Instale um estúdio independente, abra-o no Codex ou Claude Code e descreva o qu
 
 ## 1. Instale e abra o estúdio
 
-Requer Node 22+ e um ambiente local de Codex ou Claude Code. Instale a versão candidata 0.6.0-rc.4 para testes:
+Requer Node 22+ e um ambiente local de Codex ou Claude Code. Instale a versão estável 0.6.0:
 
 ```sh
-npx --yes github:linkiaai/olympox#v0.6.0-rc.4 setup
+npx --yes github:linkiaai/olympox#v0.6.0 setup
 ```
 
 A partir de checkout revisado ou pacote extraído, use `node bin/olympox.mjs setup`.
@@ -24,7 +24,7 @@ Se a direção estiver aberta, o assistente faz poucas perguntas pendentes sobre
 
 A direção selecionada vira uma persona em rascunho e um brief. [Desenvolvimento de personagens](strategy.md) explica essa etapa.
 
-Para um primeiro teste apenas de preparação, acrescente: “Prepare somente conceitos agora. Não gere mídia, envie arquivos, autentique serviços, gaste créditos nem publique.” Isso não exige um provedor de mídia conectado. Consulte as [instruções de teste da candidata](release-notes.md) para conhecer os limites observados e relatar seu resultado.
+Para um primeiro teste apenas de preparação, acrescente: “Prepare somente conceitos agora. Não gere mídia, envie arquivos, autentique serviços, gaste créditos nem publique.” Isso não exige um provedor de mídia conectado. Consulte [validação da versão e relatos](release-notes.md) para conhecer os limites observados e relatar seu resultado.
 
 ## 3. Selecione identidade e voz
 

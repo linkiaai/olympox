@@ -1,6 +1,27 @@
 # Release notes
 
-These notes explain framework behavior by version. The current guides describe release candidate 0.6.0-rc.4, which removes the BytePlus experiment. Historical defaults below apply to their own revisions and do not override current guidance. Read [installation and upgrade](installation.md) before changing an existing studio.
+These notes explain framework behavior by version. The current guides describe stable version 0.6.0. Historical defaults below apply to their own revisions and do not override current guidance. Read [installation and upgrade](installation.md) before changing an existing studio.
+
+## 0.6.0 — October 15, 2026
+
+Version 0.6.0 promotes the reviewed local framework to the stable release line. Higgsfield remains the default media pipeline; assistant-integrated images remain an explicit image-stage alternative. The BytePlus executor, credential connector, saved provider preference and provider-choice onboarding are excluded. Historical tags and archives, including rc.1–rc.4 and 0.5.0, remain unchanged.
+
+### Included behavior
+
+- **Independent offline studios:** guided setup selects the assistant and destination, reviews the copy/retain plan and runs local checks. Both-host skill projections and conflict-refusing merge preserve unrelated files and permitted Git metadata. Installation never connects a provider, requests a provider key, generates media or publishes.
+- **Exact references and preserved identity:** bounded Windows x64 image transfer uses the pinned optional Higgsfield CLI, an exact-byte/destination grant and recoverable intent. Native acknowledgement still requires separate provider-byte and plugin/module checks. Visual selection, listened-to vocal selection when speaking, complete canon approval, immutable snapshots, a reviewed pilot and actual-byte export remain part of the production method.
+- **Vocal readiness corrections:** required voice coverage stays pending when its supporting stages are image-only. It needs an audio or video stage; an audio run cannot mark voice `not-required`, including with approved legacy canon. Static-image and explicit silent-video compatibility remain preserved without rewriting historical records.
+- **Documentation corrections:** the runtime contract reference lists optional `readinessPlanPath`; transition and readiness tables preserve every allowed value when rendered. The English and pt-BR guides explain the same vocal boundary.
+
+### Validation and remaining limits
+
+The October 15 review before stable promotion passed `npm.cmd run verify` with 248 tests, zero failures or skips, plus validation, doctor and manual checks on Windows with Node 24.18.0. Independent archive-derived installation checks covered both assistant projections, preservation and conflict refusal; 32 installed readiness tests passed. The 25 guide pairs were audited, including 346 local link targets and 28 anchors, and the local manual was inspected in English and pt-BR. These are local checks using synthetic records, not a live media pilot.
+
+The initial review encountered three `createPersona` directory-rename `EPERM` failures on Windows. The unchanged baseline passed the seven affected tests in independent OS TEMP, and the final full review passed 248/248. The intermittent condition's cause remains unconfirmed; no storage fix or automatic retry was introduced. Preserve the original error and environment when reporting it.
+
+Real provider authentication, module/model availability, accepted reference inputs, listened-to voice continuity, complete speaking video, lip-sync, billing and export fidelity still require an inspected pilot in an independent studio. Node 22 execution, other operating systems and actual host skill discovery remain separate acceptance checks. Updating these sources or publishing a GitHub release does not deploy the hosted manual.
+
+Install with `npx --yes github:linkiaai/olympox#v0.6.0 setup`. Existing studios use the [preservation-first upgrade procedure](installation.md#upgrade-an-existing-studio); merge does not update or uninstall automatically. Report reproducible issues through [GitHub issues](https://github.com/linkiaai/olympox/issues), including framework version `0.6.0`, operating system, Node and assistant versions, command/request, expected result and the actual sanitized error. Keep credentials, account identifiers and private creative records out of reports.
 
 ## 0.6.0-rc.4 — October 13, 2026
 

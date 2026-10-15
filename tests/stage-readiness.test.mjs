@@ -5,6 +5,7 @@ import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { startRun, readRun, transitionRun, resumeRun, validateRunRecord, validateFramework } from '../scripts/framework-core.mjs';
 import { canonHash } from '../scripts/studio-core.mjs';
+import { installFramework } from '../scripts/install-framework.mjs';
 import { validateReadinessPlan, validateReadinessRecord, evaluateMediaReadiness, mediaReadinessPolicy, readinessHash } from '../scripts/stage-readiness-core.mjs';
 import { usePreReadinessContracts } from './fixtures/pre-stage-readiness/activate.mjs';
 import { source, parent, scratch, at, clone, json, save, hash, provenance, fixture, begin, next, reach, planFor, recordFor, rebind, importRecord, generated, evidence } from './fixtures/stage-readiness.mjs';
@@ -62,6 +63,41 @@ test('whole-method feasibility does not require future voice or pilot source byt
   assert.equal(imported.mediaReadiness.stages.find(s => s.stageId === 'voice-reference').ready, false);
   assert.equal(imported.mediaReadiness.stages.find(s => s.stageId === 'pilot').ready, false);
   assert.equal(fs.existsSync(path.join(root, 'work/pilot-prompt.json')), false);
+});
+
+test('image-only required voice coverage stays loadable but cannot authorize candidates', () => {
+  const f = fixture({ scope: 'unspecified', draft: true });
+  installFramework(source, f.root, { assistant: 'both', merge: true });
+  const run = reach(f.root, begin(f.root, 'create-character', 'video'));
+  const plan = planFor(f.root, run, { futureVoice: true });
+  plan.stages = plan.stages.filter(stage => stage.id !== 'voice-reference');
+  plan.requirements.find(requirement => requirement.id === 'voice').stageIds = ['candidates'];
+  const record = recordFor(f.root, run, plan, true);
+  assert.doesNotThrow(() => validateReadinessRecord(record, run.run, f.root));
+  const pending = importRecord(f.root, run, record), before = raw(f.root, pending);
+  assert.equal(pending.mediaReadiness.pipelineReady, false); assert.equal(pending.mediaReadiness.canStartStage, false);
+  assert.match(pending.mediaReadiness.reasons.join(' '), /Required voice coverage needs an audio or video stage/);
+  assert.equal(validateRunRecord(readRun(f.root, run.runId).run), true); assert.deepEqual(raw(f.root, pending), before);
+  const transition = save(f.root, 'work/voice-start.json', { action: 'start', stageId: 'candidates', job: { provider: 'fixture' } });
+  const cli = spawnSync(process.execPath, [path.join(f.root, 'scripts/studio.mjs'), 'run-step', run.runId, path.join(f.root, transition)], { cwd: f.root, encoding: 'utf8' });
+  assert.equal(cli.status, 0, cli.stderr);
+  const started = JSON.parse(cli.stdout);
+  assert.equal(started.state, 'awaiting-tool'); assert.equal(started.run.attempts[0].job, null);
+  assert.equal(started.run.attempts[0].execution, null); assert.equal(started.run.attempts[0].results.length, pending.run.attempts[0].results.length);
+});
+
+test('required voice accepts checked audio or video feasibility without future vocal bytes', () => {
+  for (const medium of ['audio', 'video']) {
+    const f = fixture({ scope: 'unspecified', draft: true }), run = reach(f.root, begin(f.root, 'create-character', 'video'));
+    const plan = planFor(f.root, run, { futureVoice: true }), voice = plan.stages.find(stage => stage.id === 'voice-reference');
+    voice.medium = medium;
+    voice.inputSlots = plan.stages[0].inputSlots.map(slot => clone(slot));
+    const record = recordFor(f.root, run, plan, true), ready = importRecord(f.root, run, record);
+    assert.equal(ready.mediaReadiness.pipelineReady, true); assert.equal(ready.mediaReadiness.canStartStage, true);
+    assert.equal(ready.mediaReadiness.stages.find(stage => stage.stageId === 'voice-reference').ready, false);
+    assert.equal(record.feasibility.stages.find(stage => stage.stageId === 'voice-reference').inspection.method, medium === 'audio' ? 'listening' : 'visual-and-audio');
+    assert.equal(fs.existsSync(path.join(f.root, 'work/voice-reference-prompt.json')), false);
+  }
 });
 
 test('each missing required check remains pending despite generic capability availability', () => {
@@ -175,8 +211,10 @@ test('native destination exposure and actual requested model remain separate che
 });
 
 test('speaking reuse binds approved selected audio, and arbitrary work bytes cannot supply it', () => {
-  const f = ready({ scope: 'speaking', legacy: true }, 'produce-piece', 'video'); let run = importRecord(f.root, f.run, f.record); assert.equal(run.mediaReadiness.canStartStage, true);
-  run = transitionRun(f.root, run.runId, { action: 'start', stageId: 'generation' }); assert.equal(generated(f.root, run).nextTask.stepId, 'review');
+  for (const medium of ['video', 'audio']) {
+    const f = ready({ scope: 'speaking', legacy: true }, 'produce-piece', medium); let run = importRecord(f.root, f.run, f.record); assert.equal(run.mediaReadiness.canStartStage, true);
+    run = transitionRun(f.root, run.runId, { action: 'start', stageId: 'generation' }); assert.equal(generated(f.root, run).nextTask.stepId, 'review');
+  }
   const g = ready({ scope: 'speaking', legacy: true }, 'produce-piece', 'video'); const voice = g.record.stages.find(s => s.stageId === 'voice-reference'); voice.inputs = []; voice.acceptedInputs = []; const arbitrary = save(g.root, 'work/arbitrary.wav', 'Synthetic unrelated audio'); voice.outcome.files = [{ path: arbitrary, sha256: hash(fs.readFileSync(path.join(g.root, arbitrary))), bytes: fs.statSync(path.join(g.root, arbitrary)).size }]; rebind(g.run, g.record);
   const pending = importRecord(g.root, g.run, g.record); assert.equal(pending.mediaReadiness.canStartStage, false); assert.match(pending.mediaReadiness.reasons.join(' '), /selected approved audio/);
 });
@@ -187,6 +225,34 @@ test('current static piece on historical EN and pt-BR canon preserves absent voc
     const before = fs.readFileSync(path.join(f.root, 'influencers/alpha/persona.json')); const run = reach(f.root, begin(f.root)); const record = recordFor(f.root, run, planFor(f.root, run));
     assert.equal(importRecord(f.root, run, record).mediaReadiness.canStartStage, true); assert.deepEqual(fs.readFileSync(path.join(f.root, 'influencers/alpha/persona.json')), before); assert.equal(Object.hasOwn(f.p.voice, 'applicability'), false);
   }
+});
+
+test('voice not-required never authorizes current audio under unchanged historical canon', () => {
+  for (const pt of [false, true]) {
+    const f = fixture({ legacy: true });
+    installFramework(source, f.root, { assistant: 'both', merge: true });
+    if (pt) { f.p.status = 'canon_aprovado'; for (const ref of f.p.references) ref.status = 'aprovado'; f.p.approval.canonHash = canonHash(f.p); save(f.root, 'influencers/alpha/persona.json', f.p); }
+    const before = fs.readFileSync(path.join(f.root, 'influencers/alpha/persona.json'));
+    const run = reach(f.root, begin(f.root, 'produce-piece', 'audio')), record = recordFor(f.root, run, planFor(f.root, run));
+    const pending = importRecord(f.root, run, record);
+    assert.equal(pending.mediaReadiness.pipelineReady, false); assert.equal(pending.mediaReadiness.canStartStage, false);
+    assert.match(pending.mediaReadiness.reasons.join(' '), /Audio execution requires voice coverage/);
+    const transition = save(f.root, 'work/voice-start.json', { action: 'start', stageId: 'generation', job: { provider: 'fixture' } });
+    const cli = spawnSync(process.execPath, [path.join(f.root, 'scripts/studio.mjs'), 'run-step', run.runId, path.join(f.root, transition)], { cwd: f.root, encoding: 'utf8' });
+    assert.equal(cli.status, 0, cli.stderr);
+    const started = JSON.parse(cli.stdout);
+    assert.equal(started.state, 'awaiting-tool'); assert.equal(started.run.attempts[0].job, null); assert.equal(started.run.attempts[0].execution, null);
+    assert.deepEqual(fs.readFileSync(path.join(f.root, 'influencers/alpha/persona.json')), before);
+    assert.equal(Object.hasOwn(f.p.voice, 'applicability'), false); assert.equal(f.p.voice.referenceId, null);
+  }
+});
+
+test('explicit silent video keeps historical canon and absent vocal fields unchanged', () => {
+  const f = fixture({ legacy: true }), before = fs.readFileSync(path.join(f.root, 'influencers/alpha/persona.json'));
+  const run = reach(f.root, begin(f.root, 'produce-piece', 'video')), ready = importRecord(f.root, run, recordFor(f.root, run, planFor(f.root, run)));
+  assert.equal(ready.mediaReadiness.pipelineReady, true); assert.equal(ready.mediaReadiness.canStartStage, true);
+  assert.deepEqual(fs.readFileSync(path.join(f.root, 'influencers/alpha/persona.json')), before);
+  assert.equal(Object.hasOwn(f.p.voice, 'applicability'), false);
 });
 
 test('current speaking piece reuses preserved pt-BR historical approvals without normalizing bytes', () => {

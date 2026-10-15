@@ -2,7 +2,7 @@
 
 `scripts/framework-core.mjs` implements local workflow records for OLYMPOX. The registry selects profiles, task contracts, and workflow definitions; a run saves those definitions with its observed context. The coordinating assistant performs the work and supplies declarations and existing files. The module has no agent dispatcher or provider adapter.
 
-The framework package and registry use the release-candidate version **0.6.0-rc.4**. Task/workflow JSON contracts retain individual component revisions, including **0.2.0** and **0.3.0**, and `schemaVersion: 1`; these are compatibility identifiers, not the current product release number. This reference describes the current implementation, including additive provider, vocal and stage-readiness policies. See [release notes](../docs/release-notes.md) for testing and pending live acceptance.
+The framework package and registry use stable version **0.6.0**. Task/workflow JSON contracts retain individual component revisions, including **0.2.0** and **0.3.0**, and `schemaVersion: 1`; these are compatibility identifiers, not the current product release number. This reference describes the current implementation, including additive provider, vocal and stage-readiness policies. See [release notes](../docs/release-notes.md) for local validation and pending live acceptance.
 
 For the conversational workflow and CLI sequence, read [workflows and resumption](../docs/framework-02.md). For persona, manifest, and backup commands, read [operations](../docs/operations.md).
 
@@ -17,7 +17,7 @@ For the conversational workflow and CLI sequence, read [workflows and resumption
 | `transitionRun(root, runId, options)` | Applies a declared transition under the run lock |
 | `resumeRun(root, runId, options = {})` | Checks continuation or creates an explicit new attempt while preserving history |
 
-`startRun` options are `workflowId`, `personaId`, `objective`, `inputs`, `medium`, `capabilities`, and `mediaProviders`. `objective` must be nonempty. `create-character` permits `personaId: null` and defaults to `medium: video`; production/correction require approved canon and default to image. Accepted media are `image`, `video`, and `audio`.
+`startRun` options are `workflowId`, `personaId`, `objective`, `inputs`, `medium`, `capabilities`, `mediaProviders`, and optional `readinessPlanPath`. `objective` must be nonempty. `create-character` permits `personaId: null` and defaults to `medium: video`; production/correction require approved canon and default to image. Accepted media are `image`, `video`, and `audio`.
 
 Inputs/outputs are lists of existing root-relative paths with `/`. Paths escaping the root, duplicate equivalent files, and another character's files are rejected. Records are `work/runs/run-<UUID>.json`. The package reports `nextTask`, `responsible`, `state`, `attemptId`, `inputs`, `canonBinding`, `drift`, `missingCapabilities`, and `canContinue`, together with the saved run. `automaticallyDispatched` is always `false`.
 
@@ -51,7 +51,7 @@ Every transition contains `action`. Available actions:
 | `complete` | Checks prerequisites/capabilities and validates outputs plus `evidence` or human `approval` |
 | `bind-persona` | `personaId`; only when unbound, before the candidate stages require it |
 | `skip` | `reason`; only a step marked optional in the saved workflow |
-| `wait` | `state: awaiting-input|awaiting-tool|in-review`, and `reason` |
+| `wait` | `state` is `awaiting-input`, `awaiting-tool`, or `in-review`; also requires `reason` |
 | `uncertain` | `job` with provider/known IDs and `reason`; preserves unresolved identifiers |
 | `resolve` | Reconciled `job` status/identifiers and `evidence` of type `reconciled` |
 | `fail` | `reason`; finishes the local attempt after unresolved jobs are reconciled |
@@ -118,7 +118,9 @@ Each provenance is exactly `{actor,at,eventId,source,notes}`, with a real UTC ti
 
 Use `start` with the exact `stageId` only when whole-path feasibility and current exact readiness pass. The core captures immutable plan/scope/input/quote/grant context before any optional job intent. `complete` requires that captured start and existing media outputs. Its generated evidence has only `type,performed,actor,at,eventId,notes,tool,provider,stageId,planHash,scopeHash,readinessSnapshotId,module,route,modelExposed,model`, matching the capture and selected method. Generic capability, acknowledgement, instruction mode or direct completion cannot bypass this gate. A quote valid at captured start can expire before matching completion. Existing full media review and delivery checks still apply.
 
-Status reports `pipelineReady` (feasibility), per-stage exact pending reasons/outcomes, `currentStageReady`, `canStartStage` and active capture identity without writing or querying a provider. Future exact slots can remain pending while candidates can start. Explicit silent scope may make voice not-required; compatible historical absent vocal fields can support an explicitly selected static/silent piece without changing the character. Speaking reuse binds selected approved audio as exact input/outcome and attaches that audio to speaking execution. It never bypasses current complete-canon vocal selection.
+Status reports `pipelineReady` (feasibility), per-stage exact pending reasons/outcomes, `currentStageReady`, `canStartStage` and active capture identity without writing or querying a provider. Future exact slots can remain pending while candidates can start. A required `voice` requirement must include an `audio` or `video` stage; image-only stages cannot supply voice and leave coverage pending. Audio stages require listening support; video stages require complete visual-and-audio inspection support. These declarations do not establish audible speech or vocal fidelity.
+
+Explicit silent scope may make voice `not-required` for images or silent video. A run with `medium: audio` cannot use `voice` as `not-required`, including with approved legacy canon. Compatible historical absent vocal fields can support an explicitly selected static image or silent video without changing the character; they do not authorize audio execution without voice coverage. Speaking reuse binds selected approved audio as exact input/outcome and attaches that audio to speaking execution. It never bypasses current complete-canon vocal selection.
 
 Same-plan observation/quote/grant refresh appends immutable snapshots; imported JSON itself is not a tracked mutable input. Already bound input/model/destination or plan/method changes use `run-resume` with `newAttempt:true` and a reason, optionally a fresh `readinessPlanPath`. New attempts clear current readiness evidence and capture, preserve old attempts and retain the saved task contracts. Unresolved original jobs block refresh and retry; matching `resolve` remains usable despite drift. Captured generation `0.1.0`/`0.2.0` remains legacy with original semantics and no new defaults; a fresh current run adopts the new policy. Local consistency proves neither provider execution nor listening, lip-sync, media quality or host parity. Private observations/quotes/grants stay outside framework export.
 
@@ -128,9 +130,9 @@ The nested objects use these exact keys. Missing/null observations remain pendin
 | --- | --- |
 | Plan | `schemaVersion,methodSource,choice,requirements,stages` |
 | Method source | `path,sha256` |
-| Requirement | `id,applicability,reason,decision,stageIds`; applicability `required|reuse|not-required` |
+| Requirement | `id,applicability,reason,decision,stageIds`; applicability is `required`, `reuse`, or `not-required` |
 | Plan stage | `id,stepId,purpose,medium,provider,method,module,route,tool,requestedModel,inputSlots` |
-| Input slot | `id,kind,role,order,fromStageId`; kind `prompt|parameters|reference`; non-reference role/order null |
+| Input slot | `id,kind,role,order,fromStageId`; kind is `prompt`, `parameters`, or `reference`; non-reference role/order null |
 | Feasibility | `stages,authorization` |
 | Feasibility stage | `stageId,access,acceptedInputSlots,destination,model,quote,export,inspection,limitations,provenance` |
 | Access / accepted slot | `available,provenance` / `slotId,supported,provenance` |

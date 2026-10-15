@@ -10,7 +10,7 @@ Install **OLYMPOX - AI Influencer framework** into an independent studio for Cod
 
 The local core has no external runtime dependencies; these commands need no `npm install`. Higgsfield access is prepared separately. You can install, plan characters, and maintain records before connecting a provider.
 
-This guide describes the **0.6.0-rc.4** release candidate. Install its tag with `npx --yes github:linkiaai/olympox#v0.6.0-rc.4 setup`. Use the local commands below for a reviewed checkout or extracted package. A later local edit does not update a published tag or hosted manual. The historical 0.5.0 release remains unchanged. See [release notes and candidate testing](release-notes.md).
+This guide describes stable version **0.6.0**. Install its tag with `npx --yes github:linkiaai/olympox#v0.6.0 setup`. Use the local commands below for a reviewed checkout or extracted package. A later local edit does not update a published tag or hosted manual. Historical release tags remain unchanged. See [release notes and validation limits](release-notes.md).
 
 ## Guided setup
 
@@ -79,7 +79,7 @@ Check the complete Higgsfield pilot path, references, export and budget first.
 
 Installed files and successful local checks do not establish live skill discovery. The Claude target configures local Claude Code project files, not Claude web or other environments.
 
-Pre-release preparation was exercised on Windows with Node 24.18.0, before the release-version metadata was updated. Both assistant projections passed local installation checks; a Codex CLI session prepared concepts after process-only configuration adjustments, while full skill loading and a real Claude session remain unverified. Node 22 and other operating systems still need execution checks. Test your actual host and report its exact version and error through the [candidate testing procedure](release-notes.md), without changing personal settings just to hide a failure.
+The local framework review ran on Windows with Node 24.18.0. Both assistant projections passed installation checks, and an actual native terminal exercised guided setup without provider or key prompts. Full skill discovery in the actual host and a complete Codex/Claude media workflow remain unverified. Node 22 and other operating systems still need execution checks. The intermittent Windows atomic-rename `EPERM` concern remains open with an unconfirmed cause. Test your actual host and report its exact version and error through the [release validation and reporting procedure](release-notes.md), without changing personal settings just to hide a failure.
 
 ## Merge into an existing project
 

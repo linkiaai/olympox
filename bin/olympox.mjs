@@ -29,7 +29,7 @@ Usage:
   olympox --version
 
 Install a new studio:
-  npx --yes github:linkiaai/olympox#v0.5.0 setup
+  npx --yes github:linkiaai/olympox#v0.6.0 setup
 
 From a reviewed source checkout or extracted package:
   node bin/olympox.mjs setup

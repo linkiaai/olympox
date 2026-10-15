@@ -1,6 +1,6 @@
 # Framework architecture
 
-OLYMPOX separates assistant direction, local records and external media execution. The current framework source is the **0.6.0-rc.4** release candidate; individual contracts and workflows retain their own component revisions, including `0.2.0` and `0.3.0`. See [release notes](release-notes.md) for testing and pending live acceptance.
+OLYMPOX separates assistant direction, local records and external media execution. The current framework source is stable version **0.6.0**; individual contracts and workflows retain their own component revisions, including `0.2.0` and `0.3.0`. See [release notes](release-notes.md) for local validation and pending live acceptance.
 
 This guide describes the implementation boundary. Use [workflow operation](framework-02.md) for commands and [identity and records](operations.md) for file procedures.
 
